@@ -1,0 +1,46 @@
+@charset "UTF-8";
+
+#login {
+	background-color: #6c6c6c;
+}
+
+#navigator {
+	height: 100%;
+	background-color: #d1d1d1;
+}
+
+#content {
+	white-space: nowrap;
+	overflow: auto;
+}
+
+#deliveryTable {
+	margin: 0px;
+	font-size: 10pt;
+}
+
+#deliveryTable tr td, #deliveryTable tr th {
+	padding: 3px;
+}
+
+#deliveryTable tr th {
+	padding: 3px;
+	text-align: center;
+	padding: 3px;
+}
+
+#deliveryTableDiv {
+	padding: 0px; 
+	white-space : nowrap;
+	overflow: auto;
+	white-space: nowrap;
+}
+
+#searchDelivery {
+	margin-top: 20px;
+	margin-bottom: 20px;
+	height: 50px;
+	box-sizing: border-box;
+	border: #a2ffff solid 2px;
+	box-sizing: border-box;
+}
