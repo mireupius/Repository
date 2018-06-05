@@ -1,0 +1,23 @@
+@charset "UTF-8";
+
+header{
+	width: 100%
+}
+.headerQQ{
+	background-color:gray; 
+}
+
+.titleQQ{
+	background-color:#398946; 
+	height: 75px;
+}
+.SearchBarQQ{
+	background-color:#399999; 
+	height: 75px;
+}
+.headerBanner{
+	background-color:#991656; 
+	height: 75px;
+}
+
+
