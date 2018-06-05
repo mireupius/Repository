@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @Controller
 public class GoodsController {
 
-	@RequestMapping(value = "/", method = RequestMethod.GET)
+	@RequestMapping(value = "/goods", method = RequestMethod.GET)
 	public String goods(HttpServletRequest request, HttpServletResponse response) {
 
 		request.setAttribute("contentPage", "goods/goods.jsp");

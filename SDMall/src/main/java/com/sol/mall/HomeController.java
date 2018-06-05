@@ -12,14 +12,15 @@ import org.springframework.web.bind.annotation.RequestMethod;
  */
 @Controller
 public class HomeController {
-	
+
 	/**
 	 * Simply selects the home view to render by returning its name.
 	 */
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String home(HttpServletRequest req, HttpServletResponse res) {
-	
-		return "home";
+		
+		req.setAttribute("contentPage", "goods/goods.jsp");
+		return "index";
 	}
-	
+
 }
