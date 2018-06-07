@@ -1,16 +1,22 @@
 @charset "EUC-KR";
 
-#gdTb {
+.gdTb {
 	border-spacing: 0;
 	margin-left: auto;
 	margin-right: auto;
+	margin-top:100px;/*  마진톱을 주면 접었다 펼때 옆에 스크롤바가 생기면서 흔들림  */
 	width: 1400px;
 }
 
 #gdTb2 {
 	border-spacing: 0;
 }
-
+.gdTb3 {
+	border-spacing: 0;
+	margin-left: auto;
+	margin-right: auto;
+	width: 1400px;
+}
 .gdTd1 {
 	border: #d9dadc thin solid;
 	background-color: #f5f4f4;
