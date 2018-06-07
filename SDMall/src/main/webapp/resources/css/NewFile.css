@@ -1,23 +1,33 @@
 @charset "UTF-8";
 
-header{
+header {
 	width: 100%
 }
-.headerQQ{
-	background-color:gray; 
+
+.header_QQ {
+	border-bottom: #888888 solid 1px;
 }
 
-.titleQQ{
-	background-color:#398946; 
-	height: 75px;
-}
-.SearchBarQQ{
-	background-color:#399999; 
-	height: 75px;
-}
-.headerBanner{
-	background-color:#991656; 
-	height: 75px;
+.global_Width {
+	background-color: gray;
 }
 
+.title_QQ {
+	background-color: #398946;
+	height: 90px;
+}
 
+.SearchBar_QQ {
+	background-color: #399999;
+	height: 90px;
+}
+
+.headerBanner_QQ {
+	background-color: #991656;
+	height: 90px;
+}
+
+.menuBar_QQ {
+	background-color: #110044;
+	height: 50px;
+}

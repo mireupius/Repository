@@ -21,6 +21,12 @@
     <![endif]-->
 
 <link href="resources\css\NewFile.css" rel="stylesheet">
+<link rel="stylesheet" href="resources\css/reset.css"><!-- CSS reset -->
+<link rel="stylesheet" href="resources\css/style.css"><!-- Resource style -->
+<script src="resources\js\modernizr.js"></script><!-- Modernizr -->
+<script src="resources\js\jquery-2.1.1.js"></script>
+<script src="resources\js\jquery.menu-aim.js"></script> <!-- menu aim -->
+<script src="resources\js\main.js"></script> <!-- Resource jQuery -->
 </head>
 <body>
 
@@ -31,12 +37,85 @@
 	<!-- 모든 컴파일된 플러그인을 포함합니다 (아래), 원하지 않는다면 필요한 각각의 파일을 포함하세요 -->
 
 	<script src="resources/bootstrap-3.3.2-dist/js/bootstrap.min.js"></script>
-	<div class="col-md-12">
-		<div class="headerQQ col-md-8 col-md-offset-2">
+	<div class="header_QQ col-md-12">
+		<div class="global_Width col-md-8 col-md-offset-2">
 			<div class="row">
-				<div class="titleQQ col-md-2">타이틀</div>
-				<div class="SearchBarQQ col-md-7">검색</div>
-				<div class="headerBanner col-md-3">해더 광고</div>
+				<div class="title_QQ col-md-3">타이틀</div>
+				<div class="SearchBar_QQ col-md-5">검색</div>
+				<div class="headerBanner_QQ col-md-4">해더 광고</div>
+			</div>
+			<div class="row">
+				<div class="menuBar_QQ col-md-9">
+				
+					<div class="cd-dropdown-wrapper">
+						<a class="cd-dropdown-trigger" href="#0">Dropdown</a>
+						<nav class="cd-dropdown">
+							<h2>Title</h2>
+							<a href="#0" class="cd-close">Close</a>
+							<ul class="cd-dropdown-content">
+
+								<li class="has-children"><a href="#0">Clothing</a>
+									<ul class="cd-secondary-dropdown is-hidden">
+										<li class="go-back"><a href="#0">Menu</a></li>
+										<li class="see-all"><a href="#0">All Clothing</a></li>
+										<li class="has-children"><a href="#0">Accessories</a>
+
+											<ul class="is-hidden">
+												<li class="go-back"><a href="#0">패션의류</a></li>
+												<li class="see-all"><a href="#0">All Accessories</a></li>
+												<li class="has-children"><a href="#0">Beanies</a>
+													<ul class="is-hidden">
+														<li class="go-back"><a href="#0">Accessories</a></li>
+														<li class="see-all"><a href="#0">All Benies</a></li>
+														<li><a href="#0">Caps &amp; Hats</a></li>
+														<!-- other list items here -->
+													</ul></li>
+												<li class="has-children"><a href="#0">Caps &amp;
+														Hats</a>
+													<ul class="is-hidden">
+														<li class="go-back"><a href="#0">Accessories</a></li>
+														<li class="see-all"><a href="#0">All Caps &amp;
+																Hats</a></li>
+														<li><a href="#0">Beanies</a></li>
+														<!-- other list items here -->
+													</ul></li>
+												<li><a href="#0">Glasses</a></li>
+												<!-- other list items here -->
+											</ul></li>
+
+										<li class="has-children">
+											<!-- other list items here -->
+										</li>
+
+										<li class="has-children">
+											<!-- other list items here -->
+										</li>
+
+										<li class="has-children">
+											<!-- other list items here -->
+										</li>
+									</ul> <!-- .cd-secondary-dropdown --></li>
+								<!-- .has-children -->
+
+								<li class="has-children">
+									<!-- other list items here -->
+								</li>
+								<!-- .has-children -->
+
+								<li class="has-children">
+									<!-- other list items here -->
+								</li>
+								<!-- .has-children -->
+
+							</ul>
+							<!-- .cd-dropdown-content -->
+						</nav>
+						<!-- .cd-dropdown -->
+					</div>
+					<!-- .cd-dropdown-wrapper -->
+					
+				</div>
+				<div class="menuBar_QQ col-md-3">고객메뉴</div>
 			</div>
 		</div>
 	</div>
