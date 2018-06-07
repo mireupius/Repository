@@ -90,8 +90,8 @@
 		</tr>
 	</table>
 
-	<div class="gdTb3" data-toggle="collapse"
-				href="#collapse2" aria-expanded="false" aria-controls="collapse2">
+	<div class="gdTb3" data-toggle="collapse" href="#collapse2"
+		aria-expanded="false" aria-controls="collapse2">
 		<h2 style="background-color: gray;">기본정보</h2>
 	</div>
 	<div class="collapse" id="collapse2">
@@ -106,19 +106,97 @@
 						<td class="gdTd1">모델명</td>
 						<td class="gdTd2"><input></td>
 					</tr>
+					<tr>
+						<td class="gdTd1">상품코드</td>
+						<td class="gdTd2"><input></td>
+					</tr>
+					<tr>
+						<td class="gdTd1">상품상세설명</td>
+						<td class="gdTd2"><input></td>
+					</tr>
+					<tr>
+						<td class="gdTd1">검색어설정</td>
+						<td class="gdTd2"><input></td>
+					</tr>
 				</tbody>
 			</table>
 		</div>
 	</div>
-
-
-	<table id="bssts">=기본정보= 상품명 모델명 상품코드 상품상세설명 검색어설정
-	</table>
-	<table id="bssts">=판매정보= 소비자가 판매가 상품코드 상품상세설명 검색어설정
-	</table>
-	<table id="bssts">=옵션/재고= 옵션명 옵션재고 옵션가격
-	</table>
-	<table id="bssts">=이미지= 옵션명 옵션재고 옵션가격
-	</table>
+	<div class="gdTb3" data-toggle="collapse" href="#collapse3"
+		aria-expanded="false" aria-controls="collapse3">
+		<h2 style="background-color: gray;">판매정보</h2>
+	</div>
+	<div class="collapse" id="collapse3">
+		<div>
+			<table class="gdTb3">
+				<tbody>
+					<tr>
+						<td class="gdTd1">소비자가 판매가</td>
+						<td class="gdTd2"><input></td>
+					</tr>
+					<tr>
+						<td class="gdTd1">상품코드</td>
+						<td class="gdTd2"><input></td>
+					</tr>
+					<tr>
+						<td class="gdTd1">상품상세설명</td>
+						<td class="gdTd2"><input></td>
+					</tr>
+					<tr>
+						<td class="gdTd1">검색어설정</td>
+						<td class="gdTd2"><input></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+	<div class="gdTb3" data-toggle="collapse" href="#collapse4"
+		aria-expanded="false" aria-controls="collapse4">
+		<h2 style="background-color: gray;">옵션/재고</h2>
+	</div>
+	<div class="collapse" id="collapse4">
+		<div>
+			<table class="gdTb3">
+				<tbody>
+					<tr>
+						<td class="gdTd1">옵션명</td>
+						<td class="gdTd2"><input></td>
+					</tr>
+					<tr>
+						<td class="gdTd1">옵션재고</td>
+						<td class="gdTd2"><input></td>
+					</tr>
+					<tr>
+						<td class="gdTd1">옵션가격</td>
+						<td class="gdTd2"><input></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+		<div class="gdTb3" data-toggle="collapse" href="#collapse5"
+		aria-expanded="false" aria-controls="collapse5">
+		<h2 style="background-color: gray;">이미지</h2>
+	</div>
+	<div class="collapse" id="collapse5">
+		<div>
+			<table class="gdTb3">
+				<tbody>
+					<tr>
+						<td class="gdTd1">옵션명</td>
+						<td class="gdTd2"><input></td>
+					</tr>
+					<tr>
+						<td class="gdTd1">옵션재고</td>
+						<td class="gdTd2"><input></td>
+					</tr>
+					<tr>
+						<td class="gdTd1">옵션가격</td>
+						<td class="gdTd2"><input></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
 </body>
 </html>
