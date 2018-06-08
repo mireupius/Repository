@@ -1,6 +1,5 @@
 @charset "EUC-KR";
 
-
 .gdTb {
 	border-spacing: 0;
 	margin-left: auto;
@@ -13,6 +12,12 @@
 	border-spacing: 0;
 }
 .gdTb3 {
+	border-spacing: 0;
+	margin-left: auto;
+	margin-right: auto;
+	width: 1400px;
+}
+.gdTb4 {
 	border-spacing: 0;
 	margin-left: auto;
 	margin-right: auto;
