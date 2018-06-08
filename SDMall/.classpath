@@ -25,5 +25,7 @@
 			<attribute name="owner.project.facets" value="java"/>
 		</attributes>
 	</classpathentry>
+	<classpathentry kind="lib" path="C:/Users/soldesk/Desktop/kxml2-2.3.0.jar"/>
+	<classpathentry kind="lib" path="C:/Users/soldesk/Desktop/ojdbc8.jar"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>
