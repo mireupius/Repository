@@ -16,6 +16,12 @@ public class HomeController {
 	/**
 	 * Simply selects the home view to render by returning its name.
 	 */
+	@RequestMapping(value = "/shoppingbag.go", method = RequestMethod.GET)
+	public String shoppingbag(HttpServletRequest req, HttpServletResponse res) {
+	
+		return "shoppingbag";
+	}
+	
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String home(HttpServletRequest req, HttpServletResponse res) {
 	
