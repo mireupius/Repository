@@ -7,120 +7,168 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
+<script type="text/javascript">
+	$(function() {
+		$("#checkAll").click(function() {
+			if ($('#checkAll').prop('checked')) {
+				$('.orderCheck').prop('checked', true);
+			} else {
+				$('.orderCheck').prop('checked', false);
+			}
+		});
+
+		$("#inputSet").click(function() {
+
+			$("input[name=orderCheck]:checked").each(function(i, box) {
+
+				var q = ".cs_" + $(box).val();
+				var n = ".no_" + $(box).val();
+				var qv = $("#inputSel").val();
+				var nv = $("#inputVal").val();
+
+				$(q).val(qv).prop("selected", true);
+				$(n).val(nv);
+
+			});
+
+		});
+
+		$("#deliveryCheckButton").click(function() {
+
+			var array;
+			$("input[name=orderCheck]:checked").each(function(i, box) {
+				if (i == 0) {
+					array = $(box).val();
+				} else {
+					array += "," + $(box).val();
+				}
+			});
+
+			$("#arrayVal").val(array);
+			alert($("#arrayVal").val());
+		});
+
+	});
+</script>
+
+
 </head>
 <body>
+	<section id="main-content"> <section class="wrapper">
+	<h3>
+		<i class="fa fa-angle-right"></i> 발주/발송관리
+	</h3>
+	<button id="xxx">값변경</button>
+	<div class="row mt">
+		<div class="col-lg-12">
+			<div class="content-panel deliveryTableDiv">
+				선택건 일괄입력 <select id="inputSel">
+					<option value="" selected disabled hidden>선택</option>
+					<option>대한통운</option>
+					<option>로젠택배</option>
+					<option>우체국택배</option>
+				</select> <input id="inputVal" placeholer="송장번호">
+				<button id="inputSet">선택건 적용</button>
+				<section id="unseen">
+				<table class="table table-bordered table-striped table-condensed">
+					<thead>
+						<tr>
+							<th><input type="checkbox" class="checked" id="checkAll"></th>
+							<th>상품주문번호</th>
+							<th>주문번호</th>
+							<th>택배사</th>
+							<th>송장번호</th>
+							<th>배송완료일</th>
+							<th>구매자명</th>
+							<th>구매자ID</th>
+							<th>수취인명</th>
+							<th>주문상태</th>
+							<th>주문세부상태</th>
+							<th>배송비</th>
+							<th>상품번호</th>
+							<th>상품명</th>
+							<th>옵션종류</th>
+							<th>옵션정보</th>
+							<th>수량(구입수량)</th>
+							<th>옵션가격</th>
+							<th>상품가격</th>
+							<th>판매가격</th>
+							<th>상품별 총 주문금액</th>
+							<th>발주확인일</th>
+							<th>수취인연락처1</th>
+							<th>배송지</th>
+							<th>구매자연락처</th>
+							<th>우편번호</th>
+							<th>배송메세지</th>
+							<th>출고지</th>
+							<th>주문일시</th>
+							<th>클레임상태</th>
+							<th>결제수단</th>
+						</tr>
+					</thead>
+					<tbody>
+						<c:forEach items="${delivery }" var="d">
+							<tr>
+								<td><input type="checkbox" class="checked orderCheck"
+									name="orderCheck" value="${d.sd_delivery_pno}"></td>
+								<td>${d.sd_delivery_pno}</td>
+								<td>${d.sd_delivery_no}</td>
+								<td><select class="cs_${d.sd_delivery_pno}">
+										<option value="" selected disabled hidden>선택</option>
+										<option>대한통운</option>
+										<option>로젠택배</option>
+										<option>우체국택배</option>
+								</select></td>
+								<td><input class="no_${d.sd_delivery_pno}"></td>
+								<td>${d.sd_delivery_done_date}</td>
+								<td>${d.sd_customer_name}</td>
+								<td>${d.sd_customer_id}</td>
+								<td>${d.sd_taker_name}</td>
+								<td>${d.sd_delivery_state}</td>
+								<td>${d.sd_state_detail}</td>
+								<td>${d.sd_delivery_cost}</td>
+								<td>${d.sd_product_no}</td>
+								<td>${d.sd_product_name}</td>
+								<td>${d.sd_option_type}</td>
+								<td>${d.sd_option_info}</td>
+								<td>${d.sd_amount}</td>
+								<td>${d.sd_option_price}</td>
+								<td>${d.sd_product_price}</td>
+								<td>${d.sd_product_sellprice}</td>
+								<td>${d.sd_total_price}</td>
+								<td>${d.sd_check_date}</td>
+								<td>${d.sd_taker_phone}</td>
+								<td>${d.sd_take_area}</td>
+								<td>${d.sd_customer_ph}</td>
+								<td>${d.sd_postno}</td>
+								<td>${d.sd_message}</td>
+								<td>${d.sd_out_area}</td>
+								<td>${d.sd_order_date}</td>
+								<td>${d.sd_claim}</td>
+								<td>${d.sd_pay_method}</td>
+							</tr>
+						</c:forEach>
 
 
-	<div id="searchDelivery" class="col-md-11">
-		검색 : <input>
+					</tbody>
+				</table>
+				</section>
+				발송처리 :
+				<button>선택건 발송처리</button>
+				<button>엑셀 일괄등록</button>
+				<form action="sale.deliveryCheck.do" method="post"
+					style="display: inline">
+					<input name="array" id="arrayVal" hidden> <input
+						id="deliveryCheckButton" type="submit" value="선택건 발주확인">
+				</form>
+
+			</div>
+			<!-- /content-panel -->
+		</div>
+		<!-- /col-lg-4 -->
 	</div>
-
-	<div id="deliveryTableDiv" class="col-md-11">
-		<table
-			class="table table-hover table-striped table-bordered table-sm table-responsive"
-			id="deliveryTable">
-			<thead class="thead-dark">
-				<tr>
-					<th scope="col">상품주문번호</th>
-					<th scope="col">주문번호</th>
-					<th scope="col">택배사</th>
-					<th scope="col">송장번호</th>
-					<th scope="col">배송완료일</th>
-					<th scope="col">구매자명</th>
-					<th scope="col">구매자ID</th>
-					<th scope="col">수취인명</th>
-					<th scope="col">주문상태</th>
-					<th scope="col">주문세부상태</th>
-					<th scope="col">배송비</th>
-					<th scope="col">상품번호</th>
-					<th scope="col">상품명</th>
-					<th scope="col">옵션종류</th>
-					<th scope="col">옵션정보</th>
-					<th scope="col">수량(구입수량)</th>
-					<th scope="col">옵션가격</th>
-					<th scope="col">상품가격</th>
-					<th scope="col">판매가격</th>
-					<th scope="col">상품별 총 주문금액</th>
-					<th scope="col">발주확인일</th>
-					<th scope="col">수취인연락처1</th>
-					<th scope="col">배송지</th>
-					<th scope="col">구매자연락처</th>
-					<th scope="col">우편번호</th>
-					<th scope="col">배송메세지</th>
-					<th scope="col">출고지</th>
-					<th scope="col">주문일시</th>
-					<th scope="col">클레임상태</th>
-					<th scope="col">결제수단</th>
-				</tr>
-			</thead>
-			<tbody>
-				<c:forEach var="o" items="${orders }">
-					<tr>
-						<th scope="row">${o.shp_o_order_pnum}</th>
-						<!--상품주문번호 -->
-						<td>${o.shp_o_order_num}</td>
-						<!--주문번호 -->
-						<td>${o.shp_o_courier}</td>
-						<!--택배사 -->
-						<td>${o.shp_o_invoice_num}</td>
-						<!--송장번호 -->
-						<td>${o.shp_o_delivery_done_date}</td>
-						<!--배송완료일 -->
-						<td>${o.shp_o_customer_name}</td>
-						<!--구매자명 -->
-						<td>${o.shp_o_customer_id}</td>
-						<!--구매자ID -->
-						<td>${o.shp_o_taker_name}</td>
-						<!--수취인명 -->
-						<td>${o.shp_o_state}</td>
-						<!--주문상태 -->
-						<td>${o.shp_o_state_detail}</td>
-						<!--주문세부상태 -->
-						<td>${o.shp_o_delivery_cost}</td>
-						<!--배송비 -->
-						<td>${o.shp_o_product_num}</td>
-						<!--상품번호 -->
-						<td>${o.shp_o_product_name}</td>
-						<!--상품명 -->
-						<td>${o.shp_o_option_type}</td>
-						<!--옵션종류 -->
-						<td>${o.shp_o_option_info}</td>
-						<!--옵션정보 -->
-						<td>${o.shp_o_amount}</td>
-						<!--수량(구입수량) -->
-						<td>${o.shp_o_option_price}</td>
-						<!--옵션가격 -->
-						<td>${o.shp_o_product_price}</td>
-						<!--상품가격 -->
-						<td>${o.shp_o_product_sellprice}</td>
-						<!--판매가격 -->
-						<td>${o.shp_o_total_price}</td>
-						<!--상품별 총 주문금액 -->
-						<td>${o.shp_o_check_date}</td>
-						<!--발주확인일 -->
-						<td>${o.shp_o_taker_ph}</td>
-						<!--수취인연락처1 -->
-						<td>${o.shp_o_take_area}</td>
-						<!--배송지 -->
-						<td>${o.shp_o_customer_ph}</td>
-						<!--구매자연락처 -->
-						<td>${o.shp_o_postnum}</td>
-						<!--우편번호 -->
-						<td>${o.shp_o_message}</td>
-						<!--배송메세지 -->
-						<td>${o.shp_o_out_area}</td>
-						<!--출고지 -->
-						<td>${o.shp_o_date}</td>
-						<!--주문일시 -->
-						<td>${o.shp_o_claim}</td>
-						<!--클레임상태 -->
-						<td>${o.shp_o_pay_method}</td>
-						<!--결제수단 -->
-					</tr>
-				</c:forEach>
-			</tbody>
-		</table>
-	</div>
+	<!-- /row --> </section><!--/wrapper --> </section>
+	<!-- /MAIN CONTENT -->
 
 </body>
 </html>

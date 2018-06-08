@@ -3,7 +3,15 @@
 <mapper namespace="com.sol.mall.sale.delivery.DeliveryMapper">
 	<select id="getAllDelivery"
 		resultType="com.sol.mall.sale.delivery.Delivery">
-		select * from sdmall_order
+		select * from sale_delivery
 	</select>
+	
+	<update id="deliveryCheck"
+		parameterType="com.sol.mall.sale.delivery.Delivery">
+		update sale_delivery set sd_state_detail = #{sd_state_detail}, sd_check_date = #{sd_check_date}
+		where sd_delivery_pno = #{sd_delivery_pno}
+	</update>
+	
+	
 
 </mapper>

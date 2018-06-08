@@ -10,23 +10,29 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller
 public class DeliveryController {
-	
+
 	@Autowired
 	private DeliveryDAO DDAO;
 
 	@RequestMapping(value = "/saleMain.go", method = RequestMethod.GET)
 	public String home(HttpServletRequest req, HttpServletResponse res) {
-		DDAO.getAllOrder(req, res);
-		req.setAttribute("saleNav", "saleNav.jsp");
-		req.setAttribute("saleContent", "saleHome.jsp");
+		req.setAttribute("contentPage", "saleHome.jsp");
 		return "sale/saleIndex";
 	}
-	
-	@RequestMapping(value = "/delivery.new.go", method = RequestMethod.GET)
+
+	@RequestMapping(value = "/sale.delivery.go", method = RequestMethod.GET)
 	public String delivery(HttpServletRequest req, HttpServletResponse res) {
 		DDAO.getAllOrder(req, res);
-		req.setAttribute("saleNav", "saleNav.jsp");
-		req.setAttribute("saleContent", "delivery/deliveryContent.jsp");
+		req.setAttribute("contentPage", "delivery/deliveryContent.jsp");
 		return "sale/saleIndex";
 	}
+
+	@RequestMapping(value = "/sale.deliveryCheck.do", method = RequestMethod.POST)
+	public String deliveryCheck(HttpServletRequest req, HttpServletResponse res) {
+		DDAO.deliveryCheck(req, res);
+		DDAO.getAllOrder(req, res);
+		req.setAttribute("contentPage", "delivery/deliveryContent.jsp");
+		return "sale/saleIndex";
+	}
+
 }

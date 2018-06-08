@@ -1,0 +1,9 @@
+@charset "UTF-8";
+
+.deliveryTableDiv {
+	border: #c5c5c5 solid 1px;
+	padding : 0px;
+	overflow: auto;
+	white-space: nowrap;
+	padding: 0;
+}

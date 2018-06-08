@@ -4,321 +4,320 @@ import java.math.BigDecimal;
 import java.util.Date;
 
 public class Delivery {
-	private BigDecimal shp_o_order_pnum;
-	private BigDecimal shp_o_order_num;
-	private String shp_o_courier;
-	private BigDecimal shp_o_invoice_num;
-	private Date shp_o_delivery_done_date;
-	private String shp_o_customer_name;
-	private String shp_o_customer_id;
-	private String shp_o_taker_name;
-	private String shp_o_state;
-	private String shp_o_state_detail;
-	private BigDecimal shp_o_delivery_cost;
-	private BigDecimal shp_o_product_num;
-	private String shp_o_product_name;
-	private String shp_o_option_type;
-	private String shp_o_option_info;
-	private BigDecimal shp_o_amount;
-	private BigDecimal shp_o_option_price;
-	private BigDecimal shp_o_product_price;
-	private BigDecimal shp_o_product_sellprice;
-	private BigDecimal shp_o_total_price;
-	private Date shp_o_check_date;
-	private String shp_o_taker_ph;
-	private String shp_o_take_area;
-	private String shp_o_customer_ph;
-	private BigDecimal shp_o_postnum;
-	private String shp_o_message;
-	private String shp_o_out_area;
-	private Date shp_o_date;
-	private String shp_o_claim;
-	private String shp_o_pay_method;
+	private String sd_delivery_pno;
+	private String sd_delivery_no;
+	private String sd_courier;
+	private String sd_invoice_no;
+	private Date sd_delivery_done_date;
+	private String sd_customer_name;
+	private String sd_customer_id;
+	private String sd_taker_name;
+	private String sd_delivery_state;
+	private String sd_state_detail;
+	private BigDecimal sd_delivery_cost;
+	private String sd_product_no;
+	private String sd_product_name;
+	private String sd_option_type;
+	private String sd_option_info;
+	private BigDecimal sd_amount;
+	private BigDecimal sd_option_price;
+	private BigDecimal sd_product_price;
+	private BigDecimal sd_product_sellprice;
+	private BigDecimal sd_total_price;
+	private Date sd_check_date;
+	private String sd_taker_phone;
+	private String sd_take_area;
+	private String sd_customer_ph;
+	private String sd_postno;
+	private String sd_message;
+	private String sd_out_area;
+	private Date sd_order_date;
+	private String sd_claim;
+	private String sd_pay_method;
 
 	public Delivery() {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Delivery(BigDecimal shp_o_order_pnum, BigDecimal shp_o_order_num, String shp_o_courier,
-			BigDecimal shp_o_invoice_num, Date shp_o_delivery_done_date, String shp_o_customer_name,
-			String shp_o_customer_id, String shp_o_taker_name, String shp_o_state, String shp_o_state_detail,
-			BigDecimal shp_o_delivery_cost, BigDecimal shp_o_product_num, String shp_o_product_name,
-			String shp_o_option_type, String shp_o_option_info, BigDecimal shp_o_amount, BigDecimal shp_o_option_price,
-			BigDecimal shp_o_product_price, BigDecimal shp_o_product_sellprice, BigDecimal shp_o_total_price,
-			Date shp_o_check_date, String shp_o_taker_ph, String shp_o_take_area, String shp_o_customer_ph,
-			BigDecimal shp_o_postnum, String shp_o_message, String shp_o_out_area, Date shp_o_date, String shp_o_claim,
-			String shp_o_pay_method) {
+	public Delivery(String sd_delivery_pno, String sd_delivery_no, String sd_courier, String sd_invoice_no,
+			Date sd_delivery_done_date, String sd_customer_name, String sd_customer_id, String sd_taker_name,
+			String sd_delivery_state, String sd_state_detail, BigDecimal sd_delivery_cost, String sd_product_no,
+			String sd_product_name, String sd_option_type, String sd_option_info, BigDecimal sd_amount,
+			BigDecimal sd_option_price, BigDecimal sd_product_price, BigDecimal sd_product_sellprice,
+			BigDecimal sd_total_price, Date sd_check_date, String sd_taker_phone, String sd_take_area,
+			String sd_customer_ph, String sd_postno, String sd_message, String sd_out_area, Date sd_order_date,
+			String sd_claim, String sd_pay_method) {
 		super();
-		this.shp_o_order_pnum = shp_o_order_pnum;
-		this.shp_o_order_num = shp_o_order_num;
-		this.shp_o_courier = shp_o_courier;
-		this.shp_o_invoice_num = shp_o_invoice_num;
-		this.shp_o_delivery_done_date = shp_o_delivery_done_date;
-		this.shp_o_customer_name = shp_o_customer_name;
-		this.shp_o_customer_id = shp_o_customer_id;
-		this.shp_o_taker_name = shp_o_taker_name;
-		this.shp_o_state = shp_o_state;
-		this.shp_o_state_detail = shp_o_state_detail;
-		this.shp_o_delivery_cost = shp_o_delivery_cost;
-		this.shp_o_product_num = shp_o_product_num;
-		this.shp_o_product_name = shp_o_product_name;
-		this.shp_o_option_type = shp_o_option_type;
-		this.shp_o_option_info = shp_o_option_info;
-		this.shp_o_amount = shp_o_amount;
-		this.shp_o_option_price = shp_o_option_price;
-		this.shp_o_product_price = shp_o_product_price;
-		this.shp_o_product_sellprice = shp_o_product_sellprice;
-		this.shp_o_total_price = shp_o_total_price;
-		this.shp_o_check_date = shp_o_check_date;
-		this.shp_o_taker_ph = shp_o_taker_ph;
-		this.shp_o_take_area = shp_o_take_area;
-		this.shp_o_customer_ph = shp_o_customer_ph;
-		this.shp_o_postnum = shp_o_postnum;
-		this.shp_o_message = shp_o_message;
-		this.shp_o_out_area = shp_o_out_area;
-		this.shp_o_date = shp_o_date;
-		this.shp_o_claim = shp_o_claim;
-		this.shp_o_pay_method = shp_o_pay_method;
+		this.sd_delivery_pno = sd_delivery_pno;
+		this.sd_delivery_no = sd_delivery_no;
+		this.sd_courier = sd_courier;
+		this.sd_invoice_no = sd_invoice_no;
+		this.sd_delivery_done_date = sd_delivery_done_date;
+		this.sd_customer_name = sd_customer_name;
+		this.sd_customer_id = sd_customer_id;
+		this.sd_taker_name = sd_taker_name;
+		this.sd_delivery_state = sd_delivery_state;
+		this.sd_state_detail = sd_state_detail;
+		this.sd_delivery_cost = sd_delivery_cost;
+		this.sd_product_no = sd_product_no;
+		this.sd_product_name = sd_product_name;
+		this.sd_option_type = sd_option_type;
+		this.sd_option_info = sd_option_info;
+		this.sd_amount = sd_amount;
+		this.sd_option_price = sd_option_price;
+		this.sd_product_price = sd_product_price;
+		this.sd_product_sellprice = sd_product_sellprice;
+		this.sd_total_price = sd_total_price;
+		this.sd_check_date = sd_check_date;
+		this.sd_taker_phone = sd_taker_phone;
+		this.sd_take_area = sd_take_area;
+		this.sd_customer_ph = sd_customer_ph;
+		this.sd_postno = sd_postno;
+		this.sd_message = sd_message;
+		this.sd_out_area = sd_out_area;
+		this.sd_order_date = sd_order_date;
+		this.sd_claim = sd_claim;
+		this.sd_pay_method = sd_pay_method;
 	}
 
-	public BigDecimal getShp_o_order_pnum() {
-		return shp_o_order_pnum;
+	public String getSd_delivery_pno() {
+		return sd_delivery_pno;
 	}
 
-	public void setShp_o_order_pnum(BigDecimal shp_o_order_pnum) {
-		this.shp_o_order_pnum = shp_o_order_pnum;
+	public void setSd_delivery_pno(String sd_delivery_pno) {
+		this.sd_delivery_pno = sd_delivery_pno;
 	}
 
-	public BigDecimal getShp_o_order_num() {
-		return shp_o_order_num;
+	public String getSd_delivery_no() {
+		return sd_delivery_no;
 	}
 
-	public void setShp_o_order_num(BigDecimal shp_o_order_num) {
-		this.shp_o_order_num = shp_o_order_num;
+	public void setSd_delivery_no(String sd_delivery_no) {
+		this.sd_delivery_no = sd_delivery_no;
 	}
 
-	public String getShp_o_courier() {
-		return shp_o_courier;
+	public String getSd_courier() {
+		return sd_courier;
 	}
 
-	public void setShp_o_courier(String shp_o_courier) {
-		this.shp_o_courier = shp_o_courier;
+	public void setSd_courier(String sd_courier) {
+		this.sd_courier = sd_courier;
 	}
 
-	public BigDecimal getShp_o_invoice_num() {
-		return shp_o_invoice_num;
+	public String getSd_invoice_no() {
+		return sd_invoice_no;
 	}
 
-	public void setShp_o_invoice_num(BigDecimal shp_o_invoice_num) {
-		this.shp_o_invoice_num = shp_o_invoice_num;
+	public void setSd_invoice_no(String sd_invoice_no) {
+		this.sd_invoice_no = sd_invoice_no;
 	}
 
-	public Date getShp_o_delivery_done_date() {
-		return shp_o_delivery_done_date;
+	public Date getSd_delivery_done_date() {
+		return sd_delivery_done_date;
 	}
 
-	public void setShp_o_delivery_done_date(Date shp_o_delivery_done_date) {
-		this.shp_o_delivery_done_date = shp_o_delivery_done_date;
+	public void setSd_delivery_done_date(Date sd_delivery_done_date) {
+		this.sd_delivery_done_date = sd_delivery_done_date;
 	}
 
-	public String getShp_o_customer_name() {
-		return shp_o_customer_name;
+	public String getSd_customer_name() {
+		return sd_customer_name;
 	}
 
-	public void setShp_o_customer_name(String shp_o_customer_name) {
-		this.shp_o_customer_name = shp_o_customer_name;
+	public void setSd_customer_name(String sd_customer_name) {
+		this.sd_customer_name = sd_customer_name;
 	}
 
-	public String getShp_o_customer_id() {
-		return shp_o_customer_id;
+	public String getSd_customer_id() {
+		return sd_customer_id;
 	}
 
-	public void setShp_o_customer_id(String shp_o_customer_id) {
-		this.shp_o_customer_id = shp_o_customer_id;
+	public void setSd_customer_id(String sd_customer_id) {
+		this.sd_customer_id = sd_customer_id;
 	}
 
-	public String getShp_o_taker_name() {
-		return shp_o_taker_name;
+	public String getSd_taker_name() {
+		return sd_taker_name;
 	}
 
-	public void setShp_o_taker_name(String shp_o_taker_name) {
-		this.shp_o_taker_name = shp_o_taker_name;
+	public void setSd_taker_name(String sd_taker_name) {
+		this.sd_taker_name = sd_taker_name;
 	}
 
-	public String getShp_o_state() {
-		return shp_o_state;
+	public String getSd_delivery_state() {
+		return sd_delivery_state;
 	}
 
-	public void setShp_o_state(String shp_o_state) {
-		this.shp_o_state = shp_o_state;
+	public void setSd_delivery_state(String sd_delivery_state) {
+		this.sd_delivery_state = sd_delivery_state;
 	}
 
-	public String getShp_o_state_detail() {
-		return shp_o_state_detail;
+	public String getSd_state_detail() {
+		return sd_state_detail;
 	}
 
-	public void setShp_o_state_detail(String shp_o_state_detail) {
-		this.shp_o_state_detail = shp_o_state_detail;
+	public void setSd_state_detail(String sd_state_detail) {
+		this.sd_state_detail = sd_state_detail;
 	}
 
-	public BigDecimal getShp_o_delivery_cost() {
-		return shp_o_delivery_cost;
+	public BigDecimal getSd_delivery_cost() {
+		return sd_delivery_cost;
 	}
 
-	public void setShp_o_delivery_cost(BigDecimal shp_o_delivery_cost) {
-		this.shp_o_delivery_cost = shp_o_delivery_cost;
+	public void setSd_delivery_cost(BigDecimal sd_delivery_cost) {
+		this.sd_delivery_cost = sd_delivery_cost;
 	}
 
-	public BigDecimal getShp_o_product_num() {
-		return shp_o_product_num;
+	public String getSd_product_no() {
+		return sd_product_no;
 	}
 
-	public void setShp_o_product_num(BigDecimal shp_o_product_num) {
-		this.shp_o_product_num = shp_o_product_num;
+	public void setSd_product_no(String sd_product_no) {
+		this.sd_product_no = sd_product_no;
 	}
 
-	public String getShp_o_product_name() {
-		return shp_o_product_name;
+	public String getSd_product_name() {
+		return sd_product_name;
 	}
 
-	public void setShp_o_product_name(String shp_o_product_name) {
-		this.shp_o_product_name = shp_o_product_name;
+	public void setSd_product_name(String sd_product_name) {
+		this.sd_product_name = sd_product_name;
 	}
 
-	public String getShp_o_option_type() {
-		return shp_o_option_type;
+	public String getSd_option_type() {
+		return sd_option_type;
 	}
 
-	public void setShp_o_option_type(String shp_o_option_type) {
-		this.shp_o_option_type = shp_o_option_type;
+	public void setSd_option_type(String sd_option_type) {
+		this.sd_option_type = sd_option_type;
 	}
 
-	public String getShp_o_option_info() {
-		return shp_o_option_info;
+	public String getSd_option_info() {
+		return sd_option_info;
 	}
 
-	public void setShp_o_option_info(String shp_o_option_info) {
-		this.shp_o_option_info = shp_o_option_info;
+	public void setSd_option_info(String sd_option_info) {
+		this.sd_option_info = sd_option_info;
 	}
 
-	public BigDecimal getShp_o_amount() {
-		return shp_o_amount;
+	public BigDecimal getSd_amount() {
+		return sd_amount;
 	}
 
-	public void setShp_o_amount(BigDecimal shp_o_amount) {
-		this.shp_o_amount = shp_o_amount;
+	public void setSd_amount(BigDecimal sd_amount) {
+		this.sd_amount = sd_amount;
 	}
 
-	public BigDecimal getShp_o_option_price() {
-		return shp_o_option_price;
+	public BigDecimal getSd_option_price() {
+		return sd_option_price;
 	}
 
-	public void setShp_o_option_price(BigDecimal shp_o_option_price) {
-		this.shp_o_option_price = shp_o_option_price;
+	public void setSd_option_price(BigDecimal sd_option_price) {
+		this.sd_option_price = sd_option_price;
 	}
 
-	public BigDecimal getShp_o_product_price() {
-		return shp_o_product_price;
+	public BigDecimal getSd_product_price() {
+		return sd_product_price;
 	}
 
-	public void setShp_o_product_price(BigDecimal shp_o_product_price) {
-		this.shp_o_product_price = shp_o_product_price;
+	public void setSd_product_price(BigDecimal sd_product_price) {
+		this.sd_product_price = sd_product_price;
 	}
 
-	public BigDecimal getShp_o_product_sellprice() {
-		return shp_o_product_sellprice;
+	public BigDecimal getSd_product_sellprice() {
+		return sd_product_sellprice;
 	}
 
-	public void setShp_o_product_sellprice(BigDecimal shp_o_product_sellprice) {
-		this.shp_o_product_sellprice = shp_o_product_sellprice;
+	public void setSd_product_sellprice(BigDecimal sd_product_sellprice) {
+		this.sd_product_sellprice = sd_product_sellprice;
 	}
 
-	public BigDecimal getShp_o_total_price() {
-		return shp_o_total_price;
+	public BigDecimal getSd_total_price() {
+		return sd_total_price;
 	}
 
-	public void setShp_o_total_price(BigDecimal shp_o_total_price) {
-		this.shp_o_total_price = shp_o_total_price;
+	public void setSd_total_price(BigDecimal sd_total_price) {
+		this.sd_total_price = sd_total_price;
 	}
 
-	public Date getShp_o_check_date() {
-		return shp_o_check_date;
+	public Date getSd_check_date() {
+		return sd_check_date;
 	}
 
-	public void setShp_o_check_date(Date shp_o_check_date) {
-		this.shp_o_check_date = shp_o_check_date;
+	public void setSd_check_date(Date sd_check_date) {
+		this.sd_check_date = sd_check_date;
 	}
 
-	public String getShp_o_taker_ph() {
-		return shp_o_taker_ph;
+	public String getSd_taker_phone() {
+		return sd_taker_phone;
 	}
 
-	public void setShp_o_taker_ph(String shp_o_taker_ph) {
-		this.shp_o_taker_ph = shp_o_taker_ph;
+	public void setSd_taker_phone(String sd_taker_phone) {
+		this.sd_taker_phone = sd_taker_phone;
 	}
 
-	public String getShp_o_take_area() {
-		return shp_o_take_area;
+	public String getSd_take_area() {
+		return sd_take_area;
 	}
 
-	public void setShp_o_take_area(String shp_o_take_area) {
-		this.shp_o_take_area = shp_o_take_area;
+	public void setSd_take_area(String sd_take_area) {
+		this.sd_take_area = sd_take_area;
 	}
 
-	public String getShp_o_customer_ph() {
-		return shp_o_customer_ph;
+	public String getSd_customer_ph() {
+		return sd_customer_ph;
 	}
 
-	public void setShp_o_customer_ph(String shp_o_customer_ph) {
-		this.shp_o_customer_ph = shp_o_customer_ph;
+	public void setSd_customer_ph(String sd_customer_ph) {
+		this.sd_customer_ph = sd_customer_ph;
 	}
 
-	public BigDecimal getShp_o_postnum() {
-		return shp_o_postnum;
+	public String getSd_postno() {
+		return sd_postno;
 	}
 
-	public void setShp_o_postnum(BigDecimal shp_o_postnum) {
-		this.shp_o_postnum = shp_o_postnum;
+	public void setSd_postno(String sd_postno) {
+		this.sd_postno = sd_postno;
 	}
 
-	public String getShp_o_message() {
-		return shp_o_message;
+	public String getSd_message() {
+		return sd_message;
 	}
 
-	public void setShp_o_message(String shp_o_message) {
-		this.shp_o_message = shp_o_message;
+	public void setSd_message(String sd_message) {
+		this.sd_message = sd_message;
 	}
 
-	public String getShp_o_out_area() {
-		return shp_o_out_area;
+	public String getSd_out_area() {
+		return sd_out_area;
 	}
 
-	public void setShp_o_out_area(String shp_o_out_area) {
-		this.shp_o_out_area = shp_o_out_area;
+	public void setSd_out_area(String sd_out_area) {
+		this.sd_out_area = sd_out_area;
 	}
 
-	public Date getShp_o_date() {
-		return shp_o_date;
+	public Date getSd_order_date() {
+		return sd_order_date;
 	}
 
-	public void setShp_o_date(Date shp_o_date) {
-		this.shp_o_date = shp_o_date;
+	public void setSd_order_date(Date sd_order_date) {
+		this.sd_order_date = sd_order_date;
 	}
 
-	public String getShp_o_claim() {
-		return shp_o_claim;
+	public String getSd_claim() {
+		return sd_claim;
 	}
 
-	public void setShp_o_claim(String shp_o_claim) {
-		this.shp_o_claim = shp_o_claim;
+	public void setSd_claim(String sd_claim) {
+		this.sd_claim = sd_claim;
 	}
 
-	public String getShp_o_pay_method() {
-		return shp_o_pay_method;
+	public String getSd_pay_method() {
+		return sd_pay_method;
 	}
 
-	public void setShp_o_pay_method(String shp_o_pay_method) {
-		this.shp_o_pay_method = shp_o_pay_method;
+	public void setSd_pay_method(String sd_pay_method) {
+		this.sd_pay_method = sd_pay_method;
 	}
 
 }
