@@ -1,97 +1,97 @@
-create sequence goods_sq;		
-create table goods_tb			
-(			
- gdno  number (13) primary key,			
- gdname   varchar2 (20 char) not null,			
- gtprice     number (7)	not null,	
- gtdlvchrg    varchar2 (20 char) not null,			
- gdcsmprice  number (7) not null,			
- gdimgl   varchar2 (200 char) not null,			
- gdimgm   varchar2 (200 char) not null,			
- gdimgs   varchar2 (200 char) not null,			
- gdimgss  varchar2 (200 char) not null,			
- gdclfl   number (3) not null,			
- gdclfm   number (3),			
- gdclfs   number (3)			
+create sequence goods_sq
+MAXVALUE 9999
+CYCLE
+NOCACHE;
+
+create table goods_tb				
+(				
+ gd_no 		number(13)		primary key,				
+ gd_name  	varchar2(20 char) 	not null,				
+ gd_csmprice 	number(7) 		not null,				
+ gd_price    	number(7) 		not null,				
+ gd_dlvchrg   	varchar2(20 char) 	not null,				
+ gd_imgl  	varchar2(200 char) 	not null,				
+ gd_imgm  	varchar2(200 char) 	not null,				
+ gd_imgs  	varchar2(200 char) 	not null,				
+ gd_imgss 	varchar2(200 char) 	not null,				
+ gd_clfl  	number(3)		not null,				
+ gd_clfm   	number(3),				
+ gd_clfs   	number(3)				
+);				
+				
+create sequence goodsdtl_sq		
+MAXVALUE 99999
+CYCLE 
+NOCACHE;
+
+create table goodsdtl_tb				
+(				
+gt_no		varchar2(5)		primary key,				
+gt_gdno		varchar2(13)		not null,				
+gt_mdlname   	varchar2(20 char),				
+gt_maker     	varchar2(20 char),				
+gt_brand     	varchar2(20 char),				
+gt_mfd       	varchar2(20 char),				
+gt_exp       	varchar2(20 char),				
+gt_material  	varchar2(20 char),				
+gt_weight    	varchar2(20 char),				
+gt_volume    	varchar2(20 char),				
+gt_origin    	varchar2(20 char),				
+gt_stock     	number(7)		not null,				
+gt_keyword   	varchar2 (40 char),				
+gt_detail    	varchar2 (1000 char) 	not null 				
+);				
+				
+create sequence category_sq
+MAXVALUE 999
+START WITH 100
+CYCLE 
+NOCACHE;
+
+create table category_tb				
+(				
+ct_no 		number(3)		primary key,				
+ct_clfname   	varchar2(50 char)	not null,				
+ct_clf       	varchar2(1 char)	not null 				
 );
 
-create sequence goodsdtl_sq;	
-create table goodsdtl_tb			
-(			
-gtno        number (5) primary key,
-gtgdno      number (13) not null,
-gtmdlname   varchar2 (20 char),		
-gtmaker     varchar2 (20 char),			
-gtbrand     varchar2 (20 char),			
-gtmfd       varchar2 (20 char),			
-gtexp       varchar2 (20 char),			
-gtmaterial  varchar2 (20 char),			
-gtweight    varchar2 (20 char),			
-gtvolume    varchar2 (20 char),			
-gtorigin    varchar2 (20 char),			
-gtstock     number (7) not null ,			
-gtkeyword   varchar2 (40 char),			
-gtdetail    varchar2 (1000 char) not null 			
-);			
-			
-create sequence category_sq	;		
-create table category_tb			
-(			
-ctno         number (3) primary key,			
-ctclfname    varchar2 (50 char) not null,			
-ctclf        varchar2 (1 char) not null			
-);			
-			
-create sequence option_sq;		
-create table option_tb			
-(			
-	opno  number(5) primary key,		
-	opgdno  number(13) not null,		
-	opname  varchar2 (20 char) not null,		
-	opprice  number(7) not null,		
-	opstock  number(4) not null		
-);			
-			
-create table viewdgd_tb			
-(			
-	csmid varchar2(12) not null ,		
-	gdnos varchar2(12)		
-);			
+				
+create sequence option_sq
+MAXVALUE 99999
+CYCLE 
+NOCACHE;
 
-create table customer_reg(
-csm_id varchar2(12 char) primary key,
-csm_pw varchar2(15 char) not null,
-csm_name varchar2(10 char) not null,
-csm_birth date not null,
-csm_phoneNo varchar2(11 char) not null,
-csm_emailAddress varchar2(30 char) not null
-);
-
-
-create table seller_reg(
-sl_id varchar2(12 char) primary key,
-sl_pw varchar2(15 char) not null,
-sl_coName varchar2(10 char) not null,
-sl_coRegNo varchar2(10 char) not null,
-sl_phoneNo varchar2(11 char) not null,
-sl_emailAddress varchar2(30 char) not null
-);
-
-
-create table membership(
-ms_id varchar2(12 char) primary key,
-ms_grade varchar2(5 char) not null,
-ms_totalBuy number(10) not null,
-ms_point number(7) not null
+create table option_tb				
+(				
+op_no		varchar2(5)		primary key,				
+op_gdno 	varchar2(13)		not null,				
+op_name 	varchar2(20 char) 	not null,				
+op_price 	number(7) 		not null,				
+op_stock 	number(4) 		not null 				
+);				
+				
+create table viewdgd_tb				
+(				
+vg_csmid	varchar2(12) not null,				
+vg_gdno 	varchar2(1000)				
 );
 
 
-create table questionAnswer(
-qa_RegNo number(4) primary key,
-qa_orderNo varchar2(13 char) not null,
-qa_csm_id varchar2(12 char) not null,
-qa_pName varchar2(50 char) not null,
-qa_question varchar2(100 char) not null,
-qa_answer varchar2(100 char) not null,
-qa_regDate date not null
-);
+drop table goods_tb cascade constraint purge;
+drop sequence goods_sq;
+drop table goodsdtl_tb cascade constraint purge;
+drop sequence goodsdtl_sq;
+drop table category_tb cascade constraint purge;
+drop sequence category_sq;
+drop table option_tb cascade constraint purge;
+drop sequence option_sq;
+drop table viewdgd_tb cascade constraint purge;
+drop table customer_reg cascade constraint purge;
+drop table seller_reg cascade constraint purge;
+drop table membership cascade constraint purge;
+drop table questionAnswer cascade constraint purge;
+
+
+insert into category_tb values(category_sq.nextval, '대분류' , 1);
+insert into category_tb values(category_sq.nextval, '중분류' , 2);
+insert into category_tb values(category_sq.nextval, '소분류' , 3);
