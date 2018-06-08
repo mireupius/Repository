@@ -19,7 +19,7 @@ public class HomeController {
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String home(HttpServletRequest req, HttpServletResponse res) {
 	
-		return "home";
+		return "member/loginArea";
 	}
 	
 }
