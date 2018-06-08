@@ -16,7 +16,7 @@ public class HomeController {
 	/**
 	 * Simply selects the home view to render by returning its name.
 	 */
-	@RequestMapping(value = "/", method = RequestMethod.GET)
+	@RequestMapping(value = "/home", method = RequestMethod.GET)
 	public String home(HttpServletRequest req, HttpServletResponse res) {
 		
 		req.setAttribute("contentPage", "goods/goods.jsp");

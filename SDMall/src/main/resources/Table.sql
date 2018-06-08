@@ -92,6 +92,6 @@ drop table membership cascade constraint purge;
 drop table questionAnswer cascade constraint purge;
 
 
-insert into category_tb values(category_sq.nextval, '대분류' , 1);
-insert into category_tb values(category_sq.nextval, '중분류' , 2);
-insert into category_tb values(category_sq.nextval, '소분류' , 3);
+insert into category_tb values(category_sq.nextval, '대분류3' , 1);
+insert into category_tb values(category_sq.nextval, '중분류4' , 2);
+insert into category_tb values(category_sq.nextval, '소분류4' , 3);

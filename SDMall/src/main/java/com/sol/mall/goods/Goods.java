@@ -4,136 +4,137 @@ import java.math.BigDecimal;
 
 public class Goods {
 
-	private BigDecimal gdno;
-	private String gdname;
-	private BigDecimal gtprice;
-	private BigDecimal gtdlvchrg;
-	private BigDecimal gdcsmprice;
-	private String gdimgl;
-	private String gdimgm;
-	private String gdimgs;
-	private String gdimgss;
-	private BigDecimal gdclfl;
-	private BigDecimal gdclfm;
-	private BigDecimal gdclfs;
+	private	BigDecimal	gd_no	;
+	private	String	gd_name	;
+	private	BigDecimal	gd_csmprice	;
+	private	BigDecimal	gd_price	;
+	private	BigDecimal	gd_dlvchrg	;
+	private	String	gd_imgl	;
+	private	String	gd_imgm	;
+	private	String	gd_imgs	;
+	private	String	gd_imgss	;
+	private	BigDecimal	gd_clfl	;
+	private	BigDecimal	gd_clfm	;
+	private	BigDecimal	gd_clfs	;
 
 	public Goods() {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Goods(BigDecimal gdno, String gdname, BigDecimal gtprice, BigDecimal gtdlvchrg, BigDecimal gdcsmprice,
-			String gdimgl, String gdimgm, String gdimgs, String gdimgss, BigDecimal gdclfl, BigDecimal gdclfm,
-			BigDecimal gdclfs) {
+	public Goods(BigDecimal gd_no, String gd_name, BigDecimal gd_csmprice, BigDecimal gd_price, BigDecimal gd_dlvchrg,
+			String gd_imgl, String gd_imgm, String gd_imgs, String gd_imgss, BigDecimal gd_clfl, BigDecimal gd_clfm,
+			BigDecimal gd_clfs) {
 		super();
-		this.gdno = gdno;
-		this.gdname = gdname;
-		this.gtprice = gtprice;
-		this.gtdlvchrg = gtdlvchrg;
-		this.gdcsmprice = gdcsmprice;
-		this.gdimgl = gdimgl;
-		this.gdimgm = gdimgm;
-		this.gdimgs = gdimgs;
-		this.gdimgss = gdimgss;
-		this.gdclfl = gdclfl;
-		this.gdclfm = gdclfm;
-		this.gdclfs = gdclfs;
+		this.gd_no = gd_no;
+		this.gd_name = gd_name;
+		this.gd_csmprice = gd_csmprice;
+		this.gd_price = gd_price;
+		this.gd_dlvchrg = gd_dlvchrg;
+		this.gd_imgl = gd_imgl;
+		this.gd_imgm = gd_imgm;
+		this.gd_imgs = gd_imgs;
+		this.gd_imgss = gd_imgss;
+		this.gd_clfl = gd_clfl;
+		this.gd_clfm = gd_clfm;
+		this.gd_clfs = gd_clfs;
 	}
 
-	public BigDecimal getGdno() {
-		return gdno;
+	public BigDecimal getGd_no() {
+		return gd_no;
 	}
 
-	public void setGdno(BigDecimal gdno) {
-		this.gdno = gdno;
+	public void setGd_no(BigDecimal gd_no) {
+		this.gd_no = gd_no;
 	}
 
-	public String getGdname() {
-		return gdname;
+	public String getGd_name() {
+		return gd_name;
 	}
 
-	public void setGdname(String gdname) {
-		this.gdname = gdname;
+	public void setGd_name(String gd_name) {
+		this.gd_name = gd_name;
 	}
 
-	public BigDecimal getGtprice() {
-		return gtprice;
+	public BigDecimal getGd_csmprice() {
+		return gd_csmprice;
 	}
 
-	public void setGtprice(BigDecimal gtprice) {
-		this.gtprice = gtprice;
+	public void setGd_csmprice(BigDecimal gd_csmprice) {
+		this.gd_csmprice = gd_csmprice;
 	}
 
-	public BigDecimal getGtdlvchrg() {
-		return gtdlvchrg;
+	public BigDecimal getGd_price() {
+		return gd_price;
 	}
 
-	public void setGtdlvchrg(BigDecimal gtdlvchrg) {
-		this.gtdlvchrg = gtdlvchrg;
+	public void setGd_price(BigDecimal gd_price) {
+		this.gd_price = gd_price;
 	}
 
-	public BigDecimal getGdcsmprice() {
-		return gdcsmprice;
+	public BigDecimal getGd_dlvchrg() {
+		return gd_dlvchrg;
 	}
 
-	public void setGdcsmprice(BigDecimal gdcsmprice) {
-		this.gdcsmprice = gdcsmprice;
+	public void setGd_dlvchrg(BigDecimal gd_dlvchrg) {
+		this.gd_dlvchrg = gd_dlvchrg;
 	}
 
-	public String getGdimgl() {
-		return gdimgl;
+	public String getGd_imgl() {
+		return gd_imgl;
 	}
 
-	public void setGdimgl(String gdimgl) {
-		this.gdimgl = gdimgl;
+	public void setGd_imgl(String gd_imgl) {
+		this.gd_imgl = gd_imgl;
 	}
 
-	public String getGdimgm() {
-		return gdimgm;
+	public String getGd_imgm() {
+		return gd_imgm;
 	}
 
-	public void setGdimgm(String gdimgm) {
-		this.gdimgm = gdimgm;
+	public void setGd_imgm(String gd_imgm) {
+		this.gd_imgm = gd_imgm;
 	}
 
-	public String getGdimgs() {
-		return gdimgs;
+	public String getGd_imgs() {
+		return gd_imgs;
 	}
 
-	public void setGdimgs(String gdimgs) {
-		this.gdimgs = gdimgs;
+	public void setGd_imgs(String gd_imgs) {
+		this.gd_imgs = gd_imgs;
 	}
 
-	public String getGdimgss() {
-		return gdimgss;
+	public String getGd_imgss() {
+		return gd_imgss;
 	}
 
-	public void setGdimgss(String gdimgss) {
-		this.gdimgss = gdimgss;
+	public void setGd_imgss(String gd_imgss) {
+		this.gd_imgss = gd_imgss;
 	}
 
-	public BigDecimal getGdclfl() {
-		return gdclfl;
+	public BigDecimal getGd_clfl() {
+		return gd_clfl;
 	}
 
-	public void setGdclfl(BigDecimal gdclfl) {
-		this.gdclfl = gdclfl;
+	public void setGd_clfl(BigDecimal gd_clfl) {
+		this.gd_clfl = gd_clfl;
 	}
 
-	public BigDecimal getGdclfm() {
-		return gdclfm;
+	public BigDecimal getGd_clfm() {
+		return gd_clfm;
 	}
 
-	public void setGdclfm(BigDecimal gdclfm) {
-		this.gdclfm = gdclfm;
+	public void setGd_clfm(BigDecimal gd_clfm) {
+		this.gd_clfm = gd_clfm;
 	}
 
-	public BigDecimal getGdclfs() {
-		return gdclfs;
+	public BigDecimal getGd_clfs() {
+		return gd_clfs;
 	}
 
-	public void setGdclfs(BigDecimal gdclfs) {
-		this.gdclfs = gdclfs;
+	public void setGd_clfs(BigDecimal gd_clfs) {
+		this.gd_clfs = gd_clfs;
 	}
+	
 	
 	
 }
