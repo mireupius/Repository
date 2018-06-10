@@ -19,9 +19,9 @@ public class GoodsDAO {
 		ArrayList<Category> cts = new ArrayList<>();
 		 cts = (ArrayList<Category>) ss.getMapper(GoodsMapper.class).getAllcategory();
 		
-		for (Category category : cts) {
+/*		for (Category category : cts) {
 			System.out.println(category.getCt_clfname());
-		}
+		}*/
 		request.setAttribute("category", cts);
 	}
 }
