@@ -550,6 +550,7 @@
         var i, input;
         var form = editor.getForm();
         var content = editor.getContent();
+        $("#daumeditor").val(content)
 
         // 본문 내용을 필드를 생성하여 값을 할당하는 부분
         var textarea = document.createElement('textarea');

@@ -24,9 +24,9 @@ public class GoodsController {
 
 	@RequestMapping(value = "/editor.do", method = RequestMethod.POST)
 	public String editor(HttpServletRequest request, HttpServletResponse response) {
-		System.out.println("Å×½ºÆ®");
-		gdsDAO.getAllcategory(request, response);
-		request.setAttribute("contentPage", "goods/goods.jsp");
+		//request.setAttribute("daumeditor", request.getParameter("daumeditor"));
+
+		request.setAttribute("contentPage", "goods/test.jsp");
 		return "index";
 	}
 
