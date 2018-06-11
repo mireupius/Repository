@@ -14,18 +14,22 @@
 <script
 	src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
 <!-- jquery -->
-<script src="resources/js/jquery.js"></script>
 <script src="resources/js/bootstrap/bootstrap.min.js"></script>
+
+
+<!-- 다음 에디터 -->
+<link rel=stylesheet type=text/css
+	href="${pageContext.request.contextPath}/resources/daumeditor/css/editor.css"
+	charset=utf-8 />
+<script type=text/javascript charset=utf-8
+	src="${pageContext.request.contextPath}/resources/daumeditor/js/editor_loader.js"></script>
+
 <script type="text/javascript">
-	$(function() {
-		$("#ct1").click(function() {
-
-			var ct1 = $("#ct1").val();
-
-			alert(ct1);
-		});
-	});
+function saveContent() {
+    Editor.save(); // 이 함수를 호출하여 글을 등록하면 된다.
+}
 </script>
+
 <title>Goods</title>
 <style type="text/css">
 h3 {
@@ -37,9 +41,9 @@ h3 {
 	background-color: #848898;
 }
 
-.imgli{
-float: left;
-width: 200px;
+.imgli {
+	float: left;
+	width: 200px;
 }
 </style>
 
@@ -154,7 +158,32 @@ width: 200px;
 					</tr>
 					<tr>
 						<td class="gdTd1">상품상세설명</td>
-						<td class="gdTd2"><input></td>
+						<td class="gdTd2">
+							<!-- 에디터 시작 -->
+							<div>
+								<form name="tx_editor_form" id="tx_editor_form"
+									action="editor.do" method="post"
+									accept-charset="utf-8">
+									<!-- 에디터프레임호출 영역 -->
+									<div id="editor_frame">
+										<!-- 다음에디터 넣기 -->
+										<jsp:include page="../editor/editor.jsp"></jsp:include>
+										<script type="text/javascript">
+											//'수정하기' 모드일 때, 다음과 같이 데이터를 다음오픈에디터에 대입할 수 있다.
+											if ('${board!=null}' == 'true')
+												Editor.modify({'content' : '${board.board_content}'});
+										</script>
+
+									</div>
+									<!-- 실제 값이 담겨져서 넘어갈 textarea 태그 -->
+									<textarea name="daumeditor" id="daumeditor" rows="10"
+										cols="100" style="width: 766px; height: 412px; display: none;"></textarea>
+									<input type="button" id="save_button" value="내용전송" onclick="saveContent();"/>
+								</form>
+							</div> <!-- 에디터 끝 -->
+
+
+						</td>
 					</tr>
 					<tr>
 						<td class="gdTd1">검색어설정</td>
@@ -201,27 +230,17 @@ width: 200px;
 						<td class="gdTd2">
 							<div>
 								<ul>
-									<li class="imgli">
-										<span>상세이미지</span><br>
-										<span>권장 500px * 500px</span><br>
-										<span><input type="file"> </span>
-									</li>
-									<li class="imgli">
-										<span>목록 이미지</span><br>
-										<span>권장 300px * 300px</span><br>
-										
-									</li>
-									<li class="imgli"><span>작은목록 이미지</span><br>
-										<span>권장 100px * 100px</span><br>
-										
-									</li>
-									<li class="imgli"><span>축소 이미지</span><br>
-										<span>권장 220px * 220px</span><br>
-										
-									</li>
+									<li class="imgli"><span>상세이미지</span><br> <span>권장
+											500px * 500px</span><br> <span><input type="file">
+									</span></li>
+									<li class="imgli"><span>목록 이미지</span><br> <span>권장
+											300px * 300px</span><br></li>
+									<li class="imgli"><span>작은목록 이미지</span><br> <span>권장
+											100px * 100px</span><br></li>
+									<li class="imgli"><span>축소 이미지</span><br> <span>권장
+											220px * 220px</span><br></li>
 								</ul>
 							</div>
-
 						</td>
 					</tr>
 				</tbody>
@@ -229,4 +248,3 @@ width: 200px;
 		</div>
 	</div>
 </body>
-</html>
