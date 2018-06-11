@@ -3,6 +3,7 @@ create table category_tb
 ct_no number(3)	primary key,
 ct_clfname varchar2(50 char)	not null,
 ct_clf varchar2(1 char)	not null 
+ct_parentno varchar2(3 char)
 );		
 
 create sequence category_sq
