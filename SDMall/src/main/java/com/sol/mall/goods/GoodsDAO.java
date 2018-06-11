@@ -24,4 +24,17 @@ public class GoodsDAO {
 		}*/
 		request.setAttribute("category", cts);
 	}
+	
+	
+	public void insertCT(TestContent tct, HttpServletRequest request, HttpServletResponse response) {
+		
+		System.out.println(tct.getDaumcontent());
+		
+		if(ss.getMapper(GoodsMapper.class).insertCT(tct) == 1) {
+			
+			System.out.println("성공");
+		}else{
+			System.out.println("실패");
+		}
+	}
 }

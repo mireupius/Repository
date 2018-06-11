@@ -7,6 +7,8 @@
 <title>Insert title here</title>
 </head>
 <body>
-${param.daumeditor}
+${param.daumcontent}
+
+
 </body>
 </html>

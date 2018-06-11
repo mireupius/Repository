@@ -16,13 +16,14 @@
 <!-- jquery -->
 <script src="resources/js/bootstrap/bootstrap.min.js"></script>
 
-
 <!-- 다음 에디터 -->
 <link rel=stylesheet type=text/css
 	href="${pageContext.request.contextPath}/resources/daumeditor/css/editor.css"
 	charset=utf-8 />
 <script type=text/javascript charset=utf-8
 	src="${pageContext.request.contextPath}/resources/daumeditor/js/editor_loader.js"></script>
+<!-- jquery.form.js - ajaxSubmit() 사용 --> 
+<script type=text/javascript src="${pageContext.request.contextPath}/resources/daumeditor/js/jquery.form.min.js"></script>
 
 <script type="text/javascript">
 function saveContent() {
@@ -164,6 +165,7 @@ h3 {
 								<form name="tx_editor_form" id="tx_editor_form"
 									action="editor.do" method="post"
 									accept-charset="utf-8">
+								
 									<!-- 에디터프레임호출 영역 -->
 									<div id="editor_frame">
 										<!-- 다음에디터 넣기 -->
@@ -171,18 +173,15 @@ h3 {
 										<script type="text/javascript">
 											//'수정하기' 모드일 때, 다음과 같이 데이터를 다음오픈에디터에 대입할 수 있다.
 											if ('${board!=null}' == 'true')
-												Editor.modify({'content' : '${board.board_content}'});
+												Editor.modify({'content' : '${board.daumcontent}'});
 										</script>
 
 									</div>
+
 									<!-- 실제 값이 담겨져서 넘어갈 textarea 태그 -->
-									<textarea name="daumeditor" id="daumeditor" rows="10"
-										cols="100" style="width: 766px; height: 412px; display: none;"></textarea>
 									<input type="button" id="save_button" value="내용전송" onclick="saveContent();"/>
 								</form>
 							</div> <!-- 에디터 끝 -->
-
-
 						</td>
 					</tr>
 					<tr>

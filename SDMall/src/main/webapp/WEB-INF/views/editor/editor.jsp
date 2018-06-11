@@ -496,6 +496,16 @@
 			attachbox: {
 				show: true,
 				confirmForDeleteAll: true
+			},
+			// 이미지첨부 관련 추가 config
+			attacher:{
+				image:{ 
+					features:{left:250,top:65,width:400,height:190,scrollbars:0}, //팝업창 사이즈 
+					popPageUrl:'${pageContext.request.contextPath}/daumeditor/imagePopup' // 팝업창 주소(콘트롤러 RequestMapping)
+				} 
+			},
+			/* 이미지첨부 관련 추가 config */
+			capacity: { maximum: 5*1024*1024 // 최대 첨부 용량 (5MB) 
 			}
 		},
 		size: {
@@ -550,11 +560,10 @@
         var i, input;
         var form = editor.getForm();
         var content = editor.getContent();
-        $("#daumeditor").val(content)
 
-        // 본문 내용을 필드를 생성하여 값을 할당하는 부분
+        // 본문 내용을 daumcontent라는 이름의textarea를 만들어서 값을 할당
         var textarea = document.createElement('textarea');
-        textarea.name = 'board_content';
+        textarea.name = 'daumcontent';
         textarea.value = content;
         form.createField(textarea);
 
