@@ -44,7 +44,10 @@
 		<beans:property name="mapperLocations">
 			<beans:list>
 				<beans:value>classpath:testMapper.xml</beans:value>
+<<<<<<< HEAD
 				<beans:value>classpath:ShoppingbagMapper.xml</beans:value>
+=======
+>>>>>>> refs/remotes/origin/Oh
 				<beans:value>classpath:memberMapper.xml</beans:value>
 			</beans:list>
 		</beans:property>
