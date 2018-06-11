@@ -16,10 +16,10 @@ public class HomeController {
 	/**
 	 * Simply selects the home view to render by returning its name.
 	 */
-	@RequestMapping(value = "/", method = RequestMethod.GET)
-	public String home(HttpServletRequest req, HttpServletResponse res) {
-	
-		return "index";
-	}
+//	@RequestMapping(value = "/", method = RequestMethod.GET)
+//	public String home(HttpServletRequest req, HttpServletResponse res) {
+//	
+//		return "main";
+//	}
 	
 }

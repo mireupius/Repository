@@ -1,5 +1,6 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-	pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -71,14 +72,14 @@
 							<div class="wishlist d-flex flex-row align-items-center justify-content-end">
 								<div class="wishlist_content">
 									<div class="wishlist_icon"><img src="resources/etc/icon-login.png" alt=""></div>
-									<div class="wishlist_text"><a href="#">·Î±×ÀÎ</a></div>
+									<div class="wishlist_text"><a href="#">ë¡œê·¸ì¸</a></div>
 								</div>
 							</div>
 							<!-- Myhome -->
 							<div class="wishlist d-flex flex-row align-items-center justify-content-end">
 								<div class="wishlist_content">
 									<div class="wishlist_icon"><img src="resources/etc/icon-myhome.png" alt=""></div>
-									<div class="wishlist_text"><a href="#">¸¶ÀÌÈ¨</a></div>
+									<div class="wishlist_text"><a href="#">ë§ˆì´í™ˆ</a></div>
 								</div>
 							</div>
 
@@ -90,7 +91,7 @@
 											<img src="resources/etc/icon-cart.png" alt="">
 											<div class="cart_count"><span>10</span></div>
 										</div>
-										<div class="cart_text"><a href="#">Àå¹Ù±¸´Ï</a></div>
+										<div class="cart_text"><a href="#">ìž¥ë°”êµ¬ë‹ˆ</a></div>
 									</div>
 								</div>
 							</div>
@@ -114,47 +115,33 @@
 							<div class="cat_menu_container">
 								<div class="cat_menu_title d-flex flex-row align-items-center justify-content-start">
 									<div class="cat_burger"><span></span><span></span><span></span></div>
-									<div class="cat_menu_text">Ä«Å×°í¸®</div>
+									<div class="cat_menu_text">ì¹´í…Œê³ ë¦¬</div>
 								</div>
 
 								<ul class="cat_menu">
 									<li class="hassubs">
-										<a href="#">ÆÐ¼ÇÀÇ·ù<i class="fas fa-chevron-right"></i></a>
+										<a href="#">íŒ¨ì…˜ì˜ë¥˜<i class="fas fa-chevron-right"></i></a>
 										<ul>
 											<li class="hassubs">
-												<a href="#">¿©¼ºÀÇ·ù<i class="fas fa-chevron-right"></i></a>
+												<a href="#">ì—¬ì„±ì˜ë¥˜<i class="fas fa-chevron-right"></i></a>
 												<ul>
-													<li><a href="#">Æ¼¼ÅÃ÷<i class="fas fa-chevron-right"></i></a></li>
-													<li><a href="#">ºí¶ó¿ì½º/¼ÅÃ÷<i class="fas fa-chevron-right"></i></a></li>
-													<li><a href="#">´ÏÆ®/°¡µð°Ç<i class="fas fa-chevron-right"></i></a></li>
-													<li><a href="#">¿øÇÇ½º/ÅõÇÇ½º<i class="fas fa-chevron-right"></i></a></li>
-													<li><a href="#">½ºÄ¿Æ®<i class="fas fa-chevron-right"></i></a></li>
-													<li><a href="#">ÆÒÃ÷/µ¥´Ô<i class="fas fa-chevron-right"></i></a></li>
-													<li><a href="#">ÀÚÄÏ/Á¡ÆÛ/ÄÚÆ®<i class="fas fa-chevron-right"></i></a></li>
-													<li><a href="#">ÇÑº¹/Å×¸¶ÀÇ·ù<i class="fas fa-chevron-right"></i></a></li>
+													<li><a href="#">í‹°ì…”ì¸ <i class="fas fa-chevron-right"></i></a></li>
+													<li><a href="#">ë¸”ë¼ìš°ìŠ¤/ì…”ì¸ <i class="fas fa-chevron-right"></i></a></li>
+													<li><a href="#">ë‹ˆíŠ¸/ê°€ë””ê±´<i class="fas fa-chevron-right"></i></a></li>
+													<li><a href="#">ì›í”¼ìŠ¤/íˆ¬í”¼ìŠ¤<i class="fas fa-chevron-right"></i></a></li>
+													<li><a href="#">ìŠ¤ì»¤íŠ¸<i class="fas fa-chevron-right"></i></a></li>
+													<li><a href="#">íŒ¬ì¸ /ë°ë‹˜<i class="fas fa-chevron-right"></i></a></li>
+													<li><a href="#">ìžì¼“/ì í¼/ì½”íŠ¸<i class="fas fa-chevron-right"></i></a></li>
+													<li><a href="#">í•œë³µ/í…Œë§ˆì˜ë¥˜<i class="fas fa-chevron-right"></i></a></li>
 												</ul>
 											</li>
-											<li><a href="#">³²¼ºÀÇ·ù<i class="fas fa-chevron-right"></i></a></li>
-											<li><a href="#">Ä³ÁÖ¾óÀÇ·ù<i class="fas fa-chevron-right"></i></a></li>
-											<li><a href="#">¾ð´õ¿þ¾î<i class="fas fa-chevron-right"></i></a></li>
+											<li><a href="#">ë‚¨ì„±ì˜ë¥˜<i class="fas fa-chevron-right"></i></a></li>
+											<li><a href="#">ìºì£¼ì–¼ì˜ë¥˜<i class="fas fa-chevron-right"></i></a></li>
+											<li><a href="#">ì–¸ë”ì›¨ì–´<i class="fas fa-chevron-right"></i></a></li>
 										</ul>
 									</li>
 									<li class="hassubs">
-										<a href="#">ÀâÈ­/º¸¼®<i class="fas fa-chevron-right"></i></a>
-										<ul>
-											<li class="hassubs">
-												<a href="#">Menu Item<i class="fas fa-chevron-right"></i></a>
-												<ul>
-													<li><a href="#">Menu Item<i class="fas fa-chevron-right"></i></a></li>
-													<li><a href="#">Menu Item<i class="fas fa-chevron-right"></i></a></li>
-												</ul>
-											</li>
-											<li><a href="#">Menu Item<i class="fas fa-chevron-right"></i></a></li>
-											<li><a href="#">Menu Item<i class="fas fa-chevron-right"></i></a></li>
-										</ul>
-									</li>
-									<li class="hassubs">
-										<a href="#">½ºÆ÷Ã÷/¾Æ¿ôµµ¾î<i class="fas fa-chevron-right"></i></a>
+										<a href="#">ìž¡í™”/ë³´ì„<i class="fas fa-chevron-right"></i></a>
 										<ul>
 											<li class="hassubs">
 												<a href="#">Menu Item<i class="fas fa-chevron-right"></i></a>
@@ -168,7 +155,7 @@
 										</ul>
 									</li>
 									<li class="hassubs">
-										<a href="#">ºäÆ¼<i class="fas fa-chevron-right"></i></a>
+										<a href="#">ìŠ¤í¬ì¸ /ì•„ì›ƒë„ì–´<i class="fas fa-chevron-right"></i></a>
 										<ul>
 											<li class="hassubs">
 												<a href="#">Menu Item<i class="fas fa-chevron-right"></i></a>
@@ -182,7 +169,7 @@
 										</ul>
 									</li>
 									<li class="hassubs">
-										<a href="#">½ÄÇ°/ÁÖ¹æ<i class="fas fa-chevron-right"></i></a>
+										<a href="#">ë·°í‹°<i class="fas fa-chevron-right"></i></a>
 										<ul>
 											<li class="hassubs">
 												<a href="#">Menu Item<i class="fas fa-chevron-right"></i></a>
@@ -196,7 +183,7 @@
 										</ul>
 									</li>
 									<li class="hassubs">
-										<a href="#">Ãâ»ê/À¯¾Æµ¿<i class="fas fa-chevron-right"></i></a>
+										<a href="#">ì‹í’ˆ/ì£¼ë°©<i class="fas fa-chevron-right"></i></a>
 										<ul>
 											<li class="hassubs">
 												<a href="#">Menu Item<i class="fas fa-chevron-right"></i></a>
@@ -210,7 +197,7 @@
 										</ul>
 									</li>
 									<li class="hassubs">
-										<a href="#">°¡±¸/ÀÎÅ×¸®¾î<i class="fas fa-chevron-right"></i></a>
+										<a href="#">ì¶œì‚°/ìœ ì•„ë™<i class="fas fa-chevron-right"></i></a>
 										<ul>
 											<li class="hassubs">
 												<a href="#">Menu Item<i class="fas fa-chevron-right"></i></a>
@@ -224,7 +211,7 @@
 										</ul>
 									</li>
 									<li class="hassubs">
-										<a href="#">»ýÈ°/°Ç°­/Ãë¹Ì<i class="fas fa-chevron-right"></i></a>
+										<a href="#">ê°€êµ¬/ì¸í…Œë¦¬ì–´<i class="fas fa-chevron-right"></i></a>
 										<ul>
 											<li class="hassubs">
 												<a href="#">Menu Item<i class="fas fa-chevron-right"></i></a>
@@ -238,7 +225,21 @@
 										</ul>
 									</li>
 									<li class="hassubs">
-										<a href="#">°¡Àü/µðÁöÅÐ<i class="fas fa-chevron-right"></i></a>
+										<a href="#">ìƒí™œ/ê±´ê°•/ì·¨ë¯¸<i class="fas fa-chevron-right"></i></a>
+										<ul>
+											<li class="hassubs">
+												<a href="#">Menu Item<i class="fas fa-chevron-right"></i></a>
+												<ul>
+													<li><a href="#">Menu Item<i class="fas fa-chevron-right"></i></a></li>
+													<li><a href="#">Menu Item<i class="fas fa-chevron-right"></i></a></li>
+												</ul>
+											</li>
+											<li><a href="#">Menu Item<i class="fas fa-chevron-right"></i></a></li>
+											<li><a href="#">Menu Item<i class="fas fa-chevron-right"></i></a></li>
+										</ul>
+									</li>
+									<li class="hassubs">
+										<a href="#">ê°€ì „/ë””ì§€í„¸<i class="fas fa-chevron-right"></i></a>
 										<ul>
 											<li class="hassubs">
 												<a href="#">Menu Item<i class="fas fa-chevron-right"></i></a>
@@ -431,7 +432,12 @@
 			</div>
 		</div>
 	</div>
-
+	
+	<div>
+		<c:forEach var="cate" items="allCategory">
+			${cate.ct_no }
+		</c:forEach>
+	</div>
 	<!-- Footer -->
 
 	<footer class="footer">
