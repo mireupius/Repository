@@ -77,7 +77,18 @@ select * from option_tb;
 select * from goods_tb,option_tb where op_gdno=gd_no;      
 
 
+-- 구매자 --
+create table customer_reg(
+csm_id varchar2(12 char) primary key,
+csm_pw varchar2(15 char) not null,
+csm_name varchar2(10 char) not null,
+csm_birth date not null,
+csm_phoneNo varchar2(11 char) not null,
+csm_emailAddress varchar2(30 char) not null
+);
 
+insert into customer_reg values('cyh524','123123','최완희',sysdate,'01051990686','moon1765@naver.com');
 
+select * from customer_reg;
 
 

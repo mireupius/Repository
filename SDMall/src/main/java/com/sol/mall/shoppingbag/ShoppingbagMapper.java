@@ -1,5 +1,7 @@
 package com.sol.mall.shoppingbag;
 
-public interface ShoppingbagMapper {
+import java.util.List;
 
+public interface ShoppingbagMapper {
+	public abstract List<Shoppingbag> getcart(Shoppingbag s);
 }

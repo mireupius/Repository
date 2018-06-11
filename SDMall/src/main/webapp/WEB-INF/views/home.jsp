@@ -7,5 +7,7 @@
 </head>
 <body>
 <a href="shoppingbag.go">장바구니바로기</a>
+<a href="customer.register.go">회원가입페이지가기</a>
+<a href="loginpage.go">로그인페이지가기</a>
 </body>
 </html>
