@@ -87,7 +87,7 @@
 	<section id="main-content">
 		<section class="wrapper">
 			<h3>
-				<i class="fa fa-angle-right"></i> 발주/발송관리
+				<i class="fa fa-angle-right"></i> 배송현황 관리
 			</h3>
 			<div class="showback" id="inputSets">
 

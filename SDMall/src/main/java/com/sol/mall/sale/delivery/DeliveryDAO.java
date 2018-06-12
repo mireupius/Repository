@@ -15,16 +15,44 @@ public class DeliveryDAO {
 
 	@Autowired
 	private SqlSession ss;
+	private Delivery d;
 
 	public void getAllOrder(HttpServletRequest req, HttpServletResponse res) {
 		List<Delivery> ds = ss.getMapper(DeliveryMapper.class).getAllDelivery();
 		req.setAttribute("delivery", ds);
 	}
 
+	public void getNewDeals(HttpServletRequest req, HttpServletResponse res) {
+		List<Delivery> ds = ss.getMapper(DeliveryMapper.class).getNewDeliverys();
+		req.setAttribute("delivery", ds);
+	}
+
+	public void getCheckDeals(HttpServletRequest req, HttpServletResponse res) {
+		List<Delivery> ds = ss.getMapper(DeliveryMapper.class).getCheckDeliverys();
+		req.setAttribute("delivery", ds);
+	}
+
+	public void getAllDeliveryNum(HttpServletRequest req, HttpServletResponse res) {
+		int adn = ss.getMapper(DeliveryMapper.class).getAllDeliveryNum();
+		req.setAttribute("AllDeliveryNum", adn);
+	}
+
+	public void getNewDeliveryNum(HttpServletRequest req, HttpServletResponse res) {
+
+		int ndn = ss.getMapper(DeliveryMapper.class).getNewDeliveryNum();
+		req.setAttribute("NewDeliveryNum", ndn);
+	}
+
+	public void getCheckDeliveryNum(HttpServletRequest req, HttpServletResponse res) {
+
+		int cdn = ss.getMapper(DeliveryMapper.class).getCheckDeliveryNum();
+		req.setAttribute("CheckDeliveryNum", cdn);
+	}
+
 	public void deliveryCheck(HttpServletRequest req, HttpServletResponse res) {
 		String str = req.getParameter("array");
 		String[] array = str.split(",");
-		Delivery d = new Delivery();
+		d = new Delivery();
 		d.setSd_state_detail("발주확인");
 		d.setSd_check_date(new Date());
 

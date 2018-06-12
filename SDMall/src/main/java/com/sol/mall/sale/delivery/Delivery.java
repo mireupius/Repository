@@ -80,6 +80,8 @@ public class Delivery {
 		this.sd_pay_method = sd_pay_method;
 	}
 
+	
+	
 	public String getSd_delivery_pno() {
 		return sd_delivery_pno;
 	}

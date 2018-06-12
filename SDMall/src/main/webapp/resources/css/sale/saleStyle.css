@@ -1,9 +1,36 @@
 @charset "UTF-8";
 
-.deliveryTableDiv {
+#deliveryTableDiv {
+	height: 450px;
 	border: #c5c5c5 solid 1px;
-	padding : 0px;
+	padding: 0px;
 	overflow: auto;
 	white-space: nowrap;
-	padding: 0;
+	padding: 0px;
+	border: #c5c5c5 solid 1px;
+}
+
+#inputVal {
+	display: inline;
+	width: 130px;
+}
+
+#inputSel {
+	height: 34px;
+}
+
+#inputSets {
+	margin-bottom: -20px;
+}
+
+#inputSets span {
+	font-weight: 800;
+	font-size: 11pt;
+	margin-right: 5px;
+	font-size: 11pt;
+}
+
+.deliver_no_input {
+	width: 130px;
+	height: 25px;
 }

@@ -23,6 +23,8 @@
 	href="resources/assets/js/gritter/css/jquery.gritter.css" />
 <link rel="stylesheet" type="text/css"
 	href="resources/assets/lineicons/style.css">
+<link rel="stylesheet" type="text/css"
+	href="resources/css/sale/saleStyle.css">
 
 <!-- Custom styles for this template -->
 <link href="resources/assets/css/style.css" rel="stylesheet">
@@ -89,7 +91,7 @@
 						<ul class="sub">
 							<li><a href="#.html">주문조회</a></li>
 							<li><a href="sale.delivery.go">발주발송관리</a></li>
-							<li><a href="#.html">배송현황관리</a></li>
+							<li><a href="sale.goingDelivery.go">배송현황관리</a></li>
 							<li><a href="#.html">구매확정내역</a></li>
 							<li><a href="#.html">취소관리</a></li>
 							<li><a href="#.html">반품관리</a></li>
@@ -182,6 +184,7 @@
 		
 		
 		
+		
         $(document).ready(function () {
             $("#date-popover").popover({html: true, trigger: "manual"});
             $("#date-popover").hide();
@@ -215,6 +218,7 @@
             console.log('nav ' + nav + ' to: ' + to.month + '/' + to.year);
         }
     
+	
 	
 	
 	

@@ -22,7 +22,12 @@ public class DeliveryController {
 
 	@RequestMapping(value = "/sale.delivery.go", method = RequestMethod.GET)
 	public String delivery(HttpServletRequest req, HttpServletResponse res) {
+
 		DDAO.getAllOrder(req, res);
+		DDAO.getAllDeliveryNum(req, res);
+		DDAO.getNewDeliveryNum(req, res);
+		DDAO.getCheckDeliveryNum(req, res);
+
 		req.setAttribute("contentPage", "delivery/deliveryContent.jsp");
 		return "sale/saleIndex";
 	}
@@ -31,7 +36,42 @@ public class DeliveryController {
 	public String deliveryCheck(HttpServletRequest req, HttpServletResponse res) {
 		DDAO.deliveryCheck(req, res);
 		DDAO.getAllOrder(req, res);
+		DDAO.getAllDeliveryNum(req, res);
+		DDAO.getNewDeliveryNum(req, res);
+		DDAO.getCheckDeliveryNum(req, res);
 		req.setAttribute("contentPage", "delivery/deliveryContent.jsp");
+		return "sale/saleIndex";
+	}
+
+	@RequestMapping(value = "/sale.selNewDeals.go", method = RequestMethod.GET)
+	public String selNewDeals(HttpServletRequest req, HttpServletResponse res) {
+		DDAO.getNewDeals(req, res);
+		DDAO.getAllDeliveryNum(req, res);
+		DDAO.getNewDeliveryNum(req, res);
+		DDAO.getCheckDeliveryNum(req, res);
+		req.setAttribute("contentPage", "delivery/deliveryContent.jsp");
+		return "sale/saleIndex";
+	}
+
+	@RequestMapping(value = "/sale.selCheckDeals.go", method = RequestMethod.GET)
+	public String selCheckDeals(HttpServletRequest req, HttpServletResponse res) {
+		DDAO.getCheckDeals(req, res);
+		DDAO.getAllDeliveryNum(req, res);
+		DDAO.getNewDeliveryNum(req, res);
+		DDAO.getCheckDeliveryNum(req, res);
+
+		req.setAttribute("contentPage", "delivery/deliveryContent.jsp");
+		return "sale/saleIndex";
+	}
+
+	@RequestMapping(value = "/sale.goingDelivery.go", method = RequestMethod.GET)
+	public String goingDelivery(HttpServletRequest req, HttpServletResponse res) {
+		DDAO.deliveryCheck(req, res);
+		DDAO.getAllDeliveryNum(req, res);
+		DDAO.getNewDeliveryNum(req, res);
+		DDAO.getCheckDeliveryNum(req, res);
+
+		req.setAttribute("contentPage", "delivery/goingDeliveryContent.jsp");
 		return "sale/saleIndex";
 	}
 
