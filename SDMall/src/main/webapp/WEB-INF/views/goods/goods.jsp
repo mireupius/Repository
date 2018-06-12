@@ -107,6 +107,7 @@ h3 {
 			</table>
 		</div>
 	</div>
+	
 	<div class="gdTb3" data-toggle="collapse" href="#collapse2"
 		aria-expanded="false" aria-controls="collapse2">
 		<h3>기본정보</h3>
@@ -120,40 +121,11 @@ h3 {
 						<td class="gdTd2"><input></td>
 					</tr>
 					<tr>
+						<td class="gdTd1">상품코드</td>
+						<td class="gdTd2"><input></td>
+					</tr>
+					<tr>
 						<td class="gdTd1">모델명</td>
-						<td class="gdTd2"><input></td>
-					</tr>
-					<tr>
-						<td class="gdTd1">상품코드</td>
-						<td class="gdTd2"><input></td>
-					</tr>
-					<tr>
-						<td class="gdTd1">상품상세설명</td>
-						<td class="gdTd2"><input></td>
-					</tr>
-					<tr>
-						<td class="gdTd1">검색어설정</td>
-						<td class="Rhf">검색어설정</td>
-						<td class="gdTd2"><input></td>
-					</tr>
-				</tbody>
-			</table>
-		</div>
-	</div>
-	<div class="gdTb3" data-toggle="collapse" href="#collapse3"
-		aria-expanded="false" aria-controls="collapse3">
-		<h3>판매정보</h3>
-	</div>
-	<div class="collapse" id="collapse3">
-		<div>
-			<table class="gdTb3">
-				<tbody>
-					<tr>
-						<td class="gdTd1">소비자가 판매가</td>
-						<td class="gdTd2"><input></td>
-					</tr>
-					<tr>
-						<td class="gdTd1">상품코드</td>
 						<td class="gdTd2"><input></td>
 					</tr>
 					<tr>
@@ -191,6 +163,27 @@ h3 {
 			</table>
 		</div>
 	</div>
+	<div class="gdTb3" data-toggle="collapse" href="#collapse3"
+		aria-expanded="false" aria-controls="collapse3">
+		<h3>판매정보</h3>
+	</div>
+	<div class="collapse" id="collapse3">
+		<div>
+			<table class="gdTb3">
+				<tbody>
+					<tr>
+						<td class="gdTd1">소비자가</td>
+						<td class="gdTd2"><input></td>
+					</tr>
+					<tr>
+						<td class="gdTd1">판매가</td>
+						<td class="gdTd2"><input></td>
+					</tr>
+					
+				</tbody>
+			</table>
+		</div>
+	</div>
 	<div class="gdTb3" data-toggle="collapse" href="#collapse4"
 		aria-expanded="false" aria-controls="collapse4">
 		<h3>옵션/재고</h3>
@@ -204,11 +197,11 @@ h3 {
 						<td class="gdTd2"><input></td>
 					</tr>
 					<tr>
-						<td class="gdTd1">옵션재고</td>
+						<td class="gdTd1">옵션가격</td>
 						<td class="gdTd2"><input></td>
 					</tr>
 					<tr>
-						<td class="gdTd1">옵션가격</td>
+						<td class="gdTd1">옵션재고</td>
 						<td class="gdTd2"><input></td>
 					</tr>
 				</tbody>
@@ -245,4 +238,70 @@ h3 {
 			</table>
 		</div>
 	</div>
+	<div class="gdTb3" data-toggle="collapse" href="#collapse6"
+		aria-expanded="false" aria-controls="collapse6">
+		<h3>제작 정보</h3>
+	</div>
+	<div class="collapse" id="collapse6">
+		<div>
+			<table class="gdTb3">
+				<tbody>
+					<tr>
+						<td class="gdTd1">제조사</td>
+						<td class="gdTd2"><input></td>
+					</tr>
+					<tr>
+						<td class="gdTd1">브랜드</td>
+						<td class="gdTd2"><input></td>
+					</tr>
+					<tr>
+						<td class="gdTd1">제조일자</td>
+						<td class="gdTd2"><input></td>
+					</tr>
+					<tr>
+						<td class="gdTd1">유효기간</td>
+						<td class="gdTd2"><input></td>
+					</tr>
+					<tr>
+						<td class="gdTd1">상품소재</td>
+						<td class="gdTd2"><input></td>
+					</tr>
+					<tr>
+						<td class="gdTd1">상품 전체중량(kg)</td>
+						<td class="gdTd2"><input></td>
+					</tr>
+					<tr>
+						<td class="gdTd1">상품부피(cm)</td>
+						<td class="gdTd2"><input></td>
+					</tr>
+					<tr>
+						<td class="gdTd1">원산지</td>
+						<td class="gdTd2"><input></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+	<div class="gdTb3" data-toggle="collapse" href="#collapse7"
+		aria-expanded="false" aria-controls="collapse7">
+		<h3>배송 정보</h3>
+	</div>
+	<div class="collapse" id="collapse7">
+		<div>
+			<table class="gdTb3">
+				<tbody>
+					<tr>
+						<td class="gdTd1">배송비</td>
+						<td class="gdTd2"><input></td>
+					</tr>
+					<tr>
+						<td class="gdTd1">무료조건가격</td>
+						<td class="gdTd2"><input></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+	
+	<p><br></p><table class="txc-table" width="664" cellspacing="0" cellpadding="0" border="0" style="border:none;border-collapse:collapse;;font-family:굴림;font-size:13.3333px"><tbody><tr><td style="width: 83px; height: 24px; border-width: 1px; border-style: solid; border-color: rgb(151, 220, 32) rgb(255, 255, 255) rgb(255, 255, 255) rgb(151, 220, 32); color: rgb(255, 255, 255); background-color: rgb(151, 220, 32);"><p><br></p></td><td style="width: 83px; height: 24px; border-bottom: 1px solid rgb(255, 255, 255); border-right: 1px solid rgb(255, 255, 255); border-top: 1px solid rgb(151, 220, 32); color: rgb(255, 255, 255); background-color: rgb(151, 220, 32);"><p><br></p></td><td style="width: 83px; height: 24px; border-bottom: 1px solid rgb(255, 255, 255); border-right: 1px solid rgb(255, 255, 255); border-top: 1px solid rgb(151, 220, 32); color: rgb(255, 255, 255); background-color: rgb(151, 220, 32);"><p><br></p></td><td style="width: 83px; height: 24px; border-bottom: 1px solid rgb(255, 255, 255); border-right: 1px solid rgb(255, 255, 255); border-top: 1px solid rgb(151, 220, 32); color: rgb(255, 255, 255); background-color: rgb(151, 220, 32);"><p><br></p></td><td style="width: 83px; height: 24px; border-bottom: 1px solid rgb(255, 255, 255); border-right: 1px solid rgb(255, 255, 255); border-top: 1px solid rgb(151, 220, 32); color: rgb(255, 255, 255); background-color: rgb(151, 220, 32);"><p><br></p></td><td style="width: 83px; height: 24px; border-bottom: 1px solid rgb(255, 255, 255); border-right: 1px solid rgb(255, 255, 255); border-top: 1px solid rgb(151, 220, 32); color: rgb(255, 255, 255); background-color: rgb(151, 220, 32);"><p><br></p></td><td style="width: 83px; height: 24px; border-bottom: 1px solid rgb(255, 255, 255); border-right: 1px solid rgb(255, 255, 255); border-top: 1px solid rgb(151, 220, 32); color: rgb(255, 255, 255); background-color: rgb(151, 220, 32);"><p><br></p></td><td style="width: 83px; height: 24px; border-bottom: 1px solid rgb(255, 255, 255); border-right: 1px solid rgb(151, 220, 32); border-top: 1px solid rgb(151, 220, 32); color: rgb(255, 255, 255); background-color: rgb(151, 220, 32);"><p><br></p></td></tr><tr><td style="width: 83px; height: 24px; border-bottom: none; border-right: none; border-left: 1px solid rgb(151, 220, 32); color: rgb(0, 0, 0); background-color: transparent;"><p><br></p></td><td style="width: 83px; height: 24px; border-bottom: none; border-right: none; color: rgb(0, 0, 0); background-color: transparent;"><p><br></p></td><td style="width: 83px; height: 24px; border-bottom: none; border-right: none; color: rgb(0, 0, 0); background-color: transparent;"><p><br></p></td><td style="width: 83px; height: 24px; border-bottom: none; border-right: none; color: rgb(0, 0, 0); background-color: transparent;"><p><br></p></td><td style="width: 83px; height: 24px; border-bottom: none; border-right: none; color: rgb(0, 0, 0); background-color: transparent;"><p><br></p></td><td style="width: 83px; height: 24px; border-bottom: none; border-right: none; color: rgb(0, 0, 0); background-color: transparent;"><p><br></p></td><td style="width: 83px; height: 24px; border-bottom: none; border-right: none; color: rgb(0, 0, 0); background-color: transparent;"><p><br></p></td><td style="width: 83px; height: 24px; border-bottom: 1px solid rgb(255, 255, 255); border-right: 1px solid rgb(151, 220, 32); color: rgb(255, 255, 255); background-color: rgb(151, 220, 32);"><p><br></p></td></tr><tr><td style="width: 83px; height: 24px; border-bottom: none; border-right: none; border-left: 1px solid rgb(151, 220, 32); color: rgb(0, 0, 0); background-color: transparent;"><p><br></p></td><td style="width: 83px; height: 24px; border-bottom: none; border-right: none; color: rgb(0, 0, 0); background-color: transparent;"><p><br></p></td><td style="width: 83px; height: 24px; border-bottom: none; border-right: none; color: rgb(0, 0, 0); background-color: transparent;"><p><br></p></td><td style="width: 83px; height: 24px; border-bottom: none; border-right: none; color: rgb(0, 0, 0); background-color: transparent;"><p><br></p></td><td style="width: 83px; height: 24px; border-bottom: none; border-right: none; color: rgb(0, 0, 0); background-color: transparent;"><p><br></p></td><td style="width: 83px; height: 24px; border-bottom: none; border-right: none; color: rgb(0, 0, 0); background-color: transparent;"><p><br></p></td><td style="width: 83px; height: 24px; border-bottom: none; border-right: none; color: rgb(0, 0, 0); background-color: transparent;"><p><br></p></td><td style="width: 83px; height: 24px; border-bottom: 1px solid rgb(255, 255, 255); border-right: 1px solid rgb(151, 220, 32); color: rgb(255, 255, 255); background-color: rgb(151, 220, 32);"><p><br></p></td></tr><tr><td style="width: 83px; height: 24px; border-bottom: none; border-right: none; border-left: 1px solid rgb(151, 220, 32); color: rgb(0, 0, 0); background-color: transparent;"><p><br></p></td><td style="width: 83px; height: 24px; border-bottom: none; border-right: none; color: rgb(0, 0, 0); background-color: transparent;"><p><br></p></td><td style="width: 83px; height: 24px; border-bottom: none; border-right: none; color: rgb(0, 0, 0); background-color: transparent;"><p><br></p></td><td style="width: 83px; height: 24px; border-bottom: none; border-right: none; color: rgb(0, 0, 0); background-color: transparent;"><p>ㅁㄴㅇㄻㄴㅇㄹ</p></td><td style="width: 83px; height: 24px; border-bottom: none; border-right: none; color: rgb(0, 0, 0); background-color: transparent;"><p><br></p></td><td style="width: 83px; height: 24px; border-bottom: none; border-right: none; color: rgb(0, 0, 0); background-color: transparent;"><p><br></p></td><td style="width: 83px; height: 24px; border-bottom: none; border-right: none; color: rgb(0, 0, 0); background-color: transparent;"><p><br></p></td><td style="width: 83px; height: 24px; border-bottom: 1px solid rgb(255, 255, 255); border-right: 1px solid rgb(151, 220, 32); color: rgb(255, 255, 255); background-color: rgb(151, 220, 32);"><p><br></p></td></tr><tr><td style="width: 83px; height: 24px; border-bottom: none; border-right: none; border-left: 1px solid rgb(151, 220, 32); color: rgb(0, 0, 0); background-color: transparent;"><p><br></p></td><td style="width: 83px; height: 24px; border-bottom: none; border-right: none; color: rgb(0, 0, 0); background-color: transparent;"><p><br></p></td><td style="width: 83px; height: 24px; border-bottom: none; border-right: none; color: rgb(0, 0, 0); background-color: transparent;"><p><br></p></td><td style="width: 83px; height: 24px; border-bottom: none; border-right: none; color: rgb(0, 0, 0); background-color: transparent;"><p>ㄴㅇㄻㄴㅇㄹ</p></td><td style="width: 83px; height: 24px; border-bottom: none; border-right: none; color: rgb(0, 0, 0); background-color: transparent;"><p><br></p></td><td style="width: 83px; height: 24px; border-bottom: none; border-right: none; color: rgb(0, 0, 0); background-color: transparent;"><p><br></p></td><td style="width: 83px; height: 24px; border-bottom: none; border-right: none; color: rgb(0, 0, 0); background-color: transparent;"><p><br></p></td><td style="width: 83px; height: 24px; border-bottom: 1px solid rgb(255, 255, 255); border-right: 1px solid rgb(151, 220, 32); color: rgb(255, 255, 255); background-color: rgb(151, 220, 32);"><p><br></p></td></tr><tr><td style="width: 83px; height: 24px; border-bottom: none; border-right: none; border-left: 1px solid rgb(151, 220, 32); color: rgb(0, 0, 0); background-color: transparent;"><p><br></p></td><td style="width: 83px; height: 24px; border-bottom: none; border-right: none; color: rgb(0, 0, 0); background-color: transparent;"><p><br></p></td><td style="width: 83px; height: 24px; border-bottom: none; border-right: none; color: rgb(0, 0, 0); background-color: transparent;"><p><br></p></td><td style="width: 83px; height: 24px; border-bottom: none; border-right: none; color: rgb(0, 0, 0); background-color: transparent;"><p><br></p></td><td style="width: 83px; height: 24px; border-bottom: none; border-right: none; color: rgb(0, 0, 0); background-color: transparent;"><p><br></p></td><td style="width: 83px; height: 24px; border-bottom: none; border-right: none; color: rgb(0, 0, 0); background-color: transparent;"><p><br></p></td><td style="width: 83px; height: 24px; border-bottom: none; border-right: none; color: rgb(0, 0, 0); background-color: transparent;"><p><br></p></td><td style="width: 83px; height: 24px; border-bottom: 1px solid rgb(255, 255, 255); border-right: 1px solid rgb(151, 220, 32); color: rgb(255, 255, 255); background-color: rgb(151, 220, 32);"><p><br></p></td></tr><tr><td style="width: 83px; height: 24px; border-bottom: 1px solid rgb(151, 220, 32); border-right: none; border-left: 1px solid rgb(151, 220, 32); color: rgb(0, 0, 0); background-color: transparent;"><p><br></p></td><td style="width: 83px; height: 24px; border-bottom: 1px solid rgb(151, 220, 32); border-right: none; color: rgb(0, 0, 0); background-color: transparent;"><p><br></p></td><td style="width: 83px; height: 24px; border-bottom: 1px solid rgb(151, 220, 32); border-right: none; color: rgb(0, 0, 0); background-color: transparent;"><p><br></p></td><td style="width: 83px; height: 24px; border-bottom: 1px solid rgb(151, 220, 32); border-right: none; color: rgb(0, 0, 0); background-color: transparent;"><p><br></p></td><td style="width: 83px; height: 24px; border-bottom: 1px solid rgb(151, 220, 32); border-right: none; color: rgb(0, 0, 0); background-color: transparent;"><p><br></p></td><td style="width: 83px; height: 24px; border-bottom: 1px solid rgb(151, 220, 32); border-right: none; color: rgb(0, 0, 0); background-color: transparent;"><p><br></p></td><td style="width: 83px; height: 24px; border-bottom: 1px solid rgb(151, 220, 32); border-right: none; color: rgb(0, 0, 0); background-color: transparent;"><p><br></p></td><td style="width: 83px; height: 24px; border-bottom: 1px solid rgb(151, 220, 32); border-right: 1px solid rgb(151, 220, 32); color: rgb(255, 255, 255); background-color: rgb(151, 220, 32);"><p><br></p></td></tr></tbody></table><p><br></p><p style="text-align: center;"><img src="/mall/upload/board/images/20180612213925-382-66c90fe56987.png" class="txc-image" style="clear:none;float:none;" /></p><p><br></p>
 </body>

@@ -459,6 +459,7 @@
 <!-- 에디터 컨테이너 끝 -->
 <script type="text/javascript">
 	var config = {
+		
 		txHost: '', /* 런타임 시 리소스들을 로딩할 때 필요한 부분으로, 경로가 변경되면 이 부분 수정이 필요. ex) http://xxx.xxx.com */
 		txPath: '', /* 런타임 시 리소스들을 로딩할 때 필요한 부분으로, 경로가 변경되면 이 부분 수정이 필요. ex) /xxx/xxx/ */
 		txService: 'sample', /* 수정필요없음. */
@@ -469,6 +470,7 @@
 		txIconPath: "${ pageContext.request.contextPath }/resources/daumeditor/images/icon/editor/", /*에디터에 사용되는 이미지 디렉터리, 필요에 따라 수정한다. */
 		txDecoPath: "${ pageContext.request.contextPath }/resources/daumeditor/images/deco/contents/", /*본문에 사용되는 이미지 디렉터리, 서비스에서 사용할 때는 완성된 컨텐츠로 배포되기 위해 절대경로로 수정한다. */
 		canvas: {
+			initHeight: 200,
             exitEditor:{
                 /*
                 desc:'빠져 나오시려면 shift+b를 누르세요.',

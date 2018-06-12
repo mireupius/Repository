@@ -1,23 +1,25 @@
 package com.sol.mall.goods;
 
 public class TestContent {
-	private String daumcontent;
+	private Long daumcontent;
 
 	public TestContent() {
 		// TODO Auto-generated constructor stub
 	}
 
-	public TestContent(String daumcontent) {
+	public TestContent(Long daumcontent) {
 		super();
 		this.daumcontent = daumcontent;
 	}
 
-	public String getDaumcontent() {
+	public Long getDaumcontent() {
 		return daumcontent;
 	}
 
-	public void setDaumcontent(String daumcontent) {
+	public void setDaumcontent(Long daumcontent) {
 		this.daumcontent = daumcontent;
 	}
+
+	
 
 }
