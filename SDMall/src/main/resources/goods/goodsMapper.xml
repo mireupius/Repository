@@ -7,4 +7,13 @@
 		select * from category_tb
 	</select>
 
+	<insert id="insertCT" parameterType="com.sol.mall.goods.TestContent">
+		insert into test_editor values(
+		#{daumcontent}
+		)
+	</insert>
+	
+	<select id="getAll" resultType="com.sol.mall.goods.TestContent">
+		select * from test_editor
+	</select>
 </mapper>

@@ -16,14 +16,13 @@
 <!-- jquery -->
 <script src="resources/js/bootstrap/bootstrap.min.js"></script>
 
-
 <!-- 다음 에디터 -->
 <link rel=stylesheet type=text/css
 	href="${pageContext.request.contextPath}/resources/daumeditor/css/editor.css"
 	charset=utf-8 />
 <script type=text/javascript charset=utf-8
 	src="${pageContext.request.contextPath}/resources/daumeditor/js/editor_loader.js"></script>
-
+<!-- 도로아미 타불 -->
 <script type="text/javascript">
 function saveContent() {
     Editor.save(); // 이 함수를 호출하여 글을 등록하면 된다.
@@ -108,6 +107,7 @@ h3 {
 			</table>
 		</div>
 	</div>
+	
 	<div class="gdTb3" data-toggle="collapse" href="#collapse2"
 		aria-expanded="false" aria-controls="collapse2">
 		<h3>기본정보</h3>
@@ -121,16 +121,39 @@ h3 {
 						<td class="gdTd2"><input></td>
 					</tr>
 					<tr>
-						<td class="gdTd1">모델명</td>
-						<td class="gdTd2"><input></td>
-					</tr>
-					<tr>
 						<td class="gdTd1">상품코드</td>
 						<td class="gdTd2"><input></td>
 					</tr>
 					<tr>
-						<td class="gdTd1">상품상세설명</td>
+						<td class="gdTd1">모델명</td>
 						<td class="gdTd2"><input></td>
+					</tr>
+					<tr>
+						<td class="gdTd1">상품상세설명</td>
+						<td class="gdTd2">
+							<!-- 에디터 시작 -->
+							<div>
+								<form name="tx_editor_form" id="tx_editor_form"
+									action="editor.do" method="post"
+									accept-charset="utf-8">
+								
+									<!-- 에디터프레임호출 영역 -->
+									<div id="editor_frame">
+										<!-- 다음에디터 넣기 -->
+										<jsp:include page="../daumeditor/editor.jsp"></jsp:include>
+										<script type="text/javascript">
+											//'수정하기' 모드일 때, 다음과 같이 데이터를 다음오픈에디터에 대입할 수 있다.
+											if ('${board!=null}' == 'true')
+												Editor.modify({'content' : '${board.daumcontent}'});
+										</script>
+
+									</div>
+
+									<!-- 실제 값이 담겨져서 넘어갈 textarea 태그 -->
+									<input type="button" id="save_button" value="내용전송" onclick="saveContent();"/>
+								</form>
+							</div> <!-- 에디터 끝 -->
+						</td>
 					</tr>
 					<tr>
 						<td class="gdTd1">검색어설정</td>
@@ -149,46 +172,14 @@ h3 {
 			<table class="gdTb3">
 				<tbody>
 					<tr>
-						<td class="gdTd1">소비자가 판매가</td>
+						<td class="gdTd1">소비자가</td>
 						<td class="gdTd2"><input></td>
 					</tr>
 					<tr>
-						<td class="gdTd1">상품코드</td>
+						<td class="gdTd1">판매가</td>
 						<td class="gdTd2"><input></td>
 					</tr>
-					<tr>
-						<td class="gdTd1">상품상세설명</td>
-						<td class="gdTd2">
-							<!-- 에디터 시작 -->
-							<div>
-								<form name="tx_editor_form" id="tx_editor_form"
-									action="editor.do" method="post"
-									accept-charset="utf-8">
-									<!-- 에디터프레임호출 영역 -->
-									<div id="editor_frame">
-										<!-- 다음에디터 넣기 -->
-										<jsp:include page="../editor/editor.jsp"></jsp:include>
-										<script type="text/javascript">
-											//'수정하기' 모드일 때, 다음과 같이 데이터를 다음오픈에디터에 대입할 수 있다.
-											if ('${board!=null}' == 'true')
-												Editor.modify({'content' : '${board.board_content}'});
-										</script>
-
-									</div>
-									<!-- 실제 값이 담겨져서 넘어갈 textarea 태그 -->
-									<textarea name="daumeditor" id="daumeditor" rows="10"
-										cols="100" style="width: 766px; height: 412px; display: none;"></textarea>
-									<input type="button" id="save_button" value="내용전송" onclick="saveContent();"/>
-								</form>
-							</div> <!-- 에디터 끝 -->
-
-
-						</td>
-					</tr>
-					<tr>
-						<td class="gdTd1">검색어설정</td>
-						<td class="gdTd2"><input></td>
-					</tr>
+					
 				</tbody>
 			</table>
 		</div>
@@ -206,11 +197,11 @@ h3 {
 						<td class="gdTd2"><input></td>
 					</tr>
 					<tr>
-						<td class="gdTd1">옵션재고</td>
+						<td class="gdTd1">옵션가격</td>
 						<td class="gdTd2"><input></td>
 					</tr>
 					<tr>
-						<td class="gdTd1">옵션가격</td>
+						<td class="gdTd1">옵션재고</td>
 						<td class="gdTd2"><input></td>
 					</tr>
 				</tbody>
@@ -247,4 +238,70 @@ h3 {
 			</table>
 		</div>
 	</div>
+	<div class="gdTb3" data-toggle="collapse" href="#collapse6"
+		aria-expanded="false" aria-controls="collapse6">
+		<h3>제작 정보</h3>
+	</div>
+	<div class="collapse" id="collapse6">
+		<div>
+			<table class="gdTb3">
+				<tbody>
+					<tr>
+						<td class="gdTd1">제조사</td>
+						<td class="gdTd2"><input></td>
+					</tr>
+					<tr>
+						<td class="gdTd1">브랜드</td>
+						<td class="gdTd2"><input></td>
+					</tr>
+					<tr>
+						<td class="gdTd1">제조일자</td>
+						<td class="gdTd2"><input></td>
+					</tr>
+					<tr>
+						<td class="gdTd1">유효기간</td>
+						<td class="gdTd2"><input></td>
+					</tr>
+					<tr>
+						<td class="gdTd1">상품소재</td>
+						<td class="gdTd2"><input></td>
+					</tr>
+					<tr>
+						<td class="gdTd1">상품 전체중량(kg)</td>
+						<td class="gdTd2"><input></td>
+					</tr>
+					<tr>
+						<td class="gdTd1">상품부피(cm)</td>
+						<td class="gdTd2"><input></td>
+					</tr>
+					<tr>
+						<td class="gdTd1">원산지</td>
+						<td class="gdTd2"><input></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+	<div class="gdTb3" data-toggle="collapse" href="#collapse7"
+		aria-expanded="false" aria-controls="collapse7">
+		<h3>배송 정보</h3>
+	</div>
+	<div class="collapse" id="collapse7">
+		<div>
+			<table class="gdTb3">
+				<tbody>
+					<tr>
+						<td class="gdTd1">배송비</td>
+						<td class="gdTd2"><input></td>
+					</tr>
+					<tr>
+						<td class="gdTd1">무료조건가격</td>
+						<td class="gdTd2"><input></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+	
+	<p><br></p><table class="txc-table" width="664" cellspacing="0" cellpadding="0" border="0" style="border:none;border-collapse:collapse;;font-family:굴림;font-size:13.3333px"><tbody><tr><td style="width: 83px; height: 24px; border-width: 1px; border-style: solid; border-color: rgb(151, 220, 32) rgb(255, 255, 255) rgb(255, 255, 255) rgb(151, 220, 32); color: rgb(255, 255, 255); background-color: rgb(151, 220, 32);"><p><br></p></td><td style="width: 83px; height: 24px; border-bottom: 1px solid rgb(255, 255, 255); border-right: 1px solid rgb(255, 255, 255); border-top: 1px solid rgb(151, 220, 32); color: rgb(255, 255, 255); background-color: rgb(151, 220, 32);"><p><br></p></td><td style="width: 83px; height: 24px; border-bottom: 1px solid rgb(255, 255, 255); border-right: 1px solid rgb(255, 255, 255); border-top: 1px solid rgb(151, 220, 32); color: rgb(255, 255, 255); background-color: rgb(151, 220, 32);"><p><br></p></td><td style="width: 83px; height: 24px; border-bottom: 1px solid rgb(255, 255, 255); border-right: 1px solid rgb(255, 255, 255); border-top: 1px solid rgb(151, 220, 32); color: rgb(255, 255, 255); background-color: rgb(151, 220, 32);"><p><br></p></td><td style="width: 83px; height: 24px; border-bottom: 1px solid rgb(255, 255, 255); border-right: 1px solid rgb(255, 255, 255); border-top: 1px solid rgb(151, 220, 32); color: rgb(255, 255, 255); background-color: rgb(151, 220, 32);"><p><br></p></td><td style="width: 83px; height: 24px; border-bottom: 1px solid rgb(255, 255, 255); border-right: 1px solid rgb(255, 255, 255); border-top: 1px solid rgb(151, 220, 32); color: rgb(255, 255, 255); background-color: rgb(151, 220, 32);"><p><br></p></td><td style="width: 83px; height: 24px; border-bottom: 1px solid rgb(255, 255, 255); border-right: 1px solid rgb(255, 255, 255); border-top: 1px solid rgb(151, 220, 32); color: rgb(255, 255, 255); background-color: rgb(151, 220, 32);"><p><br></p></td><td style="width: 83px; height: 24px; border-bottom: 1px solid rgb(255, 255, 255); border-right: 1px solid rgb(151, 220, 32); border-top: 1px solid rgb(151, 220, 32); color: rgb(255, 255, 255); background-color: rgb(151, 220, 32);"><p><br></p></td></tr><tr><td style="width: 83px; height: 24px; border-bottom: none; border-right: none; border-left: 1px solid rgb(151, 220, 32); color: rgb(0, 0, 0); background-color: transparent;"><p><br></p></td><td style="width: 83px; height: 24px; border-bottom: none; border-right: none; color: rgb(0, 0, 0); background-color: transparent;"><p><br></p></td><td style="width: 83px; height: 24px; border-bottom: none; border-right: none; color: rgb(0, 0, 0); background-color: transparent;"><p><br></p></td><td style="width: 83px; height: 24px; border-bottom: none; border-right: none; color: rgb(0, 0, 0); background-color: transparent;"><p><br></p></td><td style="width: 83px; height: 24px; border-bottom: none; border-right: none; color: rgb(0, 0, 0); background-color: transparent;"><p><br></p></td><td style="width: 83px; height: 24px; border-bottom: none; border-right: none; color: rgb(0, 0, 0); background-color: transparent;"><p><br></p></td><td style="width: 83px; height: 24px; border-bottom: none; border-right: none; color: rgb(0, 0, 0); background-color: transparent;"><p><br></p></td><td style="width: 83px; height: 24px; border-bottom: 1px solid rgb(255, 255, 255); border-right: 1px solid rgb(151, 220, 32); color: rgb(255, 255, 255); background-color: rgb(151, 220, 32);"><p><br></p></td></tr><tr><td style="width: 83px; height: 24px; border-bottom: none; border-right: none; border-left: 1px solid rgb(151, 220, 32); color: rgb(0, 0, 0); background-color: transparent;"><p><br></p></td><td style="width: 83px; height: 24px; border-bottom: none; border-right: none; color: rgb(0, 0, 0); background-color: transparent;"><p><br></p></td><td style="width: 83px; height: 24px; border-bottom: none; border-right: none; color: rgb(0, 0, 0); background-color: transparent;"><p><br></p></td><td style="width: 83px; height: 24px; border-bottom: none; border-right: none; color: rgb(0, 0, 0); background-color: transparent;"><p><br></p></td><td style="width: 83px; height: 24px; border-bottom: none; border-right: none; color: rgb(0, 0, 0); background-color: transparent;"><p><br></p></td><td style="width: 83px; height: 24px; border-bottom: none; border-right: none; color: rgb(0, 0, 0); background-color: transparent;"><p><br></p></td><td style="width: 83px; height: 24px; border-bottom: none; border-right: none; color: rgb(0, 0, 0); background-color: transparent;"><p><br></p></td><td style="width: 83px; height: 24px; border-bottom: 1px solid rgb(255, 255, 255); border-right: 1px solid rgb(151, 220, 32); color: rgb(255, 255, 255); background-color: rgb(151, 220, 32);"><p><br></p></td></tr><tr><td style="width: 83px; height: 24px; border-bottom: none; border-right: none; border-left: 1px solid rgb(151, 220, 32); color: rgb(0, 0, 0); background-color: transparent;"><p><br></p></td><td style="width: 83px; height: 24px; border-bottom: none; border-right: none; color: rgb(0, 0, 0); background-color: transparent;"><p><br></p></td><td style="width: 83px; height: 24px; border-bottom: none; border-right: none; color: rgb(0, 0, 0); background-color: transparent;"><p><br></p></td><td style="width: 83px; height: 24px; border-bottom: none; border-right: none; color: rgb(0, 0, 0); background-color: transparent;"><p>ㅁㄴㅇㄻㄴㅇㄹ</p></td><td style="width: 83px; height: 24px; border-bottom: none; border-right: none; color: rgb(0, 0, 0); background-color: transparent;"><p><br></p></td><td style="width: 83px; height: 24px; border-bottom: none; border-right: none; color: rgb(0, 0, 0); background-color: transparent;"><p><br></p></td><td style="width: 83px; height: 24px; border-bottom: none; border-right: none; color: rgb(0, 0, 0); background-color: transparent;"><p><br></p></td><td style="width: 83px; height: 24px; border-bottom: 1px solid rgb(255, 255, 255); border-right: 1px solid rgb(151, 220, 32); color: rgb(255, 255, 255); background-color: rgb(151, 220, 32);"><p><br></p></td></tr><tr><td style="width: 83px; height: 24px; border-bottom: none; border-right: none; border-left: 1px solid rgb(151, 220, 32); color: rgb(0, 0, 0); background-color: transparent;"><p><br></p></td><td style="width: 83px; height: 24px; border-bottom: none; border-right: none; color: rgb(0, 0, 0); background-color: transparent;"><p><br></p></td><td style="width: 83px; height: 24px; border-bottom: none; border-right: none; color: rgb(0, 0, 0); background-color: transparent;"><p><br></p></td><td style="width: 83px; height: 24px; border-bottom: none; border-right: none; color: rgb(0, 0, 0); background-color: transparent;"><p>ㄴㅇㄻㄴㅇㄹ</p></td><td style="width: 83px; height: 24px; border-bottom: none; border-right: none; color: rgb(0, 0, 0); background-color: transparent;"><p><br></p></td><td style="width: 83px; height: 24px; border-bottom: none; border-right: none; color: rgb(0, 0, 0); background-color: transparent;"><p><br></p></td><td style="width: 83px; height: 24px; border-bottom: none; border-right: none; color: rgb(0, 0, 0); background-color: transparent;"><p><br></p></td><td style="width: 83px; height: 24px; border-bottom: 1px solid rgb(255, 255, 255); border-right: 1px solid rgb(151, 220, 32); color: rgb(255, 255, 255); background-color: rgb(151, 220, 32);"><p><br></p></td></tr><tr><td style="width: 83px; height: 24px; border-bottom: none; border-right: none; border-left: 1px solid rgb(151, 220, 32); color: rgb(0, 0, 0); background-color: transparent;"><p><br></p></td><td style="width: 83px; height: 24px; border-bottom: none; border-right: none; color: rgb(0, 0, 0); background-color: transparent;"><p><br></p></td><td style="width: 83px; height: 24px; border-bottom: none; border-right: none; color: rgb(0, 0, 0); background-color: transparent;"><p><br></p></td><td style="width: 83px; height: 24px; border-bottom: none; border-right: none; color: rgb(0, 0, 0); background-color: transparent;"><p><br></p></td><td style="width: 83px; height: 24px; border-bottom: none; border-right: none; color: rgb(0, 0, 0); background-color: transparent;"><p><br></p></td><td style="width: 83px; height: 24px; border-bottom: none; border-right: none; color: rgb(0, 0, 0); background-color: transparent;"><p><br></p></td><td style="width: 83px; height: 24px; border-bottom: none; border-right: none; color: rgb(0, 0, 0); background-color: transparent;"><p><br></p></td><td style="width: 83px; height: 24px; border-bottom: 1px solid rgb(255, 255, 255); border-right: 1px solid rgb(151, 220, 32); color: rgb(255, 255, 255); background-color: rgb(151, 220, 32);"><p><br></p></td></tr><tr><td style="width: 83px; height: 24px; border-bottom: 1px solid rgb(151, 220, 32); border-right: none; border-left: 1px solid rgb(151, 220, 32); color: rgb(0, 0, 0); background-color: transparent;"><p><br></p></td><td style="width: 83px; height: 24px; border-bottom: 1px solid rgb(151, 220, 32); border-right: none; color: rgb(0, 0, 0); background-color: transparent;"><p><br></p></td><td style="width: 83px; height: 24px; border-bottom: 1px solid rgb(151, 220, 32); border-right: none; color: rgb(0, 0, 0); background-color: transparent;"><p><br></p></td><td style="width: 83px; height: 24px; border-bottom: 1px solid rgb(151, 220, 32); border-right: none; color: rgb(0, 0, 0); background-color: transparent;"><p><br></p></td><td style="width: 83px; height: 24px; border-bottom: 1px solid rgb(151, 220, 32); border-right: none; color: rgb(0, 0, 0); background-color: transparent;"><p><br></p></td><td style="width: 83px; height: 24px; border-bottom: 1px solid rgb(151, 220, 32); border-right: none; color: rgb(0, 0, 0); background-color: transparent;"><p><br></p></td><td style="width: 83px; height: 24px; border-bottom: 1px solid rgb(151, 220, 32); border-right: none; color: rgb(0, 0, 0); background-color: transparent;"><p><br></p></td><td style="width: 83px; height: 24px; border-bottom: 1px solid rgb(151, 220, 32); border-right: 1px solid rgb(151, 220, 32); color: rgb(255, 255, 255); background-color: rgb(151, 220, 32);"><p><br></p></td></tr></tbody></table><p><br></p><p style="text-align: center;"><img src="/mall/upload/board/images/20180612213925-382-66c90fe56987.png" class="txc-image" style="clear:none;float:none;" /></p><p><br></p>
 </body>

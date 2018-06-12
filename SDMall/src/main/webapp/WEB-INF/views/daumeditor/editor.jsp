@@ -459,6 +459,7 @@
 <!-- 에디터 컨테이너 끝 -->
 <script type="text/javascript">
 	var config = {
+		
 		txHost: '', /* 런타임 시 리소스들을 로딩할 때 필요한 부분으로, 경로가 변경되면 이 부분 수정이 필요. ex) http://xxx.xxx.com */
 		txPath: '', /* 런타임 시 리소스들을 로딩할 때 필요한 부분으로, 경로가 변경되면 이 부분 수정이 필요. ex) /xxx/xxx/ */
 		txService: 'sample', /* 수정필요없음. */
@@ -469,6 +470,7 @@
 		txIconPath: "${ pageContext.request.contextPath }/resources/daumeditor/images/icon/editor/", /*에디터에 사용되는 이미지 디렉터리, 필요에 따라 수정한다. */
 		txDecoPath: "${ pageContext.request.contextPath }/resources/daumeditor/images/deco/contents/", /*본문에 사용되는 이미지 디렉터리, 서비스에서 사용할 때는 완성된 컨텐츠로 배포되기 위해 절대경로로 수정한다. */
 		canvas: {
+			initHeight: 200,
             exitEditor:{
                 /*
                 desc:'빠져 나오시려면 shift+b를 누르세요.',
@@ -496,6 +498,16 @@
 			attachbox: {
 				show: true,
 				confirmForDeleteAll: true
+			},
+			// 이미지첨부 관련 추가 config
+			attacher:{
+				image:{ 
+					features:{left:250,top:65,width:400,height:190,scrollbars:0}, //팝업창 사이즈 
+					popPageUrl:'${pageContext.request.contextPath}/daumeditor/imagePopup' // 팝업창 주소(콘트롤러 RequestMapping)
+				} 
+			},
+			/* 이미지첨부 관련 추가 config */
+			capacity: { maximum: 5*1024*1024 // 최대 첨부 용량 (5MB) 
 			}
 		},
 		size: {
@@ -550,11 +562,10 @@
         var i, input;
         var form = editor.getForm();
         var content = editor.getContent();
-        $("#daumeditor").val(content)
 
-        // 본문 내용을 필드를 생성하여 값을 할당하는 부분
+        // 본문 내용을 daumcontent라는 이름의textarea를 만들어서 값을 할당
         var textarea = document.createElement('textarea');
-        textarea.name = 'board_content';
+        textarea.name = 'daumcontent';
         textarea.value = content;
         form.createField(textarea);
 

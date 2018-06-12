@@ -95,3 +95,13 @@ drop table questionAnswer cascade constraint purge;
 insert into category_tb values(category_sq.nextval, '대분류3' , 1);
 insert into category_tb values(category_sq.nextval, '중분류4' , 2);
 insert into category_tb values(category_sq.nextval, '소분류4' , 3);
+
+
+
+create table test_editor (
+daumcontent long
+);
+
+drop table test_editor cascade constraint purge;
+
+select * from test_editor;
