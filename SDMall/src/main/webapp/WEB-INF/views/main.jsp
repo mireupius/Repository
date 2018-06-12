@@ -111,152 +111,40 @@
 						<div class="main_nav_content d-flex flex-row">
 
 							<!-- Categories Menu -->
-
 							<div class="cat_menu_container">
 								<div class="cat_menu_title d-flex flex-row align-items-center justify-content-start">
 									<div class="cat_burger"><span></span><span></span><span></span></div>
 									<div class="cat_menu_text">카테고리</div>
 								</div>
-
-								<ul class="cat_menu">
-									<li class="hassubs">
-										<a href="#">패션의류<i class="fas fa-chevron-right"></i></a>
-										<ul>
-											<li class="hassubs">
-												<a href="#">여성의류<i class="fas fa-chevron-right"></i></a>
-												<ul>
-													<li><a href="#">티셔츠<i class="fas fa-chevron-right"></i></a></li>
-													<li><a href="#">블라우스/셔츠<i class="fas fa-chevron-right"></i></a></li>
-													<li><a href="#">니트/가디건<i class="fas fa-chevron-right"></i></a></li>
-													<li><a href="#">원피스/투피스<i class="fas fa-chevron-right"></i></a></li>
-													<li><a href="#">스커트<i class="fas fa-chevron-right"></i></a></li>
-													<li><a href="#">팬츠/데님<i class="fas fa-chevron-right"></i></a></li>
-													<li><a href="#">자켓/점퍼/코트<i class="fas fa-chevron-right"></i></a></li>
-													<li><a href="#">한복/테마의류<i class="fas fa-chevron-right"></i></a></li>
-												</ul>
-											</li>
-											<li><a href="#">남성의류<i class="fas fa-chevron-right"></i></a></li>
-											<li><a href="#">캐주얼의류<i class="fas fa-chevron-right"></i></a></li>
-											<li><a href="#">언더웨어<i class="fas fa-chevron-right"></i></a></li>
-										</ul>
-									</li>
-									<li class="hassubs">
-										<a href="#">잡화/보석<i class="fas fa-chevron-right"></i></a>
-										<ul>
-											<li class="hassubs">
-												<a href="#">Menu Item<i class="fas fa-chevron-right"></i></a>
-												<ul>
-													<li><a href="#">Menu Item<i class="fas fa-chevron-right"></i></a></li>
-													<li><a href="#">Menu Item<i class="fas fa-chevron-right"></i></a></li>
-												</ul>
-											</li>
-											<li><a href="#">Menu Item<i class="fas fa-chevron-right"></i></a></li>
-											<li><a href="#">Menu Item<i class="fas fa-chevron-right"></i></a></li>
-										</ul>
-									</li>
-									<li class="hassubs">
-										<a href="#">스포츠/아웃도어<i class="fas fa-chevron-right"></i></a>
-										<ul>
-											<li class="hassubs">
-												<a href="#">Menu Item<i class="fas fa-chevron-right"></i></a>
-												<ul>
-													<li><a href="#">Menu Item<i class="fas fa-chevron-right"></i></a></li>
-													<li><a href="#">Menu Item<i class="fas fa-chevron-right"></i></a></li>
-												</ul>
-											</li>
-											<li><a href="#">Menu Item<i class="fas fa-chevron-right"></i></a></li>
-											<li><a href="#">Menu Item<i class="fas fa-chevron-right"></i></a></li>
-										</ul>
-									</li>
-									<li class="hassubs">
-										<a href="#">뷰티<i class="fas fa-chevron-right"></i></a>
-										<ul>
-											<li class="hassubs">
-												<a href="#">Menu Item<i class="fas fa-chevron-right"></i></a>
-												<ul>
-													<li><a href="#">Menu Item<i class="fas fa-chevron-right"></i></a></li>
-													<li><a href="#">Menu Item<i class="fas fa-chevron-right"></i></a></li>
-												</ul>
-											</li>
-											<li><a href="#">Menu Item<i class="fas fa-chevron-right"></i></a></li>
-											<li><a href="#">Menu Item<i class="fas fa-chevron-right"></i></a></li>
-										</ul>
-									</li>
-									<li class="hassubs">
-										<a href="#">식품/주방<i class="fas fa-chevron-right"></i></a>
-										<ul>
-											<li class="hassubs">
-												<a href="#">Menu Item<i class="fas fa-chevron-right"></i></a>
-												<ul>
-													<li><a href="#">Menu Item<i class="fas fa-chevron-right"></i></a></li>
-													<li><a href="#">Menu Item<i class="fas fa-chevron-right"></i></a></li>
-												</ul>
-											</li>
-											<li><a href="#">Menu Item<i class="fas fa-chevron-right"></i></a></li>
-											<li><a href="#">Menu Item<i class="fas fa-chevron-right"></i></a></li>
-										</ul>
-									</li>
-									<li class="hassubs">
-										<a href="#">출산/유아동<i class="fas fa-chevron-right"></i></a>
-										<ul>
-											<li class="hassubs">
-												<a href="#">Menu Item<i class="fas fa-chevron-right"></i></a>
-												<ul>
-													<li><a href="#">Menu Item<i class="fas fa-chevron-right"></i></a></li>
-													<li><a href="#">Menu Item<i class="fas fa-chevron-right"></i></a></li>
-												</ul>
-											</li>
-											<li><a href="#">Menu Item<i class="fas fa-chevron-right"></i></a></li>
-											<li><a href="#">Menu Item<i class="fas fa-chevron-right"></i></a></li>
-										</ul>
-									</li>
-									<li class="hassubs">
-										<a href="#">가구/인테리어<i class="fas fa-chevron-right"></i></a>
-										<ul>
-											<li class="hassubs">
-												<a href="#">Menu Item<i class="fas fa-chevron-right"></i></a>
-												<ul>
-													<li><a href="#">Menu Item<i class="fas fa-chevron-right"></i></a></li>
-													<li><a href="#">Menu Item<i class="fas fa-chevron-right"></i></a></li>
-												</ul>
-											</li>
-											<li><a href="#">Menu Item<i class="fas fa-chevron-right"></i></a></li>
-											<li><a href="#">Menu Item<i class="fas fa-chevron-right"></i></a></li>
-										</ul>
-									</li>
-									<li class="hassubs">
-										<a href="#">생활/건강/취미<i class="fas fa-chevron-right"></i></a>
-										<ul>
-											<li class="hassubs">
-												<a href="#">Menu Item<i class="fas fa-chevron-right"></i></a>
-												<ul>
-													<li><a href="#">Menu Item<i class="fas fa-chevron-right"></i></a></li>
-													<li><a href="#">Menu Item<i class="fas fa-chevron-right"></i></a></li>
-												</ul>
-											</li>
-											<li><a href="#">Menu Item<i class="fas fa-chevron-right"></i></a></li>
-											<li><a href="#">Menu Item<i class="fas fa-chevron-right"></i></a></li>
-										</ul>
-									</li>
-									<li class="hassubs">
-										<a href="#">가전/디지털<i class="fas fa-chevron-right"></i></a>
-										<ul>
-											<li class="hassubs">
-												<a href="#">Menu Item<i class="fas fa-chevron-right"></i></a>
-												<ul>
-													<li><a href="#">Menu Item<i class="fas fa-chevron-right"></i></a></li>
-													<li><a href="#">Menu Item<i class="fas fa-chevron-right"></i></a></li>
-												</ul>
-											</li>
-											<li><a href="#">Menu Item<i class="fas fa-chevron-right"></i></a></li>
-											<li><a href="#">Menu Item<i class="fas fa-chevron-right"></i></a></li>
-										</ul>
-									</li>
+ 								<ul class="cat_menu">
+									<c:forEach var="cate1" items="${allCategory}">
+										<c:if test="${cate1.ct_clf==1 }">
+										<li class="hassubs">
+											<a href="#">${cate1.ct_clfname }<i class="fas fa-chevron-right"></i></a>
+											<ul>
+											<c:forEach var="cate2" items="${allCategory}">
+												<c:if test="${cate2.ct_parentno==cate1.ct_no }">
+													<li class="hassubs">
+														<a href="#">${cate2.ct_clfname }<i class="fas fa-chevron-right"></i></a>
+														<ul>
+														<c:forEach var="cate3" items="${allCategory}">
+															<c:if test="${cate3.ct_parentno==cate2.ct_no }">
+															<li><a href="${cate3.ct_clfname }">${cate3.ct_clfname }<i class="fas fa-chevron-right"></i></a></li>
+															</c:if>
+														</c:forEach>
+															
+														</ul>
+													</li>
+												</c:if>
+											</c:forEach>
+											</ul>
+										</li>
+										</c:if>
+									</c:forEach>
 								</ul>
 							</div>
 
 							<!-- Main Nav Menu -->
-
 							<div class="main_nav_menu ml-auto">
 								<ul class="standard_dropdown main_nav_dropdown">
 									<li><a href="#">Home<i class="fas fa-chevron-down"></i></a></li>
@@ -434,7 +322,7 @@
 	</div>
 	
 	<div>
-		<c:forEach var="cate" items="allCategory">
+		<c:forEach var="cate" items="${allCategory}">
 			${cate.ct_no }
 		</c:forEach>
 	</div>

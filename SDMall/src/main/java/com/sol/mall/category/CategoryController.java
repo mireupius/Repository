@@ -19,4 +19,10 @@ public class CategoryController {
 		cDAO.getAllCategory(request, response);
 		return "main";
 	}
+	
+	@RequestMapping(value = "/티셔츠", method = RequestMethod.GET)
+	public String pa(HttpServletRequest request, HttpServletResponse response) {
+		cDAO.getAllCategory(request, response);
+		return "home";
+	}
 }
