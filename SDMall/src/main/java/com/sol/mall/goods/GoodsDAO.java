@@ -1,6 +1,7 @@
 package com.sol.mall.goods;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -36,5 +37,19 @@ public class GoodsDAO {
 		}else{
 			System.out.println("실패");
 		}
+	}
+	
+	
+	public void view(HttpServletRequest request, HttpServletResponse response) {
+
+		ArrayList<TestContent> tttt =  (ArrayList<TestContent>) ss.getMapper(GoodsMapper.class).getAll();
+		int i = 0;
+		for (TestContent testContent : tttt) {
+			
+			System.out.println(i +"==="+ testContent.getDaumcontent());
+			i++;
+		}
+		
+		request.setAttribute("tent", tttt);
 	}
 }

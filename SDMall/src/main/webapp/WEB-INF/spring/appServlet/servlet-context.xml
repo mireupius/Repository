@@ -21,6 +21,9 @@
 	<tx:annotation-driven />
 	<resources mapping="/resources/**" location="/resources/" />
 
+	<!-- 다음오픈에디터 저장소 -->
+	<resources mapping="/upload/**" location="/upload/" />
+
 	<beans:bean
 		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<beans:property name="prefix" value="/WEB-INF/views/" />
@@ -63,9 +66,8 @@
 		<beans:constructor-arg name="sqlSessionFactory"
 			ref="sqlSessionFactory" />
 	</beans:bean>
-	
+
 	<!-- MultipartResolver Bean -->
-	<beans:bean id="multipartResolver"
-		class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+	<beans:bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
 	</beans:bean>
 </beans:beans>

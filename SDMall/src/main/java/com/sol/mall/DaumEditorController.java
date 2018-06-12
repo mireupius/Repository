@@ -20,16 +20,20 @@ import org.springframework.web.multipart.MultipartFile;
 public class DaumEditorController { // 이미지 첨부 팝업
 	@RequestMapping(value = "/imagePopup")
 	public String imagePopup() {
-		return "editor/image";
+		
+		return "daumeditor/image";
 	}
 	
 	
 	// 단일 파일 업로드Ajax 
 	@RequestMapping(value = "/singleUploadImageAjax", method = RequestMethod.POST) 
 	public @ResponseBody HashMap singleUploadImageAjax(@RequestParam("Filedata") MultipartFile multipartFile, HttpSession httpSession) { 
+				
 		HashMap fileInfo = new HashMap(); // CallBack할 때 이미지 정보를 담을 Map 
+		
 		// 업로드 파일이 존재하면 
-		if(multipartFile != null && !(multipartFile.getOriginalFilename().equals(""))) { 
+		if(multipartFile != null && !(multipartFile.getOriginalFilename().equals(""))) {
+
 			// 확장자 제한 
 			String originalName = multipartFile.getOriginalFilename(); // 실제 파일명 
 			String originalNameExtension = originalName.substring(originalName.lastIndexOf(".") + 1).toLowerCase(); // 실제파일 확장자 (소문자변경) 
@@ -37,9 +41,9 @@ public class DaumEditorController { // 이미지 첨부 팝업
 				fileInfo.put("result", -1); // 허용 확장자가 아닐 경우 
 				return fileInfo; 
 			} 
-			// 파일크기제한 (1MB) 
+			// 파일크기제한 (5MB) 
 			long filesize = multipartFile.getSize(); // 파일크기 
-			long limitFileSize = 1*1024*1024; // 1MB 
+			long limitFileSize = 5*1024*1024; // 5MB 
 			if(limitFileSize < filesize){ // 제한보다 파일크기가 클 경우 
 				fileInfo.put("result", -2); 
 				return fileInfo; 
@@ -52,7 +56,7 @@ public class DaumEditorController { // 이미지 첨부 팝업
 				File file = new File(path);
 				if(!file.exists()) { // 디렉토리 존재하지 않을경우 디렉토리 생성 
 					file.mkdirs(); 
-				} 
+				}
 				
 				// 파일 저장명 처리 (20150702091941-fd8-db619e6040d5.확장자) 
 				SimpleDateFormat formatter = new SimpleDateFormat("yyyyMMddHHmmss"); 

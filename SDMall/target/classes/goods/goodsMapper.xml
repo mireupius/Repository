@@ -12,4 +12,8 @@
 		#{daumcontent}
 		)
 	</insert>
+	
+	<select id="getAll" resultType="com.sol.mall.goods.TestContent">
+		select * from test_editor
+	</select>
 </mapper>

@@ -25,14 +25,11 @@ public class GoodsController {
 	@RequestMapping(value = "/editor.do", method = RequestMethod.POST)
 	public String editor(TestContent tct, HttpServletRequest request, HttpServletResponse response) {
 		gdsDAO.insertCT(tct, request, response);
+		gdsDAO.view( request, response);
+		
 		request.setAttribute("contentPage", "goods/test.jsp");
 		return "index";
 	}
-	@RequestMapping(value = "/fileupload.do", method = RequestMethod.POST)
-	public String fileupload(TestContent tct, HttpServletRequest request, HttpServletResponse response) {
-		System.out.println(request.getParameter("image_file"));
-		request.setAttribute("contentPage", "goods/test.jsp");
-		return "index";
-	}
+
 
 }

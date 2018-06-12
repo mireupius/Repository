@@ -22,9 +22,7 @@
 	charset=utf-8 />
 <script type=text/javascript charset=utf-8
 	src="${pageContext.request.contextPath}/resources/daumeditor/js/editor_loader.js"></script>
-<!-- jquery.form.js - ajaxSubmit() 사용 --> 
-<script type=text/javascript src="${pageContext.request.contextPath}/resources/daumeditor/js/jquery.form.min.js"></script>
-
+<!-- 도로아미 타불 -->
 <script type="text/javascript">
 function saveContent() {
     Editor.save(); // 이 함수를 호출하여 글을 등록하면 된다.
@@ -135,6 +133,7 @@ h3 {
 					</tr>
 					<tr>
 						<td class="gdTd1">검색어설정</td>
+						<td class="Rhf">검색어설정</td>
 						<td class="gdTd2"><input></td>
 					</tr>
 				</tbody>
@@ -169,7 +168,7 @@ h3 {
 									<!-- 에디터프레임호출 영역 -->
 									<div id="editor_frame">
 										<!-- 다음에디터 넣기 -->
-										<jsp:include page="../editor/editor.jsp"></jsp:include>
+										<jsp:include page="../daumeditor/editor.jsp"></jsp:include>
 										<script type="text/javascript">
 											//'수정하기' 모드일 때, 다음과 같이 데이터를 다음오픈에디터에 대입할 수 있다.
 											if ('${board!=null}' == 'true')
