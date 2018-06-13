@@ -320,7 +320,7 @@ gt_keyword   	<input name ="gt_keyword">	<br>
 	</div>
 	<div align="center">
 		<!-- 실제 값이 담겨져서 넘어갈 textarea 태그 -->
-		<input type="button" id="save_button" value="내용전송" onclick="saveContent();"/>
+		<input type="button" id="save_button" value="상품등록" onclick="saveContent();"/>
 	</div>
 </form>
 </body>
