@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sol.mall.goods.GoodsMapper">
+
+	<select id="getAllcategory"
+		resultType="com.sol.mall.goods.Category">
+		select * from category_tb
+	</select>
+
+	<insert id="insertCT" parameterType="com.sol.mall.goods.TestContent">
+		insert into test_editor values(
+		#{daumcontent}
+		)
+	</insert>
+	
+	<select id="getAll" resultType="com.sol.mall.goods.TestContent">
+		select * from test_editor
+	</select>
+</mapper>
