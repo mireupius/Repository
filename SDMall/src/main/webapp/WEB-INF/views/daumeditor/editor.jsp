@@ -563,9 +563,9 @@
         var form = editor.getForm();
         var content = editor.getContent();
 
-        // 본문 내용을 daumcontent라는 이름의textarea를 만들어서 값을 할당
+        // 본문 내용을 gt_detail라는 이름의textarea를 만들어서 값을 할당
         var textarea = document.createElement('textarea');
-        textarea.name = 'daumcontent';
+        textarea.name = 'gt_detail';
         textarea.value = content;
         form.createField(textarea);
 

@@ -12,44 +12,69 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class GoodsDAO {
-	
+
 	@Autowired
 	private SqlSession ss;
-	
+
 	public void getAllcategory(HttpServletRequest request, HttpServletResponse response) {
 		ArrayList<Category> cts = new ArrayList<>();
-		 cts = (ArrayList<Category>) ss.getMapper(GoodsMapper.class).getAllcategory();
-		
-/*		for (Category category : cts) {
-			System.out.println(category.getCt_clfname());
-		}*/
+		cts = (ArrayList<Category>) ss.getMapper(GoodsMapper.class).getAllcategory();
+
+		/*
+		 * for (Category category : cts) { System.out.println(category.getCt_clfname());
+		 * }
+		 */
 		request.setAttribute("category", cts);
 	}
-	
-	
-	public void insertCT(TestContent tct, HttpServletRequest request, HttpServletResponse response) {
+
+	public void insertGdtl(GoodsDtl g, HttpServletRequest request, HttpServletResponse response) {
 		
-		System.out.println(tct.getDaumcontent());
 		
-		if(ss.getMapper(GoodsMapper.class).insertCT(tct) == 1) {
+		if (ss.getMapper(GoodsMapper.class).insertGdsDtl(g) == 1) {
 			
 			System.out.println("성공");
-		}else{
+		} else {
 			System.out.println("실패");
 		}
 	}
-	
-	
-	public void view(HttpServletRequest request, HttpServletResponse response) {
 
-		ArrayList<TestContent> tttt =  (ArrayList<TestContent>) ss.getMapper(GoodsMapper.class).getAll();
+	public void getGdtl(HttpServletRequest request, HttpServletResponse response) {
+		
+		ArrayList<GoodsDtl> tttt = (ArrayList<GoodsDtl>) ss.getMapper(GoodsMapper.class).getGoodsDtl();
 		int i = 0;
-		for (TestContent testContent : tttt) {
+		for (GoodsDtl goodsDtl : tttt) {
 			
-			System.out.println(i +"==="+ testContent.getDaumcontent());
+			System.out.println(i + "===" + goodsDtl.getGt_detail());
 			i++;
 		}
 		
+		request.setAttribute("tent", tttt);
+	}
+	
+	// 테스트용
+	public void insertCT(TestContent tct, HttpServletRequest request, HttpServletResponse response) {
+
+		System.out.println(tct.getDaumcontent());
+
+		if (ss.getMapper(GoodsMapper.class).insertCT(tct) == 1) {
+
+			System.out.println("성공");
+		} else {
+			System.out.println("실패");
+		}
+	}
+
+	// 테스트용
+	public void view(HttpServletRequest request, HttpServletResponse response) {
+
+		ArrayList<TestContent> tttt = (ArrayList<TestContent>) ss.getMapper(GoodsMapper.class).getAll();
+		int i = 0;
+		for (TestContent testContent : tttt) {
+
+			System.out.println(i + "===" + testContent.getDaumcontent());
+			i++;
+		}
+
 		request.setAttribute("tent", tttt);
 	}
 }

@@ -39,7 +39,7 @@ gt_volume    	varchar2(20 char),
 gt_origin    	varchar2(20 char),				
 gt_stock     	number(7)		not null,				
 gt_keyword   	varchar2 (40 char),				
-gt_detail    	varchar2 (1000 char) 	not null 				
+gt_detail    	clob 	not null 				
 );				
 				
 create sequence category_sq
@@ -105,3 +105,5 @@ daumcontent clob
 drop table test_editor cascade constraint purge;
 
 select * from test_editor;
+
+desc test_editor
