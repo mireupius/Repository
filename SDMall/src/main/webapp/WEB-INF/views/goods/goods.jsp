@@ -13,16 +13,13 @@
 <!-- IE9 버전 이하의 브라우저에서 반응형 웹을 적용 -->
 <script
 	src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-<!-- jquery -->
 <script src="resources/js/bootstrap/bootstrap.min.js"></script>
-
 <!-- 다음 에디터 -->
 <link rel=stylesheet type=text/css
 	href="${pageContext.request.contextPath}/resources/daumeditor/css/editor.css"
 	charset=utf-8 />
 <script type=text/javascript charset=utf-8
 	src="${pageContext.request.contextPath}/resources/daumeditor/js/editor_loader.js"></script>
-<!-- 도로아미 타불 -->
 <script type="text/javascript">
 function saveContent() {
     Editor.save(); // 이 함수를 호출하여 글을 등록하면 된다.
