@@ -39,7 +39,6 @@ h3 {
 	color: #fff;
 	background-color: #848898;
 }
-
 .imgli {
 	float: left;
 	width: 200px;
