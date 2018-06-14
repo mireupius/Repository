@@ -25,15 +25,10 @@ public class GoodsDAO {
 	
 	public Categories getCategory(Category cg, HttpServletRequest request, HttpServletResponse response) {
 
-		return new Categories(
-				ss.getMapper(GoodsMapper.class).getCategory(cg)
-			);
+		return new Categories(ss.getMapper(GoodsMapper.class).getCategory(cg));
 	}
-	
-	
 
 	public void insertGdtl(GoodsDtl g, HttpServletRequest request, HttpServletResponse response) {
-		
 		
 		if (ss.getMapper(GoodsMapper.class).insertGdsDtl(g) == 1) {
 			
