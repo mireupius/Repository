@@ -24,6 +24,51 @@
 function saveContent() {
     Editor.save(); // 이 함수를 호출하여 글을 등록하면 된다.
 }
+
+
+$(function(){
+	
+
+	$(".ct1").click(function() {
+		var cn = $(this).attr("category_num");
+		var clf = "2";
+		
+		$.ajax({
+			url : "category.get",
+			data : {ct_no : cn, ct_clf : clf},
+			success : function(json) {
+				var ar = json.category;
+				$("#ct12").empty();
+				$("#ct13").empty();
+				$.each(ar, function(i, c){
+					var fname = $("<li></li>").text(c.ct_clfname);
+					fname.attr("class","ct2");
+					fname.attr("category_num", c.ct_no);
+					$("#ct12").append(fname);
+				}); 
+			}
+		});
+	});
+	// 동적으로 생성된 태그에 이벤트 주기 $(document).on("click",".ct2",function(){
+	$(document).on("click",".ct2",function(){
+		var cn = $(this).attr("category_num");
+		var clf = "3";
+		$.ajax({
+			url : "category.get",
+			data : {ct_no : cn, ct_clf : clf},
+			success : function(json) {
+				var ar = json.category;
+				$("#ct13").empty();
+				$.each(ar, function(i, c){
+					var fname = $("<li></li>").text(c.ct_clfname);
+					$("#ct13").append(fname);
+				}); 
+			}
+		});
+	});
+	
+});
+
 </script>
 
 <title>Goods</title>
@@ -45,9 +90,9 @@ h3 {
 
 </head>
 <body>
-								<form name="tx_editor_form" id="tx_editor_form"
-									action="editor.do" method="post"
-									accept-charset="utf-8">
+<form name="tx_editor_form" id="tx_editor_form"
+	action="editor.do" method="post"
+	accept-charset="utf-8">
 	<div class="gdTb3" data-toggle="collapse" href="#collapse1"
 		aria-expanded="false" aria-controls="collapse1">
 		<h3>표시설정</h3>
@@ -69,34 +114,22 @@ h3 {
 									<td class="gdinTdleft gdinTdBottom height">
 										<div>
 											<ul>
-												<c:forEach var="ctg" items="${category }">
-													<c:if test="${ctg.ct_clf == '1'}">
-														<li id="ct1">${ctg.ct_clfname}</li>
+												<c:forEach var="i" begin="0" end="${category.size() > 0 ? category.size()-1 : category.size() }" step="1">
+													<c:if test="${category[i].ct_clf == '1'}">
+														<li class="ct1" category_num="${category[i].ct_no}" >${category[i].ct_clfname}</li>
 													</c:if>
 												</c:forEach>
 											</ul>
 										</div>
 									</td>
 									<td class="gdinTdcenter gdinTdBottom height">
-										<div>
-											<ul>
-												<c:forEach var="ctg" items="${category }">
-													<c:if test="${ctg.ct_clf == '2'}">
-														<li>${ctg.ct_clfname}</li>
-													</c:if>
-												</c:forEach>
-											</ul>
+										<div >
+											<ul id= "ct12"></ul>
 										</div>
 									</td>
 									<td class="gdinTdright gdinTdBottom height">
 										<div>
-											<ul>
-												<c:forEach var="ctg" items="${category }">
-													<c:if test="${ctg.ct_clf == '3'}">
-														<li>${ctg.ct_clfname}</li>
-													</c:if>
-												</c:forEach>
-											</ul>
+											<ul id= "ct13"></ul>
 										</div>
 									</td>
 								</tr>
