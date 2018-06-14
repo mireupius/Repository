@@ -18,7 +18,7 @@ create table goods_tb
  gd_clfm   	number(3),				
  gd_clfs   	number(3)				
 );				
-				
+
 create sequence goodsdtl_sq		
 MAXVALUE 99999
 CYCLE 
