@@ -2,7 +2,7 @@ create sequence goods_sq
 MAXVALUE 9999
 CYCLE
 NOCACHE;
-
+ 
 create table goods_tb				
 (				
  gd_no 		number(13)		primary key,				
