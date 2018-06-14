@@ -99,7 +99,7 @@ insert into category_tb values(category_sq.nextval, '소분류4' , 3);
 
 
 create table test_editor (
-daumcontent varchar2(4000)
+daumcontent long
 );
 
 drop table test_editor cascade constraint purge;
