@@ -23,9 +23,12 @@ public class GoodsController {
 	}
 
 	@RequestMapping(value = "/editor.do", method = RequestMethod.POST)
-	public String editor(TestContent tct, HttpServletRequest request, HttpServletResponse response) {
-		gdsDAO.insertCT(tct, request, response);
-		gdsDAO.view( request, response);
+	public String editor(GoodsDtl g, HttpServletRequest request, HttpServletResponse response) {
+//		gdsDAO.insertCT(tct, request, response);
+//		gdsDAO.view( request, response);
+		
+		gdsDAO.insertGdtl(g, request, response);
+		gdsDAO.getGdtl(request, response);
 		
 		request.setAttribute("contentPage", "goods/test.jsp");
 		return "index";

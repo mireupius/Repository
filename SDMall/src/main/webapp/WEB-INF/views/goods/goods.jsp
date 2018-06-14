@@ -13,16 +13,13 @@
 <!-- IE9 버전 이하의 브라우저에서 반응형 웹을 적용 -->
 <script
 	src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-<!-- jquery -->
 <script src="resources/js/bootstrap/bootstrap.min.js"></script>
-
 <!-- 다음 에디터 -->
 <link rel=stylesheet type=text/css
 	href="${pageContext.request.contextPath}/resources/daumeditor/css/editor.css"
 	charset=utf-8 />
 <script type=text/javascript charset=utf-8
 	src="${pageContext.request.contextPath}/resources/daumeditor/js/editor_loader.js"></script>
-<!-- 도로아미 타불 -->
 <script type="text/javascript">
 function saveContent() {
     Editor.save(); // 이 함수를 호출하여 글을 등록하면 된다.
@@ -48,6 +45,9 @@ h3 {
 
 </head>
 <body>
+								<form name="tx_editor_form" id="tx_editor_form"
+									action="editor.do" method="post"
+									accept-charset="utf-8">
 	<div class="gdTb3" data-toggle="collapse" href="#collapse1"
 		aria-expanded="false" aria-controls="collapse1">
 		<h3>표시설정</h3>
@@ -133,9 +133,9 @@ h3 {
 						<td class="gdTd2">
 							<!-- 에디터 시작 -->
 							<div>
-								<form name="tx_editor_form" id="tx_editor_form"
+<!-- 								<form name="tx_editor_form" id="tx_editor_form"
 									action="editor.do" method="post"
-									accept-charset="utf-8">
+									accept-charset="utf-8"> -->
 								
 									<!-- 에디터프레임호출 영역 -->
 									<div id="editor_frame">
@@ -147,11 +147,27 @@ h3 {
 												Editor.modify({'content' : '${board.daumcontent}'});
 										</script>
 
+
+gt_no	<input name ="gt_no">	<br>
+gt_gdno	<input name ="gt_gdno">	<br>
+gt_mdlname   	<input name ="gt_mdlname">	<br>
+gt_maker     	<input name ="gt_maker">	<br>
+gt_brand     	<input name ="gt_brand">	<br>
+gt_mfd       	<input name ="gt_mfd">	<br>
+gt_exp       	<input name ="gt_exp">	<br>
+gt_material  	<input name ="gt_material">	<br>
+gt_weight    	<input name ="gt_weight">	<br>
+gt_volume    	<input name ="gt_volume">	<br>
+gt_origin    	<input name ="gt_origin">	<br>
+gt_stock     	<input name ="gt_stock">	<br>
+gt_keyword   	<input name ="gt_keyword">	<br>
+
+
 									</div>
 
-									<!-- 실제 값이 담겨져서 넘어갈 textarea 태그 -->
+<!-- 									실제 값이 담겨져서 넘어갈 textarea 태그
 									<input type="button" id="save_button" value="내용전송" onclick="saveContent();"/>
-								</form>
+								</form> -->
 							</div> <!-- 에디터 끝 -->
 						</td>
 					</tr>
@@ -302,6 +318,9 @@ h3 {
 			</table>
 		</div>
 	</div>
-	
-	<p><br></p><table class="txc-table" width="664" cellspacing="0" cellpadding="0" border="0" style="border:none;border-collapse:collapse;;font-family:굴림;font-size:13.3333px"><tbody><tr><td style="width: 83px; height: 24px; border-width: 1px; border-style: solid; border-color: rgb(151, 220, 32) rgb(255, 255, 255) rgb(255, 255, 255) rgb(151, 220, 32); color: rgb(255, 255, 255); background-color: rgb(151, 220, 32);"><p><br></p></td><td style="width: 83px; height: 24px; border-bottom: 1px solid rgb(255, 255, 255); border-right: 1px solid rgb(255, 255, 255); border-top: 1px solid rgb(151, 220, 32); color: rgb(255, 255, 255); background-color: rgb(151, 220, 32);"><p><br></p></td><td style="width: 83px; height: 24px; border-bottom: 1px solid rgb(255, 255, 255); border-right: 1px solid rgb(255, 255, 255); border-top: 1px solid rgb(151, 220, 32); color: rgb(255, 255, 255); background-color: rgb(151, 220, 32);"><p><br></p></td><td style="width: 83px; height: 24px; border-bottom: 1px solid rgb(255, 255, 255); border-right: 1px solid rgb(255, 255, 255); border-top: 1px solid rgb(151, 220, 32); color: rgb(255, 255, 255); background-color: rgb(151, 220, 32);"><p><br></p></td><td style="width: 83px; height: 24px; border-bottom: 1px solid rgb(255, 255, 255); border-right: 1px solid rgb(255, 255, 255); border-top: 1px solid rgb(151, 220, 32); color: rgb(255, 255, 255); background-color: rgb(151, 220, 32);"><p><br></p></td><td style="width: 83px; height: 24px; border-bottom: 1px solid rgb(255, 255, 255); border-right: 1px solid rgb(255, 255, 255); border-top: 1px solid rgb(151, 220, 32); color: rgb(255, 255, 255); background-color: rgb(151, 220, 32);"><p><br></p></td><td style="width: 83px; height: 24px; border-bottom: 1px solid rgb(255, 255, 255); border-right: 1px solid rgb(255, 255, 255); border-top: 1px solid rgb(151, 220, 32); color: rgb(255, 255, 255); background-color: rgb(151, 220, 32);"><p><br></p></td><td style="width: 83px; height: 24px; border-bottom: 1px solid rgb(255, 255, 255); border-right: 1px solid rgb(151, 220, 32); border-top: 1px solid rgb(151, 220, 32); color: rgb(255, 255, 255); background-color: rgb(151, 220, 32);"><p><br></p></td></tr><tr><td style="width: 83px; height: 24px; border-bottom: none; border-right: none; border-left: 1px solid rgb(151, 220, 32); color: rgb(0, 0, 0); background-color: transparent;"><p><br></p></td><td style="width: 83px; height: 24px; border-bottom: none; border-right: none; color: rgb(0, 0, 0); background-color: transparent;"><p><br></p></td><td style="width: 83px; height: 24px; border-bottom: none; border-right: none; color: rgb(0, 0, 0); background-color: transparent;"><p><br></p></td><td style="width: 83px; height: 24px; border-bottom: none; border-right: none; color: rgb(0, 0, 0); background-color: transparent;"><p><br></p></td><td style="width: 83px; height: 24px; border-bottom: none; border-right: none; color: rgb(0, 0, 0); background-color: transparent;"><p><br></p></td><td style="width: 83px; height: 24px; border-bottom: none; border-right: none; color: rgb(0, 0, 0); background-color: transparent;"><p><br></p></td><td style="width: 83px; height: 24px; border-bottom: none; border-right: none; color: rgb(0, 0, 0); background-color: transparent;"><p><br></p></td><td style="width: 83px; height: 24px; border-bottom: 1px solid rgb(255, 255, 255); border-right: 1px solid rgb(151, 220, 32); color: rgb(255, 255, 255); background-color: rgb(151, 220, 32);"><p><br></p></td></tr><tr><td style="width: 83px; height: 24px; border-bottom: none; border-right: none; border-left: 1px solid rgb(151, 220, 32); color: rgb(0, 0, 0); background-color: transparent;"><p><br></p></td><td style="width: 83px; height: 24px; border-bottom: none; border-right: none; color: rgb(0, 0, 0); background-color: transparent;"><p><br></p></td><td style="width: 83px; height: 24px; border-bottom: none; border-right: none; color: rgb(0, 0, 0); background-color: transparent;"><p><br></p></td><td style="width: 83px; height: 24px; border-bottom: none; border-right: none; color: rgb(0, 0, 0); background-color: transparent;"><p><br></p></td><td style="width: 83px; height: 24px; border-bottom: none; border-right: none; color: rgb(0, 0, 0); background-color: transparent;"><p><br></p></td><td style="width: 83px; height: 24px; border-bottom: none; border-right: none; color: rgb(0, 0, 0); background-color: transparent;"><p><br></p></td><td style="width: 83px; height: 24px; border-bottom: none; border-right: none; color: rgb(0, 0, 0); background-color: transparent;"><p><br></p></td><td style="width: 83px; height: 24px; border-bottom: 1px solid rgb(255, 255, 255); border-right: 1px solid rgb(151, 220, 32); color: rgb(255, 255, 255); background-color: rgb(151, 220, 32);"><p><br></p></td></tr><tr><td style="width: 83px; height: 24px; border-bottom: none; border-right: none; border-left: 1px solid rgb(151, 220, 32); color: rgb(0, 0, 0); background-color: transparent;"><p><br></p></td><td style="width: 83px; height: 24px; border-bottom: none; border-right: none; color: rgb(0, 0, 0); background-color: transparent;"><p><br></p></td><td style="width: 83px; height: 24px; border-bottom: none; border-right: none; color: rgb(0, 0, 0); background-color: transparent;"><p><br></p></td><td style="width: 83px; height: 24px; border-bottom: none; border-right: none; color: rgb(0, 0, 0); background-color: transparent;"><p>ㅁㄴㅇㄻㄴㅇㄹ</p></td><td style="width: 83px; height: 24px; border-bottom: none; border-right: none; color: rgb(0, 0, 0); background-color: transparent;"><p><br></p></td><td style="width: 83px; height: 24px; border-bottom: none; border-right: none; color: rgb(0, 0, 0); background-color: transparent;"><p><br></p></td><td style="width: 83px; height: 24px; border-bottom: none; border-right: none; color: rgb(0, 0, 0); background-color: transparent;"><p><br></p></td><td style="width: 83px; height: 24px; border-bottom: 1px solid rgb(255, 255, 255); border-right: 1px solid rgb(151, 220, 32); color: rgb(255, 255, 255); background-color: rgb(151, 220, 32);"><p><br></p></td></tr><tr><td style="width: 83px; height: 24px; border-bottom: none; border-right: none; border-left: 1px solid rgb(151, 220, 32); color: rgb(0, 0, 0); background-color: transparent;"><p><br></p></td><td style="width: 83px; height: 24px; border-bottom: none; border-right: none; color: rgb(0, 0, 0); background-color: transparent;"><p><br></p></td><td style="width: 83px; height: 24px; border-bottom: none; border-right: none; color: rgb(0, 0, 0); background-color: transparent;"><p><br></p></td><td style="width: 83px; height: 24px; border-bottom: none; border-right: none; color: rgb(0, 0, 0); background-color: transparent;"><p>ㄴㅇㄻㄴㅇㄹ</p></td><td style="width: 83px; height: 24px; border-bottom: none; border-right: none; color: rgb(0, 0, 0); background-color: transparent;"><p><br></p></td><td style="width: 83px; height: 24px; border-bottom: none; border-right: none; color: rgb(0, 0, 0); background-color: transparent;"><p><br></p></td><td style="width: 83px; height: 24px; border-bottom: none; border-right: none; color: rgb(0, 0, 0); background-color: transparent;"><p><br></p></td><td style="width: 83px; height: 24px; border-bottom: 1px solid rgb(255, 255, 255); border-right: 1px solid rgb(151, 220, 32); color: rgb(255, 255, 255); background-color: rgb(151, 220, 32);"><p><br></p></td></tr><tr><td style="width: 83px; height: 24px; border-bottom: none; border-right: none; border-left: 1px solid rgb(151, 220, 32); color: rgb(0, 0, 0); background-color: transparent;"><p><br></p></td><td style="width: 83px; height: 24px; border-bottom: none; border-right: none; color: rgb(0, 0, 0); background-color: transparent;"><p><br></p></td><td style="width: 83px; height: 24px; border-bottom: none; border-right: none; color: rgb(0, 0, 0); background-color: transparent;"><p><br></p></td><td style="width: 83px; height: 24px; border-bottom: none; border-right: none; color: rgb(0, 0, 0); background-color: transparent;"><p><br></p></td><td style="width: 83px; height: 24px; border-bottom: none; border-right: none; color: rgb(0, 0, 0); background-color: transparent;"><p><br></p></td><td style="width: 83px; height: 24px; border-bottom: none; border-right: none; color: rgb(0, 0, 0); background-color: transparent;"><p><br></p></td><td style="width: 83px; height: 24px; border-bottom: none; border-right: none; color: rgb(0, 0, 0); background-color: transparent;"><p><br></p></td><td style="width: 83px; height: 24px; border-bottom: 1px solid rgb(255, 255, 255); border-right: 1px solid rgb(151, 220, 32); color: rgb(255, 255, 255); background-color: rgb(151, 220, 32);"><p><br></p></td></tr><tr><td style="width: 83px; height: 24px; border-bottom: 1px solid rgb(151, 220, 32); border-right: none; border-left: 1px solid rgb(151, 220, 32); color: rgb(0, 0, 0); background-color: transparent;"><p><br></p></td><td style="width: 83px; height: 24px; border-bottom: 1px solid rgb(151, 220, 32); border-right: none; color: rgb(0, 0, 0); background-color: transparent;"><p><br></p></td><td style="width: 83px; height: 24px; border-bottom: 1px solid rgb(151, 220, 32); border-right: none; color: rgb(0, 0, 0); background-color: transparent;"><p><br></p></td><td style="width: 83px; height: 24px; border-bottom: 1px solid rgb(151, 220, 32); border-right: none; color: rgb(0, 0, 0); background-color: transparent;"><p><br></p></td><td style="width: 83px; height: 24px; border-bottom: 1px solid rgb(151, 220, 32); border-right: none; color: rgb(0, 0, 0); background-color: transparent;"><p><br></p></td><td style="width: 83px; height: 24px; border-bottom: 1px solid rgb(151, 220, 32); border-right: none; color: rgb(0, 0, 0); background-color: transparent;"><p><br></p></td><td style="width: 83px; height: 24px; border-bottom: 1px solid rgb(151, 220, 32); border-right: none; color: rgb(0, 0, 0); background-color: transparent;"><p><br></p></td><td style="width: 83px; height: 24px; border-bottom: 1px solid rgb(151, 220, 32); border-right: 1px solid rgb(151, 220, 32); color: rgb(255, 255, 255); background-color: rgb(151, 220, 32);"><p><br></p></td></tr></tbody></table><p><br></p><p style="text-align: center;"><img src="/mall/upload/board/images/20180612213925-382-66c90fe56987.png" class="txc-image" style="clear:none;float:none;" /></p><p><br></p>
+	<div align="center">
+		<!-- 실제 값이 담겨져서 넘어갈 textarea 태그 -->
+		<input type="button" id="save_button" value="상품등록" onclick="saveContent();"/>
+	</div>
+</form>
 </body>

@@ -7,13 +7,55 @@
 		select * from category_tb
 	</select>
 
-	<insert id="insertCT" parameterType="com.sol.mall.goods.TestContent">
-		insert into test_editor values(
-		#{daumcontent}
+	<resultMap id="getGoodsDtl"
+		type="com.sol.mall.goods.GoodsDtl">
+		<result property="gt_no" column="gt_no" />
+		<result property="gt_gdno" column="gt_gdno" />
+		<result property="gt_mdlname" column="gt_mdlname" />
+		<result property="gt_maker" column="gt_maker" />
+		<result property="gt_brand" column="gt_brand" />
+		<result property="gt_mfd" column="gt_mfd" />
+		<result property="gt_exp" column="gt_exp" />
+		<result property="gt_material" column="gt_material" />
+		<result property="gt_weight" column="gt_weight" />
+		<result property="gt_volume" column="gt_volume" />
+		<result property="gt_origin" column="gt_origin" />
+		<result property="gt_stock" column="gt_stock" />
+		<result property="gt_keyword" column="gt_keyword" />
+		<result property="gt_detail" column="gt_detail" jdbcType="CLOB" />
+	</resultMap>
+
+	<insert id="insertGdsDtl"
+		parameterType="com.sol.mall.goods.GoodsDtl">
+		insert into goodsdtl_tb values(
+			#{gt_no}, #{gt_gdno}, #{gt_mdlname}, #{gt_maker},
+			#{gt_brand}, #{gt_mfd}, #{gt_exp}, #{gt_material},
+			#{gt_weight}, #{gt_volume},	#{gt_origin}, #{gt_stock},
+			#{gt_keyword}, #{gt_detail}
 		)
 	</insert>
-	
-	<select id="getAll" resultType="com.sol.mall.goods.TestContent">
+
+	<select id="getGoodsDtl" resultMap="getGoodsDtl">
+		select * from goodsdtl_tb
+	</select>
+
+
+
+<!-- ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓     테스트용  지워야 됨        ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓-->
+	<resultMap id="getContent"
+		type="com.sol.mall.goods.TestContent">
+		<result property="daumcontent" column="daumcontent"
+			jdbcType="CLOB" />
+	</resultMap>
+
+	<insert id="insertCT"
+		parameterType="com.sol.mall.goods.TestContent">
+		insert into test_editor values(
+			#{daumcontent}
+		)
+	</insert>
+
+	<select id="getAll" resultMap="getContent">
 		select * from test_editor
 	</select>
 </mapper>

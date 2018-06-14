@@ -6,8 +6,11 @@ public interface GoodsMapper {
 
 	public abstract List<Category> getAllcategory();
 	
-	public abstract int insertCT(TestContent tct);
+	public abstract int insertGdsDtl(GoodsDtl g);
 	
+	public abstract List<GoodsDtl> getGoodsDtl();
+	
+	public abstract int insertCT(TestContent tct);
 	public abstract List<TestContent> getAll();
 	
 }
