@@ -31,8 +31,8 @@ $(function(){
 
 	$(".ct1").click(function() {
 		var cn = $(this).attr("category_num");
+		var clfname = $(this).text();
 		var clf = "2";
-		
 		$.ajax({
 			url : "category.get",
 			data : {ct_no : cn, ct_clf : clf},
@@ -45,6 +45,8 @@ $(function(){
 					fname.attr("class","ct2");
 					fname.attr("category_num", c.ct_no);
 					$("#ct12").append(fname);
+					
+					$("#category_select").text(clfname + ">");
 				}); 
 			}
 		});
@@ -134,6 +136,8 @@ h3 {
 									</td>
 								</tr>
 							</table> <br> <br> <br>
+							
+							<div id="category_select"></div>
 						</td>
 					</tr>
 				</tbody>
