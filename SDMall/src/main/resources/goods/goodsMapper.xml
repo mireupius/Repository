@@ -7,6 +7,14 @@
 		select * from category_tb
 	</select>
 
+	<select id="getCategory"
+		parameterType="com.sol.mall.goods.Category"
+		resultType="com.sol.mall.goods.Category">
+		select * from category_tb
+		where ct_parentno = #{ct_no}
+		and ct_clf  = #{ct_clf}
+	</select>
+
 	<resultMap id="getGoodsDtl"
 		type="com.sol.mall.goods.GoodsDtl">
 		<result property="gt_no" column="gt_no" />
@@ -28,10 +36,10 @@
 	<insert id="insertGdsDtl"
 		parameterType="com.sol.mall.goods.GoodsDtl">
 		insert into goodsdtl_tb values(
-			#{gt_no}, #{gt_gdno}, #{gt_mdlname}, #{gt_maker},
-			#{gt_brand}, #{gt_mfd}, #{gt_exp}, #{gt_material},
-			#{gt_weight}, #{gt_volume},	#{gt_origin}, #{gt_stock},
-			#{gt_keyword}, #{gt_detail}
+		#{gt_no}, #{gt_gdno}, #{gt_mdlname}, #{gt_maker},
+		#{gt_brand}, #{gt_mfd}, #{gt_exp}, #{gt_material},
+		#{gt_weight}, #{gt_volume}, #{gt_origin}, #{gt_stock},
+		#{gt_keyword}, #{gt_detail}
 		)
 	</insert>
 
@@ -41,7 +49,7 @@
 
 
 
-<!-- ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓     테스트용  지워야 됨        ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓-->
+	<!-- ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓ 테스트용 지워야 됨 ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓ -->
 	<resultMap id="getContent"
 		type="com.sol.mall.goods.TestContent">
 		<result property="daumcontent" column="daumcontent"
@@ -51,7 +59,7 @@
 	<insert id="insertCT"
 		parameterType="com.sol.mall.goods.TestContent">
 		insert into test_editor values(
-			#{daumcontent}
+		#{daumcontent}
 		)
 	</insert>
 

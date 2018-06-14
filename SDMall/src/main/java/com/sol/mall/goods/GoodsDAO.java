@@ -20,12 +20,17 @@ public class GoodsDAO {
 		ArrayList<Category> cts = new ArrayList<>();
 		cts = (ArrayList<Category>) ss.getMapper(GoodsMapper.class).getAllcategory();
 
-		/*
-		 * for (Category category : cts) { System.out.println(category.getCt_clfname());
-		 * }
-		 */
 		request.setAttribute("category", cts);
 	}
+	
+	public Categories getCategory(Category cg, HttpServletRequest request, HttpServletResponse response) {
+
+		return new Categories(
+				ss.getMapper(GoodsMapper.class).getCategory(cg)
+			);
+	}
+	
+	
 
 	public void insertGdtl(GoodsDtl g, HttpServletRequest request, HttpServletResponse response) {
 		

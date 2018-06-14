@@ -527,7 +527,6 @@
 /* 	function saveContent() {
 		Editor.save(); // 이 함수를 호출하여 글을 등록하면 된다.
 	} */
-
 	/**
 	 * Editor.save()를 호출한 경우 데이터가 유효한지 검사하기 위해 부르는 콜백함수로
 	 * 상황에 맞게 수정하여 사용한다.
@@ -538,7 +537,6 @@
 	 */
 	function validForm(editor) {
 		// Place your validation logic here
-
 		// sample : validate that content exists
 		var validator = new Trex.Validator();
 		var content = editor.getContent();
@@ -546,10 +544,8 @@
 			alert('내용을 입력하세요');
 			return false;
 		}
-
 		return true;
 	}
-
 	/**
 	 * Editor.save()를 호출한 경우 validForm callback 이 수행된 이후
 	 * 실제 form submit을 위해 form 필드를 생성, 변경하기 위해 부르는 콜백함수로
