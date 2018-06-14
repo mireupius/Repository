@@ -23,6 +23,6 @@ public class CategoryController {
 	@RequestMapping(value = "/티셔츠", method = RequestMethod.GET)
 	public String pa(HttpServletRequest request, HttpServletResponse response) {
 		cDAO.getAllCategory(request, response);
-		return "home";
+		return "shop";
 	}
 }

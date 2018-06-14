@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<title>OneTech</title>
+<title>Shopping Smart - SDmall</title>
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="description" content="OneTech shop project">
@@ -321,13 +321,7 @@
 		</div>
 	</div>
 	
-	<div>
-		<c:forEach var="cate" items="${allCategory}">
-			${cate.ct_no }
-		</c:forEach>
-	</div>
 	<!-- Footer -->
-
 	<footer class="footer">
 		<div class="container">
 			<div class="row">
