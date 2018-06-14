@@ -18,7 +18,6 @@ public class HomeController {
 	 */
 	@RequestMapping(value = "/home", method = RequestMethod.GET)
 	public String home(HttpServletRequest req, HttpServletResponse res) {
-		
 		req.setAttribute("contentPage", "goods/goods.jsp");
 		return "index";
 	}
