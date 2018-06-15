@@ -19,4 +19,11 @@ public class GoodsController {
 		gDAO.getAllGoods(request, response);
 		return "shop";
 	}
+
+	@RequestMapping(value = "/goods", method = RequestMethod.GET)
+	public String getGoodsDtlByNo(Goods goods,HttpServletRequest request, HttpServletResponse response) {
+		goods.setGd_no(request.getParameter("gd_no"));
+		gDAO.getGoodsDtlByNo(goods, request, response);
+		return "product";
+	}
 }

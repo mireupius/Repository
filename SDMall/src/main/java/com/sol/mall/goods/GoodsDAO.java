@@ -18,7 +18,6 @@ public class GoodsDAO {
 	}
 
 	public void getGoodsDtlByNo(Goods goods, HttpServletRequest request, HttpServletResponse response) {
-		goods.setGd_no(request.getParameter("gd_no"));
 		request.setAttribute("GoodsDtl", ss.getMapper(GoodsMapper.class).getGoodsDtlByNo(goods));
 	}
 
