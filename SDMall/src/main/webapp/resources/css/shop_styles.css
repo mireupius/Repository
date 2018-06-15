@@ -858,7 +858,6 @@ select option
 	color: #a3a3a3;
 	margin-top: -2px;
 }
-
 /*********************************
 3.3 Main Navigation
 *********************************/
@@ -935,8 +934,8 @@ select option
 	position: absolute;
 	top: 100%;
 	left: 0;
-	/*visibility: hidden;
-	opacity: 0;*/
+	visibility: hidden;
+	opacity: 0;
 	min-width: 100%;
 	background: #FFFFFF;
 	box-shadow: 0px 10px 25px rgba(0,0,0,0.1);

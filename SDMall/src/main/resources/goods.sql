@@ -17,7 +17,8 @@ gd_sellerid	varchar2 (12char)	not null
 
 drop table goods_tb cascade constraint purge;
 
-insert into goods_tb values('9998887774445','tomcat',10000,9000,'0,0','D:/방사능 고양이.PNG','D:/방사능 고양이.PNG','D:/방사능 고양이.PNG','D:/방사능 고양이.PNG','100','109','113','apache');
-insert into goods_tb values('3338777498778','tomdog',20000,20000,'0,2500','D:/방사능 고양이.PNG','D:/방사능 고양이.PNG','D:/방사능 고양이.PNG','D:/방사능 고양이.PNG','100','109','113','apache');
+insert into goods_tb values('9998887774445','tomcat',10000,9000,'0,0','방사능 고양이.png','방사능 고양이.png','방사능 고양이.png','방사능 고양이.png','100','109','113','apache');
+insert into goods_tb values('3338777498778','tomdog',20000,20000,'0,2500','방사능 고양이.png','방사능 고양이.png','방사능 고양이.png','방사능 고양이.png','100','109','113','apache');
+insert into goods_tb values('1184523498778','호랑이',70000,33000,'0,2500','방사능 고양이.png','방사능 고양이.png','방사능 고양이.png','방사능 고양이.png','100','109','113','apache');
 
 select * from goods_tb;

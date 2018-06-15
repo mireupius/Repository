@@ -1,10 +1,12 @@
 package com.sol.mall.goods;
 
+import java.math.BigDecimal;
+
 public class Goods {
 	private String gd_no;
 	private String gd_name;
-	private int gd_csmprice;
-	private int gd_price;
+	private BigDecimal gd_csmprice;
+	private BigDecimal gd_price;
 	private String gd_dlvchrg;
 	private String gd_imgl;
 	private String gd_imgm;
@@ -19,9 +21,9 @@ public class Goods {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Goods(String gd_no, String gd_name, int gd_csmprice, int gd_price, String gd_dlvchrg, String gd_imgl,
-			String gd_imgm, String gd_imgs, String gd_imgss, String gd_clfl, String gd_clfm, String gd_clfs,
-			String gd_sellerid) {
+	public Goods(String gd_no, String gd_name, BigDecimal gd_csmprice, BigDecimal gd_price, String gd_dlvchrg,
+			String gd_imgl, String gd_imgm, String gd_imgs, String gd_imgss, String gd_clfl, String gd_clfm,
+			String gd_clfs, String gd_sellerid) {
 		super();
 		this.gd_no = gd_no;
 		this.gd_name = gd_name;
@@ -54,19 +56,19 @@ public class Goods {
 		this.gd_name = gd_name;
 	}
 
-	public int getGd_csmprice() {
+	public BigDecimal getGd_csmprice() {
 		return gd_csmprice;
 	}
 
-	public void setGd_csmprice(int gd_csmprice) {
+	public void setGd_csmprice(BigDecimal gd_csmprice) {
 		this.gd_csmprice = gd_csmprice;
 	}
 
-	public int getGd_price() {
+	public BigDecimal getGd_price() {
 		return gd_price;
 	}
 
-	public void setGd_price(int gd_price) {
+	public void setGd_price(BigDecimal gd_price) {
 		this.gd_price = gd_price;
 	}
 
