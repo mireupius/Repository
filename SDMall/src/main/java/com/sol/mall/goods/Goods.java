@@ -4,11 +4,11 @@ import java.math.BigDecimal;
 
 public class Goods {
 
-	private	BigDecimal	gd_no;
+	private	String	gd_no;
 	private	String	gd_name;
 	private	BigDecimal	gd_csmprice;
 	private	BigDecimal	gd_price;
-	private	BigDecimal	gd_dlvchrg;
+	private	String	gd_dlvchrg;
 	private	String	gd_imgl;
 	private	String	gd_imgm;
 	private	String	gd_imgs;
@@ -16,12 +16,13 @@ public class Goods {
 	private	String	gd_clfl;
 	private	String	gd_clfm;
 	private	String	gd_clfs;
+	private String  gd_sellerid;
 
 	public Goods() {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Goods(BigDecimal gd_no, String gd_name, BigDecimal gd_csmprice, BigDecimal gd_price, BigDecimal gd_dlvchrg,
+	public Goods(String gd_no, String gd_name, BigDecimal gd_csmprice, BigDecimal gd_price, String gd_dlvchrg,
 			String gd_imgl, String gd_imgm, String gd_imgs, String gd_imgss, String gd_clfl, String gd_clfm,
 			String gd_clfs) {
 		super();
@@ -39,11 +40,11 @@ public class Goods {
 		this.gd_clfs = gd_clfs;
 	}
 
-	public BigDecimal getGd_no() {
+	public String getGd_no() {
 		return gd_no;
 	}
 
-	public void setGd_no(BigDecimal gd_no) {
+	public void setGd_no(String gd_no) {
 		this.gd_no = gd_no;
 	}
 
@@ -71,11 +72,11 @@ public class Goods {
 		this.gd_price = gd_price;
 	}
 
-	public BigDecimal getGd_dlvchrg() {
+	public String getGd_dlvchrg() {
 		return gd_dlvchrg;
 	}
 
-	public void setGd_dlvchrg(BigDecimal gd_dlvchrg) {
+	public void setGd_dlvchrg(String gd_dlvchrg) {
 		this.gd_dlvchrg = gd_dlvchrg;
 	}
 
@@ -135,4 +136,12 @@ public class Goods {
 		this.gd_clfs = gd_clfs;
 	}
 
+	public String getGd_sellerid() {
+		return gd_sellerid;
+	}
+	
+	public void setGd_sellerid(String gd_sellerid) {
+		this.gd_sellerid = gd_sellerid;
+	}
+	
 }
