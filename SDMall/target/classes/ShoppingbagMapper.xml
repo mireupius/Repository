@@ -1,12 +1,54 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.sol.mall.shoppingbag.ShoppingbagMapper">
-	<!-- <select id="getcart" parameterType="Member" resultType="com.sol.mall.shoppingbag.Shoppingbag"> 
-		select * from ihwac2_member where im_id=#{im_id} </select> -->
+
 	<select id="getcart"
 		parameterType="com.sol.mall.shoppingbag.Shoppingbag"
 		resultType="com.sol.mall.shoppingbag.Shoppingbag">
 		select * from shoppingBasket
 		where sb_csm_id = #{sb_csm_id}
 	</select>
+
+	<select id="getprice"
+		parameterType="com.sol.mall.shoppingbag.Summoney"
+		resultType="com.sol.mall.shoppingbag.Summoney">
+		select sb_Pprice*sb_quantity+sb_optionPrice as summoney
+		from shoppingBasket where
+		sb_csm_id = #{csm_id}
+	</select>
+
+	<!-- 나중에 배송비까지더해야할 SQL문 -->
+	<select id="getSprice"
+		parameterType="com.sol.mall.shoppingbag.Summoney"
+		resultType="com.sol.mall.shoppingbag.Summoney">
+		select (sb_PSprice+sb_optionPrice)*sb_quantity as summoney
+		from shoppingBasket where
+		sb_csm_id = #{csm_id}
+	</select>
+	<select id="getsaleprice"
+		parameterType="com.sol.mall.shoppingbag.Saleprice"
+		resultType="com.sol.mall.shoppingbag.Saleprice">
+		select (sb_Pprice-sb_PSprice)*sb_quantity as saleprice from
+		shoppingBasket where
+		sb_csm_id
+		= #{csm_id}
+	</select>
+
+	<delete id="deletegd"
+		parameterType="com.sol.mall.shoppingbag.Shoppingbag">
+		delete from shoppingBasket where sb_gd_no=#{sb_gd_no}
+		and sb_csm_id=#{sb_csm_id}
+	</delete>
+
+	<delete id="deletegdAll"
+		parameterType="com.sol.mall.shoppingbag.Shoppingbag">
+		delete from shoppingBasket where sb_csm_id=#{sb_csm_id}
+	</delete>
+
+	<select id="joinSBOS"
+		resultType="com.sol.mall.shoppingbag.GdOption">
+		select op_no,op_gdno,op_name,op_price,op_stock from option_tb,shoppingBasket
+		where sb_gd_no=op_gdno
+	</select>
+
 </mapper> 

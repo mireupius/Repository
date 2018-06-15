@@ -1,7 +1,7 @@
 package com.sol.mall.member;
 
+import java.awt.List;
 import java.text.SimpleDateFormat;
-<<<<<<< HEAD
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -16,96 +16,42 @@ public class MemberDAO {
 	@Autowired
 	private SqlSession ss;
 
-	public void registerCSM(Customer c, HttpServletRequest req, HttpServletResponse res) {
-
-		try {
-			
-			// Spring에서 자바빈 변수명과 JSP input name의 요청파라메터명이 같으면 자동으로 생성해주는데
-				// 이 때 Date 타입은 스프링이 자동으로 해주지 못하므로
-				// 자동으로 못 들어가게 요청파라메터명을 다르게 바꿔줌 
-				// System.out.println(req.getParameter("csm_birthday"));
-			
-			SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
-			String csm_emailFront = req.getParameter("csm_emailFront");
-			String csm_autoCompleteEmail = req.getParameter("csm_autoCompleteEmail");
-			String csm_emailAddress = String.format("%s%s", csm_emailFront, csm_autoCompleteEmail);
-			
-			c.setCsm_birth(sdf.parse(req.getParameter("csm_birthday")));
-			c.setCsm_emailAddress(csm_emailAddress);
-			
-			// System.out.println(c.getCsm_id());System.out.println(c.getCsm_pw());
-			// System.out.println(c.getCsm_name());System.out.println(c.getCsm_birth());
-			// System.out.println(c.getCsm_phoneNo());	System.out.println(c.getCsm_emailAddress());
-			
-			if (ss.getMapper(MemberMapper.class).registerCSM(c) == 1) {
-				req.setAttribute("r", "가입 성공");
-				
-			} else {
-				req.setAttribute("r", "가입 실패");
-			}
-			
-
-		} catch (Exception e) {
-			e.printStackTrace();
-			req.setAttribute("r", "가입 실패");
-
-		}
-
-	}
-	
-
-=======
-import java.util.List;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
-import org.apache.ibatis.session.SqlSession;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
-@Service
-public class MemberDAO {
-
-	@Autowired
-	private SqlSession ss;
-
-	public void registerCSM(Customer c, HttpServletRequest req, HttpServletResponse res) {
-
-		try {
-			
-			// Spring에서 자바빈 변수명과 JSP input name의 요청파라메터명이 같으면 자동으로 생성해주는데
-				// 이 때 Date 타입은 스프링이 자동으로 해주지 못하므로
-				// 자동으로 못 들어가게 요청파라메터명을 다르게 바꿔줌 
-				// System.out.println(req.getParameter("csm_birthday"));
-			
-			SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
-			String csm_emailFront = req.getParameter("csm_emailFront");
-			String csm_autoCompleteEmail = req.getParameter("csm_autoCompleteEmail");
-			String csm_emailAddress = String.format("%s%s", csm_emailFront, csm_autoCompleteEmail);
-			
-			c.setCsm_birth(sdf.parse(req.getParameter("csm_birthday")));
-			c.setCsm_emailAddress(csm_emailAddress);
-			
-			// System.out.println(c.getCsm_id());System.out.println(c.getCsm_pw());
-			// System.out.println(c.getCsm_name());System.out.println(c.getCsm_birth());
-			// System.out.println(c.getCsm_phoneNo());	System.out.println(c.getCsm_emailAddress());
-			
-			if (ss.getMapper(MemberMapper.class).registerCSM(c) == 1) {
-				req.setAttribute("r", "가입 성공");
-				
-			} else {
-				req.setAttribute("r", "가입 실패");
-			}
-			
-
-		} catch (Exception e) {
-			e.printStackTrace();
-			req.setAttribute("r", "가입 실패");
-
-		}
-
-	}
+//	public void registerCSM(Customer c, HttpServletRequest req, HttpServletResponse res) {
+//
+//		try {
+//			
+//			// Spring에서 자바빈 변수명과 JSP input name의 요청파라메터명이 같으면 자동으로 생성해주는데
+//				// 이 때 Date 타입은 스프링이 자동으로 해주지 못하므로
+//				// 자동으로 못 들어가게 요청파라메터명을 다르게 바꿔줌 
+//				// System.out.println(req.getParameter("csm_birthday"));
+//			
+//			SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
+//			String csm_emailFront = req.getParameter("csm_emailFront");
+//			String csm_autoCompleteEmail = req.getParameter("csm_autoCompleteEmail");
+//			String csm_emailAddress = String.format("%s%s", csm_emailFront, csm_autoCompleteEmail);
+//			
+//			c.setCsm_birth(sdf.parse(req.getParameter("csm_birthday")));
+//			c.setCsm_emailAddress(csm_emailAddress);
+//			
+//			// System.out.println(c.getCsm_id());System.out.println(c.getCsm_pw());
+//			// System.out.println(c.getCsm_name());System.out.println(c.getCsm_birth());
+//			// System.out.println(c.getCsm_phoneNo());	System.out.println(c.getCsm_emailAddress());
+//			
+//			if (ss.getMapper(MemberMapper.class).registerCSM(c) == 1) {
+//				req.setAttribute("r", "가입 성공");
+//				
+//			} else {
+//				req.setAttribute("r", "가입 실패");
+//			}
+//			
+//
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//			req.setAttribute("r", "가입 실패");
+//
+//		}
+//
+//	}
 	
 	public void registerSL(Seller s, HttpServletRequest req, HttpServletResponse res) {
 		
@@ -193,54 +139,53 @@ public class MemberDAO {
 
 	}
 	
-	public void loginSeller(Seller s, HttpServletRequest req, HttpServletResponse res) {
-		
-		try {
-			Seller dbS = ss.getMapper(MemberMapper.class).getSellerById(s);
-			
-			if (dbS != null) {
-				
-				req.setAttribute("r", "로그인 성공");
-				
-			} else {
-				req.setAttribute("r", "비밀번호 오류");
-			}
-			
-			
-		} catch (Exception e) {
-			e.printStackTrace();
-			req.setAttribute("r", "로그인 실패");
-		}
-		
-	}
+//	public void loginSeller(Seller s, HttpServletRequest req, HttpServletResponse res) {
+//		
+//		try {
+//			Seller dbS = ss.getMapper(MemberMapper.class).getSellerById(s);
+//			
+//			if (dbS != null) {
+//				
+//				req.setAttribute("r", "로그인 성공");
+//				
+//			} else {
+//				req.setAttribute("r", "비밀번호 오류");
+//			}
+//			
+//			
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//			req.setAttribute("r", "로그인 실패");
+//		}
+//		
+//	}
 
-	public void getCart(Shoppingbag sb2, HttpServletRequest req, HttpServletResponse res) {
-		
-		Customer cc = (Customer) req.getSession().getAttribute("loginMember");
-		
-		
-		System.out.println("==" + sb2.getSb_csm_id());
-		
-		sb2.setSb_csm_id(cc.getCsm_id());
-		
-		List<Shoppingbag> tt = ss.getMapper(MemberMapper.class).getcart(sb2);
-		
-		for (Shoppingbag shoppingbag : tt) {
-			
-			System.out.println(shoppingbag.getSb_csm_id());
-		}
-		
-		System.out.println(tt.size());
-		
-		if (cc.getCsm_id().equals(sb2.getSb_csm_id())) {
-			
-			req.setAttribute("shopBag", tt);
-			
-		}
-		
-		
-		
-	}
->>>>>>> refs/remotes/origin/Oh
+//	public void getCart(Shoppingbag sb2, HttpServletRequest req, HttpServletResponse res) {
+//		
+//		Customer cc = (Customer) req.getSession().getAttribute("loginMember");
+//		
+//		
+//		System.out.println("==" + sb2.getSb_csm_id());
+//		
+//		sb2.setSb_csm_id(cc.getCsm_id());
+//		
+//		java.util.List<Shoppingbag> tt = ss.getMapper(MemberMapper.class).getcart(sb2);
+//		
+//		for (Shoppingbag shoppingbag : tt) {
+//			
+//			System.out.println(shoppingbag.getSb_csm_id());
+//		}
+//		
+//		System.out.println(tt.size());
+//		
+//		if (cc.getCsm_id().equals(sb2.getSb_csm_id())) {
+//			
+//			req.setAttribute("shopBag", tt);
+//			
+//		}
+//		
+//		
+//		
+//	}
 	
 }

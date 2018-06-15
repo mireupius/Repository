@@ -1,7 +1,7 @@
-	-- 장바구니테이블은 옵션테이블이랑 상품테이블 조인시켜사용 --
+-- 장바구니테이블은 옵션테이블이랑 상품테이블 조인시켜사용 --
 	-- 장바구니 --
 create table shoppingBasket(
-sb_gd_no number(13) primary key,
+sb_gd_no number(13) not null,
 sb_csm_id varchar2(12 char) not null, 
 sb_Pname varchar2 (20 char) not null,
 sb_Pprice number (7) not null,
@@ -13,7 +13,9 @@ sb_quantity number (4) not null,			-- 구매수량
 sb_shippingFee varchar2 (20 char) not null	-- 택배비
 );
 
-insert into shoppingBasket values(1111111111111,'cyh524','사과',2000,1000,'apple.png','배',2000,10,'5000'); 
+select * from option_tb where op_gdno = 1111111111111
+
+insert into shoppingBasket values(1111111111111,'cyh524','사과',2000,1000,'apple.png','익다만사과',2000,10,'5000'); 
 insert into shoppingBasket values(2222222222222,'moon1765','사과',2000,1000,'apple.png','배',2000,5,'0'); 
 insert into shoppingBasket values(3333333333333,'cyh524','원피스',50000,43000,'onepiece.jpg','머리끈',500,1,'0'); 
 insert into shoppingBasket values(4444444444444,'moon1765','모자',70000,60000,'manshoes.jpg','썬크림',10000,2,'2500'); 
@@ -73,9 +75,9 @@ op_price number(7) not null,		-- 옵션가격
 op_stock number(4) not null         -- 재고--
 );
 
-
-insert into option_tb values(1,1111111111111,'발목양말',2000,1);
 select * from option_tb;
+insert into option_tb values(1,1111111111111,'발목양말',2000,1);
+select * from op_gdno;
 
 --옵션테이블 상품테이블 조인시키기--
 select * from goods_tb,option_tb where op_gdno=gd_no;      
@@ -90,6 +92,14 @@ csm_birth date not null,
 csm_phoneNo varchar2(11 char) not null,
 csm_emailAddress varchar2(30 char) not null
 );
+
+select * from shoppingBasket,option_tb where op_gdno=1111111111111
+
+select * from shoppingBasket
+select * from option_tb
+select * from
+		option_tb where
+		op_gdno = 3333333333333
 
 insert into customer_reg values('cyh524','123123','최완희',sysdate,'01051990686','moon1765@naver.com');
 

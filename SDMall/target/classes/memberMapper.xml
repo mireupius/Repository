@@ -1,22 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.sol.mall.member.MemberMapper">
-<<<<<<< HEAD
-	<insert id="registerCSM"
+	<!-- <insert id="registerCSM"
 		parameterType="com.sol.mall.member.Customer">
 		insert into customer_reg values(
 		#{csm_id}, #{csm_pw},
 		#{csm_name}, #{csm_birth},
 		#{csm_phoneNo}, #{csm_emailAddress}
-		)
-	</insert>
+		
+	</insert>)  
 	<select id="getCustomerById"
 		parameterType="com.sol.mall.member.Customer"
 		resultType="com.sol.mall.member.Customer">
 		select * from customer_reg
 		where csm_id = #{csm_id}
-	</select>
-=======
+	</select>-->
 	<insert id="registerCSM" parameterType="com.sol.mall.member.Customer">
 		insert into customer_reg values(
 			#{csm_id}, #{csm_pw},
@@ -53,21 +51,20 @@
 	</select>
 	
 	<select id="getcart"
-		parameterType="com.sol.mall.member.Shoppingbag"
-		resultType="com.sol.mall.member.Shoppingbag">
+		parameterType="com.sol.mall.shoppingbag.Shoppingbag"
+		resultType="com.sol.mall.shoppingbag.Shoppingbag">
 		select * from shoppingBasket
 		where sb_csm_id = #{sb_csm_id}
 	</select>
 	
 	<select id="getcart2"
-		parameterType="com.sol.mall.member.Shoppingbag"
-		resultType="com.sol.mall.member.Shoppingbag">
+		parameterType="com.sol.mall.shoppingbag.Shoppingbag"
+		resultType="com.sol.mall.shoppingbag.Shoppingbag">
 		select * from shoppingBasket
 		where sb_csm_id = #{sb_csm_id}
 	</select>
 	
 
->>>>>>> refs/remotes/origin/Oh
 </mapper>
 
 

@@ -5,6 +5,53 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
+<script type="text/javascript" src="resources/js/jquery.js"></script>
+<script type="text/javascript">
+	
+	$(function() {
+
+		alert("++++" + $(".tt").val());
+		alert("===" + $('input[name=tt]').val());
+
+		
+	
+		
+		
+	/* 	$(".opname").click( function() {
+			
+		   var id_check = $(this).attr("id").val();
+		   alert(id_check);
+		}); */
+		
+		// 전체상품선택시 전체상품선택되고 풀면다풀리게해주기		
+		$("#checkAll").click(function() {
+			//클릭되었으면
+			if ($("#checkAll").prop("checked")) {
+				//input태그의 name이 chk인 태그들을 찾아서 checked옵션을 true로 정의
+				$("input[name=check]").prop("checked", true);
+				//클릭이 안되있으면
+			} else {
+				//input태그의 name이 chk인 태그들을 찾아서 checked옵션을 false로 정의
+				$("input[name=check]").prop("checked", false);
+			}
+		});
+
+		// 전체상품선택후 다른상품 하나라도 해제시 전체상품체크박스 체크해제
+		$('.check').click(function() {
+			if ($('#check').prop("checked")) {
+
+				$("input[name=checkAll]").prop("checked", true);
+			} else {
+				$("input[name=checkAll]").prop("checked", false);
+			}
+		});
+
+		$('.check').click(function() {
+			alert($(this).attr(id));
+		});
+
+	});
+</script>
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
@@ -35,6 +82,7 @@
     <![endif]-->
 </head>
 <body>
+<input name="tt"  class="tt"    value="asdasdasd">
 	<div class="container">
 		<div class="logo">
 			<a href="home.go"><img src="resources/img/cjmalllogo.png"></a>
@@ -54,61 +102,99 @@ CJmall 50대 가구 핫딜 SALE">
 			</nav>
 			<h3 class="text-muted" style="padding-bottom: 10px;">카테고리</h3>
 		</div>
-		<div class="jumbotron">
-			<div id="mainheader">장바구니</div>
-			<div id="allcheck">
-				<input type="checkbox" id="divECI_ISDVSAVE" class="checkbox-style"><label
-					for="divECI_ISDVSAVE">전체상품구매</label> <a href="">전체상품삭제</a>
-			</div>
-			<div id="alldelete" align="right"></div>
-			<div>
-				<c:forEach var="p" items="${shoppingbag }">
-					<table border="1">
-						<tr>
-							<td><input type="checkbox" id="divECI_ISDVSAVE"
-								class="checkbox-style"><label for="divECI_ISDVSAVE">[VW
-									베라왕］2018 SdS 레이디 Lady 슬링백</label></td>
-							<td>X</td>
-						</tr>
-						<tr>
-							<td rowspan="3">IMG들어올자리</td>
-							<td>아이스그레이/250MM | 수량1</td>
-						</tr>
-						<tr>
-							<td>98,000원 | 배송비정보</td>
-						</tr>
-						<tr>
-							<td>무이자 3개월</td>
-						</tr>
-						<tr>
-							<td colspan="2" align="right">옵션변경 구매하기</td>
-						</tr>
-					</table>
-				</c:forEach>
-			</div>
-			<div>
-				<table border="1" width="397">
-					<tr>
-						<td>상품금액</td>
-						<td align="right">99,000원</td>
-					</tr>
-					<tr>
-						<td>할인금액</td>
-						<td align="right">-1000원</td>
-					</tr>
-					<tr>
-						<td>배송비</td>
-						<td align="right">5000원</td>
-					</tr>
-					<tr>
-						<td>주문금액</td>
-						<td align="right">98,000원</td>
-					</tr>
-				</table>
-			</div>
-			<div style="width: 395px;">선택상품 구매</div>
-			<div style="width: 395px;">전체상품구매</div>
-		</div>
+		<c:choose>
+			<c:when test="${shopBag.size() == 0}">
+				<h1>장바구니가 비었습니다</h1>
+			</c:when>
+			<c:otherwise>
+				<div class="jumbotron">
+					<div id="mainheader">장바구니</div>
+					<div id="allcheck">
+						<input type="checkbox" id="checkAll" class="checkbox-style"
+							name="checkAll"><label for="divECI_ISDVSAVE">전체상품선택</label>
+						<a href="deleteAll.do?sb_csm_id=${sp.sb_csm_id }">전체상품삭제</a>
+					</div>
+					<div id="alldelete" align="right"></div>
+					<div>
+						<c:forEach var="sp" items="${shopBag }" varStatus="status">
+							<table border="1">
+								<tr>
+									<td><input type="checkbox" name="check" class="check"
+										id="check${status.count}"><label for="divECI_ISDVSAVE">${sp.sb_Pname }</label></td>
+									<td align="right"><a
+										href="delete.do?sb_gd_no=${sp.sb_gd_no }">X</a>
+										 </td>
+										
+								</tr>
+								<tr>
+									<td rowspan="3"><img src="resources/img/${sp.sb_Img }"
+										style="width: 90px;"></td>
+									<td><select>
+											<option style="background-color: blue;" class="opname"
+												value="">${sp.sb_optionName }</option>
+											<c:forEach var="op" items="${option }">
+												<c:if test="${sp.sb_gd_no==op.op_gdno}">
+													     <option id="" class="opname" value="${op.op_no }">${op.op_name }</option>
+												</c:if>
+											</c:forEach>
+									</select>| 
+									<select>
+											<option style="background-color: blue;">${sp.sb_quantity }</option>
+											<c:forEach var="op" items="${option }">
+												<c:if test="${op.op_gdno == sp.sb_gd_no }">
+													<c:forEach begin="1" end="${op.op_stock }" var="i">
+														<option>${i}</option>
+													</c:forEach>
+												</c:if>
+											</c:forEach>
+									</select> 
+									<input type="button" value="변경">
+									</td>
+								</tr>
+								<tr>
+									<td><c:forEach begin="${status.index}"
+											end="${status.index}" var="sm" items="${summoney}">
+											<fmt:formatNumber pattern="###,###,###"
+												value="${sm.summoney }"></fmt:formatNumber>
+										</c:forEach> | 배송비정보</td>
+								</tr>
+								<tr>
+									<td>무이자 3개월</td>
+								</tr>
+								<tr>
+									<td colspan="2" align="right">옵션변경 구매하기</td>
+								</tr>
+							</table>
+						</c:forEach>
+					</div>
+					<div>
+						<table border="1" width="397">
+							<tr>
+								<td>상품금액</td>
+								<td align="right"><fmt:formatNumber pattern="###,###,###"
+										value="${sumAllprice }"></fmt:formatNumber></td>
+							</tr>
+							<tr>
+								<td>할인금액</td>
+								<td align="right">- <fmt:formatNumber pattern="###,###,###"
+										value="${saleprice }"></fmt:formatNumber></td>
+							</tr>
+							<tr>
+								<td>배송비</td>
+								<td align="right">미정</td>
+							</tr>
+							<tr>
+								<td>주문금액</td>
+								<td align="right"><fmt:formatNumber pattern="###,###,###"
+										value="${sumAllSprice }"></fmt:formatNumber></td>
+							</tr>
+						</table>
+					</div>
+					<div style="width: 395px;">선택상품 구매</div>
+					<div style="width: 395px;">전체상품구매 ${r }</div>
+				</div>
+			</c:otherwise>
+		</c:choose>
 		<footer class="footer">
 		<p>&copy; Company 2018-06-07</p>
 		</footer>

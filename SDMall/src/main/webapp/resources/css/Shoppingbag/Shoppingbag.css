@@ -24,9 +24,7 @@ body {
 	padding-top: 10px;
 }
 
-div {
-	border: 1px solid black;
-}
+
 
 #mainheader {
 	font-weight: 800;
@@ -37,7 +35,7 @@ div {
 #alldelete{
 
 }
-input[type=checkbox] {  
+/* input[type=checkbox] {  
     display: none;  
 }
 
@@ -77,4 +75,4 @@ input[type=checkbox]:checked + label:before {
     text-align: center;  
     line-height: 18px;  
 
-} 
+}  */

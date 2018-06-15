@@ -9,12 +9,11 @@
 <title>Insert title here</title>
 </head>
 <body>
-
+asas
 	<div>
 		<c:forEach var="sp" items="${shopBag }">
-
 ${sp.sb_Pname }
-
+${sp.sb_Pprice } 
 
 </c:forEach>
 	</div>
