@@ -104,6 +104,8 @@
 					placeholder="송장번호입력">
 				<button id="inputSet" type="button" class="btn btn-default">선택건
 					적용</button>
+				<a href="excel.xlsx"><button type="button"
+						class="btn btn-default">발주확인 주문건 엑셀다운로드</button></a>
 
 			</div>
 
@@ -209,12 +211,16 @@
 
 			<div class="showback">
 				<button id="selectDealSend">선택건 발송처리</button>
-				<button>엑셀 일괄등록</button>
+
 
 				<form action="sale.deliveryCheck.do" method="post"
 					style="display: inline">
 					<input name="array" id="arrayVal" hidden> <input
 						id="deliveryCheckButton" type="submit" value="선택건 발주확인">
+				</form>
+				<form action="inputexcel.go" enctype="multipart/form-data"
+					method="post" style="display: block">
+					<input type="submit" value="엑셀 일괄발송"> <input name="excelFile" type="file" style="display: inline">
 				</form>
 
 			</div>

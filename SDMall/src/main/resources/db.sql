@@ -23,6 +23,7 @@ DROP TABLE sale_delivery
 	CASCADE CONSTRAINTS purge;
 
 ALTER TABLE sale_delivery add(sd_go_delivery_date date);
+ALTER TABLE sale_delivery add(d_seller_id varchar2 (12 char));
 
 
 ALTER TABLE sale_delivery
@@ -37,6 +38,7 @@ DROP TABLE sale_delivery
 
 /* 주문 */
 CREATE TABLE sale_delivery (
+	sd_seller_id varchar2(12 char) NOT NULL, /* 판매자ID */
 	sd_delivery_pno varchar2(16 char) primary key, /* 상품주문번호 */
 	sd_delivery_no varchar2(16 char) NOT NULL, /* 주문번호 */
 	sd_courier varchar2(8 char), /* 택배사 */
