@@ -4,10 +4,11 @@
 
 
 	<!-- =========================================== select ==================================================== -->
-	
+
 	<select id="getAllDelivery"
 		resultType="com.sol.mall.sale.delivery.Delivery">
-		select * from sale_delivery where sd_delivery_state != '배송중' order by sd_order_date
+		select * from sale_delivery where sd_delivery_state !=
+		'배송중' order by sd_order_date
 	</select>
 
 	<select id="getNewDeliverys"
@@ -23,16 +24,20 @@
 	</select>
 
 	<select id="getAllDeliveryNum" resultType="java.lang.Integer">
-		select count(*) from sale_delivery
+		select count(*) from
+		sale_delivery where sd_delivery_state !=
+		'배송중'
 	</select>
 
 
 	<select id="getNewDeliveryNum" resultType="java.lang.Integer">
-		select count(*) from sale_delivery where sd_state_detail = '신규주문'
+		select count(*) from
+		sale_delivery where sd_state_detail = '신규주문'
 	</select>
 
 	<select id="getCheckDeliveryNum" resultType="java.lang.Integer">
-		select count(*) from sale_delivery where sd_state_detail = '발주확인'
+		select count(*) from
+		sale_delivery where sd_state_detail = '발주확인'
 	</select>
 
 	<!-- =========================================== 배송완료 ==================================================== -->
@@ -46,16 +51,21 @@
 
 	<select id="getSendDoneDeliverys"
 		resultType="com.sol.mall.sale.delivery.Delivery">
-		select * from sale_delivery where sd_delivery_state = '배송완료'
+		select * from sale_delivery where sd_delivery_state =
+		'배송완료'
 		order by sd_order_date
 	</select>
 
-	<select id="getSendingDeliverysNum" resultType="java.lang.Integer">
-		select count(*) from sale_delivery where sd_delivery_state = '배송중'
+	<select id="getSendingDeliverysNum"
+		resultType="java.lang.Integer">
+		select count(*) from sale_delivery where sd_delivery_state
+		= '배송중'
 	</select>
 
-	<select id="getSendDoneDeliveryNum" resultType="java.lang.Integer">
-		select count(*) from sale_delivery where sd_delivery_state = '배송완료'
+	<select id="getSendDoneDeliveryNum"
+		resultType="java.lang.Integer">
+		select count(*) from sale_delivery where sd_delivery_state
+		= '배송완료'
 	</select>
 
 
@@ -71,12 +81,28 @@
 
 
 	<!-- =========================================== update ==================================================== -->
-	
+
 	<update id="deliveryCheck"
 		parameterType="com.sol.mall.sale.delivery.Delivery">
-		update sale_delivery set sd_state_detail = #{sd_state_detail}, sd_check_date = #{sd_check_date}
+		update sale_delivery set sd_state_detail = '발주확인',
+		sd_check_date = sysdate
 		where sd_delivery_pno = #{sd_delivery_pno}
 	</update>
+
+
+	<update id="sendDeliverys"
+		parameterType="com.sol.mall.sale.delivery.Delivery">
+		update sale_delivery
+		set
+		sd_invoice_no = #{sd_invoice_no},
+		sd_courier = #{sd_courier},
+		sd_delivery_state =	'배송중',
+		sd_state_detail = '배송중',
+		sd_delivery_type = '택배/등기/소포',
+		sd_go_delivery_date = sysdate 
+		where sd_delivery_pno = #{sd_delivery_pno}
+	</update>
+
 
 
 

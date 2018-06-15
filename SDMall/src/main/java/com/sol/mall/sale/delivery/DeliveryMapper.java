@@ -11,6 +11,7 @@ public interface DeliveryMapper {
 	public abstract List<Delivery> getSendDoneDeliverys();
 	
 	
+	public abstract int sendDeliverys(Delivery d);
 	public abstract int deliveryCheck(Delivery d);
 	public abstract int getNewDeliveryNum();
 	public abstract int getCheckDeliveryNum();

@@ -33,10 +33,10 @@ public class ExcelController {
 
 	}
 
-	@RequestMapping(value = "/inputexcel.go", method = RequestMethod.POST)
-	public String delivery(HttpServletRequest req, HttpServletResponse res) {
+	@RequestMapping(value = "/insertExcel.go", method = RequestMethod.POST)
+	public String doSendDeliverys(HttpServletRequest req, HttpServletResponse res) {
 
-		EDAO.excelTest(req, res);
+		EDAO.sendDeliverys(req, res);
 		DDAO.getAllOrder(req, res);
 		DDAO.getAllDeliveryNum(req, res);
 		DDAO.getNewDeliveryNum(req, res);

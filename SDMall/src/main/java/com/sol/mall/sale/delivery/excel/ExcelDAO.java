@@ -30,32 +30,19 @@ public class ExcelDAO {
 	@Autowired
 	private SqlSession ss;
 
-	public void insertMassiveArticleInBoard(File destFile) {
-		ReadOption readOption = new ReadOption();
-		readOption.setFilePath(destFile.getAbsolutePath());
-
-		readOption.setOutputColumns("A", "B", "C");
-
-		readOption.setStartRow(1);
-
-		List<Map<String, String>> excelContent = ExcelRead.read(readOption);
-
-		for (Map<String, String> article : excelContent) {
-
-			System.out.println(article.get("A"));
-			System.out.println(article.get("B"));
-			System.out.println(article.get("C"));
-			System.out.println("-------------------");
-
-		}
-
-		destFile.delete();
-	}
-
-	public void excelTest(HttpServletRequest req, HttpServletResponse res) {
+	public void sendDeliverys(HttpServletRequest req, HttpServletResponse res) {
 		String path = req.getSession().getServletContext().getRealPath("resources/files/sale/temp");
 
 		System.out.println(path);
+
+		File selectedDir = new File(path);
+
+		File[] innerFiles = selectedDir.listFiles();
+
+		// 하위 디렉토리 삭제
+		for (int i = 0; i < innerFiles.length; i++) {
+			innerFiles[i].delete();
+		}
 
 		try {
 			MultipartRequest mr = new MultipartRequest(req, path, 1024 * 1024 * 12, "utf-8",
@@ -65,7 +52,36 @@ public class ExcelDAO {
 
 			File excel = new File(path + "/" + fileName);
 
-			this.insertMassiveArticleInBoard(excel);
+			ReadOption readOption = new ReadOption();
+			readOption.setFilePath(excel.getAbsolutePath());
+
+			System.out.println(excel.getAbsolutePath());
+			readOption.setOutputColumns("A", "B", "C");
+
+			readOption.setStartRow(0);
+
+			Delivery d = null;
+
+			List<Map<String, String>> excelContent = ExcelRead.read(readOption);
+
+			int all = excelContent.size();
+			int success = 0;
+
+			System.out.println(excelContent.size() + "??????????");
+
+			for (int i = 1; i < excelContent.size(); i++) {
+				d = new Delivery();
+
+				d.setSd_delivery_pno(excelContent.get(i).get("A"));
+				d.setSd_courier(excelContent.get(i).get("B"));
+				d.setSd_invoice_no(excelContent.get(i).get("C") + "");
+
+				if (ss.getMapper(DeliveryMapper.class).sendDeliverys(d) == 1) {
+					success++;
+				}
+			}
+			req.setAttribute("all", all - 1);
+			req.setAttribute("success", success);
 
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
@@ -89,7 +105,7 @@ public class ExcelDAO {
 		String excelName = "excel.xlsx";
 		Map<String, String> headerList = new HashMap<String, String>();
 		Map<String, String> list = new HashMap<String, String>();
-		List<Delivery> d = ss.getMapper(DeliveryMapper.class).getAllDelivery();
+		List<Delivery> d = ss.getMapper(DeliveryMapper.class).getCheckDeliverys();
 		String[] titles = { "상품주문번호", "주문번호", "택배사", "구매자명", "구매자ID", "수취인명", "주문상태", "주문세부상태", "배송비", "상품번호", "상품명",
 				"옵션종류", "옵션정보", "수량(구입수량)", "옵션가격", "상품가격", "판매가격", "상품별 총 주문금액", "발주확인일", "수취인연락처1", "배송지", "구매자연락처",
 				"우편번호", "배송메세지", "출고지", "주문일시", "클레임상태", "결제수단", "배송방법" };

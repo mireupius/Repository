@@ -1,6 +1,5 @@
 package com.sol.mall.sale.delivery;
 
-import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -53,8 +52,6 @@ public class DeliveryDAO {
 		String str = req.getParameter("array");
 		String[] array = str.split(",");
 		d = new Delivery();
-		d.setSd_state_detail("발주확인");
-		d.setSd_check_date(new Date());
 
 		for (String string : array) {
 			d.setSd_delivery_pno(string);

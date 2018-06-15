@@ -9,6 +9,12 @@
 <title>Insert title here</title>
 <script type="text/javascript">
 	$(function() {
+
+		if ($('#allVal').val() != 0) {
+			alert($('#allVal').val() + "건 등록시도," + $('#successVal').val()
+					+ "건 등록성공");
+		}
+
 		$("#checkAll").click(function() {
 			if ($('#checkAll').prop('checked')) {
 				$('.orderCheck').prop('checked', true);
@@ -210,18 +216,26 @@
 
 
 			<div class="showback">
-				<button id="selectDealSend">선택건 발송처리</button>
+				<button id="selectDealSend" type="button" class="btn btn-default">선택건
+					발송처리</button>
 
 
 				<form action="sale.deliveryCheck.do" method="post"
 					style="display: inline">
 					<input name="array" id="arrayVal" hidden> <input
-						id="deliveryCheckButton" type="submit" value="선택건 발주확인">
+						id="deliveryCheckButton" type="submit" value="선택건 발주확인"
+						type="button" class="btn btn-default">
 				</form>
-				<form action="inputexcel.go" enctype="multipart/form-data"
-					method="post" style="display: block">
-					<input type="submit" value="엑셀 일괄발송"> <input name="excelFile" type="file" style="display: inline">
+				<form action="insertExcel.go" enctype="multipart/form-data"
+					method="post" style="display: inline">
+					<input type="submit" value="엑셀 일괄발송" type="button"
+						class="btn btn-default"> <input name="excelFile"
+						type="file" style="display: inline">
 				</form>
+
+				<input value="${all }" id="allVal" hidden> <input
+					value="${success }" id="successVal" hidden>
+
 
 			</div>
 			<!-- /row -->
