@@ -4,7 +4,7 @@ public class TestContent {
 	private String daumcontent;
 
 	public TestContent() {
-		// TODO Auto-generated constructor stub
+		// TODOAuto-generatedconstructorstub
 	}
 
 	public TestContent(String daumcontent) {

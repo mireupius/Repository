@@ -61,7 +61,7 @@
 
 	<%-- ${param.daumcontent} --%>
 	<table></table>
-		<%-- <c:forEach var="tt" items="${tent }">
+	<%-- <c:forEach var="tt" items="${tent }">
 			<tr>
 				<td>${tt.gt_no}</td>
 				<td>${tt.gt_gdno}</td>
@@ -79,7 +79,7 @@
 				<td>${tt.gt_detail}</td>
 			</tr>
 		</c:forEach> --%>
-		<%-- <c:forEach var="ctg" items="${category }">
+	<%-- <c:forEach var="ctg" items="${category }">
 			<c:if test="${ctg.ct_clf == '1'}">
 				<li id="ct1">${ctg.ct_clfname}</li>
 			</c:if>
@@ -90,9 +90,7 @@
 				<li id="ct1">${category[i].ct_clfname}</li>
 			</c:if>
 		</c:forEach> --%>
-		ddd
-
-	
+	ddd 
 
 </body>
 </html>

@@ -116,7 +116,7 @@ $(function(){
 		// 카테고리 선택 표시 영역
 		$("#category_select3").text(clfname + ">");
 		var input = $("#ctgry3").val(cn);
-        input.attr("name", "gd_clfm");
+        input.attr("name", "gd_clfs");
 	});
 });
 </script>
@@ -141,7 +141,7 @@ h3 {
 </head>
 <body>
 <form name="tx_editor_form" id="tx_editor_form"
-	action="editor.do" method="post"
+	action="registration.do" method="post"
 	accept-charset="utf-8">
 	<div class="gdTb3" data-toggle="collapse" href="#collapse1"
 		aria-expanded="false" aria-controls="collapse1">
@@ -152,7 +152,7 @@ h3 {
 			<table class="gdTb3">
 				<tbody>
 					<tr>
-						<td class="gdTd1">상품분류 선택</td>
+						<td class="gdTd1">상품분류 선택 필수(대분류)</td>
 						<td class="gdTd2">
 						<br>
 							<table id="gdTb2">
@@ -189,7 +189,9 @@ h3 {
 								<span id="category_select1"></span>
 								<span id="category_select2"></span>
 								<span id="category_select3"></span>
-								<input id="ctgry1" type="hidden"><input id="ctgry2" type="hidden"><input id="ctgry3" type="hidden">
+								<input id="ctgry1"  type="hidden">
+								<input id="ctgry2"  type="hidden">
+								<input id="ctgry3"  type="hidden">
 							</div>
 							<br>
 						</td>
@@ -208,19 +210,15 @@ h3 {
 			<table class="gdTb3">
 				<tbody>
 					<tr>
-						<td class="gdTd1">상품명</td>
+						<td class="gdTd1">상품명 필수</td>
 						<td class="gdTd2"><input name="gd_name"></td>
-					</tr>
-					<tr>
-						<td class="gdTd1">상품코드</td>
-						<td class="gdTd2"><input name="gd_no"></td>
 					</tr>
 					<tr>
 						<td class="gdTd1">모델명</td>
 						<td class="gdTd2"><input name="gt_mdlname"></td>
 					</tr>
 					<tr>
-						<td class="gdTd1">상품상세설명</td>
+						<td class="gdTd1">상품상세설명 필수</td>
 						<td class="gdTd2">
 							<!-- 에디터 시작 -->
 							<div>
@@ -255,11 +253,11 @@ h3 {
 			<table class="gdTb3">
 				<tbody>
 					<tr>
-						<td class="gdTd1">소비자가</td>
+						<td class="gdTd1">소비자가 필수</td>
 						<td class="gdTd2"><input name="gd_csmprice"></td>
 					</tr>
 					<tr>
-						<td class="gdTd1">판매가</td>
+						<td class="gdTd1">판매가 필수</td>
 						<td class="gdTd2"><input name="gd_price"></td>
 					</tr>
 					
@@ -276,15 +274,15 @@ h3 {
 			<table class="gdTb3">
 				<tbody>
 					<tr>
-						<td class="gdTd1">옵션명</td>
+						<td class="gdTd1">옵션명 필수</td>
 						<td class="gdTd2"><input name="op_name"></td>
 					</tr>
 					<tr>
-						<td class="gdTd1">옵션가격</td>
+						<td class="gdTd1">옵션가격 필수</td>
 						<td class="gdTd2"><input name="op_price"></td>
 					</tr>
 					<tr>
-						<td class="gdTd1">옵션재고</td>
+						<td class="gdTd1">옵션재고 필수</td>
 						<td class="gdTd2"><input name="op_stock"></td>
 					</tr>
 				</tbody>
@@ -300,18 +298,18 @@ h3 {
 			<table class="gdTb3">
 				<tbody>
 					<tr>
-						<td class="gdTd1">이미지 등록</td>
+						<td class="gdTd1">이미지 등록 필수(일단보류)</td>
 						<td class="gdTd2">
 							<div>
 								<ul>
-									<li class="imgli"><span>상세이미지</span><br> <span>권장
+									<li class="imgli" name="gd_imgl" ><span>상세이미지</span><br> <span>권장
 											500px * 500px</span><br> <span><input type="file">
 									</span></li>
-									<li class="imgli"><span>목록 이미지</span><br> <span>권장
+									<li class="imgli" name="gd_imgm" ><span>목록 이미지</span><br> <span>권장
 											300px * 300px</span><br></li>
-									<li class="imgli"><span>작은목록 이미지</span><br> <span>권장
+									<li class="imgli" name="gd_imgs" ><span>작은목록 이미지</span><br> <span>권장
 											100px * 100px</span><br></li>
-									<li class="imgli"><span>축소 이미지</span><br> <span>권장
+									<li class="imgli" name="gd_imgss"><span>축소 이미지</span><br> <span>권장
 											220px * 220px</span><br></li>
 								</ul>
 							</div>
@@ -374,12 +372,24 @@ h3 {
 			<table class="gdTb3">
 				<tbody>
 					<tr>
-						<td class="gdTd1">배송비</td>
+						<td class="gdTd1">배송비 필수</td>
 						<td class="gdTd2"><input name="gd_dlvchrg"></td>
 					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+	<div class="gdTb3" data-toggle="collapse" href="#collapse8"
+		aria-expanded="false" aria-controls="collapse8">
+		<h3>판매자 정보</h3>
+	</div>
+	<div class="collapse" id="collapse8">
+		<div>
+			<table class="gdTb3">
+				<tbody>
 					<tr>
-						<td class="gdTd1">무료조건가격</td>
-						<td class="gdTd2"><input name=""></td>
+						<td class="gdTd1">판매자ID 필수</td>
+						<td class="gdTd2"><input name="gd_sellerid"></td>
 					</tr>
 				</tbody>
 			</table>

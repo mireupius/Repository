@@ -2,7 +2,14 @@ create sequence goods_sq
 MAXVALUE 9999
 CYCLE
 NOCACHE;
+select * from goods_tb;
+select * from goodsdtl_tb;
 
+values(to_char(카테고리 9자리) || LPAD(시퀀스.nextval,3,0)
+nvl (컬럼,0)->널일 때 0으로
+
+
+gd_no ---> ct_no1+ct_no2+ct_no3 || LPDA(goods_sq.nextval,4,0)
 --상품코드(카테고리 9자리 + 시퀀스4)
 create table goods_tb				
 (				
@@ -17,8 +24,9 @@ create table goods_tb
  gd_imgss 	varchar2(200 char) 	not null,				
  gd_clfl  	varchar2(3 char)	not null,				
  gd_clfm   	varchar2(3 char),				
- gd_clfs   	varchar2(3 char)				
-);				
+ gd_clfs   	varchar2(3 char),
+ gd_sellerid	varchar2 (12 char)	not null
+);			
 
 create sequence goodsdtl_sq		
 MAXVALUE 99999
@@ -133,15 +141,27 @@ insert into category_tb values(category_sq.nextval, '소분류3' , 3);
 
 select * from category_tb;
 
+
+
+create sequence test_sq;
 create table test_editor (
 daumcontent clob
 );
 
+
+insert into test_editor values(
+  LPAD(goods_sq.nextval,4,0)
+);
 drop table test_editor cascade constraint purge;
 
 select * from test_editor;
 
 desc test_editor
 
-
+insert into goodsdtl_tb values(
+			'1', '1'||'1'||'1'||LPDA(goods_sq.nextval,4,'0'), '1', '1',
+			'1', '1', '1', '1',
+			'1', '1', '1', '1',
+			'1', '1'
+		);
 
