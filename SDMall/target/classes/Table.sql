@@ -15,11 +15,11 @@ create table goods_tb
  gd_imgm  	varchar2(200 char) 	not null,				
  gd_imgs  	varchar2(200 char) 	not null,				
  gd_imgss 	varchar2(200 char) 	not null,				
- gd_clfl  	number(3)		not null,				
- gd_clfm   	number(3),				
- gd_clfs   	number(3)				
+ gd_clfl  	varchar2(3 char)	not null,				
+ gd_clfm   	varchar2(3 char),				
+ gd_clfs   	varchar2(3 char)				
 );				
-				
+
 create sequence goodsdtl_sq		
 MAXVALUE 99999
 CYCLE 

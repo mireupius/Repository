@@ -1,6 +1,12 @@
-http://devstory.ibksplatform.com/2017/08/blog-post_21.html
 
-
+다음에디터 연동 및 서버에 컨텐츠 내용 전송하는 방법
 http://hellogk.tistory.com/64?category=528477
 
+[다음오픈에디터] 이미지 첨부 in Spring (JSP)
 http://lofty87.tistory.com/7?category=711730
+
+자바 이미지 리사이징
+http://2joong2.tistory.com/entry/%EC%9E%90%EB%B0%94-%EC%9D%B4%EB%AF%B8%EC%A7%80-%EB%A6%AC%EC%82%AC%EC%9D%B4%EC%A7%95
+
+JSONP 알고 쓰자!
+http://kingbbode.tistory.com/26
