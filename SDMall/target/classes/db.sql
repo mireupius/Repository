@@ -67,7 +67,8 @@ CREATE TABLE sale_delivery (
 	sd_order_date date NOT NULL, /* 주문일시 */
 	sd_claim varchar2(20 char), /* 클레임상태 */
 	sd_pay_method varchar2(10 char) NOT NULL /* 결제수단 */
-	sd_go_delivery_date date /* 결제수단 */
+	sd_go_delivery_date date /* 발송일 */
+	sd_delivery_type varchar2(10 char) /* 발송일 */
 );
 
 

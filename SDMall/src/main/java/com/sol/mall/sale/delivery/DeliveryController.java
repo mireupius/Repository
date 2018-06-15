@@ -66,11 +66,27 @@ public class DeliveryController {
 
 	@RequestMapping(value = "/sale.goingDelivery.go", method = RequestMethod.GET)
 	public String goingDelivery(HttpServletRequest req, HttpServletResponse res) {
-		DDAO.deliveryCheck(req, res);
-		DDAO.getAllDeliveryNum(req, res);
-		DDAO.getNewDeliveryNum(req, res);
-		DDAO.getCheckDeliveryNum(req, res);
+		DDAO.getSendDoneDeliveryNum(req, res);
+		DDAO.getSendingDeliverysNum(req, res);
 
+		req.setAttribute("contentPage", "delivery/goingDeliveryContent.jsp");
+		return "sale/saleIndex";
+	}
+
+	@RequestMapping(value = "/sale.sendingDelivery.go", method = RequestMethod.GET)
+	public String sendingDeliverys(HttpServletRequest req, HttpServletResponse res) {
+		DDAO.getSendDoneDeliveryNum(req, res);
+		DDAO.getSendingDeliverysNum(req, res);
+		DDAO.getSendingDeliverys(req, res);
+		req.setAttribute("contentPage", "delivery/goingDeliveryContent.jsp");
+		return "sale/saleIndex";
+	}
+
+	@RequestMapping(value = "/sale.sendDoneDelivery.go", method = RequestMethod.GET)
+	public String sendDoneDeliverys(HttpServletRequest req, HttpServletResponse res) {
+		DDAO.getSendDoneDeliveryNum(req, res);
+		DDAO.getSendingDeliverysNum(req, res);
+		DDAO.getSendDoneDeliverys(req, res);
 		req.setAttribute("contentPage", "delivery/goingDeliveryContent.jsp");
 		return "sale/saleIndex";
 	}

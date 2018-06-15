@@ -66,4 +66,27 @@ public class DeliveryDAO {
 		}
 	}
 
+	public void getSendingDeliverys(HttpServletRequest req, HttpServletResponse res) {
+		List<Delivery> ds = ss.getMapper(DeliveryMapper.class).getSendingDeliverys();
+		req.setAttribute("delivery", ds);
+
+	}
+
+	public void getSendDoneDeliverys(HttpServletRequest req, HttpServletResponse res) {
+		List<Delivery> ds = ss.getMapper(DeliveryMapper.class).getSendDoneDeliverys();
+		req.setAttribute("delivery", ds);
+	}
+
+	public void getSendingDeliverysNum(HttpServletRequest req, HttpServletResponse res) {
+		int num = ss.getMapper(DeliveryMapper.class).getSendingDeliverysNum();
+		req.setAttribute("sendingDeliveryNum", num);
+
+	}
+
+	public void getSendDoneDeliveryNum(HttpServletRequest req, HttpServletResponse res) {
+		int num = ss.getMapper(DeliveryMapper.class).getSendDoneDeliveryNum();
+		req.setAttribute("sendDoneDeliveryNum", num);
+
+	}
+
 }

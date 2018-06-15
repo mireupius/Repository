@@ -35,6 +35,41 @@
 		select count(*) from sale_delivery where sd_state_detail = '발주확인'
 	</select>
 
+	<!-- =========================================== 배송완료 ==================================================== -->
+
+
+	<select id="getSendingDeliverys"
+		resultType="com.sol.mall.sale.delivery.Delivery">
+		select * from sale_delivery where sd_delivery_state = '배송중'
+		order by sd_order_date
+	</select>
+
+	<select id="getSendDoneDeliverys"
+		resultType="com.sol.mall.sale.delivery.Delivery">
+		select * from sale_delivery where sd_delivery_state = '배송완료'
+		order by sd_order_date
+	</select>
+
+	<select id="getSendingDeliverysNum" resultType="java.lang.Integer">
+		select count(*) from sale_delivery where sd_delivery_state = '배송중'
+	</select>
+
+	<select id="getSendDoneDeliveryNum" resultType="java.lang.Integer">
+		select count(*) from sale_delivery where sd_delivery_state = '배송완료'
+	</select>
+
+
+
+
+
+
+
+
+
+
+
+
+
 	<!-- =========================================== update ==================================================== -->
 	
 	<update id="deliveryCheck"

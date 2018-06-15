@@ -34,6 +34,8 @@ public class Delivery {
 	private Date sd_order_date;
 	private String sd_claim;
 	private String sd_pay_method;
+	private Date sd_go_delivery_date;
+	private String sd_delivery_type;
 
 	public Delivery() {
 		// TODO Auto-generated constructor stub
@@ -46,7 +48,7 @@ public class Delivery {
 			BigDecimal sd_option_price, BigDecimal sd_product_price, BigDecimal sd_product_sellprice,
 			BigDecimal sd_total_price, Date sd_check_date, String sd_taker_phone, String sd_take_area,
 			String sd_customer_ph, String sd_postno, String sd_message, String sd_out_area, Date sd_order_date,
-			String sd_claim, String sd_pay_method) {
+			String sd_claim, String sd_pay_method, Date sd_go_delivery_date, String sd_delivery_type) {
 		super();
 		this.sd_delivery_pno = sd_delivery_pno;
 		this.sd_delivery_no = sd_delivery_no;
@@ -78,10 +80,10 @@ public class Delivery {
 		this.sd_order_date = sd_order_date;
 		this.sd_claim = sd_claim;
 		this.sd_pay_method = sd_pay_method;
+		this.sd_go_delivery_date = sd_go_delivery_date;
+		this.sd_delivery_type = sd_delivery_type;
 	}
 
-	
-	
 	public String getSd_delivery_pno() {
 		return sd_delivery_pno;
 	}
@@ -320,6 +322,22 @@ public class Delivery {
 
 	public void setSd_pay_method(String sd_pay_method) {
 		this.sd_pay_method = sd_pay_method;
+	}
+
+	public Date getSd_go_delivery_date() {
+		return sd_go_delivery_date;
+	}
+
+	public void setSd_go_delivery_date(Date sd_go_delivery_date) {
+		this.sd_go_delivery_date = sd_go_delivery_date;
+	}
+
+	public String getSd_delivery_type() {
+		return sd_delivery_type;
+	}
+
+	public void setSd_delivery_type(String sd_delivery_type) {
+		this.sd_delivery_type = sd_delivery_type;
 	}
 
 }
