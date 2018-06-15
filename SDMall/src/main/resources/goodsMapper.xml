@@ -4,4 +4,8 @@
 	<select id="getAllGoods" resultType="com.sol.mall.goods.Goods">
 		select * from goods_tb
 	</select>
+	
+	<select id="getGoodsDtlByNo" parameterMap="com.sol.mall.goods.Goods" resultMap="com.sol.mall.goods.GoodsDtl">
+		select * from goodsdtl_tb where gt_gdno=#{gd_no}
+	</select>
 </mapper>
