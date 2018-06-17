@@ -172,9 +172,7 @@ h3 {
 <body>
 <section id="main-content">
 <section class="wrapper">
-<form name="tx_editor_form" id="tx_editor_form"
-	action="registration.do" method="post"
-	accept-charset="utf-8">
+<form name="tx_editor_form" id="tx_editor_form" action="registration.do" method="post" accept-charset="utf-8" >
 	<div class="gdTb3" data-toggle="collapse" href="#collapse1"
 		aria-expanded="false" aria-controls="collapse1">
 		<h3>표시설정</h3>
@@ -338,28 +336,28 @@ h3 {
 										<span>상세이미지</span><br>
 										<span>권장 500px * 500px</span><br>
 										<span>
-											<img id="img1" src="//img.echosting.cafe24.com/thumb/108x108_2.gif" width="108" height="108" name="gd_imgl" >
+											<img id="img1" src="//img.echosting.cafe24.com/thumb/108x108_2.gif" width="108" height="108" >
 										</span>
 									</li>
 									<li class="liImg">
 										<span>목록 이미지</span><br>
 										<span>권장 300px * 300px</span><br>
 										<span>
-											<img id="img2" src="//img.echosting.cafe24.com/thumb/108x108_2.gif" width="108" height="108" name="gd_imgm" >
+											<img id="img2" src="//img.echosting.cafe24.com/thumb/108x108_2.gif" width="108" height="108" >
 										</span>
 									</li>
 									<li  class="liImg">
 										<span>작은목록 이미지</span><br>
 										<span>권장 220px * 220px</span><br>
 										<span>
-											<img id="img3"  src="//img.echosting.cafe24.com/thumb/108x108_2.gif" width="108" height="108" name="gd_imgs" >
+											<img id="img3"  src="//img.echosting.cafe24.com/thumb/108x108_2.gif" width="108" height="108"  >
 										</span>
 									</li>
 									<li class="liImg">
 										<span>축소 이미지</span><br>
 										<span>권장 100px * 100px</span><br>
 										<span>
-											<img id="img4" src="//img.echosting.cafe24.com/thumb/108x108_2.gif" width="108" height="108" name="gd_imgss">
+											<img id="img4" src="//img.echosting.cafe24.com/thumb/108x108_2.gif" width="108" height="108" >
 										</span>
 									</li>
 								</ul>
@@ -369,7 +367,10 @@ h3 {
 					<tr>
 						<td class="gdTd2">
 							<span>
-								<input type="file" id="input_img">
+								<input type="file" id="input_img" name="gd_imgl">
+								<input type="file"  name="gd_imgm" >
+								<input type="file"  name="gd_imgs">
+								<input type="file"  name="gd_imgss">
 							</span>
 						</td>
 					</tr>

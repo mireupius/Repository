@@ -1,5 +1,7 @@
 package com.sol.mall.goods;
 
+import java.math.BigDecimal;
+import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -10,6 +12,9 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import com.oreilly.servlet.MultipartRequest;
+import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
 @Service
 public class GoodsDAO {
@@ -46,15 +51,16 @@ public class GoodsDAO {
 	}
 
 	// 입력-----------------------------------------------------------------------
-	public void insertGd(Goods g, HttpServletRequest request, HttpServletResponse response) {
+	public void insertGd(Goods gd, HttpServletRequest request, HttpServletResponse response) {
 		// 이미지 문제
-
-		if (ss.getMapper(GoodsMapper.class).insertGds(g) == 1) {
-
-			System.out.println("insertGd성공");
-		} else {
-			System.out.println("실패");
-		}
+		
+			if (ss.getMapper(GoodsMapper.class).insertGds(gd) == 1) {
+	
+				System.out.println("insertGd성공");
+			} else {
+				System.out.println("실패");
+			}
+		
 	}
 
 	public void insertGdtl(GoodsDtl g, HttpServletRequest request, HttpServletResponse response) {

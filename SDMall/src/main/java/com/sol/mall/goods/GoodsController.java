@@ -1,5 +1,8 @@
 package com.sol.mall.goods;
 
+import java.math.BigDecimal;
+import java.net.URLEncoder;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -8,6 +11,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+
+import com.oreilly.servlet.MultipartRequest;
+import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
 @Controller
 public class GoodsController {
@@ -31,11 +37,42 @@ public class GoodsController {
 
 		// 이미지 입력 만들기 전 까지 임시
 		gd.setGd_imgl("gd_imgl");
-		gd.setGd_imgm("gd_imgm");
-		gd.setGd_imgs("gd_imgs");
-		gd.setGd_imgss("gd_imgss");
+		gd.setGd_imgm("gd_imgl");//"gd_imgm"
+		gd.setGd_imgs("gd_imgl");//"gd_imgs"
+		gd.setGd_imgss("gd_imgl");//"gd_imgss"
 		gdtl.setGt_stock(op.getOp_stock());
 
+//		try {
+//			
+//			String path = request.getSession().getServletContext().getRealPath("upload");
+//			
+//			MultipartRequest mr = new MultipartRequest(request, path, 30 * 1024 * 1024, "UTF-8", new DefaultFileRenamePolicy());
+//			System.out.println("여기");
+//			String gd_imgl = mr.getFilesystemName("gd_imgl");
+//			
+//			System.out.println("상품이미지="+path);
+//			System.out.println(gd_imgl);
+//			
+//			gd_imgl = URLEncoder.encode(gd_imgl, "UTF-8");
+//			gd_imgl = gd_imgl.replace("+", " ");
+//			
+//			
+//			gd.setGd_name(mr.getParameter("gd_name"));
+//			gd.setGd_csmprice(new BigDecimal(mr.getParameter("gd_csmprice")));
+//			gd.setGd_price(new BigDecimal(mr.getParameter("gd_price")));
+//			gd.setGd_dlvchrg(mr.getParameter("gd_dlvchrg"));
+//			gd.setGd_imgl(gd_imgl);
+//			gd.setGd_imgm("gd_imgl");//"gd_imgm"
+//			gd.setGd_imgs("gd_imgl");//"gd_imgs"
+//			gd.setGd_imgss("gd_imgl");//"gd_imgss"
+//			gd.setGd_clfl(mr.getParameter("gd_clfl"));
+//			gd.setGd_clfm(mr.getParameter("gd_clfm"));
+//			gd.setGd_clfs(mr.getParameter("gd_clfs"));
+//			gd.setGd_sellerid(mr.getParameter("gd_sellerid"));
+//		
+//		}catch (Exception e) {
+//
+//		}
 		// FK 설정으로 입력이나 삭제시 주의 상품상세테이블 먼저 입력이나 삭제하고 상품테이블 삭제
 		// 방금입력한 상품번호 어떻게 가져오지?
 		// 입력하고 저장 누르면 저장후 입력화면으로 이동 방금입력한 내용을 다시 입력화면에 표시불가
