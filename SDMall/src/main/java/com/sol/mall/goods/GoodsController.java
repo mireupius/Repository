@@ -16,13 +16,13 @@ public class GoodsController {
 	private GoodsDAO gdsDAO;
 
 	// 상품등록화면 처음
-	@RequestMapping(value = "/", method = RequestMethod.GET)
+	@RequestMapping(value = "/goods.go", method = RequestMethod.GET)
 	public String goods(HttpServletRequest request, HttpServletResponse response) {
 
 		gdsDAO.getAllcategory(request, response);
 
-		request.setAttribute("contentPage", "goods/goods.jsp");
-		return "index";
+		request.setAttribute("contentPage", "../goods/goods.jsp");
+		return "sale/saleIndex";
 	}
 
 	// 상품등록작업
@@ -45,8 +45,8 @@ public class GoodsController {
 		gdsDAO.insertGdsInfo(gd, gdtl, op, request, response);
 		
 		gdsDAO.getAllcategory(request, response);
-		request.setAttribute("contentPage", "goods/goods.jsp");
-		return "index";
+		request.setAttribute("contentPage", "../goods/goods.jsp");
+		return "sale/saleIndex";
 	}
 
 	@RequestMapping(value = "/category.get", method = RequestMethod.GET, produces = "application/json; charset=utf-8")

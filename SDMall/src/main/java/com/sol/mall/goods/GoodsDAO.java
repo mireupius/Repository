@@ -47,6 +47,7 @@ public class GoodsDAO {
 
 	// 입력-----------------------------------------------------------------------
 	public void insertGd(Goods g, HttpServletRequest request, HttpServletResponse response) {
+		// 이미지 문제
 
 		if (ss.getMapper(GoodsMapper.class).insertGds(g) == 1) {
 

@@ -82,7 +82,7 @@
 					</a>
 						<ul class="sub">
 							<li><a href="#">상품 조회/수정</a></li>
-							<li><a href="#">상품 등록</a></li>
+							<li><a href="goods.go">상품 등록</a></li>
 						</ul></li>
 
 					<li class="sub-menu"><a href="javascript:;"> <i

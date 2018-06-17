@@ -119,9 +119,39 @@ $(function(){
         input.attr("name", "gd_clfs");
 	});
 });
+
+	var sel_file;
+	
+	$(document).ready(function(){  
+		$("#input_img").on("change", handleImgFileSelect);
+	});
+
+	function handleImgFileSelect(e){
+		var files = e.target.files;
+		var filesArr = Array.prototype.slice.call(files);
+		filesArr.forEach(function(f){
+			if(!f.type.match("image.*")){alert("확장자는 이미지 확장자만 가능")
+				return;
+			}
+			
+			sel_file = f;
+			
+			var reader = new FileReader();
+			reader.onload = function(e){
+				$("#img1").attr("src", e.target.result); 
+				$("#img2").attr("src", e.target.result);
+				$("#img3").attr("src", e.target.result);
+				$("#img4").attr("src", e.target.result);
+			}
+			
+			reader.readAsDataURL(f);
+		});
+	}
+	
 </script>
 
 <title>Goods</title>
+<link rel="stylesheet" href="resources/css/goods.css">
 <style type="text/css">
 h3 {
 	margin-bottom: 0;
@@ -140,6 +170,8 @@ h3 {
 
 </head>
 <body>
+<section id="main-content">
+<section class="wrapper">
 <form name="tx_editor_form" id="tx_editor_form"
 	action="registration.do" method="post"
 	accept-charset="utf-8">
@@ -152,7 +184,7 @@ h3 {
 			<table class="gdTb3">
 				<tbody>
 					<tr>
-						<td class="gdTd1">상품분류 선택 필수(대분류)</td>
+						<td class="gdTd1">상품분류 선택 필수</td>
 						<td class="gdTd2">
 						<br>
 							<table id="gdTb2">
@@ -205,7 +237,7 @@ h3 {
 		aria-expanded="false" aria-controls="collapse2">
 		<h3>기본정보</h3>
 	</div>
-	<div class="collapse" id="collapse2">
+	<div class="collapse in" id="collapse2">
 		<div>
 			<table class="gdTb3">
 				<tbody>
@@ -248,7 +280,7 @@ h3 {
 		aria-expanded="false" aria-controls="collapse3">
 		<h3>판매정보</h3>
 	</div>
-	<div class="collapse" id="collapse3">
+	<div class="collapse in" id="collapse3">
 		<div>
 			<table class="gdTb3">
 				<tbody>
@@ -269,7 +301,7 @@ h3 {
 		aria-expanded="false" aria-controls="collapse4">
 		<h3>옵션/재고</h3>
 	</div>
-	<div class="collapse" id="collapse4">
+	<div class="collapse in" id="collapse4">
 		<div>
 			<table class="gdTb3">
 				<tbody>
@@ -293,26 +325,52 @@ h3 {
 		aria-expanded="false" aria-controls="collapse5">
 		<h3>이미지</h3>
 	</div>
-	<div class="collapse" id="collapse5">
+	<div class="collapse in" id="collapse5">
 		<div>
 			<table class="gdTb3">
 				<tbody>
 					<tr>
-						<td class="gdTd1">이미지 등록 필수(일단보류)</td>
+						<td class="gdTd1" rowspan="2">이미지 등록 필수</td>
 						<td class="gdTd2">
 							<div>
 								<ul>
-									<li class="imgli" name="gd_imgl" ><span>상세이미지</span><br> <span>권장
-											500px * 500px</span><br> <span><input type="file">
-									</span></li>
-									<li class="imgli" name="gd_imgm" ><span>목록 이미지</span><br> <span>권장
-											300px * 300px</span><br></li>
-									<li class="imgli" name="gd_imgs" ><span>작은목록 이미지</span><br> <span>권장
-											100px * 100px</span><br></li>
-									<li class="imgli" name="gd_imgss"><span>축소 이미지</span><br> <span>권장
-											220px * 220px</span><br></li>
+									<li class="liImg">
+										<span>상세이미지</span><br>
+										<span>권장 500px * 500px</span><br>
+										<span>
+											<img id="img1" src="//img.echosting.cafe24.com/thumb/108x108_2.gif" width="108" height="108" name="gd_imgl" >
+										</span>
+									</li>
+									<li class="liImg">
+										<span>목록 이미지</span><br>
+										<span>권장 300px * 300px</span><br>
+										<span>
+											<img id="img2" src="//img.echosting.cafe24.com/thumb/108x108_2.gif" width="108" height="108" name="gd_imgm" >
+										</span>
+									</li>
+									<li  class="liImg">
+										<span>작은목록 이미지</span><br>
+										<span>권장 220px * 220px</span><br>
+										<span>
+											<img id="img3"  src="//img.echosting.cafe24.com/thumb/108x108_2.gif" width="108" height="108" name="gd_imgs" >
+										</span>
+									</li>
+									<li class="liImg">
+										<span>축소 이미지</span><br>
+										<span>권장 100px * 100px</span><br>
+										<span>
+											<img id="img4" src="//img.echosting.cafe24.com/thumb/108x108_2.gif" width="108" height="108" name="gd_imgss">
+										</span>
+									</li>
 								</ul>
-							</div>
+							</div><br>
+						</td>
+					</tr>
+					<tr>
+						<td class="gdTd2">
+							<span>
+								<input type="file" id="input_img">
+							</span>
 						</td>
 					</tr>
 				</tbody>
@@ -323,7 +381,7 @@ h3 {
 		aria-expanded="false" aria-controls="collapse6">
 		<h3>제작 정보</h3>
 	</div>
-	<div class="collapse" id="collapse6">
+	<div class="collapse in" id="collapse6">
 		<div>
 			<table class="gdTb3">
 				<tbody>
@@ -367,7 +425,7 @@ h3 {
 		aria-expanded="false" aria-controls="collapse7">
 		<h3>배송 정보</h3>
 	</div>
-	<div class="collapse" id="collapse7">
+	<div class="collapse in" id="collapse7">
 		<div>
 			<table class="gdTb3">
 				<tbody>
@@ -383,7 +441,7 @@ h3 {
 		aria-expanded="false" aria-controls="collapse8">
 		<h3>판매자 정보</h3>
 	</div>
-	<div class="collapse" id="collapse8">
+	<div class="collapse in" id="collapse8">
 		<div>
 			<table class="gdTb3">
 				<tbody>
@@ -402,4 +460,6 @@ h3 {
 	</div>
 	<br><br><br><br><br><br>
 </form>
+</section>
+</section>
 </body>
