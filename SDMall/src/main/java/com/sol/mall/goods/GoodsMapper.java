@@ -28,5 +28,8 @@ public interface GoodsMapper {
 	
 	// 다중 입력
 	public abstract int insertGdtlTwo(HashMap<String, Object> map);
+
+	public abstract int insertOpTwo(HashMap<String, Object> map);
+	
 	
 }

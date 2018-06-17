@@ -2,8 +2,10 @@ create sequence goods_sq
 MAXVALUE 9999
 CYCLE
 NOCACHE;
-select * from goods_tb;
+select * from goods_tb
+order by gd_no desc; 
 select * from goodsdtl_tb;
+select * from option_tb;
 
 values(to_char(카테고리 9자리) || LPAD(시퀀스.nextval,3,0)
 nvl (컬럼,0)->널일 때 0으로
@@ -104,6 +106,7 @@ MAXVALUE 99999
 CYCLE 
 NOCACHE;
 
+
 create table option_tb				
 (				
 op_no		varchar2(5)		primary key,				
@@ -135,13 +138,10 @@ drop table membership cascade constraint purge;
 drop table questionAnswer cascade constraint purge;
 
 
-insert into category_tb values(category_sq.nextval, '대분류1' , 1);
-insert into category_tb values(category_sq.nextval, '중분류2' , 2);
-insert into category_tb values(category_sq.nextval, '소분류3' , 3);
 
 select * from category_tb;
 
-
+--///////////////////////////////////////////////
 
 create sequence test_sq;
 create table test_editor (
@@ -165,3 +165,37 @@ insert into goodsdtl_tb values(
 			'1', '1'
 		);
 
+create sequence t1_sq;
+create table t1 (
+a1 varchar2(2 char) primary key,
+a2 varchar2(2 char)
+);
+
+create sequence t2_sq;
+create table t2 (
+a3 varchar2(2 char) primary key,
+a4 varchar2(2 char) not null
+);
+
+
+ALTER TABLE t2
+ADD CONSTRAINTS FK_a1 FOREIGN KEY(a4)
+REFERENCES t1(a1);
+
+
+insert into t1 values(
+t1_sq.nextval,'t1'
+);
+insert into t2 values(
+t2_sq.nextval,t1_sq.currval 
+);
+
+
+
+select * from t1;
+select * from t2;
+
+drop table t1 cascade constraint purge;
+drop table t2 cascade constraint purge;
+drop sequence t1_sq;
+drop sequence t2_sq;

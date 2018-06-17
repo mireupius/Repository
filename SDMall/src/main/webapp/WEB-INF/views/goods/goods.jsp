@@ -147,7 +147,7 @@ h3 {
 		aria-expanded="false" aria-controls="collapse1">
 		<h3>표시설정</h3>
 	</div>
-	<div class="collapse" id="collapse1">
+	<div class="collapse in" id="collapse1">
 		<div>
 			<table class="gdTb3">
 				<tbody>

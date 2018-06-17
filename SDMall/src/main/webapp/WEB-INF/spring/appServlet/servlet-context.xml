@@ -18,12 +18,13 @@
 
 	<annotation-driven />
 	<context:annotation-config />
-	<tx:annotation-driven />
+	<!-- <tx:annotation-driven /> -->
 	<resources mapping="/resources/**" location="/resources/" />
 
-	<!-- 다음오픈에디터 저장소 -->
+	<!--↓↓↓↓↓↓↓↓↓↓ 다음오픈에디터 저장소 ↓↓↓↓↓↓↓↓↓↓-->
 	<resources mapping="/upload/**" location="/upload/" />
-
+	<!--↑↑↑↑↑↑↑↑↑↑ 다음오픈에디터 저장소 ↑↑↑↑↑↑↑↑↑↑-->
+	
 	<beans:bean
 		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<beans:property name="prefix" value="/WEB-INF/views/" />
@@ -47,6 +48,24 @@
 		class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
 		<beans:property name="dataSource" ref="dataSource" />
 	</beans:bean>
+
+   <!-- ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓ AOP 사용 ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓ -->
+  	<tx:advice id="txAdvice"
+		transaction-manager="transactionManager">
+		<tx:attributes>
+			<tx:method name="insertGds*" propagation="REQUIRED"
+				rollback-for="Exception" />
+			<tx:method name="get*" read-only="true" />
+		</tx:attributes>
+	</tx:advice>
+	<aop:config>
+		<aop:pointcut
+			expression="execution(public * com.sol.mall.goods.GoodsDAO.*(..))"
+			id="servicePublicMethod" />
+		<aop:advisor advice-ref="txAdvice"
+			pointcut-ref="servicePublicMethod" />
+	</aop:config> 
+	<!-- ↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑ AOP 사용 ↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑ -->
 
 	<beans:bean id="sqlSessionFactory"
 		class="org.mybatis.spring.SqlSessionFactoryBean">
