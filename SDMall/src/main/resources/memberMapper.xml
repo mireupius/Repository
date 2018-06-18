@@ -16,12 +16,12 @@
 		    #{sl_phoneNo}, #{sl_emailAddress}
 		)
 	</insert>
-	<insert id="regTP" parameterType="com.sol.mall.member.Product">
-		insert into test_product values(
-		test_product_seq.nextval, to_char(sysdate,'yyyyMMdd') || test_product_seq.nextval,
-		#{tp_name}
-		)
-	</insert>
+	
+	<select id="getAllCustomer"
+		resultType="com.sol.mall.member.Customer">
+		select * from customer_reg
+	</select>
+	
 	<select id="getCustomerById"
 		parameterType="com.sol.mall.member.Customer"
 		resultType="com.sol.mall.member.Customer">
@@ -29,7 +29,21 @@
 		where csm_id = #{csm_id}
 	</select>
 	
+	<select id="getCustomerById2"
+		parameterType="com.sol.mall.member.Customer"
+		resultType="com.sol.mall.member.Customer">
+		select * from customer_reg
+		where csm_id = #{csm_id}
+	</select>
+
 	<select id="getSellerById"
+		parameterType="com.sol.mall.member.Seller"
+		resultType="com.sol.mall.member.Seller">
+		select * from seller_reg
+		where sl_id = #{sl_id}
+	</select>
+	
+	<select id="getSellerById2"
 		parameterType="com.sol.mall.member.Seller"
 		resultType="com.sol.mall.member.Seller">
 		select * from seller_reg
@@ -43,13 +57,31 @@
 		where sb_csm_id = #{sb_csm_id}
 	</select>
 	
-	<select id="getcart2"
-		parameterType="com.sol.mall.member.Shoppingbag"
-		resultType="com.sol.mall.member.Shoppingbag">
-		select * from shoppingBasket
-		where sb_csm_id = #{sb_csm_id}
-	</select>
+	<update id="updateCSMInfo" parameterType="com.sol.mall.member.Customer">
+		update customer_reg
+		set csm_pw = #{csm_pw}, csm_name = #{csm_name},
+			csm_birth = #{csm_birth}, csm_phoneNo = #{csm_phoneNo},
+			csm_emailAddress = #{csm_emailAddress}
+		where csm_id = #{csm_id}
+	</update>
+	<update id="updateSLInfo" parameterType="com.sol.mall.member.Seller">
+		update seller_reg
+		set sl_pw = #{sl_pw}, sl_coName = #{sl_coName},
+			sl_coRegNo = #{sl_coRegNo}, sl_phoneNo = #{sl_phoneNo},
+			sl_emailAddress = #{sl_emailAddress}
+		where sl_id = #{sl_id}
+	</update>
 	
+	<delete id="withdrawCSM" parameterType="com.sol.mall.member.Customer">
+		delete
+		from customer_reg
+		where csm_id = #{csm_id}
+	</delete>
+	<delete id="withdrawSL" parameterType="com.sol.mall.member.Seller">
+		delete
+		from seller_reg
+		where sl_id = #{sl_id}
+	</delete>
 
 </mapper>
 

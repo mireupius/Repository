@@ -7,75 +7,210 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
 public class MemberController {
-	
+
 	@Autowired
 	private MemberDAO MDAO;
-	
-	
+
 	@RequestMapping(value = "/customer.register.go", method = RequestMethod.GET)
 	public String goRegCustomer(HttpServletRequest req, HttpServletResponse res) {
-		
+
 		return "member/regCSMPage";
+
+	}
+
+	@RequestMapping(value = "/customer.getAll.do", method = RequestMethod.GET, produces = "application/json; charset=utf-8")
+	public @ResponseBody Customers getAllCustomer(HttpServletRequest req, HttpServletResponse res) {
+		
+		
+		return MDAO.getAllCustomer(req, res);
 		
 	}
 	
-	@RequestMapping(value = "/customer.register.do", method = RequestMethod.GET)
-	public String doRegCustomer(Customer c, HttpServletRequest req, HttpServletResponse res) {
+	@RequestMapping(value = "/customer.validCheck", method = RequestMethod.GET, produces = "application/json; charset=utf-8")
+	public @ResponseBody Customers csmValidCheck(Customer c, HttpServletRequest req, HttpServletResponse res) {
 		
+		return MDAO.customerCheck(c, req, res);
+		
+	}
+	
+	@RequestMapping(value = "/customer.register.do", method = RequestMethod.POST)
+	public String doRegCustomer(Customer c, HttpServletRequest req, HttpServletResponse res) {
+
 		MDAO.registerCSM(c, req, res);
 		return "member/loginArea";
-		
+
 	}
-	
+
 	@RequestMapping(value = "/seller.register.go", method = RequestMethod.GET)
 	public String goRegSeller(HttpServletRequest req, HttpServletResponse res) {
-		
+
 		return "member/regSLPage";
-		
+
 	}
-	
-	@RequestMapping(value = "/seller.register.do", method = RequestMethod.GET)
+
+	@RequestMapping(value = "/seller.register.do", method = RequestMethod.POST)
 	public String doRegSeller(Seller s, HttpServletRequest req, HttpServletResponse res) {
-		
+
 		MDAO.registerSL(s, req, res);
 		return "member/loginArea";
+
+	}
+	
+	@RequestMapping(value = "/seller.idvalidate.do", method = RequestMethod.GET, produces = "application/json; charset=utf-8")
+	public @ResponseBody Sellers slIdValidate(Seller s, HttpServletRequest req, HttpServletResponse res) {
+		
+		return MDAO.sellerCheck(s, req, res);
 		
 	}
 	
-	@RequestMapping(value = "/product.register.go", method = RequestMethod.GET)
-	public String goRegP(HttpServletRequest req, HttpServletResponse res) {
+	@RequestMapping(value = "/seller.loginCheck", method = RequestMethod.POST, produces = "application/json; charset=utf-8")
+	public @ResponseBody Sellers slLoginCheck(Seller s, HttpServletRequest req, HttpServletResponse res) {
 		
-		return "member/regP";
-		
-	}
-	
-	@RequestMapping(value = "/product.register.do", method = RequestMethod.GET)
-	public String regP(Product p, HttpServletRequest req, HttpServletResponse res) {
-		
-		MDAO.regTP(p, req, res);
-		return "member/loginArea";
+		return MDAO.sellerCheck(s, req, res);
 		
 	}
-	
-	@RequestMapping(value = "/customer.login.do", method = RequestMethod.POST)
-	public String loginMember(Customer c, HttpServletRequest req, HttpServletResponse res) {
-		
+
+	@RequestMapping(value = "/customer.login.do", method = RequestMethod.GET)
+	public String loginCustomer(Customer c, HttpServletRequest req, HttpServletResponse res) {
+
 		MDAO.loginCustomer(c, req, res);
-		return "member/loginArea";
+		if(MDAO.csmLoginCheck(req, res)) {
+			
+			return "customer/customerMain";
+			
+		}else {
+			return "member/loginPage";
+		}
+	
+	}
+	
+	@RequestMapping(value = "/seller.login.do", method = RequestMethod.GET)
+	public String loginSeller(Seller s, HttpServletRequest req, HttpServletResponse res) {
+		
+		MDAO.loginSeller(s, req, res);
+		if(MDAO.slLoginCheck(req, res) == true) {
+			
+			return "seller/sellerManageMain";
+	
+		}else {
+			return "member/loginArea";
+			
+		}
 		
 	}
 	
+	@RequestMapping(value = "/customer.logout.do", method = RequestMethod.GET)
+	public String logoutCustomer(HttpServletRequest req, HttpServletResponse res) {
+		
+		MDAO.logoutCustomer(req, res);
+		MDAO.csmLoginCheck(req, res);
+		return "member/loginArea";
+			
+	}
+	
+	@RequestMapping(value = "/seller.logout.do", method = RequestMethod.GET)
+	public String logoutSeller(HttpServletRequest req, HttpServletResponse res) {
+		
+		MDAO.logoutSeller(req, res);
+		MDAO.slLoginCheck(req, res);
+		return "member/loginArea";
+		
+		
+	}
+
 	@RequestMapping(value = "/shopbag.get.do", method = RequestMethod.GET)
 	public String shopbagGet(Shoppingbag sb, HttpServletRequest req, HttpServletResponse res) {
-		
+
 		MDAO.getCart(sb, req, res);
 		return "member/as";
+
+	}
+
+	@RequestMapping(value = "/customer.update.go", method = RequestMethod.GET)
+	public String goUpdateCustomer(HttpServletRequest req, HttpServletResponse res) {
+		
+		if(MDAO.csmLoginCheck(req, res)) {
+			
+			return "member/updateCSMPage";
+		
+		}else {
+			return "member/loginPage";
+		}
 		
 	}
 	
+	@RequestMapping(value = "/customer.update.do", method = RequestMethod.POST)
+	public String doUpdateCustomer(Customer c, HttpServletRequest req, HttpServletResponse res) {
+		
+		if(MDAO.csmLoginCheck(req, res)) {
+			
+			MDAO.updateCustomer(c, req, res);
+			return "customer/csmLoginOK";
+			
+		}else {
+			return "member/loginPage";
+		}
+		
+	}
+	
+	@RequestMapping(value = "/seller.update.go", method = RequestMethod.GET)
+	public String goUpdateSeller(HttpServletRequest req, HttpServletResponse res) {
+		
+		if(MDAO.slLoginCheck(req, res)) {
+			
+			return "member/updateSLPage";
+			
+		}else {
+			return "member/loginPage";
+		}
+		
+	}
+	
+	@RequestMapping(value = "/seller.update.do", method = RequestMethod.POST)
+	public String doUpdateSeller(Seller s, HttpServletRequest req, HttpServletResponse res) {
+		
+		if(MDAO.slLoginCheck(req, res)) {
+			
+			MDAO.updateSeller(s, req, res);
+			return "seller/slLoginOK";
+			
+		}else {
+			return "member/loginPage";
+		}
+		
+	}
+	
+	@RequestMapping(value = "/customer.withdraw.go", method = RequestMethod.GET)
+	public String goWithdrawCustomer(HttpServletRequest req, HttpServletResponse res) {
+		
+		if(MDAO.csmLoginCheck(req, res)) {
+			
+			return "member/withdrawCSMPage";
+		
+		}else {
+			return "member/loginPage";
+		}
+		
+	}
+	
+	@RequestMapping(value = "/customer.withdraw.do", method = RequestMethod.GET)
+	public String doWithdrawCustomer(Customer c, HttpServletRequest req, HttpServletResponse res) {
+		
+		if(MDAO.csmLoginCheck(req, res)) {
+			
+			MDAO.withdrawCustomer(c, req, res);
+			MDAO.logoutCustomer(req, res);
+			MDAO.csmLoginCheck(req, res);
+			
+		}
+		return "member/loginPage";
+		
+	}
 	
 
+	
 }

@@ -95,4 +95,4 @@ insert into customer_reg values('cyh524','123123','최완희',sysdate,'010519906
 
 select * from customer_reg;
 
-
+		select * from customer_reg	where csm_id = 'aaa'

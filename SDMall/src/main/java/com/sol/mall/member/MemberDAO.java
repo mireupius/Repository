@@ -53,6 +53,11 @@ public class MemberDAO {
 
 	}
 	
+	public Customers customerCheck(Customer c, HttpServletRequest req, HttpServletResponse res) {
+		
+		return new Customers(ss.getMapper(MemberMapper.class).getCustomerById2(c));	
+	}
+	
 	public void registerSL(Seller s, HttpServletRequest req, HttpServletResponse res) {
 		
 		try {
@@ -63,9 +68,9 @@ public class MemberDAO {
 			
 			s.setSl_emailAddress(sl_emailAddress);
 			
-			 System.out.println(s.getSl_id());System.out.println(s.getSl_pw());
-			 System.out.println(s.getSl_coName());System.out.println(s.getSl_coRegNo());
-			 System.out.println(s.getSl_phoneNo());	System.out.println(s.getSl_emailAddress());
+			 //System.out.println(s.getSl_id());System.out.println(s.getSl_pw());
+			 //System.out.println(s.getSl_coName());System.out.println(s.getSl_coRegNo());
+			 //System.out.println(s.getSl_phoneNo());	System.out.println(s.getSl_emailAddress());
 			
 			if (ss.getMapper(MemberMapper.class).registerSL(s) == 1) {
 				req.setAttribute("r", "가입 성공");
@@ -83,58 +88,26 @@ public class MemberDAO {
 		
 	}
 	
-	public void regTP(Product p, HttpServletRequest req, HttpServletResponse res) {
+	public Sellers sellerCheck(Seller s, HttpServletRequest req, HttpServletResponse res) {
 		
-		try {
-			
-//			Date d = new Date();
-//			SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
-//			String today = sdf.format(d);
-//			
-//			String tp_no = String.format("%s%d", today, p.getTp_seq());
-//			p.setTp_no(tp_no);
-			
-			
-			if (ss.getMapper(MemberMapper.class).regTP(p) == 1) {
-				
-				req.setAttribute("r", "상품등록성공");
-				
-			} else {
-				req.setAttribute("r", "상품등록실패");
-			}
-			
-				
-		} catch (Exception e) {
-			e.printStackTrace();
-			req.setAttribute("r", "상품등록실패");
-		}
-		
+		return new Sellers(ss.getMapper(MemberMapper.class).getSellerById2(s));		
 	}
-	
+		
 	public void loginCustomer(Customer c, HttpServletRequest req, HttpServletResponse res) {
 
 		try {
-			Customer dbC = ss.getMapper(MemberMapper.class).getCustomerById(c);
 			
-			if (dbC != null) {
-
-				if (c.getCsm_pw().equals(dbC.getCsm_pw())) {
-					
-					//req.setAttribute("r", "로그인 성공");
-					req.getSession().setAttribute("loginMember", dbC);
-					req.getSession().setMaxInactiveInterval(300);
-
-				} else {
-					req.setAttribute("r", "비밀번호 오류");
-				}
-
-			} else {
-				req.setAttribute("r", "계정 없음");
-			}
+			Customer dbC = ss.getMapper(MemberMapper.class).getCustomerById(c);
+				
+			// 로그인 성공시
+				req.getSession().setAttribute("loginCustomer", dbC);
+				req.getSession().setMaxInactiveInterval(300);
+				
+			// 로그인 실패는 AJAX로 유효성 검사
 
 		} catch (Exception e) {
+			
 			e.printStackTrace();
-			req.setAttribute("r", "DB서버문제");
 		}
 
 	}
@@ -144,19 +117,68 @@ public class MemberDAO {
 		try {
 			Seller dbS = ss.getMapper(MemberMapper.class).getSellerById(s);
 			
-			if (dbS != null) {
+			//if (dbS != null) {
 				
-				req.setAttribute("r", "로그인 성공");
+				//if (s.getSl_pw().equals(dbS.getSl_pw())) {
+					req.getSession().setAttribute("loginSeller", dbS);
+					req.getSession().setMaxInactiveInterval(300);
 				
-			} else {
-				req.setAttribute("r", "비밀번호 오류");
-			}
+				//}else {
+					//req.setAttribute("r", "비밀번호 오류");
+				//}
+				
+			//} else {
+				//req.setAttribute("r", "계정 없음");
+			//}
 			
 			
 		} catch (Exception e) {
 			e.printStackTrace();
-			req.setAttribute("r", "로그인 실패");
+			//req.setAttribute("r", "DB서버문제");
 		}
+		
+	}
+	
+	public boolean csmLoginCheck(HttpServletRequest req, HttpServletResponse res) {
+
+		Customer cc = (Customer) req.getSession().getAttribute("loginCustomer");
+
+		if (cc != null) {
+			req.setAttribute("loginInfo", "csmLoginOK.jsp");
+			return true;
+
+		}else if (cc == null) {
+			
+			req.setAttribute("loginInfo", "../member/loginArea.jsp");
+		}
+		return false;
+
+	}
+	
+	public boolean slLoginCheck(HttpServletRequest req, HttpServletResponse res) {
+		
+		Seller s = (Seller) req.getSession().getAttribute("loginSeller");
+		
+		
+		if (s != null) {
+			req.setAttribute("loginInfo", "slLoginOK.jsp");
+			return true;
+			
+		}
+		req.setAttribute("loginInfo", "member/loginPage.jsp");
+		return false;
+		
+	}
+	
+	public void logoutCustomer(HttpServletRequest req, HttpServletResponse res) {
+
+		req.getSession().setAttribute("loginCustomer", null);
+		
+	}
+	
+	public void logoutSeller(HttpServletRequest req, HttpServletResponse res) {
+		
+		req.getSession().setAttribute("loginSeller", null);
 		
 	}
 
@@ -185,6 +207,94 @@ public class MemberDAO {
 		}
 		
 		
+	}
+	
+	public Customers getAllCustomer(HttpServletRequest req, HttpServletResponse res) {
+		
+		return new Customers(ss.getMapper(MemberMapper.class).getAllCustomer());
+		
+	}
+
+	public void updateCustomer(Customer c, HttpServletRequest req, HttpServletResponse res) {
+		
+		try {
+			// 세션 불러와서
+			Customer nowSession = (Customer) req.getSession().getAttribute("loginCustomer");
+			
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
+			String csm_emailFront = req.getParameter("csm_emailFront");
+			String csm_autoCompleteEmail = req.getParameter("csm_autoCompleteEmail");
+			String csm_emailAddress = String.format("%s%s", csm_emailFront, csm_autoCompleteEmail);
+			
+			c.setCsm_birth(sdf.parse(req.getParameter("csm_birthday")));
+			c.setCsm_emailAddress(csm_emailAddress);
+			
+			
+			if (ss.getMapper(MemberMapper.class).updateCSMInfo(c) == 1) {
+				req.setAttribute("r", "정보 수정성공");
+				// 세션 업데이트
+				req.getSession().setAttribute("loginCustomer", ss.getMapper(MemberMapper.class).getCustomerById(c));
+				
+			} else {
+				req.setAttribute("r", "정보 수정실패");
+			}
+			
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+			req.setAttribute("r", "정보 수정실패");
+			
+		}
+		
+	}
+
+	public void updateSeller(Seller s, HttpServletRequest req, HttpServletResponse res) {
+		
+		try {
+			// 세션 불러오기
+			Seller nowSession = (Seller) req.getSession().getAttribute("loginSeller");
+			
+			String sl_emailFront = req.getParameter("sl_emailFront");
+			String sl_autoCompleteEmail = req.getParameter("sl_autoCompleteEmail");
+			String sl_emailAddress = String.format("%s%s", sl_emailFront, sl_autoCompleteEmail);
+			
+			s.setSl_emailAddress(sl_emailAddress);
+			
+			if (ss.getMapper(MemberMapper.class).updateSLInfo(s) == 1) {
+				req.setAttribute("r", "정보 수정성공");
+				req.getSession().setAttribute("loginSeller", ss.getMapper(MemberMapper.class).getSellerById(s));
+				
+			} else {
+				req.setAttribute("r", "정보 수정실패");
+			}
+			
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+			req.setAttribute("r", "정보 수정실패");
+			
+		}
+		
+	}
+	
+	public void withdrawCustomer(Customer c, HttpServletRequest req, HttpServletResponse res) {
+		
+		try {
+			
+			if (ss.getMapper(MemberMapper.class).withdrawCSM(c) == 1) {
+				
+				req.setAttribute("r", "탈퇴 성공");
+				//req.getSession().setAttribute("loginCustomer", null);
+				
+				
+			} else {
+				req.setAttribute("r", "탈퇴 실패");
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			req.setAttribute("r", "탈퇴 실패");
+		}
 		
 	}
 	

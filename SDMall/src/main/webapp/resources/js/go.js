@@ -2,6 +2,10 @@ function goRegisterC() {
 	location.href = "customer.register.go"
 }
 
+//function goIdValidate() {
+//	location.href = "customer.idvalidate.do"
+//}
+
 function goRegisterS() {
 	location.href = "seller.register.go"
 }
