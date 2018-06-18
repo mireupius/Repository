@@ -14,7 +14,6 @@ public class GoodsDtl {
 	private String	gt_weight;
 	private String	gt_volume;
 	private String	gt_origin;
-	private BigDecimal	gt_stock;
 	private String	gt_keyword;
 	private String	gt_detail;
  
@@ -26,7 +25,7 @@ public class GoodsDtl {
 
 	public GoodsDtl(String gt_no, String gt_gdno, String gt_mdlname, String gt_maker, String gt_brand, String gt_mfd,
 			String gt_exp, String gt_material, String gt_weight, String gt_volume, String gt_origin,
-			BigDecimal gt_stock, String gt_keyword, String gt_detail) {
+			String gt_keyword, String gt_detail) {
 		super();
 		this.gt_no = gt_no;
 		this.gt_gdno = gt_gdno;
@@ -39,7 +38,6 @@ public class GoodsDtl {
 		this.gt_weight = gt_weight;
 		this.gt_volume = gt_volume;
 		this.gt_origin = gt_origin;
-		this.gt_stock = gt_stock;
 		this.gt_keyword = gt_keyword;
 		this.gt_detail = gt_detail;
 	}
@@ -152,16 +150,6 @@ public class GoodsDtl {
 
 	public void setGt_origin(String gt_origin) {
 		this.gt_origin = gt_origin;
-	}
-
-
-	public BigDecimal getGt_stock() {
-		return gt_stock;
-	}
-
-
-	public void setGt_stock(BigDecimal gt_stock) {
-		this.gt_stock = gt_stock;
 	}
 
 

@@ -80,8 +80,6 @@ public class GoodsController {
 			System.out.println("** 상품이미지 originalName : " + originalName + " **"); 
 			System.out.println("** 상품이미지 modifyName : " + modifyName + " **");
 			
-			gdtl.setGt_stock(op.getOp_stock());
-			
 			gd.setGd_imgl(modifyName);
 			// 이미지 사이즈 조절 만들 때 까지 임시
 			gd.setGd_imgm(modifyName);

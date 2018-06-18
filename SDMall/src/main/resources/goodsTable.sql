@@ -110,7 +110,49 @@ insert into category_tb values(to_char(category_sq.nextval),'팬츠/데님',3,10
 insert into category_tb values(to_char(category_sq.nextval),'자켓/점퍼/코트',3,109);
 insert into category_tb values(to_char(category_sq.nextval),'한복/테마의류',3,109);
 
-				
+
+
+
+CREATE TABLE sale_delivery (				
+	sd_delivery_pno 	varchar2(16 char) PRIMARY KEY, /* 상품주문번호 */			
+	sd_delivery_no 		varchar2(16 char) NOT NULL, /* 주문번호 */			
+	sd_seller_id 		varchar2(12 char) NOT NULL, /* 판매자ID */			
+	sd_courier 			varchar2(8 char), /* 택배사 */			
+	sd_invoice_no 		varchar2(14 char), /* 송장번호 */			
+	sd_delivery_done_date date, /* 배송완료일 */			
+	sd_customer_name 	varchar2(10 char) NOT NULL, /* 구매자명 */			
+	sd_customer_id 		varchar2(12 char) NOT NULL, /* 구매자ID */			
+	sd_taker_name 		varchar2(10 char) NOT NULL, /* 수취인명 */			
+	sd_delivery_state 	varchar2(8 char) NOT NULL, /* 주문상태 */			
+	sd_state_detail 	varchar2(8 char) NOT NULL, /* 주문세부상태 */			
+	sd_delivery_cost 	number(5) NOT NULL, /* 배송비 */			
+	sd_product_no 		varchar2(13 char) NOT NULL, /* 상품번호 */			
+	sd_product_name 	varchar2(30 char) NOT NULL, /* 상품명 */			
+	sd_option_type 		varchar2(30 char), /* 옵션종류 */			
+	sd_option_info 		varchar2(30 char), /* 옵션정보 */			
+	sd_amount 			number(5) NOT NULL, /* 수량(구입수량) */			
+	sd_option_price 	number(7), /* 옵션가격 */			
+	sd_product_price 	number(8) NOT NULL, /* 상품가격 */			
+	sd_product_sellprice number(8) NOT NULL, /* 판매가격 */			
+	sd_total_price 		number(8) NOT NULL, /* 상품별 총 주문금액 */			
+	sd_check_date date, /* 발주확인일 */			
+	sd_taker_phone 		varchar2(15 char) NOT NULL, /* 수취인연락처1 */			
+	sd_take_area 		varchar2(100 char) NOT NULL, /* 배송지 */			
+	sd_customer_ph 		varchar2(15 char) NOT NULL, /* 구매자연락처 */			
+	sd_postno 			varchar2(6 char) NOT NULL, /* 우편번호 */			
+	sd_message 			varchar2(15 char), /* 배송메세지 */			
+	sd_out_area 		varchar2(100 char) NOT NULL, /* 출고지 */			
+	sd_order_date 		date NOT NULL, /* 주문일시 */			
+	sd_claim 			varchar2(20 char), /* 클레임상태 */			
+	sd_pay_method 		varchar2(10 char) NOT NULL, /* 결제수단 */			
+	sd_go_delivery_date date, /* 발송처리일 */			
+	sd_delivery_method 	varchar2(10 char) /* 배송방법 */			
+);				
+
+
+
+
+
 
 
 drop table goods_tb cascade constraint purge;

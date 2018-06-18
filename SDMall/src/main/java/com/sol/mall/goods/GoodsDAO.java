@@ -99,7 +99,7 @@ public class GoodsDAO {
 	}
 
 	// 트랜잭션 3가지 테이블 입력시 상품번호 시퀀스충돌 방지?
-//	@Transactional(rollbackFor = Exception.class) 어노테이션 방식사용시
+//	@Transactional(rollbackFor = Exception.class)
 	public void insertGdsInfo(Goods gd, GoodsDtl gdtl, Option op, HttpServletRequest request,
 			HttpServletResponse response) throws Exception {
 
