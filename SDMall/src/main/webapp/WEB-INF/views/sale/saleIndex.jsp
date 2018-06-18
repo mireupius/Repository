@@ -81,7 +81,7 @@
 							class="fa fa-desktop"></i> <span>상품관리</span>
 					</a>
 						<ul class="sub">
-							<li><a href="#">상품 조회/수정</a></li>
+							<li><a href="goods.list">상품 조회/수정</a></li>
 							<li><a href="goods.go">상품 등록</a></li>
 						</ul></li>
 

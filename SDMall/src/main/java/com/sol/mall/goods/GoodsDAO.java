@@ -1,9 +1,7 @@
 package com.sol.mall.goods;
 
-import java.math.BigDecimal;
-import java.net.URLEncoder;
-import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -12,9 +10,6 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import com.oreilly.servlet.MultipartRequest;
-import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
 @Service
 public class GoodsDAO {
@@ -37,7 +32,7 @@ public class GoodsDAO {
 	// 상품 조회
 	public void getGd(HttpServletRequest request, HttpServletResponse response) {
 
-		ArrayList<Goods> gds = (ArrayList<Goods>) ss.getMapper(GoodsMapper.class).getGoods();
+		List<Goods> gds = ss.getMapper(GoodsMapper.class).getGoods();
 
 		request.setAttribute("gds", gds);
 	}
@@ -45,22 +40,32 @@ public class GoodsDAO {
 	// 상품상세 조회
 	public void getGdtl(HttpServletRequest request, HttpServletResponse response) {
 
-		ArrayList<GoodsDtl> gdsDtl = (ArrayList<GoodsDtl>) ss.getMapper(GoodsMapper.class).getGoodsDtl();
+		
+		List<GoodsDtl> gdsDtl = ss.getMapper(GoodsMapper.class).getGoodsDtl();
 
 		request.setAttribute("gdsDtl", gdsDtl);
+	}
+
+	// 상품목록 조회
+	public void getAllGoods(HttpServletRequest request) {
+		List<Goods> gdslist = ss.getMapper(GoodsMapper.class).getAllGoods();
+
+		if (gdslist.size() > 0) {
+			request.setAttribute("gdslist", gdslist);
+		}
 	}
 
 	// 입력-----------------------------------------------------------------------
 	public void insertGd(Goods gd, HttpServletRequest request, HttpServletResponse response) {
 		// 이미지 문제
-		
-			if (ss.getMapper(GoodsMapper.class).insertGds(gd) == 1) {
-	
-				System.out.println("insertGd성공");
-			} else {
-				System.out.println("실패");
-			}
-		
+
+		if (ss.getMapper(GoodsMapper.class).insertGds(gd) == 1) {
+
+			System.out.println("insertGd성공");
+		} else {
+			System.out.println("실패");
+		}
+
 	}
 
 	public void insertGdtl(GoodsDtl g, HttpServletRequest request, HttpServletResponse response) {
@@ -94,7 +99,7 @@ public class GoodsDAO {
 	}
 
 	// 트랜잭션 3가지 테이블 입력시 상품번호 시퀀스충돌 방지?
-	@Transactional(rollbackFor = Exception.class)
+//	@Transactional(rollbackFor = Exception.class) 어노테이션 방식사용시
 	public void insertGdsInfo(Goods gd, GoodsDtl gdtl, Option op, HttpServletRequest request,
 			HttpServletResponse response) throws Exception {
 

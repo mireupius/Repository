@@ -2,43 +2,33 @@ create sequence goods_sq
 MAXVALUE 9999
 CYCLE
 NOCACHE;
-select * from goods_tb
-order by gd_no desc; 
-select * from goodsdtl_tb;
-select * from option_tb;
 
-values(to_char(카테고리 9자리) || LPAD(시퀀스.nextval,3,0)
-nvl (컬럼,0)->널일 때 0으로
-
-
-gd_no ---> ct_no1+ct_no2+ct_no3 || LPDA(goods_sq.nextval,4,0)
---상품코드(카테고리 9자리 + 시퀀스4)
 create table goods_tb			
 (				
- gd_no 		varchar2 (13 char)	primary key,				
- gd_name  	varchar2(20 char) 	not null,				
- gd_csmprice 	number(7) 		not null,				
- gd_price    	number(7) 		not null,				
+ gd_no 			varchar2 (13 char)	primary key,				
+ gd_name  		varchar2(20 char) 	not null,				
+ gd_csmprice 	number(7)	 		not null,				
+ gd_price    	number(7) 			not null,				
  gd_dlvchrg   	varchar2(20 char) 	not null,				
- gd_imgl  	varchar2(200 char) 	not null,				
- gd_imgm  	varchar2(200 char) 	not null,				
- gd_imgs  	varchar2(200 char) 	not null,				
- gd_imgss 	varchar2(200 char) 	not null,				
- gd_clfl  	varchar2(3 char)	not null,				
- gd_clfm   	varchar2(3 char),				
- gd_clfs   	varchar2(3 char),
+ gd_imgl  		varchar2(200 char) 	not null,				
+ gd_imgm  		varchar2(200 char) 	not null,				
+ gd_imgs  		varchar2(200 char) 	not null,				
+ gd_imgss 		varchar2(200 char) 	not null,				
+ gd_clfl  		varchar2(3 char)	not null,				
+ gd_clfm   		varchar2(3 char),				
+ gd_clfs   		varchar2(3 char),
  gd_sellerid	varchar2 (12 char)	not null
 );			
 
-create sequence goodsdtl_sq		
+create sequence goodsdtl_sq
 MAXVALUE 99999
 CYCLE 
 NOCACHE;
 
 create table goodsdtl_tb				
 (				
-gt_no		varchar2(5)		primary key,				
-gt_gdno		varchar2(13)	not null,				
+gt_no		varchar2(5)			primary key,				
+gt_gdno		varchar2(13)		not null,				
 gt_mdlname  varchar2(20 char),				
 gt_maker    varchar2(20 char),				
 gt_brand    varchar2(20 char),				
@@ -48,9 +38,8 @@ gt_material varchar2(20 char),
 gt_weight   varchar2(20 char),				
 gt_volume   varchar2(20 char),				
 gt_origin   varchar2(20 char),				
-gt_stock    number(7)		not null,				
 gt_keyword  varchar2 (40 char),				
-gt_detail   clob 	not null 				
+gt_detail   clob 				not null 				
 );
 
 
@@ -60,6 +49,19 @@ ADD CONSTRAINTS FK_GT_GDNO FOREIGN KEY(gt_gdno)
 REFERENCES goods_tb(gd_no);
 -- ↑↑↑↑↑↑↑↑↑↑↑ FK 설정 ↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑
 
+create sequence option_sq
+MAXVALUE 99999
+CYCLE 
+NOCACHE;
+
+create table option_tb				
+(				
+op_no		varchar2(5)			primary key,				
+op_gdno 	varchar2(13 char)	not null,				
+op_name 	varchar2(20 char) 	not null,				
+op_price 	number(7) 			not null,				
+op_stock 	number(4) 			not null 				
+);	
 
 --카테고리번호 (시퀀스번호3자리)
 create sequence category_sq
@@ -75,6 +77,14 @@ ct_clfname  varchar2(50 char)	not null,
 ct_clf      varchar2(1 char)	not null,
 ct_parentno	varchar2 (3 char)
 );
+
+create table viewdgd_tb				
+(				
+vg_csmid	varchar2(12 char) 	not null,				
+vg_gdno 	varchar2(1000 char)				
+);
+
+
 
 insert into category_tb values(to_char(category_sq.nextval),'패션의류',1,null);
 insert into category_tb values(to_char(category_sq.nextval),'잡화/보석',1,null);
@@ -101,26 +111,6 @@ insert into category_tb values(to_char(category_sq.nextval),'자켓/점퍼/코�
 insert into category_tb values(to_char(category_sq.nextval),'한복/테마의류',3,109);
 
 				
-create sequence option_sq
-MAXVALUE 99999
-CYCLE 
-NOCACHE;
-
-
-create table option_tb				
-(				
-op_no		varchar2(5)		primary key,				
-op_gdno 	varchar2(13)		not null,				
-op_name 	varchar2(20 char) 	not null,				
-op_price 	number(7) 		not null,				
-op_stock 	number(4) 		not null 				
-);				
-				
-create table viewdgd_tb				
-(				
-vg_csmid	varchar2(12) not null,				
-vg_gdno 	varchar2(1000)				
-);
 
 
 drop table goods_tb cascade constraint purge;
@@ -199,3 +189,16 @@ drop table t1 cascade constraint purge;
 drop table t2 cascade constraint purge;
 drop sequence t1_sq;
 drop sequence t2_sq;
+
+values(to_char(카테고리 9자리) || LPAD(시퀀스.nextval,3,0)
+nvl (컬럼,0)->널일 때 0으로
+
+gd_no ---> ct_no1+ct_no2+ct_no3 || LPDA(goods_sq.nextval,4,0)
+--상품코드(카테고리 9자리 + 시퀀스4)
+
+select * from goods_tb
+order by gd_no desc; 
+select * from goodsdtl_tb;
+select * from option_tb;
+select * from goods_tb a, goodsdtl_tb b 
+		where a.gd_no = b.gt_gdno ;

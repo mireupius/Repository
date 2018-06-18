@@ -110,7 +110,16 @@ public class GoodsController {
 	public @ResponseBody Categories categoryGet(Category cg, HttpServletRequest request, HttpServletResponse response) {
 
 		return gdsDAO.getCategory(cg, request, response);
+	}
+	
+	// 상품표시화면 처음
+	@RequestMapping(value = "/goods.list", method = RequestMethod.GET)
+	public String goodsList(HttpServletRequest request, HttpServletResponse response) {
 
+		gdsDAO.getAllGoods(request);
+	
+		request.setAttribute("contentPage", "../goods/goodsList.jsp");
+		return "sale/saleIndex";
 	}
 
 }
