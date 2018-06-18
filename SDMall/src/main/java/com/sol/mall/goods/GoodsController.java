@@ -1,6 +1,7 @@
 package com.sol.mall.goods;
 
-import java.util.HashMap;
+import java.math.BigDecimal;
+import java.net.URLEncoder;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -11,60 +12,85 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.oreilly.servlet.MultipartRequest;
+import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
+
 @Controller
 public class GoodsController {
 
 	@Autowired
 	private GoodsDAO gdsDAO;
 
-	// 상품등록화면 처음 
-	@RequestMapping(value = "/", method = RequestMethod.GET)
+	// 상품등록화면 처음
+	@RequestMapping(value = "/goods.go", method = RequestMethod.GET)
 	public String goods(HttpServletRequest request, HttpServletResponse response) {
-		
+
 		gdsDAO.getAllcategory(request, response);
-		
-		request.setAttribute("contentPage", "goods/goods.jsp");
-		return "index";
+
+		request.setAttribute("contentPage", "../goods/goods.jsp");
+		return "sale/saleIndex";
 	}
 
 	// 상품등록작업
 	@RequestMapping(value = "/registration.do", method = RequestMethod.POST)
-	public String registrationDo(Goods gd, GoodsDtl gdtl, HttpServletRequest request, HttpServletResponse response) {
+	public String registrationDo(Goods gd, GoodsDtl gdtl, Option op, HttpServletRequest request, HttpServletResponse response) throws Exception {
 
-		
+		// 이미지 입력 만들기 전 까지 임시
 		gd.setGd_imgl("gd_imgl");
-		gd.setGd_imgm("gd_imgm");
-		gd.setGd_imgs("gd_imgs");
-		gd.setGd_imgss("gd_imgss");
-		
+		gd.setGd_imgm("gd_imgl");//"gd_imgm"
+		gd.setGd_imgs("gd_imgl");//"gd_imgs"
+		gd.setGd_imgss("gd_imgl");//"gd_imgss"
+		gdtl.setGt_stock(op.getOp_stock());
+
+//		try {
+//			
+//			String path = request.getSession().getServletContext().getRealPath("upload");
+//			
+//			MultipartRequest mr = new MultipartRequest(request, path, 30 * 1024 * 1024, "UTF-8", new DefaultFileRenamePolicy());
+//			System.out.println("여기");
+//			String gd_imgl = mr.getFilesystemName("gd_imgl");
+//			
+//			System.out.println("상품이미지="+path);
+//			System.out.println(gd_imgl);
+//			
+//			gd_imgl = URLEncoder.encode(gd_imgl, "UTF-8");
+//			gd_imgl = gd_imgl.replace("+", " ");
+//			
+//			
+//			gd.setGd_name(mr.getParameter("gd_name"));
+//			gd.setGd_csmprice(new BigDecimal(mr.getParameter("gd_csmprice")));
+//			gd.setGd_price(new BigDecimal(mr.getParameter("gd_price")));
+//			gd.setGd_dlvchrg(mr.getParameter("gd_dlvchrg"));
+//			gd.setGd_imgl(gd_imgl);
+//			gd.setGd_imgm("gd_imgl");//"gd_imgm"
+//			gd.setGd_imgs("gd_imgl");//"gd_imgs"
+//			gd.setGd_imgss("gd_imgl");//"gd_imgss"
+//			gd.setGd_clfl(mr.getParameter("gd_clfl"));
+//			gd.setGd_clfm(mr.getParameter("gd_clfm"));
+//			gd.setGd_clfs(mr.getParameter("gd_clfs"));
+//			gd.setGd_sellerid(mr.getParameter("gd_sellerid"));
+//		
+//		}catch (Exception e) {
+//
+//		}
 		// FK 설정으로 입력이나 삭제시 주의 상품상세테이블 먼저 입력이나 삭제하고 상품테이블 삭제
-		// 입력부(상품)
-		gdsDAO.insertGd(gd, request, response);
-
+		// 방금입력한 상품번호 어떻게 가져오지?
+		// 입력하고 저장 누르면 저장후 입력화면으로 이동 방금입력한 내용을 다시 입력화면에 표시불가
+		// 수정화면 따로 만들어야 함
+	
+		// Transaction 적용
+		gdsDAO.insertGdsInfo(gd, gdtl, op, request, response);
 		
-		// 입력부(상품상세)
-		//gdsDAO.insertGdtl(gdtl, request, response);
-
-		HashMap<String, Object> map = new HashMap<String, Object>();
-		map.put("goods", gd);
-		map.put("goodsDtl", gdtl);
-		
-		// 입력부(상품상세)
-		gdsDAO.insertGdtlTwo(map, request, response);
-		
-		// 표시부(수정필요)
-		gdsDAO.getGd(request, response);
-		gdsDAO.getGdtl(request, response);
-		
-		request.setAttribute("contentPage", "goods/test.jsp");
-		return "index";
+		gdsDAO.getAllcategory(request, response);
+		request.setAttribute("contentPage", "../goods/goods.jsp");
+		return "sale/saleIndex";
 	}
 
 	@RequestMapping(value = "/category.get", method = RequestMethod.GET, produces = "application/json; charset=utf-8")
 	public @ResponseBody Categories categoryGet(Category cg, HttpServletRequest request, HttpServletResponse response) {
 
-			return gdsDAO.getCategory(cg, request, response);
+		return gdsDAO.getCategory(cg, request, response);
 
 	}
-	
+
 }

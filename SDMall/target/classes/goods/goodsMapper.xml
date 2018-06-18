@@ -70,12 +70,18 @@
 	<!-- insert는 보통처럼 -->
 	<insert id="insertGdtlTwo" parameterType="hashmap">
 		insert into goodsdtl_tb values(
-			#{goodsDtl.gt_no}, #{goods.gd_clfl}||#{goods.gd_clfm}||#{goods.gd_clfs}||LPAD(goods_sq.nextval, 4,'0'), #{gt_mdlname}, #{gt_maker},
-			#{goodsDtl.gt_brand}, #{gt_mfd}, #{gt_exp}, #{gt_material},
-			#{goodsDtl.gt_weight}, #{gt_volume}, #{gt_origin}, #{gt_stock},
-			#{gt_keyword}, #{gt_detail}
+			goodsdtl_sq.nextval, #{goods.gd_clfl}||#{goods.gd_clfm}||#{goods.gd_clfs}||LPAD(goods_sq.currval, 4,'0'), #{goodsDtl.gt_mdlname}, #{goodsDtl.gt_maker},
+			#{goodsDtl.gt_brand}, #{goodsDtl.gt_mfd}, #{goodsDtl.gt_exp}, #{goodsDtl.gt_material},
+			#{goodsDtl.gt_weight}, #{goodsDtl.gt_volume}, #{goodsDtl.gt_origin}, #{goodsDtl.gt_stock},
+			#{goodsDtl.gt_keyword}, #{goodsDtl.gt_detail}
 		)
 	</insert>
 
+	<insert id="insertOpTwo" parameterType="hashmap">
+		insert into option_tb values(
+			option_sq.nextval, #{goods.gd_clfl}||#{goods.gd_clfm}||#{goods.gd_clfs}||LPAD(goods_sq.currval, 4,'0'), 
+			#{option.op_name}, #{option.op_price}, #{option.op_stock}
+		)
+	</insert>
 	
 </mapper>

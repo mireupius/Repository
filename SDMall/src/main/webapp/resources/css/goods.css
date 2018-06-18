@@ -1,10 +1,10 @@
-@charset "EUC-KR";
+@charset "UTF-8";
 
 .gdTb {
 	border-spacing: 0;
 	margin-left: auto;
 	margin-right: auto;
-	margin-top:100px;/*  ¸¶ÁøÅéÀ» ÁÖ¸é Á¢¾ú´Ù Æî¶§ ¿·¿¡ ½ºÅ©·Ñ¹Ù°¡ »ı±â¸é¼­ Èçµé¸²  */
+	margin-top:100px;/*  ë§ˆì§„í†±ì„ ì£¼ë©´ ì ‘ì—ˆë‹¤ í¼ë•Œ ì˜†ì— ìŠ¤í¬ë¡¤ë°”ê°€ ìƒê¸°ë©´ì„œ í”ë“¤ë¦¼  */
 	width: 1400px;
 }
 
@@ -72,4 +72,9 @@
 
 li {
 	list-style: none;
+}
+
+.liImg{
+	float: left;
+	width: 200px;
 }

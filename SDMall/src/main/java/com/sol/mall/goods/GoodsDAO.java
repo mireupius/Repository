@@ -1,5 +1,7 @@
 package com.sol.mall.goods;
 
+import java.math.BigDecimal;
+import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -9,6 +11,10 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import com.oreilly.servlet.MultipartRequest;
+import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
 @Service
 public class GoodsDAO {
@@ -45,27 +51,16 @@ public class GoodsDAO {
 	}
 
 	// 입력-----------------------------------------------------------------------
-	public void insertGd(Goods g, HttpServletRequest request, HttpServletResponse response) {
-
-		System.out.println(g.getGd_name());
-		System.out.println(g.getGd_csmprice());
-		System.out.println(g.getGd_price());
-		System.out.println(g.getGd_dlvchrg());
-		System.out.println(g.getGd_imgl());
-		System.out.println(g.getGd_imgm());
-		System.out.println(g.getGd_imgs());
-		System.out.println(g.getGd_imgss());
-		System.out.println(g.getGd_clfl());
-		System.out.println(g.getGd_clfm());
-		System.out.println(g.getGd_clfs());
-		System.out.println(g.getGd_sellerid());
-
-		if (ss.getMapper(GoodsMapper.class).insertGds(g) == 1) {
-
-			System.out.println("성공");
-		} else {
-			System.out.println("실패");
-		}
+	public void insertGd(Goods gd, HttpServletRequest request, HttpServletResponse response) {
+		// 이미지 문제
+		
+			if (ss.getMapper(GoodsMapper.class).insertGds(gd) == 1) {
+	
+				System.out.println("insertGd성공");
+			} else {
+				System.out.println("실패");
+			}
+		
 	}
 
 	public void insertGdtl(GoodsDtl g, HttpServletRequest request, HttpServletResponse response) {
@@ -82,9 +77,42 @@ public class GoodsDAO {
 
 		if (ss.getMapper(GoodsMapper.class).insertGdtlTwo(map) == 1) {
 
-			System.out.println("성공");
+			System.out.println("insertGdtlTwo성공");
 		} else {
 			System.out.println("실패");
 		}
+	}
+
+	public void insertOpTwo(HashMap<String, Object> map, HttpServletRequest request, HttpServletResponse response) {
+
+		if (ss.getMapper(GoodsMapper.class).insertOpTwo(map) == 1) {
+
+			System.out.println("insertOpTwo성공");
+		} else {
+			System.out.println("실패");
+		}
+	}
+
+	// 트랜잭션 3가지 테이블 입력시 상품번호 시퀀스충돌 방지?
+	@Transactional(rollbackFor = Exception.class)
+	public void insertGdsInfo(Goods gd, GoodsDtl gdtl, Option op, HttpServletRequest request,
+			HttpServletResponse response) throws Exception {
+
+		// 입력(상품테이블)
+		insertGd(gd, request, response);
+
+		// 입력(상품상세 파라메터 작성goods, goodsDtl)
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("goods", gd);
+		map.put("goodsDtl", gdtl);
+		// 입력(상품상세테이블)
+		insertGdtlTwo(map, request, response);
+
+		// 입력(상품상세 파라메터 작성goods, goodsDtl)
+		HashMap<String, Object> map2 = new HashMap<String, Object>();
+		map2.put("goods", gd);
+		map2.put("option", op);
+		// 입력(옵션테이블)
+		insertOpTwo(map2, request, response);
 	}
 }
