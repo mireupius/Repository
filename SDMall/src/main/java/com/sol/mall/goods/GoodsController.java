@@ -82,11 +82,11 @@ public class GoodsController {
 			
 			gdtl.setGt_stock(op.getOp_stock());
 			
-			gd.setGd_imgl(originalName);
+			gd.setGd_imgl(modifyName);
 			// 이미지 사이즈 조절 만들 때 까지 임시
-			gd.setGd_imgm(originalName);
-			gd.setGd_imgs(originalName);
-			gd.setGd_imgss(originalName);
+			gd.setGd_imgm(modifyName);
+			gd.setGd_imgs(modifyName);
+			gd.setGd_imgss(modifyName);
 
 			System.out.println("이미지 테스트="+gd.getGd_imgl());
 			

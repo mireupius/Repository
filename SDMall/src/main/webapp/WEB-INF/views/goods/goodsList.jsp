@@ -27,8 +27,7 @@ h3 {
 <body>
 	<section id="main-content"> <section class="wrapper">
 	<form name="tx_editor_form" id="tx_editor_form"
-		action="registration.do" method="post" accept-charset="utf-8"
-		encType=multipart/form-data>
+		action="registration.do" method="post" accept-charset="utf-8">
 
 		<table border="1" summary="" class="eChkColor">
 			<colgroup>
