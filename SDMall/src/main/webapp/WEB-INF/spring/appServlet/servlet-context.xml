@@ -24,10 +24,11 @@
 	<!--↓↓↓↓↓↓↓↓↓↓ 다음오픈에디터 저장소 ↓↓↓↓↓↓↓↓↓↓-->
 	<resources mapping="/upload/**" location="/upload/" />
 	<!--↑↑↑↑↑↑↑↑↑↑ 다음오픈에디터 저장소 ↑↑↑↑↑↑↑↑↑↑-->
+	<!--↓↓↓↓↓↓↓↓↓↓ 멀티파트 ↓↓↓↓↓↓↓↓↓↓-->
 	<!-- MultipartResolver Bean -->
 	<beans:bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
 	</beans:bean>
-	
+	<!--↑↑↑↑↑↑↑↑↑↑ 멀티파트 ↑↑↑↑↑↑↑↑↑↑-->
 	<beans:bean
 		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<beans:property name="prefix" value="/WEB-INF/views/" />

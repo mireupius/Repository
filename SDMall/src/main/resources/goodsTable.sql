@@ -13,7 +13,7 @@ nvl (컬럼,0)->널일 때 0으로
 
 gd_no ---> ct_no1+ct_no2+ct_no3 || LPDA(goods_sq.nextval,4,0)
 --상품코드(카테고리 9자리 + 시퀀스4)
-create table goods_tb				
+create table goods_tb			
 (				
  gd_no 		varchar2 (13 char)	primary key,				
  gd_name  	varchar2(20 char) 	not null,				

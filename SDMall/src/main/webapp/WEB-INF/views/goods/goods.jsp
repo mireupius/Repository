@@ -172,7 +172,7 @@ h3 {
 <body>
 <section id="main-content">
 <section class="wrapper">
-<form name="tx_editor_form" id="tx_editor_form" action="registration.do" method="post" accept-charset="utf-8" >
+<form name="tx_editor_form" id="tx_editor_form" action="registration.do" method="post" accept-charset="utf-8" encType=multipart/form-data>
 	<div class="gdTb3" data-toggle="collapse" href="#collapse1"
 		aria-expanded="false" aria-controls="collapse1">
 		<h3>표시설정</h3>
@@ -367,10 +367,10 @@ h3 {
 					<tr>
 						<td class="gdTd2">
 							<span>
-								<input type="file" id="input_img" name="gd_imgl">
-								<input type="file"  name="gd_imgm" >
-								<input type="file"  name="gd_imgs">
-								<input type="file"  name="gd_imgss">
+								<input type="file" id="input_img" name="gd_file1">
+								<input type="file"  name="gd_file2" >
+								<input type="file"  name="gd_file3">
+								<input type="file"  name="gd_file4">
 							</span>
 						</td>
 					</tr>
