@@ -24,10 +24,11 @@
 		where gd_no = #{gd_no}
 	</select>
 	
-	<select id="">
+	<select id="getGoodsView" parameterType="com.sol.mall.goods.GoodsView" resultType="com.sol.mall.goods.GoodsView">
 		select * from goods_tb a, goodsdtl_tb b 
 		where a.gd_no = b.gt_gdno 
-	</select>
+		and a.gd_no = #{gd_no}
+ 	</select>
 	
 <!-- ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓ CLOB SELECT 세트 ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓ -->
 	<resultMap id="getGoodsDtl"

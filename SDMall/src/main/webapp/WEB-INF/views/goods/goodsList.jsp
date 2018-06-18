@@ -123,7 +123,7 @@ h3 {
 								<c:forEach var="i" begin="0" end="${gdslist.size() }" >
 									<tr>
 										<td class="gdLstTd1">${i+1}</td>
-										<td class="gdLstTd1">${gdslist[i].gd_no}</td>
+										<td class="gdLstTd1"><a href="goods.view?gd_no=${gdslist[i].gd_no}" >${gdslist[i].gd_no}</a></td>
 										<td class="gdLstTd1"><img src="${pageContext.request.contextPath}/upload/${gdslist[i].gd_imgl}" width="44"
 											height="44" alt=""></td>
 										<td class="gdLstTd1">${gdslist[i].gd_price}</td>

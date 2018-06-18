@@ -154,6 +154,11 @@ CREATE TABLE sale_delivery (
 
 
 
+select * from goods_tb a, goodsdtl_tb b 
+		where a.gd_no = b.gt_gdno 
+		and a.gd_no = '1001091160004';
+
+
 
 drop table goods_tb cascade constraint purge;
 drop sequence goods_sq;
