@@ -3,7 +3,7 @@
 <!DOCTYPE html5>
 <html>
 <head>
-<link rel="stylesheet" href="resources/css/goods.css">
+<link rel="stylesheet" href="resources/css/goods/goods.css">
 <link rel="stylesheet" href="resources/css/bootstrap/bootstrap.min.css">
 <link rel="stylesheet" href="resources/css/bootstrap/bootstrap-theme.min.css">
 <script src="resources/js/jquery.js"></script>

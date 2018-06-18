@@ -151,7 +151,7 @@ $(function(){
 </script>
 
 <title>Goods</title>
-<link rel="stylesheet" href="resources/css/goods.css">
+<link rel="stylesheet" href="resources/css/goods/goods.css">
 <style type="text/css">
 h3 {
 	margin-bottom: 0;
