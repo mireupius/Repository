@@ -17,8 +17,9 @@ public class GoodsDAO {
 		request.setAttribute("allGoods", ss.getMapper(GoodsMapper.class).getAllGoods());
 	}
 
-	public void getGoodsDtlByNo(Goods goods, HttpServletRequest request, HttpServletResponse response) {
-		request.setAttribute("GoodsDtl", ss.getMapper(GoodsMapper.class).getGoodsDtlByNo(goods));
+	public void getGoodsByNo(Goods goods, HttpServletRequest request, HttpServletResponse response) {
+		request.setAttribute("goodsDtl1", ss.getMapper(GoodsMapper.class).getGoodsByNo(goods));
+		request.setAttribute("goodsDtl2", ss.getMapper(GoodsMapper.class).getGoodsDtlByNo(goods));
 	}
 
 }

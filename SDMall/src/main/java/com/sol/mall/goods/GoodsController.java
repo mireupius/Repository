@@ -14,7 +14,7 @@ public class GoodsController {
 	@Autowired
 	GoodsDAO gDAO;
 
-	@RequestMapping(value = "/goods", method = RequestMethod.GET)
+	@RequestMapping(value = "/shop", method = RequestMethod.GET)
 	public String getAllGoods(HttpServletRequest request, HttpServletResponse response) {
 		gDAO.getAllGoods(request, response);
 		return "shop";
@@ -22,8 +22,7 @@ public class GoodsController {
 
 	@RequestMapping(value = "/goods", method = RequestMethod.GET)
 	public String getGoodsDtlByNo(Goods goods,HttpServletRequest request, HttpServletResponse response) {
-		goods.setGd_no(request.getParameter("gd_no"));
-		gDAO.getGoodsDtlByNo(goods, request, response);
+		gDAO.getGoodsByNo(goods, request, response);
 		return "product";
 	}
 }

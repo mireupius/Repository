@@ -395,6 +395,7 @@
 
 							
 							<c:forEach var="goods" items="${allGoods}">
+							<a href="goods?gd_no=${goods.gd_no }">
 							<c:choose>
 								<c:when test="${goods.gd_price==goods.gd_csmprice }">
 								<div class="product_item">
@@ -422,6 +423,7 @@
 								</div>
 								</c:otherwise>
 							</c:choose>
+							</a>
 							</c:forEach>
 														
 							
