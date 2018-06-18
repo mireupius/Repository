@@ -14,7 +14,7 @@ function connectSLUpdateCheckEvent() {
 			var originPw = $(".originPwInput").val();
 			
 			$.ajax({
-				url : "seller.idvalidate.do",
+				url : "seller.validCheck",
 				data : {sl_id : id},
 				success : function(json) {
 					

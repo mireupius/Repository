@@ -31,7 +31,9 @@
 						<td>
 							<a href="seller.logout.do">로그아웃</a>
 							<a href="seller.update.go">회원정보변경</a>
+							<a href="seller.withdraw.go">회원탈퇴</a>
 						</td>
+						
 					</tr>
 				</table>
 			</td>

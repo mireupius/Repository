@@ -10,6 +10,7 @@
 	<table id="loginOKTb">
 		<tr>
 			<td>
+				customer
 				<jsp:include page="${loginInfo }"></jsp:include>
 			</td>
 		</tr>

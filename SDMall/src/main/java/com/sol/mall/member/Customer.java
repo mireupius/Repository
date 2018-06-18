@@ -1,5 +1,6 @@
 package com.sol.mall.member;
 
+import java.math.BigDecimal;
 import java.util.Date;
 
 public class Customer {
@@ -73,6 +74,6 @@ public class Customer {
 	public void setCsm_emailAddress(String csm_emailAddress) {
 		this.csm_emailAddress = csm_emailAddress;
 	}
-	
+
 	
 }

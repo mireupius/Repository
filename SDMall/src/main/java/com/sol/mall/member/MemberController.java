@@ -38,9 +38,9 @@ public class MemberController {
 	}
 	
 	@RequestMapping(value = "/customer.register.do", method = RequestMethod.POST)
-	public String doRegCustomer(Customer c, HttpServletRequest req, HttpServletResponse res) {
+	public String doRegCustomer(Customer c, Membership m, HttpServletRequest req, HttpServletResponse res) {
 
-		MDAO.registerCSM(c, req, res);
+		MDAO.registerCSM(c, m, req, res);
 		return "member/loginArea";
 
 	}
@@ -60,15 +60,8 @@ public class MemberController {
 
 	}
 	
-	@RequestMapping(value = "/seller.idvalidate.do", method = RequestMethod.GET, produces = "application/json; charset=utf-8")
-	public @ResponseBody Sellers slIdValidate(Seller s, HttpServletRequest req, HttpServletResponse res) {
-		
-		return MDAO.sellerCheck(s, req, res);
-		
-	}
-	
-	@RequestMapping(value = "/seller.loginCheck", method = RequestMethod.POST, produces = "application/json; charset=utf-8")
-	public @ResponseBody Sellers slLoginCheck(Seller s, HttpServletRequest req, HttpServletResponse res) {
+	@RequestMapping(value = "/seller.validCheck", method = RequestMethod.GET, produces = "application/json; charset=utf-8")
+	public @ResponseBody Sellers slValidCheck(Seller s, HttpServletRequest req, HttpServletResponse res) {
 		
 		return MDAO.sellerCheck(s, req, res);
 		
@@ -199,13 +192,35 @@ public class MemberController {
 	
 	@RequestMapping(value = "/customer.withdraw.do", method = RequestMethod.GET)
 	public String doWithdrawCustomer(Customer c, HttpServletRequest req, HttpServletResponse res) {
-		
-		if(MDAO.csmLoginCheck(req, res)) {
-			
+	
 			MDAO.withdrawCustomer(c, req, res);
 			MDAO.logoutCustomer(req, res);
 			MDAO.csmLoginCheck(req, res);
+			return "member/loginPage";
+		
+	}
+	
+	@RequestMapping(value = "/seller.withdraw.go", method = RequestMethod.GET)
+	public String goWithdrawSeller(HttpServletRequest req, HttpServletResponse res) {
+		
+		if(MDAO.slLoginCheck(req, res)) {
 			
+			return "member/withdrawSLPage";
+			
+		}else {
+			return "loginPage";
+		}
+		
+	}
+	
+	@RequestMapping(value = "/seller.withdraw.do", method = RequestMethod.GET)
+	public String doWithdrawSeller(Seller s, HttpServletRequest req, HttpServletResponse res) {
+		
+		if(MDAO.slLoginCheck(req, res)) {
+			
+			MDAO.withdrawSeller(s, req, res);
+			MDAO.logoutCustomer(req, res);
+			MDAO.slLoginCheck(req, res);	
 		}
 		return "member/loginPage";
 		

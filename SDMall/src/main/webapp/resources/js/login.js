@@ -22,11 +22,16 @@ function loginCheck() {
 						
 					}else if (pw != csm_pw) {
 						alert("비밀번호가 틀렸습니다");
+						$("#loginCSM_pw").val("");
+						$("#loginCSM_pw").focus();
 						
 					}
 					
 				} else if(ok == 0){
 					alert("계정 없음");
+					$("#loginCSM_id").val("");
+					$("#loginCSM_pw").val("");
+					$("#loginCSM_id").focus();
 					
 				}
 				
@@ -43,8 +48,7 @@ function loginCheck() {
 		
 		$.ajax({
 			
-			type : "POST",
-			url : "seller.loginCheck",
+			url : "seller.validCheck",
 			data : {sl_id : id},
 			success : function(json) {
 				var ok = json.seller.length;
@@ -59,11 +63,16 @@ function loginCheck() {
 						
 					}else if (pw != sl_pw) {
 						alert("비밀번호가 틀렸습니다");
+						$("#loginSL_pw").val("");
+						$("#loginSL_pw").focus();
 						
 					}
 					
 				} else if(ok == 0){
 					alert("계정 없음");
+					$("#loginSL_id").val("");
+					$("#loginSL_pw").val("");
+					$("#loginSL_id").focus();
 					
 				}
 				

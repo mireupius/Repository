@@ -19,7 +19,7 @@ public class HomeController {
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String home(HttpServletRequest req, HttpServletResponse res) {
 		
-		req.setAttribute("loginArea", "loginArea.jsp");
+		req.setAttribute("loginInfo", "loginArea.jsp");
 		return "member/loginPage";
 	}
 	

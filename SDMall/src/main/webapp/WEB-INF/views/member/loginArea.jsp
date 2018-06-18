@@ -28,6 +28,7 @@
 
 	<div class="loginTab">
 		<h3>로그인</h3>${r }
+		<h3>${r2 }</h3>
 		<ul id="myTab" class="nav nav-tabs" role="tablist">
 			<li role="presentation" class="active">
 				<a href="#csmloginArea" id="csm-tab" role="tab"	data-toggle="tab">구매자</a>

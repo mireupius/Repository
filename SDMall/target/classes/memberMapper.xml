@@ -82,7 +82,11 @@
 		from seller_reg
 		where sl_id = #{sl_id}
 	</delete>
-
+	<insert id="registerMemberShip" parameterType="com.sol.mall.member.Membership">
+		insert into membership values(
+		#{ms_csm_id}, '실버', 0, 0
+		)
+	</insert>
 </mapper>
 
 

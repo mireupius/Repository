@@ -34,7 +34,7 @@ function connectSLRegisterCheckEvent() {
 				
 				$.ajax({
 					
-					url : "seller.idvalidate.do",
+					url : "seller.validCheck",
 					data : {sl_id : id},
 					success : function(json) {
 
