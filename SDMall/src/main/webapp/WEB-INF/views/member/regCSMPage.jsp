@@ -13,8 +13,9 @@
 <script type="text/javascript">
 	$(function() {
 		
-		$(".birthdayInput").datepicker();		
+		//$(".birthdayInput").datepicker();		
 		connectCSMRegisterCheckEvent();
+		
 		
 	});
 
@@ -48,8 +49,8 @@
 		<span class="promptTxt_name" style="display: none"></span>
 		</div>
 		<div>
-		<span> <input class="birthdayInput" type="text"
-				name="csm_birthday" placeholder="생년월일(예: 19910101)" maxlength="8"><br>
+		<span> <input class="birthdayInput" type="date"
+				name="csm_birthday" placeholder="생년월일(예: 19910101)"><br>
 		</span>
 		<span class="promptTxt_birthday"></span>
 		</div>

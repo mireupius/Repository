@@ -25,12 +25,13 @@ public class MemberDAO {
 			// 자동으로 못 들어가게 요청파라메터명을 다르게 바꿔줌
 			// System.out.println(req.getParameter("csm_birthday"));
 
-			SimpleDateFormat sdf = new SimpleDateFormat("YYYY-MM-DD");
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 			String csm_emailFront = req.getParameter("csm_emailFront");
 			String csm_autoCompleteEmail = req.getParameter("csm_autoCompleteEmail");
 			String csm_emailAddress = String.format("%s%s", csm_emailFront, csm_autoCompleteEmail);
 
 			c.setCsm_birth(sdf.parse(req.getParameter("csm_birthday")));
+			System.out.println(c.getCsm_birth());
 			c.setCsm_emailAddress(csm_emailAddress);
 			m.setMs_csm_id(req.getParameter("csm_id"));
 			
@@ -54,7 +55,7 @@ public class MemberDAO {
 		} catch (Exception e) {
 			e.printStackTrace();
 			req.setAttribute("r", "가입 실패");
-			System.out.println("멤버쉽 가입 성공");
+			System.out.println("멤버쉽 가입 실패");
 
 		}
 

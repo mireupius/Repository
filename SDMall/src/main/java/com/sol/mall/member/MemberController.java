@@ -39,8 +39,8 @@ public class MemberController {
 	
 	@RequestMapping(value = "/customer.register.do", method = RequestMethod.POST)
 	public String doRegCustomer(Customer c, Membership m, HttpServletRequest req, HttpServletResponse res) {
-
 		MDAO.registerCSM(c, m, req, res);
+		System.out.println(c.getCsm_birth());
 		return "member/loginArea";
 
 	}
