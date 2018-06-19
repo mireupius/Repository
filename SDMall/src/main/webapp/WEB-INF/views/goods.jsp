@@ -391,19 +391,19 @@
 											<div class="color_dropdown_button"><i class="fas fa-chevron-down"></i></div>
 
 											<ul class="color_list">
+												<li><div class="color_mark" style="background: #b19c83;"></div></li>
+												<li><div class="color_mark" style="background: #000000;"></div></li>
 												<c:forEach var="o" items="${option}">
 													<li>${o.op_name } / ${o.op_price } / ${o.op_stock } </li>
 												</c:forEach>
-												<li>블랙</li>
-												<li><div class="color_mark" style="background: #b19c83;"></div></li>
-												<li><div class="color_mark" style="background: #000000;"></div></li>
+												
 											</ul>
 										</li>
 									</ul>
 
 								</div>
 
-								<div class="product_price">$2000</div>
+								<div class="product_price">${goodsDtl1.gd_price }</div>
 								<div class="button_container">
 									<button type="button" class="button cart_button">Add to Cart</button>
 									<div class="product_fav"><i class="fas fa-heart"></i></div>
