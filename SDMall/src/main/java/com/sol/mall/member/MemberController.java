@@ -15,11 +15,18 @@ public class MemberController {
 	@Autowired
 	private MemberDAO MDAO;
 
+	@RequestMapping(value = "/member.loginPage", method = RequestMethod.GET)
+	public String goLoginPage(HttpServletRequest req, HttpServletResponse res) {
+
+		req.setAttribute("loginInfo", "loginArea.jsp");
+		return "member/loginPage";
+
+	}
 	@RequestMapping(value = "/customer.register.go", method = RequestMethod.GET)
 	public String goRegCustomer(HttpServletRequest req, HttpServletResponse res) {
-
+		
 		return "member/regCSMPage";
-
+		
 	}
 
 	@RequestMapping(value = "/customer.getAll.do", method = RequestMethod.GET, produces = "application/json; charset=utf-8")
@@ -73,13 +80,29 @@ public class MemberController {
 		MDAO.loginCustomer(c, req, res);
 		if(MDAO.csmLoginCheck(req, res)) {
 			
-			return "customer/customerMain";
+			return "customer/customerMain2";
 			
 		}else {
 			return "member/loginPage";
 		}
 	
 	}
+	
+	@RequestMapping(value = "/customer.myHome.go", method = RequestMethod.GET)
+	public String goMyhome(Customer c, HttpServletRequest req, HttpServletResponse res) {
+		
+		
+		if(MDAO.csmLoginCheck2(req, res)) {
+			
+			return "customer/customerMyPage";
+			
+		}else {
+			return "member/loginPage";
+		}
+		
+	}
+	
+	
 	
 	@RequestMapping(value = "/seller.login.do", method = RequestMethod.GET)
 	public String loginSeller(Seller s, HttpServletRequest req, HttpServletResponse res) {
@@ -101,7 +124,7 @@ public class MemberController {
 		
 		MDAO.logoutCustomer(req, res);
 		MDAO.csmLoginCheck(req, res);
-		return "member/loginArea";
+		return "customer/customerMain2";
 			
 	}
 	
@@ -115,13 +138,13 @@ public class MemberController {
 		
 	}
 
-	@RequestMapping(value = "/shopbag.get.do", method = RequestMethod.GET)
-	public String shopbagGet(Shoppingbag sb, HttpServletRequest req, HttpServletResponse res) {
+	//@RequestMapping(value = "/shopbag.get.do", method = RequestMethod.GET)
+	//public String shopbagGet(Shoppingbag sb, HttpServletRequest req, HttpServletResponse res) {
 
-		MDAO.getCart(sb, req, res);
-		return "member/as";
+		//MDAO.getCart(sb, req, res);
+		//return "member/as";
 
-	}
+	//}
 
 	@RequestMapping(value = "/customer.update.go", method = RequestMethod.GET)
 	public String goUpdateCustomer(HttpServletRequest req, HttpServletResponse res) {
@@ -220,7 +243,7 @@ public class MemberController {
 			
 			MDAO.withdrawSeller(s, req, res);
 			MDAO.logoutCustomer(req, res);
-			MDAO.slLoginCheck(req, res);	
+			MDAO.slLoginCheck(req, res);
 		}
 		return "member/loginPage";
 		

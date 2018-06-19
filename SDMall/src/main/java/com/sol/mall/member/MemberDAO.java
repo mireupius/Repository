@@ -152,15 +152,31 @@ public class MemberDAO {
 
 		if (cc != null) {
 			req.setAttribute("loginInfo", "csmLoginOK.jsp");
-			System.out.println("csmLoginOK ------ ");
+			
 			return true;
 
 		} else {
-			System.out.println("loginArea ------ ");
 			req.setAttribute("loginInfo", "loginArea.jsp");
 			return false;
 		}
 
+	}
+	
+	public boolean csmLoginCheck2(HttpServletRequest req, HttpServletResponse res) {
+		
+		Customer cc = (Customer) req.getSession().getAttribute("loginCustomer");
+		
+		if (cc != null) {
+			//req.setAttribute("loginInfo", "csmLoginOK.jsp");
+			System.out.println("마이페이지이동성공 ------ ");
+			return true;
+			
+		} else {
+			System.out.println("마이페이지이동실패 ------ ");
+			req.setAttribute("loginInfo", "loginArea.jsp");
+			return false;
+		}
+		
 	}
 
 	public boolean slLoginCheck(HttpServletRequest req, HttpServletResponse res) {

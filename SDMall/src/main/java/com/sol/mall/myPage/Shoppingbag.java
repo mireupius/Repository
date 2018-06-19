@@ -1,6 +1,7 @@
-package com.sol.mall.member;
+package com.sol.mall.myPage;
 
 import java.math.BigDecimal;
+import java.util.Date;
 
 
 public class Shoppingbag {
@@ -14,10 +15,15 @@ public class Shoppingbag {
 	private BigDecimal sb_optionPrice;
 	private BigDecimal sb_quantity;
 	private String sb_shippingFee;
+	private Date sb_orderDate;
+	
+	public Shoppingbag() {
+		// TODO Auto-generated constructor stub
+	}
 
 	public Shoppingbag(BigDecimal sb_gd_no, String sb_csm_id, String sb_Pname, BigDecimal sb_Pprice,
 			BigDecimal sb_PSprice, String sb_Img, String sb_optionName, BigDecimal sb_optionPrice,
-			BigDecimal sb_quantity, String sb_shippingFee) {
+			BigDecimal sb_quantity, String sb_shippingFee, Date sb_orderDate) {
 		super();
 		this.sb_gd_no = sb_gd_no;
 		this.sb_csm_id = sb_csm_id;
@@ -29,10 +35,7 @@ public class Shoppingbag {
 		this.sb_optionPrice = sb_optionPrice;
 		this.sb_quantity = sb_quantity;
 		this.sb_shippingFee = sb_shippingFee;
-	}
-
-	public Shoppingbag() {
-		// TODO Auto-generated constructor stub
+		this.sb_orderDate = sb_orderDate;
 	}
 
 	public BigDecimal getSb_gd_no() {
@@ -115,4 +118,12 @@ public class Shoppingbag {
 		this.sb_shippingFee = sb_shippingFee;
 	}
 
+	public Date getSb_orderDate() {
+		return sb_orderDate;
+	}
+
+	public void setSb_orderDate(Date sb_orderDate) {
+		this.sb_orderDate = sb_orderDate;
+	}
+	
 }

@@ -1,11 +1,19 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="utf-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="utf-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>	
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
+<link rel="stylesheet" type="text/css" href="resources/css/bootstrap4/bootstrap.min.css">
 <link rel="stylesheet" type="text/css" href="resources/css/main_styles.css">
+<script type="text/javascript" src="resources/js/jquery.js"></script>
+<script type="text/javascript">
+$(function() {
+	
+});
+
+</script>
 </head>
 <body>
 
@@ -47,15 +55,21 @@
 						<div class="wishlist_cart d-flex flex-row align-items-center justify-content-end">
 							<div class="wishlist d-flex flex-row align-items-center justify-content-end">
 								<div class="wishlist_content">
-									<div class="wishlist_icon"><img src="resources/etc/icon-login.png" alt=""></div>
-									<div class="wishlist_text"><a href="#">로그인</a></div>
+									<div class="wishlist_icon"><img src="resources/etc/icon-login.png"></div>
+									<div class="wishlist_text">
+									<c:if test="${sessionScope.loginCustomer == null }">
+									<a href="member.loginPage">로그인</a>
+									</c:if>
+									<c:if test="${sessionScope.loginCustomer != null }">
+									<a href="customer.logout.do">로그아웃</a>
+									</c:if>
+									</div>
 								</div>
-							</div>
 							<!-- Myhome -->
 							<div class="wishlist d-flex flex-row align-items-center justify-content-end">
 								<div class="wishlist_content">
-									<div class="wishlist_icon"><img src="resources/etc/icon-myhome.png" alt=""></div>
-									<div class="wishlist_text"><a href="#">마이홈</a></div>
+									<div class="wishlist_icon"><img src="resources/etc/icon-myhome.png"></div>
+									<div class="wishlist_text"><a href="customer.myHome.go">마이홈</a></div>
 								</div>
 							</div>
 

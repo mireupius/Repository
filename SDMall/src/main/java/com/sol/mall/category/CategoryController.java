@@ -14,7 +14,7 @@ public class CategoryController {
 	@Autowired
 	private CategoryDAO cDAO;
 
-	@RequestMapping(value = "/", method = RequestMethod.GET)
+	@RequestMapping(value = "/sdds", method = RequestMethod.GET)
 	public String home(HttpServletRequest request, HttpServletResponse response) {
 		cDAO.getAllCategory(request, response);
 		return "main";

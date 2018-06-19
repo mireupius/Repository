@@ -11,6 +11,7 @@ sb_optionName varchar2 (20 char) not null,  -- 옵션이름
 sb_optionPrice number (7) not null,  		-- 옵션 가격
 sb_quantity number (4) not null,			-- 구매수량
 sb_shippingFee varchar2 (20 char) not null	-- 택배비
+sb_orderDate date not null
 );
 
 insert into shoppingBasket values(1111111111111,'cyh524','사과',2000,1000,'apple.png','배',2000,10,'5000'); 

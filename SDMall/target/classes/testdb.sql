@@ -49,7 +49,43 @@ pr_star number(1) not null,
 
 drop table customer_reg cascade constraint purge;
 drop table membership cascade constraint purge;
+drop table shoppingBasket cascade constraint purge;
 
 select * from customer_reg;
 select * from membership;
+
+create table shoppingBasket(
+sb_gd_no number(13) primary key,
+sb_csm_id varchar2(12 char) not null, 
+sb_Pname varchar2 (20 char) not null,
+sb_Pprice number (7) not null,
+sb_PSprice number (7) not null,
+sb_Img varchar2 (200 char) not null,  
+sb_optionName varchar2 (20 char) not null,  -- 옵션이름
+sb_optionPrice number (7) not null,  		-- 옵션 가격
+sb_quantity number (4) not null,			-- 구매수량
+sb_shippingFee varchar2 (20 char) not null,	-- 택배비
+sb_orderDate date not null
+);
+
+select * from shoppingBasket;
+
+select SYSDATE AS BASIC, TO_CHAR(SYSDATE, 'YYYY.MM.DD')
+from dual
+where BASIC between (SELECT BASIC + 1 FROM DUAL) AND (SELECT SYSDATE+ 6 FROM DUAL)
+;
+
+SELECT SYSDATE + 6 FROM DUAL
+SELECT TO_DATE(TO_CHAR(SYSDATE, 'YYYYMMDD')) - TO_DATE(TO_CHAR(SELECT SYSDATE + 6 FROM DUAL, 'YYYYMMDD')) FROM DUAL;
+
+SELECT * FROM shoppingBasket WHERE sb_orderDate BETWEEN (SELECT ADD_MONTHS(SYSDATE, -3) FROM dual) and (SELECT SYSDATE FROM dual);
+
+
+
+insert into shoppingBasket values(1111111111111,'cyh524','사과',2000,1000,'apple.png','배',2000,10,'5000', '2018-04-13'); 
+insert into shoppingBasket values(2222222222222,'moon1765','사과',2000,1000,'apple.png','배',2000,5,'0', '2018-03-12'); 
+insert into shoppingBasket values(3333333333333,'cyh524','원피스',50000,43000,'onepiece.jpg','머리끈',500,1,'0', '2018-02-10'); 
+insert into shoppingBasket values(4444444444444,'moon1765','모자',70000,60000,'manshoes.jpg','썬크림',10000,2,'2500', '2018-05-22'); 
+insert into shoppingBasket values(5555555555555,'cyh524','단화',34000,30000,'Shoes.jpg','검은양말',1000,1,'5000', '2018-01-30');
+
 
