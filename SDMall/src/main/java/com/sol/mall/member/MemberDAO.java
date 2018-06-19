@@ -25,7 +25,7 @@ public class MemberDAO {
 			// 자동으로 못 들어가게 요청파라메터명을 다르게 바꿔줌
 			// System.out.println(req.getParameter("csm_birthday"));
 
-			SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
+			SimpleDateFormat sdf = new SimpleDateFormat("YYYY-MM-DD");
 			String csm_emailFront = req.getParameter("csm_emailFront");
 			String csm_autoCompleteEmail = req.getParameter("csm_autoCompleteEmail");
 			String csm_emailAddress = String.format("%s%s", csm_emailFront, csm_autoCompleteEmail);

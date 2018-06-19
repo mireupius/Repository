@@ -103,16 +103,19 @@ function connectCSMRegisterCheckEvent() {
 		
 		// 생년월일 Event
 		
-		$('.birthdayInput').keyup(function(e) {
+		//$('.birthdayInput').keyup(function(e) {
 
-			if (isEmpty(birthdayField)|| lessThan(birthdayField, 8) != false) {
-				$(".promptTxt_birthday").text("생년월일을 입력해주세요")
-				.css("color", "red").css("display", "block");
-			}else {
-				$(".promptTxt_birthday").empty();
-			}
+			//if (isEmpty(birthdayField)|| lessThan(birthdayField, 11) != false) {
+				//$(".promptTxt_birthday").text("생년월일을 입력해주세요")
+				//.css("color", "red").css("display", "block");
+			//}else {
+				//$(".promptTxt_birthday").empty();
+			//}
 	
-		});
+		//});
+		
+		//$('.birthdayInput').datepicker({}); 
+		
 		
 		// 휴대전화 Event
 		
