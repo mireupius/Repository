@@ -23,6 +23,6 @@ public class GoodsController {
 	@RequestMapping(value = "/goods", method = RequestMethod.GET)
 	public String getGoodsDtlByNo(Goods goods,HttpServletRequest request, HttpServletResponse response) {
 		gDAO.getGoodsByNo(goods, request, response);
-		return "product";
+		return "goods";
 	}
 }

@@ -56,3 +56,23 @@ insert into goodsdtl_tb values(to_char(goodsdtl_sq.nextval),'3338777498778','고
 insert into goodsdtl_tb values(to_char(goodsdtl_sq.nextval),'1184523498778','호랑이1','호랑이굴','아파치2','2025/09/15','2045/06/01','호랑이가죽','55','180','미국',5,'호랑이,가죽,아파치','호랑이제품상세');
 
 select * from goodsdtl_tb;
+
+create table option_tb		
+(		
+op_no	varchar2(5)	primary key,
+op_gdno 	varchar2(13 char)	not null,
+op_name 	varchar2(20 char) 	not null,
+op_price 	number(7) 	not null,
+op_stock 	number(4) 	not null 
+);		
+
+create sequence option_sq
+MAXVALUE 99999
+CYCLE 
+NOCACHE;
+
+
+insert into OPTION_TB values(to_char(option_sq.nextval),'9998887774445','블랙',8000,100);
+insert into OPTION_TB values(to_char(option_sq.nextval),'9998887774445','화이트',5000,50);
+insert into OPTION_TB values(to_char(option_sq.nextval),'9998887774445','레드',0,200);
+select * from option_tb;

@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -391,7 +391,10 @@
 											<div class="color_dropdown_button"><i class="fas fa-chevron-down"></i></div>
 
 											<ul class="color_list">
-												<li><div class="color_mark" style="background: #999999;"></div></li>
+												<c:forEach var="o" items="${option}">
+													<li>${o.op_name } / ${o.op_price } / ${o.op_stock } </li>
+												</c:forEach>
+												<li>블랙</li>
 												<li><div class="color_mark" style="background: #b19c83;"></div></li>
 												<li><div class="color_mark" style="background: #000000;"></div></li>
 											</ul>

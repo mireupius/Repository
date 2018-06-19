@@ -126,7 +126,7 @@
 											<c:forEach var="cate2" items="${allCategory}">
 												<c:if test="${cate2.ct_parentno==cate1.ct_no }">
 													<li class="hassubs">
-														<a href="#">${cate2.ct_clfname }<i class="fas fa-chevron-right"></i></a>
+														<a href="shop?cate3=${cate3.ct_no }">${cate2.ct_clfname }<i class="fas fa-chevron-right"></i></a>
 														<ul>
 														<c:forEach var="cate3" items="${allCategory}">
 															<c:if test="${cate3.ct_parentno==cate2.ct_no }">
