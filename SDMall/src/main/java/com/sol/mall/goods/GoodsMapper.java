@@ -29,9 +29,14 @@ public interface GoodsMapper {
 	// 다중 입력
 	public abstract int insertGdtlTwo(HashMap<String, Object> map);
 
+	// 옵션입력
 	public abstract int insertOpTwo(HashMap<String, Object> map);
 	
 	// 선택한 상품 상세화면표시 	
 	public abstract GoodsView getGoodsView(GoodsView gv);
+
+	// 상품상세화면에 사용할 카테고리
+	public abstract List<Category> getCtgryForView(GoodsCategory gc);
+	
 	
 }

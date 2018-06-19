@@ -256,11 +256,6 @@ h3 {
 								<div id="editor_frame">
 									<!-- 다음에디터 넣기 -->
 									<jsp:include page="../daumeditor/editor.jsp"></jsp:include>
-									<script type="text/javascript">
-										//'수정하기' 모드일 때, 다음과 같이 데이터를 다음오픈에디터에 대입할 수 있다.
-										if ('${board!=null}' == 'true')
-											Editor.modify({'content' : '${board.daumcontent}'});
-									</script>
 								</div>
 							</div>
 							<!-- 에디터 끝 -->

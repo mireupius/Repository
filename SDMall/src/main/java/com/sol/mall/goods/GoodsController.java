@@ -123,9 +123,10 @@ public class GoodsController {
 
 	// 상품상세화면 표시
 	@RequestMapping(value = "/goods.view", method = RequestMethod.GET)
-	public String goodsDtlView(GoodsView gv, HttpServletRequest request, HttpServletResponse response) {
-		
-		gdsDAO.getGoodsView(gv, request, response);
+	public String goodsDtlView(GoodsView gv, GoodsCategory gc, HttpServletRequest request, HttpServletResponse response) {
+		// goodsView.jsp 수정시 daumeditor의 editor.jsp안의 	Editor.modify({'content': '${gdsView.gt_detail}'}); 수정필요
+		// gdsView.gt_detail 다음에디터로 작성한 상세내용 
+		gdsDAO.getGoodsView(gv, gc, request, response);
 		request.setAttribute("contentPage", "../goods/goodsView.jsp");
 		return "sale/saleIndex";
 	}

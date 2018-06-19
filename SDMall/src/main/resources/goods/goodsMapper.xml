@@ -14,6 +14,12 @@
 		where ct_parentno = #{ct_no}
 		and ct_clf  = #{ct_clf}
 	</select>
+	
+	<select id="getCtgryForView" parameterType="com.sol.mall.goods.GoodsCategory"  resultType="com.sol.mall.goods.Category">
+		select * from category_tb
+		where ct_no = #{gd_clfl} OR ct_no = #{gd_clfm} OR ct_no = #{gd_clfs} 
+		order by ct_clf
+	</select>
 
 	<select id="getAllGoods" resultType="com.sol.mall.goods.Goods">
 		select * from goods_tb
@@ -29,6 +35,7 @@
 		where a.gd_no = b.gt_gdno 
 		and a.gd_no = #{gd_no}
  	</select>
+	
 	
 <!-- ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓ CLOB SELECT 세트 ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓ -->
 	<resultMap id="getGoodsDtl"

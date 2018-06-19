@@ -1,5 +1,6 @@
 package com.sol.mall.goods;
 
+import java.text.SimpleDateFormat;
 import java.util.HashMap;
 import java.util.List;
 
@@ -19,7 +20,6 @@ public class GoodsDAO {
 
 	// 카테고리 조회
 	public void getAllcategory(HttpServletRequest request, HttpServletResponse response) {
-
 		request.setAttribute("category", ss.getMapper(GoodsMapper.class).getAllcategory());
 	}
 
@@ -38,9 +38,19 @@ public class GoodsDAO {
 	}
 
 	// 상품상세 조회
-	public void getGoodsView(GoodsView gv, HttpServletRequest request, HttpServletResponse response) {
+	public void getGoodsView(GoodsView gv, GoodsCategory gc, HttpServletRequest request, HttpServletResponse response) {
 
-		request.setAttribute("gdsDtl", ss.getMapper(GoodsMapper.class).getGoodsView(gv));
+		GoodsView gdv = ss.getMapper(GoodsMapper.class).getGoodsView(gv);
+		
+		gc.setGd_clfl(gdv.getGd_clfl());
+		gc.setGd_clfm(gdv.getGd_clfm());
+		gc.setGd_clfs(gdv.getGd_clfs());
+		
+		List<Category> ctgLt = ss.getMapper(GoodsMapper.class).getCtgryForView(gc);
+
+		System.out.println("===="+gdv.getGd_clfl());
+		request.setAttribute("gdsView", gdv);
+		request.setAttribute("gdViewCtg", ctgLt);
 	}
 
 	// 상품목록 조회

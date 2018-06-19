@@ -156,7 +156,7 @@ CREATE TABLE sale_delivery (
 
 select * from goods_tb a, goodsdtl_tb b 
 		where a.gd_no = b.gt_gdno 
-		and a.gd_no = '1001091160004';
+		and a.gd_no = '1001091160005';
 
 
 
@@ -249,3 +249,11 @@ select * from goodsdtl_tb;
 select * from option_tb;
 select * from goods_tb a, goodsdtl_tb b 
 		where a.gd_no = b.gt_gdno ;
+		
+		
+		
+		
+select * from category_tb
+		where ct_no = '100' OR ct_no = '109' OR ct_no = '116'
+		order by ct_clf;
+		and ct_clf  = #{ct_clf}

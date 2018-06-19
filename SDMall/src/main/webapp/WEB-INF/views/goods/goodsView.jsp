@@ -25,6 +25,7 @@ function saveContent() {
 }
 
 $(function(){
+
 //구버전	$(".ct1").click(function() {
 	$(document).on("click",".ct1",function(){
 		var cn = $(this).attr("category_num");
@@ -121,7 +122,6 @@ $(function(){
 });
 
 	var sel_file;
-	
 	$(document).ready(function(){  
 		$("#input_img").on("change", handleImgFileSelect);
 	});
@@ -133,9 +133,7 @@ $(function(){
 			if(!f.type.match("image.*")){alert("확장자는 이미지 확장자만 가능")
 				return;
 			}
-			
 			sel_file = f;
-			
 			var reader = new FileReader();
 			reader.onload = function(e){
 				$("#img1").attr("src", e.target.result); 
@@ -143,11 +141,9 @@ $(function(){
 				$("#img3").attr("src", e.target.result);
 				$("#img4").attr("src", e.target.result);
 			}
-			
 			reader.readAsDataURL(f);
 		});
 	}
-	
 </script>
 
 <title>Goods</title>
@@ -216,9 +212,9 @@ h3 {
 								</tr>
 							</table> <br> <br>
 							<div>
-								<span id="category_select1"></span>
-								<span id="category_select2"></span>
-								<span id="category_select3"></span>
+								<span id="category_select1">${gdViewCtg[0].ct_clfname}</span>
+								<span id="category_select2">${gdViewCtg[1].ct_clfname}</span>
+								<span id="category_select3">${gdViewCtg[2].ct_clfname}</span>
 								<input id="ctgry1"  type="hidden">
 								<input id="ctgry2"  type="hidden">
 								<input id="ctgry3"  type="hidden">
@@ -241,11 +237,11 @@ h3 {
 				<tbody>
 					<tr>
 						<td class="gdTd1">상품명 필수</td>
-						<td class="gdTd2"><input name="gd_name"></td>
+						<td class="gdTd2">${gdsView.gd_name}</td>
 					</tr>
 					<tr>
 						<td class="gdTd1">모델명</td>
-						<td class="gdTd2"><input name="gt_mdlname"></td>
+						<td class="gdTd2">${gdsView.gt_mdlname}</td>
 					</tr>
 					<tr>
 						<td class="gdTd1">상품상세설명 필수</td>
@@ -256,11 +252,6 @@ h3 {
 								<div id="editor_frame">
 									<!-- 다음에디터 넣기 -->
 									<jsp:include page="../daumeditor/editor.jsp"></jsp:include>
-									<script type="text/javascript">
-										//'수정하기' 모드일 때, 다음과 같이 데이터를 다음오픈에디터에 대입할 수 있다.
-										if ('${board!=null}' == 'true')
-											Editor.modify({'content' : '${board.daumcontent}'});
-									</script>
 								</div>
 							</div>
 							<!-- 에디터 끝 -->
@@ -268,7 +259,7 @@ h3 {
 					</tr>
 					<tr>
 						<td class="gdTd1">검색어설정</td>
-						<td class="gdTd2"><input name="gt_keyword"></td>
+						<td class="gdTd2">${gdsView.gt_keyword}</td>
 					</tr>
 				</tbody>
 			</table>
@@ -284,11 +275,11 @@ h3 {
 				<tbody>
 					<tr>
 						<td class="gdTd1">소비자가 필수</td>
-						<td class="gdTd2">${gdsDtl.gd_csmprice}</td>
+						<td class="gdTd2">${gdsView.gd_csmprice}</td>
 					</tr>
 					<tr>
 						<td class="gdTd1">판매가 필수</td>
-						<td class="gdTd2">${gdsDtl.gd_price}</td>
+						<td class="gdTd2">${gdsView.gd_price}</td>
 					</tr>
 					
 				</tbody>
@@ -305,15 +296,15 @@ h3 {
 				<tbody>
 					<tr>
 						<td class="gdTd1">옵션명 필수</td>
-						<td class="gdTd2"><input name="op_name"></td>
+						<%-- <td class="gdTd2">${gdsOp.op_name}</td> --%>
 					</tr>
 					<tr>
 						<td class="gdTd1">옵션가격 필수</td>
-						<td class="gdTd2"><input name="op_price"></td>
+						<%-- <td class="gdTd2">${gdsOp.op_price}</td> --%>
 					</tr>
 					<tr>
 						<td class="gdTd1">옵션재고 필수</td>
-						<td class="gdTd2"><input name="op_stock"></td>
+						<%-- <td class="gdTd2">${gdsOp.op_stock}</td> --%>
 					</tr>
 				</tbody>
 			</table>
@@ -336,28 +327,28 @@ h3 {
 										<span>상세이미지</span><br>
 										<span>권장 500px * 500px</span><br>
 										<span>
-											<img id="img1" src="//img.echosting.cafe24.com/thumb/108x108_2.gif" width="108" height="108" >
+											<img id="img1" src="${pageContext.request.contextPath}/upload/${gdsView.gd_imgl}" width="108" height="108" >
 										</span>
 									</li>
 									<li class="liImg">
 										<span>목록 이미지</span><br>
 										<span>권장 300px * 300px</span><br>
 										<span>
-											<img id="img2" src="//img.echosting.cafe24.com/thumb/108x108_2.gif" width="108" height="108" >
+											<img id="img2" src="${pageContext.request.contextPath}/upload/${gdsView.gd_imgm}" width="108" height="108" >
 										</span>
 									</li>
 									<li  class="liImg">
 										<span>작은목록 이미지</span><br>
 										<span>권장 220px * 220px</span><br>
 										<span>
-											<img id="img3"  src="//img.echosting.cafe24.com/thumb/108x108_2.gif" width="108" height="108"  >
+											<img id="img3"  src="${pageContext.request.contextPath}/upload/${gdsView.gd_imgs}" width="108" height="108"  >
 										</span>
 									</li>
 									<li class="liImg">
 										<span>축소 이미지</span><br>
 										<span>권장 100px * 100px</span><br>
 										<span>
-											<img id="img4" src="//img.echosting.cafe24.com/thumb/108x108_2.gif" width="108" height="108" >
+											<img id="img4" src="${pageContext.request.contextPath}/upload/${gdsView.gd_imgss}" width="108" height="108" >
 										</span>
 									</li>
 								</ul>
@@ -388,35 +379,35 @@ h3 {
 				<tbody>
 					<tr>
 						<td class="gdTd1">제조사</td>
-						<td class="gdTd2"><input name="gt_maker"></td>
+						<td class="gdTd2">${gdsView.gt_maker}</td>
 					</tr>
 					<tr>
 						<td class="gdTd1">브랜드</td>
-						<td class="gdTd2"><input name="gt_brand"></td>
+						<td class="gdTd2">${gdsView.gt_brand}</td>
 					</tr>
 					<tr>
 						<td class="gdTd1">제조일자</td>
-						<td class="gdTd2"><input name="gt_mfd"></td>
+						<td class="gdTd2">${gdsView.gt_mfd}</td>
 					</tr>
 					<tr>
 						<td class="gdTd1">유효기간</td>
-						<td class="gdTd2"><input name="gt_exp"></td>
+						<td class="gdTd2">${gdsView.gt_exp}</td>
 					</tr>
 					<tr>
 						<td class="gdTd1">상품소재</td>
-						<td class="gdTd2"><input name="gt_material"></td>
+						<td class="gdTd2">${gdsView.gt_material}</td>
 					</tr>
 					<tr>
 						<td class="gdTd1">상품 전체중량(kg)</td>
-						<td class="gdTd2"><input name="gt_weight"></td>
+						<td class="gdTd2">${gdsView.gt_weight}</td>
 					</tr>
 					<tr>
 						<td class="gdTd1">상품부피(cm)</td>
-						<td class="gdTd2"><input name="gt_volume"></td>
+						<td class="gdTd2">${gdsView.gt_volume}</td>
 					</tr>
 					<tr>
 						<td class="gdTd1">원산지</td>
-						<td class="gdTd2"><input name="gt_origin"></td>
+						<td class="gdTd2">${gdsView.gt_origin}</td>
 					</tr>
 				</tbody>
 			</table>
@@ -432,7 +423,7 @@ h3 {
 				<tbody>
 					<tr>
 						<td class="gdTd1">배송비 필수</td>
-						<td class="gdTd2"><input name="gd_dlvchrg"></td>
+						<td class="gdTd2">${gdsView.gd_dlvchrg}</td>
 					</tr>
 				</tbody>
 			</table>
@@ -448,7 +439,7 @@ h3 {
 				<tbody>
 					<tr>
 						<td class="gdTd1">판매자ID 필수</td>
-						<td class="gdTd2"><input name="gd_sellerid"></td>
+						<td class="gdTd2">${gdsView.gd_sellerid}</td>
 					</tr>
 				</tbody>
 			</table>
