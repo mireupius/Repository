@@ -39,7 +39,7 @@ h3 {
 					<div>
 						<table class="gdliTb3">
 							<tbody>
-								<tr>
+								<tr class="gdliTb1">
 									<td class="gdLstTd1">상품명 검색</td>
 									<td class="gdLstTd2"><select class="fSelect eSearch"
 										name="eField[]">
@@ -111,7 +111,7 @@ h3 {
 				</div>
 				<div>
 					<div>
-						<table class="gdLstTb3">
+						<table class="table table-bordered table-striped table-condensed">
 							<tbody>
 								<tr>
 									<td class="gdLstTd1">No</td>

@@ -48,7 +48,6 @@ public class GoodsDAO {
 		
 		List<Category> ctgLt = ss.getMapper(GoodsMapper.class).getCtgryForView(gc);
 
-		System.out.println("===="+gdv.getGd_clfl());
 		request.setAttribute("gdsView", gdv);
 		request.setAttribute("gdViewCtg", ctgLt);
 	}
