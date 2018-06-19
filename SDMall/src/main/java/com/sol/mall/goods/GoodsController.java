@@ -86,8 +86,6 @@ public class GoodsController {
 			gd.setGd_imgs(modifyName);
 			gd.setGd_imgss(modifyName);
 
-			System.out.println("이미지 테스트=" + gd.getGd_imgl());
-
 			// FK 설정으로 입력이나 삭제시 주의 상품상세테이블 먼저 입력이나 삭제하고 상품테이블 삭제
 			// 방금입력한 상품번호 어떻게 가져오지?
 			// 입력하고 저장 누르면 저장후 입력화면으로 이동 방금입력한 내용을 다시 입력화면에 표시불가
@@ -127,6 +125,8 @@ public class GoodsController {
 		// goodsView.jsp 수정시 daumeditor의 editor.jsp안의 	Editor.modify({'content': '${gdsView.gt_detail}'}); 수정필요
 		// gdsView.gt_detail 다음에디터로 작성한 상세내용 
 		gdsDAO.getGoodsView(gv, gc, request, response);
+		
+		gdsDAO.getAllcategory(request, response);
 		request.setAttribute("contentPage", "../goods/goodsView.jsp");
 		return "sale/saleIndex";
 	}

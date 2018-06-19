@@ -162,6 +162,11 @@ h3 {
 	float: left;
 	width: 200px;
 }
+
+.tdFont{
+	font-size: 11pt;
+}
+
 </style>
 
 </head>
@@ -178,8 +183,8 @@ h3 {
 			<table class="gdTb3">
 				<tbody>
 					<tr>
-						<td class="gdTd1">상품분류 선택 필수</td>
-						<td class="gdTd2">
+						<td class="gdTd1 tdFont">상품분류 선택 필수</td>
+						<td class="gdTd2 tdFont">
 						<br>
 							<table id="gdTb2">
 								<tr>
@@ -236,16 +241,20 @@ h3 {
 			<table class="gdTb3">
 				<tbody>
 					<tr>
-						<td class="gdTd1">상품명 필수</td>
-						<td class="gdTd2">${gdsView.gd_name}</td>
+						<td class="gdTd1 tdFont">상품번호</td>
+						<td class="gdTd2 tdFont">${gdsView.gd_no}</td>
 					</tr>
 					<tr>
-						<td class="gdTd1">모델명</td>
-						<td class="gdTd2">${gdsView.gt_mdlname}</td>
+						<td class="gdTd1 tdFont">상품명 필수</td>
+						<td class="gdTd2 tdFont">${gdsView.gd_name}</td>
 					</tr>
 					<tr>
-						<td class="gdTd1">상품상세설명 필수</td>
-						<td class="gdTd2">
+						<td class="gdTd1 tdFont">모델명</td>
+						<td class="gdTd2 tdFont">${gdsView.gt_mdlname}</td>
+					</tr>
+					<tr>
+						<td class="gdTd1 tdFont">상품상세설명 필수</td>
+						<td class="gdTd2 tdFont">
 							<!-- 에디터 시작 -->
 							<div>
 								<!-- 에디터프레임호출 영역 -->
@@ -258,8 +267,8 @@ h3 {
 						</td>
 					</tr>
 					<tr>
-						<td class="gdTd1">검색어설정</td>
-						<td class="gdTd2">${gdsView.gt_keyword}</td>
+						<td class="gdTd1 tdFont">검색어설정</td>
+						<td class="gdTd2 tdFont">${gdsView.gt_keyword}</td>
 					</tr>
 				</tbody>
 			</table>
@@ -274,12 +283,12 @@ h3 {
 			<table class="gdTb3">
 				<tbody>
 					<tr>
-						<td class="gdTd1">소비자가 필수</td>
-						<td class="gdTd2">${gdsView.gd_csmprice}</td>
+						<td class="gdTd1 tdFont">소비자가 필수</td>
+						<td class="gdTd2 tdFont">${gdsView.gd_csmprice}</td>
 					</tr>
 					<tr>
-						<td class="gdTd1">판매가 필수</td>
-						<td class="gdTd2">${gdsView.gd_price}</td>
+						<td class="gdTd1 tdFont">판매가 필수</td>
+						<td class="gdTd2 tdFont">${gdsView.gd_price}</td>
 					</tr>
 					
 				</tbody>
@@ -295,15 +304,15 @@ h3 {
 			<table class="gdTb3">
 				<tbody>
 					<tr>
-						<td class="gdTd1">옵션명 필수</td>
+						<td class="gdTd1 tdFont">옵션명 필수</td>
 						<%-- <td class="gdTd2">${gdsOp.op_name}</td> --%>
 					</tr>
 					<tr>
-						<td class="gdTd1">옵션가격 필수</td>
+						<td class="gdTd1 tdFont">옵션가격 필수</td>
 						<%-- <td class="gdTd2">${gdsOp.op_price}</td> --%>
 					</tr>
 					<tr>
-						<td class="gdTd1">옵션재고 필수</td>
+						<td class="gdTd1 tdFont">옵션재고 필수</td>
 						<%-- <td class="gdTd2">${gdsOp.op_stock}</td> --%>
 					</tr>
 				</tbody>
@@ -319,8 +328,8 @@ h3 {
 			<table class="gdTb3">
 				<tbody>
 					<tr>
-						<td class="gdTd1" rowspan="2">이미지 등록 필수</td>
-						<td class="gdTd2">
+						<td class="gdTd1 tdFont" rowspan="2">이미지 등록 필수</td>
+						<td class="gdTd2 tdFont">
 							<div>
 								<ul>
 									<li class="liImg">
@@ -356,7 +365,7 @@ h3 {
 						</td>
 					</tr>
 					<tr>
-						<td class="gdTd2">
+						<td class="gdTd2 tdFont">
 							<span>
 								<input type="file" id="input_img" name="gd_file1">
 								<input type="file"  name="gd_file2" >
@@ -378,36 +387,36 @@ h3 {
 			<table class="gdTb3">
 				<tbody>
 					<tr>
-						<td class="gdTd1">제조사</td>
-						<td class="gdTd2">${gdsView.gt_maker}</td>
+						<td class="gdTd1 tdFont">제조사</td>
+						<td class="gdTd2 tdFont">${gdsView.gt_maker}</td>
 					</tr>
 					<tr>
-						<td class="gdTd1">브랜드</td>
-						<td class="gdTd2">${gdsView.gt_brand}</td>
+						<td class="gdTd1 tdFont">브랜드</td>
+						<td class="gdTd2 tdFont">${gdsView.gt_brand}</td>
 					</tr>
 					<tr>
-						<td class="gdTd1">제조일자</td>
-						<td class="gdTd2">${gdsView.gt_mfd}</td>
+						<td class="gdTd1 tdFont">제조일자</td>
+						<td class="gdTd2 tdFont">${gdsView.gt_mfd}</td>
 					</tr>
 					<tr>
-						<td class="gdTd1">유효기간</td>
-						<td class="gdTd2">${gdsView.gt_exp}</td>
+						<td class="gdTd1 tdFont">유효기간</td>
+						<td class="gdTd2 tdFont">${gdsView.gt_exp}</td>
 					</tr>
 					<tr>
-						<td class="gdTd1">상품소재</td>
-						<td class="gdTd2">${gdsView.gt_material}</td>
+						<td class="gdTd1 tdFont">상품소재</td>
+						<td class="gdTd2 tdFont">${gdsView.gt_material}</td>
 					</tr>
 					<tr>
-						<td class="gdTd1">상품 전체중량(kg)</td>
-						<td class="gdTd2">${gdsView.gt_weight}</td>
+						<td class="gdTd1 tdFont">상품 전체중량(kg)</td>
+						<td class="gdTd2 tdFont">${gdsView.gt_weight}</td>
 					</tr>
 					<tr>
-						<td class="gdTd1">상품부피(cm)</td>
-						<td class="gdTd2">${gdsView.gt_volume}</td>
+						<td class="gdTd1 tdFont">상품부피(cm)</td>
+						<td class="gdTd2 tdFont">${gdsView.gt_volume}</td>
 					</tr>
 					<tr>
-						<td class="gdTd1">원산지</td>
-						<td class="gdTd2">${gdsView.gt_origin}</td>
+						<td class="gdTd1 tdFont">원산지</td>
+						<td class="gdTd2 tdFont">${gdsView.gt_origin}</td>
 					</tr>
 				</tbody>
 			</table>
@@ -422,8 +431,8 @@ h3 {
 			<table class="gdTb3">
 				<tbody>
 					<tr>
-						<td class="gdTd1">배송비 필수</td>
-						<td class="gdTd2">${gdsView.gd_dlvchrg}</td>
+						<td class="gdTd1 tdFont">배송비 필수</td>
+						<td class="gdTd2 tdFont">${gdsView.gd_dlvchrg}</td>
 					</tr>
 				</tbody>
 			</table>
@@ -438,8 +447,8 @@ h3 {
 			<table class="gdTb3">
 				<tbody>
 					<tr>
-						<td class="gdTd1">판매자ID 필수</td>
-						<td class="gdTd2">${gdsView.gd_sellerid}</td>
+						<td class="gdTd1 tdFont">판매자ID 필수</td>
+						<td class="gdTd2 tdFont">${gdsView.gd_sellerid}</td>
 					</tr>
 				</tbody>
 			</table>
@@ -448,7 +457,7 @@ h3 {
 	<br>
 	<div align="center">
 		<!-- 실제 값이 담겨져서 넘어갈 textarea 태그 -->
-		<input type="button" id="save_button" value="내용전송" onclick="saveContent();"/>
+		<input type="button" id="save_button" value="내용수정" onclick="saveContent();"/>
 	</div>
 	<br><br><br><br><br><br>
 </form>
