@@ -43,8 +43,13 @@
 		<beans:property name="typeAliasesPackage" value="com.sol.mall" />
 		<beans:property name="mapperLocations">
 			<beans:list>
+<<<<<<< HEAD
 				<beans:value>classpath:testMapper.xml</beans:value>
 				<beans:value>classpath:memberMapper.xml</beans:value>
+=======
+				<beans:value>classpath:categoryMapper.xml</beans:value>
+				<beans:value>classpath:goodsMapper.xml</beans:value>
+>>>>>>> refs/remotes/origin/hs2
 			</beans:list>
 		</beans:property>
 	</beans:bean>

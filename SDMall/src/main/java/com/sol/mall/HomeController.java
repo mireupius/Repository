@@ -16,11 +16,19 @@ public class HomeController {
 	/**
 	 * Simply selects the home view to render by returning its name.
 	 */
+<<<<<<< HEAD
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String home(HttpServletRequest req, HttpServletResponse res) {
 		
 		req.setAttribute("loginInfo", "loginArea.jsp");
 		return "member/loginPage";
 	}
+=======
+//	@RequestMapping(value = "/", method = RequestMethod.GET)
+//	public String home(HttpServletRequest req, HttpServletResponse res) {
+//	
+//		return "main";
+//	}
+>>>>>>> refs/remotes/origin/hs2
 	
 }
