@@ -284,11 +284,11 @@ h3 {
 				<tbody>
 					<tr>
 						<td class="gdTd1">소비자가 필수</td>
-						<td class="gdTd2">${gd_csmprice}</td>
+						<td class="gdTd2">${gdsDtl.gd_csmprice}</td>
 					</tr>
 					<tr>
 						<td class="gdTd1">판매가 필수</td>
-						<td class="gdTd2">${gd_price }</td>
+						<td class="gdTd2">${gdsDtl.gd_price}</td>
 					</tr>
 					
 				</tbody>

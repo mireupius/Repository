@@ -40,9 +40,7 @@ public class GoodsDAO {
 	// 상품상세 조회
 	public void getGoodsView(GoodsView gv, HttpServletRequest request, HttpServletResponse response) {
 
-		List<GoodsView> gdsDtl = ss.getMapper(GoodsMapper.class).getGoodsView(gv);
-
-		request.setAttribute("gdsDtl", gdsDtl);
+		request.setAttribute("gdsDtl", ss.getMapper(GoodsMapper.class).getGoodsView(gv));
 	}
 
 	// 상품목록 조회

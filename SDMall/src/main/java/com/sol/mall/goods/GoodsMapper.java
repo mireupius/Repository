@@ -32,6 +32,6 @@ public interface GoodsMapper {
 	public abstract int insertOpTwo(HashMap<String, Object> map);
 	
 	// 선택한 상품 상세화면표시 	
-	public abstract List<GoodsView> getGoodsView(GoodsView gv);
+	public abstract GoodsView getGoodsView(GoodsView gv);
 	
 }
