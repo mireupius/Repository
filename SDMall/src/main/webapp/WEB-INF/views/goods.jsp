@@ -387,16 +387,12 @@
 									<ul class="product_color">
 										<li>
 											<span>Color: </span>
-											<div class="color_mark_container"><div id="selected_color" class="color_mark"></div></div>
+											<div class="color_mark_container"><div id="selected_color"></div></div>
 											<div class="color_dropdown_button"><i class="fas fa-chevron-down"></i></div>
-
 											<ul class="color_list">
-												<li><div class="color_mark" style="background: #b19c83;"></div></li>
-												<li><div class="color_mark" style="background: #000000;"></div></li>
 												<c:forEach var="o" items="${option}">
-													<li>${o.op_name } / ${o.op_price } / ${o.op_stock } </li>
+													<li><sapn id="op_name">${o.op_name }</sapn> <span id ="op_price">${o.op_price }</span> / <span id ="op_stock">${o.op_stock }</span> </li>
 												</c:forEach>
-												
 											</ul>
 										</li>
 									</ul>
@@ -408,7 +404,7 @@
 									<button type="button" class="button cart_button">Add to Cart</button>
 									<div class="product_fav"><i class="fas fa-heart"></i></div>
 								</div>
-								
+								<input id="" type="hidden"> 
 							</form>
 						</div>
 					</div>
