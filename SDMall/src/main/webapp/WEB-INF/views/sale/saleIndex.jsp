@@ -89,13 +89,12 @@
 							class="fa fa-cogs"></i> <span>판매관리</span>
 					</a>
 						<ul class="sub">
-							<li><a href="#.html">주문조회</a></li>
 							<li><a href="sale.delivery.go">발주발송관리</a></li>
 							<li><a href="sale.goingDelivery.go">배송현황관리</a></li>
-							<li><a href="#.html">구매확정내역</a></li>
-							<li><a href="#.html">취소관리</a></li>
-							<li><a href="#.html">반품관리</a></li>
-							<li><a href="#.html">교환관리</a></li>
+							<li><a href="sale.confirmDelivery.go">구매확정내역</a></li>
+							<li><a href="sale.cancelDelivery.go">취소관리</a></li>
+							<li><a href="sale.returnDelivery.go">반품관리</a></li>
+							<li><a href="sale.exchangeDelivery.go">교환관리</a></li>
 						</ul></li>
 					<li class="sub-menu"><a href="javascript:;"> <i
 							class="fa fa-book"></i> <span>정산관리</span>
@@ -185,6 +184,7 @@
 		
 		
 		
+		
         $(document).ready(function () {
             $("#date-popover").popover({html: true, trigger: "manual"});
             $("#date-popover").hide();
@@ -218,6 +218,7 @@
             console.log('nav ' + nav + ' to: ' + to.month + '/' + to.year);
         }
     
+	
 	
 	
 	

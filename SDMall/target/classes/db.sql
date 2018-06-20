@@ -1,4 +1,14 @@
 select * from sale_delivery where sd_delivery_state != '배송중' order by sd_order_date
+select sd_delivery_type from sale_delivery;
+
+update sale_delivery set sd_delivery_state = '구매확정'  where  sd_delivery_pno = 2018052291233612;
+update sale_delivery set sd_delivery_state = '구매확정'  where  sd_delivery_pno = 2018052291233613;
+update sale_delivery set sd_claim = '반품'  where  sd_delivery_pno = '2018052391233614';
+update sale_delivery set sd_claim = '반품'  where  sd_delivery_pno = '2018052391233615';
+update sale_delivery set sd_claim = '교환'  where  sd_delivery_pno = '2018052391233616';
+update sale_delivery set sd_claim = '교환'  where  sd_delivery_pno = '2018052391233617';
+update sale_delivery set sd_claim = '취소'  where  sd_delivery_pno = '2018052391233618';
+update sale_delivery set sd_claim = '취소'  where  sd_delivery_pno = '2018052491233619';
 
 insert into sale_delivery values('aaa',	'2018052291233612',	'2018052252351030',	null,	null,	null,	'장희원',	'aa',	'장희원',	'발송대기',	'신규주문',	2500,	'2917445930',	'헤어핀2',	'조합형옵션상품',	'컬러:블루',	2,	0,	5600,	5600,	5600,	null,	'010-0000-0001',	'서울특별시 송파구 오금로32길 5 (송파동, 가락삼익맨숀) 000동000호',	'010-4717-0038',	'05674',	'부재시 경비실에 맡겨주세요',	'(04306) 서울특별시 용산구 청파로71길  77-77',	to_date('20180522','yyyyMMdd'),	null,	'신용카드',null,null	);
 insert into sale_delivery values('aaa',	'2018052291233613',	'2018052252351030',	null,	null,	null,	'장희원',	'aa',	'장희원',	'발송대기',	'신규주문',	2500,	'2917445931',	'헤어핀3',	'조합형옵션상품',	'컬러:블랙',	2,	0,	5700,	5700,	5700,	null,	'010-0000-0002',	'서울특별시 송파구 오금로32길 5 (송파동, 가락삼익맨숀) 000동000호',	'010-4717-0039',	'05675',	null,	'(04306) 서울특별시 용산구 청파로71길  77-77',	to_date('20180522','yyyyMMdd'),	null,	'신용카드',null,null	);
@@ -24,6 +34,8 @@ DROP TABLE sale_delivery
 
 ALTER TABLE sale_delivery add(sd_go_delivery_date date);
 ALTER TABLE sale_delivery add(d_seller_id varchar2 (12 char));
+
+ALTER TABLE sale_delivery RENAME COLUMN sd_delivery_method TO sd_delivery_type;
 
 
 ALTER TABLE sale_delivery

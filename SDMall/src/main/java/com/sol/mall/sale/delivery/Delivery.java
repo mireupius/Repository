@@ -4,6 +4,7 @@ import java.math.BigDecimal;
 import java.util.Date;
 
 public class Delivery {
+	private String sd_seller_id;
 	private String sd_delivery_pno;
 	private String sd_delivery_no;
 	private String sd_courier;
@@ -41,15 +42,25 @@ public class Delivery {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Delivery(String sd_delivery_pno, String sd_delivery_no, String sd_courier, String sd_invoice_no,
-			Date sd_delivery_done_date, String sd_customer_name, String sd_customer_id, String sd_taker_name,
-			String sd_delivery_state, String sd_state_detail, BigDecimal sd_delivery_cost, String sd_product_no,
-			String sd_product_name, String sd_option_type, String sd_option_info, BigDecimal sd_amount,
-			BigDecimal sd_option_price, BigDecimal sd_product_price, BigDecimal sd_product_sellprice,
-			BigDecimal sd_total_price, Date sd_check_date, String sd_taker_phone, String sd_take_area,
-			String sd_customer_ph, String sd_postno, String sd_message, String sd_out_area, Date sd_order_date,
-			String sd_claim, String sd_pay_method, Date sd_go_delivery_date, String sd_delivery_type) {
+	public String getSd_seller_id() {
+		return sd_seller_id;
+	}
+
+	public void setSd_seller_id(String sd_seller_id) {
+		this.sd_seller_id = sd_seller_id;
+	}
+
+	public Delivery(String sd_seller_id, String sd_delivery_pno, String sd_delivery_no, String sd_courier,
+			String sd_invoice_no, Date sd_delivery_done_date, String sd_customer_name, String sd_customer_id,
+			String sd_taker_name, String sd_delivery_state, String sd_state_detail, BigDecimal sd_delivery_cost,
+			String sd_product_no, String sd_product_name, String sd_option_type, String sd_option_info,
+			BigDecimal sd_amount, BigDecimal sd_option_price, BigDecimal sd_product_price,
+			BigDecimal sd_product_sellprice, BigDecimal sd_total_price, Date sd_check_date, String sd_taker_phone,
+			String sd_take_area, String sd_customer_ph, String sd_postno, String sd_message, String sd_out_area,
+			Date sd_order_date, String sd_claim, String sd_pay_method, Date sd_go_delivery_date,
+			String sd_delivery_type) {
 		super();
+		this.sd_seller_id = sd_seller_id;
 		this.sd_delivery_pno = sd_delivery_pno;
 		this.sd_delivery_no = sd_delivery_no;
 		this.sd_courier = sd_courier;

@@ -55,7 +55,6 @@ public class ExcelDAO {
 			ReadOption readOption = new ReadOption();
 			readOption.setFilePath(excel.getAbsolutePath());
 
-			System.out.println(excel.getAbsolutePath());
 			readOption.setOutputColumns("A", "B", "C");
 
 			readOption.setStartRow(0);
@@ -66,8 +65,6 @@ public class ExcelDAO {
 
 			int all = excelContent.size();
 			int success = 0;
-
-			System.out.println(excelContent.size() + "??????????");
 
 			for (int i = 1; i < excelContent.size(); i++) {
 				d = new Delivery();
@@ -98,8 +95,10 @@ public class ExcelDAO {
 		File[] innerFiles = selectedDir.listFiles();
 
 		// 하위 디렉토리 삭제
-		for (int i = 0; i < innerFiles.length; i++) {
-			innerFiles[i].delete();
+		if (innerFiles.length != 0) {
+			for (int i = 0; i < innerFiles.length; i++) {
+				innerFiles[i].delete();
+			}
 		}
 
 		String excelName = "excel.xlsx";

@@ -1,13 +1,14 @@
 @charset "UTF-8";
 
 #deliveryTableDiv {
-	height: 450px;
+	height: 415px;
 	border: #c5c5c5 solid 1px;
 	padding: 0px;
 	overflow: auto;
 	white-space: nowrap;
 	padding: 0px;
 	border: #c5c5c5 solid 1px;
+	margin-bottom: 10px;
 }
 
 #inputVal {
@@ -30,7 +31,16 @@
 	font-size: 11pt;
 }
 
+.tableTr td {
+	text-align: center;
+	padding: 5px !important;
+}
+
 .deliver_no_input {
 	width: 130px;
 	height: 25px;
+}
+
+#deliveryTable {
+	margin: 0px;
 }

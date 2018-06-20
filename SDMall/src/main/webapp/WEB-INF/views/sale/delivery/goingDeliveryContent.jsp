@@ -92,8 +92,7 @@
 			<div class="showback" id="inputSets">
 
 				<span>배송중 :<a href="sale.sendingDelivery.go">${sendingDeliveryNum }</a>건
-				</span> 
-				<span>배송완료 :<a href="sale.sendDoneDelivery.go">${sendDoneDeliveryNum }</a>건
+				</span> <span>배송완료 :<a href="sale.sendDoneDelivery.go">${sendDoneDeliveryNum }</a>건
 				</span>
 
 			</div>
@@ -135,52 +134,75 @@
 									</tr>
 								</thead>
 								<tbody>
-									<c:forEach items="${delivery }" var="d">
-										<tr>
-											<td><input type="checkbox" class="checked orderCheck"
-												name="orderCheck" value="${d.sd_delivery_pno}"></td>
-											<td>${d.sd_delivery_pno}</td>
-											<td>${d.sd_delivery_no}</td>
-											<td>${d.sd_go_delivery_date}</td>
-											<td>${d.sd_delivery_type}</td>
-											<td>${d.sd_courier}</td>
-											<td>${d.sd_invoice_no}</td>
-											<td>${d.sd_customer_name}</td>
-											<td>${d.sd_customer_id}</td>
-											<td>${d.sd_taker_name}</td>
-											<td>${d.sd_delivery_state}</td>
-											<td>${d.sd_claim}</td>
-											<td>${d.sd_product_no}</td>
-											<td>${d.sd_product_name}</td>
-											<td>${d.sd_option_type}</td>
-											<td>${d.sd_option_info}</td>
-											<td>${d.sd_amount}</td>
-											<td>${d.sd_product_price}</td>
-											<td>${d.sd_option_price}</td>
-											<td>${d.sd_total_price}</td>
-											<td>${d.sd_delivery_done_date}</td>
-											<td>${d.sd_taker_phone}</td>
-											<td>${d.sd_take_area}</td>
-											<td>${d.sd_customer_ph}</td>
-											<td>${d.sd_postno}</td>
+									<c:choose>
+										<c:when test="${deliverys != '0'}">
+											<c:forEach items="${deliverys }" var="d">
+												<tr class="tableTr">
+													<td><input type="checkbox" class="checked orderCheck"
+														name="orderCheck" value="${d.sd_delivery_pno}"></td>
+													<td>${d.sd_delivery_pno}</td>
+													<td>${d.sd_delivery_no}</td>
+													<td>${d.sd_go_delivery_date}</td>
+													<td>${d.sd_delivery_type}</td>
+													<td>${d.sd_courier}</td>
+													<td>${d.sd_invoice_no}</td>
+													<td>${d.sd_customer_name}</td>
+													<td>${d.sd_customer_id}</td>
+													<td>${d.sd_taker_name}</td>
+													<td>${d.sd_delivery_state}</td>
+													<td>${d.sd_claim}</td>
+													<td>${d.sd_product_no}</td>
+													<td>${d.sd_product_name}</td>
+													<td>${d.sd_option_type}</td>
+													<td>${d.sd_option_info}</td>
+													<td>${d.sd_amount}</td>
+													<td>${d.sd_product_price}</td>
+													<td>${d.sd_option_price}</td>
+													<td>${d.sd_total_price}</td>
+													<td>${d.sd_delivery_done_date}</td>
+													<td>${d.sd_taker_phone}</td>
+													<td>${d.sd_take_area}</td>
+													<td>${d.sd_customer_ph}</td>
+													<td>${d.sd_postno}</td>
 
-										</tr>
-									</c:forEach>
+												</tr>
+											</c:forEach>
+										</c:when>
 
 
+										<c:otherwise>
+											<tr>
+												<td colspan="27">조회된 내용이 없습니다</td>
+											</tr>
+										</c:otherwise>
+									</c:choose>
 								</tbody>
 							</table>
 						</section>
 					</div>
 					<!-- /content-panel -->
+					<c:if test="${pageCount != 0}">
+						<div class="showback" align="center">
+
+							<c:forEach var="i" begin="0" varStatus="num" end="${pageCount }">
+								<a href="${now}?pno=${num.count }">
+									<button type="button" class="btn btn-default">${num.count }</button>
+								</a>
+							</c:forEach>
+
+						</div>
+					</c:if>
+					<div class="showback">
+						<button>엑셀 일괄등록</button>
+					</div>
 				</div>
+
+
 				<!-- /col-lg-4 -->
 			</div>
 
 
-			<div class="showback">
-				<button>엑셀 일괄등록</button>
-			</div>
+
 			<!-- /row -->
 		</section>
 		<!--/wrapper -->
