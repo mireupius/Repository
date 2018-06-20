@@ -46,6 +46,9 @@ buildNumber.properties
 ###
 #properties
 *.properties
+
 *.classpath
+log4j.xml
+
 
 # End of https://www.gitignore.io/api/java,maven,java-web
