@@ -80,12 +80,15 @@ SELECT TO_DATE(TO_CHAR(SYSDATE, 'YYYYMMDD')) - TO_DATE(TO_CHAR(SELECT SYSDATE + 
 
 SELECT * FROM shoppingBasket WHERE sb_orderDate BETWEEN (SELECT ADD_MONTHS(SYSDATE, -3) FROM dual) and (SELECT SYSDATE FROM dual);
 
+SELECT *
+FROM shoppingBasket
+WHERE sb_csm_id = 'vip150'
+AND sb_orderDate BETWEEN (SELECT ADD_MONTHS(SYSDATE, -3) FROM dual) and (SELECT SYSDATE FROM dual);
 
-
-insert into shoppingBasket values(1111111111111,'cyh524','사과',2000,1000,'apple.png','배',2000,10,'5000', '2018-04-13'); 
-insert into shoppingBasket values(2222222222222,'moon1765','사과',2000,1000,'apple.png','배',2000,5,'0', '2018-03-12'); 
-insert into shoppingBasket values(3333333333333,'cyh524','원피스',50000,43000,'onepiece.jpg','머리끈',500,1,'0', '2018-02-10'); 
-insert into shoppingBasket values(4444444444444,'moon1765','모자',70000,60000,'manshoes.jpg','썬크림',10000,2,'2500', '2018-05-22'); 
-insert into shoppingBasket values(5555555555555,'cyh524','단화',34000,30000,'Shoes.jpg','검은양말',1000,1,'5000', '2018-01-30');
+insert into shoppingBasket values(1111111111111,'vip150','사과',2000,1000,'apple.png','배',2000,10,'5000', '2018-04-13'); 
+insert into shoppingBasket values(2222222222222,'vip150','사과',2000,1000,'apple.png','배',2000,5,'0', '2018-03-12'); 
+insert into shoppingBasket values(3333333333333,'vip150','원피스',50000,43000,'onepiece.jpg','머리끈',500,1,'0', '2018-02-10'); 
+insert into shoppingBasket values(4444444444444,'vip150','모자',70000,60000,'manshoes.jpg','썬크림',10000,2,'2500', '2018-05-22'); 
+insert into shoppingBasket values(5555555555555,'vip150','단화',34000,30000,'Shoes.jpg','검은양말',1000,1,'5000', '2018-01-30');
 
 

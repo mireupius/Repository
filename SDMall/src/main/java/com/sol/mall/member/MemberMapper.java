@@ -11,7 +11,6 @@ public interface MemberMapper {
 	public abstract List<Customer> getCustomerById2(Customer c);
 	public abstract Seller getSellerById(Seller s);
 	public abstract List<Seller> getSellerById2(Seller s);
-	public abstract List<Shoppingbag> getcart(Shoppingbag s);
 	public abstract List<Customer> getAllCustomer();
 	public abstract int updateCSMInfo(Customer c);
 	public abstract int updateSLInfo(Seller s);

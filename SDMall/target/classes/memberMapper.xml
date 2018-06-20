@@ -50,13 +50,6 @@
 		where sl_id = #{sl_id}
 	</select>
 	
-	<select id="getcart"
-		parameterType="com.sol.mall.member.Shoppingbag"
-		resultType="com.sol.mall.member.Shoppingbag">
-		select * from shoppingBasket
-		where sb_csm_id = #{sb_csm_id}
-	</select>
-	
 	<update id="updateCSMInfo" parameterType="com.sol.mall.member.Customer">
 		update customer_reg
 		set csm_pw = #{csm_pw}, csm_name = #{csm_name},

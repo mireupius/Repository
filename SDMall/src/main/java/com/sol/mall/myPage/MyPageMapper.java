@@ -4,6 +4,7 @@ import java.util.List;
 
 public interface MyPageMapper {
 	
-	public abstract List<E>
+	public abstract List<Shoppingbag> orderList(Shoppingbag sb);
+	
 
 }

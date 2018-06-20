@@ -205,31 +205,6 @@ public class MemberDAO {
 
 	}
 
-	public void getCart(Shoppingbag sb2, HttpServletRequest req, HttpServletResponse res) {
-
-		Customer cc = (Customer) req.getSession().getAttribute("loginMember");
-
-		System.out.println("==" + sb2.getSb_csm_id());
-
-		sb2.setSb_csm_id(cc.getCsm_id());
-
-		List<Shoppingbag> tt = ss.getMapper(MemberMapper.class).getcart(sb2);
-
-		for (Shoppingbag shoppingbag : tt) {
-
-			System.out.println(shoppingbag.getSb_csm_id());
-		}
-
-		System.out.println(tt.size());
-
-		if (cc.getCsm_id().equals(sb2.getSb_csm_id())) {
-
-			req.setAttribute("shopBag", tt);
-
-		}
-
-	}
-
 	public Customers getAllCustomer(HttpServletRequest req, HttpServletResponse res) {
 
 		return new Customers(ss.getMapper(MemberMapper.class).getAllCustomer());
