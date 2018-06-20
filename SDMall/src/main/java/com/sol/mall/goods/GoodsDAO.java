@@ -1,6 +1,5 @@
 package com.sol.mall.goods;
 
-import java.text.SimpleDateFormat;
 import java.util.HashMap;
 import java.util.List;
 
@@ -10,7 +9,6 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class GoodsDAO {
@@ -52,7 +50,7 @@ public class GoodsDAO {
 		request.setAttribute("gdViewCtg", ctgLt);
 	}
 
-	// 상품목록 조회
+	// 상품목록 전체조회
 	public void getAllGoods(HttpServletRequest request) {
 		List<Goods> gdslist = ss.getMapper(GoodsMapper.class).getAllGoods();
 
@@ -61,6 +59,13 @@ public class GoodsDAO {
 		}
 	}
 
+	// 상품목록 전체조회
+	public GoodsList getGoodsByKey(Keywords k, HttpServletRequest request) {
+		System.out.println("====="+k.getKey_name());
+		System.out.println("====="+k.getKey_value());
+		return new GoodsList(ss.getMapper(GoodsMapper.class).getGoodsByKey(k));
+	}
+	
 	// 입력-----------------------------------------------------------------------
 	public void insertGd(Goods gd, HttpServletRequest request, HttpServletResponse response) {
 		// 이미지 문제
