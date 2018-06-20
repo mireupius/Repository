@@ -16,10 +16,14 @@ public class HomeController {
 	/**
 	 * Simply selects the home view to render by returning its name.
 	 */
-//	@RequestMapping(value = "/", method = RequestMethod.GET)
-//	public String home(HttpServletRequest req, HttpServletResponse res) {
-//	
-//		return "main";
-//	}
-	
+
+	@RequestMapping(value = "/", method = RequestMethod.GET)
+	public String home(HttpServletRequest req, HttpServletResponse res) {
+		
+		
+		//req.setAttribute("loginInfo", "loginArea.jsp");
+		//return "member/loginPage";
+		return "customer/customerMain2";
+	}
+
 }

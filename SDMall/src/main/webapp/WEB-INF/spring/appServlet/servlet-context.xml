@@ -43,9 +43,12 @@
 		<beans:property name="typeAliasesPackage" value="com.sol.mall" />
 		<beans:property name="mapperLocations">
 			<beans:list>
+			
+				<beans:value>classpath:memberMapper.xml</beans:value>
 				<beans:value>classpath:categoryMapper.xml</beans:value>
 				<beans:value>classpath:goodsMapper.xml</beans:value>
 				<beans:value>classpath:optionMapper.xml</beans:value>
+				<beans:value>classpath:myPageMapper.xml</beans:value>
 			</beans:list>
 		</beans:property>
 	</beans:bean>

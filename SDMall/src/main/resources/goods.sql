@@ -12,7 +12,7 @@ create table goods_tb
  gd_clfl  	varchar2 (3char)	not null,
  gd_clfm   	varchar2 (3char),	
  gd_clfs   	varchar2 (3char),	
-gd_sellerid	varchar2 (12char)	not null
+ gd_sellerid	varchar2 (12char)	not null
 );		
 
 drop table goods_tb cascade constraint purge;

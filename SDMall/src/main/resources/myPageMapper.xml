@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sol.mall.myPage.MyPageMapper">
+	<select id="orderList"
+		parameterType="com.sol.mall.myPage.Shoppingbag"
+		resultType="com.sol.mall.myPage.Shoppingbag">
+		select * from shoppingBasket
+		where sb_csm_id = #{sb_csm_id}
+		and sb_orderDate between (select add_months(SYSDATE, #{searchMonth}) from dual) and (select SYSDATE from dual)
+	</select>
+</mapper>
