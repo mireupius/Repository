@@ -1360,13 +1360,12 @@ select option
 }
 .product_quantity
 {
-	width: 182px;
+	width: 370px;
 	height: 50px;
 	border: solid 1px #e5e5e5;
 	border-radius: 5px;
 	overflow: hidden;
 	padding-left: 25px;
-	float: left;
 	margin-right: 30px;
 }
 .product_quantity span
@@ -1382,7 +1381,6 @@ select option
 .product_quantity input
 {
 	display: block;
-	width: 30px;
 	height: 50px;
 	border: none;
 	outline: none;
@@ -1441,11 +1439,10 @@ select option
 }
 .product_color
 {
-	width: 182px;
+	width: 370px;
 	height: 50px;
 	border: solid 1px #e5e5e5;
 	border-radius: 5px;
-	float: left;
 	cursor: pointer;
 }
 .product_color span
@@ -1490,7 +1487,6 @@ select option
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
-	width: 20px;
 	height: 48px;
 	float: right;
 }
