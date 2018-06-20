@@ -4,26 +4,27 @@ import java.math.BigDecimal;
 
 public class Goods {
 
-	private	BigDecimal	gd_no	;
-	private	String	gd_name	;
-	private	BigDecimal	gd_csmprice	;
-	private	BigDecimal	gd_price	;
-	private	BigDecimal	gd_dlvchrg	;
-	private	String	gd_imgl	;
-	private	String	gd_imgm	;
-	private	String	gd_imgs	;
-	private	String	gd_imgss	;
-	private	BigDecimal	gd_clfl	;
-	private	BigDecimal	gd_clfm	;
-	private	BigDecimal	gd_clfs	;
+	private	String	gd_no;
+	private	String	gd_name;
+	private	BigDecimal	gd_csmprice;
+	private	BigDecimal	gd_price;
+	private	String	gd_dlvchrg;
+	private	String	gd_imgl;
+	private	String	gd_imgm;
+	private	String	gd_imgs;
+	private	String	gd_imgss;
+	private	String	gd_clfl;
+	private	String	gd_clfm;
+	private	String	gd_clfs;
+	private String  gd_sellerid;
 
 	public Goods() {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Goods(BigDecimal gd_no, String gd_name, BigDecimal gd_csmprice, BigDecimal gd_price, BigDecimal gd_dlvchrg,
-			String gd_imgl, String gd_imgm, String gd_imgs, String gd_imgss, BigDecimal gd_clfl, BigDecimal gd_clfm,
-			BigDecimal gd_clfs) {
+	public Goods(String gd_no, String gd_name, BigDecimal gd_csmprice, BigDecimal gd_price, String gd_dlvchrg,
+			String gd_imgl, String gd_imgm, String gd_imgs, String gd_imgss, String gd_clfl, String gd_clfm,
+			String gd_clfs) {
 		super();
 		this.gd_no = gd_no;
 		this.gd_name = gd_name;
@@ -39,11 +40,11 @@ public class Goods {
 		this.gd_clfs = gd_clfs;
 	}
 
-	public BigDecimal getGd_no() {
+	public String getGd_no() {
 		return gd_no;
 	}
 
-	public void setGd_no(BigDecimal gd_no) {
+	public void setGd_no(String gd_no) {
 		this.gd_no = gd_no;
 	}
 
@@ -71,11 +72,11 @@ public class Goods {
 		this.gd_price = gd_price;
 	}
 
-	public BigDecimal getGd_dlvchrg() {
+	public String getGd_dlvchrg() {
 		return gd_dlvchrg;
 	}
 
-	public void setGd_dlvchrg(BigDecimal gd_dlvchrg) {
+	public void setGd_dlvchrg(String gd_dlvchrg) {
 		this.gd_dlvchrg = gd_dlvchrg;
 	}
 
@@ -111,30 +112,36 @@ public class Goods {
 		this.gd_imgss = gd_imgss;
 	}
 
-	public BigDecimal getGd_clfl() {
+	public String getGd_clfl() {
 		return gd_clfl;
 	}
 
-	public void setGd_clfl(BigDecimal gd_clfl) {
+	public void setGd_clfl(String gd_clfl) {
 		this.gd_clfl = gd_clfl;
 	}
 
-	public BigDecimal getGd_clfm() {
+	public String getGd_clfm() {
 		return gd_clfm;
 	}
 
-	public void setGd_clfm(BigDecimal gd_clfm) {
+	public void setGd_clfm(String gd_clfm) {
 		this.gd_clfm = gd_clfm;
 	}
 
-	public BigDecimal getGd_clfs() {
+	public String getGd_clfs() {
 		return gd_clfs;
 	}
 
-	public void setGd_clfs(BigDecimal gd_clfs) {
+	public void setGd_clfs(String gd_clfs) {
 		this.gd_clfs = gd_clfs;
 	}
+
+	public String getGd_sellerid() {
+		return gd_sellerid;
+	}
 	
-	
+	public void setGd_sellerid(String gd_sellerid) {
+		this.gd_sellerid = gd_sellerid;
+	}
 	
 }

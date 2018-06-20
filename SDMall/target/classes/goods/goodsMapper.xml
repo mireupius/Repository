@@ -7,13 +7,93 @@
 		select * from category_tb
 	</select>
 
-	<insert id="insertCT" parameterType="com.sol.mall.goods.TestContent">
-		insert into test_editor values(
-		#{daumcontent}
+	<select id="getCategory"
+		parameterType="com.sol.mall.goods.Category"
+		resultType="com.sol.mall.goods.Category">
+		select * from category_tb
+		where ct_parentno = #{ct_no}
+		and ct_clf  = #{ct_clf}
+	</select>
+	
+	<select id="getCtgryForView" parameterType="com.sol.mall.goods.GoodsCategory"  resultType="com.sol.mall.goods.Category">
+		select * from category_tb
+		where ct_no = #{gd_clfl} OR ct_no = #{gd_clfm} OR ct_no = #{gd_clfs} 
+		order by ct_clf
+	</select>
+
+	<select id="getAllGoods" resultType="com.sol.mall.goods.Goods">
+		select * from goods_tb
+	</select>
+	
+	<select id="getGoods" parameterType="com.sol.mall.goods.Goods" resultType="com.sol.mall.goods.Goods">
+		select * from goods_tb
+		where gd_no = #{gd_no}
+	</select>
+	
+	<select id="getGoodsView" parameterType="com.sol.mall.goods.GoodsView" resultType="com.sol.mall.goods.GoodsView">
+		select * from goods_tb a, goodsdtl_tb b 
+		where a.gd_no = b.gt_gdno 
+		and a.gd_no = #{gd_no}
+ 	</select>
+	
+	
+<!-- ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓ CLOB SELECT 세트 ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓ -->
+	<resultMap id="getGoodsDtl"
+		type="com.sol.mall.goods.GoodsDtl">
+		<result property="gt_no" column="gt_no" />
+		<result property="gt_gdno" column="gt_gdno" />
+		<result property="gt_mdlname" column="gt_mdlname" />
+		<result property="gt_maker" column="gt_maker" />
+		<result property="gt_brand" column="gt_brand" />
+		<result property="gt_mfd" column="gt_mfd" />
+		<result property="gt_exp" column="gt_exp" />
+		<result property="gt_material" column="gt_material" />
+		<result property="gt_weight" column="gt_weight" />
+		<result property="gt_volume" column="gt_volume" />
+		<result property="gt_origin" column="gt_origin" />
+		<result property="gt_keyword" column="gt_keyword" />
+		<result property="gt_detail" column="gt_detail" jdbcType="CLOB" />
+	</resultMap>
+
+	<select id="getGoodsDtl" resultMap="getGoodsDtl">
+		select * from goodsdtl_tb
+	</select>
+
+	<!-- insert는 보통처럼 -->
+	<insert id="insertGdsDtl" 
+		parameterType="hashmap" >
+		insert into goodsdtl_tb values(
+			#{gt_no}, #{gt_gdno}, #{gt_mdlname}, #{gt_maker},
+			#{gt_brand}, #{gt_mfd}, #{gt_exp}, #{gt_material},
+			#{gt_weight}, #{gt_volume}, #{gt_origin}, 
+			#{gt_keyword}, #{gt_detail}
+		)
+	</insert>
+<!-- ↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑ CLOB SELECT 세트 ↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑ -->
+	<insert id="insertGds"
+		parameterType="com.sol.mall.goods.Goods">
+		insert into goods_tb values(
+			#{gd_clfl}||#{gd_clfm}||#{gd_clfs}||LPAD(goods_sq.nextval,4,'0'), #{gd_name}, #{gd_csmprice}, #{gd_price},
+			#{gd_dlvchrg}, #{gd_imgl}, #{gd_imgm}, #{gd_imgs},
+			#{gd_imgss}, #{gd_clfl}, #{gd_clfm}, #{gd_clfs}, #{gd_sellerid}
+		)
+	</insert>
+
+	<!-- insert는 보통처럼 -->
+	<insert id="insertGdtlTwo" parameterType="hashmap">
+		insert into goodsdtl_tb values(
+			goodsdtl_sq.nextval, #{goods.gd_clfl}||#{goods.gd_clfm}||#{goods.gd_clfs}||LPAD(goods_sq.currval, 4,'0'), #{goodsDtl.gt_mdlname}, #{goodsDtl.gt_maker},
+			#{goodsDtl.gt_brand}, #{goodsDtl.gt_mfd}, #{goodsDtl.gt_exp}, #{goodsDtl.gt_material},
+			#{goodsDtl.gt_weight}, #{goodsDtl.gt_volume}, #{goodsDtl.gt_origin},
+			#{goodsDtl.gt_keyword}, #{goodsDtl.gt_detail}
+		)
+	</insert>
+
+	<insert id="insertOpTwo" parameterType="hashmap">
+		insert into option_tb values(
+			option_sq.nextval, #{goods.gd_clfl}||#{goods.gd_clfm}||#{goods.gd_clfs}||LPAD(goods_sq.currval, 4,'0'), 
+			#{option.op_name}, #{option.op_price}, #{option.op_stock}
 		)
 	</insert>
 	
-	<select id="getAll" resultType="com.sol.mall.goods.TestContent">
-		select * from test_editor
-	</select>
 </mapper>

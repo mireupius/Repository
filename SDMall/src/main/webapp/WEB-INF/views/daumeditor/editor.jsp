@@ -12,8 +12,7 @@
 				<LI class=tx-list>
 					<DIV id=tx_image class="tx-image tx-btn-trans" unselectable="on">
 						<A title=사진 class=tx-text href="javascript:;">사진</A>
-					</DIV> <!-- 이미지 첨부 버튼 끝 -->
-				<!-- <LI class=tx-list>
+					</DIV> <!-- 이미지 첨부 버튼 끝 --> <!-- <LI class=tx-list>
 					<DIV id=tx_file class="tx-file tx-btn-trans" unselectable="on">
 						<A title=파일 class=tx-text href="javascript:;">파일</A>
 					</DIV>
@@ -416,7 +415,7 @@
 			src="${pageContext.request.contextPath}/resources/daumeditor/images/icon/editor/skin/01/btn_drag01.gif"
 			width=58 height=12 unselectable="on">
 	</DIV>
-<%-- 	다음로고 삭제
+	<%-- 	다음로고 삭제
 		<DIV id=tx_side_bi class=tx-side-bi>
 		<DIV style="TEXT-ALIGN: right">
 			<IMG hspace=4
@@ -459,73 +458,87 @@
 <!-- 에디터 컨테이너 끝 -->
 <script type="text/javascript">
 	var config = {
-		
-		txHost: '', /* 런타임 시 리소스들을 로딩할 때 필요한 부분으로, 경로가 변경되면 이 부분 수정이 필요. ex) http://xxx.xxx.com */
-		txPath: '', /* 런타임 시 리소스들을 로딩할 때 필요한 부분으로, 경로가 변경되면 이 부분 수정이 필요. ex) /xxx/xxx/ */
-		txService: 'sample', /* 수정필요없음. */
-		txProject: 'sample', /* 수정필요없음. 프로젝트가 여러개일 경우만 수정한다. */
-		initializedId: "", /* 대부분의 경우에 빈문자열 */
-		wrapper: "tx_trex_container", /* 에디터를 둘러싸고 있는 레이어 이름(에디터 컨테이너) */
-		form: 'tx_editor_form'+"", /* 등록하기 위한 Form 이름 */
-		txIconPath: "${ pageContext.request.contextPath }/resources/daumeditor/images/icon/editor/", /*에디터에 사용되는 이미지 디렉터리, 필요에 따라 수정한다. */
-		txDecoPath: "${ pageContext.request.contextPath }/resources/daumeditor/images/deco/contents/", /*본문에 사용되는 이미지 디렉터리, 서비스에서 사용할 때는 완성된 컨텐츠로 배포되기 위해 절대경로로 수정한다. */
-		canvas: {
-			initHeight: 200,
-            exitEditor:{
-                /*
-                desc:'빠져 나오시려면 shift+b를 누르세요.',
-                hotKey: {
-                    shiftKey:true,
-                    keyCode:66
-                },
-                nextElement: document.getElementsByTagName('button')[0]
-                */
-            },
-			styles: {
-				color: "#123456", /* 기본 글자색 */
-				fontFamily: "굴림", /* 기본 글자체 */
-				fontSize: "10pt", /* 기본 글자크기 */
-				backgroundColor: "#fff", /*기본 배경색 */
-				lineHeight: "1.5", /*기본 줄간격 */
-				padding: "8px" /* 위지윅 영역의 여백 */
+
+		txHost : '', /* 런타임 시 리소스들을 로딩할 때 필요한 부분으로, 경로가 변경되면 이 부분 수정이 필요. ex) http://xxx.xxx.com */
+		txPath : '', /* 런타임 시 리소스들을 로딩할 때 필요한 부분으로, 경로가 변경되면 이 부분 수정이 필요. ex) /xxx/xxx/ */
+		txService : 'sample', /* 수정필요없음. */
+		txProject : 'sample', /* 수정필요없음. 프로젝트가 여러개일 경우만 수정한다. */
+		initializedId : "", /* 대부분의 경우에 빈문자열 */
+		wrapper : "tx_trex_container", /* 에디터를 둘러싸고 있는 레이어 이름(에디터 컨테이너) */
+		form : 'tx_editor_form' + "", /* 등록하기 위한 Form 이름 */
+		txIconPath : "${ pageContext.request.contextPath }/resources/daumeditor/images/icon/editor/", /*에디터에 사용되는 이미지 디렉터리, 필요에 따라 수정한다. */
+		txDecoPath : "${ pageContext.request.contextPath }/resources/daumeditor/images/deco/contents/", /*본문에 사용되는 이미지 디렉터리, 서비스에서 사용할 때는 완성된 컨텐츠로 배포되기 위해 절대경로로 수정한다. */
+		canvas : {
+			initHeight : 200,
+			exitEditor : {
+			/*
+			desc:'빠져 나오시려면 shift+b를 누르세요.',
+			hotKey: {
+			    shiftKey:true,
+			    keyCode:66
 			},
-			showGuideArea: false
+			nextElement: document.getElementsByTagName('button')[0]
+			 */
+			},
+			styles : {
+				color : "#123456", /* 기본 글자색 */
+				fontFamily : "굴림", /* 기본 글자체 */
+				fontSize : "10pt", /* 기본 글자크기 */
+				backgroundColor : "#fff", /*기본 배경색 */
+				lineHeight : "1.5", /*기본 줄간격 */
+				padding : "8px" /* 위지윅 영역의 여백 */
+			},
+			showGuideArea : false
 		},
-		events: {
-			preventUnload: false
+		events : {
+			preventUnload : false
 		},
-		sidebar: {
-			attachbox: {
-				show: true,
-				confirmForDeleteAll: true
+		sidebar : {
+			attachbox : {
+				show : true,
+				confirmForDeleteAll : true
 			},
 			// 이미지첨부 관련 추가 config
-			attacher:{
-				image:{ 
-					features:{left:250,top:65,width:400,height:190,scrollbars:0}, //팝업창 사이즈 
-					popPageUrl:'${pageContext.request.contextPath}/daumeditor/imagePopup' // 팝업창 주소(콘트롤러 RequestMapping)
-				} 
+			attacher : {
+				image : {
+					features : {
+						left : 250,
+						top : 65,
+						width : 400,
+						height : 190,
+						scrollbars : 0
+					}, //팝업창 사이즈 
+					popPageUrl : '${pageContext.request.contextPath}/daumeditor/imagePopup' // 팝업창 주소(콘트롤러 RequestMapping)
+				}
 			},
 			/* 이미지첨부 관련 추가 config */
-			capacity: { maximum: 5*1024*1024 // 최대 첨부 용량 (5MB) 
+			capacity : {
+				maximum : 5 * 1024 * 1024
+			// 최대 첨부 용량 (5MB) 
 			}
 		},
-		size: {
-			contentWidth: 700 /* 지정된 본문영역의 넓이가 있을 경우에 설정 */
+		size : {
+			contentWidth : 700
+		/* 지정된 본문영역의 넓이가 있을 경우에 설정 */
 		}
 	};
+
 	EditorJSLoader.ready(function(Editor) {
 		var editor = new Editor(config);
 	});
 	
+
+	/* if('${body !=null}'=='true')  body 오블젝트?*/
+		Editor.modify({'content': '${gdsView.gt_detail}'});
+
 </script>
 
 <!-- Sample: Saving Contents -->
 <script type="text/javascript">
 	/* 예제용 함수 goods.jsp에서 호출하게변경*/
-/* 	function saveContent() {
-		Editor.save(); // 이 함수를 호출하여 글을 등록하면 된다.
-	} */
+	/* 	function saveContent() {
+	 Editor.save(); // 이 함수를 호출하여 글을 등록하면 된다.
+	 } */
 	/**
 	 * Editor.save()를 호출한 경우 데이터가 유효한지 검사하기 위해 부르는 콜백함수로
 	 * 상황에 맞게 수정하여 사용한다.
@@ -554,37 +567,40 @@
 	 * @returns {Boolean} 정상적인 경우에 true
 	 */
 	function setForm(editor) {
-        var i, input;
-        var form = editor.getForm();
-        var content = editor.getContent();
-        // 본문 내용을 daumcontent라는 이름의textarea를 만들어서 값을 할당
-        var textarea = document.createElement('textarea');
-        textarea.name = 'daumcontent';
-        textarea.value = content;
-        form.createField(textarea);
-        /* 아래의 코드는 첨부된 데이터를 필드를 생성하여 값을 할당하는 부분으로 상황에 맞게 수정하여 사용한다.
-         첨부된 데이터 중에 주어진 종류(image,file..)에 해당하는 것만 배열로 넘겨준다. */
-        var images = editor.getAttachments('image');
-        for (i = 0; i < images.length; i++) {
-            // existStage는 현재 본문에 존재하는지 여부
-            if (images[i].existStage) {
-                // data는 팝업에서 execAttach 등을 통해 넘긴 데이터
-                alert('attachment information - image[' + i + '] \r\n' + JSON.stringify(images[i].data));
-                input = document.createElement('input');
-                input.type = 'hidden';
-                input.name = 'attach_image';
-                input.value = images[i].data.imageurl;  // 예에서는 이미지경로만 받아서 사용
-                form.createField(input);
-            }
-        }
-        var files = editor.getAttachments('file');
-        for (i = 0; i < files.length; i++) {
-            input = document.createElement('input');
-            input.type = 'hidden';
-            input.name = 'attach_file';
-            input.value = files[i].data.attachurl;
-            form.createField(input);
-        }
-        return true;
+		var i, input;
+		var form = editor.getForm();
+		var content = editor.getContent();
+
+		// 본문 내용을 gt_detail라는 이름의textarea를 만들어서 값을 할당
+		var textarea = document.createElement('textarea');
+		textarea.name = 'gt_detail';
+		textarea.value = content;
+		form.createField(textarea);
+
+		/* 아래의 코드는 첨부된 데이터를 필드를 생성하여 값을 할당하는 부분으로 상황에 맞게 수정하여 사용한다.
+		 첨부된 데이터 중에 주어진 종류(image,file..)에 해당하는 것만 배열로 넘겨준다. */
+		var images = editor.getAttachments('image');
+		for (i = 0; i < images.length; i++) {
+			// existStage는 현재 본문에 존재하는지 여부
+			if (images[i].existStage) {
+				// data는 팝업에서 execAttach 등을 통해 넘긴 데이터
+				// alert('attachment information - image[' + i + '] \r\n' + JSON.stringify(images[i].data));
+				input = document.createElement('input');
+				input.type = 'hidden';
+				input.name = 'attach_image';
+				input.value = images[i].data.imageurl; // 예에서는 이미지경로만 받아서 사용
+				form.createField(input);
+			}
+		}
+
+		var files = editor.getAttachments('file');
+		for (i = 0; i < files.length; i++) {
+			input = document.createElement('input');
+			input.type = 'hidden';
+			input.name = 'attach_file';
+			input.value = files[i].data.attachurl;
+			form.createField(input);
+		}
+		return true;
 	}
 </script>
