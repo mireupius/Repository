@@ -25,6 +25,16 @@ ms_totalBuy number(10) not null,
 ms_point number(7) not null
 );
 
+
+select *
+from membership, CUSTOMER_REG
+where ms_csm_id = csm_id
+and ms_csm_id = 'love77';
+
+
+
+select * from membership;
+
 create table question_Answer(
 qa_Regno number(4) primary key,
 qa_orderNo varchar2(13 char) not null,
@@ -52,21 +62,25 @@ drop table membership cascade constraint purge;
 drop table shoppingBasket cascade constraint purge;
 
 select * from customer_reg;
+select * from seller_reg;
 select * from membership;
 
 create table shoppingBasket(
-sb_gd_no number(13) primary key,
+sb_no number(13) primary key,
+sb_gd_no number(13) not null,
 sb_csm_id varchar2(12 char) not null, 
 sb_Pname varchar2 (20 char) not null,
 sb_Pprice number (7) not null,
 sb_PSprice number (7) not null,
 sb_Img varchar2 (200 char) not null,  
-sb_optionName varchar2 (20 char) not null,  -- ì˜µì…˜ì´ë¦„
-sb_optionPrice number (7) not null,  		-- ì˜µì…˜ ê°€ê²©
-sb_quantity number (4) not null,			-- êµ¬ë§¤ìˆ˜ëŸ‰
-sb_shippingFee varchar2 (20 char) not null,	-- íƒë°°ë¹„
-sb_orderDate date not null
+sb_optionName varchar2 (20 char) not null,  -- ¿É¼ÇÀÌ¸§
+sb_optionPrice number (7) not null,  		-- ¿É¼Ç °¡°İ
+sb_quantity number (4) not null,			-- ±¸¸Å¼ö·®
+sb_shippingFee varchar2 (20 char) not null,	-- ÅÃ¹èºñ
+sb_orderDate date not null					-- ÁÖ¹®ÀÏ
 );
+
+sb_searchMonth number(2) not null
 
 select * from shoppingBasket;
 
@@ -85,10 +99,11 @@ FROM shoppingBasket
 WHERE sb_csm_id = 'vip150'
 AND sb_orderDate BETWEEN (SELECT ADD_MONTHS(SYSDATE, -3) FROM dual) and (SELECT SYSDATE FROM dual);
 
-insert into shoppingBasket values(1111111111111,'vip150','ì‚¬ê³¼',2000,1000,'apple.png','ë°°',2000,10,'5000', '2018-04-13'); 
-insert into shoppingBasket values(2222222222222,'vip150','ì‚¬ê³¼',2000,1000,'apple.png','ë°°',2000,5,'0', '2018-03-12'); 
-insert into shoppingBasket values(3333333333333,'vip150','ì›í”¼ìŠ¤',50000,43000,'onepiece.jpg','ë¨¸ë¦¬ëˆ',500,1,'0', '2018-02-10'); 
-insert into shoppingBasket values(4444444444444,'vip150','ëª¨ì',70000,60000,'manshoes.jpg','ì¬í¬ë¦¼',10000,2,'2500', '2018-05-22'); 
-insert into shoppingBasket values(5555555555555,'vip150','ë‹¨í™”',34000,30000,'Shoes.jpg','ê²€ì€ì–‘ë§',1000,1,'5000', '2018-01-30');
-
+insert into shoppingBasket values(2018010101, 1111111111111,'vip150','»ç°ú',2000,1000,'apple.png','»ç°ú',2000,10,'5000', '2018-04-13'); 
+insert into shoppingBasket values(2018010102, 2222222222222,'vip150','¹è',2000,1000,'pear.png','¹è',2000,5,'0', '2018-03-12'); 
+insert into shoppingBasket values(2018010103, 3333333333333,'vip150','¿øÇÇ½º',50000,43000,'onepiece.jpg','¸Ó¸®²ö',500,1,'0', '2018-02-10'); 
+insert into shoppingBasket values(2018010104, 4444444444444,'vip150','¸ğÀÚ',70000,60000,'manshoes.jpg','½ãÅ©¸²',10000,2,'2500', '2018-05-22'); 
+insert into shoppingBasket values(2018010105, 5555555555555,'vip150','´ÜÈ­',34000,30000,'Shoes.jpg','°ËÀº¾ç¸»',1000,1,'5000', '2018-01-30');
+insert into shoppingBasket values(2018010106, 6666666666666,'vip150','´Ü¼Ò',36000,800,'Shoes.jpg','ÆÄ¶õ¼ÅÃ÷',1000,1,'8000', '2017-11-25');
+insert into shoppingBasket values(2018010107, 7777777777777,'vip150','±Ö',1500,900,'Shoes.jpg','¼Õ¼ö°Ç',1000,1,'2000', '2017-08-11');
 
