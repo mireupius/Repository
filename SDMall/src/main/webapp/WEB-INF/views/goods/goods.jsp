@@ -63,7 +63,7 @@
 											<div class="color_dropdown_button"><i class="fas fa-chevron-down"></i></div>
 											<ul class="color_list">
 												<c:forEach var="o" items="${option}">
-													<li><sapn id="op_name">${o.op_name }</sapn> <span id ="op_price">${o.op_price }</span> / <span id ="op_stock">${o.op_stock }</span> </li>
+													<li><sapn id="op_name">${o.op_name }</sapn> / <span id ="op_price">(+${o.op_price })</span> / <span id ="op_stock">${o.op_stock }</span> </li>
 												</c:forEach>
 											</ul>
 										</li>
@@ -73,10 +73,13 @@
 
 								<div class="product_price">${goodsDtl1.gd_price }</div>
 								<div class="button_container">
-									<button type="button" class="button cart_button">Add to Cart</button>
+									<a href="cart.add" class="button cart_button">Add to Cart</a>
+									<!-- <button type="button" class="button cart_button">Add to Cart</button> -->
 									<div class="product_fav"><i class="fas fa-heart"></i></div>
 								</div>
-								<input id="" type="hidden"> 
+								<input id="gd_no" value="${goodsDtl1.gd_no }"> 
+								<input id="op_no" value="${o[0].op_no}"> 
+								<input id="quantity" value="1"> 
 							</form>
 						</div>
 					</div>
