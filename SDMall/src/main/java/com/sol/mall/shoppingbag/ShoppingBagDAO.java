@@ -13,6 +13,9 @@ public class ShoppingBagDAO {
 	private SqlSession ss;
 
 	public void addToCart(ShoppingBag sb, HttpServletRequest req, HttpServletResponse res) {
+		sb.setSb_no("1");
+		System.out.println(sb.getSb_no());
+		System.out.println(sb.getSb_csmid());
 		try {
 			if (ss.getMapper(ShoppingBagMapper.class).addToCart(sb) == 1) {
 				System.out.println("카트 추가");

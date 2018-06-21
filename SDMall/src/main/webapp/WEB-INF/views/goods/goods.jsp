@@ -73,7 +73,8 @@
 
 								<div class="product_price">${goodsDtl1.gd_price }</div>
 								<div class="button_container">
-									<button type="button" class="button cart_button">Add to Cart</button>
+									<a href="cart.add" class="button cart_button">Add to Cart</a>
+									<!-- <button type="button" class="button cart_button">Add to Cart</button> -->
 									<div class="product_fav"><i class="fas fa-heart"></i></div>
 								</div>
 								<input id="gd_no" value="${goodsDtl1.gd_no }"> 
