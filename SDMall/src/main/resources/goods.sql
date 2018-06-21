@@ -22,7 +22,7 @@ insert into goods_tb values('3338777498778','tomdog',20000,20000,'0,2500','방�
 insert into goods_tb values('1184523498778','호랑이',70000,33000,'0,2500','방사능 고양이.png','방사능 고양이.png','방사능 고양이.png','방사능 고양이.png','100','109','113','apache');
 
 select * from goods_tb;
-
+select * from goods_tb
 
 create table goodsdtl_tb		
 (		

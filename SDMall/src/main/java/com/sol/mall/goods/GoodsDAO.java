@@ -64,9 +64,8 @@ public class GoodsDAO {
 	public void getAllGoods(HttpServletRequest request) {
 		List<Goods> gdslist = ss.getMapper(GoodsMapper.class).getAllGoods();
 
-		if (gdslist.size() > 0) {
-			request.setAttribute("gdslist", gdslist);
-		}
+		request.setAttribute("gdslist", gdslist);
+		request.setAttribute("allGoods", gdslist);
 	}
 
 	// 상품목록 전체조회

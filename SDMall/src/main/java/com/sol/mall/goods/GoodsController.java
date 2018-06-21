@@ -39,7 +39,7 @@ public class GoodsController {
 	public String getAllGoods(HttpServletRequest request, HttpServletResponse response) {
 		cDAO.getAllCategory(request, response);
 		
-		gdsDAO.getAllGoods(request, response);
+		gdsDAO.getAllGoods(request);
 		request.setAttribute("contentPage", "goods/shop.jsp");
 		return "main";
 	}
