@@ -361,18 +361,36 @@ $(document).ready(function()
 		if($('.product_color').length)
 		{
 			var selectedCol = $('#selected_color');
-			var colorItems = $('.color_list li .color_mark');
-			colorItems.each(function()
-			{
-				var colorItem = $(this);
-				colorItem.on('click', function()
-				{
-					var color = colorItem.css('backgroundColor');
-					selectedCol.css('backgroundColor', color);
-				});
-			});
+			var optionItems = $('.color_list li');
+			optionItems.each(function()
+					{
+				var optionItems = $(this);
+				optionItems.on('click', function()
+						{
+					var option = optionItems.text();
+					selectedCol.text(option);
+						});
+					});
 		}
 	}
+	 
+//	function initColor()
+//	{
+//		if($('.product_color').length)
+//		{
+//			var selectedCol = $('#selected_color');
+//			var colorItems = $('.color_list li .color_mark');
+//			colorItems.each(function()
+//			{
+//				var colorItem = $(this);
+//				colorItem.on('click', function()
+//				{
+//					var color = colorItem.css('backgroundColor');
+//					selectedCol.css('backgroundColor', color);
+//				});
+//			});
+//		}
+//	}
 
 	/* 
 

@@ -27,6 +27,16 @@ public class GoodsDAO {
 		return new Categories(ss.getMapper(GoodsMapper.class).getCategory(cg));
 	}
 
+	public void getGoodsByNo(Goods goods, HttpServletRequest request, HttpServletResponse response) {
+		request.setAttribute("goodsDtl1", ss.getMapper(GoodsMapper.class).getGoodsByNo(goods));
+		request.setAttribute("goodsDtl2", ss.getMapper(GoodsMapper.class).getGoodsDtlByNo(goods));
+		request.setAttribute("option", ss.getMapper(OptionMapper.class).getOptionByGdno(goods));
+		System.out.println(goods.getGd_no());
+
+		// ss.getMapper(GoodsMapper.class).getGoodsByNo(goods).getGd_clfl();
+
+	}
+
 	// 상품 조회
 	public void getGd(HttpServletRequest request, HttpServletResponse response) {
 
@@ -39,11 +49,11 @@ public class GoodsDAO {
 	public void getGoodsView(GoodsView gv, GoodsCategory gc, HttpServletRequest request, HttpServletResponse response) {
 
 		GoodsView gdv = ss.getMapper(GoodsMapper.class).getGoodsView(gv);
-		
+
 		gc.setGd_clfl(gdv.getGd_clfl());
 		gc.setGd_clfm(gdv.getGd_clfm());
 		gc.setGd_clfs(gdv.getGd_clfs());
-		
+
 		List<Category> ctgLt = ss.getMapper(GoodsMapper.class).getCtgryForView(gc);
 
 		request.setAttribute("gdsView", gdv);
@@ -54,16 +64,15 @@ public class GoodsDAO {
 	public void getAllGoods(HttpServletRequest request) {
 		List<Goods> gdslist = ss.getMapper(GoodsMapper.class).getAllGoods();
 
-		if (gdslist.size() > 0) {
-			request.setAttribute("gdslist", gdslist);
-		}
+		request.setAttribute("gdslist", gdslist);
+		request.setAttribute("allGoods", gdslist);
 	}
 
 	// 상품목록 전체조회
 	public GoodsList getGoodsByKey(Keywords k, HttpServletRequest request) {
 		return new GoodsList(ss.getMapper(GoodsMapper.class).getGoodsByKey(k));
 	}
-	
+
 	// 입력-----------------------------------------------------------------------
 	public void insertGd(Goods gd, HttpServletRequest request, HttpServletResponse response) {
 		// 이미지 문제
@@ -108,7 +117,7 @@ public class GoodsDAO {
 	}
 
 	// 트랜잭션 3가지 테이블 입력시 상품번호 시퀀스충돌 방지?
-//	@Transactional(rollbackFor = Exception.class)
+	// @Transactional(rollbackFor = Exception.class)
 	public void insertGdsInfo(Goods gd, GoodsDtl gdtl, Option op, HttpServletRequest request,
 			HttpServletResponse response) throws Exception {
 

@@ -16,20 +16,32 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.sol.mall.category.CategoryDAO;
+
 @Controller
 public class GoodsController {
 
 	@Autowired
 	private GoodsDAO gdsDAO;
-
+	
+	@Autowired
+	CategoryDAO cDAO;
 	// 상품등록화면 처음
-	@RequestMapping(value = "/goods.go", method = RequestMethod.GET)
+	@RequestMapping(value = "/goodsReg.go", method = RequestMethod.GET)
 	public String goods(HttpServletRequest request, HttpServletResponse response) {
 
 		gdsDAO.getAllcategory(request, response);
 
 		request.setAttribute("contentPage", "../goods/goods.jsp");
 		return "sale/saleIndex";
+	}
+	@RequestMapping(value = "/shop", method = RequestMethod.GET)
+	public String getAllGoods(HttpServletRequest request, HttpServletResponse response) {
+		cDAO.getAllCategory(request, response);
+		
+		gdsDAO.getAllGoods(request);
+		request.setAttribute("contentPage", "goods/shop.jsp");
+		return "main";
 	}
 
 	// 상품등록작업
@@ -100,6 +112,14 @@ public class GoodsController {
 		request.setAttribute("contentPage", "../goods/goods.jsp");
 
 		return "sale/saleIndex";
+	}
+	@RequestMapping(value = "/goods", method = RequestMethod.GET)
+	public String getGoodsDtlByNo(Goods goods,HttpServletRequest request, HttpServletResponse response) {
+		cDAO.getAllCategory(request, response);
+		
+		gdsDAO.getGoodsByNo(goods, request, response);
+		request.setAttribute("contentPage", "goods/goods.jsp");
+		return "main";
 	}
 
 	// 카테고리 가져오기

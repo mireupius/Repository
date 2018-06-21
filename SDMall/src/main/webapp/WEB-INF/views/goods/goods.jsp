@@ -1,461 +1,269 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
-<meta charset="UTF-8">
-<!-- IE호환모들를 지정 -->
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<!-- 반응형 웹페이지를 적용 -->
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<!-- IE9 버전 이하의 브라우저에서 반응형 웹을 적용 -->
-<script
-	src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-<script src="resources/js/bootstrap/bootstrap.min.js"></script>
-<!-- 다음 에디터 -->
-<link rel=stylesheet type=text/css
-	href="${pageContext.request.contextPath}/resources/daumeditor/css/editor.css"
-	charset=utf-8 />
-<script type=text/javascript charset=utf-8
-	src="${pageContext.request.contextPath}/resources/daumeditor/js/editor_loader.js"></script>
-<script type="text/javascript">
-function saveContent() {
-    Editor.save(); // 이 함수를 호출하여 글을 등록하면 된다.
-}
+<title>${goodsDtl1.gd_name } - SDmall</title>
+<link rel="stylesheet" type="text/css" href="resources/css/product_styles.css">
+<link rel="stylesheet" type="text/css" href="resources/css/product_responsive.css">
 
-$(function(){
-//구버전	$(".ct1").click(function() {
-	$(document).on("click",".ct1",function(){
-		var cn = $(this).attr("category_num");
-		var clfname = $(this).text();
-		var clf = "2";
-		
-		$.ajax({
-			url : "category.get",
-			data : {ct_no : cn, ct_clf : clf},
-			success : function(json) {
-				var ar = json.category;
-				
-				$("#ct12").empty();
-				$("#ct13").empty();
-				$("#category_select1").empty();
-				$("#category_select2").empty();
-				$("#category_select3").empty();
-				
-				if(ar.length > 0){
-					$.each(ar, function(i, c){
-						
-						var fname = $("<li></li>").text(c.ct_clfname);
-						fname.attr("class","ct2");
-						fname.attr("category_num", c.ct_no);
-						$("#ct12").append(fname);
-						// 카테고리 선택 표시 영역
-						$("#category_select1").text(clfname + ">");
-						var input = $("#ctgry1").val(cn);
-		                input.attr("name", "gd_clfl");
-					});
-				
-				}else{
-				
-					// 카테고리 선택 표시 영역
-					$("#category_select1").text(clfname + ">");
-					var input = $("#ctgry1").val(cn);
-	                input.attr("name", "gd_clfl");
-				}
-			}
-		});
-	});
-	
-	// 동적으로 생성된 태그에 이벤트 주기 $(document).on("click",".ct2",function(){
-	$(document).on("click",".ct2",function(){
-		var cn = $(this).attr("category_num");
-		var clfname = $(this).text();
-		var clf = "3";
-		
-		$.ajax({
-			url : "category.get",
-			data : {ct_no : cn, ct_clf : clf},
-			success : function(json) {
-				var ar = json.category;
-				
-				$("#ct13").empty();
-				$("#category_select2").empty();
-				$("#category_select3").empty();
-				
-				if(ar.length > 0){
-					$.each(ar, function(i, c){
-						
-						var fname = $("<li></li>").text(c.ct_clfname);
-						fname.attr("class","ct3");
-						fname.attr("category_num", c.ct_no);
-						$("#ct13").append(fname);
-						
-						// 카테고리 선택 표시 영역
-						$("#category_select2").text(clfname + ">");
-						var input = $("#ctgry2").val(cn);
-		                input.attr("name", "gd_clfm");
-		                
-					});
-				}else{
-					// 카테고리 선택 표시 영역
-					$("#category_select2").text(clfname + ">");
-					var input = $("#ctgry2").val(cn);
-	                input.attr("name", "gd_clfm");
-				}
-			}
-		});
-	});
-	
-	// 동적으로 생성된 태그에 이벤트 주기 $(document).on("click",".ct2",function(){
-	$(document).on("click",".ct3",function(){
-		var cn = $(this).attr("category_num");
-		var clfname = $(this).text();
-		
-		$("#category_select3").empty();
-		// 카테고리 선택 표시 영역
-		$("#category_select3").text(clfname + ">");
-		var input = $("#ctgry3").val(cn);
-        input.attr("name", "gd_clfs");
-	});
-});
-
-	var sel_file;
-	
-	$(document).ready(function(){  
-		$("#input_img").on("change", handleImgFileSelect);
-	});
-
-	function handleImgFileSelect(e){
-		var files = e.target.files;
-		var filesArr = Array.prototype.slice.call(files);
-		filesArr.forEach(function(f){
-			if(!f.type.match("image.*")){alert("확장자는 이미지 확장자만 가능")
-				return;
-			}
-			
-			sel_file = f;
-			
-			var reader = new FileReader();
-			reader.onload = function(e){
-				$("#img1").attr("src", e.target.result); 
-				$("#img2").attr("src", e.target.result);
-				$("#img3").attr("src", e.target.result);
-				$("#img4").attr("src", e.target.result);
-			}
-			
-			reader.readAsDataURL(f);
-		});
-	}
-	
-</script>
-
-<title>Goods</title>
-<link rel="stylesheet" href="resources/css/goods/goods.css">
-<style type="text/css">
-h3 {
-	margin-bottom: 0;
-	margin-top: 0;
-	font-weight: 400;
-	font-size: 14pt;
-	color: #fff;
-	background-color: #848898;
-}
-
-.imgli {
-	float: left;
-	width: 200px;
-}
-</style>
-
+<script src="resources/js/product_custom.js"></script>
 </head>
+
 <body>
-<section id="main-content">
-<section class="wrapper">
-<form name="tx_editor_form" id="tx_editor_form" action="registration.do" method="post" accept-charset="utf-8" encType=multipart/form-data>
-	<div class="gdTb3" data-toggle="collapse" href="#collapse1"
-		aria-expanded="false" aria-controls="collapse1">
-		<h3>표시설정</h3>
-	</div>
-	<div class="collapse in" id="collapse1">
-		<div>
-			<table class="gdTb3">
-				<tbody>
-					<tr>
-						<td class="gdTd1">상품분류 선택 필수</td>
-						<td class="gdTd2">
-						<br>
-							<table id="gdTb2">
-								<tr>
-									<td class="gdinTdleft gdinTdBgC" align="center">대분류</td>
-									<td class="gdinTdcenter gdinTdBgC" align="center">중분류</td>
-									<td class="gdinTdright gdinTdBgC" align="center">소분류</td>
-								</tr>
-								<tr>
-									<td class="gdinTdleft gdinTdBottom height">
-										<div>
-											<ul>
-												<c:forEach var="i" begin="0" end="${category.size() > 0 ? category.size()-1 : category.size() }" step="1">
-													<c:if test="${category[i].ct_clf == '1'}">
-														<li class="ct1" category_num="${category[i].ct_no}" >${category[i].ct_clfname}</li>
-													</c:if>
+
+<div class="super_container">
+
+	<!-- Single Product -->
+
+	<div class="single_product">
+		<div class="container">
+			<div class="row">
+
+				<!-- Images -->
+				<div class="col-lg-2 order-lg-1 order-2">
+					<ul class="image_list">
+						<li data-image="images/single_4.jpg"><img src="images/single_4.jpg" alt=""></li>
+						<li data-image="images/single_2.jpg"><img src="images/single_2.jpg" alt=""></li>
+						<li data-image="images/single_3.jpg"><img src="images/single_3.jpg" alt=""></li>
+					</ul>
+				</div>
+
+				<!-- Selected Image -->
+				<div class="col-lg-5 order-lg-2 order-1">
+					<div class="image_selected"><img src="images/single_4.jpg" alt=""></div>
+				</div>
+
+				<!-- Description -->
+				<div class="col-lg-5 order-3">
+					<div class="product_description">
+						<div class="product_category">Laptops</div>
+						<div class="product_name">${goodsDtl1.gd_name }</div>
+						<div class="rating_r rating_r_4 product_rating"><i></i><i></i><i></i><i></i><i></i></div>
+						<div class="product_text"><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas fermentum. laoreet turpis, nec sollicitudin dolor cursus at. Maecenas aliquet, dolor a faucibus efficitur, nisi tellus cursus urna, eget dictum lacus turpis.</p></div>
+						<div class="order_info d-flex flex-row">
+							<form action="#">
+								<div class="clearfix" style="z-index: 1000;">
+
+									<!-- Product Quantity -->
+									<div class="product_quantity clearfix">
+										<span>Quantity: </span>
+										<input id="quantity_input" type="text" pattern="[0-9]*" value="1">
+										<div class="quantity_buttons">
+											<div id="quantity_inc_button" class="quantity_inc quantity_control"><i class="fas fa-chevron-up"></i></div>
+											<div id="quantity_dec_button" class="quantity_dec quantity_control"><i class="fas fa-chevron-down"></i></div>
+										</div>
+									</div>
+
+									<!-- Product Color -->
+									<ul class="product_color">
+										<li>
+											<span>Color: </span>
+											<div class="color_mark_container"><div id="selected_color"></div></div>
+											<div class="color_dropdown_button"><i class="fas fa-chevron-down"></i></div>
+											<ul class="color_list">
+												<c:forEach var="o" items="${option}">
+													<li><sapn id="op_name">${o.op_name }</sapn> <span id ="op_price">${o.op_price }</span> / <span id ="op_stock">${o.op_stock }</span> </li>
 												</c:forEach>
 											</ul>
-										</div>
-									</td>
-									<td class="gdinTdcenter gdinTdBottom height">
-										<div >
-											<ul id= "ct12"></ul>
-										</div>
-									</td>
-									<td class="gdinTdright gdinTdBottom height">
-										<div>
-											<ul id= "ct13"></ul>
-										</div>
-									</td>
-								</tr>
-							</table> <br> <br>
-							<div>
-								<span id="category_select1"></span>
-								<span id="category_select2"></span>
-								<span id="category_select3"></span>
-								<input id="ctgry1"  type="hidden">
-								<input id="ctgry2"  type="hidden">
-								<input id="ctgry3"  type="hidden">
-							</div>
-							<br>
-						</td>
-					</tr>
-				</tbody>
-			</table>
+										</li>
+									</ul>
+
+								</div>
+
+								<div class="product_price">${goodsDtl1.gd_price }</div>
+								<div class="button_container">
+									<button type="button" class="button cart_button">Add to Cart</button>
+									<div class="product_fav"><i class="fas fa-heart"></i></div>
+								</div>
+								<input id="" type="hidden"> 
+							</form>
+						</div>
+					</div>
+				</div>
+
+			</div>
 		</div>
 	</div>
-	
-	<div class="gdTb3" data-toggle="collapse" href="#collapse2"
-		aria-expanded="false" aria-controls="collapse2">
-		<h3>기본정보</h3>
-	</div>
-	<div class="collapse in" id="collapse2">
-		<div>
-			<table class="gdTb3">
-				<tbody>
-					<tr>
-						<td class="gdTd1">상품명 필수</td>
-						<td class="gdTd2"><input name="gd_name"></td>
-					</tr>
-					<tr>
-						<td class="gdTd1">모델명</td>
-						<td class="gdTd2"><input name="gt_mdlname"></td>
-					</tr>
-					<tr>
-						<td class="gdTd1">상품상세설명 필수</td>
-						<td class="gdTd2">
-							<!-- 에디터 시작 -->
-							<div>
-								<!-- 에디터프레임호출 영역 -->
-								<div id="editor_frame">
-									<!-- 다음에디터 넣기 -->
-									<jsp:include page="../daumeditor/editor.jsp"></jsp:include>
+
+	<!-- Recently Viewed -->
+
+	<div class="viewed">
+		<div class="container">
+			<div class="row">
+				<div class="col">
+					<div class="viewed_title_container">
+						<h3 class="viewed_title">Recently Viewed</h3>
+						<div class="viewed_nav_container">
+							<div class="viewed_nav viewed_prev"><i class="fas fa-chevron-left"></i></div>
+							<div class="viewed_nav viewed_next"><i class="fas fa-chevron-right"></i></div>
+						</div>
+					</div>
+
+					<div class="viewed_slider_container">
+						
+						<!-- Recently Viewed Slider -->
+
+						<div class="owl-carousel owl-theme viewed_slider">
+							
+							<!-- Recently Viewed Item -->
+							<div class="owl-item">
+								<div class="viewed_item discount d-flex flex-column align-items-center justify-content-center text-center">
+									<div class="viewed_image"><img src="images/view_1.jpg" alt=""></div>
+									<div class="viewed_content text-center">
+										<div class="viewed_price">$225<span>$300</span></div>
+										<div class="viewed_name"><a href="#">Beoplay H7</a></div>
+									</div>
+									<ul class="item_marks">
+										<li class="item_mark item_discount">-25%</li>
+										<li class="item_mark item_new">new</li>
+									</ul>
 								</div>
 							</div>
-							<!-- 에디터 끝 -->
-						</td>
-					</tr>
-					<tr>
-						<td class="gdTd1">검색어설정</td>
-						<td class="gdTd2"><input name="gt_keyword"></td>
-					</tr>
-				</tbody>
-			</table>
+
+							<!-- Recently Viewed Item -->
+							<div class="owl-item">
+								<div class="viewed_item d-flex flex-column align-items-center justify-content-center text-center">
+									<div class="viewed_image"><img src="images/view_2.jpg" alt=""></div>
+									<div class="viewed_content text-center">
+										<div class="viewed_price">$379</div>
+										<div class="viewed_name"><a href="#">LUNA Smartphone</a></div>
+									</div>
+									<ul class="item_marks">
+										<li class="item_mark item_discount">-25%</li>
+										<li class="item_mark item_new">new</li>
+									</ul>
+								</div>
+							</div>
+
+							<!-- Recently Viewed Item -->
+							<div class="owl-item">
+								<div class="viewed_item d-flex flex-column align-items-center justify-content-center text-center">
+									<div class="viewed_image"><img src="images/view_3.jpg" alt=""></div>
+									<div class="viewed_content text-center">
+										<div class="viewed_price">$225</div>
+										<div class="viewed_name"><a href="#">Samsung J730F...</a></div>
+									</div>
+									<ul class="item_marks">
+										<li class="item_mark item_discount">-25%</li>
+										<li class="item_mark item_new">new</li>
+									</ul>
+								</div>
+							</div>
+
+							<!-- Recently Viewed Item -->
+							<div class="owl-item">
+								<div class="viewed_item is_new d-flex flex-column align-items-center justify-content-center text-center">
+									<div class="viewed_image"><img src="images/view_4.jpg" alt=""></div>
+									<div class="viewed_content text-center">
+										<div class="viewed_price">$379</div>
+										<div class="viewed_name"><a href="#">Huawei MediaPad...</a></div>
+									</div>
+									<ul class="item_marks">
+										<li class="item_mark item_discount">-25%</li>
+										<li class="item_mark item_new">new</li>
+									</ul>
+								</div>
+							</div>
+
+							<!-- Recently Viewed Item -->
+							<div class="owl-item">
+								<div class="viewed_item discount d-flex flex-column align-items-center justify-content-center text-center">
+									<div class="viewed_image"><img src="images/view_5.jpg" alt=""></div>
+									<div class="viewed_content text-center">
+										<div class="viewed_price">$225<span>$300</span></div>
+										<div class="viewed_name"><a href="#">Sony PS4 Slim</a></div>
+									</div>
+									<ul class="item_marks">
+										<li class="item_mark item_discount">-25%</li>
+										<li class="item_mark item_new">new</li>
+									</ul>
+								</div>
+							</div>
+
+							<!-- Recently Viewed Item -->
+							<div class="owl-item">
+								<div class="viewed_item d-flex flex-column align-items-center justify-content-center text-center">
+									<div class="viewed_image"><img src="images/view_6.jpg" alt=""></div>
+									<div class="viewed_content text-center">
+										<div class="viewed_price">$375</div>
+										<div class="viewed_name"><a href="#">Speedlink...</a></div>
+									</div>
+									<ul class="item_marks">
+										<li class="item_mark item_discount">-25%</li>
+										<li class="item_mark item_new">new</li>
+									</ul>
+								</div>
+							</div>
+						</div>
+
+					</div>
+				</div>
+			</div>
 		</div>
 	</div>
-	<div class="gdTb3" data-toggle="collapse" href="#collapse3"
-		aria-expanded="false" aria-controls="collapse3">
-		<h3>판매정보</h3>
-	</div>
-	<div class="collapse in" id="collapse3">
-		<div>
-			<table class="gdTb3">
-				<tbody>
-					<tr>
-						<td class="gdTd1">소비자가 필수</td>
-						<td class="gdTd2"><input name="gd_csmprice"></td>
-					</tr>
-					<tr>
-						<td class="gdTd1">판매가 필수</td>
-						<td class="gdTd2"><input name="gd_price"></td>
-					</tr>
-					
-				</tbody>
-			</table>
+
+	<!-- Brands -->
+
+	<div class="brands">
+		<div class="container">
+			<div class="row">
+				<div class="col">
+					<div class="brands_slider_container">
+						
+						<!-- Brands Slider -->
+
+						<div class="owl-carousel owl-theme brands_slider">
+							
+							<div class="owl-item"><div class="brands_item d-flex flex-column justify-content-center"><img src="images/brands_1.jpg" alt=""></div></div>
+							<div class="owl-item"><div class="brands_item d-flex flex-column justify-content-center"><img src="images/brands_2.jpg" alt=""></div></div>
+							<div class="owl-item"><div class="brands_item d-flex flex-column justify-content-center"><img src="images/brands_3.jpg" alt=""></div></div>
+							<div class="owl-item"><div class="brands_item d-flex flex-column justify-content-center"><img src="images/brands_4.jpg" alt=""></div></div>
+							<div class="owl-item"><div class="brands_item d-flex flex-column justify-content-center"><img src="images/brands_5.jpg" alt=""></div></div>
+							<div class="owl-item"><div class="brands_item d-flex flex-column justify-content-center"><img src="images/brands_6.jpg" alt=""></div></div>
+							<div class="owl-item"><div class="brands_item d-flex flex-column justify-content-center"><img src="images/brands_7.jpg" alt=""></div></div>
+							<div class="owl-item"><div class="brands_item d-flex flex-column justify-content-center"><img src="images/brands_8.jpg" alt=""></div></div>
+
+						</div>
+						
+						<!-- Brands Slider Navigation -->
+						<div class="brands_nav brands_prev"><i class="fas fa-chevron-left"></i></div>
+						<div class="brands_nav brands_next"><i class="fas fa-chevron-right"></i></div>
+
+					</div>
+				</div>
+			</div>
 		</div>
 	</div>
-	<div class="gdTb3" data-toggle="collapse" href="#collapse4"
-		aria-expanded="false" aria-controls="collapse4">
-		<h3>옵션/재고</h3>
-	</div>
-	<div class="collapse in" id="collapse4">
-		<div>
-			<table class="gdTb3">
-				<tbody>
-					<tr>
-						<td class="gdTd1">옵션명 필수</td>
-						<td class="gdTd2"><input name="op_name"></td>
-					</tr>
-					<tr>
-						<td class="gdTd1">옵션가격 필수</td>
-						<td class="gdTd2"><input name="op_price"></td>
-					</tr>
-					<tr>
-						<td class="gdTd1">옵션재고 필수</td>
-						<td class="gdTd2"><input name="op_stock"></td>
-					</tr>
-				</tbody>
-			</table>
+
+	<!-- Newsletter -->
+
+	<div class="newsletter">
+		<div class="container">
+			<div class="row">
+				<div class="col">
+					<div class="newsletter_container d-flex flex-lg-row flex-column align-items-lg-center align-items-center justify-content-lg-start justify-content-center">
+						<div class="newsletter_title_container">
+							<div class="newsletter_icon"><img src="images/send.png" alt=""></div>
+							<div class="newsletter_title">Sign up for Newsletter</div>
+							<div class="newsletter_text"><p>...and receive %20 coupon for first shopping.</p></div>
+						</div>
+						<div class="newsletter_content clearfix">
+							<form action="#" class="newsletter_form">
+								<input type="email" class="newsletter_input" required="required" placeholder="Enter your email address">
+								<button class="newsletter_button">Subscribe</button>
+							</form>
+							<div class="newsletter_unsubscribe_link"><a href="#">unsubscribe</a></div>
+						</div>
+					</div>
+				</div>
+			</div>
 		</div>
 	</div>
-	<div class="gdTb3" data-toggle="collapse" href="#collapse5"
-		aria-expanded="false" aria-controls="collapse5">
-		<h3>이미지</h3>
-	</div>
-	<div class="collapse in" id="collapse5">
-		<div>
-			<table class="gdTb3">
-				<tbody>
-					<tr>
-						<td class="gdTd1" rowspan="2">이미지 등록 필수</td>
-						<td class="gdTd2">
-							<div>
-								<ul>
-									<li class="liImg">
-										<span>상세이미지</span><br>
-										<span>권장 500px * 500px</span><br>
-										<span>
-											<img id="img1" src="//img.echosting.cafe24.com/thumb/108x108_2.gif" width="108" height="108" >
-										</span>
-									</li>
-									<li class="liImg">
-										<span>목록 이미지</span><br>
-										<span>권장 300px * 300px</span><br>
-										<span>
-											<img id="img2" src="//img.echosting.cafe24.com/thumb/108x108_2.gif" width="108" height="108" >
-										</span>
-									</li>
-									<li  class="liImg">
-										<span>작은목록 이미지</span><br>
-										<span>권장 220px * 220px</span><br>
-										<span>
-											<img id="img3"  src="//img.echosting.cafe24.com/thumb/108x108_2.gif" width="108" height="108"  >
-										</span>
-									</li>
-									<li class="liImg">
-										<span>축소 이미지</span><br>
-										<span>권장 100px * 100px</span><br>
-										<span>
-											<img id="img4" src="//img.echosting.cafe24.com/thumb/108x108_2.gif" width="108" height="108" >
-										</span>
-									</li>
-								</ul>
-							</div><br>
-						</td>
-					</tr>
-					<tr>
-						<td class="gdTd2">
-							<span>
-								<input type="file" id="input_img" name="gd_file1">
-								<input type="file"  name="gd_file2" >
-								<input type="file"  name="gd_file3">
-								<input type="file"  name="gd_file4">
-							</span>
-						</td>
-					</tr>
-				</tbody>
-			</table>
-		</div>
-	</div>
-	<div class="gdTb3" data-toggle="collapse" href="#collapse6"
-		aria-expanded="false" aria-controls="collapse6">
-		<h3>제작 정보</h3>
-	</div>
-	<div class="collapse in" id="collapse6">
-		<div>
-			<table class="gdTb3">
-				<tbody>
-					<tr>
-						<td class="gdTd1">제조사</td>
-						<td class="gdTd2"><input name="gt_maker"></td>
-					</tr>
-					<tr>
-						<td class="gdTd1">브랜드</td>
-						<td class="gdTd2"><input name="gt_brand"></td>
-					</tr>
-					<tr>
-						<td class="gdTd1">제조일자</td>
-						<td class="gdTd2"><input name="gt_mfd"></td>
-					</tr>
-					<tr>
-						<td class="gdTd1">유효기간</td>
-						<td class="gdTd2"><input name="gt_exp"></td>
-					</tr>
-					<tr>
-						<td class="gdTd1">상품소재</td>
-						<td class="gdTd2"><input name="gt_material"></td>
-					</tr>
-					<tr>
-						<td class="gdTd1">상품 전체중량(kg)</td>
-						<td class="gdTd2"><input name="gt_weight"></td>
-					</tr>
-					<tr>
-						<td class="gdTd1">상품부피(cm)</td>
-						<td class="gdTd2"><input name="gt_volume"></td>
-					</tr>
-					<tr>
-						<td class="gdTd1">원산지</td>
-						<td class="gdTd2"><input name="gt_origin"></td>
-					</tr>
-				</tbody>
-			</table>
-		</div>
-	</div>
-	<div class="gdTb3" data-toggle="collapse" href="#collapse7"
-		aria-expanded="false" aria-controls="collapse7">
-		<h3>배송 정보</h3>
-	</div>
-	<div class="collapse in" id="collapse7">
-		<div>
-			<table class="gdTb3">
-				<tbody>
-					<tr>
-						<td class="gdTd1">배송비 필수</td>
-						<td class="gdTd2"><input name="gd_dlvchrg"></td>
-					</tr>
-				</tbody>
-			</table>
-		</div>
-	</div>
-	<div class="gdTb3" data-toggle="collapse" href="#collapse8"
-		aria-expanded="false" aria-controls="collapse8">
-		<h3>판매자 정보</h3>
-	</div>
-	<div class="collapse in" id="collapse8">
-		<div>
-			<table class="gdTb3">
-				<tbody>
-					<tr>
-						<td class="gdTd1">판매자ID 필수</td>
-						<td class="gdTd2"><input name="gd_sellerid"></td>
-					</tr>
-				</tbody>
-			</table>
-		</div>
-	</div>
-	<br>
-	<div align="center">
-		<!-- 실제 값이 담겨져서 넘어갈 textarea 태그 -->
-		<input type="button" id="save_button" value="내용전송" onclick="saveContent();"/>
-	</div>
-	<br><br><br><br><br><br>
-</form>
-</section>
-</section>
+
+</div>
+
+
 </body>
+
+</html>

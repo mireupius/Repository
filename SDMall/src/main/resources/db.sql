@@ -1,19 +1,19 @@
 <<<<<<< HEAD
 	-- 장바구니테이블은 옵션테이블이랑 상품테이블 조인시켜사용 --
 	-- 장바구니 --
-create table shoppingBasket(
-sb_no number(13) primary key
-sb_gd_no number(13) primary not null,
-sb_csm_id varchar2(12 char) not null, 
-sb_Pname varchar2 (20 char) not null,
-sb_Pprice number (7) not null,
-sb_PSprice number (7) not null,
-sb_Img varchar2 (200 char) not null,  
-sb_optionName varchar2 (20 char) not null,  -- 옵션이름
-sb_optionPrice number (7) not null,  		-- 옵션 가격
-sb_quantity number (4) not null,			-- 구매수량
-sb_shippingFee varchar2 (20 char) not null	-- 택배비
-sb_orderDate date not null					-- 주문일
+CREATE TABLE SHOPPINGBASKET(
+SB_NO NUMBER(13) PRIMARY KEY
+SB_GD_NO NUMBER(13) PRIMARY NOT NULL,
+SB_CSM_ID VARCHAR2(12 CHAR) NOT NULL, 
+SB_PNAME VARCHAR2 (20 CHAR) NOT NULL,
+SB_PPRICE NUMBER (7) NOT NULL,
+SB_PSPRICE NUMBER (7) NOT NULL,
+SB_IMG VARCHAR2 (200 CHAR) NOT NULL,  
+SB_OPTIONNAME VARCHAR2 (20 CHAR) NOT NULL,  -- 옵션이름
+SB_OPTIONPRICE NUMBER (7) NOT NULL,  		-- 옵션 가격
+SB_QUANTITY NUMBER (4) NOT NULL,			-- 구매수량
+SB_SHIPPINGFEE VARCHAR2 (20 CHAR) NOT NULL	-- 택배비
+SB_ORDERDATE DATE NOT NULL					-- 주문일
 );
 
 insert into shoppingBasket values(1111111111111,'cyh524','사과',2000,1000,'apple.png','배',2000,10,'5000'); 
