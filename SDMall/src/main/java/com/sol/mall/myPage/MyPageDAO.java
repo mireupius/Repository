@@ -18,7 +18,7 @@ public class MyPageDAO {
 	@Autowired
 	private SqlSession ss;
 	
-	public void getOrderList(Buy bb, HttpServletRequest req, HttpServletResponse res) {
+	public void getOrderList(SearchOrder bb, HttpServletRequest req, HttpServletResponse res) {
 
 		Customer cc = (Customer) req.getSession().getAttribute("loginCustomer");
 
@@ -42,9 +42,6 @@ public class MyPageDAO {
 		//ss.getMapper(MyPageMapper.class).membershipStatus(c);
 		
 		try {
-			System.out.println("==" + m.getMs_csm_id());
-			
-			System.out.println("멤버쉽 초기");
 			
 			Membership mms = ss.getMapper(MyPageMapper.class).membershipStatus(m);
 			

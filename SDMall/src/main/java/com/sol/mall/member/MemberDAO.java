@@ -1,7 +1,6 @@
 package com.sol.mall.member;
 
 import java.text.SimpleDateFormat;
-import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -125,19 +124,8 @@ public class MemberDAO {
 		try {
 			Seller dbS = ss.getMapper(MemberMapper.class).getSellerById(s);
 
-			// if (dbS != null) {
-
-			// if (s.getSl_pw().equals(dbS.getSl_pw())) {
 			req.getSession().setAttribute("loginSeller", dbS);
 			req.getSession().setMaxInactiveInterval(300);
-
-			// }else {
-			// req.setAttribute("r", "비밀번호 오류");
-			// }
-
-			// } else {
-			// req.setAttribute("r", "계정 없음");
-			// }
 
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -168,11 +156,11 @@ public class MemberDAO {
 		
 		if (cc != null) {
 			//req.setAttribute("loginInfo", "csmLoginOK.jsp");
-			System.out.println("마이페이지이동성공 ------ ");
+			System.out.println("마이페이지이동성공");
 			return true;
 			
 		} else {
-			System.out.println("마이페이지이동실패 ------ ");
+			System.out.println("마이페이지이동실패");
 			req.setAttribute("loginInfo", "loginArea.jsp");
 			return false;
 		}

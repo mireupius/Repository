@@ -65,10 +65,10 @@ ${sessionScope.loginCustomer.csm_phoneNo }<br>
 <form action="customer.myHome.orderList">
 
 <select name="sb_searchMonth">
-	<option value="-1">최근 1개월 전</option>
-	<option value="-3">최근 3개월 전</option>
-	<option value="-6">최근 6개월 전</option>
-	<option value="-12">최근 12개월 전</option>
+	<option value="1">최근 1개월 전</option>
+	<option value="3">최근 3개월 전</option>
+	<option value="6">최근 6개월 전</option>
+	<option value="12">최근 12개월 전</option>
 </select>
 
 <input type="submit" value="조회">

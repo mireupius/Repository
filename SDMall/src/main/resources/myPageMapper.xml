@@ -2,11 +2,12 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.sol.mall.myPage.MyPageMapper">
 	<select id="orderList"
-		parameterType="com.sol.mall.myPage.Buy"
+		parameterType="com.sol.mall.myPage.SearchOrder"
 		resultType="com.sol.mall.myPage.Shoppingbag">
 		select * from shoppingBasket
 		where sb_csm_id = #{sb_csm_id}
-		and sb_orderDate between (select add_months(SYSDATE, #{sb_searchMonth}) from dual) and (select SYSDATE from dual)
+		and sb_orderDate between (select add_months(SYSDATE, -#{sb_searchMonth}) from dual) and (select SYSDATE from dual)
+	<!-- #{sb_searchMonth}앞 '-'는 GET방식으로 넘어갈 때 양수로 보여지게 하기 위해서 쿼리를 수정함 -->
 	</select>
 	
 	<select id="membershipStatus"

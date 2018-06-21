@@ -3,16 +3,16 @@ package com.sol.mall.myPage;
 import java.math.BigDecimal;
 import java.util.Date;
 
-public class Buy {
+public class SearchOrder {
 	
 	private String sb_csm_id;
 	private BigDecimal sb_searchMonth;
 	
-	public Buy() {
+	public SearchOrder() {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Buy(String sb_csm_id, BigDecimal sb_searchMonth) {
+	public SearchOrder(String sb_csm_id, BigDecimal sb_searchMonth) {
 		super();
 		this.sb_csm_id = sb_csm_id;
 		this.sb_searchMonth = sb_searchMonth;
