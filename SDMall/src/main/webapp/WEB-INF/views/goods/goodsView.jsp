@@ -246,7 +246,7 @@ h3 {
 					</tr>
 					<tr>
 						<td class="gdTd1 tdFont">상품명 필수</td>
-						<td class="gdTd2 tdFont">${gdsView.gd_name}</td>
+						<td class="gdTd2 tdFont" name="">${gdsView.gd_name}</td>
 					</tr>
 					<tr>
 						<td class="gdTd1 tdFont">모델명</td>

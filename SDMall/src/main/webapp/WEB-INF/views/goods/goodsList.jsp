@@ -90,31 +90,6 @@ $(function(){
 									</select>
 									<input id="sValue" >
 								</tr>
-								<tr>
-									<td class="gdLstTd1">상품분류</td>
-									<td class="gdLstTd2">
-									<span> 
-										<select id="eCategory1">
-												<option value="">- 대분류 선택 -</option>
-												<option value="24">(대분류) Outerwear</option>
-												<option value="25">(대분류) Tops</option>
-												<option value="26">(대분류) Dresses</option>
-												<option value="27">(대분류) Bottoms</option>
-												<option value="28">(대분류) Accessories</option>
-										</select>
-									</span>
-									<span>
-										<select id="">
-												<option value="">- 중분류 선택 -</option>
-										</select>
-									</span>
-									<span>
-										<select id="eCategory3">
-												<option value="">- 소분류 선택 -</option>
-										</select>
-									</span>
-									</td>
-								</tr>
 							</tbody>
 						</table>
 					</div>

@@ -32,9 +32,10 @@ public class GoodsController {
 
 		gdsDAO.getAllcategory(request, response);
 
-		request.setAttribute("contentPage", "../goods/goods.jsp");
+		request.setAttribute("contentPage", "../goods/goodsReg.jsp");
 		return "sale/saleIndex";
 	}
+	
 	@RequestMapping(value = "/shop", method = RequestMethod.GET)
 	public String getAllGoods(HttpServletRequest request, HttpServletResponse response) {
 		cDAO.getAllCategory(request, response);
