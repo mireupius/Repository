@@ -108,7 +108,7 @@ public class MemberDAO {
 
 			// 로그인 성공시
 			req.getSession().setAttribute("loginCustomer", dbC);
-			req.getSession().setMaxInactiveInterval(300);
+			req.getSession().setMaxInactiveInterval(600);
 
 			// 로그인 실패는 AJAX로 유효성 검사
 
