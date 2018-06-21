@@ -83,7 +83,6 @@ public class GoodsDAO {
 		} else {
 			System.out.println("실패");
 		}
-
 	}
 
 	public void insertGdtl(GoodsDtl g, HttpServletRequest request, HttpServletResponse response) {
@@ -138,4 +137,64 @@ public class GoodsDAO {
 		// 입력(옵션테이블)
 		insertOpTwo(map2, request, response);
 	}
+	
+	
+	
+	// 업데이트==================================================
+	
+	
+	// 트랜잭션 3가지 테이블 입력시 상품번호 시퀀스충돌 방지?
+	// @Transactional(rollbackFor = Exception.class)
+	public void updateGdsInfo(Goods gd, GoodsDtl gdtl, Option op, HttpServletRequest request,
+			HttpServletResponse response) throws Exception {
+		
+		// 입력(상품테이블)
+		updateGd(gd, request, response);
+		
+		// 입력(상품상세 파라메터 작성goods, goodsDtl)
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("goods", gd);
+		map.put("goodsDtl", gdtl);
+		// 입력(상품상세테이블)
+		updateGdtlTwo(map, request, response);
+		
+		// 입력(상품상세 파라메터 작성goods, goodsDtl)
+		HashMap<String, Object> map2 = new HashMap<String, Object>();
+		map2.put("goods", gd);
+		map2.put("option", op);
+		// 입력(옵션테이블)
+		updateOpTwo(map2, request, response);
+	}
+	
+	public void updateGd(Goods gd, HttpServletRequest request, HttpServletResponse response) {
+		// 이미지 문제
+
+		if (ss.getMapper(GoodsMapper.class).insertGds(gd) == 1) {
+
+			System.out.println("insertGd성공");
+		} else {
+			System.out.println("실패");
+		}
+	}
+	
+	public void updateGdtlTwo(HashMap<String, Object> map, HttpServletRequest request, HttpServletResponse response) {
+
+		if (ss.getMapper(GoodsMapper.class).insertGdtlTwo(map) == 1) {
+
+			System.out.println("insertGdtlTwo성공");
+		} else {
+			System.out.println("실패");
+		}
+	}
+	
+	public void updateOpTwo(HashMap<String, Object> map, HttpServletRequest request, HttpServletResponse response) {
+
+		if (ss.getMapper(GoodsMapper.class).insertOpTwo(map) == 1) {
+
+			System.out.println("insertOpTwo성공");
+		} else {
+			System.out.println("실패");
+		}
+	}
+	
 }

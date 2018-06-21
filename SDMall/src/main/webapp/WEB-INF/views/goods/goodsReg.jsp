@@ -30,7 +30,7 @@ $(function(){
 		var cn = $(this).attr("category_num");
 		var clfname = $(this).text();
 		var clf = "2";
-		
+
 		$.ajax({
 			url : "category.get",
 			data : {ct_no : cn, ct_clf : clf},
@@ -363,9 +363,9 @@ h3 {
 						<td class="gdTd2">
 							<span>
 								<input type="file" id="input_img" name="gd_file1">
-								<input type="file"  name="gd_file2" >
-								<input type="file"  name="gd_file3">
-								<input type="file"  name="gd_file4">
+								<input type="hidden"  name="gd_file2" >
+								<input type="hidden"  name="gd_file3">
+								<input type="hidden"  name="gd_file4">
 							</span>
 						</td>
 					</tr>

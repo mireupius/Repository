@@ -112,4 +112,33 @@
 		)
 	</insert>
 	
+	
+	<!-- 업데이트 (상품상세 수정)  -->
+	<update id="updateGds"
+		parameterType="com.sol.mall.goods.Goods">
+		update goods_tb 
+		set(
+			#{gd_clfl}||#{gd_clfm}||#{gd_clfs}||LPAD(goods_sq.nextval,4,'0'), #{gd_name}, #{gd_csmprice}, #{gd_price},
+			#{gd_dlvchrg}, #{gd_imgl}, #{gd_imgm}, #{gd_imgs},
+			#{gd_imgss}, #{gd_clfl}, #{gd_clfm}, #{gd_clfs}, #{gd_sellerid}
+		)
+	</update>
+
+	<!-- update는 보통처럼 -->
+	<update id="updateGdtlTwo" parameterType="hashmap">
+		insert into goodsdtl_tb values(
+			goodsdtl_sq.nextval, #{goods.gd_clfl}||#{goods.gd_clfm}||#{goods.gd_clfs}||LPAD(goods_sq.currval, 4,'0'), #{goodsDtl.gt_mdlname}, #{goodsDtl.gt_maker},
+			#{goodsDtl.gt_brand}, #{goodsDtl.gt_mfd}, #{goodsDtl.gt_exp}, #{goodsDtl.gt_material},
+			#{goodsDtl.gt_weight}, #{goodsDtl.gt_volume}, #{goodsDtl.gt_origin},
+			#{goodsDtl.gt_keyword}, #{goodsDtl.gt_detail}
+		)
+	</update>
+
+	<update id="updateOpTwo" parameterType="hashmap">
+		insert into option_tb values(
+			option_sq.nextval, #{goods.gd_clfl}||#{goods.gd_clfm}||#{goods.gd_clfs}||LPAD(goods_sq.currval, 4,'0'), 
+			#{option.op_name}, #{option.op_price}, #{option.op_stock}
+		)
+	</update>
+	
 </mapper>

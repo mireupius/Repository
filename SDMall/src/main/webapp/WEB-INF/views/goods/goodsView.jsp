@@ -173,7 +173,7 @@ h3 {
 <body>
 <section id="main-content">
 <section class="wrapper">
-<form name="tx_editor_form" id="tx_editor_form" action="registration.do" method="post" accept-charset="utf-8" encType=multipart/form-data>
+<form name="tx_editor_form" id="tx_editor_form" action="goodsUpdate.do" method="post" accept-charset="utf-8" encType=multipart/form-data>
 	<div class="gdTb3" data-toggle="collapse" href="#collapse1"
 		aria-expanded="false" aria-controls="collapse1">
 		<h3>표시설정</h3>
@@ -246,11 +246,11 @@ h3 {
 					</tr>
 					<tr>
 						<td class="gdTd1 tdFont">상품명 필수</td>
-						<td class="gdTd2 tdFont" name="">${gdsView.gd_name}</td>
+						<td class="gdTd2 tdFont"><input name="gd_name" value="${gdsView.gd_name}"></td>
 					</tr>
 					<tr>
 						<td class="gdTd1 tdFont">모델명</td>
-						<td class="gdTd2 tdFont">${gdsView.gt_mdlname}</td>
+						<td class="gdTd2 tdFont"><input name="gt_mdlname" value="${gdsView.gt_mdlname}"></td>
 					</tr>
 					<tr>
 						<td class="gdTd1 tdFont">상품상세설명 필수</td>
@@ -268,7 +268,7 @@ h3 {
 					</tr>
 					<tr>
 						<td class="gdTd1 tdFont">검색어설정</td>
-						<td class="gdTd2 tdFont">${gdsView.gt_keyword}</td>
+						<td class="gdTd2 tdFont"><input name="gt_keyword" value="${gdsView.gt_keyword}"></td>
 					</tr>
 				</tbody>
 			</table>
@@ -284,11 +284,11 @@ h3 {
 				<tbody>
 					<tr>
 						<td class="gdTd1 tdFont">소비자가 필수</td>
-						<td class="gdTd2 tdFont">${gdsView.gd_csmprice}</td>
+						<td class="gdTd2 tdFont"><input name="gd_csmprice" value="${gdsView.gd_csmprice}"></td>
 					</tr>
 					<tr>
 						<td class="gdTd1 tdFont">판매가 필수</td>
-						<td class="gdTd2 tdFont">${gdsView.gd_price}</td>
+						<td class="gdTd2 tdFont"><input name="gd_price" value="${gdsView.gd_price}"></td>
 					</tr>
 					
 				</tbody>
@@ -305,15 +305,15 @@ h3 {
 				<tbody>
 					<tr>
 						<td class="gdTd1 tdFont">옵션명 필수</td>
-						<%-- <td class="gdTd2">${gdsOp.op_name}</td> --%>
+						<td class="gdTd2"><input name="op_name" value="${gdsOp.op_name}"></td>
 					</tr>
 					<tr>
 						<td class="gdTd1 tdFont">옵션가격 필수</td>
-						<%-- <td class="gdTd2">${gdsOp.op_price}</td> --%>
+						<td class="gdTd2"><input name="op_price" value="${gdsOp.op_price}"></td>
 					</tr>
 					<tr>
 						<td class="gdTd1 tdFont">옵션재고 필수</td>
-						<%-- <td class="gdTd2">${gdsOp.op_stock}</td> --%>
+						<td class="gdTd2"><input name="op_stock" value="${gdsOp.op_stock}"></td>
 					</tr>
 				</tbody>
 			</table>
@@ -368,9 +368,9 @@ h3 {
 						<td class="gdTd2 tdFont">
 							<span>
 								<input type="file" id="input_img" name="gd_file1">
-								<input type="file"  name="gd_file2" >
-								<input type="file"  name="gd_file3">
-								<input type="file"  name="gd_file4">
+								<input type="hidden"  name="gd_file2" >
+								<input type="hidden"  name="gd_file3">
+								<input type="hidden"  name="gd_file4">
 							</span>
 						</td>
 					</tr>
@@ -388,35 +388,35 @@ h3 {
 				<tbody>
 					<tr>
 						<td class="gdTd1 tdFont">제조사</td>
-						<td class="gdTd2 tdFont">${gdsView.gt_maker}</td>
+						<td class="gdTd2 tdFont"><input name="gt_maker" value="${gdsView.gt_maker}"></td>
 					</tr>
 					<tr>
 						<td class="gdTd1 tdFont">브랜드</td>
-						<td class="gdTd2 tdFont">${gdsView.gt_brand}</td>
+						<td class="gdTd2 tdFont"><input name="gt_brand" value="${gdsView.gt_brand}"></td>
 					</tr>
 					<tr>
 						<td class="gdTd1 tdFont">제조일자</td>
-						<td class="gdTd2 tdFont">${gdsView.gt_mfd}</td>
+						<td class="gdTd2 tdFont"><input name="gt_mfd" value="${gdsView.gt_mfd}"></td>
 					</tr>
 					<tr>
 						<td class="gdTd1 tdFont">유효기간</td>
-						<td class="gdTd2 tdFont">${gdsView.gt_exp}</td>
+						<td class="gdTd2 tdFont"><input name="gt_exp" value="${gdsView.gt_exp}"></td>
 					</tr>
 					<tr>
 						<td class="gdTd1 tdFont">상품소재</td>
-						<td class="gdTd2 tdFont">${gdsView.gt_material}</td>
+						<td class="gdTd2 tdFont"><input name="gt_material" value="${gdsView.gt_material}"></td>
 					</tr>
 					<tr>
 						<td class="gdTd1 tdFont">상품 전체중량(kg)</td>
-						<td class="gdTd2 tdFont">${gdsView.gt_weight}</td>
+						<td class="gdTd2 tdFont"><input name="gt_weight" value="${gdsView.gt_weight}"></td>
 					</tr>
 					<tr>
 						<td class="gdTd1 tdFont">상품부피(cm)</td>
-						<td class="gdTd2 tdFont">${gdsView.gt_volume}</td>
+						<td class="gdTd2 tdFont"><input name="gt_volume" value="${gdsView.gt_volume}"></td>
 					</tr>
 					<tr>
 						<td class="gdTd1 tdFont">원산지</td>
-						<td class="gdTd2 tdFont">${gdsView.gt_origin}</td>
+						<td class="gdTd2 tdFont"><input name="gt_origin" value="${gdsView.gt_origin}"></td>
 					</tr>
 				</tbody>
 			</table>
@@ -432,7 +432,7 @@ h3 {
 				<tbody>
 					<tr>
 						<td class="gdTd1 tdFont">배송비 필수</td>
-						<td class="gdTd2 tdFont">${gdsView.gd_dlvchrg}</td>
+						<td class="gdTd2 tdFont"><input name="gd_dlvchrg" value="${gdsView.gd_dlvchrg}"></td>
 					</tr>
 				</tbody>
 			</table>
@@ -448,7 +448,7 @@ h3 {
 				<tbody>
 					<tr>
 						<td class="gdTd1 tdFont">판매자ID 필수</td>
-						<td class="gdTd2 tdFont">${gdsView.gd_sellerid}</td>
+						<td class="gdTd2 tdFont"><input name="gd_sellerid" value="${gdsView.gd_sellerid}"></td>
 					</tr>
 				</tbody>
 			</table>
