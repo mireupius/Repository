@@ -86,7 +86,7 @@
 							<div class="wishlist d-flex flex-row align-items-center justify-content-end">
 								<div class="wishlist_content">
 									<div class="wishlist_icon"><img src="resources/etc/icon-myhome.png" alt=""></div>
-									<div class="wishlist_text"><a href="#">마이홈</a></div>
+									<div class="wishlist_text"><a href="customer.myHome.go">마이홈</a></div>
 								</div>
 							</div>
 
