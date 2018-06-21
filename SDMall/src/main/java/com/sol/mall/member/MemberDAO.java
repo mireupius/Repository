@@ -270,11 +270,11 @@ public class MemberDAO {
 
 	}
 
-	public void withdrawCustomer(Customer c, HttpServletRequest req, HttpServletResponse res) {
+	public void withdrawCustomer(Customer c, Membership m, HttpServletRequest req, HttpServletResponse res) {
 
 		try {
 
-			if (ss.getMapper(MemberMapper.class).withdrawCSM(c) == 1) {
+			if (ss.getMapper(MemberMapper.class).withdrawCSM(c) == 1 && ss.getMapper(MemberMapper.class).withdrawMemberShip(m) == 1) {
 
 				req.setAttribute("r", "탈퇴 성공");
 				// req.getSession().setAttribute("loginCustomer", null);

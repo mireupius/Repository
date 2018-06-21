@@ -17,5 +17,6 @@ public interface MemberMapper {
 	public abstract int withdrawCSM(Customer c);
 	public abstract int withdrawSL(Seller s);
 	public abstract int registerMemberShip(Membership m);
+	public abstract int withdrawMemberShip(Membership m);
 
 }

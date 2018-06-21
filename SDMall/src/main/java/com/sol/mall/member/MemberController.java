@@ -9,11 +9,17 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.sol.mall.myPage.MyPageDAO;
+
 @Controller
 public class MemberController {
 
 	@Autowired
 	private MemberDAO MDAO;
+	
+	@Autowired
+	private MyPageDAO MPDAO;
+
 
 	@RequestMapping(value = "/member.loginPage", method = RequestMethod.GET)
 	public String goLoginPage(HttpServletRequest req, HttpServletResponse res) {
@@ -22,6 +28,9 @@ public class MemberController {
 		return "member/loginPage";
 
 	}
+	
+	
+	
 	@RequestMapping(value = "/customer.register.go", method = RequestMethod.GET)
 	public String goRegCustomer(HttpServletRequest req, HttpServletResponse res) {
 		
@@ -89,20 +98,21 @@ public class MemberController {
 	}
 	
 	@RequestMapping(value = "/customer.myHome.go", method = RequestMethod.GET)
-	public String goMyhome(Customer c, HttpServletRequest req, HttpServletResponse res) {
+	public String goMyhome(Membership m, HttpServletRequest req, HttpServletResponse res) {
 		
 		
 		if(MDAO.csmLoginCheck2(req, res)) {
 			
+			MPDAO.getMembership(m, req, res);
+			
 			return "customer/customerMyPage";
+			
 			
 		}else {
 			return "member/loginPage";
 		}
 		
 	}
-	
-	
 	
 	@RequestMapping(value = "/seller.login.do", method = RequestMethod.GET)
 	public String loginSeller(Seller s, HttpServletRequest req, HttpServletResponse res) {
@@ -214,9 +224,9 @@ public class MemberController {
 	}
 	
 	@RequestMapping(value = "/customer.withdraw.do", method = RequestMethod.GET)
-	public String doWithdrawCustomer(Customer c, HttpServletRequest req, HttpServletResponse res) {
+	public String doWithdrawCustomer(Customer c, Membership m, HttpServletRequest req, HttpServletResponse res) {
 	
-			MDAO.withdrawCustomer(c, req, res);
+			MDAO.withdrawCustomer(c, m, req, res);
 			MDAO.logoutCustomer(req, res);
 			MDAO.csmLoginCheck(req, res);
 			return "member/loginPage";

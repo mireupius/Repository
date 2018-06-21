@@ -2,10 +2,19 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.sol.mall.myPage.MyPageMapper">
 	<select id="orderList"
-		parameterType="com.sol.mall.myPage.Shoppingbag"
+		parameterType="com.sol.mall.myPage.Buy"
 		resultType="com.sol.mall.myPage.Shoppingbag">
 		select * from shoppingBasket
 		where sb_csm_id = #{sb_csm_id}
-		and sb_orderDate between (select add_months(SYSDATE, #{searchMonth}) from dual) and (select SYSDATE from dual)
+		and sb_orderDate between (select add_months(SYSDATE, #{sb_searchMonth}) from dual) and (select SYSDATE from dual)
 	</select>
+	
+	<select id="membershipStatus"
+		parameterType="com.sol.mall.member.Membership"
+		resultType="com.sol.mall.member.Membership">
+		select *
+		from membership
+		where ms_csm_id = #{ms_csm_id}
+	</select>
+	
 </mapper>

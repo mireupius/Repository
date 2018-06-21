@@ -80,6 +80,11 @@
 		#{ms_csm_id}, '실버', 0, 0
 		)
 	</insert>
+	<delete id="withdrawMemberShip" parameterType="com.sol.mall.member.Membership">
+		delete
+		from membership
+		where ms_csm_id = #{ms_csm_id}
+	</delete>
 </mapper>
 
 

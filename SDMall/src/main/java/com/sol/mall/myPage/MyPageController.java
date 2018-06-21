@@ -8,6 +8,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.sol.mall.member.MemberDAO;
+
 @Controller
 public class MyPageController {
 	
@@ -15,14 +17,15 @@ public class MyPageController {
 	private MyPageDAO MPDAO;
 	
 	@RequestMapping(value = "/customer.myHome.orderList", method = RequestMethod.GET)
-	public String goOrderList(Month m, Shoppingbag sb, HttpServletRequest req, HttpServletResponse res) {
+	public String goOrderList(Buy bb, HttpServletRequest req, HttpServletResponse res) {
 
-		MPDAO.getOrderList(m, sb, req, res);
+		MPDAO.getOrderList(bb, req, res);
 		
 		return "customer/customerMyPage";
 		
 
 	}
+	
 	
 	
 	
