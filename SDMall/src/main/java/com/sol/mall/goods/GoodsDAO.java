@@ -61,8 +61,6 @@ public class GoodsDAO {
 
 	// 상품목록 전체조회
 	public GoodsList getGoodsByKey(Keywords k, HttpServletRequest request) {
-		System.out.println("====="+k.getKey_name());
-		System.out.println("====="+k.getKey_value());
 		return new GoodsList(ss.getMapper(GoodsMapper.class).getGoodsByKey(k));
 	}
 	
