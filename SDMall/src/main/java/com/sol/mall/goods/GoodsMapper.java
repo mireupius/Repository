@@ -22,6 +22,9 @@ public interface GoodsMapper {
 
 	// 상품 전체 조회
 	public abstract List<Goods> getAllGoods();
+
+	// 상품 전체 조회
+	public abstract List<Goods> getGoodsByKey(Keywords k);
 	
 	// 상품상세 조회
 	public abstract List<GoodsDtl> getGoodsDtl();
