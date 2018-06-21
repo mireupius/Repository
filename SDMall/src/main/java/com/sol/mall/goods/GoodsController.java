@@ -27,7 +27,7 @@ public class GoodsController {
 	@Autowired
 	CategoryDAO cDAO;
 	// 상품등록화면 처음
-	@RequestMapping(value = "/goods.go", method = RequestMethod.GET)
+	@RequestMapping(value = "/goodsReg.go", method = RequestMethod.GET)
 	public String goods(HttpServletRequest request, HttpServletResponse response) {
 
 		gdsDAO.getAllcategory(request, response);
