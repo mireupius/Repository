@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.sol.mall.category.CategoryDAO;
 import com.sol.mall.myPage.MyPageDAO;
 
 @Controller
@@ -20,6 +21,8 @@ public class MemberController {
 	@Autowired
 	private MyPageDAO MPDAO;
 
+	@Autowired
+	private CategoryDAO cDAO;
 
 	@RequestMapping(value = "/member.loginPage", method = RequestMethod.GET)
 	public String goLoginPage(HttpServletRequest req, HttpServletResponse res) {
@@ -87,7 +90,9 @@ public class MemberController {
 		MDAO.loginCustomer(c, req, res);
 		if(MDAO.csmLoginCheck(req, res)) {
 			
-			return "customer/customerMain2";
+			cDAO.getAllCategory(req, res);// 메인 카테고리 호출 메소드
+			req.setAttribute("contentPage", "home.jsp");
+			return "main";
 			
 		}else {
 			return "member/loginPage";
@@ -133,7 +138,9 @@ public class MemberController {
 		
 		MDAO.logoutCustomer(req, res);
 		MDAO.csmLoginCheck(req, res);
-		return "customer/customerMain2";
+		cDAO.getAllCategory(req, res);// 메인 카테고리 호출 메소드
+		req.setAttribute("contentPage", "home.jsp");
+		return "main";
 			
 	}
 	
@@ -142,7 +149,9 @@ public class MemberController {
 		
 		MDAO.logoutSeller(req, res);
 		MDAO.slLoginCheck(req, res);
-		return "member/loginArea";
+		cDAO.getAllCategory(req, res);// 메인 카테고리 호출 메소드
+		req.setAttribute("contentPage", "home.jsp");
+		return "main";
 		
 		
 	}
