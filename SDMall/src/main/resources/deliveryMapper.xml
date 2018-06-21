@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sol.mall.sale.delivery.DeliveryMapper">
+
+
+	<!-- =========================================== select ==================================================== -->
+
+	<select id="getAllDelivery"
+		resultType="com.sol.mall.sale.delivery.Delivery">
+		select * from sale_delivery where sd_delivery_state !=
+		'배송중' order by sd_order_date
+	</select>
+
+	<select id="getNewDeliverys"
+		resultType="com.sol.mall.sale.delivery.Delivery">
+		select * from sale_delivery where sd_state_detail = '신규주문'
+		order by sd_order_date
+	</select>
+
+	<select id="getCheckDeliverys"
+		resultType="com.sol.mall.sale.delivery.Delivery">
+		select * from sale_delivery where sd_state_detail = '발주확인'
+		order by sd_order_date
+	</select>
+
+	<select id="getAllDeliveryNum" resultType="java.lang.Integer">
+		select count(*) from
+		sale_delivery where sd_delivery_state !=
+		'배송중'
+	</select>
+
+
+	<select id="getNewDeliveryNum" resultType="java.lang.Integer">
+		select count(*) from
+		sale_delivery where sd_state_detail = '신규주문'
+	</select>
+
+	<select id="getCheckDeliveryNum" resultType="java.lang.Integer">
+		select count(*) from
+		sale_delivery where sd_state_detail = '발주확인'
+	</select>
+
+	<!-- ============== 배송완료 ===================== -->
+
+
+	<select id="getSendingDeliverys"
+		resultType="com.sol.mall.sale.delivery.Delivery">
+		select * from sale_delivery where sd_delivery_state = '배송중'
+		order by sd_order_date
+	</select>
+
+	<select id="getSendDoneDeliverys"
+		resultType="com.sol.mall.sale.delivery.Delivery">
+		select * from sale_delivery where sd_delivery_state =
+		'배송완료'
+		order by sd_order_date
+	</select>
+
+	<select id="getSendingDeliverysNum"
+		resultType="java.lang.Integer">
+		select count(*) from sale_delivery where sd_delivery_state
+		= '배송중'
+	</select>
+
+	<select id="getSendDoneDeliveryNum"
+		resultType="java.lang.Integer">
+		select count(*) from sale_delivery where sd_delivery_state
+		= '배송완료'
+	</select>
+
+	<!-- ============== 구매확정 ===================== -->
+
+	<select id="getConfirmDeliveryNum"
+		resultType="java.lang.Integer">
+		select count(*) from
+		sale_delivery where sd_delivery_state
+		= '구매확정'
+	</select>
+
+	<select id="getConfirmDelivery"
+		resultType="com.sol.mall.sale.delivery.Delivery">
+		select * from
+		sale_delivery where sd_delivery_state
+		= '구매확정'
+	</select>
+
+	<!-- ============== 취소관리 ===================== -->
+	<select id="getCancelDelivery"
+		resultType="com.sol.mall.sale.delivery.Delivery">
+		select * from
+		sale_delivery where sd_claim
+		= '취소' order by
+		sd_order_date
+	</select>
+
+	<select id="getCancelDeliveryNum" resultType="java.lang.Integer">
+		select count(*) from
+		sale_delivery where sd_claim
+		= '취소'
+	</select>
+
+	<!-- ============== 반품관리 ===================== -->
+
+	<select id="getReturnDelivery"
+		resultType="com.sol.mall.sale.delivery.Delivery">
+		select * from
+		sale_delivery where sd_claim
+		= '반품' order by
+		sd_order_date
+	</select>
+
+	<select id="getReturnDeliveryNum" resultType="java.lang.Integer">
+		select count(*)
+		from
+		sale_delivery where sd_claim
+		= '반품' order by sd_order_date
+	</select>
+
+	<!-- ============== 교환관리 ===================== -->
+
+	<select id="getExchangeDelivery"
+		resultType="com.sol.mall.sale.delivery.Delivery">
+		select * from
+		sale_delivery where sd_claim
+		= '교환' order by
+		sd_order_date
+	</select>
+
+	<select id="getExchangeDeliveryNum"
+		resultType="java.lang.Integer">
+		select count(*) from
+		sale_delivery where sd_claim
+		= '교환'
+		order by sd_order_date
+	</select>
+
+
+
+
+
+
+
+
+
+	<!-- =========================================== update ==================================================== -->
+
+	<update id="deliveryCheck"
+		parameterType="com.sol.mall.sale.delivery.Delivery">
+		update sale_delivery set sd_state_detail = '발주확인',
+		sd_check_date = sysdate
+		where sd_delivery_pno = #{sd_delivery_pno}
+	</update>
+
+
+	<update id="sendDeliverys"
+		parameterType="com.sol.mall.sale.delivery.Delivery">
+		update sale_delivery
+		set
+		sd_invoice_no = #{sd_invoice_no},
+		sd_courier = #{sd_courier},
+		sd_delivery_state = '배송중',
+		sd_state_detail =
+		'배송중',
+		sd_delivery_type = '택배/등기/소포',
+		sd_go_delivery_date = sysdate
+		where sd_delivery_pno = #{sd_delivery_pno}
+	</update>
+
+
+
+
+</mapper>

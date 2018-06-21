@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 function goRegisterC() {
 	location.href = "customer.register.go"
 }
@@ -18,3 +19,8 @@ function goShop(){
 	alert("sdfs");
 	location.href = "shopbag.get.do"
 }
+=======
+/**
+ * 
+ */
+>>>>>>> refs/remotes/origin/union2
