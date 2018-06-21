@@ -62,6 +62,7 @@ drop table membership cascade constraint purge;
 drop table shoppingBasket cascade constraint purge;
 
 select * from customer_reg;
+select * from seller_reg;
 select * from membership;
 
 create table shoppingBasket(
