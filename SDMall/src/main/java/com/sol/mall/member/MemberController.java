@@ -29,8 +29,6 @@ public class MemberController {
 
 	}
 	
-	
-	
 	@RequestMapping(value = "/customer.register.go", method = RequestMethod.GET)
 	public String goRegCustomer(HttpServletRequest req, HttpServletResponse res) {
 		
@@ -120,7 +118,8 @@ public class MemberController {
 		MDAO.loginSeller(s, req, res);
 		if(MDAO.slLoginCheck(req, res) == true) {
 			
-			return "seller/sellerManageMain";
+			req.setAttribute("contentPage", "saleHome.jsp");
+			return "sale/saleIndex";
 	
 		}else {
 			return "member/loginArea";
