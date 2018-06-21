@@ -57,6 +57,12 @@
 			<!--logo start-->
 			<a href="index.html" class="logo"><b>SD MALL</b></a>
 			<!--logo end-->
+			 <div class="top-menu">
+            	<ul class="nav pull-right top-menu">
+                    <li>${sessionScope.loginSeller.sl_id }님</li>
+                    <li><a class="logout" href="seller.logout.do">로그아웃</a></li>
+            	</ul>
+            </div>
 		</header>
 		<!--header end-->
 
@@ -74,7 +80,7 @@
 							src="resources/assets/img/ui-sam.jpg" class="img-circle"
 							width="60"></a>
 					</p>
-					<h5 class="centered">판매자이름</h5>
+					<h5 class="centered">${sessionScope.loginSeller.sl_coName }</h5>
 
 
 					<li class="sub-menu"><a href="javascript:;"> <i
