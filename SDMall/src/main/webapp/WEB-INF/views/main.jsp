@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+	
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html lang="en">
@@ -7,15 +8,14 @@
 <title>Shopping Smart - SDmall</title>
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="description" content="OneTech shop project">
+<meta name="description" content="Shopping Smart - SDmall">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" type="text/css" href="resources/css/bootstrap4/bootstrap.min.css">
 <link href="resources/plugins/fontawesome-free-5.0.1/css/fontawesome-all.css" rel="stylesheet" type="text/css">
 <link rel="stylesheet" type="text/css" href="resources/plugins/OwlCarousel2-2.2.1/owl.carousel.css">
 <link rel="stylesheet" type="text/css" href="resources/plugins/OwlCarousel2-2.2.1/owl.theme.default.css">
 <link rel="stylesheet" type="text/css" href="resources/plugins/OwlCarousel2-2.2.1/animate.css">
-<link rel="stylesheet" type="text/css" href="resources/plugins/slick-1.8.0/slick.css">
-<link rel="stylesheet" type="text/css" href="resources/css/main_styles.css">
+<link rel="stylesheet" type="text/css" href="resources/css/main.css">
 <link rel="stylesheet" type="text/css" href="resources/css/responsive.css">
 
 <script src="resources/js/jquery-3.3.1.min.js"></script>
@@ -27,7 +27,6 @@
 <script src="resources/plugins/greensock/animation.gsap.min.js"></script>
 <script src="resources/plugins/greensock/ScrollToPlugin.min.js"></script>
 <script src="resources/plugins/OwlCarousel2-2.2.1/owl.carousel.js"></script>
-<script src="resources/plugins/slick-1.8.0/slick.js"></script>
 <script src="resources/plugins/easing/easing.js"></script>
 <script src="resources/js/custom.js"></script>
 </head>
@@ -49,7 +48,7 @@
 					<!-- Logo -->
 					<div class="col-lg-3 col-sm-3 col-3 order-1">
 						<div class="logo_container">
-							<div class="logo"><a href="#"><img alt="SD Mall" src="resources/etc/logo.png"></a></div>
+							<div class="logo"><a href="/mall"><img alt="SD Mall" src="resources/etc/logo.png"></a></div>
 						</div>
 					</div>
 
@@ -73,7 +72,14 @@
 							<div class="wishlist d-flex flex-row align-items-center justify-content-end">
 								<div class="wishlist_content">
 									<div class="wishlist_icon"><img src="resources/etc/icon-login.png" alt=""></div>
-									<div class="wishlist_text"><a href="#">로그인</a></div>
+									<div class="wishlist_text">
+										<c:if test="${sessionScope.loginCustomer == null }">
+										<a href="member.loginPage">로그인</a>
+										</c:if>
+										<c:if test="${sessionScope.loginCustomer != null }">
+										<a href="customer.logout.do">로그아웃</a>
+										</c:if>
+									</div>
 								</div>
 							</div>
 							<!-- Myhome -->
@@ -303,23 +309,8 @@
 
 	</header>
 	
-	<!-- Banner -->
-
-	<div class="banner">
-		<div class="banner_background" style="background-image:url(images/banner_background.jpg)"></div>
-		<div class="container fill_height">
-			<div class="row fill_height">
-				<div class="banner_product_image"><img src="images/banner_product.png" alt=""></div>
-				<div class="col-lg-5 offset-lg-4 fill_height">
-					<div class="banner_content">
-						<h1 class="banner_text">new era of smartphones</h1>
-						<div class="banner_price"><span>$530</span>$460</div>
-						<div class="banner_product_name">Apple Iphone 6s</div>
-						<div class="button banner_button"><a href="#">Shop Now</a></div>
-					</div>
-				</div>
-			</div>
-		</div>
+	<div class="content"><!--  -->
+		<jsp:include page="${contentPage }"></jsp:include>
 	</div>
 	
 	<!-- Footer -->

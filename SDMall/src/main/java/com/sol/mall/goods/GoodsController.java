@@ -8,21 +8,32 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.sol.mall.category.CategoryDAO;
+
 @Controller
 public class GoodsController {
 
 	@Autowired
 	GoodsDAO gDAO;
+	
+	@Autowired
+	CategoryDAO cDAO;
 
 	@RequestMapping(value = "/shop", method = RequestMethod.GET)
 	public String getAllGoods(HttpServletRequest request, HttpServletResponse response) {
+		cDAO.getAllCategory(request, response);
+		
 		gDAO.getAllGoods(request, response);
-		return "shop";
+		request.setAttribute("contentPage", "goods/shop.jsp");
+		return "main";
 	}
 
 	@RequestMapping(value = "/goods", method = RequestMethod.GET)
 	public String getGoodsDtlByNo(Goods goods,HttpServletRequest request, HttpServletResponse response) {
+		cDAO.getAllCategory(request, response);
+		
 		gDAO.getGoodsByNo(goods, request, response);
-		return "goods";
+		request.setAttribute("contentPage", "goods/goods.jsp");
+		return "main";
 	}
 }
