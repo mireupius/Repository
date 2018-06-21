@@ -1,19 +1,36 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
-<script type="text/javascript">
-	function gosale() {
-		location.href = "saleMain.go";
-	};
-	
-</script>
+<link rel="stylesheet" type="text/css" href="resources/css/home_styles.css">
 </head>
+
 <body>
-	<button id='dbutton' onclick="gosale()">배송으로가기</button>
+<div class="super_container">
+	
+	<!-- Banner -->
+
+	<div class="banner">
+		<div class="banner_background" style="background-image:url(images/banner_background.jpg)"></div>
+		<div class="container fill_height">
+			<div class="row fill_height">
+				<div class="banner_product_image"><img src="images/banner_product.png" alt=""></div>
+				<div class="col-lg-5 offset-lg-4 fill_height">
+					<div class="banner_content">
+						<h1 class="banner_text">new era of smartphones</h1>
+						<div class="banner_price"><span>$530</span>$460</div>
+						<div class="banner_product_name">Apple Iphone 6s</div>
+						<div class="button banner_button"><a href="#">Shop Now</a></div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+</div>
+
 
 </body>
+
 </html>

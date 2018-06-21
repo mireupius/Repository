@@ -3,12 +3,11 @@ package com.sol.mall.goods;
 import java.math.BigDecimal;
 
 public class Option {
-
-	private	String op_no;
-	private	String op_gdno;
-	private	String op_name;
-	private	BigDecimal op_price;
-	private	BigDecimal op_stock;
+	private String op_no;
+	private String op_gdno;
+	private String op_name;
+	private BigDecimal op_price;
+	private BigDecimal op_stock;
 
 	public Option() {
 		// TODO Auto-generated constructor stub
@@ -62,5 +61,5 @@ public class Option {
 	public void setOp_stock(BigDecimal op_stock) {
 		this.op_stock = op_stock;
 	}
-	
+
 }

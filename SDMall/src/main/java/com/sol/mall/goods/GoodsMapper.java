@@ -41,5 +41,9 @@ public interface GoodsMapper {
 	// 상품상세화면에 사용할 카테고리
 	public abstract List<Category> getCtgryForView(GoodsCategory gc);
 	
+	public abstract Goods getGoodsByNo(Goods goods);//상품코드로 상품 조회
+
+	public abstract GoodsDtl getGoodsDtlByNo(Goods goods);//상품코드로 상품 상세 조회
+	
 	
 }
