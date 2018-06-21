@@ -58,8 +58,8 @@ public class GoodsController {
 
 			// 저장경로
 			String defaultPath = request.getSession().getServletContext().getRealPath("/"); // 서버기본경로 (프로젝트 폴더 아님)
-			String path = defaultPath + File.separator + "upload" + File.separator + "";
-
+			String path = defaultPath + "upload" + File.separator + "";
+			// File.separator + 
 			// 저장경로 처리
 			File file = new File(path);
 			if (!file.exists()) { // 디렉토리 존재하지 않을경우 디렉토리 생성
@@ -130,5 +130,11 @@ public class GoodsController {
 		request.setAttribute("contentPage", "../goods/goodsView.jsp");
 		return "sale/saleIndex";
 	}
-
+	
+	// 상품키워드 검색
+	@RequestMapping(value = "/goods.search.keyword", method = RequestMethod.GET, produces = "application/json; charset=utf-8")
+	public @ResponseBody GoodsList gdsSearchKey(Keywords k, HttpServletRequest request, HttpServletResponse response) {
+		return gdsDAO.getGoodsByKey(k, request);
+	}
+	
 }

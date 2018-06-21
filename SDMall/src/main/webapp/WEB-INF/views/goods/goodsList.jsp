@@ -22,16 +22,49 @@ h3 {
 	width: 200px;
 }
 </style>
+<script type="text/javascript">
+$(function(){
+		
+		$("#s_bt").click(function(){
+			var k_name = $("#sKey").val();
+			var k_value = $("#sValue").val();
+	
+			 $.ajax({
+				url : "goods.search.keyword",
+				data : {key_name : k_name, key_value : k_value},
+				success : function(json) {
+					var ar = json.goods;
+					
+					$.each(ar, function(i, c){
+						$("#gdLstTr").empty();
+						
+						$.each(ar, function(i, s){
+							var noTd = $("<td></td>").attr("class","gdLstTd1").text(i+1);
+							var codeA = $("<a></a>").attr("href","goods.view?gd_no="+s.gd_no).text(s.gd_no);
+							var codeTd = $("<td></td>").attr("class","gdLstTd1").append(codeA);
+							var nameImg=$("<img>").attr("src","${pageContext.request.contextPath}/upload/"+s.gd_imgl);
+							nameImg.css("width","44").css("height","44");
+							var nameTd = $("<td></td>").attr("class","gdLstTd1").append(nameImg);
+							nameTd.append("&nbsp;&nbsp; " + s.gd_name);
+							var priceTd = $("<td></td>").attr("class","gdLstTd1").text(s.gd_price);
+							var cmpriceTd = $("<td></td>").attr("class","gdLstTd1").text(s.gd_csmprice);
+							var tr = $("<tr></tr>").append(noTd, codeTd, nameTd, priceTd,cmpriceTd);
+							$("#gdLstTr").append(tr);
+						});
+						
+					});
+				}
+			});
+		});
+});
 
+</script>
 </head>
 <body>
-	<section id="main-content"> <section class="wrapper">
-	<form name="tx_editor_form" id="tx_editor_form"
-		action="registration.do" method="post" accept-charset="utf-8">
-
+	<section id="main-content">
+	<section class="wrapper">
 		<table border="1" summary="" class="eChkColor">
 			<colgroup>
-
 				<div class="gdliTb3">
 					<h3>&nbsp;&nbsp;&nbsp;&nbsp;</h3>
 				</div>
@@ -41,44 +74,27 @@ h3 {
 							<tbody>
 								<tr class="gdliTb1">
 									<td class="gdLstTd1">상품명 검색</td>
-									<td class="gdLstTd2"><select class="fSelect eSearch"
-										name="eField[]">
-											<option value="product_name">상품명</option>
-											<option value="eng_product_name">영문상품명</option>
-											<option value="item_name">상품명(관리용)</option>
-											<option value="purchase_prd_name">공급사 상품명</option>
-											<option value="naver_ks_product_name">네이버쇼핑 상품명</option>
+									<td class="gdLstTd2">
+									<select id="sKey" >
+											<option value="gd_name">상품명</option>
 											<option value="">--------------------</option>
-											<option value="product_no">상품번호</option>
-											<option value="product_code">상품코드</option>
-											<option value="ma_product_code">자체 상품코드</option>
-											<option value="item_code">품목코드</option>
-											<option value="admin_item_code">자체 품목코드</option>
+											<option value="gd_no">상품번호</option>
 											<option value="">--------------------</option>
-											<option value="Manufacturer">제조사</option>
-											<option value="Supplier">공급사</option>
-											<option value="Brand">브랜드</option>
-											<option value="Trend">트렌드</option>
-											<option value="Classification">자체분류</option>
+											<option value="gt_maker">제조사</option>
+											<option value="gt_brand">브랜드</option>
 											<option value="">--------------------</option>
-											<option value="model_name">모델명</option>
-											<option value="origin">원산지</option>
-											<option value="Condition">상품상태</option>
-											<option value="product_tag">상품 검색태그</option>
-											<option value="product_weight">상품 전체중량</option>
-											<option value="">--------------------</option>
-											<option value="pm_memo">메모</option>
-											<option value="ins_user">등록아이디</option>
-									</select> <input class="" name=""> <a href="#none"
-										class="btnIcon icoMinus" search-type="general"><span>삭제</span></a>
-										<a href="#none" class="btnIcon icoPlus" search-type="general"
-										style=""><span>추가</span></a></td>
+											<option value="gt_mdlname">모델명</option>
+											<option value="gt_origin">원산지</option>
+											<option value="gt_keyword">상품 검색태그</option>
+											<option value="gt_weight">상품 전체중량</option>
+									</select>
+									<input id="sValue" >
 								</tr>
 								<tr>
 									<td class="gdLstTd1">상품분류</td>
-									<td class="gdLstTd2"><span> <select
-											class="fSelect category eCategory" id="eCategory1" depth="1"
-											name="categorys[]">
+									<td class="gdLstTd2">
+									<span> 
+										<select id="eCategory1">
 												<option value="">- 대분류 선택 -</option>
 												<option value="24">(대분류) Outerwear</option>
 												<option value="25">(대분류) Tops</option>
@@ -86,15 +102,18 @@ h3 {
 												<option value="27">(대분류) Bottoms</option>
 												<option value="28">(대분류) Accessories</option>
 										</select>
-									</span> <span> <select class="fSelect category eCategory"
-											id="eCategory2" depth="2" name="categorys[]">
+									</span>
+									<span>
+										<select id="">
 												<option value="">- 중분류 선택 -</option>
 										</select>
-									</span> <span> <select class="fSelect category eCategory"
-											id="eCategory3" depth="3" name="categorys[]">
+									</span>
+									<span>
+										<select id="eCategory3">
 												<option value="">- 소분류 선택 -</option>
 										</select>
-									</span></td>
+									</span>
+									</td>
 								</tr>
 							</tbody>
 						</table>
@@ -103,6 +122,9 @@ h3 {
 				<br>
 				<br>
 				<br>
+<div>
+<button id="s_bt">검색</button>
+</div>
 				<br>
 				<br>
 				<br>
@@ -112,7 +134,6 @@ h3 {
 				<div>
 					<div>
 						<table class="table table-bordered table-striped table-condensed">
-							<tbody>
 								<tr>
 									<td class="gdLstTd1">No</td>
 									<td class="gdLstTd1">상품코드</td>
@@ -120,22 +141,20 @@ h3 {
 									<td class="gdLstTd1">판매가</td>
 									<td class="gdLstTd1">소비자가</td>
 								</tr>
-								<c:forEach var="i" begin="0" end="${gdslist.size() }" >
-									<tr>
-										<td class="gdLstTd1">${i+1}</td>
-										<td class="gdLstTd1"><a href="goods.view?gd_no=${gdslist[i].gd_no}" >${gdslist[i].gd_no}</a></td>
-										<td class="gdLstTd1"><img src="${pageContext.request.contextPath}/upload/${gdslist[i].gd_imgl}" width="44"
-											height="44" alt=""></td>
-										<td class="gdLstTd1">${gdslist[i].gd_price}</td>
-										<td class="gdLstTd1">${gdslist[i].gd_csmprice}</td>
-										</td>
-									</tr>
-								</c:forEach>
-								<tr>
-									<td><a href="#none" class="btnIcon icoMinus"
-										search-type="general"><span>삭제</span></a> <a href="#none"
-										class="btnIcon icoPlus" search-type="general" style=""><span>추가</span></a></td>
-								</tr>
+							<tbody id="gdLstTr">
+								<c:if test="${gdslist.size() > 0}">
+									<c:forEach var="i" begin="0" end="${gdslist.size()-1}" >
+										<tr>
+											<td class="gdLstTd1">${i+1}</td>
+											<td class="gdLstTd1"><a href="goods.view?gd_no=${gdslist[i].gd_no}" >${gdslist[i].gd_no}</a></td>
+											<td class="gdLstTd1"><img src="${pageContext.request.contextPath}/upload/${gdslist[i].gd_imgl}" width="44"
+												height="44" alt="">&nbsp;&nbsp; ${gdslist[i].gd_name}</td>
+											<td class="gdLstTd1">${gdslist[i].gd_price}</td>
+											<td class="gdLstTd1">${gdslist[i].gd_csmprice}</td>
+											</td>
+										</tr>
+									</c:forEach>
+								</c:if>
 							</tbody>
 						</table>
 					</div>
@@ -143,8 +162,7 @@ h3 {
 				<br>
 				<br>
 				<br>
-				</form>
-				</section>
-				</section>
+	</section>
+	</section>
 </body>
 </html>
