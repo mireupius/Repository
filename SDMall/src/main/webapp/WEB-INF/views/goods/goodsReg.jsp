@@ -240,11 +240,11 @@ h3 {
 			<table class="gdTb3">
 				<tbody>
 					<tr>
-						<td class="gdTd1">상품명 필수</td>
+						<td class="gdTd1">상품명 필수(20)</td>
 						<td class="gdTd2"><input name="gd_name"></td>
 					</tr>
 					<tr>
-						<td class="gdTd1">모델명</td>
+						<td class="gdTd1">모델명(20)</td>
 						<td class="gdTd2"><input name="gt_mdlname"></td>
 					</tr>
 					<tr>
@@ -278,11 +278,11 @@ h3 {
 			<table class="gdTb3">
 				<tbody>
 					<tr>
-						<td class="gdTd1">소비자가 필수</td>
+						<td class="gdTd1">소비자가 필수(7)</td>
 						<td class="gdTd2"><input name="gd_csmprice"></td>
 					</tr>
 					<tr>
-						<td class="gdTd1">판매가 필수</td>
+						<td class="gdTd1">판매가 필수(7)</td>
 						<td class="gdTd2"><input name="gd_price"></td>
 					</tr>
 					
@@ -299,16 +299,34 @@ h3 {
 			<table class="gdTb3">
 				<tbody>
 					<tr>
-						<td class="gdTd1">옵션명 필수</td>
-						<td class="gdTd2"><input name="op_name"></td>
+						<td class="gdTd1">옵션명 필수(20)</td>
+						<td class="gdTd2" rowspan="3">
+						<div>
+						<ul class="opUl">
+							<li class="opTb">
+								<span>
+									<input class="inpWidth" name="op_name">
+								</span><br>
+								<span>
+									<input class="inpWidth" name="op_price">
+								</span><br>
+								<span>
+									<input class="inpWidth" name="op_stock">
+								</span>
+							</li>
+							<li class="opTbr">
+								<button id="opPlus">추가</button>
+							</li>
+						</ul>
+						</div>
+						
+						</td>
 					</tr>
 					<tr>
-						<td class="gdTd1">옵션가격 필수</td>
-						<td class="gdTd2"><input name="op_price"></td>
+						<td class="gdTd1">옵션가격 필수(7)</td>
 					</tr>
 					<tr>
-						<td class="gdTd1">옵션재고 필수</td>
-						<td class="gdTd2"><input name="op_stock"></td>
+						<td class="gdTd1">옵션재고 필수(4)</td>
 					</tr>
 				</tbody>
 			</table>
@@ -382,35 +400,35 @@ h3 {
 			<table class="gdTb3">
 				<tbody>
 					<tr>
-						<td class="gdTd1">제조사</td>
+						<td class="gdTd1">제조사(20)</td>
 						<td class="gdTd2"><input name="gt_maker"></td>
 					</tr>
 					<tr>
-						<td class="gdTd1">브랜드</td>
+						<td class="gdTd1">브랜드(20)</td>
 						<td class="gdTd2"><input name="gt_brand"></td>
 					</tr>
 					<tr>
-						<td class="gdTd1">제조일자</td>
+						<td class="gdTd1">제조일자(20)</td>
 						<td class="gdTd2"><input name="gt_mfd"></td>
 					</tr>
 					<tr>
-						<td class="gdTd1">유효기간</td>
+						<td class="gdTd1">유효기간(20)</td>
 						<td class="gdTd2"><input name="gt_exp"></td>
 					</tr>
 					<tr>
-						<td class="gdTd1">상품소재</td>
+						<td class="gdTd1">상품소재(20)</td>
 						<td class="gdTd2"><input name="gt_material"></td>
 					</tr>
 					<tr>
-						<td class="gdTd1">상품 전체중량(kg)</td>
+						<td class="gdTd1">상품 전체중량(kg)(20)</td>
 						<td class="gdTd2"><input name="gt_weight"></td>
 					</tr>
 					<tr>
-						<td class="gdTd1">상품부피(cm)</td>
+						<td class="gdTd1">상품부피(cm)(20)</td>
 						<td class="gdTd2"><input name="gt_volume"></td>
 					</tr>
 					<tr>
-						<td class="gdTd1">원산지</td>
+						<td class="gdTd1">원산지(20)</td>
 						<td class="gdTd2"><input name="gt_origin"></td>
 					</tr>
 				</tbody>
@@ -426,7 +444,7 @@ h3 {
 			<table class="gdTb3">
 				<tbody>
 					<tr>
-						<td class="gdTd1">배송비 필수</td>
+						<td class="gdTd1">배송비 필수(20)</td>
 						<td class="gdTd2"><input name="gd_dlvchrg"></td>
 					</tr>
 				</tbody>
@@ -442,7 +460,7 @@ h3 {
 			<table class="gdTb3">
 				<tbody>
 					<tr>
-						<td class="gdTd1">판매자ID 필수</td>
+						<td class="gdTd1">판매자ID 필수(12)</td>
 						<td class="gdTd2"><input name="gd_sellerid"></td>
 					</tr>
 				</tbody>

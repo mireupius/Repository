@@ -305,15 +305,31 @@ h3 {
 				<tbody>
 					<tr>
 						<td class="gdTd1 tdFont">옵션명 필수</td>
-						<td class="gdTd2"><input name="op_name" value="${gdsOp.op_name}"></td>
+						<td class="gdTd2 tdFont" rowspan="3" >
+						<div>
+						<ul class="opUl">
+						<c:forEach var="gdsOp" items="${gdsOp}">
+							<li class="opTb">
+								<span>
+										<input class="inpWidth" name="op_name" value="${gdsOp.op_name}">
+								</span><br>
+								<span>
+										<input class="inpWidth" name="op_price" value="${gdsOp.op_price}">
+								</span><br>
+								<span>
+										<input class="inpWidth" name="op_stock" value="${gdsOp.op_stock}">
+								</span>
+							</li>
+						</c:forEach>
+						</ul>
+						</div>
+						</td>
 					</tr>
 					<tr>
 						<td class="gdTd1 tdFont">옵션가격 필수</td>
-						<td class="gdTd2"><input name="op_price" value="${gdsOp.op_price}"></td>
 					</tr>
 					<tr>
 						<td class="gdTd1 tdFont">옵션재고 필수</td>
-						<td class="gdTd2"><input name="op_stock" value="${gdsOp.op_stock}"></td>
 					</tr>
 				</tbody>
 			</table>

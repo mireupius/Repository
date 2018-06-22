@@ -79,3 +79,33 @@ li {
 	float: left;
 	width: 200px;
 }
+
+.opTd{
+	border-bottom: #d9dadc thin solid;
+	border-top: #d9dadc thin solid;
+	border-right: #d9dadc thin solid;
+	padding-left: 30px;
+	width: 200px;
+}
+
+.opTb{
+	float: left;
+	width: 100px;
+}
+.opTbr{
+	float: right;
+	width: 100px;
+}
+.opUl{
+	margin: 0px;
+	padding: 0px;
+}
+.opDiv{
+	margin: 0px;
+	padding: 0px;
+}
+.inpWidth{
+	width: 150px;
+	
+}
+

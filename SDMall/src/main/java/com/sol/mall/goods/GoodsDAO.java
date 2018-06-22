@@ -46,7 +46,10 @@ public class GoodsDAO {
 	}
 
 	// 상품상세 조회
-	public void getGoodsView(GoodsView gv, GoodsCategory gc, HttpServletRequest request, HttpServletResponse response) {
+	public void getGoodsView(GoodsView gv, GoodsCategory gc, Option op, HttpServletRequest request, HttpServletResponse response) {
+
+		System.out.println(gv.getGd_no());
+		op.setOp_gdno(gv.getGd_no());
 
 		GoodsView gdv = ss.getMapper(GoodsMapper.class).getGoodsView(gv);
 
@@ -54,10 +57,19 @@ public class GoodsDAO {
 		gc.setGd_clfm(gdv.getGd_clfm());
 		gc.setGd_clfs(gdv.getGd_clfs());
 
+		System.out.println(op.getOp_gdno());
+		System.out.println(op.getOp_name());
+		System.out.println(op.getOp_no());
+		System.out.println(op.getOp_price());
+		System.out.println(op.getOp_stock());
+
 		List<Category> ctgLt = ss.getMapper(GoodsMapper.class).getCtgryForView(gc);
+		
+		List<Option> gdsOp= ss.getMapper(GoodsMapper.class).getOptionByNo(op);
 
 		request.setAttribute("gdsView", gdv);
 		request.setAttribute("gdViewCtg", ctgLt);
+		request.setAttribute("gdsOp", gdsOp);
 	}
 
 	// 상품목록 전체조회
@@ -120,6 +132,18 @@ public class GoodsDAO {
 	public void insertGdsInfo(Goods gd, GoodsDtl gdtl, Option op, HttpServletRequest request,
 			HttpServletResponse response) throws Exception {
 
+//		System.out.println("=no="+gd.getGd_no());
+//		System.out.println("=name="+gd.getGd_name());
+//		System.out.println("=imgl="+gd.getGd_imgl());
+//		System.out.println("=clfl="+gd.getGd_clfl());
+//		System.out.println("=clfm="+gd.getGd_clfm());
+//		System.out.println("=clfs="+gd.getGd_clfs());
+//		System.out.println("=dlvchrg="+gd.getGd_dlvchrg());
+//		System.out.println("=imgm="+gd.getGd_imgm());
+//		System.out.println("=imgs="+gd.getGd_imgs());
+//		System.out.println("=imgss="+gd.getGd_imgss());
+//		System.out.println("=sellerid="+gd.getGd_sellerid());
+		
 		// 입력(상품테이블)
 		insertGd(gd, request, response);
 
@@ -138,10 +162,7 @@ public class GoodsDAO {
 		insertOpTwo(map2, request, response);
 	}
 	
-	
-	
 	// 업데이트==================================================
-	
 	
 	// 트랜잭션 3가지 테이블 입력시 상품번호 시퀀스충돌 방지?
 	// @Transactional(rollbackFor = Exception.class)
@@ -171,7 +192,7 @@ public class GoodsDAO {
 
 		if (ss.getMapper(GoodsMapper.class).insertGds(gd) == 1) {
 
-			System.out.println("insertGd성공");
+			System.out.println("updateGd성공");
 		} else {
 			System.out.println("실패");
 		}
@@ -181,7 +202,7 @@ public class GoodsDAO {
 
 		if (ss.getMapper(GoodsMapper.class).insertGdtlTwo(map) == 1) {
 
-			System.out.println("insertGdtlTwo성공");
+			System.out.println("updateGdtlTwo성공");
 		} else {
 			System.out.println("실패");
 		}
@@ -191,7 +212,7 @@ public class GoodsDAO {
 
 		if (ss.getMapper(GoodsMapper.class).insertOpTwo(map) == 1) {
 
-			System.out.println("insertOpTwo성공");
+			System.out.println("updateOpTwo성공");
 		} else {
 			System.out.println("실패");
 		}

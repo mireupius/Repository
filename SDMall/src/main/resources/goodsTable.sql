@@ -123,11 +123,6 @@ sd_delivery_method 		varchar2(10 char) /* 배송방법 */
 );
 
 
-select * from goods_tb a, goodsdtl_tb b 
-where a.gd_no = b.gt_gdno 
-and a.gd_no = '1001091160005';
-
-
 
 drop table goods_tb cascade constraint purge;
 drop sequence goods_sq;
@@ -201,7 +196,21 @@ pr_star number(1) not null
 
 --///////////////////////////////////////////////
 
+select * from option_tb;
+where op_gdno ='1001091160005';
 
+insert into option_tb values(
+option_sq.nextval, '1001091160005', '300', '2000','23'
+);
+
+select * from goods_tb a, goodsdtl_tb b 
+where a.gd_no = b.gt_gdno 
+and a.gd_no = '1001091160005';
+select * from goods_tb;
+
+select * from category_tb
+		where ct_no = '100' OR ct_no = '110' OR ct_no = '109'
+		order by ct_clf;
 
 --=====================================================================
 

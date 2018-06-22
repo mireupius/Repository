@@ -110,7 +110,7 @@ public class GoodsController {
 		}
 
 		gdsDAO.getAllcategory(request, response);
-		request.setAttribute("contentPage", "../goods/goods.jsp");
+		request.setAttribute("contentPage", "../goods/goodsReg.jsp");
 
 		return "sale/saleIndex";
 	}
@@ -118,7 +118,7 @@ public class GoodsController {
 	// 상품 수정 작업
 	@RequestMapping(value = "/goodsUpdate.do", method = RequestMethod.POST)
 	public String goodsUpdateDo(@RequestParam("gd_file1") MultipartFile multipartFile, Goods gd, GoodsDtl gdtl,
-			Option op, HttpServletRequest request, HttpServletResponse response) throws Exception {
+			Option op, GoodsView gv, GoodsCategory gc, HttpServletRequest request, HttpServletResponse response) throws Exception {
 
 		// 업로드 파일이 존재하면
 		if (multipartFile != null && !(multipartFile.getOriginalFilename().equals(""))) {
@@ -164,6 +164,9 @@ public class GoodsController {
 			System.out.println("** 상품이미지 modifyName : " + modifyName + " **");
 
 			// ★★★★★★★★★★★★★★★★★		기존 이미지 삭제		★★★★★★★★★★★★★★★★★★
+
+			
+			// ★★★★★★★★★★★★★★★★★		기존 이미지 삭제		★★★★★★★★★★★★★★★★★★
 			
 			gd.setGd_imgl(modifyName);
 			// 이미지 사이즈 조절 만들 때 까지 임시
@@ -178,11 +181,11 @@ public class GoodsController {
 
 			// Transaction 적용
 			gdsDAO.updateGdsInfo(gd, gdtl, op, request, response);
-
 		}
-
+		gdsDAO.getGoodsView(gv, gc, op, request, response);
+		
 		gdsDAO.getAllcategory(request, response);
-		request.setAttribute("contentPage", "../goods/goods.jsp");
+		request.setAttribute("contentPage", "../goods/goodsView.jsp");
 
 		return "sale/saleIndex";
 	}
@@ -215,10 +218,10 @@ public class GoodsController {
 
 	// 상품상세화면 표시
 	@RequestMapping(value = "/goods.view", method = RequestMethod.GET)
-	public String goodsDtlView(GoodsView gv, GoodsCategory gc, HttpServletRequest request, HttpServletResponse response) {
+	public String goodsDtlView(GoodsView gv, GoodsCategory gc, Option op, HttpServletRequest request, HttpServletResponse response) {
 		// goodsView.jsp 수정시 daumeditor의 editor.jsp안의 	Editor.modify({'content': '${gdsView.gt_detail}'}); 수정필요
 		// gdsView.gt_detail 다음에디터로 작성한 상세내용 
-		gdsDAO.getGoodsView(gv, gc, request, response);
+		gdsDAO.getGoodsView(gv, gc, op, request, response);
 		
 		gdsDAO.getAllcategory(request, response);
 		request.setAttribute("contentPage", "../goods/goodsView.jsp");
@@ -230,5 +233,4 @@ public class GoodsController {
 	public @ResponseBody GoodsList gdsSearchKey(Keywords k, HttpServletRequest request, HttpServletResponse response) {
 		return gdsDAO.getGoodsByKey(k, request);
 	}
-	
 }
