@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sol.mall.member.MemberMapper">
+	<insert id="registerCSM" parameterType="com.sol.mall.member.Customer">
+		insert into customer_reg values(
+			#{csm_id}, #{csm_pw},
+			#{csm_name}, #{csm_birth},
+		    #{csm_phoneNo}, #{csm_emailAddress}
+		)
+	</insert>
+	
+	<insert id="registerSL" parameterType="com.sol.mall.member.Seller">
+		insert into seller_reg values(
+			#{sl_id}, #{sl_pw},
+			#{sl_coName}, #{sl_coRegNo},
+		    #{sl_phoneNo}, #{sl_emailAddress}
+		)
+	</insert>
+	
+	<select id="getAllCustomer"
+		resultType="com.sol.mall.member.Customer">
+		select * from customer_reg
+	</select>
+	
+	<select id="getCustomerById"
+		parameterType="com.sol.mall.member.Customer"
+		resultType="com.sol.mall.member.Customer">
+		select * from customer_reg
+		where csm_id = #{csm_id}
+	</select>
+	
+	<select id="getCustomerById2"
+		parameterType="com.sol.mall.member.Customer"
+		resultType="com.sol.mall.member.Customer">
+		select * from customer_reg
+		where csm_id = #{csm_id}
+	</select>
+
+	<select id="getSellerById"
+		parameterType="com.sol.mall.member.Seller"
+		resultType="com.sol.mall.member.Seller">
+		select * from seller_reg
+		where sl_id = #{sl_id}
+	</select>
+	
+	<select id="getSellerById2"
+		parameterType="com.sol.mall.member.Seller"
+		resultType="com.sol.mall.member.Seller">
+		select * from seller_reg
+		where sl_id = #{sl_id}
+	</select>
+	
+	<update id="updateCSMInfo" parameterType="com.sol.mall.member.Customer">
+		update customer_reg
+		set csm_pw = #{csm_pw}, csm_name = #{csm_name},
+			csm_birth = #{csm_birth}, csm_phoneNo = #{csm_phoneNo},
+			csm_emailAddress = #{csm_emailAddress}
+		where csm_id = #{csm_id}
+	</update>
+	<update id="updateSLInfo" parameterType="com.sol.mall.member.Seller">
+		update seller_reg
+		set sl_pw = #{sl_pw}, sl_coName = #{sl_coName},
+			sl_coRegNo = #{sl_coRegNo}, sl_phoneNo = #{sl_phoneNo},
+			sl_emailAddress = #{sl_emailAddress}
+		where sl_id = #{sl_id}
+	</update>
+	
+	<delete id="withdrawCSM" parameterType="com.sol.mall.member.Customer">
+		delete
+		from customer_reg
+		where csm_id = #{csm_id}
+	</delete>
+	<delete id="withdrawSL" parameterType="com.sol.mall.member.Seller">
+		delete
+		from seller_reg
+		where sl_id = #{sl_id}
+	</delete>
+	<insert id="registerMemberShip" parameterType="com.sol.mall.member.Membership">
+		insert into membership values(
+		#{ms_csm_id}, '실버', 0, 0
+		)
+	</insert>
+	<delete id="withdrawMemberShip" parameterType="com.sol.mall.member.Membership">
+		delete
+		from membership
+		where ms_csm_id = #{ms_csm_id}
+	</delete>
+</mapper>
+
+
