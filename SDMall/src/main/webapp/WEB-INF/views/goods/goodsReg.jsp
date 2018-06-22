@@ -118,6 +118,18 @@ $(function(){
 		var input = $("#ctgry3").val(cn);
         input.attr("name", "gd_clfs");
 	});
+	
+	// ★★★★★★★★★★★★★옵션값 배열로 저장 input hidden으로 넘기기★★★★★★★★★★★★★★★
+var opNameList =  	
+	
+	
+	
+	// ★★★★★★★★★★★★★옵션값 배열로 저장 input hidden으로 넘기기★★★★★★★★★★★★★★★
+	
+	
+	
+	
+	
 });
 
 	var sel_file;
@@ -305,13 +317,13 @@ h3 {
 						<ul class="opUl">
 							<li class="opTb">
 								<span>
-									<input class="inpWidth" name="op_name">
+									<input class="inpWidth" name="op_name0">
 								</span><br>
 								<span>
-									<input class="inpWidth" name="op_price">
+									<input class="inpWidth" name="op_price0">
 								</span><br>
 								<span>
-									<input class="inpWidth" name="op_stock">
+									<input class="inpWidth" name="op_stock0">
 								</span>
 							</li>
 							<li class="opTbr">
@@ -319,7 +331,9 @@ h3 {
 							</li>
 						</ul>
 						</div>
-						
+						<input class="inpWidth" name="op_name" type="hidden">
+						<input class="inpWidth" name="op_price" type="hidden">
+						<input class="inpWidth" name="op_stock" type="hidden">
 						</td>
 					</tr>
 					<tr>
