@@ -305,19 +305,22 @@ h3 {
 				<tbody>
 					<tr>
 						<td class="gdTd1 tdFont">옵션명 필수</td>
+						<input name="op_name" type="hidden">
+						<input name="op_price" type="hidden">
+						<input name="op_stock" type="hidden">
 						<td class="gdTd2 tdFont" rowspan="3" >
 						<div>
 						<ul class="opUl">
-						<c:forEach var="gdsOp" items="${gdsOp}">
+						<c:forEach var="h" begin="0" end="${gdsOp.size()-1}" step="1">
 							<li class="opTb">
 								<span>
-										<input class="inpWidth" name="op_name" value="${gdsOp.op_name}">
+									<input class="inpWidth" name="op_name${h}" value="${gdsOp[h].op_name}">
 								</span><br>
 								<span>
-										<input class="inpWidth" name="op_price" value="${gdsOp.op_price}">
+									<input class="inpWidth" name="op_price${h}" value="${gdsOp[h].op_price}">
 								</span><br>
 								<span>
-										<input class="inpWidth" name="op_stock" value="${gdsOp.op_stock}">
+									<input class="inpWidth" name="op_stock${h}" value="${gdsOp[h].op_stock}">
 								</span>
 							</li>
 						</c:forEach>

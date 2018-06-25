@@ -24,6 +24,8 @@ function saveContent() {
     Editor.save(); // 이 함수를 호출하여 글을 등록하면 된다.
 }
 
+var opN = 1;// 옵션 항목 눌렀을 경우 추가되는 name의 번호
+
 $(function(){
 //구버전	$(".ct1").click(function() {
 	$(document).on("click",".ct1",function(){
@@ -120,15 +122,23 @@ $(function(){
 	});
 	
 	// ★★★★★★★★★★★★★옵션값 배열로 저장 input hidden으로 넘기기★★★★★★★★★★★★★★★
-var opNameList =  	
-	
-	
+	$(document).on("click","#opPlus",function(){
+alert("d");
+		
+		var opInputN = $("<input>").attr("class","inpWidth").attr("name", "op_name");
+		var opSpanN = $("<span></span><br>").append(opInputN);
+		
+		var opInputP = $("<input>").attr("class","inpWidth").attr("name", "op_price");
+		var opSpanP = $("<span></span><br>").append(opInputP);
+		
+		var opInputS = $("<input>").attr("class","inpWidth").attr("name", "op_stock"+opN);
+		var opSpanS = $("<span></span><br>").append(opInputS);
+
+		var opLi = $("<li></li>").attr("class","opTb").append(opSpanN, opSpanP, opSpanS);
+		$("#opUl").append(opLi);
+	});
 	
 	// ★★★★★★★★★★★★★옵션값 배열로 저장 input hidden으로 넘기기★★★★★★★★★★★★★★★
-	
-	
-	
-	
 	
 });
 
@@ -326,11 +336,11 @@ h3 {
 									<input class="inpWidth" name="op_stock0">
 								</span>
 							</li>
-							<li class="opTbr">
-								<button id="opPlus">추가</button>
-							</li>
 						</ul>
 						</div>
+						<li class="opTbr">
+							<button id="opPlus">추가</button>
+						</li>
 						<input class="inpWidth" name="op_name" type="hidden">
 						<input class="inpWidth" name="op_price" type="hidden">
 						<input class="inpWidth" name="op_stock" type="hidden">
