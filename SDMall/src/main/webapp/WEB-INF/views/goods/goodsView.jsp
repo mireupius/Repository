@@ -24,6 +24,7 @@ function saveContent() {
     Editor.save(); // 이 함수를 호출하여 글을 등록하면 된다.
 }
 
+
 $(function(){
 
 //구버전	$(".ct1").click(function() {
@@ -52,7 +53,7 @@ $(function(){
 						fname.attr("category_num", c.ct_no);
 						$("#ct12").append(fname);
 						// 카테고리 선택 표시 영역
-						$("#category_select1").text(clfname + ">");
+						$("#category_select1").text(clfname + " > ");
 						var input = $("#ctgry1").val(cn);
 		                input.attr("name", "gd_clfl");
 					});
@@ -60,7 +61,7 @@ $(function(){
 				}else{
 				
 					// 카테고리 선택 표시 영역
-					$("#category_select1").text(clfname + ">");
+					$("#category_select1").text(clfname + " > ");
 					var input = $("#ctgry1").val(cn);
 	                input.attr("name", "gd_clfl");
 				}
@@ -93,14 +94,14 @@ $(function(){
 						$("#ct13").append(fname);
 						
 						// 카테고리 선택 표시 영역
-						$("#category_select2").text(clfname + ">");
+						$("#category_select2").text(clfname);
 						var input = $("#ctgry2").val(cn);
 		                input.attr("name", "gd_clfm");
 		                
 					});
 				}else{
 					// 카테고리 선택 표시 영역
-					$("#category_select2").text(clfname + ">");
+					$("#category_select2").text(clfname);
 					var input = $("#ctgry2").val(cn);
 	                input.attr("name", "gd_clfm");
 				}
@@ -115,10 +116,54 @@ $(function(){
 		
 		$("#category_select3").empty();
 		// 카테고리 선택 표시 영역
-		$("#category_select3").text(clfname + ">");
+		$("#category_select3").text(" > "+clfname);
 		var input = $("#ctgry3").val(cn);
         input.attr("name", "gd_clfs");
 	});
+	
+	
+	// ▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼ 옵션값 배열로 저장 input hidden으로 넘기기 ▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼
+	// db에 저장된 옵션 사이지 저장 추가 버튼 클릭시 옵션 번호증가
+	var opN = $("#opSize").val();
+	
+	$(document).on("click","#opPlus",function(){
+
+		var opInputN = $("<input>").attr("class","inpWidth").attr("name", "op_name"+opN);
+		var opSpanN = $("<span></span>").append(opInputN);
+		
+		var opInputP = $("<input>").attr("class","inpWidth").attr("name", "op_price"+opN);
+		var opSpanP = $("<span></span>").append(opInputP);
+		
+		var opInputS = $("<input>").attr("class","inpWidth").attr("name", "op_stock"+opN);
+		var opSpanS = $("<span></span>").append(opInputS);
+
+		var opLi = $("<li></li>").attr("class","opTb").append(opSpanN, opSpanP, opSpanS);
+		$(".opUl").append(opLi);
+		
+		opN++;
+	});
+	
+	// 적용 버튼 클릭으로 옵션값 히든에 저장
+	$(document).on("click","#opSave",function(){
+		var r = opN;
+		var opl_name = [];
+		var opl_price = [];
+		var opl_stock = [];
+		
+		for (var i = 0; i < r; i++) {
+			opl_name[i] = $("input[name=op_name"+i+"]").val();
+			opl_price[i] = $("input[name=op_price"+i+"]").val();
+			opl_stock[i] = $("input[name=op_stock"+i+"]").val();
+		}
+		
+		$("input[name=opl_name]").val(opl_name);
+		$("input[name=opl_price]").val(opl_price);
+		$("input[name=opl_stock]").val(opl_stock);
+		alert("옵션 적용");
+
+	});
+	// ▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲ 옵션값 배열로 저장 input hidden으로 넘기기 ▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲
+	
 });
 
 	var sel_file;
@@ -217,12 +262,12 @@ h3 {
 								</tr>
 							</table> <br> <br>
 							<div>
-								<span id="category_select1">${gdViewCtg[0].ct_clfname}</span>
-								<span id="category_select2">${gdViewCtg[1].ct_clfname}</span>
-								<span id="category_select3">${gdViewCtg[2].ct_clfname}</span>
-								<input id="ctgry1"  type="hidden">
-								<input id="ctgry2"  type="hidden">
-								<input id="ctgry3"  type="hidden">
+								<span id="category_select1" >${gdViewCtg[0].ct_clfname}&nbsp;>&nbsp;</span>
+								<span id="category_select2" >${gdViewCtg[1].ct_clfname}<c:if test="${gdViewCtg[2].ct_clfname != null}">&nbsp;>&nbsp;</c:if></span>
+								<span id="category_select3" >${gdViewCtg[2].ct_clfname}</span>
+								<input id="ctgry1" name="gd_clfl" type="hidden" value="${gdsView.gd_clfl}">
+								<input id="ctgry2" name="gd_clfm" type="hidden" value="${gdsView.gd_clfm}">
+								<input id="ctgry3" name="gd_clfs" type="hidden" value="${gdsView.gd_clfs}">
 							</div>
 							<br>
 						</td>
@@ -242,7 +287,7 @@ h3 {
 				<tbody>
 					<tr>
 						<td class="gdTd1 tdFont">상품번호</td>
-						<td class="gdTd2 tdFont">${gdsView.gd_no}</td>
+						<td class="gdTd2 tdFont"><input name="gd_no" value="${gdsView.gd_no}" readonly></td>
 					</tr>
 					<tr>
 						<td class="gdTd1 tdFont">상품명 필수</td>
@@ -305,9 +350,6 @@ h3 {
 				<tbody>
 					<tr>
 						<td class="gdTd1 tdFont">옵션명 필수</td>
-						<input name="op_name" type="hidden">
-						<input name="op_price" type="hidden">
-						<input name="op_stock" type="hidden">
 						<td class="gdTd2 tdFont" rowspan="3" >
 						<div>
 						<ul class="opUl">
@@ -326,6 +368,16 @@ h3 {
 						</c:forEach>
 						</ul>
 						</div>
+						<li class="opTbr">
+							<button id="opPlus">추가</button>
+						</li>
+						<li class="opTbr">
+							<button id="opSave">적용</button>
+						</li>
+						<input id="opSize" type="hidden" value="${gdsOp.size()}">
+						<input name="opl_name" type="hidden">
+						<input name="opl_price" type="hidden">
+						<input name="opl_stock" type="hidden">
 						</td>
 					</tr>
 					<tr>
@@ -390,6 +442,10 @@ h3 {
 								<input type="hidden"  name="gd_file2" >
 								<input type="hidden"  name="gd_file3">
 								<input type="hidden"  name="gd_file4">
+								<input type="hidden"  name="gd_imgl" value="${gdsView.gd_imgl}">
+								<input type="hidden"  name="gd_imgm" value="${gdsView.gd_imgm}">
+								<input type="hidden"  name="gd_imgs" value="${gdsView.gd_imgs}">
+								<input type="hidden"  name="gd_imgss" value="${gdsView.gd_imgss}">
 							</span>
 						</td>
 					</tr>
@@ -467,7 +523,7 @@ h3 {
 				<tbody>
 					<tr>
 						<td class="gdTd1 tdFont">판매자ID 필수</td>
-						<td class="gdTd2 tdFont"><input name="gd_sellerid" value="${gdsView.gd_sellerid}"></td>
+						<td class="gdTd2 tdFont"><input name="gd_sellerid" value="${gdsView.gd_sellerid}" readonly></td>
 					</tr>
 				</tbody>
 			</table>

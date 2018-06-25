@@ -1,7 +1,5 @@
 package com.sol.mall.goods;
 
-import java.math.BigDecimal;
-
 public class GoodsDtl {
 	private String	gt_no;
 	private String	gt_gdno;

@@ -48,7 +48,7 @@ public class GoodsController {
 	// 상품등록작업
 	@RequestMapping(value = "/registration.do", method = RequestMethod.POST)
 	public String registrationDo(@RequestParam("gd_file1") MultipartFile multipartFile, Goods gd, GoodsDtl gdtl,
-			Option op, HttpServletRequest request, HttpServletResponse response) throws Exception {
+			OptionList opl, HttpServletRequest request, HttpServletResponse response) throws Exception {
 
 		// 업로드 파일이 존재하면
 		if (multipartFile != null && !(multipartFile.getOriginalFilename().equals(""))) {
@@ -104,8 +104,10 @@ public class GoodsController {
 			// 입력하고 저장 누르면 저장후 입력화면으로 이동 방금입력한 내용을 다시 입력화면에 표시불가
 			// 수정화면 따로 만들어야 함
 
+			
+			System.out.println("옵션값 테스트==="+opl.getOpl_name().size());
 			// Transaction 적용
-			gdsDAO.insertGdsInfo(gd, gdtl, op, request, response);
+			gdsDAO.insertGdsInfo(gd, gdtl, opl, request, response);
 
 		}
 
@@ -118,9 +120,9 @@ public class GoodsController {
 	// 상품 수정 작업
 	@RequestMapping(value = "/goodsUpdate.do", method = RequestMethod.POST)
 	public String goodsUpdateDo(@RequestParam("gd_file1") MultipartFile multipartFile, Goods gd, GoodsDtl gdtl,
-			Option op, GoodsView gv, GoodsCategory gc, HttpServletRequest request, HttpServletResponse response) throws Exception {
+			OptionList opl, GoodsView gv, GoodsCategory gc, HttpServletRequest request, HttpServletResponse response) throws Exception {
 
-		// 업로드 파일이 존재하면
+		// 업로드 파일이 존재하면? 파일업로드 없이 그냥 하면?
 		if (multipartFile != null && !(multipartFile.getOriginalFilename().equals(""))) {
 
 			// 확장자 제한
@@ -163,10 +165,10 @@ public class GoodsController {
 			System.out.println("** 상품이미지 originalName : " + originalName + " **");
 			System.out.println("** 상품이미지 modifyName : " + modifyName + " **");
 
-			// ★★★★★★★★★★★★★★★★★		기존 이미지 삭제		★★★★★★★★★★★★★★★★★★
+			// ▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼		기존 이미지 삭제		▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼
 
 			
-			// ★★★★★★★★★★★★★★★★★		기존 이미지 삭제		★★★★★★★★★★★★★★★★★★
+			// ▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲		기존 이미지 삭제		▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲
 			
 			gd.setGd_imgl(modifyName);
 			// 이미지 사이즈 조절 만들 때 까지 임시
@@ -179,10 +181,12 @@ public class GoodsController {
 			// 입력하고 저장 누르면 저장후 입력화면으로 이동 방금입력한 내용을 다시 입력화면에 표시불가
 			// 수정화면 따로 만들어야 함
 
-			// Transaction 적용
-			gdsDAO.updateGdsInfo(gd, gdtl, op, request, response);
 		}
-		gdsDAO.getGoodsView(gv, gc, op, request, response);
+		System.out.println("업데이트 진입");
+		// Transaction 적용
+		gdsDAO.updateGdsInfo(gd, gdtl, opl, request, response);
+
+		gdsDAO.getGoodsView(gv, gc, request, response);
 		
 		gdsDAO.getAllcategory(request, response);
 		request.setAttribute("contentPage", "../goods/goodsView.jsp");
@@ -218,10 +222,10 @@ public class GoodsController {
 
 	// 상품상세화면 표시
 	@RequestMapping(value = "/goods.view", method = RequestMethod.GET)
-	public String goodsDtlView(GoodsView gv, GoodsCategory gc, Option op, HttpServletRequest request, HttpServletResponse response) {
+	public String goodsDtlView(GoodsView gv, GoodsCategory gc, HttpServletRequest request, HttpServletResponse response) {
 		// goodsView.jsp 수정시 daumeditor의 editor.jsp안의 	Editor.modify({'content': '${gdsView.gt_detail}'}); 수정필요
 		// gdsView.gt_detail 다음에디터로 작성한 상세내용 
-		gdsDAO.getGoodsView(gv, gc, op, request, response);
+		gdsDAO.getGoodsView(gv, gc, request, response);
 		
 		gdsDAO.getAllcategory(request, response);
 		request.setAttribute("contentPage", "../goods/goodsView.jsp");

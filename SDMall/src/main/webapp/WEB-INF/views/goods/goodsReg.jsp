@@ -24,7 +24,7 @@ function saveContent() {
     Editor.save(); // 이 함수를 호출하여 글을 등록하면 된다.
 }
 
-var opN = 1;// 옵션 항목 눌렀을 경우 추가되는 name의 번호
+//var opN = 1;// 옵션 항목 눌렀을 경우 추가되는 name의 번호
 
 $(function(){
 //구버전	$(".ct1").click(function() {
@@ -53,7 +53,7 @@ $(function(){
 						fname.attr("category_num", c.ct_no);
 						$("#ct12").append(fname);
 						// 카테고리 선택 표시 영역
-						$("#category_select1").text(clfname + ">");
+						$("#category_select1").text(clfname + " > ");
 						var input = $("#ctgry1").val(cn);
 		                input.attr("name", "gd_clfl");
 					});
@@ -61,7 +61,7 @@ $(function(){
 				}else{
 				
 					// 카테고리 선택 표시 영역
-					$("#category_select1").text(clfname + ">");
+					$("#category_select1").text(clfname + " > ");
 					var input = $("#ctgry1").val(cn);
 	                input.attr("name", "gd_clfl");
 				}
@@ -94,14 +94,14 @@ $(function(){
 						$("#ct13").append(fname);
 						
 						// 카테고리 선택 표시 영역
-						$("#category_select2").text(clfname + ">");
+						$("#category_select2").text(clfname);
 						var input = $("#ctgry2").val(cn);
 		                input.attr("name", "gd_clfm");
 		                
 					});
 				}else{
 					// 카테고리 선택 표시 영역
-					$("#category_select2").text(clfname + ">");
+					$("#category_select2").text(clfname);
 					var input = $("#ctgry2").val(cn);
 	                input.attr("name", "gd_clfm");
 				}
@@ -116,29 +116,52 @@ $(function(){
 		
 		$("#category_select3").empty();
 		// 카테고리 선택 표시 영역
-		$("#category_select3").text(clfname + ">");
+		$("#category_select3").text(" > "+clfname);
 		var input = $("#ctgry3").val(cn);
         input.attr("name", "gd_clfs");
 	});
-	
-	// ★★★★★★★★★★★★★옵션값 배열로 저장 input hidden으로 넘기기★★★★★★★★★★★★★★★
+	   
+	// ▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼ 옵션값 배열로 저장 input hidden으로 넘기기 ▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼
+	var opN = 1;// 옵션 항목 눌렀을 경우 추가되는 name의 번호
+
 	$(document).on("click","#opPlus",function(){
-alert("d");
+
+		var opInputN = $("<input>").attr("class","inpWidth").attr("name", "op_name"+opN);
+		var opSpanN = $("<span></span>").append(opInputN);
 		
-		var opInputN = $("<input>").attr("class","inpWidth").attr("name", "op_name");
-		var opSpanN = $("<span></span><br>").append(opInputN);
-		
-		var opInputP = $("<input>").attr("class","inpWidth").attr("name", "op_price");
-		var opSpanP = $("<span></span><br>").append(opInputP);
+		var opInputP = $("<input>").attr("class","inpWidth").attr("name", "op_price"+opN);
+		var opSpanP = $("<span></span>").append(opInputP);
 		
 		var opInputS = $("<input>").attr("class","inpWidth").attr("name", "op_stock"+opN);
-		var opSpanS = $("<span></span><br>").append(opInputS);
+		var opSpanS = $("<span></span>").append(opInputS);
 
 		var opLi = $("<li></li>").attr("class","opTb").append(opSpanN, opSpanP, opSpanS);
-		$("#opUl").append(opLi);
+		$(".opUl").append(opLi);
+		
+		opN++;
 	});
 	
-	// ★★★★★★★★★★★★★옵션값 배열로 저장 input hidden으로 넘기기★★★★★★★★★★★★★★★
+	// 적용 버튼 클릭으로 옵션값 히든에 저장
+//	$(document).on("keyup","[name=op_stock"+(opN-1)+"]",function(){
+	$(document).on("click","#opSave",function(){
+		var r = opN;
+		var opl_name = [];
+		var opl_price = [];
+		var opl_stock = [];
+		
+		for (var i = 0; i < r; i++) {
+			opl_name[i] = $("input[name=op_name"+i+"]").val();
+			opl_price[i] = $("input[name=op_price"+i+"]").val();
+			opl_stock[i] = $("input[name=op_stock"+i+"]").val();
+		}
+		
+		$("input[name=opl_name]").val(opl_name);
+		$("input[name=opl_price]").val(opl_price);
+		$("input[name=opl_stock]").val(opl_stock);
+		alert("옵션 적용");
+
+	});
+	// ▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲ 옵션값 배열로 저장 input hidden으로 넘기기 ▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲
 	
 });
 
@@ -263,11 +286,11 @@ h3 {
 				<tbody>
 					<tr>
 						<td class="gdTd1">상품명 필수(20)</td>
-						<td class="gdTd2"><input name="gd_name"></td>
+						<td class="gdTd2"><input class="inpWidth" name="gd_name"></td>
 					</tr>
 					<tr>
 						<td class="gdTd1">모델명(20)</td>
-						<td class="gdTd2"><input name="gt_mdlname"></td>
+						<td class="gdTd2"><input class="inpWidth" name="gt_mdlname"></td>
 					</tr>
 					<tr>
 						<td class="gdTd1">상품상세설명 필수</td>
@@ -285,7 +308,7 @@ h3 {
 					</tr>
 					<tr>
 						<td class="gdTd1">검색어설정</td>
-						<td class="gdTd2"><input name="gt_keyword"></td>
+						<td class="gdTd2"><input class="inpWidth" name="gt_keyword"></td>
 					</tr>
 				</tbody>
 			</table>
@@ -301,11 +324,11 @@ h3 {
 				<tbody>
 					<tr>
 						<td class="gdTd1">소비자가 필수(7)</td>
-						<td class="gdTd2"><input name="gd_csmprice"></td>
+						<td class="gdTd2"><input class="inpWidth" name="gd_csmprice"></td>
 					</tr>
 					<tr>
 						<td class="gdTd1">판매가 필수(7)</td>
-						<td class="gdTd2"><input name="gd_price"></td>
+						<td class="gdTd2"><input class="inpWidth" name="gd_price"></td>
 					</tr>
 					
 				</tbody>
@@ -341,9 +364,12 @@ h3 {
 						<li class="opTbr">
 							<button id="opPlus">추가</button>
 						</li>
-						<input class="inpWidth" name="op_name" type="hidden">
-						<input class="inpWidth" name="op_price" type="hidden">
-						<input class="inpWidth" name="op_stock" type="hidden">
+						<li class="opTbr">
+							<button id="opSave">적용</button>
+						</li>
+						<input class="inpWidth" name="opl_name" type="hidden">
+						<input class="inpWidth" name="opl_price" type="hidden">
+						<input class="inpWidth" name="opl_stock" type="hidden">
 						</td>
 					</tr>
 					<tr>
@@ -425,35 +451,35 @@ h3 {
 				<tbody>
 					<tr>
 						<td class="gdTd1">제조사(20)</td>
-						<td class="gdTd2"><input name="gt_maker"></td>
+						<td class="gdTd2"><input class="inpWidth" name="gt_maker"></td>
 					</tr>
 					<tr>
 						<td class="gdTd1">브랜드(20)</td>
-						<td class="gdTd2"><input name="gt_brand"></td>
+						<td class="gdTd2"><input class="inpWidth" name="gt_brand"></td>
 					</tr>
 					<tr>
 						<td class="gdTd1">제조일자(20)</td>
-						<td class="gdTd2"><input name="gt_mfd"></td>
+						<td class="gdTd2"><input class="inpWidth" name="gt_mfd"></td>
 					</tr>
 					<tr>
 						<td class="gdTd1">유효기간(20)</td>
-						<td class="gdTd2"><input name="gt_exp"></td>
+						<td class="gdTd2"><input class="inpWidth" name="gt_exp"></td>
 					</tr>
 					<tr>
 						<td class="gdTd1">상품소재(20)</td>
-						<td class="gdTd2"><input name="gt_material"></td>
+						<td class="gdTd2"><input class="inpWidth" name="gt_material"></td>
 					</tr>
 					<tr>
 						<td class="gdTd1">상품 전체중량(kg)(20)</td>
-						<td class="gdTd2"><input name="gt_weight"></td>
+						<td class="gdTd2"><input class="inpWidth" name="gt_weight"></td>
 					</tr>
 					<tr>
 						<td class="gdTd1">상품부피(cm)(20)</td>
-						<td class="gdTd2"><input name="gt_volume"></td>
+						<td class="gdTd2"><input class="inpWidth" name="gt_volume"></td>
 					</tr>
 					<tr>
 						<td class="gdTd1">원산지(20)</td>
-						<td class="gdTd2"><input name="gt_origin"></td>
+						<td class="gdTd2"><input class="inpWidth" name="gt_origin"></td>
 					</tr>
 				</tbody>
 			</table>
@@ -469,7 +495,7 @@ h3 {
 				<tbody>
 					<tr>
 						<td class="gdTd1">배송비 필수(20)</td>
-						<td class="gdTd2"><input name="gd_dlvchrg"></td>
+						<td class="gdTd2"><input class="inpWidth" name="gd_dlvchrg"></td>
 					</tr>
 				</tbody>
 			</table>
@@ -485,7 +511,7 @@ h3 {
 				<tbody>
 					<tr>
 						<td class="gdTd1">판매자ID 필수(12)</td>
-						<td class="gdTd2"><input name="gd_sellerid"></td>
+						<td class="gdTd2"><input class="inpWidth" name="gd_sellerid"></td>
 					</tr>
 				</tbody>
 			</table>

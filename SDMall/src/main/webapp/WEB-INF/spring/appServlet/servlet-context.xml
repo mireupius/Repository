@@ -59,7 +59,7 @@
 		<tx:attributes>
 			<tx:method name="insertGds*" propagation="REQUIRED"
 				rollback-for="Exception" />
-			<tx:method name="updateGds*" propagation="REQUIRED"
+			<tx:method name="update*" propagation="REQUIRED"
 				rollback-for="Exception" />
 			<tx:method name="get*" read-only="true" />
 		</tx:attributes>

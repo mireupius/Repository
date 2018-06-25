@@ -207,10 +207,36 @@ select * from goods_tb a, goodsdtl_tb b
 where a.gd_no = b.gt_gdno 
 and a.gd_no = '1001091160005';
 select * from goods_tb;
+select * from goodsdtl_tb
+where gt_no = '1001091130021';
 
+옵77
 select * from category_tb
 		where ct_no = '100' OR ct_no = '110' OR ct_no = '109'
 		order by ct_clf;
+
+		select * from goods_tb a, goodsdtl_tb b 
+		where a.gd_no = b.gt_gdno 
+		and a.gd_no = '1001091130021';
+		
+		
+		update goods_tb 
+		set
+			gd_name = '강제1',
+			gd_csmprice = '22',
+			gd_price = '22',
+			gd_dlvchrg = '33',
+			gd_imgl = '20180619093041-a57-2342508a86ba.jpg',
+			gd_imgm = '20180619093041-a57-2342508a86ba.jpg',
+			gd_imgs = '20180619093041-a57-2342508a86ba.jpg',
+			gd_imgss = '20180619093041-a57-2342508a86ba.jpg',
+			gd_clfl = '100',
+			gd_clfm = '110',
+			gd_clfs = '109'
+		
+		where  gd_no = '1001091160005' and gd_sellerid = 'aaaaaaaaaaaa';
+		
+select * from option_tb;
 
 --=====================================================================
 
