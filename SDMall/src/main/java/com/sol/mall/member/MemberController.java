@@ -108,7 +108,7 @@ public class MemberController {
 			
 			MPDAO.getMembership(m, req, res);
 			
-			return "customer/customerMyPage";
+			return "customer/customerMyPage2";
 			
 			
 		}else {
