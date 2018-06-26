@@ -16,8 +16,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.sol.mall.category.CategoryDAO;
-
 @Controller
 public class GoodsController {
 
@@ -113,11 +111,22 @@ public class GoodsController {
 
 		return "sale/saleIndex";
 	}
+	
+	//상품상세 조회
 	@RequestMapping(value = "/goods", method = RequestMethod.GET)
 	public String getGoodsDtlByNo(Goods goods,HttpServletRequest request, HttpServletResponse response) {
 		cDAO.getAllCategory(request, response);
 		
 		gdsDAO.getGoodsByNo(goods, request, response);
+		request.setAttribute("contentPage", "goods/goods.jsp");
+		return "main";
+	}
+	
+	//카테고리 상품 조회
+	@RequestMapping(value = "/shop232", method = RequestMethod.GET)
+	public String getGoodsByCate(Category category, HttpServletRequest request, HttpServletResponse response) {
+		cDAO.getAllCategory(request, response);
+		
 		request.setAttribute("contentPage", "goods/goods.jsp");
 		return "main";
 	}

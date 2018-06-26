@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.sol.mall.category.CategoryDAO;
+import com.sol.mall.goods.CategoryDAO;
 import com.sol.mall.myPage.MyPageDAO;
 
 @Controller

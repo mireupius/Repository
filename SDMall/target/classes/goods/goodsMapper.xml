@@ -41,6 +41,11 @@
 		where gd_no = #{gd_no}
 	</select>
 	
+	<select id="getGoodsByCate" parameterType="com.sol.mall.goods.Category" resultType="com.sol.mall.goods.Goods">
+		select * from goods_tb
+		where gd_no = #{ct_no}
+	</select>
+	
 	<select id="getGoodsDtlByNo" parameterType="com.sol.mall.goods.Goods" resultType="com.sol.mall.goods.GoodsDtl">
 		select * from goodsdtl_tb
 		where gt_gdno = #{gd_no}
