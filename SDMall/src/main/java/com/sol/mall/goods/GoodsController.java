@@ -21,9 +21,10 @@ public class GoodsController {
 
 	@Autowired
 	private GoodsDAO gdsDAO;
-	
+
 	@Autowired
 	CategoryDAO cDAO;
+
 	// 상품등록화면 처음
 	@RequestMapping(value = "/goodsReg.go", method = RequestMethod.GET)
 	public String goods(HttpServletRequest request, HttpServletResponse response) {
@@ -33,11 +34,24 @@ public class GoodsController {
 		request.setAttribute("contentPage", "../goods/goodsReg.jsp");
 		return "sale/saleIndex";
 	}
+
+	// 전체 상품 조회
 	@RequestMapping(value = "/shop", method = RequestMethod.GET)
 	public String getAllGoods(HttpServletRequest request, HttpServletResponse response) {
 		cDAO.getAllCategory(request, response);
-		
+
 		gdsDAO.getAllGoods(request);
+		request.setAttribute("contentPage", "goods/shop.jsp");
+		return "main";
+	}
+
+	// 카테고리 상품 조회
+	@RequestMapping(value = "/shop.Category", method = RequestMethod.GET)
+	public String getGoodsByCate(Category category, HttpServletRequest request, HttpServletResponse response) {
+		cDAO.getAllCategory(request, response);
+		
+		System.out.println("컨트롤러");
+		gdsDAO.getGoodsByCate(category, request, response);
 		request.setAttribute("contentPage", "goods/shop.jsp");
 		return "main";
 	}
@@ -69,7 +83,7 @@ public class GoodsController {
 			// 저장경로
 			String defaultPath = request.getSession().getServletContext().getRealPath("/"); // 서버기본경로 (프로젝트 폴더 아님)
 			String path = defaultPath + "upload" + File.separator + "";
-			// File.separator + 
+			// File.separator +
 			// 저장경로 처리
 			File file = new File(path);
 			if (!file.exists()) { // 디렉토리 존재하지 않을경우 디렉토리 생성
@@ -111,22 +125,13 @@ public class GoodsController {
 
 		return "sale/saleIndex";
 	}
-	
-	//상품상세 조회
+
+	// 상품상세 조회
 	@RequestMapping(value = "/goods", method = RequestMethod.GET)
-	public String getGoodsDtlByNo(Goods goods,HttpServletRequest request, HttpServletResponse response) {
+	public String getGoodsDtlByNo(Goods goods, HttpServletRequest request, HttpServletResponse response) {
 		cDAO.getAllCategory(request, response);
-		
+
 		gdsDAO.getGoodsByNo(goods, request, response);
-		request.setAttribute("contentPage", "goods/goods.jsp");
-		return "main";
-	}
-	
-	//카테고리 상품 조회
-	@RequestMapping(value = "/shop232", method = RequestMethod.GET)
-	public String getGoodsByCate(Category category, HttpServletRequest request, HttpServletResponse response) {
-		cDAO.getAllCategory(request, response);
-		
 		request.setAttribute("contentPage", "goods/goods.jsp");
 		return "main";
 	}
@@ -150,20 +155,22 @@ public class GoodsController {
 
 	// 상품상세화면 표시
 	@RequestMapping(value = "/goods.view", method = RequestMethod.GET)
-	public String goodsDtlView(GoodsView gv, GoodsCategory gc, HttpServletRequest request, HttpServletResponse response) {
-		// goodsView.jsp 수정시 daumeditor의 editor.jsp안의 	Editor.modify({'content': '${gdsView.gt_detail}'}); 수정필요
-		// gdsView.gt_detail 다음에디터로 작성한 상세내용 
+	public String goodsDtlView(GoodsView gv, GoodsCategory gc, HttpServletRequest request,
+			HttpServletResponse response) {
+		// goodsView.jsp 수정시 daumeditor의 editor.jsp안의 Editor.modify({'content':
+		// '${gdsView.gt_detail}'}); 수정필요
+		// gdsView.gt_detail 다음에디터로 작성한 상세내용
 		gdsDAO.getGoodsView(gv, gc, request, response);
-		
+
 		gdsDAO.getAllcategory(request, response);
 		request.setAttribute("contentPage", "../goods/goodsView.jsp");
 		return "sale/saleIndex";
 	}
-	
+
 	// 상품키워드 검색
 	@RequestMapping(value = "/goods.search.keyword", method = RequestMethod.GET, produces = "application/json; charset=utf-8")
 	public @ResponseBody GoodsList gdsSearchKey(Keywords k, HttpServletRequest request, HttpServletResponse response) {
 		return gdsDAO.getGoodsByKey(k, request);
 	}
-	
+
 }

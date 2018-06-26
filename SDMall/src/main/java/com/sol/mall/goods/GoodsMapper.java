@@ -45,5 +45,5 @@ public interface GoodsMapper {
 
 	public abstract GoodsDtl getGoodsDtlByNo(Goods goods);// 상품코드로 상품 상세 조회
 
-	public abstract List<Goods> getGoodsByCate();// 카테고리 상품 조회
+	public abstract List<Goods> getGoodsByCate(Category category);// 카테고리 상품 조회
 }

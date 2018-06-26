@@ -43,7 +43,7 @@
 	
 	<select id="getGoodsByCate" parameterType="com.sol.mall.goods.Category" resultType="com.sol.mall.goods.Goods">
 		select * from goods_tb
-		where gd_no = #{ct_no}
+		where gd_clfl = #{ct_no} or gd_clfm = #{ct_no} or gd_clfs = #{ct_no}
 	</select>
 	
 	<select id="getGoodsDtlByNo" parameterType="com.sol.mall.goods.Goods" resultType="com.sol.mall.goods.GoodsDtl">

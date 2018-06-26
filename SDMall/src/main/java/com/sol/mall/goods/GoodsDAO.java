@@ -39,13 +39,14 @@ public class GoodsDAO {
 	}
 
 	// 카테고리로 상품 조회
-	public void getGoodsByCate(Goods goods, HttpServletRequest request, HttpServletResponse response) {
-		request.setAttribute("goodsDtl1", ss.getMapper(GoodsMapper.class).getGoodsByNo(goods));
-		request.setAttribute("option", ss.getMapper(OptionMapper.class).getOptionByGdno(goods));
-		System.out.println(goods.getGd_no());
+	public void getGoodsByCate(Category category, HttpServletRequest request, HttpServletResponse response) {
+		try {
+			List<Goods> goods = ss.getMapper(GoodsMapper.class).getGoodsByCate(category);
 
-		// ss.getMapper(GoodsMapper.class).getGoodsByNo(goods).getGd_clfl();
-
+			request.setAttribute("goods", goods);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 	// 상품 조회
