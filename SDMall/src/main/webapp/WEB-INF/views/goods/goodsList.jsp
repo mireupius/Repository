@@ -6,7 +6,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
-<link rel="stylesheet" href="resources/css/goods/goodsLst.css">
+<link rel="stylesheet" href="resources/css/goods/goodsList.css">
 <style type="text/css">
 h3 {
 	margin-bottom: 0;
@@ -70,12 +70,12 @@ $(function(){
 				</div>
 				<div>
 					<div>
-						<table class="gdliTb3">
+						<table class="table table-bordered table-striped table-condensed">
 							<tbody>
 								<tr class="gdliTb1">
-									<td class="gdLstTd1">상품명 검색</td>
+									<td class="gdLstTitle">상품명 검색</td>
 									<td class="gdLstTd2">
-									<select id="sKey" >
+									<select class="gdLstSel" id="sKey" >
 											<option value="gd_name">상품명</option>
 											<option value="">--------------------</option>
 											<option value="gd_no">상품번호</option>

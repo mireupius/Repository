@@ -17,6 +17,7 @@ public class Goods {
 	private	String	gd_clfm;
 	private	String	gd_clfs;
 	private String  gd_sellerid;
+	private	String	gd_outarea;
 
 	public Goods() {
 		// TODO Auto-generated constructor stub
@@ -24,7 +25,7 @@ public class Goods {
 
 	public Goods(String gd_no, String gd_name, BigDecimal gd_csmprice, BigDecimal gd_price, String gd_dlvchrg,
 			String gd_imgl, String gd_imgm, String gd_imgs, String gd_imgss, String gd_clfl, String gd_clfm,
-			String gd_clfs) {
+			String gd_clfs, String gd_sellerid, String gd_outarea) {
 		super();
 		this.gd_no = gd_no;
 		this.gd_name = gd_name;
@@ -38,6 +39,8 @@ public class Goods {
 		this.gd_clfl = gd_clfl;
 		this.gd_clfm = gd_clfm;
 		this.gd_clfs = gd_clfs;
+		this.gd_sellerid = gd_sellerid;
+		this.gd_outarea = gd_outarea;
 	}
 
 	public String getGd_no() {
@@ -139,9 +142,17 @@ public class Goods {
 	public String getGd_sellerid() {
 		return gd_sellerid;
 	}
-	
+
 	public void setGd_sellerid(String gd_sellerid) {
 		this.gd_sellerid = gd_sellerid;
 	}
-	
+
+	public String getGd_outarea() {
+		return gd_outarea;
+	}
+
+	public void setGd_outarea(String gd_outarea) {
+		this.gd_outarea = gd_outarea;
+	}
+
 }

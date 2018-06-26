@@ -129,7 +129,8 @@ $(function(){
 	$(document).on("click","#opPlus",function(){
 
 		var opInputN = $("<input>").attr("class","inpWidth").attr("name", "op_name"+opN);
-		var opSpanN = $("<span></span>").append(opInputN);
+		var opInputNo = $("<input>").attr("type","hidden").attr("name", "op_no"+opN);
+		var opSpanN = $("<span></span>").append(opInputN, opInputNo);
 		
 		var opInputP = $("<input>").attr("class","inpWidth").attr("name", "op_price"+opN);
 		var opSpanP = $("<span></span>").append(opInputP);
@@ -146,16 +147,19 @@ $(function(){
 	// 적용 버튼 클릭으로 옵션값 히든에 저장
 	$(document).on("click","#opSave",function(){
 		var r = opN;
+		var opl_no = [];
 		var opl_name = [];
 		var opl_price = [];
 		var opl_stock = [];
 		
 		for (var i = 0; i < r; i++) {
+			opl_no[i] = $("input[name=op_no"+i+"]").val();
 			opl_name[i] = $("input[name=op_name"+i+"]").val();
 			opl_price[i] = $("input[name=op_price"+i+"]").val();
 			opl_stock[i] = $("input[name=op_stock"+i+"]").val();
 		}
 		
+		$("input[name=opl_no]").val(opl_no);
 		$("input[name=opl_name]").val(opl_name);
 		$("input[name=opl_price]").val(opl_price);
 		$("input[name=opl_stock]").val(opl_stock);
@@ -287,14 +291,17 @@ h3 {
 				<tbody>
 					<tr>
 						<td class="gdTd1 tdFont">상품번호</td>
-						<td class="gdTd2 tdFont"><input name="gd_no" value="${gdsView.gd_no}" readonly></td>
+						<td class="gdTd2 tdFont">
+							<input name="gd_no" value="${gdsView.gd_no}" readonly>
+							<input name="gt_no" value="${gdsView.gt_no}" type="hidden">
+						</td>
 					</tr>
 					<tr>
-						<td class="gdTd1 tdFont">상품명 필수</td>
+						<td class="gdTd1 tdFont">상품명 필수(20)</td>
 						<td class="gdTd2 tdFont"><input name="gd_name" value="${gdsView.gd_name}"></td>
 					</tr>
 					<tr>
-						<td class="gdTd1 tdFont">모델명</td>
+						<td class="gdTd1 tdFont">모델명(20)</td>
 						<td class="gdTd2 tdFont"><input name="gt_mdlname" value="${gdsView.gt_mdlname}"></td>
 					</tr>
 					<tr>
@@ -328,11 +335,11 @@ h3 {
 			<table class="gdTb3">
 				<tbody>
 					<tr>
-						<td class="gdTd1 tdFont">소비자가 필수</td>
+						<td class="gdTd1 tdFont">소비자가 필수(7)</td>
 						<td class="gdTd2 tdFont"><input name="gd_csmprice" value="${gdsView.gd_csmprice}"></td>
 					</tr>
 					<tr>
-						<td class="gdTd1 tdFont">판매가 필수</td>
+						<td class="gdTd1 tdFont">판매가 필수(7)</td>
 						<td class="gdTd2 tdFont"><input name="gd_price" value="${gdsView.gd_price}"></td>
 					</tr>
 					
@@ -349,14 +356,16 @@ h3 {
 			<table class="gdTb3">
 				<tbody>
 					<tr>
-						<td class="gdTd1 tdFont">옵션명 필수</td>
+						<td class="gdTd1 tdFont">옵션명 필수(20)</td>
 						<td class="gdTd2 tdFont" rowspan="3" >
 						<div>
 						<ul class="opUl">
+						<c:if test="${gdsOp.size() > 0}">
 						<c:forEach var="h" begin="0" end="${gdsOp.size()-1}" step="1">
 							<li class="opTb">
 								<span>
 									<input class="inpWidth" name="op_name${h}" value="${gdsOp[h].op_name}">
+									<input type="hidden" name="op_no${h}" value="${gdsOp[h].op_no}">
 								</span><br>
 								<span>
 									<input class="inpWidth" name="op_price${h}" value="${gdsOp[h].op_price}">
@@ -366,6 +375,7 @@ h3 {
 								</span>
 							</li>
 						</c:forEach>
+						</c:if>
 						</ul>
 						</div>
 						<li class="opTbr">
@@ -375,16 +385,17 @@ h3 {
 							<button id="opSave">적용</button>
 						</li>
 						<input id="opSize" type="hidden" value="${gdsOp.size()}">
+						<input name="opl_no" type="hidden">
 						<input name="opl_name" type="hidden">
 						<input name="opl_price" type="hidden">
 						<input name="opl_stock" type="hidden">
 						</td>
 					</tr>
 					<tr>
-						<td class="gdTd1 tdFont">옵션가격 필수</td>
+						<td class="gdTd1 tdFont">옵션가격 필수(7)</td>
 					</tr>
 					<tr>
-						<td class="gdTd1 tdFont">옵션재고 필수</td>
+						<td class="gdTd1 tdFont">옵션재고 필수(4)</td>
 					</tr>
 				</tbody>
 			</table>
@@ -462,35 +473,35 @@ h3 {
 			<table class="gdTb3">
 				<tbody>
 					<tr>
-						<td class="gdTd1 tdFont">제조사</td>
+						<td class="gdTd1 tdFont">제조사(20)</td>
 						<td class="gdTd2 tdFont"><input name="gt_maker" value="${gdsView.gt_maker}"></td>
 					</tr>
 					<tr>
-						<td class="gdTd1 tdFont">브랜드</td>
+						<td class="gdTd1 tdFont">브랜드(20)</td>
 						<td class="gdTd2 tdFont"><input name="gt_brand" value="${gdsView.gt_brand}"></td>
 					</tr>
 					<tr>
-						<td class="gdTd1 tdFont">제조일자</td>
+						<td class="gdTd1 tdFont">제조일자(20)</td>
 						<td class="gdTd2 tdFont"><input name="gt_mfd" value="${gdsView.gt_mfd}"></td>
 					</tr>
 					<tr>
-						<td class="gdTd1 tdFont">유효기간</td>
+						<td class="gdTd1 tdFont">유효기간(20)</td>
 						<td class="gdTd2 tdFont"><input name="gt_exp" value="${gdsView.gt_exp}"></td>
 					</tr>
 					<tr>
-						<td class="gdTd1 tdFont">상품소재</td>
+						<td class="gdTd1 tdFont">상품소재(20)</td>
 						<td class="gdTd2 tdFont"><input name="gt_material" value="${gdsView.gt_material}"></td>
 					</tr>
 					<tr>
-						<td class="gdTd1 tdFont">상품 전체중량(kg)</td>
+						<td class="gdTd1 tdFont">상품 전체중량(kg)(20)</td>
 						<td class="gdTd2 tdFont"><input name="gt_weight" value="${gdsView.gt_weight}"></td>
 					</tr>
 					<tr>
-						<td class="gdTd1 tdFont">상품부피(cm)</td>
+						<td class="gdTd1 tdFont">상품부피(cm)(20)</td>
 						<td class="gdTd2 tdFont"><input name="gt_volume" value="${gdsView.gt_volume}"></td>
 					</tr>
 					<tr>
-						<td class="gdTd1 tdFont">원산지</td>
+						<td class="gdTd1 tdFont">원산지(20)</td>
 						<td class="gdTd2 tdFont"><input name="gt_origin" value="${gdsView.gt_origin}"></td>
 					</tr>
 				</tbody>
@@ -506,8 +517,12 @@ h3 {
 			<table class="gdTb3">
 				<tbody>
 					<tr>
-						<td class="gdTd1 tdFont">배송비 필수</td>
+						<td class="gdTd1 tdFont">배송비 필수(20)</td>
 						<td class="gdTd2 tdFont"><input name="gd_dlvchrg" value="${gdsView.gd_dlvchrg}"></td>
+					</tr>
+					<tr>
+						<td class="gdTd1 tdFont">출고지 필수(20)</td>
+						<td class="gdTd2 tdFont"><input name="gd_outarea" value="${gdsView.gd_outarea}"></td>
 					</tr>
 				</tbody>
 			</table>
@@ -522,7 +537,7 @@ h3 {
 			<table class="gdTb3">
 				<tbody>
 					<tr>
-						<td class="gdTd1 tdFont">판매자ID 필수</td>
+						<td class="gdTd1 tdFont">판매자ID 필수(12)</td>
 						<td class="gdTd2 tdFont"><input name="gd_sellerid" value="${gdsView.gd_sellerid}" readonly></td>
 					</tr>
 				</tbody>
@@ -532,7 +547,7 @@ h3 {
 	<br>
 	<div align="center">
 		<!-- 실제 값이 담겨져서 넘어갈 textarea 태그 -->
-		<input type="button" id="save_button" value="내용수정" onclick="saveContent();"/>
+		<input type="button" id="save_button" value="상품수정" onclick="saveContent();"/>
 	</div>
 	<br><br><br><br><br><br>
 </form>

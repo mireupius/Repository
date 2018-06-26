@@ -81,23 +81,34 @@
 		select * from goodsdtl_tb
 	</select>
 
-	<!-- insert는 보통처럼 -->
+<!-- 	
 	<insert id="insertGdsDtl" 
 		parameterType="hashmap" >
 		insert into goodsdtl_tb values(
-			#{gt_no}, #{gt_gdno}, #{gt_mdlname}, #{gt_maker},
-			#{gt_brand}, #{gt_mfd}, #{gt_exp}, #{gt_material},
-			#{gt_weight}, #{gt_volume}, #{gt_origin}, 
-			#{gt_keyword}, #{gt_detail}
+			#{gt_no},			#{gt_gdno},			#{gt_mdlname},			#{gt_maker},
+			#{gt_brand},			#{gt_mfd},			#{gt_exp},			#{gt_material},
+			#{gt_weight},			#{gt_volume},			#{gt_origin}, 			#{gt_keyword}, 
+			#{gt_detail}
 		)
-	</insert>
+	</insert> -->
 <!-- ↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑ CLOB SELECT 세트 ↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑ -->
 	<insert id="insertGds"
 		parameterType="com.sol.mall.goods.Goods">
 		insert into goods_tb values(
-			#{gd_clfl}||#{gd_clfm}||NVL(#{gd_clfs, jdbcType=VARCHAR},'000')||LPAD(goods_sq.nextval,4,'0'), #{gd_name}, #{gd_csmprice}, #{gd_price},
-			#{gd_dlvchrg}, #{gd_imgl}, #{gd_imgm}, #{gd_imgs},
-			#{gd_imgss}, #{gd_clfl}, #{gd_clfm},  #{gd_clfs, jdbcType=VARCHAR}, #{gd_sellerid}
+			#{gd_clfl}||#{gd_clfm}||NVL(#{gd_clfs, jdbcType=VARCHAR},'000')||LPAD(goods_sq.nextval,4,'0'),
+			#{gd_name},
+			#{gd_csmprice},
+			#{gd_price},
+			#{gd_dlvchrg},
+			#{gd_imgl},
+			#{gd_imgm},
+			#{gd_imgs},
+			#{gd_imgss},
+			#{gd_clfl},
+			#{gd_clfm},
+			#{gd_clfs, jdbcType=VARCHAR}, 
+			#{gd_sellerid},
+			#{gd_outarea}
 		)
 	</insert>
 
@@ -117,7 +128,13 @@
 			#{option.op_name}, #{option.op_price}, #{option.op_stock}
 		)
 	</insert>
-	
+
+	<insert id="insertOpTwoForUp" parameterType="hashmap">
+		insert into option_tb values(
+			option_sq.nextval, #{goods.gd_no}, 
+			#{option.op_name}, #{option.op_price}, #{option.op_stock}
+		)
+	</insert>
 	
 	<!-- 업데이트 (상품상세 수정)  -->
 	<update id="updateGds"
@@ -127,7 +144,7 @@
 			gd_name = #{gd_name}, gd_csmprice = #{gd_csmprice}, gd_price = #{gd_price},
 			gd_dlvchrg = #{gd_dlvchrg}, gd_imgl = #{gd_imgl}, gd_imgm = #{gd_imgm},
 			gd_imgs = #{gd_imgs}, gd_imgss = #{gd_imgss}, gd_clfl = #{gd_clfl},
-			gd_clfm = #{gd_clfm}, gd_clfs = #{gd_clfs, jdbcType=VARCHAR}
+			gd_clfm = #{gd_clfm}, gd_clfs = #{gd_clfs, jdbcType=VARCHAR}, gd_outarea = #{gd_outarea}
 		where  gd_no = #{gd_no} and gd_sellerid = #{gd_sellerid}
 	</update>
 
@@ -152,7 +169,9 @@
 	<update id="updateOpTwo" parameterType="hashmap">
 		update option_tb
 		set
-			#{option.op_name}, #{option.op_price}, #{option.op_stock}
+			op_name = #{option.op_name},
+			op_price = #{option.op_price},
+			op_stock = #{option.op_stock}
 		where op_no = #{option.op_no} and op_gdno = #{goods.gd_no}
 	</update>
 	

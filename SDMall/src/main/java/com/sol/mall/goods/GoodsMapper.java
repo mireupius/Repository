@@ -34,6 +34,9 @@ public interface GoodsMapper {
 
 	// 옵션입력
 	public abstract int insertOpTwo(HashMap<String, Object> map);
+
+	// 수정 화면에서 추가 옵션입력
+	public abstract int insertOpTwoForUp(HashMap<String, Object> map);
 	
 	// 선택한 상품 상세화면표시 	
 	public abstract GoodsView getGoodsView(GoodsView gv);

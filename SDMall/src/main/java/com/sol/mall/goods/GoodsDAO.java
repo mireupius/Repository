@@ -49,25 +49,14 @@ public class GoodsDAO {
 	// 상품상세 조회
 	public void getGoodsView(GoodsView gv, GoodsCategory gc, HttpServletRequest request, HttpServletResponse response) {
 
-//		System.out.println("상품번호>>"+gv.getGd_no());
-		
 		Option op = new Option();
 		op.setOp_gdno(gv.getGd_no());
 
 		GoodsView gdv = ss.getMapper(GoodsMapper.class).getGoodsView(gv);
 		
-//		System.out.println("구분1"+gdv.getGd_clfl());
-//		System.out.println("구분2"+gdv.getGd_clfm());
-//		System.out.println("구분3"+gdv.getGd_clfs());
 		gc.setGd_clfl(gdv.getGd_clfl());
 		gc.setGd_clfm(gdv.getGd_clfm());
 		gc.setGd_clfs(gdv.getGd_clfs());
-
-//		System.out.println("옵션상품번호"+op.getOp_gdno());
-//		System.out.println("옵션이름"+op.getOp_name());
-//		System.out.println("옵션번호"+op.getOp_no());
-//		System.out.println("옵션가격"+op.getOp_price());
-//		System.out.println("옵션재고"+op.getOp_stock());
 
 		List<Category> ctgLt = ss.getMapper(GoodsMapper.class).getCtgryForView(gc);
 		
@@ -93,40 +82,39 @@ public class GoodsDAO {
 
 	// 입력-----------------------------------------------------------------------
 	public void insertGd(Goods gd, HttpServletRequest request, HttpServletResponse response) {
-		// 이미지 문제
+		
+		System.out.println("=no="+gd.getGd_no());				
+		System.out.println("=name="+gd.getGd_name());				
+		System.out.println("=imgl="+gd.getGd_imgl());				
+		System.out.println("=clfl="+gd.getGd_clfl());				
+		System.out.println("=clfm="+gd.getGd_clfm());				
+		System.out.println("=clfs="+gd.getGd_clfs());				
+		System.out.println("=dlvchrg="+gd.getGd_dlvchrg());				
+		System.out.println("=outarea="+gd.getGd_outarea());				
+		System.out.println("=imgm="+gd.getGd_imgm());				
+		System.out.println("=imgs="+gd.getGd_imgs());				
+		System.out.println("=imgss="+gd.getGd_imgss());				
+		System.out.println("=sellerid="+gd.getGd_sellerid());				
 
-		System.out.println("=no="+gd.getGd_no());
-		System.out.println("=name="+gd.getGd_name());
-		System.out.println("=cmsprice="+gd.getGd_csmprice());
-		System.out.println("=gd_price="+gd.getGd_price());
-		System.out.println("=dlvchrg="+gd.getGd_dlvchrg());
-		System.out.println("=clfl="+gd.getGd_clfl());
-		System.out.println("=clfm="+gd.getGd_clfm());
-		System.out.println("=clfs="+gd.getGd_clfs());
-		System.out.println("=imgl="+gd.getGd_imgl());
-		System.out.println("=imgm="+gd.getGd_imgm());
-		System.out.println("=imgs="+gd.getGd_imgs());
-		System.out.println("=imgss="+gd.getGd_imgss());
-		System.out.println("=sellerid="+gd.getGd_sellerid());
 		
-		
+		// 이미지 문제
 		if (ss.getMapper(GoodsMapper.class).insertGds(gd) == 1) {
 
 			System.out.println("insertGd성공");
 		} else {
-			System.out.println("실패");
+			System.out.println("insertGd해당항목 없음");
 		}
 	}
 
-	public void insertGdtl(GoodsDtl g, HttpServletRequest request, HttpServletResponse response) {
-
-		if (ss.getMapper(GoodsMapper.class).insertGdsDtl(g) == 1) {
-
-			System.out.println("성공");
-		} else {
-			System.out.println("실패");
-		}
-	}
+//	public void insertGdtl(GoodsDtl g, HttpServletRequest request, HttpServletResponse response) {
+//
+//		if (ss.getMapper(GoodsMapper.class).insertGdsDtl(g) == 1) {
+//
+//			System.out.println("insertGdsDtl성공");
+//		} else {
+//			System.out.println("insertGdsDtl해당항목 없음");
+//		}
+//	}
 
 	public void insertGdtlTwo(HashMap<String, Object> map, HttpServletRequest request, HttpServletResponse response) {
 
@@ -134,7 +122,7 @@ public class GoodsDAO {
 
 			System.out.println("insertGdtlTwo성공");
 		} else {
-			System.out.println("실패");
+			System.out.println("insertGdtlTwo해당 항목없음");
 		}
 	}
 
@@ -144,7 +132,16 @@ public class GoodsDAO {
 
 			System.out.println("insertOpTwo성공");
 		} else {
-			System.out.println("실패");
+			System.out.println("insertOpTwo해당항목없음");
+		}
+	}
+	public void insertOpTwoForUp(HashMap<String, Object> map, HttpServletRequest request, HttpServletResponse response) {
+		
+		if (ss.getMapper(GoodsMapper.class).insertOpTwoForUp(map) == 1) {
+			
+			System.out.println("insertOpTwoForUp성공");
+		} else {
+			System.out.println("insertOpTwoForUp해당항목 없음");
 		}
 	}
 
@@ -152,18 +149,6 @@ public class GoodsDAO {
 	// @Transactional(rollbackFor = Exception.class)
 	public void insertGdsInfo(Goods gd, GoodsDtl gdtl, OptionList opl, HttpServletRequest request,
 			HttpServletResponse response) throws Exception {
-
-//		System.out.println("=no="+gd.getGd_no());
-//		System.out.println("=name="+gd.getGd_name());
-//		System.out.println("=imgl="+gd.getGd_imgl());
-//		System.out.println("=clfl="+gd.getGd_clfl());
-//		System.out.println("=clfm="+gd.getGd_clfm());
-//		System.out.println("=clfs="+gd.getGd_clfs());
-//		System.out.println("=dlvchrg="+gd.getGd_dlvchrg());
-//		System.out.println("=imgm="+gd.getGd_imgm());
-//		System.out.println("=imgs="+gd.getGd_imgs());
-//		System.out.println("=imgss="+gd.getGd_imgss());
-//		System.out.println("=sellerid="+gd.getGd_sellerid());
 		
 		// 입력(상품테이블)
 		insertGd(gd, request, response);
@@ -175,8 +160,6 @@ public class GoodsDAO {
 		// 입력(상품상세테이블)
 		insertGdtlTwo(map, request, response);
 
-		
-		
 		// ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓  옵션 여러개 입력할 때  ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓
 		Option op = new Option();
 		for (int i = 0; i < opl.getOpl_name().size(); i++) {
@@ -203,7 +186,6 @@ public class GoodsDAO {
 	public void updateGdsInfo(Goods gd, GoodsDtl gdtl, OptionList opl, HttpServletRequest request,
 			HttpServletResponse response) throws Exception {
 		
-		gdtl.setGt_no(gd.getGd_no());
 		// 입력(상품테이블)
 		updateGd(gd, request, response);
 		
@@ -212,73 +194,47 @@ public class GoodsDAO {
 		map.put("goods", gd);
 		map.put("goodsDtl", gdtl);
 		
-		System.out.println("=no="+gd.getGd_no());
-//		System.out.println("=name="+gd.getGd_name());
-//		System.out.println("=imgl="+gd.getGd_imgl());
-//		System.out.println("=clfl="+gd.getGd_clfl());
-//		System.out.println("=clfm="+gd.getGd_clfm());
-//		System.out.println("=clfs="+gd.getGd_clfs());
-//		System.out.println("=dlvchrg="+gd.getGd_dlvchrg());
-//		System.out.println("=imgm="+gd.getGd_imgm());
-//		System.out.println("=imgs="+gd.getGd_imgs());
-//		System.out.println("=imgss="+gd.getGd_imgss());
-//		System.out.println("=sellerid="+gd.getGd_sellerid());
-//		
-		System.out.println("상세Gt_no="+gdtl.getGt_no());
-//		System.out.println("상세="+gdtl.getGt_mdlname());
-//		System.out.println("상세="+gdtl.getGt_maker());
-//		System.out.println("상세="+gdtl.getGt_brand());
-//		System.out.println("상세="+gdtl.getGt_mfd());
-//		System.out.println("상세="+gdtl.getGt_exp());
-//		System.out.println("상세="+gdtl.getGt_material());
-//		System.out.println("상세="+gdtl.getGt_weight());
-//		System.out.println("상세="+gdtl.getGt_volume());
-//		System.out.println("상세="+gdtl.getGt_origin());
-//		System.out.println("상세="+gdtl.getGt_detail());
-		
 		// 입력(상품상세테이블)
 		updateGdtlTwo(map, request, response);
 		
-		
 		// ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓  옵션 여러개 입력할 때  ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓
 		Option op = new Option();
+		System.out.println("옵션 사이즈"+opl.getOpl_name().size());
 		for (int i = 0; i < opl.getOpl_name().size(); i++) {
 			
+			op.setOp_no(opl.getOpl_no().get(i));
 			op.setOp_name(opl.getOpl_name().get(i));
 			op.setOp_price(new BigDecimal(opl.getOpl_price().get(i)));
 			op.setOp_stock(new BigDecimal(opl.getOpl_stock().get(i)));
 			// 입력(상품상세 파라메터 작성goods, goodsDtl)
 			HashMap<String, Object> map2 = new HashMap<String, Object>();
+			
 			map2.put("goods", gd);
 			map2.put("option", op);
-			// 입력(옵션테이블)
-			updateOpTwo(map2, request, response);
+
+System.out.println(gd.getGd_clfl());
+System.out.println(gd.getGd_clfm());
+System.out.println(gd.getGd_clfs());
+
+			// 수정화면에서 옵션을 추가할시 수정이 아닌 입력이 필요
+			if(op.getOp_no().equals("")) {
+				System.out.println("수정화면 옵션 입력");
+				insertOpTwoForUp(map2, request, response);
+			}else {
+				// 수정(옵션테이블)
+				updateOpTwo(map2, request, response);
+			}
 		}
 		// ↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑  옵션 여러개 입력할 때  ↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑
 	}
 	
 	public void updateGd(Goods gd, HttpServletRequest request, HttpServletResponse response) {
 		// 이미지 문제
-
-		System.out.println("=no="+gd.getGd_no());
-		System.out.println("=name="+gd.getGd_name());
-		System.out.println("=imgl="+gd.getGd_imgl());
-		System.out.println("=clfl="+gd.getGd_clfl());
-		System.out.println("=clfm="+gd.getGd_clfm());
-		System.out.println("=clfs="+gd.getGd_clfs());
-		System.out.println("=dlvchrg="+gd.getGd_dlvchrg());
-		System.out.println("=imgm="+gd.getGd_imgm());
-		System.out.println("=imgs="+gd.getGd_imgs());
-		System.out.println("=imgss="+gd.getGd_imgss());
-		System.out.println("=sellerid="+gd.getGd_sellerid());
-		
-		System.out.println("updateGd  시작 ");
-		
 		if (ss.getMapper(GoodsMapper.class).updateGds(gd) == 1) {
 
 			System.out.println("updateGd성공");
 		} else {
-			System.out.println("실패");
+			System.out.println("updateGd 해당자료 없음");
 		}
 	}
 	
@@ -290,7 +246,7 @@ public class GoodsDAO {
 
 			System.out.println("updateGdtlTwo성공");
 		} else {
-			System.out.println("실패");
+			System.out.println("updateGdtlTwo 해당자료 없음");
 		}
 	}
 	
@@ -300,7 +256,7 @@ public class GoodsDAO {
 
 			System.out.println("updateOpTwo성공");
 		} else {
-			System.out.println("실패");
+			System.out.println("updateOpTwo 해당자료 없음");
 		}
 	}
 	

@@ -497,6 +497,10 @@ h3 {
 						<td class="gdTd1">배송비 필수(20)</td>
 						<td class="gdTd2"><input class="inpWidth" name="gd_dlvchrg"></td>
 					</tr>
+					<tr>
+						<td class="gdTd1">출고지 필수(20)</td>
+						<td class="gdTd2"><input class="inpWidth" name="gd_outarea"></td>
+					</tr>
 				</tbody>
 			</table>
 		</div>
@@ -520,7 +524,7 @@ h3 {
 	<br>
 	<div align="center">
 		<!-- 실제 값이 담겨져서 넘어갈 textarea 태그 -->
-		<input type="button" id="save_button" value="내용전송" onclick="saveContent();"/>
+		<input type="button" id="save_button" value="상품등록" onclick="saveContent();"/>
 	</div>
 	<br><br><br><br><br><br>
 </form>
