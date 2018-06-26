@@ -42,9 +42,8 @@
 						<div class="rating_r rating_r_4 product_rating"><i></i><i></i><i></i><i></i><i></i></div>
 						<div class="product_text"><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas fermentum. laoreet turpis, nec sollicitudin dolor cursus at. Maecenas aliquet, dolor a faucibus efficitur, nisi tellus cursus urna, eget dictum lacus turpis.</p></div>
 						<div class="order_info d-flex flex-row">
-							<form action="#">
+							<form action="cart.add">
 								<div class="clearfix" style="z-index: 1000;">
-
 									<!-- Product Quantity -->
 									<div class="product_quantity clearfix">
 										<span>Quantity: </span>
@@ -54,20 +53,14 @@
 											<div id="quantity_dec_button" class="quantity_dec quantity_control"><i class="fas fa-chevron-down"></i></div>
 										</div>
 									</div>
-
-									<!-- Product Color -->
-									<ul class="product_color">
-										<li>
-											<span>Color: </span>
-											<div class="color_mark_container"><div id="selected_color"></div></div>
-											<div class="color_dropdown_button"><i class="fas fa-chevron-down"></i></div>
-											<ul class="color_list">
+										<label class="custom-select" for="styledSelect1">
+											<select id="styledSelect1" name="sb_opno">
 												<c:forEach var="o" items="${option}">
-													<li><sapn id="op_name">${o.op_name }</sapn> / <span id ="op_price">(+${o.op_price })</span> / <span id ="op_stock">${o.op_stock }</span> </li>
+												<option value="${o.op_no }">${o.op_name } (+${o.op_price }) / ${o.op_stock }</option>
 												</c:forEach>
-											</ul>
-										</li>
-									</ul>
+											</select>
+										</label>
+
 
 								</div>
 
@@ -77,9 +70,8 @@
 									<!-- <button type="button" class="button cart_button">Add to Cart</button> -->
 									<div class="product_fav"><i class="fas fa-heart"></i></div>
 								</div>
-								<input id="gd_no" value="${goodsDtl1.gd_no }"> 
-								<input id="op_no" value="${o[0].op_no}"> 
-								<input id="quantity" value="1"> 
+								<input value="${goodsDtl1.gd_no }" name="sb_gdno"> 
+								<input value="1" name="sb_quantity"> 
 							</form>
 						</div>
 					</div>
