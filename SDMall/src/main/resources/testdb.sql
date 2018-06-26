@@ -94,14 +94,13 @@ select * from shoppingBasket;
 
 select SYSDATE AS BASIC, TO_CHAR(SYSDATE, 'YYYY.MM.DD')
 from dual
-where BASIC between (SELECT BASIC + 1 FROM DUAL) AND (SELECT SYSDATE+ 6 FROM DUAL)
-;
+where BASIC between (SELECT BASIC + 1 FROM DUAL) AND (SELECT SYSDATE+ 6 FROM DUAL);
 
 -- 날짜 
 SELECT SYSDATE + 6 FROM DUAL
 SELECT TO_DATE(TO_CHAR(SYSDATE, 'YYYYMMDD')) - TO_DATE(TO_CHAR(SELECT SYSDATE + 6 FROM DUAL, 'YYYYMMDD')) FROM DUAL;
 
-SELECT * FROM shoppingBasket WHERE sb_orderDate BETWEEN (SELECT ADD_MONTHS(SYSDATE, -3) FROM dual) and (SELECT SYSDATE FROM dual);
+select * from '테이블명' where '날짜칼럼명' between (select add_months(sysdate, -3) from dual) and (select sysdate from dual);
 
 SELECT *
 FROM shoppingBasket

@@ -20,6 +20,8 @@ create table goods_tb
  gd_sellerid				varchar2 (12 char)		not null
 );
 
+drop table goods_tb cascade constraint purge;
+
 
 create sequence goodsdtl_sq
 MAXVALUE 99999
@@ -190,8 +192,8 @@ insert into category_tb values(to_char(category_sq.nextval),'자켓/점퍼/코�
 insert into category_tb values(to_char(category_sq.nextval),'한복/테마의류',3,109);
 
 
-insert into goods_tb values('0000000010002','상품1','10000','8000','2500','imgl1.jpg','imgl1.jpg','imgl1.jpg','imgl1.jpg','100','109','114','seller1');
-insert into goods_tb values('0000000010003','상품2','10001','8001','2501','imgl2.jpg','imgl2.jpg','imgl2.jpg','imgl2.jpg','100','109','115','seller2');
+insert into goods_tb values('0000000010002','상품1','10000','8000','2500','imgl1.jpg','imgl1.jpg','imgl1.jpg','imgl1.jpg','100','109','114','seller123');
+insert into goods_tb values('0000000010003','상품2','10001','8001','2501','imgl2.jpg','imgl2.jpg','imgl2.jpg','imgl2.jpg','100','109','115','seller123');
 insert into goods_tb values('0000000010004','상품3','10002','8002','2502','imgl3.jpg','imgl3.jpg','imgl3.jpg','imgl3.jpg','100','109','116','seller3');
 insert into goods_tb values('0000000010005','상품4','10003','8003','2503','imgl4.jpg','imgl4.jpg','imgl4.jpg','imgl4.jpg','100','109','117','seller4');
 insert into goods_tb values('0000000010006','상품5','10004','8004','2504','imgl5.jpg','imgl5.jpg','imgl5.jpg','imgl5.jpg','100','109','118','seller5');

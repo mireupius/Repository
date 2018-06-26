@@ -73,7 +73,7 @@
 
 				<ul class="nav nav-sidebar">
 					<h4>주문관리</h4>
-					<li><a href="#">주문/배송조회</a></li>
+					<li><a href="customer.myHome.orderListGo">주문/배송조회</a></li>
 					<li><a href="#">취소/교환/반품조회</a></li>
 				</ul>
 				<ul class="nav nav-sidebar">
@@ -252,24 +252,5 @@
 	<script src="resources/junyoung/bootstrap.min.js"></script>
 	<script src="resources/junyoung/scripts.js"></script>
 
-
-
-	<form action="customer.myHome.orderList">
-
-		<select name="sb_searchMonth">
-			<option value="1">최근 1개월 전</option>
-			<option value="3">최근 3개월 전</option>
-			<option value="6">최근 6개월 전</option>
-			<option value="12">최근 12개월 전</option>
-		</select> <input type="submit" value="조회">
-	</form>
-
-	<c:forEach var="list" items="${orderList }">
-
-주문자 : ${list.sb_csm_id }
-상품명 : ${list.sb_Pname }
-가격 : ${list.sb_Pprice }
-
-</c:forEach>
 </body>
 </html>

@@ -1,13 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.sol.mall.myPage.MyPageMapper">
-	<select id="orderList"
+	<select id="searchOrderList"
 		parameterType="com.sol.mall.myPage.SearchOrder"
-		resultType="com.sol.mall.myPage.Shoppingbag">
-		select * from shoppingBasket
-		where sb_csm_id = #{sb_csm_id}
-		and sb_orderDate between (select add_months(SYSDATE, -#{sb_searchMonth}) from dual) and (select SYSDATE from dual)
+		resultType="com.sol.mall.sale.delivery.Delivery">
+		select sd_delivery_pno, sd_delivery_no, sd_product_name, sd_delivery_state, sd_amount, sd_option_info, sd_total_price
+		from sale_delivery
+		where ((sd_customer_id = #{sd_customer_id} and not sd_claim like '%'||'취소'||'%') or (sd_customer_id = #{sd_customer_id} and sd_claim is null)) 
+		and sd_order_date between (select add_months(SYSDATE, -#{sb_searchMonth}) from dual) and (select SYSDATE from dual)
 	<!-- #{sb_searchMonth}앞 '-'는 GET방식으로 넘어갈 때 양수로 보여지게 하기 위해서 쿼리를 수정함 -->
+	</select>
+	
+	<update id="orderCorrect" parameterType="com.sol.mall.sale.delivery.Delivery">
+		update sale_delivery
+		set sd_claim = '취소접수'
+		where sd_delivery_pno = #{sd_delivery_pno}
+	</update>
+	
+	<select id="searchClaimList"
+			parameterType="com.sol.mall.myPage.SearchOrder"
+			resultType="com.sol.mall.sale.delivery.Delivery">
+		select sd_delivery_pno, sd_delivery_no, sd_product_name, sd_delivery_state, sd_amount, sd_option_info, sd_total_price
+		from sale_delivery
+		where sd_customer_id = #{sd_customer_id} and sd_claim like '%'||'취소'||'%'
+		and sd_order_date between (select add_months(SYSDATE, -#{sb_searchMonth}) from dual) and (select SYSDATE from dual)
 	</select>
 	
 	<select id="membershipStatus"
@@ -17,7 +33,11 @@
 		from membership
 		where ms_csm_id = #{ms_csm_id}
 	</select>
+	<insert id="writeProductReview" parameterType="com.sol.mall.myPage.ProductReview">
+	insert into product_Review values(
+		pr_RegNo
 	
-	
+	)
+	</insert>
 	
 </mapper>

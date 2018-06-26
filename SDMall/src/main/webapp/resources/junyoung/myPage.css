@@ -3,7 +3,7 @@
 
 #header-Icon{
 	
-	position: fixed;
+	position: absolute;
 	top: 50px;
 	left: 1500px;
 	display: inline;

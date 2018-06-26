@@ -14,14 +14,23 @@ public class MyPageController {
 	@Autowired
 	private MyPageDAO MPDAO;
 	
-	@RequestMapping(value = "/customer.myHome.orderList", method = RequestMethod.GET)
+	
+	@RequestMapping(value = "/customer.myHome.orderListGo", method = RequestMethod.GET)
 	public String goOrderList(SearchOrder bb, HttpServletRequest req, HttpServletResponse res) {
 
-		MPDAO.getOrderList(bb, req, res);
-		
-		return "customer/customerMyPage";
+		return "customer/orderDelivery";
 		
 
+	}
+	
+	@RequestMapping(value = "/customer.myHome.orderList", method = RequestMethod.GET)
+	public String showOrderList(SearchOrder bb, HttpServletRequest req, HttpServletResponse res) {
+		
+		MPDAO.getOrderList(bb, req, res);
+		
+		return "customer/orderDelivery";
+		
+		
 	}
 	
 	@RequestMapping(value = "/productReview.write.go", method = RequestMethod.GET)

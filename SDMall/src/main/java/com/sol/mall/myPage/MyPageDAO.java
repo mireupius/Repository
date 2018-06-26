@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import com.sol.mall.member.Customer;
 import com.sol.mall.member.Membership;
+import com.sol.mall.sale.delivery.Delivery;
 
 @Service
 public class MyPageDAO {
@@ -22,24 +23,45 @@ public class MyPageDAO {
 
 		Customer cc = (Customer) req.getSession().getAttribute("loginCustomer");
 
-		bb.setSb_csm_id(cc.getCsm_id());
+		bb.setSd_customer_id(cc.getCsm_id());
 
-		List<Shoppingbag> orders = ss.getMapper(MyPageMapper.class).orderList(bb);
+		List<Delivery> orders = ss.getMapper(MyPageMapper.class).searchOrderList(bb);
 
-		// System.out.println(cc.getCsm_id());
-		// System.out.println("==" + sb.getSb_csm_id());
-		// System.out.println(sb.getSb_csm_id());
-
-		// m.setSearchMonth(searchMonth);
-		// System.out.println(m.getSearchMonth());
-
-		if (cc.getCsm_id().equals(bb.getSb_csm_id())) {
-
+		if (cc.getCsm_id().equals(bb.getSd_customer_id())) {
+			
 			req.setAttribute("orderList", orders);
-
 		}
 
 	}
+	
+	public void orderCorrect(Delivery d, HttpServletRequest req, HttpServletResponse res) {
+		
+		try {
+			
+			Customer cc = (Customer) req.getSession().getAttribute("loginCustomer");
+			
+			d.setSd_customer_id(cc.getCsm_id());
+			
+			if (ss.getMapper(MyPageMapper.class).orderCorrect(d) == 1) {
+				
+				System.out.println("주문 취소 성공");
+				
+			} else {
+				System.out.println("주문 취소 실패");
+			}
+			
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println("주문 취소 실패");
+			
+		}
+		
+		
+	}
+	
+	
+	
 
 	public void getMembership(Membership m, HttpServletRequest req, HttpServletResponse res) {
 
