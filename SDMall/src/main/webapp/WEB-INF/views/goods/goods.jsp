@@ -78,7 +78,7 @@
 									<div class="product_fav"><i class="fas fa-heart"></i></div>
 								</div>
 								<input id="gd_no" value="${goodsDtl1.gd_no }"> 
-								<input id="op_no" value="${o[0].op_no}"> 
+								<input id="op_no" value="${option[0].op_no}"> 
 								<input id="quantity" value="1"> 
 							</form>
 						</div>

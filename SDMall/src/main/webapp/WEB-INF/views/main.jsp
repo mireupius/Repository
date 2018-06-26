@@ -98,7 +98,7 @@
 											<img src="resources/etc/icon-cart.png" alt="">
 											<div class="cart_count"><span>10</span></div>
 										</div>
-										<div class="cart_text"><a href="#">장바구니</a></div>
+										<div class="cart_text"><a href="customer.cart.go">장바구니</a></div>
 									</div>
 								</div>
 							</div>

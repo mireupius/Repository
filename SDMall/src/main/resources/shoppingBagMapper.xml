@@ -6,11 +6,11 @@
 		to_char(SHOPPINGBAG_Seq.nextval),#{sb_csmid},#{sb_gdno},#{sb_opno},#{sb_quantity}
 		)
 	</insert>
-	<select id="showCartItems" parameterType="com.sol.mall.member.Customer" resultType="com.sol.mall.shoppingbag.ShoppingBag">
+	<select id="showCartItems" parameterType="com.sol.mall.shoppingbag.ShoppingBag" resultType="com.sol.mall.shoppingbag.ShoppingBagItem">
 		select sb_no, gd_name, gd_imgm, op_name, sb_quantity, op_price, gd_price
 		from shoppingbag_tb, goods_tb, option_tb
 		where gd_no = sb_gdno and op_no = sb_opno
-		and sb_csmid = #{csm_id};
+		and sb_csmid = #{sb_csmid}
 	</select>
 	
 </mapper>

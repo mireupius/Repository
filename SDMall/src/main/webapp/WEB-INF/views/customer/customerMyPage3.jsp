@@ -14,9 +14,11 @@ ${sessionScope.loginCustomer.csm_id }님<br>
 ${sessionScope.loginCustomer.csm_name }<br>
 ${sessionScope.loginCustomer.csm_phoneNo }<br>
 
+${membership.ms_grade }
+${membership.ms_point }
 
-	${memberStatus.ms_grade}
-	${memberStatus.ms_point}
+
+	
 
 
 

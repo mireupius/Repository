@@ -17,12 +17,12 @@ create table goods_tb
 
 drop table goods_tb cascade constraint purge;
 
-insert into goods_tb values('9998887774445','tomcat',10000,9000,'0,0','방사능 고양이.png','방사능 고양이.png','방사능 고양이.png','방사능 고양이.png','100','109','113','apache');
+insert into goods_tb values('7777777777777','tomcat',10000,9000,'0,0','방사능 고양이.png','방사능 고양이.png','방사능 고양이.png','방사능 고양이.png','100','109','113','apache');
 insert into goods_tb values('3338777498778','tomdog',20000,20000,'0,2500','방사능 고양이.png','방사능 고양이.png','방사능 고양이.png','방사능 고양이.png','100','109','113','apache');
 insert into goods_tb values('1184523498778','호랑이',70000,33000,'0,2500','방사능 고양이.png','방사능 고양이.png','방사능 고양이.png','방사능 고양이.png','100','109','113','apache');
 
 select * from goods_tb;
-select * from goods_tb
+
 
 create table goodsdtl_tb		
 (		
@@ -64,7 +64,9 @@ op_gdno 	varchar2(13 char)	not null,
 op_name 	varchar2(20 char) 	not null,
 op_price 	number(7) 	not null,
 op_stock 	number(4) 	not null 
-);		
+);
+select * from OPTION_TB;
+
 
 create sequence option_sq
 MAXVALUE 99999

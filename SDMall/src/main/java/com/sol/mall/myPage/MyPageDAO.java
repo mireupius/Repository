@@ -61,5 +61,29 @@ public class MyPageDAO {
 		}
 
 	}
+	
+	public void writeProductReview(Membership m, HttpServletRequest req, HttpServletResponse res) {
+		
+		Customer cc = (Customer) req.getSession().getAttribute("loginCustomer");
+		m.setMs_csm_id(cc.getCsm_id());
+		
+		// ss.getMapper(MyPageMapper.class).membershipStatus(c);
+		
+		try {
+			
+			Membership mms = ss.getMapper(MyPageMapper.class).membershipStatus(m);
+			
+			req.setAttribute("memberStatus", mms);
+			System.out.println("멤버쉽 가져오기 성공");
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println("멤버쉽 가져오기 실패");
+		}
+		
+	}
+	
+	
+	
 
 }

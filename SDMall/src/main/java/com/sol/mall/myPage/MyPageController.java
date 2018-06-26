@@ -24,6 +24,24 @@ public class MyPageController {
 
 	}
 	
+	@RequestMapping(value = "/productReview.write.go", method = RequestMethod.GET)
+	public String goWritingProductReview(HttpServletRequest req, HttpServletResponse res) {
+		
+		
+		return "customer/productReview";
+		
+		
+	}
+	
+	@RequestMapping(value = "/productReview.write.do", method = RequestMethod.GET)
+	public String doWritingProductReview(HttpServletRequest req, HttpServletResponse res) {
+		
+		
+		return "customer/productReview";
+		
+		
+	}
+	
 	
 	
 	
