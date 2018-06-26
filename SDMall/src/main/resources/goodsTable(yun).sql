@@ -133,4 +133,3 @@ drop table category_tb cascade constraint purge;
 drop sequence category_sq;
 drop table option_tb cascade constraint purge;
 drop sequence option_sq;
-

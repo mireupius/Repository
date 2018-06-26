@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.sol.mall.category.CategoryDAO;
+import com.sol.mall.common.ImageResize;
 
 @Controller
 public class GoodsController {
@@ -52,7 +53,9 @@ public class GoodsController {
 
 		// 업로드 파일이 존재하면
 		if (multipartFile != null && !(multipartFile.getOriginalFilename().equals(""))) {
-
+// 이미 저장된 이미지 파일을 변경한후 원본 사진은 삭제
+			
+			
 			// 확장자 제한
 			String originalName = multipartFile.getOriginalFilename(); // 실제 파일명
 			String originalNameExtension = originalName.substring(originalName.lastIndexOf(".") + 1).toLowerCase(); // 실제파일
@@ -67,13 +70,15 @@ public class GoodsController {
 			long limitFileSize = 5 * 1024 * 1024; // 5MB
 			if (limitFileSize < filesize) {
 				// 제한보다 파일크기가 클 경우
+				//???????????????????????
 			}
 
 			// 저장경로
 			String defaultPath = request.getSession().getServletContext().getRealPath("/"); // 서버기본경로 (프로젝트 폴더 아님)
 			String path = defaultPath + "upload" + File.separator + "";
 			// File.separator + 
-			// 저장경로 처리
+			
+			// 저장경로 처리 폴더생성
 			File file = new File(path);
 			if (!file.exists()) { // 디렉토리 존재하지 않을경우 디렉토리 생성
 				file.mkdirs();
@@ -84,31 +89,48 @@ public class GoodsController {
 			String today = formatter.format(new Date());
 			String modifyName = today + "-" + UUID.randomUUID().toString().substring(20) + "." + originalNameExtension;
 
+			String pathNameGd_imgl = today + "-" + UUID.randomUUID().toString().substring(20) + "." + originalNameExtension;
+			String pathNameGd_imgm = today + "-" + UUID.randomUUID().toString().substring(20) + "." + originalNameExtension;
+			String pathNameGd_imgs = today + "-" + UUID.randomUUID().toString().substring(20) + "." + originalNameExtension;
+			String pathNameGd_imgss = today + "-" + UUID.randomUUID().toString().substring(20) + "." + originalNameExtension;
+			
 			// Multipart 처리
 			// 서버에 파일 저장 (쓰기)
 			multipartFile.transferTo(new File(path + modifyName));
+
+			// 이미지 사이즈 변경
+			ImageResize.resize(500, 500, path + modifyName, path+pathNameGd_imgl, originalNameExtension);
+			ImageResize.resize(300, 300, path + modifyName, path+pathNameGd_imgm, originalNameExtension);
+			ImageResize.resize(220, 220, path + modifyName, path+pathNameGd_imgs, originalNameExtension);
+			ImageResize.resize(100, 100, path + modifyName, path+pathNameGd_imgss, originalNameExtension);
+			
 			// 상품이미지 로그
 			System.out.println("** 상품이미지 upload 정보 **");
 			System.out.println("** 상품이미지 path : " + path + " **");
 			System.out.println("** 상품이미지 originalName : " + originalName + " **");
 			System.out.println("** 상품이미지 modifyName : " + modifyName + " **");
+			System.out.println("** 상품이미지 pathNameGd_imgl : " + pathNameGd_imgl + " **");
+			System.out.println("** 상품이미지 pathNameGd_imgm : " + pathNameGd_imgm + " **");
+			System.out.println("** 상품이미지 pathNameGd_imgs : " + pathNameGd_imgs + " **");
+			System.out.println("** 상품이미지 pathNameGd_imgss : " + pathNameGd_imgss + " **");
 
-			gd.setGd_imgl(modifyName);
+			gd.setGd_imgl(pathNameGd_imgl);
 			// 이미지 사이즈 조절 만들 때 까지 임시
-			gd.setGd_imgm(modifyName);
-			gd.setGd_imgs(modifyName);
-			gd.setGd_imgss(modifyName);
+			gd.setGd_imgm(pathNameGd_imgm);
+			gd.setGd_imgs(pathNameGd_imgs);
+			gd.setGd_imgss(pathNameGd_imgss);
+			
+			// 원본파일 삭제
+			File oldFile = new File(path + modifyName);
+			oldFile.delete();
 
 			// FK 설정으로 입력이나 삭제시 주의 상품상세테이블 먼저 입력이나 삭제하고 상품테이블 삭제
 			// 방금입력한 상품번호 어떻게 가져오지?
 			// 입력하고 저장 누르면 저장후 입력화면으로 이동 방금입력한 내용을 다시 입력화면에 표시불가
 			// 수정화면 따로 만들어야 함
-
 			
-			System.out.println("옵션값 테스트==="+opl.getOpl_name().size());
 			// Transaction 적용
 			gdsDAO.insertGdsInfo(gd, gdtl, opl, request, response);
-
 		}
 
 		gdsDAO.getAllcategory(request, response);
@@ -156,25 +178,45 @@ public class GoodsController {
 			String today = formatter.format(new Date());
 			String modifyName = today + "-" + UUID.randomUUID().toString().substring(20) + "." + originalNameExtension;
 
+			String pathNameGd_imgl = today + "-" + UUID.randomUUID().toString().substring(20) + "." + originalNameExtension;
+			String pathNameGd_imgm = today + "-" + UUID.randomUUID().toString().substring(20) + "." + originalNameExtension;
+			String pathNameGd_imgs = today + "-" + UUID.randomUUID().toString().substring(20) + "." + originalNameExtension;
+			String pathNameGd_imgss = today + "-" + UUID.randomUUID().toString().substring(20) + "." + originalNameExtension;
+			
 			// Multipart 처리
 			// 서버에 파일 저장 (쓰기)
 			multipartFile.transferTo(new File(path + modifyName));
+			
+			// 이미지 사이즈 변경
+			ImageResize.resize(500, 500, path + modifyName, path+pathNameGd_imgl, originalNameExtension);
+			ImageResize.resize(300, 300, path + modifyName, path+pathNameGd_imgm, originalNameExtension);
+			ImageResize.resize(220, 220, path + modifyName, path+pathNameGd_imgs, originalNameExtension);
+			ImageResize.resize(100, 100, path + modifyName, path+pathNameGd_imgss, originalNameExtension);
+						
 			// 상품이미지 로그
 			System.out.println("** 상품이미지 upload 정보 **");
 			System.out.println("** 상품이미지 path : " + path + " **");
 			System.out.println("** 상품이미지 originalName : " + originalName + " **");
 			System.out.println("** 상품이미지 modifyName : " + modifyName + " **");
+			System.out.println("** 상품이미지 pathNameGd_imgl : " + pathNameGd_imgl + " **");
+			System.out.println("** 상품이미지 pathNameGd_imgm : " + pathNameGd_imgm + " **");
+			System.out.println("** 상품이미지 pathNameGd_imgs : " + pathNameGd_imgs + " **");
+			System.out.println("** 상품이미지 pathNameGd_imgss : " + pathNameGd_imgss + " **");
 
 			// ▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼		기존 이미지 삭제		▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼
 
 			
 			// ▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲		기존 이미지 삭제		▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲
 			
-			gd.setGd_imgl(modifyName);
+			gd.setGd_imgl(pathNameGd_imgl);
 			// 이미지 사이즈 조절 만들 때 까지 임시
-			gd.setGd_imgm(modifyName);
-			gd.setGd_imgs(modifyName);
-			gd.setGd_imgss(modifyName);
+			gd.setGd_imgm(pathNameGd_imgm);
+			gd.setGd_imgs(pathNameGd_imgs);
+			gd.setGd_imgss(pathNameGd_imgss);
+			
+			// 원본파일 삭제
+			File oldFile = new File(path + modifyName);
+			oldFile.delete();
 
 			// FK 설정으로 입력이나 삭제시 주의 상품상세테이블 먼저 입력이나 삭제하고 상품테이블 삭제
 			// 방금입력한 상품번호 어떻게 가져오지?

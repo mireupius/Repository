@@ -66,7 +66,7 @@ $(function(){
 		<table border="1" summary="" class="eChkColor">
 			<colgroup>
 				<div class="gdliTb3">
-					<h3>&nbsp;&nbsp;&nbsp;&nbsp;</h3>
+					<h3>검색</h3>
 				</div>
 				<div>
 					<div>
@@ -88,18 +88,13 @@ $(function(){
 											<option value="gt_keyword">상품 검색태그</option>
 											<option value="gt_weight">상품 전체중량</option>
 									</select>
-									<input id="sValue" >
+									<input id="sValue" ><button id="s_bt">검색</button>
+									</td>
 								</tr>
 							</tbody>
 						</table>
 					</div>
 				</div>
-				<br>
-				<br>
-				<br>
-<div>
-<button id="s_bt">검색</button>
-</div>
 				<br>
 				<br>
 				<br>
