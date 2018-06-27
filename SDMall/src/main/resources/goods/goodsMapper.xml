@@ -25,10 +25,15 @@
 		select * from goods_tb
 	</select>
 	
-	<select id="getGoodsByKey" parameterType="com.sol.mall.goods.Keywords" resultType="com.sol.mall.goods.Goods">
-		select gd_no, gd_name, gd_price, gd_csmprice, gd_imgl from goods_tb a, goodsdtl_tb b
+	<select id="getAllGoodsView" resultType="com.sol.mall.goods.GoodsView">
+		select gd_no, gd_name, gd_price, gd_csmprice, gd_imgl, gt_maker, gt_brand, gt_mdlname, gt_origin from goods_tb a, goodsdtl_tb b
+		where a.gd_no = b.gt_gdno 
+	</select>
+	<select id="getGoodsViewByKey" parameterType="com.sol.mall.goods.Keywords" resultType="com.sol.mall.goods.GoodsView">
+		select gd_no, gd_name, gd_price, gd_csmprice, gd_imgl, gt_maker, gt_brand, gt_mdlname, gt_origin from goods_tb a, goodsdtl_tb b
 		where a.gd_no = b.gt_gdno 
 		and ${key_name} like '%' || #{key_value} || '%'
+		order by ${sort_name}  ${desc_name}
 	</select>
 	
 	<select id="getGoods" parameterType="com.sol.mall.goods.Goods" resultType="com.sol.mall.goods.Goods">
@@ -56,6 +61,7 @@
 	<select id="getOptionByNo" parameterType="com.sol.mall.goods.Option" resultType="com.sol.mall.goods.Option">
 		select * from option_tb
 		where op_gdno = #{op_gdno}
+		order by op_no
 	</select>
 	
 <!-- ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓ CLOB SELECT 세트 ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓ -->

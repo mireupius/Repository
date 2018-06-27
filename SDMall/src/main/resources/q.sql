@@ -1,3 +1,10 @@
+select gd_no, gd_name, gd_price, gd_csmprice, gd_imgl from goods_tb a, goodsdtl_tb b
+		where a.gd_no = b.gt_gdno 
+		and gd_name like '%%'
+
+select gd_no, gd_name, gd_price, gd_csmprice, gd_imgl from goods_tb a, goodsdtl_tb b
+		where a.gd_no = b.gt_gdno 
+
 insert into goods_tb values('1001091130001','티셔츠1','69900','58900','5000','20180626150037-fe3-ede06d317c41.jpg','20180626150037-fe3-ede06d317c41.jpg','20180626150037-fe3-ede06d317c41.jpg','20180626150037-fe3-ede06d317c41.jpg','100','109','113','cyh524','대한통운');
 insert into goods_tb values('1001091140002','블라우스1','68000','68000','5000','20180626150339-c84-e53d97fbf24d.jpg','20180626150339-c84-e53d97fbf24d.jpg','20180626150339-c84-e53d97fbf24d.jpg','20180626150339-c84-e53d97fbf24d.jpg','100','109','114','cyh524','대한통운');
 insert into goods_tb values('1001091170004','아티스트노보','68900','65000','2500','20180626150835-1cc-6f0c11419ff6.png','20180626150835-1cc-6f0c11419ff6.png','20180626150835-1cc-6f0c11419ff6.png','20180626150835-1cc-6f0c11419ff6.png','100','109','117','aaaaaaaaaaaa','종로11');

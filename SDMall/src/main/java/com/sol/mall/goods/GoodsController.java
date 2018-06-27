@@ -256,7 +256,7 @@ public class GoodsController {
 	@RequestMapping(value = "/goods.list", method = RequestMethod.GET)
 	public String goodsList(HttpServletRequest request, HttpServletResponse response) {
 
-		gdsDAO.getAllGoods(request);
+		gdsDAO.getAllGoodsView(request);
 
 		request.setAttribute("contentPage", "../goods/goodsList.jsp");
 		return "sale/saleIndex";
@@ -276,7 +276,7 @@ public class GoodsController {
 	
 	// 상품키워드 검색
 	@RequestMapping(value = "/goods.search.keyword", method = RequestMethod.GET, produces = "application/json; charset=utf-8")
-	public @ResponseBody GoodsList gdsSearchKey(Keywords k, HttpServletRequest request, HttpServletResponse response) {
-		return gdsDAO.getGoodsByKey(k, request);
+	public @ResponseBody GoodsViewList gdsSearchKey(Keywords k, HttpServletRequest request, HttpServletResponse response) {
+		return gdsDAO.getGoodsViewByKey(k, request);
 	}
 }

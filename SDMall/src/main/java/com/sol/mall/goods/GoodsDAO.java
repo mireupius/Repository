@@ -75,9 +75,16 @@ public class GoodsDAO {
 		request.setAttribute("allGoods", gdslist);
 	}
 
-	// 상품목록 전체조회
-	public GoodsList getGoodsByKey(Keywords k, HttpServletRequest request) {
-		return new GoodsList(ss.getMapper(GoodsMapper.class).getGoodsByKey(k));
+	// 상품목록 전체조회(상품리스트화면)
+	public void getAllGoodsView(HttpServletRequest request) {
+		List<GoodsView> gdsViewList = ss.getMapper(GoodsMapper.class).getAllGoodsView();
+
+		request.setAttribute("gdsViewList", gdsViewList);
+	}
+	
+	// 상품목록 검색(상품리스트화면)
+	public GoodsViewList getGoodsViewByKey(Keywords k, HttpServletRequest request) {
+		return new GoodsViewList(ss.getMapper(GoodsMapper.class).getGoodsViewByKey(k));
 	}
 
 	// 입력-----------------------------------------------------------------------
