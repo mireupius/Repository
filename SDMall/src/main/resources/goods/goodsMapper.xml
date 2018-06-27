@@ -29,6 +29,7 @@
 		select gd_no, gd_name, gd_price, gd_csmprice, gd_imgl, gt_maker, gt_brand, gt_mdlname, gt_origin from goods_tb a, goodsdtl_tb b
 		where a.gd_no = b.gt_gdno 
 	</select>
+	
 	<select id="getGoodsViewByKey" parameterType="com.sol.mall.goods.Keywords" resultType="com.sol.mall.goods.GoodsView">
 		select gd_no, gd_name, gd_price, gd_csmprice, gd_imgl, gt_maker, gt_brand, gt_mdlname, gt_origin from goods_tb a, goodsdtl_tb b
 		where a.gd_no = b.gt_gdno 
@@ -86,35 +87,13 @@
 	<select id="getGoodsDtl" resultMap="getGoodsDtl">
 		select * from goodsdtl_tb
 	</select>
-
-<!-- 	
-	<insert id="insertGdsDtl" 
-		parameterType="hashmap" >
-		insert into goodsdtl_tb values(
-			#{gt_no},			#{gt_gdno},			#{gt_mdlname},			#{gt_maker},
-			#{gt_brand},			#{gt_mfd},			#{gt_exp},			#{gt_material},
-			#{gt_weight},			#{gt_volume},			#{gt_origin}, 			#{gt_keyword}, 
-			#{gt_detail}
-		)
-	</insert> -->
 <!-- ↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑ CLOB SELECT 세트 ↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑ -->
 	<insert id="insertGds"
 		parameterType="com.sol.mall.goods.Goods">
 		insert into goods_tb values(
 			#{gd_clfl}||#{gd_clfm}||NVL(#{gd_clfs, jdbcType=VARCHAR},'000')||LPAD(goods_sq.nextval,4,'0'),
-			#{gd_name},
-			#{gd_csmprice},
-			#{gd_price},
-			#{gd_dlvchrg},
-			#{gd_imgl},
-			#{gd_imgm},
-			#{gd_imgs},
-			#{gd_imgss},
-			#{gd_clfl},
-			#{gd_clfm},
-			#{gd_clfs, jdbcType=VARCHAR}, 
-			#{gd_sellerid},
-			#{gd_outarea}
+			#{gd_name},	#{gd_csmprice},	#{gd_price}, #{gd_dlvchrg},	#{gd_imgl},	#{gd_imgm},	#{gd_imgs},
+			#{gd_imgss}, #{gd_clfl}, #{gd_clfm}, #{gd_clfs, jdbcType=VARCHAR}, #{gd_sellerid}, #{gd_outarea}
 		)
 	</insert>
 
@@ -175,10 +154,22 @@
 	<update id="updateOpTwo" parameterType="hashmap">
 		update option_tb
 		set
-			op_name = #{option.op_name},
-			op_price = #{option.op_price},
-			op_stock = #{option.op_stock}
+			op_name = #{option.op_name}, op_price = #{option.op_price}, op_stock = #{option.op_stock}
 		where op_no = #{option.op_no} and op_gdno = #{goods.gd_no}
 	</update>
+	
+	<!-- delete  -->
+	<delete id="deleteGoodsByNo" parameterType="com.sol.mall.goods.Goods">
+		delete from goods_tb
+		where gd_no = #{gd_no}
+	</delete>
+	<delete id="deleteGoodsDtlByNo" parameterType="com.sol.mall.goods.Goods">
+		delete from goodsdtl_tb
+		where gt_gdno = #{gd_no}
+	</delete>
+	<delete id="deleteGoodsOpByNo" parameterType="com.sol.mall.goods.Goods">
+		delete from option_tb
+		where op_gdno = #{gd_no}
+	</delete>
 	
 </mapper>

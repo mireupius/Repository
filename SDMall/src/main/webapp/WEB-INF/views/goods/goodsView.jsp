@@ -24,9 +24,47 @@ function saveContent() {
     Editor.save(); // 이 함수를 호출하여 글을 등록하면 된다.
 }
 
+function deleteGoods(){
+	var ok =confirm("정말 삭제 하시겠습니까?");
+	if(ok){
+		var form = document.createElement("form");
+	    form.setAttribute("method", "POST");
+	    form.setAttribute("action", "goods.delete");
+	    
+	    var gdno=$("input[name=gd_no]").val();
+		var imgl=$("input[name=gd_imgl]").val();
+		var imgm=$("input[name=gd_imgm]").val();
+		var imgs=$("input[name=gd_imgs]").val();
+		var imgss=$("input[name=gd_imgss]").val();
+	    
+	    param= {'gd_no':gdno, 'gd_imgl':imgl, 'gd_imgm':imgm, 'gd_imgs':imgs, 'gd_imgss':imgss};
+	    
+		for(var key in param) {
+	        var hiddenField = document.createElement("input");
+	        hiddenField.setAttribute("type", "hidden");
+	        hiddenField.setAttribute("name", key);
+	        hiddenField.setAttribute("value", param[key]);
+	        form.appendChild(hiddenField);
+		}
+		
+	    document.body.appendChild(form);
+	    form.submit();
+	}
+}
+
 
 $(function(){
-
+	
+/* 	$("#delete_button").click(function(){
+		var gdno=$("input[name=gd_no]").val();
+		var imgl=$("input[name=gd_imgl]").val();
+		var imgm=$("input[name=gd_imgm]").val();
+		var imgs=$("input[name=gd_imgs]").val();
+		var imgss=$("input[name=gd_imgss]").val();
+		location.href = "goods.delete?gd_no="+gdno+"&gd_imgl="+imgl+"&gd_imgm="+imgm+"&gd_imgs="+imgs+"&gd_imgss="+imgss;
+		// 새창 window.open("goods.list");
+	}); */
+	
 //구버전	$(".ct1").click(function() {
 	$(document).on("click",".ct1",function(){
 		var cn = $(this).attr("category_num");
@@ -489,15 +527,15 @@ h3 {
 						<td class="gdTd2 tdFont"><input name="gt_exp" value="${gdsView.gt_exp}"></td>
 					</tr>
 					<tr>
-						<td class="gdTd1 tdFont">상품소재(20)</td>
+						<td class="gdTd1 tdFont">소재(20)</td>
 						<td class="gdTd2 tdFont"><input name="gt_material" value="${gdsView.gt_material}"></td>
 					</tr>
 					<tr>
-						<td class="gdTd1 tdFont">상품 전체중량(kg)(20)</td>
+						<td class="gdTd1 tdFont">전체중량(kg)(20)</td>
 						<td class="gdTd2 tdFont"><input name="gt_weight" value="${gdsView.gt_weight}"></td>
 					</tr>
 					<tr>
-						<td class="gdTd1 tdFont">상품부피(cm)(20)</td>
+						<td class="gdTd1 tdFont">부피(cm)(20)</td>
 						<td class="gdTd2 tdFont"><input name="gt_volume" value="${gdsView.gt_volume}"></td>
 					</tr>
 					<tr>
@@ -548,6 +586,7 @@ h3 {
 	<div align="center">
 		<!-- 실제 값이 담겨져서 넘어갈 textarea 태그 -->
 		<input type="button" id="save_button" value="상품수정" onclick="saveContent();"/>
+		<input type="button" id="delete_button" value="상품삭제" onclick="deleteGoods();"/>
 	</div>
 	<br><br><br><br><br><br>
 </form>

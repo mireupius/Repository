@@ -34,19 +34,14 @@ public class ImageResize {
 	            imageHeight = image.getHeight(null);
 	 
 	            if(mainPosition.equals("W")){    // 폭기준
-	 
 	                ratio = (double)newWidth/(double)imageWidth;
 	                w = (int)(imageWidth * ratio);
 	                h = (int)(imageHeight * ratio);
-	 
 	            }else if(mainPosition.equals("H")){ // 높이기준
-	 
 	                ratio = (double)newHeight/(double)imageHeight;
 	                w = (int)(imageWidth * ratio);
 	                h = (int)(imageHeight * ratio);
-	 
 	            }else{ //설정값 (비율무시)
-	 
 	                w = newWidth;
 	                h = newHeight;
 	            }
@@ -65,12 +60,8 @@ public class ImageResize {
 	            g.drawImage(resizeImage, 0, 0, null);
 	            g.dispose();
 	            ImageIO.write(newImage, imgFormat, new File(imgTargetPath));
-	 
 	        }catch (Exception e){
-	 
 	            e.printStackTrace();
-	 
 	        }
-	 
 	    }
 }

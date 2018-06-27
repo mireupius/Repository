@@ -25,6 +25,8 @@ public interface GoodsMapper {
 
 	// 상품 전체 조회
 	public abstract List<GoodsView> getAllGoodsView();
+	
+	// 상품 리스트 검색어 조회
 	public abstract List<GoodsView> getGoodsViewByKey(Keywords k);
 
 	// 상품상세 조회
@@ -60,4 +62,14 @@ public interface GoodsMapper {
 
 	// 옵션입력
 	public abstract int updateOpTwo(HashMap<String, Object> map);
+	
+	// 상품삭제
+	public abstract int deleteGoodsByNo(Goods g);
+	
+	// 상품상세삭제
+	public abstract int deleteGoodsDtlByNo(Goods g);
+	
+	// 옵션삭제
+	public abstract int deleteGoodsOpByNo(Goods g);
+
 }

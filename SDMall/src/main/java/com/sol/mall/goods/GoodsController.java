@@ -1,6 +1,7 @@
 package com.sol.mall.goods;
 
 import java.io.File;
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.UUID;
@@ -49,12 +50,10 @@ public class GoodsController {
 	// 상품등록작업
 	@RequestMapping(value = "/registration.do", method = RequestMethod.POST)
 	public String registrationDo(@RequestParam("gd_file1") MultipartFile multipartFile, Goods gd, GoodsDtl gdtl,
-			OptionList opl, HttpServletRequest request, HttpServletResponse response) throws Exception {
+			OptionList opl, HttpServletRequest request, HttpServletResponse response){
 
 		// 업로드 파일이 존재하면
 		if (multipartFile != null && !(multipartFile.getOriginalFilename().equals(""))) {
-// 이미 저장된 이미지 파일을 변경한후 원본 사진은 삭제
-			
 			
 			// 확장자 제한
 			String originalName = multipartFile.getOriginalFilename(); // 실제 파일명
@@ -70,13 +69,12 @@ public class GoodsController {
 			long limitFileSize = 5 * 1024 * 1024; // 5MB
 			if (limitFileSize < filesize) {
 				// 제한보다 파일크기가 클 경우
-				//???????????????????????
+				//??????????????????????? 구현 하기 귀찮으 ....
 			}
 
 			// 저장경로
 			String defaultPath = request.getSession().getServletContext().getRealPath("/"); // 서버기본경로 (프로젝트 폴더 아님)
 			String path = defaultPath + "upload" + File.separator + "";
-			// File.separator + 
 			
 			// 저장경로 처리 폴더생성
 			File file = new File(path);
@@ -96,7 +94,13 @@ public class GoodsController {
 			
 			// Multipart 처리
 			// 서버에 파일 저장 (쓰기)
-			multipartFile.transferTo(new File(path + modifyName));
+			try {
+				multipartFile.transferTo(new File(path + modifyName));
+			} catch (IllegalStateException e) {
+				e.printStackTrace();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
 
 			// 이미지 사이즈 변경
 			ImageResize.resize(500, 500, path + modifyName, path+pathNameGd_imgl, originalNameExtension);
@@ -114,27 +118,25 @@ public class GoodsController {
 			System.out.println("** 상품이미지 pathNameGd_imgs : " + pathNameGd_imgs + " **");
 			System.out.println("** 상품이미지 pathNameGd_imgss : " + pathNameGd_imgss + " **");
 
+			// 리사이즈된 이미지 적용
 			gd.setGd_imgl(pathNameGd_imgl);
-			// 이미지 사이즈 조절 만들 때 까지 임시
 			gd.setGd_imgm(pathNameGd_imgm);
 			gd.setGd_imgs(pathNameGd_imgs);
 			gd.setGd_imgss(pathNameGd_imgss);
 			
-			// 원본파일 삭제
+			// 리사이즈 원본파일 삭제
 			File oldFile = new File(path + modifyName);
 			oldFile.delete();
 
-			// FK 설정으로 입력이나 삭제시 주의 상품상세테이블 먼저 입력이나 삭제하고 상품테이블 삭제
-			// 방금입력한 상품번호 어떻게 가져오지?
-			// 입력하고 저장 누르면 저장후 입력화면으로 이동 방금입력한 내용을 다시 입력화면에 표시불가
-			// 수정화면 따로 만들어야 함
-			
-			// Transaction 적용
-			gdsDAO.insertGdsInfo(gd, gdtl, opl, request, response);
+			try {
+				gdsDAO.insertGdsInfo(gd, gdtl, opl, request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 		}
 
-		gdsDAO.getAllcategory(request, response);
-		request.setAttribute("contentPage", "../goods/goodsReg.jsp");
+		gdsDAO.getAllGoodsView(request);
+		request.setAttribute("contentPage", "../goods/goodsList.jsp");
 
 		return "sale/saleIndex";
 	}
@@ -142,11 +144,17 @@ public class GoodsController {
 	// 상품 수정 작업
 	@RequestMapping(value = "/goodsUpdate.do", method = RequestMethod.POST)
 	public String goodsUpdateDo(@RequestParam("gd_file1") MultipartFile multipartFile, Goods gd, GoodsDtl gdtl,
-			OptionList opl, GoodsView gv, GoodsCategory gc, HttpServletRequest request, HttpServletResponse response) throws Exception {
+			OptionList opl, GoodsView gv, GoodsCategory gc, HttpServletRequest request, HttpServletResponse response) {
 
 		// 업로드 파일이 존재하면? 파일업로드 없이 그냥 하면?
 		if (multipartFile != null && !(multipartFile.getOriginalFilename().equals(""))) {
 
+			// 삭제할 기존 파일명
+			String oldImgl = gd.getGd_imgl();
+			String oldImgm = gd.getGd_imgm(); 
+			String oldImgs  = gd.getGd_imgs();
+			String oldImgss = gd.getGd_imgss();
+			
 			// 확장자 제한
 			String originalName = multipartFile.getOriginalFilename(); // 실제 파일명
 			String originalNameExtension = originalName.substring(originalName.lastIndexOf(".") + 1).toLowerCase(); // 실제파일
@@ -166,7 +174,7 @@ public class GoodsController {
 			// 저장경로
 			String defaultPath = request.getSession().getServletContext().getRealPath("/"); // 서버기본경로 (프로젝트 폴더 아님)
 			String path = defaultPath + "upload" + File.separator + "";
-			// File.separator + 
+
 			// 저장경로 처리
 			File file = new File(path);
 			if (!file.exists()) { // 디렉토리 존재하지 않을경우 디렉토리 생성
@@ -185,7 +193,13 @@ public class GoodsController {
 			
 			// Multipart 처리
 			// 서버에 파일 저장 (쓰기)
-			multipartFile.transferTo(new File(path + modifyName));
+			try {
+				multipartFile.transferTo(new File(path + modifyName));
+			} catch (IllegalStateException e) {
+				e.printStackTrace();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
 			
 			// 이미지 사이즈 변경
 			ImageResize.resize(500, 500, path + modifyName, path+pathNameGd_imgl, originalNameExtension);
@@ -203,35 +217,40 @@ public class GoodsController {
 			System.out.println("** 상품이미지 pathNameGd_imgs : " + pathNameGd_imgs + " **");
 			System.out.println("** 상품이미지 pathNameGd_imgss : " + pathNameGd_imgss + " **");
 
-			// ▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼		기존 이미지 삭제		▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼
-
-			
-			// ▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲		기존 이미지 삭제		▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲
-			
 			gd.setGd_imgl(pathNameGd_imgl);
 			// 이미지 사이즈 조절 만들 때 까지 임시
 			gd.setGd_imgm(pathNameGd_imgm);
 			gd.setGd_imgs(pathNameGd_imgs);
 			gd.setGd_imgss(pathNameGd_imgss);
 			
-			// 원본파일 삭제
+			// 리사이즈 원본파일 삭제
 			File oldFile = new File(path + modifyName);
 			oldFile.delete();
-
+			
+			// 기존 이미지 삭제
+			try {
+				gdsDAO.fileDelete(path, oldImgl);
+				gdsDAO.fileDelete(path, oldImgm);
+				gdsDAO.fileDelete(path, oldImgs);
+				gdsDAO.fileDelete(path, oldImgss);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			
 			// FK 설정으로 입력이나 삭제시 주의 상품상세테이블 먼저 입력이나 삭제하고 상품테이블 삭제
 			// 방금입력한 상품번호 어떻게 가져오지?
 			// 입력하고 저장 누르면 저장후 입력화면으로 이동 방금입력한 내용을 다시 입력화면에 표시불가
 			// 수정화면 따로 만들어야 함
-
 		}
-		System.out.println("업데이트 진입");
 		// Transaction 적용
-		gdsDAO.updateGdsInfo(gd, gdtl, opl, request, response);
+		try {
+			gdsDAO.updateGdsInfo(gd, gdtl, opl, request, response);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 
-		gdsDAO.getGoodsView(gv, gc, request, response);
-		
-		gdsDAO.getAllcategory(request, response);
-		request.setAttribute("contentPage", "../goods/goodsView.jsp");
+		gdsDAO.getAllGoodsView(request);
+		request.setAttribute("contentPage", "../goods/goodsList.jsp");
 
 		return "sale/saleIndex";
 	}
@@ -279,4 +298,22 @@ public class GoodsController {
 	public @ResponseBody GoodsViewList gdsSearchKey(Keywords k, HttpServletRequest request, HttpServletResponse response) {
 		return gdsDAO.getGoodsViewByKey(k, request);
 	}
+	
+	// 상품삭제
+	@RequestMapping(value = "/goods.delete", method = RequestMethod.POST)
+	public String goodsDelete(Goods gd, HttpServletRequest request, HttpServletResponse response) {
+
+		// 삭제 상품코드가져와서 삭제--> 삭제 할 때는 상품에 딸려있는 상품상세 옵션도 같이 전부 삭제 해야함 이미지도
+		try {
+			gdsDAO.deleteGdsInfo(gd, request);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		gdsDAO.getAllGoodsView(request);
+
+		request.setAttribute("contentPage", "../goods/goodsList.jsp");
+		return "sale/saleIndex";
+	}
+	
 }

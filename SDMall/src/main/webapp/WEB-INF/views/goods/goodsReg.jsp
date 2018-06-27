@@ -399,28 +399,28 @@ h3 {
 										<span>상세이미지</span><br>
 										<span>권장 500px * 500px</span><br>
 										<span>
-											<img id="img1" src="//img.echosting.cafe24.com/thumb/108x108_2.gif" width="108" height="108" >
+											<img id="img1" src="${pageContext.request.contextPath}/resources/files/goods/img/108x108_2.gif" width="108" height="108" >
 										</span>
 									</li>
 									<li class="liImg">
 										<span>목록 이미지</span><br>
 										<span>권장 300px * 300px</span><br>
 										<span>
-											<img id="img2" src="//img.echosting.cafe24.com/thumb/108x108_2.gif" width="108" height="108" >
+											<img id="img2" src="${pageContext.request.contextPath}/resources/files/goods/img/108x108_2.gif" width="108" height="108" >
 										</span>
 									</li>
 									<li  class="liImg">
 										<span>작은목록 이미지</span><br>
 										<span>권장 220px * 220px</span><br>
 										<span>
-											<img id="img3"  src="//img.echosting.cafe24.com/thumb/108x108_2.gif" width="108" height="108"  >
+											<img id="img3"  src="${pageContext.request.contextPath}/resources/files/goods/img/108x108_2.gif" width="108" height="108"  >
 										</span>
 									</li>
 									<li class="liImg">
 										<span>축소 이미지</span><br>
 										<span>권장 100px * 100px</span><br>
 										<span>
-											<img id="img4" src="//img.echosting.cafe24.com/thumb/108x108_2.gif" width="108" height="108" >
+											<img id="img4" src="${pageContext.request.contextPath}/resources/files/goods/img/108x108_2.gif" width="108" height="108" >
 										</span>
 									</li>
 								</ul>
@@ -470,11 +470,11 @@ h3 {
 						<td class="gdTd2"><input class="inpWidth" name="gt_material"></td>
 					</tr>
 					<tr>
-						<td class="gdTd1">상품 전체중량(kg)(20)</td>
+						<td class="gdTd1">전체중량(kg)(20)</td>
 						<td class="gdTd2"><input class="inpWidth" name="gt_weight"></td>
 					</tr>
 					<tr>
-						<td class="gdTd1">상품부피(cm)(20)</td>
+						<td class="gdTd1">부피(cm)(20)</td>
 						<td class="gdTd2"><input class="inpWidth" name="gt_volume"></td>
 					</tr>
 					<tr>
