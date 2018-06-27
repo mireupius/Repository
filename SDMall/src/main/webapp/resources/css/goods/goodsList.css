@@ -2,6 +2,9 @@
 
 .gdLstTitle {
 width: 145px;
+height: 25px;
+line-height: 25px;
+font-size: 11pt;
 }
 
 .gdLstSel {

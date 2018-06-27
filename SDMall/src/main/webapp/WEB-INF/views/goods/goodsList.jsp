@@ -73,7 +73,6 @@ $(function(){
 						<table class="table table-bordered table-striped table-condensed">
 							<tbody>
 								<tr class="gdliTb1">
-									<td class="gdLstTitle">상품명 검색</td>
 									<td class="gdLstTd2">
 									<select class="gdLstSel" id="sKey" >
 											<option value="gd_name">상품명</option>
