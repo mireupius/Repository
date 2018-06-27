@@ -8,7 +8,12 @@ import com.sol.mall.sale.delivery.Delivery;
 public interface MyPageMapper {
 	
 	public abstract List<Delivery> searchOrderList(SearchOrder bb);
-	public abstract int orderCorrect(Delivery d);
+	public abstract List<Delivery> searchClaimedOrderList(SearchOrder bb);
+	public abstract List<Delivery> orderListToReview(Delivery d);
+	public abstract Delivery orderToReviewBySd_pno(Delivery d);
+	public abstract int cancelOrder(Delivery d);
+	public abstract int exchangeOrder(Delivery d);
+	public abstract int returnOrder(Delivery d);
 	public abstract Membership membershipStatus(Membership m);
 	
 

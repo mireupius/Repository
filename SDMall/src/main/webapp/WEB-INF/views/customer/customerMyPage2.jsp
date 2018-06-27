@@ -73,12 +73,12 @@
 
 				<ul class="nav nav-sidebar">
 					<h4>주문관리</h4>
-					<li><a href="customer.myHome.orderListGo">주문/배송조회</a></li>
-					<li><a href="#">취소/교환/반품조회</a></li>
+					<li><a href="customer.myHome.orderList.go">주문/배송조회</a></li>
+					<li><a href="customer.myHome.claimedOrderList.go">취소/교환/반품조회</a></li>
 				</ul>
 				<ul class="nav nav-sidebar">
 					<h4>활동관리</h4>
-					<li><a href="productReview.write.go">상품평작성</a></li>
+					<li><a href="customer.myHome.productReview.go">상품평작성</a></li>
 					<li><a href="">상품평조회</a></li>
 					<li><a href="">상품Q&A</a></li>
 					<li><a href="">적립금</a></li>

@@ -10,7 +10,7 @@
 </head>
 <body>
 
-<form action="customer.myHome.orderList">
+<form action="customer.myHome.claimList">
 
 		<select name="sb_searchMonth">
 			<option value="1">최근 1개월 전</option>
@@ -21,20 +21,16 @@
 	</form>
 
 	<c:forEach var="list" items="${orderList }">
-	<div>
-	상품주문번호 : ${list.sd_delivery_pno }
-	상품번호 : ${list.sd_delivery_no }
-	상품명 : ${list.sd_product_name }
-	가격 : ${list.sd_total_price }
-	클레임상태 : ${list.sd_claim }
-	수량 : ${list.sd_amount }
-	옵션 : ${list.sd_option_info }
-	<button type="button" onclick="goCancelOrder(${list.sd_delivery_pno });">주문취소</button>
-	<button type="button" onclick="goExchangeOrder(${list.sd_delivery_pno });">교환신청</button>
-	<button type="button" onclick="goReturnOrder(${list.sd_delivery_pno });">반품신청</button>
-	</div>
-
-</c:forEach>
+		<div>
+		상품주문번호 : ${list.sd_delivery_pno }
+		상품번호 : ${list.sd_delivery_no }
+		상품명 : ${list.sd_product_name }
+		가격 : ${list.sd_total_price }
+		주문상태 : ${list.sd_delivery_state }
+		수량 : ${list.sd_amount }
+		옵션 : ${list.sd_option_info }
+		</div>
+	</c:forEach>
 
 </body>
 </html>

@@ -12,10 +12,10 @@
 <body>
 
 <form action="customer.productReview.write">
-<input name="pr_orderNo"><br>
+<input value="${review.sd_delivery_pno }" name="pr_orderNo"><br>
 <input name="pr_comment"><br>
-<input name="pr_pCode"><br>
-<input name="pr_pName"><br>
+<input value="${review.sd_product_no }" name="pr_pCode"><br>
+<input value="${review.sd_product_name }" name="pr_pName"><br>
 <span class="star-input">
 	<span class="input">
     	<input type="radio" name="pr_star" value="1" id="p1">

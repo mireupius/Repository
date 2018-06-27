@@ -8,14 +8,20 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.sol.mall.member.MemberDAO;
+import com.sol.mall.sale.delivery.Delivery;
+
 @Controller
 public class MyPageController {
 	
 	@Autowired
 	private MyPageDAO MPDAO;
 	
+	@Autowired
+	private MemberDAO MDAO;
 	
-	@RequestMapping(value = "/customer.myHome.orderListGo", method = RequestMethod.GET)
+	
+	@RequestMapping(value = "/customer.myHome.orderList.go", method = RequestMethod.GET)
 	public String goOrderList(SearchOrder bb, HttpServletRequest req, HttpServletResponse res) {
 
 		return "customer/orderDelivery";
@@ -24,34 +30,91 @@ public class MyPageController {
 	}
 	
 	@RequestMapping(value = "/customer.myHome.orderList", method = RequestMethod.GET)
-	public String showOrderList(SearchOrder bb, HttpServletRequest req, HttpServletResponse res) {
+	public String getOrderList(SearchOrder bb, HttpServletRequest req, HttpServletResponse res) {
 		
-		MPDAO.getOrderList(bb, req, res);
+		if (MDAO.csmLoginCheck(req, res)) {
+			
+			MPDAO.getOrderList(bb, req, res);
+			return "customer/orderDelivery";
+		}
+		return "member/loginPage";
+			
+	}
+	
+	@RequestMapping(value = "/customer.myHome.claimedOrderList.go", method = RequestMethod.GET)
+	public String goClaimedOrderList(SearchOrder bb, HttpServletRequest req, HttpServletResponse res) {
+
+		return "customer/orderClaim";
+		
+
+	}
+	
+	@RequestMapping(value = "/customer.myHome.claimList", method = RequestMethod.GET)
+	public String getClaimedOrderList(SearchOrder bb, HttpServletRequest req, HttpServletResponse res) {
+		
+		//System.out.println("==="+bb.getSb_searchMonth());
+		if (MDAO.csmLoginCheck(req, res)) {
+			
+			MPDAO.getClaimedOrderList(bb, req, res);
+			return "customer/orderClaim";
+		}
+		return "member/loginPage";
+		
+	}
+	
+	@RequestMapping(value = "/orderList.cancel.do", method = RequestMethod.GET)
+	public String correctOrder(Delivery d, HttpServletRequest req, HttpServletResponse res) {
+		
+		MPDAO.cancelOrder(d, req, res);
+		
+		return "customer/orderDelivery";
+		
+		
+	}
+	@RequestMapping(value = "/orderList.exchange.do", method = RequestMethod.GET)
+	public String exchangeOrder(Delivery d, HttpServletRequest req, HttpServletResponse res) {
+		
+		MPDAO.exchangeOrder(d, req, res);
+		
+		return "customer/orderDelivery";
+		
+		
+	}
+	@RequestMapping(value = "/orderList.return.do", method = RequestMethod.GET)
+	public String returnOrder(Delivery d, HttpServletRequest req, HttpServletResponse res) {
+		
+		MPDAO.returnOrder(d, req, res);
 		
 		return "customer/orderDelivery";
 		
 		
 	}
 	
-	@RequestMapping(value = "/productReview.write.go", method = RequestMethod.GET)
-	public String goWritingProductReview(HttpServletRequest req, HttpServletResponse res) {
+	@RequestMapping(value = "/customer.myHome.productReview.go", method = RequestMethod.GET)
+	public String getOrderListToReview(Delivery d, HttpServletRequest req, HttpServletResponse res) {
 		
-		
-		return "customer/productReview";
-		
-		
-	}
-	
-	@RequestMapping(value = "/productReview.write.do", method = RequestMethod.GET)
-	public String doWritingProductReview(HttpServletRequest req, HttpServletResponse res) {
-		
-		
-		return "customer/productReview";
-		
+		if (MDAO.csmLoginCheck(req, res)) {
+			
+			MPDAO.getOrderListToReview(d, req, res);
+			return "customer/productReview2";
+		}
+		return "member/loginPage";
 		
 	}
 	
-	
+	// 파라미터 앞 주소가 같으면 스프링이 찾아서 파라메터 이름이 같은 걸 가져옴
+	@RequestMapping(value = "/productReview.writing.go", method = RequestMethod.GET)
+	public String goWritingReview(Delivery d, HttpServletRequest req, HttpServletResponse res) {
+		
+		if (MDAO.csmLoginCheck(req, res)) {
+			
+			MPDAO.goOrderToReview(d, req, res);
+			return "customer/productReview";
+		
+		}
+		return "member/loginPage";
+		
+	}
 	
 	
 

@@ -203,7 +203,7 @@ public class MemberDAO {
 
 		try {
 			// 세션 불러와서
-			Customer nowSession = (Customer) req.getSession().getAttribute("loginCustomer");
+			//Customer nowSession = (Customer) req.getSession().getAttribute("loginCustomer");
 
 			SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
 			String csm_emailFront = req.getParameter("csm_emailFront");
@@ -234,7 +234,7 @@ public class MemberDAO {
 
 		try {
 			// 세션 불러오기
-			Seller nowSession = (Seller) req.getSession().getAttribute("loginSeller");
+			//Seller nowSession = (Seller) req.getSession().getAttribute("loginSeller");
 
 			String sl_emailFront = req.getParameter("sl_emailFront");
 			String sl_autoCompleteEmail = req.getParameter("sl_autoCompleteEmail");

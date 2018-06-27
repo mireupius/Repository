@@ -34,7 +34,34 @@ public class MyPageDAO {
 
 	}
 	
-	public void orderCorrect(Delivery d, HttpServletRequest req, HttpServletResponse res) {
+	public void cancelOrder(Delivery d, HttpServletRequest req, HttpServletResponse res) {
+		
+		try {
+			
+			Customer cc = (Customer) req.getSession().getAttribute("loginCustomer");
+
+			d.setSd_customer_id(cc.getCsm_id());
+			
+			if (ss.getMapper(MyPageMapper.class).cancelOrder(d) == 1) {
+				
+				System.out.println("주문취소 접수 성공");
+				
+				req.setAttribute("r", "주문취소 접수 성공");
+				
+			} else {
+				System.out.println("주문취소 접수 실패");
+			}
+			
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println("주문취소 접수 실패");	
+		}
+		
+		
+	}
+	
+	public void exchangeOrder(Delivery d, HttpServletRequest req, HttpServletResponse res) {
 		
 		try {
 			
@@ -42,27 +69,78 @@ public class MyPageDAO {
 			
 			d.setSd_customer_id(cc.getCsm_id());
 			
-			if (ss.getMapper(MyPageMapper.class).orderCorrect(d) == 1) {
+			if (ss.getMapper(MyPageMapper.class).exchangeOrder(d) == 1) {
 				
-				System.out.println("주문 취소 성공");
+				System.out.println("교환신청 접수성공");
 				
 			} else {
-				System.out.println("주문 취소 실패");
+				System.out.println("교환신청 접수실패");
 			}
 			
 			
 		} catch (Exception e) {
 			e.printStackTrace();
-			System.out.println("주문 취소 실패");
-			
+			System.out.println("교환신청 접수실패");
 		}
 		
 		
 	}
 	
-	
-	
+	public void returnOrder(Delivery d, HttpServletRequest req, HttpServletResponse res) {
+		
+		try {
+			
+			Customer cc = (Customer) req.getSession().getAttribute("loginCustomer");
+			
+			d.setSd_customer_id(cc.getCsm_id());
+			
+			if (ss.getMapper(MyPageMapper.class).returnOrder(d) == 1) {
+				
+				System.out.println("반품신청 접수성공");
+				
+			} else {
+				System.out.println("반품신청 접수실패");
+			}
+			
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println("반품신청 접수실패");	
+		}
+		
+		
+	}
 
+	public void getClaimedOrderList(SearchOrder bb, HttpServletRequest req, HttpServletResponse res) {
+
+		Customer cc = (Customer) req.getSession().getAttribute("loginCustomer");
+
+		bb.setSd_customer_id(cc.getCsm_id());
+
+		List<Delivery> orders = ss.getMapper(MyPageMapper.class).searchClaimedOrderList(bb);
+
+		if (cc.getCsm_id().equals(bb.getSd_customer_id())) {
+			
+			req.setAttribute("orderList", orders);
+		}
+
+	}
+	
+	public void getOrderListToReview(Delivery d, HttpServletRequest req, HttpServletResponse res) {
+		
+		Customer cc = (Customer) req.getSession().getAttribute("loginCustomer");
+		
+		d.setSd_customer_id(cc.getCsm_id());
+		
+		List<Delivery> orders = ss.getMapper(MyPageMapper.class).orderListToReview(d);
+		
+		if (cc.getCsm_id().equals(d.getSd_customer_id())) {
+			
+			req.setAttribute("orderList", orders);
+		}
+		
+	}
+	
 	public void getMembership(Membership m, HttpServletRequest req, HttpServletResponse res) {
 
 		Customer cc = (Customer) req.getSession().getAttribute("loginCustomer");
@@ -83,6 +161,24 @@ public class MyPageDAO {
 		}
 
 	}
+	
+	public void goOrderToReview(Delivery d, HttpServletRequest req, HttpServletResponse res) {
+		
+		try {
+			
+			Delivery product = ss.getMapper(MyPageMapper.class).orderToReviewBySd_pno(d);
+			
+			req.setAttribute("review", product);
+			System.out.println("리뷰 대상 정보 불러오기 성공");
+			
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println("리뷰 대상 정보 불러오기 실패");
+		}
+		
+	}
+
 	
 	public void writeProductReview(Membership m, HttpServletRequest req, HttpServletResponse res) {
 		
