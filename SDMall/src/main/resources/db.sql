@@ -1,6 +1,5 @@
-<<<<<<< HEAD
-	-- 장바구니테이블은 옵션테이블이랑 상품테이블 조인시켜사용 --
-	-- 장바구니 --
+-- 장바구니테이블은 옵션테이블이랑 상품테이블 조인시켜사용 --
+-- 장바구니 --
 CREATE TABLE SHOPPINGBASKET(
 SB_NO NUMBER(13) PRIMARY KEY
 SB_GD_NO NUMBER(13) PRIMARY NOT NULL,
@@ -99,8 +98,6 @@ insert into customer_reg values('cyh524','123123','최완희',sysdate,'010519906
 select * from customer_reg;
 
 		select * from customer_reg	where csm_id = 'aaa'
-=======
-<<<<<<< HEAD
 select * from sale_delivery where sd_delivery_state != '배송중' order by sd_order_date
 select sd_delivery_type from sale_delivery;
 
@@ -112,9 +109,9 @@ update sale_delivery set sd_claim = '교환'  where  sd_delivery_pno = '20180523
 update sale_delivery set sd_claim = '교환'  where  sd_delivery_pno = '2018052391233617';
 update sale_delivery set sd_claim = '취소'  where  sd_delivery_pno = '2018052391233618';
 update sale_delivery set sd_claim = '취소'  where  sd_delivery_pno = '2018052491233619';
-=======
+
 select * from sale_delivery where sd_delivery_state != '諛곗넚以�' order by sd_order_date
->>>>>>> refs/remotes/origin/yun
+
 
 insert into sale_delivery values('2018052291233612', '2018052252351030', 'aaa',	null,	null,	null,	'dsfsdf',	'vip150',	'오준영',	'구매완료',	'신규주문',	2500,	'2917445930',	'0000000010002',	'상품1',	'而щ윭:釉붾（',	2,	0,	5600,	5600,	5600,	null,	'010-0000-0001',	'�꽌�슱�듅蹂꾩떆 �넚�뙆援� �삤湲덈줈32湲� 5 (�넚�뙆�룞, 媛��씫�궪�씡留⑥�) 000�룞000�샇',	'010-4717-0038',	'05674',	'배송잘해주세요',	'(04306) �꽌�슱�듅蹂꾩떆 �슜�궛援� 泥��뙆濡�71湲�  77-77',	to_date('20180522','yyyyMMdd'),	null,	'�떊�슜移대뱶',null,null	);
 insert into sale_delivery values('aaa',	'2018052291233613',	'2018052252351030',	null,	null,	null,	'�옣�씗�썝',	'aa',	'�옣�씗�썝',	'諛쒖넚��湲�',	'�떊洹쒖＜臾�',	2500,	'2917445931',	'�뿤�뼱��3',	'議고빀�삎�샃�뀡�긽�뭹',	'而щ윭:釉붾옓',	2,	0,	5700,	5700,	5700,	null,	'010-0000-0002',	'�꽌�슱�듅蹂꾩떆 �넚�뙆援� �삤湲덈줈32湲� 5 (�넚�뙆�룞, 媛��씫�궪�씡留⑥�) 000�룞000�샇',	'010-4717-0039',	'05675',	null,	'(04306) �꽌�슱�듅蹂꾩떆 �슜�궛援� 泥��뙆濡�71湲�  77-77',	to_date('20180522','yyyyMMdd'),	null,	'�떊�슜移대뱶',null,null	);
@@ -192,5 +189,3 @@ CREATE TABLE sale_delivery (
 
 insert into sale_delivery values('2018052291233612', '2018052252351030', )
 
-
->>>>>>> refs/remotes/origin/union2
