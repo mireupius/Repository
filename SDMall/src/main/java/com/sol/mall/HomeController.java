@@ -8,7 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import com.sol.mall.category.CategoryDAO;
+import com.sol.mall.goods.CategoryDAO;
 import com.sol.mall.goods.GoodsDAO;
 
 /**

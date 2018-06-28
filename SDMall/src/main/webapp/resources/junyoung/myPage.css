@@ -1,0 +1,18 @@
+@charset "UTF-8";
+
+
+#header-Icon{
+	
+	position: absolute;
+	top: 50px;
+	left: 1500px;
+	display: inline;
+	
+}
+
+.wishlist_content{
+	
+	display: inline;
+	float: left;
+	padding-right: 10px;
+}

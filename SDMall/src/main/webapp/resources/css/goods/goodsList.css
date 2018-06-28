@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 @charset "UTF-8";
 
 .gdLstTitle {
@@ -11,3 +12,46 @@ font-size: 11pt;
 	height: 25px;
 	border: 0;
 }
+=======
+@charset "UTF-8";
+
+.gdLstTb {
+	border-spacing: 0;
+	margin-left: auto;
+	margin-right: auto;
+	margin-top:100px;/*  마진톱을 주면 접었다 펼때 옆에 스크롤바가 생기면서 흔들림  */
+	width: 1300px;
+}
+
+#gdLstTb2 {
+	border-spacing: 0;
+}
+
+.gdLstTb3 {
+	border-spacing: 0;
+	margin-left: auto;
+	margin-right: auto;
+	width: 1300px;
+}
+
+.gdLstTb4 {
+	border-spacing: 0;
+	margin-left: auto;
+	margin-right: auto;
+	width: 1300px;
+}
+
+.gdLstTd1 {
+	border: #d9dadc thin solid;
+	background-color: #f5f4f4;
+	width: 1200px;
+}
+
+.gdLstTd2 {
+	border-bottom: #d9dadc thin solid;
+	border-top: #d9dadc thin solid;
+	border-right: #d9dadc thin solid;
+	width: 1000px;
+	padding-left: 30px;
+}
+>>>>>>> refs/remotes/origin/hs6

@@ -42,9 +42,8 @@
 						<div class="rating_r rating_r_4 product_rating"><i></i><i></i><i></i><i></i><i></i></div>
 						<div class="product_text"><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas fermentum. laoreet turpis, nec sollicitudin dolor cursus at. Maecenas aliquet, dolor a faucibus efficitur, nisi tellus cursus urna, eget dictum lacus turpis.</p></div>
 						<div class="order_info d-flex flex-row">
-							<form action="#">
+							<form action="cart.add" method="get">
 								<div class="clearfix" style="z-index: 1000;">
-
 									<!-- Product Quantity -->
 									<div class="product_quantity clearfix">
 										<span>Quantity: </span>
@@ -54,29 +53,25 @@
 											<div id="quantity_dec_button" class="quantity_dec quantity_control"><i class="fas fa-chevron-down"></i></div>
 										</div>
 									</div>
-
-									<!-- Product Color -->
-									<ul class="product_color">
-										<li>
-											<span>Color: </span>
-											<div class="color_mark_container"><div id="selected_color"></div></div>
-											<div class="color_dropdown_button"><i class="fas fa-chevron-down"></i></div>
-											<ul class="color_list">
+										<label class="custom-select" for="styledSelect1">
+											<select id="styledSelect1" name="sb_opno">
 												<c:forEach var="o" items="${option}">
-													<li><sapn id="op_name">${o.op_name }</sapn> <span id ="op_price">${o.op_price }</span> / <span id ="op_stock">${o.op_stock }</span> </li>
+												<option value="${o.op_no }">${o.op_no}, ${o.op_name } (+${o.op_price }) / ${o.op_stock }</option>
 												</c:forEach>
-											</ul>
-										</li>
-									</ul>
+											</select>
+										</label>
+
 
 								</div>
 
 								<div class="product_price">${goodsDtl1.gd_price }</div>
 								<div class="button_container">
-									<button type="button" class="button cart_button">Add to Cart</button>
+									<input type="submit" class="button cart_button" value="Add to Cart">
+									<!-- <button type="button" class="button cart_button">Add to Cart</button> -->
 									<div class="product_fav"><i class="fas fa-heart"></i></div>
 								</div>
-								<input id="" type="hidden"> 
+								<input value="${goodsDtl1.gd_no }" name="sb_gdno"> 
+								<input value="1" name="sb_quantity"> 
 							</form>
 						</div>
 					</div>
@@ -249,10 +244,6 @@
 							<div class="newsletter_text"><p>...and receive %20 coupon for first shopping.</p></div>
 						</div>
 						<div class="newsletter_content clearfix">
-							<form action="#" class="newsletter_form">
-								<input type="email" class="newsletter_input" required="required" placeholder="Enter your email address">
-								<button class="newsletter_button">Subscribe</button>
-							</form>
 							<div class="newsletter_unsubscribe_link"><a href="#">unsubscribe</a></div>
 						</div>
 					</div>

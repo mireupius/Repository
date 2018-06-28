@@ -1,20 +1,36 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="utf-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>	
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+	
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<!DOCTYPE html>
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
+<title>Shopping Smart - SDmall</title>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="description" content="Shopping Smart - SDmall">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" type="text/css" href="resources/css/bootstrap4/bootstrap.min.css">
-<link rel="stylesheet" type="text/css" href="resources/css/main_styles.css">
-<script type="text/javascript" src="resources/js/jquery.js"></script>
-<script type="text/javascript">
-$(function() {
-	
-});
+<link href="resources/plugins/fontawesome-free-5.0.1/css/fontawesome-all.css" rel="stylesheet" type="text/css">
+<link rel="stylesheet" type="text/css" href="resources/plugins/OwlCarousel2-2.2.1/owl.carousel.css">
+<link rel="stylesheet" type="text/css" href="resources/plugins/OwlCarousel2-2.2.1/owl.theme.default.css">
+<link rel="stylesheet" type="text/css" href="resources/plugins/OwlCarousel2-2.2.1/animate.css">
+<link rel="stylesheet" type="text/css" href="resources/css/main.css">
+<link rel="stylesheet" type="text/css" href="resources/css/responsive.css">
 
-</script>
+<script src="resources/js/jquery-3.3.1.min.js"></script>
+<script src="resources/css/bootstrap4/popper.js"></script>
+<script src="resources/css/bootstrap4/bootstrap.min.js"></script>
+<script src="resources/plugins/greensock/TweenMax.min.js"></script>
+<script src="resources/plugins/greensock/TimelineMax.min.js"></script>
+<script src="resources/plugins/scrollmagic/ScrollMagic.min.js"></script>
+<script src="resources/plugins/greensock/animation.gsap.min.js"></script>
+<script src="resources/plugins/greensock/ScrollToPlugin.min.js"></script>
+<script src="resources/plugins/OwlCarousel2-2.2.1/owl.carousel.js"></script>
+<script src="resources/plugins/easing/easing.js"></script>
+<script src="resources/js/custom.js"></script>
 </head>
+
 <body>
 
 <div class="super_container">
@@ -32,7 +48,7 @@ $(function() {
 					<!-- Logo -->
 					<div class="col-lg-3 col-sm-3 col-3 order-1">
 						<div class="logo_container">
-							<div class="logo"><a href="#"><img alt="SD Mall" src="resources/etc/logo.png"></a></div>
+							<div class="logo"><a href="/mall"><img alt="SD Mall" src="resources/etc/logo.png"></a></div>
 						</div>
 					</div>
 
@@ -55,20 +71,21 @@ $(function() {
 						<div class="wishlist_cart d-flex flex-row align-items-center justify-content-end">
 							<div class="wishlist d-flex flex-row align-items-center justify-content-end">
 								<div class="wishlist_content">
-									<div class="wishlist_icon"><img src="resources/etc/icon-login.png"></div>
+									<div class="wishlist_icon"><img src="resources/etc/icon-login.png" alt=""></div>
 									<div class="wishlist_text">
-									<c:if test="${sessionScope.loginCustomer == null }">
-									<a href="member.loginPage">로그인</a>
-									</c:if>
-									<c:if test="${sessionScope.loginCustomer != null }">
-									<a href="customer.logout.do">로그아웃</a>
-									</c:if>
+										<c:if test="${sessionScope.loginCustomer == null }">
+										<a href="member.loginPage">로그인</a>
+										</c:if>
+										<c:if test="${sessionScope.loginCustomer != null }">
+										<a href="customer.logout.do">로그아웃</a>
+										</c:if>
 									</div>
 								</div>
+							</div>
 							<!-- Myhome -->
 							<div class="wishlist d-flex flex-row align-items-center justify-content-end">
 								<div class="wishlist_content">
-									<div class="wishlist_icon"><img src="resources/etc/icon-myhome.png"></div>
+									<div class="wishlist_icon"><img src="resources/etc/icon-myhome.png" alt=""></div>
 									<div class="wishlist_text"><a href="customer.myHome.go">마이홈</a></div>
 								</div>
 							</div>
@@ -81,7 +98,7 @@ $(function() {
 											<img src="resources/etc/icon-cart.png" alt="">
 											<div class="cart_count"><span>10</span></div>
 										</div>
-										<div class="cart_text"><a href="#">장바구니</a></div>
+										<div class="cart_text"><a href="customer.cart.go">장바구니</a></div>
 									</div>
 								</div>
 							</div>
@@ -90,6 +107,119 @@ $(function() {
 				</div>
 			</div>
 		</div>
+		
+		<!-- Main Navigation -->
+
+		<nav class="main_nav">
+			<div class="container">
+				<div class="row">
+					<div class="col">
+						
+						<div class="main_nav_content d-flex flex-row">
+
+							<!-- Categories Menu -->
+							<div class="cat_menu_container">
+								<div class="cat_menu_title d-flex flex-row align-items-center justify-content-start">
+									<div class="cat_burger"><span></span><span></span><span></span></div>
+									<div class="cat_menu_text">카테고리</div>
+								</div>
+ 								<ul class="cat_menu">
+									<c:forEach var="cate1" items="${allCategory}">
+										<c:if test="${cate1.ct_clf==1 }">
+										<li class="hassubs">
+											<a href="shop?cate1=${cate1.ct_no }">${cate1.ct_clfname }<i class="fas fa-chevron-right"></i></a>
+											<ul>
+											<c:forEach var="cate2" items="${allCategory}">
+												<c:if test="${cate2.ct_parentno==cate1.ct_no }">
+													<li class="hassubs">
+														<a href="shop?cate3=${cate3.ct_no }">${cate2.ct_clfname }<i class="fas fa-chevron-right"></i></a>
+														<ul>
+														<c:forEach var="cate3" items="${allCategory}">
+															<c:if test="${cate3.ct_parentno==cate2.ct_no }">
+															<li><a href="shop?cate3=${cate3.ct_no }">${cate3.ct_clfname }<i class="fas fa-chevron-right"></i></a></li>
+															</c:if>
+														</c:forEach>
+															
+														</ul>
+													</li>
+												</c:if>
+											</c:forEach>
+											</ul>
+										</li>
+										</c:if>
+									</c:forEach>
+								</ul>
+							</div>
+
+							<!-- Main Nav Menu -->
+							<div class="main_nav_menu ml-auto">
+								<ul class="standard_dropdown main_nav_dropdown">
+									<li><a href="#">Home<i class="fas fa-chevron-down"></i></a></li>
+									<li class="hassubs">
+										<a href="#">Super Deals<i class="fas fa-chevron-down"></i></a>
+										<ul>
+											<li>
+												<a href="#">Menu Item<i class="fas fa-chevron-down"></i></a>
+												<ul>
+													<li><a href="#">Menu Item<i class="fas fa-chevron-down"></i></a></li>
+													<li><a href="#">Menu Item<i class="fas fa-chevron-down"></i></a></li>
+													<li><a href="#">Menu Item<i class="fas fa-chevron-down"></i></a></li>
+												</ul>
+											</li>
+											<li><a href="#">Menu Item<i class="fas fa-chevron-down"></i></a></li>
+											<li><a href="#">Menu Item<i class="fas fa-chevron-down"></i></a></li>
+											<li><a href="#">Menu Item<i class="fas fa-chevron-down"></i></a></li>
+										</ul>
+									</li>
+									<li class="hassubs">
+										<a href="#">Featured Brands<i class="fas fa-chevron-down"></i></a>
+										<ul>
+											<li>
+												<a href="#">Menu Item<i class="fas fa-chevron-down"></i></a>
+												<ul>
+													<li><a href="#">Menu Item<i class="fas fa-chevron-down"></i></a></li>
+													<li><a href="#">Menu Item<i class="fas fa-chevron-down"></i></a></li>
+													<li><a href="#">Menu Item<i class="fas fa-chevron-down"></i></a></li>
+												</ul>
+											</li>
+											<li><a href="#">Menu Item<i class="fas fa-chevron-down"></i></a></li>
+											<li><a href="#">Menu Item<i class="fas fa-chevron-down"></i></a></li>
+											<li><a href="#">Menu Item<i class="fas fa-chevron-down"></i></a></li>
+										</ul>
+									</li>
+									<li class="hassubs">
+										<a href="#">Pages<i class="fas fa-chevron-down"></i></a>
+										<ul>
+											<li><a href="shop.html">Shop<i class="fas fa-chevron-down"></i></a></li>
+											<li><a href="product.html">Product<i class="fas fa-chevron-down"></i></a></li>
+											<li><a href="blog.html">Blog<i class="fas fa-chevron-down"></i></a></li>
+											<li><a href="blog_single.html">Blog Post<i class="fas fa-chevron-down"></i></a></li>
+											<li><a href="regular.html">Regular Post<i class="fas fa-chevron-down"></i></a></li>
+											<li><a href="cart.html">Cart<i class="fas fa-chevron-down"></i></a></li>
+											<li><a href="contact.html">Contact<i class="fas fa-chevron-down"></i></a></li>
+										</ul>
+									</li>
+									<li><a href="blog.html">Blog<i class="fas fa-chevron-down"></i></a></li>
+									<li><a href="contact.html">Contact<i class="fas fa-chevron-down"></i></a></li>
+								</ul>
+							</div>
+
+							<!-- Menu Trigger -->
+
+							<div class="menu_trigger_container ml-auto">
+								<div class="menu_trigger d-flex flex-row align-items-center justify-content-end">
+									<div class="menu_burger">
+										<div class="menu_trigger_text">menu</div>
+										<div class="cat_burger menu_burger_inner"><span></span><span></span><span></span></div>
+									</div>
+								</div>
+							</div>
+
+						</div>
+					</div>
+				</div>
+			</div>
+		</nav>
 		
 		<!-- Menu -->
 
@@ -179,23 +309,8 @@ $(function() {
 
 	</header>
 	
-	<!-- Banner -->
-
-	<div class="banner">
-		<div class="banner_background" style="background-image:url(images/banner_background.jpg)"></div>
-		<div class="container fill_height">
-			<div class="row fill_height">
-				<div class="banner_product_image"><img src="images/banner_product.png" alt=""></div>
-				<div class="col-lg-5 offset-lg-4 fill_height">
-					<div class="banner_content">
-						<h1 class="banner_text">new era of smartphones</h1>
-						<div class="banner_price"><span>$530</span>$460</div>
-						<div class="banner_product_name">Apple Iphone 6s</div>
-						<div class="button banner_button"><a href="#">Shop Now</a></div>
-					</div>
-				</div>
-			</div>
-		</div>
+	<div class="content"><!--  -->
+		<jsp:include page="${contentPage }"></jsp:include>
 	</div>
 	
 	<!-- Footer -->
@@ -303,4 +418,5 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 
 
 </body>
+
 </html>

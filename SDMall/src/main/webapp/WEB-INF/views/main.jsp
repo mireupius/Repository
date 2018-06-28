@@ -86,7 +86,7 @@
 							<div class="wishlist d-flex flex-row align-items-center justify-content-end">
 								<div class="wishlist_content">
 									<div class="wishlist_icon"><img src="resources/etc/icon-myhome.png" alt=""></div>
-									<div class="wishlist_text"><a href="#">마이홈</a></div>
+									<div class="wishlist_text"><a href="customer.myHome.go">마이홈</a></div>
 								</div>
 							</div>
 
@@ -98,7 +98,7 @@
 											<img src="resources/etc/icon-cart.png" alt="">
 											<div class="cart_count"><span>10</span></div>
 										</div>
-										<div class="cart_text"><a href="#">장바구니</a></div>
+										<div class="cart_text"><a href="customer.cart.go">장바구니</a></div>
 									</div>
 								</div>
 							</div>
@@ -127,19 +127,18 @@
 									<c:forEach var="cate1" items="${allCategory}">
 										<c:if test="${cate1.ct_clf==1 }">
 										<li class="hassubs">
-											<a href="shop?cate1=${cate1.ct_no }">${cate1.ct_clfname }<i class="fas fa-chevron-right"></i></a>
+											<a href="shop.Category?ct_no=${cate1.ct_no }">${cate1.ct_clfname }<i class="fas fa-chevron-right"></i></a>
 											<ul>
 											<c:forEach var="cate2" items="${allCategory}">
 												<c:if test="${cate2.ct_parentno==cate1.ct_no }">
 													<li class="hassubs">
-														<a href="shop?cate3=${cate3.ct_no }">${cate2.ct_clfname }<i class="fas fa-chevron-right"></i></a>
+														<a href="shop.Category?ct_no=${cate2.ct_no }">${cate2.ct_clfname }<i class="fas fa-chevron-right"></i></a>
 														<ul>
 														<c:forEach var="cate3" items="${allCategory}">
 															<c:if test="${cate3.ct_parentno==cate2.ct_no }">
-															<li><a href="shop?cate3=${cate3.ct_no }">${cate3.ct_clfname }<i class="fas fa-chevron-right"></i></a></li>
+															<li><a href="shop.Category?ct_no=${cate3.ct_no }">${cate3.ct_clfname }<i class="fas fa-chevron-right"></i></a></li>
 															</c:if>
 														</c:forEach>
-															
 														</ul>
 													</li>
 												</c:if>
