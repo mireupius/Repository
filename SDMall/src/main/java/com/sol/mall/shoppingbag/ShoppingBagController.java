@@ -21,14 +21,13 @@ public class ShoppingBagController {
 
 	@RequestMapping(value = "/cart.add", method = RequestMethod.GET)
 	public String home(ShoppingBag sb, HttpServletRequest req, HttpServletResponse res) {
-		sbDAO.addToCart(sb, req, res);
-
 		cDAO.getAllCategory(req, res);// 메인 카테고리 호출 메소드
 
+		sbDAO.addToCart(sb, req, res);
 		req.setAttribute("contentPage", "home.jsp");
 		return "main";
 	}
-	
+
 	@RequestMapping(value = "/customer.cart.go", method = RequestMethod.GET)
 	public String cartGo(ShoppingBag sb, HttpServletRequest req, HttpServletResponse res) {
 		sbDAO.showCartItems(sb, req, res);
