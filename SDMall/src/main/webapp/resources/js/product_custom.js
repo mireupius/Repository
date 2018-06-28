@@ -6,7 +6,6 @@
 
 1. Vars and Inits
 2. Set Header
-3. Init Custom Dropdown
 4. Init Page Menu
 5. Init Recently Viewed Slider
 6. Init Brands Slider
@@ -17,6 +16,23 @@
 
 
 ******************************/
+
+//선택된 옵션의 재고를 반환하는 함수
+function limitQuantity(){
+	var optionSelected = $('option:selected').text();
+	var stock = optionSelected.split("/");
+	
+	return stock[1]*=1;	
+}
+
+//quantity_input에 재고 이상 입력된 경우 수량을 재고로 맞춤
+function overQuantity(){
+	var quantityInput = $('#quantity_input');
+	
+	if(quantityInput.val()*1>limitQuantity()){
+		quantityInput.val(limitQuantity());
+	}
+}
 
 $(document).ready(function()
 {
@@ -30,10 +46,10 @@ $(document).ready(function()
 
 	var menuActive = false;
 	var header = $('.header');
+	var opQuantity = 0;
 
 	setHeader();
 
-	initCustomDropdown();
 	initPageMenu();
 	initViewedSlider();
 	initBrandsSlider();
@@ -78,70 +94,6 @@ $(document).ready(function()
 		}
 	}
 
-	/* 
-
-	3. Init Custom Dropdown
-
-	*/
-
-	function initCustomDropdown()
-	{
-		if($('.custom_dropdown_placeholder').length && $('.custom_list').length)
-		{
-			var placeholder = $('.custom_dropdown_placeholder');
-			var list = $('.custom_list');
-		}
-
-		placeholder.on('click', function (ev)
-		{
-			if(list.hasClass('active'))
-			{
-				list.removeClass('active');
-			}
-			else
-			{
-				list.addClass('active');
-			}
-
-			$(document).one('click', function closeForm(e)
-			{
-				if($(e.target).hasClass('clc'))
-				{
-					$(document).one('click', closeForm);
-				}
-				else
-				{
-					list.removeClass('active');
-				}
-			});
-
-		});
-
-		$('.custom_list a').on('click', function (ev)
-		{
-			ev.preventDefault();
-			var index = $(this).parent().index();
-
-			placeholder.text( $(this).text() ).css('opacity', '1');
-
-			if(list.hasClass('active'))
-			{
-				list.removeClass('active');
-			}
-			else
-			{
-				list.addClass('active');
-			}
-		});
-
-
-		$('select').on('change', function (e)
-		{
-			placeholder.text(this.value);
-
-			$(this).animate({width: placeholder.width() + 'px' });
-		});
-	}
 
 	/* 
 
@@ -319,8 +271,10 @@ $(document).ready(function()
 
 	*/
 
+	//수량을 재고 1 이상 재고 이하로 제한하는 함수
 	function initQuantity()
 	{
+		
 		// Handle product quantity input
 		if($('.product_quantity').length)
 		{
@@ -334,14 +288,16 @@ $(document).ready(function()
 			incButton.on('click', function()
 			{
 				originalVal = input.val();
-				endVal = parseFloat(originalVal) + 1;
-				input.val(endVal);
+				if(originalVal < limitQuantity()){
+					endVal = parseFloat(originalVal) + 1;
+					input.val(endVal);
+				}
 			});
 
 			decButton.on('click', function()
 			{
 				originalVal = input.val();
-				if(originalVal > 0)
+				if(originalVal > 1)
 				{
 					endVal = parseFloat(originalVal) - 1;
 					input.val(endVal);
@@ -349,6 +305,7 @@ $(document).ready(function()
 			});
 		}
 	}
+	
 
 	/* 
 
@@ -374,23 +331,6 @@ $(document).ready(function()
 		}
 	}
 	 
-//	function initColor()
-//	{
-//		if($('.product_color').length)
-//		{
-//			var selectedCol = $('#selected_color');
-//			var colorItems = $('.color_list li .color_mark');
-//			colorItems.each(function()
-//			{
-//				var colorItem = $(this);
-//				colorItem.on('click', function()
-//				{
-//					var color = colorItem.css('backgroundColor');
-//					selectedCol.css('backgroundColor', color);
-//				});
-//			});
-//		}
-//	}
 
 	/* 
 
@@ -428,5 +368,35 @@ $(document).ready(function()
 				selected.attr('src', imagePath);
 			});
 		});
+	}
+	
+	function quantityLimit()
+	{
+		alert("aa");
+		alert(goodsDtl1.gd_price);
+			var input = $('#quantity_input');
+			var option = $('styledSelect1 option');
+
+			var originalVal;
+			var endVal;
+			
+			
+
+			option.on('click', function()
+			{
+				originalVal = input.val();
+				endVal = parseFloat(originalVal) + 1;
+				input.val(endVal);
+			});
+
+			decButton.on('click', function()
+			{
+				originalVal = input.val();
+				if(originalVal > 0)
+				{
+					endVal = parseFloat(originalVal) - 1;
+					input.val(endVal);
+				}
+			});
 	}
 });

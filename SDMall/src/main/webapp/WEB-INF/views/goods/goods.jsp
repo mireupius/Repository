@@ -46,17 +46,17 @@
 								<div class="clearfix" style="z-index: 1000;">
 									<!-- Product Quantity -->
 									<div class="product_quantity clearfix">
-										<span>Quantity: </span>
-										<input id="quantity_input" type="text" pattern="[0-9]*" value="1">
+										<span>수량: </span>
+										<input id="quantity_input" type="text" pattern="[0-9]*" value="1" name="sb_quantity" onchange="overQuantity()">
 										<div class="quantity_buttons">
 											<div id="quantity_inc_button" class="quantity_inc quantity_control"><i class="fas fa-chevron-up"></i></div>
 											<div id="quantity_dec_button" class="quantity_dec quantity_control"><i class="fas fa-chevron-down"></i></div>
 										</div>
 									</div>
 										<label class="custom-select" for="styledSelect1">
-											<select id="styledSelect1" name="sb_opno">
+											<select id="styledSelect1" name="sb_opno" onchange="limitQuantity(); overQuantity();">
 												<c:forEach var="o" items="${option}">
-												<option value="${o.op_no }">${o.op_no}, ${o.op_name } (+${o.op_price }) / ${o.op_stock }</option>
+												<option value="${o.op_no }">${o.op_name } (+${o.op_price }) / ${o.op_stock }</option>
 												</c:forEach>
 											</select>
 										</label>
@@ -71,7 +71,6 @@
 									<div class="product_fav"><i class="fas fa-heart"></i></div>
 								</div>
 								<input value="${goodsDtl1.gd_no }" name="sb_gdno"> 
-								<input value="1" name="sb_quantity"> 
 							</form>
 						</div>
 					</div>
