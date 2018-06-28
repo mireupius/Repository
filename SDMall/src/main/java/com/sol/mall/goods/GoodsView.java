@@ -9,6 +9,7 @@ public class GoodsView {
 	private	BigDecimal	gd_csmprice;
 	private	BigDecimal	gd_price;
 	private	String	gd_dlvchrg;
+	private	String	gd_outarea;
 	private	String	gd_imgl;
 	private	String	gd_imgm;
 	private	String	gd_imgs;
@@ -37,16 +38,17 @@ public class GoodsView {
 	}
 
 	public GoodsView(String gd_no, String gd_name, BigDecimal gd_csmprice, BigDecimal gd_price, String gd_dlvchrg,
-			String gd_imgl, String gd_imgm, String gd_imgs, String gd_imgss, String gd_clfl, String gd_clfm,
-			String gd_clfs, String gd_sellerid, String gt_no, String gt_gdno, String gt_mdlname, String gt_maker,
-			String gt_brand, String gt_mfd, String gt_exp, String gt_material, String gt_weight, String gt_volume,
-			String gt_origin, BigDecimal gt_stock, String gt_keyword, String gt_detail) {
+			String gd_outarea, String gd_imgl, String gd_imgm, String gd_imgs, String gd_imgss, String gd_clfl,
+			String gd_clfm, String gd_clfs, String gd_sellerid, String gt_no, String gt_gdno, String gt_mdlname,
+			String gt_maker, String gt_brand, String gt_mfd, String gt_exp, String gt_material, String gt_weight,
+			String gt_volume, String gt_origin, BigDecimal gt_stock, String gt_keyword, String gt_detail) {
 		super();
 		this.gd_no = gd_no;
 		this.gd_name = gd_name;
 		this.gd_csmprice = gd_csmprice;
 		this.gd_price = gd_price;
 		this.gd_dlvchrg = gd_dlvchrg;
+		this.gd_outarea = gd_outarea;
 		this.gd_imgl = gd_imgl;
 		this.gd_imgm = gd_imgm;
 		this.gd_imgs = gd_imgs;
@@ -109,6 +111,14 @@ public class GoodsView {
 
 	public void setGd_dlvchrg(String gd_dlvchrg) {
 		this.gd_dlvchrg = gd_dlvchrg;
+	}
+
+	public String getGd_outarea() {
+		return gd_outarea;
+	}
+
+	public void setGd_outarea(String gd_outarea) {
+		this.gd_outarea = gd_outarea;
 	}
 
 	public String getGd_imgl() {

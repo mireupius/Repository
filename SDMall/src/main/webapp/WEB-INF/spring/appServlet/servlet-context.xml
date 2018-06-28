@@ -57,7 +57,11 @@
 	<tx:advice id="txAdvice"
 		transaction-manager="transactionManager">
 		<tx:attributes>
-			<tx:method name="insertGds*" propagation="REQUIRED"
+			<tx:method name="insertGdsInfo" propagation="REQUIRED"
+				rollback-for="Exception" />
+			<tx:method name="updateGdsInfo" propagation="REQUIRED"
+				rollback-for="Exception" />
+			<tx:method name="deleteGdsInfo" propagation="REQUIRED"
 				rollback-for="Exception" />
 			<tx:method name="get*" read-only="true" />
 		</tx:attributes>

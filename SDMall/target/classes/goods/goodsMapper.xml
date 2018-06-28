@@ -17,7 +17,7 @@
 	
 	<select id="getCtgryForView" parameterType="com.sol.mall.goods.GoodsCategory"  resultType="com.sol.mall.goods.Category">
 		select * from category_tb
-		where ct_no = #{gd_clfl} OR ct_no = #{gd_clfm} OR ct_no = #{gd_clfs} 
+		where ct_no = #{gd_clfl} OR ct_no = #{gd_clfm} OR ct_no = #{gd_clfs, jdbcType=VARCHAR} 
 		order by ct_clf
 	</select>
 
@@ -25,10 +25,19 @@
 		select * from goods_tb
 	</select>
 	
-	<select id="getGoodsByKey" parameterType="com.sol.mall.goods.Keywords" resultType="com.sol.mall.goods.Goods">
-		select gd_no, gd_name, gd_price, gd_csmprice, gd_imgl from goods_tb a, goodsdtl_tb b
+	<select id="getAllGoodsView" parameterType="com.sol.mall.goods.Goods" resultType="com.sol.mall.goods.GoodsView">
+		select gd_no, gd_name, gd_price, gd_csmprice, gd_imgl, gt_maker, gt_brand, gt_mdlname, gt_origin 
+		from goods_tb a, goodsdtl_tb b
+		where a.gd_no = b.gt_gdno
+		and gd_sellerid = #{gd_sellerid}
+	</select>
+	
+	<select id="getGoodsViewByKey" parameterType="com.sol.mall.goods.Keywords" resultType="com.sol.mall.goods.GoodsView">
+		select gd_no, gd_name, gd_price, gd_csmprice, gd_imgl, gt_maker, gt_brand, gt_mdlname, gt_origin from goods_tb a, goodsdtl_tb b
 		where a.gd_no = b.gt_gdno 
+		and gd_sellerid = #{gd_sellerid}
 		and ${key_name} like '%' || #{key_value} || '%'
+		order by ${sort_name}  ${desc_name}
 	</select>
 	
 	<select id="getGoods" parameterType="com.sol.mall.goods.Goods" resultType="com.sol.mall.goods.Goods">
@@ -58,7 +67,14 @@
  	</select>
 	
 	
+	<select id="getOptionByNo" parameterType="com.sol.mall.goods.Option" resultType="com.sol.mall.goods.Option">
+		select * from option_tb
+		where op_gdno = #{op_gdno}
+		order by op_no
+	</select>
+	
 <!-- ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓ CLOB SELECT 세트 ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓ -->
+<!-- resultMap 없어도 정상작동 하는듯 테스트필요 -->
 	<resultMap id="getGoodsDtl"
 		type="com.sol.mall.goods.GoodsDtl">
 		<result property="gt_no" column="gt_no" />
@@ -79,31 +95,20 @@
 	<select id="getGoodsDtl" resultMap="getGoodsDtl">
 		select * from goodsdtl_tb
 	</select>
-
-	<!-- insert는 보통처럼 -->
-	<insert id="insertGdsDtl" 
-		parameterType="hashmap" >
-		insert into goodsdtl_tb values(
-			#{gt_no}, #{gt_gdno}, #{gt_mdlname}, #{gt_maker},
-			#{gt_brand}, #{gt_mfd}, #{gt_exp}, #{gt_material},
-			#{gt_weight}, #{gt_volume}, #{gt_origin}, 
-			#{gt_keyword}, #{gt_detail}
-		)
-	</insert>
 <!-- ↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑ CLOB SELECT 세트 ↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑ -->
 	<insert id="insertGds"
 		parameterType="com.sol.mall.goods.Goods">
 		insert into goods_tb values(
-			#{gd_clfl}||#{gd_clfm}||#{gd_clfs}||LPAD(goods_sq.nextval,4,'0'), #{gd_name}, #{gd_csmprice}, #{gd_price},
-			#{gd_dlvchrg}, #{gd_imgl}, #{gd_imgm}, #{gd_imgs},
-			#{gd_imgss}, #{gd_clfl}, #{gd_clfm}, #{gd_clfs}, #{gd_sellerid}
+			#{gd_clfl}||#{gd_clfm}||NVL(#{gd_clfs, jdbcType=VARCHAR},'000')||LPAD(goods_sq.nextval,4,'0'),
+			#{gd_name},	#{gd_csmprice},	#{gd_price}, #{gd_dlvchrg},	#{gd_imgl},	#{gd_imgm},	#{gd_imgs},
+			#{gd_imgss}, #{gd_clfl}, #{gd_clfm}, #{gd_clfs, jdbcType=VARCHAR}, #{gd_sellerid}, #{gd_outarea}
 		)
 	</insert>
 
 	<!-- insert는 보통처럼 -->
 	<insert id="insertGdtlTwo" parameterType="hashmap">
 		insert into goodsdtl_tb values(
-			goodsdtl_sq.nextval, #{goods.gd_clfl}||#{goods.gd_clfm}||#{goods.gd_clfs}||LPAD(goods_sq.currval, 4,'0'), #{goodsDtl.gt_mdlname}, #{goodsDtl.gt_maker},
+			goodsdtl_sq.nextval, #{goods.gd_clfl}||#{goods.gd_clfm}||NVL(#{goods.gd_clfs, jdbcType=VARCHAR},'000')||LPAD(goods_sq.currval, 4,'0'), #{goodsDtl.gt_mdlname}, #{goodsDtl.gt_maker},
 			#{goodsDtl.gt_brand}, #{goodsDtl.gt_mfd}, #{goodsDtl.gt_exp}, #{goodsDtl.gt_material},
 			#{goodsDtl.gt_weight}, #{goodsDtl.gt_volume}, #{goodsDtl.gt_origin},
 			#{goodsDtl.gt_keyword}, #{goodsDtl.gt_detail}
@@ -112,9 +117,67 @@
 
 	<insert id="insertOpTwo" parameterType="hashmap">
 		insert into option_tb values(
-			option_sq.nextval, #{goods.gd_clfl}||#{goods.gd_clfm}||#{goods.gd_clfs}||LPAD(goods_sq.currval, 4,'0'), 
+			option_sq.nextval, #{goods.gd_clfl}||#{goods.gd_clfm}||NVL(#{goods.gd_clfs, jdbcType=VARCHAR},'000')||LPAD(goods_sq.currval, 4,'0'), 
 			#{option.op_name}, #{option.op_price}, #{option.op_stock}
 		)
 	</insert>
+
+	<insert id="insertOpTwoForUp" parameterType="hashmap">
+		insert into option_tb values(
+			option_sq.nextval, #{goods.gd_no}, 
+			#{option.op_name}, #{option.op_price}, #{option.op_stock}
+		)
+	</insert>
+	
+	<!-- 업데이트 (상품상세 수정)  -->
+	<update id="updateGds"
+		parameterType="com.sol.mall.goods.Goods">
+		update goods_tb 
+		set 
+			gd_name = #{gd_name}, gd_csmprice = #{gd_csmprice}, gd_price = #{gd_price},
+			gd_dlvchrg = #{gd_dlvchrg}, gd_imgl = #{gd_imgl}, gd_imgm = #{gd_imgm},
+			gd_imgs = #{gd_imgs}, gd_imgss = #{gd_imgss}, gd_clfl = #{gd_clfl},
+			gd_clfm = #{gd_clfm}, gd_clfs = #{gd_clfs, jdbcType=VARCHAR}, gd_outarea = #{gd_outarea}
+		where  gd_no = #{gd_no} and gd_sellerid = #{gd_sellerid}
+	</update>
+
+	<!-- update는 보통처럼 -->
+	<update id="updateGdtlTwo" parameterType="hashmap">
+		update goodsdtl_tb
+		set
+			gt_mdlname = #{goodsDtl.gt_mdlname},
+			gt_maker = #{goodsDtl.gt_maker},
+			gt_brand = #{goodsDtl.gt_brand},
+			gt_mfd = #{goodsDtl.gt_mfd},
+			gt_exp = #{goodsDtl.gt_exp},
+			gt_material = #{goodsDtl.gt_material},
+			gt_weight = #{goodsDtl.gt_weight},
+			gt_volume = #{goodsDtl.gt_volume},
+			gt_origin = #{goodsDtl.gt_origin},
+			gt_keyword = #{goodsDtl.gt_keyword},
+			gt_detail = #{goodsDtl.gt_detail}
+		where gt_no = #{goodsDtl.gt_no} and gt_gdno = #{goods.gd_no} 
+	</update>
+
+	<update id="updateOpTwo" parameterType="hashmap">
+		update option_tb
+		set
+			op_name = #{option.op_name}, op_price = #{option.op_price}, op_stock = #{option.op_stock}
+		where op_no = #{option.op_no} and op_gdno = #{goods.gd_no}
+	</update>
+	
+	<!-- delete  -->
+	<delete id="deleteGoodsByNo" parameterType="com.sol.mall.goods.Goods">
+		delete from goods_tb
+		where gd_no = #{gd_no}
+	</delete>
+	<delete id="deleteGoodsDtlByNo" parameterType="com.sol.mall.goods.Goods">
+		delete from goodsdtl_tb
+		where gt_gdno = #{gd_no}
+	</delete>
+	<delete id="deleteGoodsOpByNo" parameterType="com.sol.mall.goods.Goods">
+		delete from option_tb
+		where op_gdno = #{gd_no}
+	</delete>
 	
 </mapper>

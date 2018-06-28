@@ -1,5 +1,9 @@
 eclipse.preferences.version=1
+<<<<<<< HEAD
+encoding//src/main/resources/goodsTable(yun).sql=UTF-8
+=======
 encoding//src/main/resources/db.sql=UTF-8
 encoding//src/main/resources/goodsTable.sql=UTF-8
+>>>>>>> refs/remotes/origin/hs6
 encoding//src/main/webapp/WEB-INF/views/goods/goods.jsp=UTF-8
 encoding//src/main/webapp/WEB-INF/views/home.jsp=UTF-8
