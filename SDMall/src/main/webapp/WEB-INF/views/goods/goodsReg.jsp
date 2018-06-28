@@ -515,7 +515,7 @@ h3 {
 				<tbody>
 					<tr>
 						<td class="gdTd1">판매자ID 필수(12)</td>
-						<td class="gdTd2"><input class="inpWidth" name="gd_sellerid"></td>
+						<td class="gdTd2"><input class="inpWidth" name="gd_sellerid" value="${sessionScope.loginSeller.sl_id}" readonly></td>
 					</tr>
 				</tbody>
 			</table>

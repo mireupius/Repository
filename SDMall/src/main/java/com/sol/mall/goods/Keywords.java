@@ -1,6 +1,8 @@
 package com.sol.mall.goods;
 
 public class Keywords {
+	
+	private	String	gd_sellerid;
 	private	String	key_name;
 	private	String	key_value;
 	private	String	sort_name;
@@ -10,12 +12,21 @@ public class Keywords {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Keywords(String key_name, String key_value, String sort_name, String desc_name) {
+	public Keywords(String gd_sellerid, String key_name, String key_value, String sort_name, String desc_name) {
 		super();
+		this.gd_sellerid = gd_sellerid;
 		this.key_name = key_name;
 		this.key_value = key_value;
 		this.sort_name = sort_name;
 		this.desc_name = desc_name;
+	}
+
+	public String getGd_sellerid() {
+		return gd_sellerid;
+	}
+
+	public void setGd_sellerid(String gd_sellerid) {
+		this.gd_sellerid = gd_sellerid;
 	}
 
 	public String getKey_name() {

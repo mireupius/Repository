@@ -125,7 +125,7 @@ public class MemberDAO {
 			Seller dbS = ss.getMapper(MemberMapper.class).getSellerById(s);
 
 			req.getSession().setAttribute("loginSeller", dbS);
-			req.getSession().setMaxInactiveInterval(30000);
+			req.getSession().setMaxInactiveInterval(300000);
 
 		} catch (Exception e) {
 			e.printStackTrace();

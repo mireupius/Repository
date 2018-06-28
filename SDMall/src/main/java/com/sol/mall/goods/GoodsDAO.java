@@ -77,8 +77,9 @@ public class GoodsDAO {
 	}
 
 	// 상품목록 전체조회(상품리스트화면)
-	public void getAllGoodsView(HttpServletRequest request) {
-		List<GoodsView> gdsViewList = ss.getMapper(GoodsMapper.class).getAllGoodsView();
+	public void getAllGoodsView(Goods gds, HttpServletRequest request) {
+		System.out.println("셀러"+gds.getGd_sellerid());
+		List<GoodsView> gdsViewList = ss.getMapper(GoodsMapper.class).getAllGoodsView(gds);
 
 		request.setAttribute("gdsViewList", gdsViewList);
 	}

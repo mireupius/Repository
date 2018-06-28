@@ -25,6 +25,14 @@ h3 {
 <script type="text/javascript">
 $(function(){
 		
+		$("#sValue").keyup(function(e) {
+			// 입력시 엔터치면 클릭이벤트 발생
+			if(e.keyCode == 13){
+				// 강제 이벤트 발생
+				$("#s_bt").trigger("click");
+			}
+		});
+	
 		$("#s_bt").click(function(){
 			var k_name = $("#sKey").val();
 			var k_value = $("#sValue").val();
@@ -32,7 +40,8 @@ $(function(){
 			var desc_name = $("#desc").val();
 			$.ajax({
 				url : "goods.search.keyword",
-				data : {key_name : k_name,
+				data : {
+						key_name : k_name,
 						key_value : k_value,
 						sort_name : sort_name,
 						desc_name : desc_name},

@@ -4,6 +4,10 @@ select gd_no, gd_name, gd_price, gd_csmprice, gd_imgl from goods_tb a, goodsdtl_
 
 select gd_no, gd_name, gd_price, gd_csmprice, gd_imgl from goods_tb a, goodsdtl_tb b
 		where a.gd_no = b.gt_gdno 
+		
+		select * from seller_reg
+		
+select gd_sellerid from goods_tb;
 
 insert into goods_tb values('1001091130001','티셔츠1','69900','58900','5000','20180626150037-fe3-ede06d317c41.jpg','20180626150037-fe3-ede06d317c41.jpg','20180626150037-fe3-ede06d317c41.jpg','20180626150037-fe3-ede06d317c41.jpg','100','109','113','cyh524','대한통운');
 insert into goods_tb values('1001091140002','블라우스1','68000','68000','5000','20180626150339-c84-e53d97fbf24d.jpg','20180626150339-c84-e53d97fbf24d.jpg','20180626150339-c84-e53d97fbf24d.jpg','20180626150339-c84-e53d97fbf24d.jpg','100','109','114','cyh524','대한통운');
