@@ -778,14 +778,12 @@
   z-index: 10;
   border-radius: 5px;
   cursor: pointer;
+  background: none;
 }
 .custom-select select {
   border: none;
   outline: none;
   background: transparent;
-  -webkit-appearance: none !important;
-  -moz-appearance: none !important;
-  appearance: none !important;
   border-radius: 0;
   margin: 0;
   display: block;
