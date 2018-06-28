@@ -126,10 +126,10 @@ public class GoodsController {
 				}
 	
 				// 이미지 사이즈 변경
-				ImageResize.resize(500, 500, path + modifyName, path+pathNameGd_imgl, originalNameExtension);
-				ImageResize.resize(300, 300, path + modifyName, path+pathNameGd_imgm, originalNameExtension);
+				ImageResize.resize(470, 470, path + modifyName, path+pathNameGd_imgl, originalNameExtension);
+				ImageResize.resize(236, 236, path + modifyName, path+pathNameGd_imgm, originalNameExtension);
 				ImageResize.resize(220, 220, path + modifyName, path+pathNameGd_imgs, originalNameExtension);
-				ImageResize.resize(100, 100, path + modifyName, path+pathNameGd_imgss, originalNameExtension);
+				ImageResize.resize(70, 70, path + modifyName, path+pathNameGd_imgss, originalNameExtension);
 				
 				// 상품이미지 로그
 				System.out.println("** 상품이미지 upload 정보 **");
@@ -230,10 +230,10 @@ public class GoodsController {
 				}
 				
 				// 이미지 사이즈 변경
-				ImageResize.resize(500, 500, path + modifyName, path+pathNameGd_imgl, originalNameExtension);
-				ImageResize.resize(300, 300, path + modifyName, path+pathNameGd_imgm, originalNameExtension);
+				ImageResize.resize(470, 470, path + modifyName, path+pathNameGd_imgl, originalNameExtension);
+				ImageResize.resize(236, 236, path + modifyName, path+pathNameGd_imgm, originalNameExtension);
 				ImageResize.resize(220, 220, path + modifyName, path+pathNameGd_imgs, originalNameExtension);
-				ImageResize.resize(100, 100, path + modifyName, path+pathNameGd_imgss, originalNameExtension);
+				ImageResize.resize(70, 70, path + modifyName, path+pathNameGd_imgss, originalNameExtension);
 							
 				// 상품이미지 로그
 				System.out.println("** 상품이미지 upload 정보 **");

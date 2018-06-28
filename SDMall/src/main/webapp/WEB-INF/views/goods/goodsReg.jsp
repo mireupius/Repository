@@ -397,14 +397,14 @@ h3 {
 								<ul>
 									<li class="liImg">
 										<span>상세이미지</span><br>
-										<span>권장 500px * 500px</span><br>
+										<span>권장 470px * 470px</span><br>
 										<span>
 											<img id="img1" src="${pageContext.request.contextPath}/resources/files/goods/img/108x108_2.gif" width="108" height="108" >
 										</span>
 									</li>
 									<li class="liImg">
 										<span>목록 이미지</span><br>
-										<span>권장 300px * 300px</span><br>
+										<span>권장 236px * 236px</span><br>
 										<span>
 											<img id="img2" src="${pageContext.request.contextPath}/resources/files/goods/img/108x108_2.gif" width="108" height="108" >
 										</span>
@@ -418,7 +418,7 @@ h3 {
 									</li>
 									<li class="liImg">
 										<span>축소 이미지</span><br>
-										<span>권장 100px * 100px</span><br>
+										<span>권장 70px * 70px</span><br>
 										<span>
 											<img id="img4" src="${pageContext.request.contextPath}/resources/files/goods/img/108x108_2.gif" width="108" height="108" >
 										</span>
