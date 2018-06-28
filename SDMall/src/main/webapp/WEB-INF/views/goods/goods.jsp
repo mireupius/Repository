@@ -31,7 +31,7 @@
 
 				<!-- Selected Image -->
 				<div class="col-lg-5 order-lg-2 order-1">
-					<div class="image_selected"><img src="images/single_4.jpg" alt=""></div>
+					<div class="image_selected"><img src="${pageContext.request.contextPath}/upload/${goodsDtl1.gd_imgl}"></div>
 				</div>
 
 				<!-- Description -->
