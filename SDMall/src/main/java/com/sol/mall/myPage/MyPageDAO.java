@@ -1,5 +1,7 @@
 package com.sol.mall.myPage;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -179,27 +181,53 @@ public class MyPageDAO {
 		
 	}
 
-	
-	public void writeProductReview(Membership m, HttpServletRequest req, HttpServletResponse res) {
-		
-		Customer cc = (Customer) req.getSession().getAttribute("loginCustomer");
-		m.setMs_csm_id(cc.getCsm_id());
-		
-		// ss.getMapper(MyPageMapper.class).membershipStatus(c);
+	public void writeProductReview(ProductReview pr, HttpServletRequest req, HttpServletResponse res) {
 		
 		try {
 			
-			Membership mms = ss.getMapper(MyPageMapper.class).membershipStatus(m);
+			Date today = new Date();
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+			pr.setPr_regDate(sdf.parse(sdf.format(today)));
 			
-			req.setAttribute("memberStatus", mms);
-			System.out.println("멤버쉽 가져오기 성공");
+			if(ss.getMapper(MyPageMapper.class).writeProductReview(pr) == 1 &&
+			   ss.getMapper(MyPageMapper.class).changeReviewState(pr) == 1) {
+				
+				System.out.println("상품평 등록 성공");
+			
+			}
 			
 		} catch (Exception e) {
+			System.out.println("상품평 등록 실패");
 			e.printStackTrace();
-			System.out.println("멤버쉽 가져오기 실패");
+			
 		}
 		
 	}
+	
+	public void getWritedReview(ProductReview pr, HttpServletRequest req, HttpServletResponse res) {
+		
+		try {
+			
+			Customer c = (Customer) req.getSession().getAttribute("loginCustomer");
+			pr.setPr_csm_id(c.getCsm_id());
+			
+			List<ProductReview> reviews = ss.getMapper(MyPageMapper.class).getWritedReview(pr);
+			
+			System.out.println("상품평 조회 성공");
+			req.setAttribute("reviewList", reviews);
+				
+			
+		} catch (Exception e) {
+			System.out.println("상품평 조회 실패");
+			
+			
+		}
+		
+	}
+	
+	
+	
+	
 	
 	
 	

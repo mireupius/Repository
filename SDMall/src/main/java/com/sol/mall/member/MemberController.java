@@ -17,10 +17,10 @@ import com.sol.mall.myPage.MyPageDAO;
 public class MemberController {
 
 	@Autowired
-	private MemberDAO MDAO;
+	private MemberDAO mDAO;
 	
 	@Autowired
-	private MyPageDAO MPDAO;
+	private MyPageDAO mpDAO;
 
 	@Autowired
 	private CategoryDAO cDAO;
@@ -48,20 +48,20 @@ public class MemberController {
 	public @ResponseBody Customers getAllCustomer(HttpServletRequest req, HttpServletResponse res) {
 		
 		
-		return MDAO.getAllCustomer(req, res);
+		return mDAO.getAllCustomer(req, res);
 		
 	}
 	
 	@RequestMapping(value = "/customer.validCheck", method = RequestMethod.GET, produces = "application/json; charset=utf-8")
 	public @ResponseBody Customers csmValidCheck(Customer c, HttpServletRequest req, HttpServletResponse res) {
 		
-		return MDAO.customerCheck(c, req, res);
+		return mDAO.customerCheck(c, req, res);
 		
 	}
 	
 	@RequestMapping(value = "/customer.register.do", method = RequestMethod.POST)
 	public String doRegCustomer(Customer c, Membership m, HttpServletRequest req, HttpServletResponse res) {
-		MDAO.registerCSM(c, m, req, res);
+		mDAO.registerCSM(c, m, req, res);
 		System.out.println(c.getCsm_birth());
 		return "member/loginArea";
 
@@ -77,7 +77,7 @@ public class MemberController {
 	@RequestMapping(value = "/seller.register.do", method = RequestMethod.POST)
 	public String doRegSeller(Seller s, HttpServletRequest req, HttpServletResponse res) {
 
-		MDAO.registerSL(s, req, res);
+		mDAO.registerSL(s, req, res);
 		return "member/loginArea";
 
 	}
@@ -85,15 +85,15 @@ public class MemberController {
 	@RequestMapping(value = "/seller.validCheck", method = RequestMethod.GET, produces = "application/json; charset=utf-8")
 	public @ResponseBody Sellers slValidCheck(Seller s, HttpServletRequest req, HttpServletResponse res) {
 		
-		return MDAO.sellerCheck(s, req, res);
+		return mDAO.sellerCheck(s, req, res);
 		
 	}
 
 	@RequestMapping(value = "/customer.login.do", method = RequestMethod.GET)
 	public String loginCustomer(Customer c, HttpServletRequest req, HttpServletResponse res) {
 
-		MDAO.loginCustomer(c, req, res);
-		if(MDAO.csmLoginCheck(req, res)) {
+		mDAO.loginCustomer(c, req, res);
+		if(mDAO.csmLoginCheck(req, res)) {
 			
 			cDAO.getAllCategory(req, res);// 메인 카테고리 호출 메소드
 			gdsDAO.getAllGoods(req); // 상품 전체 목록 가져오기
@@ -109,9 +109,9 @@ public class MemberController {
 	public String goMyhome(Membership m, HttpServletRequest req, HttpServletResponse res) {
 		
 		
-		if(MDAO.csmLoginCheck2(req, res)) {
+		if(mDAO.csmLoginCheck2(req, res)) {
 			
-			MPDAO.getMembership(m, req, res);
+			mpDAO.getMembership(m, req, res);
 			
 			return "customer/customerMyPage2";
 			
@@ -125,8 +125,8 @@ public class MemberController {
 	@RequestMapping(value = "/seller.login.do", method = RequestMethod.GET)
 	public String loginSeller(Seller s, HttpServletRequest req, HttpServletResponse res) {
 		
-		MDAO.loginSeller(s, req, res);
-		if(MDAO.slLoginCheck(req, res) == true) {
+		mDAO.loginSeller(s, req, res);
+		if(mDAO.slLoginCheck(req, res)) {
 			
 			req.setAttribute("contentPage", "saleHome.jsp");
 			return "sale/saleIndex";
@@ -141,8 +141,8 @@ public class MemberController {
 	@RequestMapping(value = "/customer.logout.do", method = RequestMethod.GET)
 	public String logoutCustomer(HttpServletRequest req, HttpServletResponse res) {
 		
-		MDAO.logoutCustomer(req, res);
-		MDAO.csmLoginCheck(req, res);
+		mDAO.logoutCustomer(req, res);
+		mDAO.csmLoginCheck(req, res);
 		cDAO.getAllCategory(req, res);// 메인 카테고리 호출 메소드
 		req.setAttribute("contentPage", "home.jsp");
 		return "main";
@@ -152,8 +152,8 @@ public class MemberController {
 	@RequestMapping(value = "/seller.logout.do", method = RequestMethod.GET)
 	public String logoutSeller(HttpServletRequest req, HttpServletResponse res) {
 		
-		MDAO.logoutSeller(req, res);
-		MDAO.slLoginCheck(req, res);
+		mDAO.logoutSeller(req, res);
+		mDAO.slLoginCheck(req, res);
 		cDAO.getAllCategory(req, res);// 메인 카테고리 호출 메소드
 		req.setAttribute("contentPage", "home.jsp");
 		return "main";
@@ -172,7 +172,7 @@ public class MemberController {
 	@RequestMapping(value = "/customer.update.go", method = RequestMethod.GET)
 	public String goUpdateCustomer(HttpServletRequest req, HttpServletResponse res) {
 		
-		if(MDAO.csmLoginCheck(req, res)) {
+		if(mDAO.csmLoginCheck(req, res)) {
 			
 			return "member/updateCSMPage";
 		
@@ -185,9 +185,9 @@ public class MemberController {
 	@RequestMapping(value = "/customer.update.do", method = RequestMethod.POST)
 	public String doUpdateCustomer(Customer c, HttpServletRequest req, HttpServletResponse res) {
 		
-		if(MDAO.csmLoginCheck(req, res)) {
+		if(mDAO.csmLoginCheck(req, res)) {
 			
-			MDAO.updateCustomer(c, req, res);
+			mDAO.updateCustomer(c, req, res);
 			return "customer/csmLoginOK";
 			
 		}else {
@@ -199,7 +199,7 @@ public class MemberController {
 	@RequestMapping(value = "/seller.update.go", method = RequestMethod.GET)
 	public String goUpdateSeller(HttpServletRequest req, HttpServletResponse res) {
 		
-		if(MDAO.slLoginCheck(req, res)) {
+		if(mDAO.slLoginCheck(req, res)) {
 			
 			return "member/updateSLPage";
 			
@@ -212,9 +212,9 @@ public class MemberController {
 	@RequestMapping(value = "/seller.update.do", method = RequestMethod.POST)
 	public String doUpdateSeller(Seller s, HttpServletRequest req, HttpServletResponse res) {
 		
-		if(MDAO.slLoginCheck(req, res)) {
+		if(mDAO.slLoginCheck(req, res)) {
 			
-			MDAO.updateSeller(s, req, res);
+			mDAO.updateSeller(s, req, res);
 			return "seller/slLoginOK";
 			
 		}else {
@@ -226,7 +226,7 @@ public class MemberController {
 	@RequestMapping(value = "/customer.withdraw.go", method = RequestMethod.GET)
 	public String goWithdrawCustomer(HttpServletRequest req, HttpServletResponse res) {
 		
-		if(MDAO.csmLoginCheck(req, res)) {
+		if(mDAO.csmLoginCheck(req, res)) {
 			
 			return "member/withdrawCSMPage";
 		
@@ -239,9 +239,9 @@ public class MemberController {
 	@RequestMapping(value = "/customer.withdraw.do", method = RequestMethod.GET)
 	public String doWithdrawCustomer(Customer c, Membership m, HttpServletRequest req, HttpServletResponse res) {
 	
-			MDAO.withdrawCustomer(c, m, req, res);
-			MDAO.logoutCustomer(req, res);
-			MDAO.csmLoginCheck(req, res);
+			mDAO.withdrawCustomer(c, m, req, res);
+			mDAO.logoutCustomer(req, res);
+			mDAO.csmLoginCheck(req, res);
 			return "member/loginPage";
 		
 	}
@@ -249,12 +249,12 @@ public class MemberController {
 	@RequestMapping(value = "/seller.withdraw.go", method = RequestMethod.GET)
 	public String goWithdrawSeller(HttpServletRequest req, HttpServletResponse res) {
 		
-		if(MDAO.slLoginCheck(req, res)) {
+		if(mDAO.slLoginCheck(req, res)) {
 			
 			return "member/withdrawSLPage";
 			
 		}else {
-			return "loginPage";
+			return "member/loginPage";
 		}
 		
 	}
@@ -262,11 +262,11 @@ public class MemberController {
 	@RequestMapping(value = "/seller.withdraw.do", method = RequestMethod.GET)
 	public String doWithdrawSeller(Seller s, HttpServletRequest req, HttpServletResponse res) {
 		
-		if(MDAO.slLoginCheck(req, res)) {
+		if(mDAO.slLoginCheck(req, res)) {
 			
-			MDAO.withdrawSeller(s, req, res);
-			MDAO.logoutCustomer(req, res);
-			MDAO.slLoginCheck(req, res);
+			mDAO.withdrawSeller(s, req, res);
+			mDAO.logoutCustomer(req, res);
+			mDAO.slLoginCheck(req, res);
 		}
 		return "member/loginPage";
 		

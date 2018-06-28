@@ -65,33 +65,77 @@ drop table membership cascade constraint purge;
 
 -- 질문과 답변 테이블
 -- 따로 직접 insert 할 필요없음(마이페이지에서 직접 입력하고 테스트 해봐야함)
+CREATE SEQUENCE question_Answer_seq
+START WITH 1
+MAXVALUE 9999
+MINVALUE 1
+CYCLE
+NOCACHE
+;
+
 create table question_Answer(
-qa_Regno varchar2(4 char) primary key,
-qa_orderNo varchar2(13 char) not null,
+qa_regNo varchar2(12 char) primary key,
+qa_orderNo varchar2(16 char) not null,
 qa_csm_id varchar2(12 char) not null,
-qa_sl_id varchar2(12 char) not null
+qa_sl_id varchar2(12 char) not null,
 qa_gdName varchar2(20 char) not null,
-qa_question varchar2(200 char) not null,
-qa_answer varchar2(200 char) not null,
-qa_regDate date not null,
+qa_questionTitle varchar2(20 char) not null,
+qa_questionContent varchar2(200 char) not null,
+qa_answer varchar2(200 char),
+qa_qRegDate varchar2(20 char) not null,
+qa_aRegDate varchar2(20 char),
 qa_sort varchar2(10 char) not null
 );
 
+drop table question_Answer cascade constraint purge;
+drop sequence question_Answer_seq;
+select * from question_Answer
+
+-- 샘플 데이터
+insert into question_Answer values(
+	to_char(SYSDATE,'yyyyMMdd') || LPAD(question_Answer_seq.nextval, 4, 0),
+		'15313135', 'junyoung00',
+		'seller00', '연필', '배송문의요', '어제 상품주문했는데 배송언제되요',
+		'오늘이나 내일 출고됩니다','2018-08-09', '2018-08-09', '배송'
+	)
+
+
+
 -- 상품평 테이블
 -- 따로 직접 insert 할 필요없음(마이페이지에서 직접 입력하고 테스트 해봐야함)
+CREATE SEQUENCE product_Review_seq
+START WITH 1
+MAXVALUE 9999
+MINVALUE 1
+CYCLE
+NOCACHE
+;
+
 create table product_Review(
-pr_RegNo varchar2(4 char) primary key,
-pr_orderNo varchar2(13 char) not null,
+pr_regNo varchar2(12 char) primary key,
+pr_orderNo varchar2(16 char) not null,
 pr_csm_id varchar2(12 char) not null,
 pr_comment varchar2(100 char) not null,
 pr_gdNo varchar2(13 char) not null,
 pr_gdName varchar2(20 char) not null,
-pr_star varchar2(1 char) not null
+pr_star varchar2(1 char) not null,
+pr_regDate varchar2(8 char) not null
 );
 
-create sequence product_Review_seq;
-
+drop table product_Review cascade constraint purge;
 drop sequence product_Review_seq;
+
+
+-- 샘플 데이터
+insert into product_Review values(
+	to_char(SYSDATE,'yyyyMMdd') || LPAD(product_Review_seq.nextval, 4, 0),
+		'15313135', 'dsfsdfs',
+		'sdfsfdsd', '131311', 'dsfsdf', '1', '2018-08-09'
+	)
+	
+select * from product_Review
+
+
 -- 날짜
 select * from '테이블명' where '날짜칼럼명' between (select add_months(sysdate, -3) from dual) and (select sysdate from dual);
 
@@ -105,7 +149,8 @@ select *
 
 -- test용도
 
-
+create or replace
+		
 insert into sale_delivery values('2018052291233613','2018052252351030','seller123',NULL,NULL,NULL,'장희원','junyoung12','장희원','구매확정','신규주문',2500,'2917445931','헤어핀1번','조합형옵션상품','컬러:레드',2,0,5700,5700,5700,NULL,'010-0000-0002','서울특별시 송파구 오금로32길 5 (송파동, 가락삼익맨숀) 000동000호','010-4717-0039','05675',NULL,'(04306) 서울특별시 용산구 청파로71길  77-77','2018-06-25',NULL,'신용카드',NULL,NULL, 'Y')
 insert into sale_delivery values('2018052291233614','2018052252351031','aaa',NULL,NULL,NULL,'장희원','xx','장희원','구매확정','신규주문',2500,'2917445931','헤어핀notjunyoung','조합형옵션상품','컬러:블랙',2,0,5700,5700,5700,NULL,'010-0000-0002','서울특별시 송파구 오금로32길 5 (송파동, 가락삼익맨숀) 000동000호','010-4717-0039','05675',NULL,'(04306) 서울특별시 용산구 청파로71길  77-77',sysdate,NULL,'신용카드',NULL,NULL, null)
 insert into sale_delivery values('2018052291233615','2018052252351032','seller123',NULL,NULL,NULL,'김덕순','junyoung12','장희원','결제완료','신규주문',2500,'2917445931','헤어핀3번','조합형옵션상품','컬러:블루',2,0,5700,5700,5700,NULL,'010-0000-0002','부산광역시 아파트','010-4717-0039','05675',NULL,'(04306) 서울특별시 용산구 청파로71길  77-77','2017-01-08',NULL,'신용카드',NULL,NULL, null)
@@ -114,5 +159,16 @@ insert into sale_delivery values('2018052291233617','2018052252351036','seller12
 insert into sale_delivery values('2018052291233618','2018052252351040','seller123',NULL,NULL,NULL,'뇌병','junyoung12','장희원','배송중','신규주문',2500,'2917445931','헤어핀6번','조합형옵션상품','컬러:퍼플',2,0,5700,5700,5700,NULL,'010-0000-0002','서울 연남동 192길 12 (연남동, 삼성아파트) 000동000호','010-3369-2239','05675',NULL,'(04306) 서울특별시 용산구 청파로71길  77-77','2017-01-30',NULL,'신용카드',NULL,NULL, null)
 insert into sale_delivery values('2018052291233619','2018052252351040','seller123',NULL,NULL,NULL,'염탁','junyoung12','장희원','구매확정','신규주문',2500,'2917445931','헤어핀7번','조합형옵션상품','컬러:그린',2,0,5700,5700,5700,NULL,'010-0000-0002','서울 연남동 192길 12 (연남동, 삼성아파트) 000동000호','010-3369-2239','05675',NULL,'(04306) 서울특별시 용산구 청파로71길  77-77','2017-01-30',NULL,'신용카드',NULL,NULL, null)
 insert into sale_delivery values('2018052291233620','2018052252351040','seller123',NULL,NULL,NULL,'강운지','junyoung12','장희원','구매확정','신규주문',2500,'2917445931','헤어핀8번','조합형옵션상품','컬러:마젠다',2,0,5700,5700,5700,NULL,'010-0000-0002','서울 연남동 192길 12 (연남동, 삼성아파트) 000동000호','010-3369-2239','05675',NULL,'(04306) 서울특별시 용산구 청파로71길  77-77','2017-01-30',NULL,'신용카드',NULL,NULL, null)
+
+
+
+insert into sale_delivery values('2018071711153333','2018052252351040','seller123',NULL,NULL,NULL,'강운지','junyoung12','장희원','구매확정','신규주문',2500,'2917445931','헤어핀8번','조합형옵션상품','컬러:마젠다',2,0,5700,5700,5700,NULL,'010-0000-0002','서울 연남동 192길 12 (연남동, 삼성아파트) 000동000호','010-3369-2239','05675',NULL,'(04306) 서울특별시 용산구 청파로71길  77-77','2017-01-30',NULL,'신용카드',NULL,NULL, null)
+insert into product_Review values(
+	to_char(SYSDATE,'yyyyMMdd') || LPAD(product_Review_seq.nextval, 4, 0),
+		'2018071711153333', 'xcvxcv',
+		'uiyu', '846448', 'vbvnv', '1', '2018-08-10'
+	)
+	
+
 
 select * from sale_delivery;
