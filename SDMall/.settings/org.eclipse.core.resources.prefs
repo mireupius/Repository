@@ -1,4 +1,5 @@
 eclipse.preferences.version=1
-encoding//src/main/resources/goodsTable.sql=UTF-8
+encoding//src/main/java/com/sol/mall/buying/BuyingController.java=UTF-8
+encoding//src/main/resources/sqls/delivery_woong.sql=UTF-8
 encoding//src/main/webapp/WEB-INF/views/goods/goods.jsp=UTF-8
 encoding//src/main/webapp/WEB-INF/views/home.jsp=UTF-8
