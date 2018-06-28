@@ -19,14 +19,102 @@
 	charset=utf-8 />
 <script type=text/javascript charset=utf-8
 	src="${pageContext.request.contextPath}/resources/daumeditor/js/editor_loader.js"></script>
+<script src="resources/js/goods/goodsRegCheck.js"></script>
+<script src="resources/js/validCheck.js"></script>
 <script type="text/javascript">
 function saveContent() {
-    Editor.save(); // 이 함수를 호출하여 글을 등록하면 된다.
+ 		var clflField = document.tx_editor_form.gd_clfl;
+ 		var clfmField = document.tx_editor_form.gd_clfm;
+ 		var gdNameField = document.tx_editor_form.gd_name;
+ 		var mdlnameField = document.tx_editor_form.gt_mdlname;
+ 		var csmpriceField = document.tx_editor_form.gd_csmprice;
+ 		var priceField = document.tx_editor_form.gd_price;
+ 		var opNameField = document.tx_editor_form.op_name0;
+ 		var opPriceField = document.tx_editor_form.op_price0;
+ 		var opStockField = document.tx_editor_form.op_stock0;
+ 		var gdFileField = document.tx_editor_form.gd_file1;
+ 		var makerField = document.tx_editor_form.gt_maker;
+ 		var brandField = document.tx_editor_form.gt_brand;
+ 		var mdfField = document.tx_editor_form.gt_mfd;
+ 		var expField = document.tx_editor_form.gt_exp;
+ 		var materialField = document.tx_editor_form.gt_material;
+ 		var weightField = document.tx_editor_form.gt_weight;
+ 		var volumeField = document.tx_editor_form.gt_volume;
+ 		var originField = document.tx_editor_form.gt_origin;
+ 		var dlvchrgField = document.tx_editor_form.gd_dlvchrg;
+ 		var outareaField = document.tx_editor_form.gd_outarea;
+ 	
+ 		if (clflField==null) {
+ 			alert("상품 대분류 를 선택해주세요.");
+ 			$("body").scrollTop(0);
+ 		}else if(clfmField==null){
+ 			alert("상품 중분류 를 선택해주세요.");
+ 		}else if(isEmpty(gdNameField)){
+ 			alert("상품명을 입력해주세요.");
+ 			gdNameField.value = "";
+ 			gdNameField.focus();
+ 		}else if(isEmpty(mdlnameField)){
+ 			alert("모델명을 입력해주세요.");
+ 			mdlnameField.value = "";
+ 			mdlnameField.focus();
+ 		}else if(isEmpty(csmpriceField)){
+ 			alert("소비자가를 입력해주세요.");
+ 			csmpriceField.value = "";
+ 			csmpriceField.focus();
+ 			
+ 		}else if(isEmpty(priceField)){
+ 			alert("판매가를 입력해주세요.");
+ 			priceField.value = "";
+ 			priceField.focus();
+ 			
+ 		}else if(isEmpty(opNameField)){
+ 			alert("옵션명를 입력해주세요.");
+ 			opNameField.value = "";
+ 			opNameField.focus();
+ 			
+ 		}else if(isEmpty(opPriceField)){
+ 			alert("옵션가를 입력해주세요.");
+ 			opPriceField.value = "";
+ 			opPriceField.focus();
+ 			
+ 		}else if(isEmpty(opStockField)){
+ 			alert("옵션재고를 입력해주세요.");
+ 			opStockField.value = "";
+ 			opStockField.focus();
+
+ 		}else if(isEmpty(gdFileField)){
+ 			alert("이미지를 등록해주세요.");
+ 			
+ 		}else if(isNotNumber(mdfField)){
+ 			alert("숫자만 입력 해주세요.");
+ 			mdfField.value = "";
+ 			mdfField.focus();
+ 		}else if(isNotNumber(expField)){
+ 			alert("숫자만 입력 해주세요.");
+ 			expField.value = "";
+ 			expField.focus();
+ 		}else if(isNotNumber(weightField)){
+ 			alert("숫자만 입력 해주세요.");
+ 			expField.value = "";
+ 			expField.focus();
+ 			
+ 		}else if(isNotNumber(volumeField)){
+ 			alert("숫자만 입력 해주세요.");
+ 			expField.value = "";
+ 			expField.focus();
+ 		}else if(isEmpty(dlvchrgField)){
+ 			alert("배송비를 입력 해주세요.");
+ 			
+ 		}else if(isEmpty(outareaField)){
+ 			alert("출고지를 입력 해주세요.");
+ 		}else{
+ 			  Editor.save(); // 이 함수를 호출하여 글을 등록하면 된다.
+ 		}
+ 		
 }
 
-//var opN = 1;// 옵션 항목 눌렀을 경우 추가되는 name의 번호
-
 $(function(){
+
 //구버전	$(".ct1").click(function() {
 	$(document).on("click",".ct1",function(){
 		var cn = $(this).attr("category_num");
@@ -217,7 +305,7 @@ h3 {
 <body>
 <section id="main-content">
 <section class="wrapper">
-<form name="tx_editor_form" id="tx_editor_form" action="registration.do" method="post" accept-charset="utf-8" encType=multipart/form-data>
+<form name="tx_editor_form" id="tx_editor_form" action="registration.do" method="post" accept-charset="utf-8" encType=multipart/form-data >
 	<div class="gdTb3" data-toggle="collapse" href="#collapse1"
 		aria-expanded="false" aria-controls="collapse1">
 		<h3>표시설정</h3>
@@ -307,7 +395,7 @@ h3 {
 						</td>
 					</tr>
 					<tr>
-						<td class="gdTd1">검색어설정</td>
+						<td class="gdTd1">검색어설정(40)</td>
 						<td class="gdTd2"><input class="inpWidth" name="gt_keyword"></td>
 					</tr>
 				</tbody>
