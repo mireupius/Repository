@@ -163,15 +163,16 @@ $(function(){
 	var opN = $("#opSize").val();
 	
 	$(document).on("click","#opPlus",function(){
-		var opInputN = $("<input>").attr("class","inpWidth").attr("name", "op_name"+opN);
+		var opInputN = $("<input>").attr("class","inpWidth").attr("name", "op_name"+opN).attr("maxlength","20");
 		var opInputNo = $("<input>").attr("type","hidden").attr("name", "op_no"+opN);
 		var opSpanN = $("<span></span>").append(opInputN, opInputNo);
 		
-		var opInputP = $("<input>").attr("class","inpWidth").attr("name", "op_price"+opN);
+		var opInputP = $("<input>").attr("class","inpWidth").attr("name", "op_price"+opN).attr("maxlength","7");
 		var opSpanP = $("<span></span>").append(opInputP);
 		
-		var opInputS = $("<input>").attr("class","inpWidth").attr("name", "op_stock"+opN);
+		var opInputS = $("<input>").attr("class","inpWidth").attr("name", "op_stock"+opN).attr("maxlength","4");
 		var opSpanS = $("<span></span>").append(opInputS);
+		
 		var opLi = $("<li></li>").attr("class","opTb").append(opSpanN, opSpanP, opSpanS);
 		$(".opUl").append(opLi);
 		
@@ -326,11 +327,11 @@ h3 {
 					</tr>
 					<tr>
 						<td class="gdTd1 tdFont">상품명 필수(20)</td>
-						<td class="gdTd2 tdFont"><input name="gd_name" value="${gdsView.gd_name}"></td>
+						<td class="gdTd2 tdFont"><input name="gd_name" value="${gdsView.gd_name}" maxlength="20"></td>
 					</tr>
 					<tr>
 						<td class="gdTd1 tdFont">모델명(20)</td>
-						<td class="gdTd2 tdFont"><input name="gt_mdlname" value="${gdsView.gt_mdlname}"></td>
+						<td class="gdTd2 tdFont"><input name="gt_mdlname" value="${gdsView.gt_mdlname}" maxlength="20"></td>
 					</tr>
 					<tr>
 						<td class="gdTd1 tdFont">상품상세설명 필수</td>
@@ -348,7 +349,7 @@ h3 {
 					</tr>
 					<tr>
 						<td class="gdTd1 tdFont">검색어설정(40)</td>
-						<td class="gdTd2 tdFont"><input name="gt_keyword" value="${gdsView.gt_keyword}"></td>
+						<td class="gdTd2 tdFont"><input name="gt_keyword" value="${gdsView.gt_keyword}" maxlength="40"></td>
 					</tr>
 				</tbody>
 			</table>
@@ -364,11 +365,11 @@ h3 {
 				<tbody>
 					<tr>
 						<td class="gdTd1 tdFont">소비자가 필수(7)</td>
-						<td class="gdTd2 tdFont"><input name="gd_csmprice" value="${gdsView.gd_csmprice}"></td>
+						<td class="gdTd2 tdFont"><input name="gd_csmprice" value="${gdsView.gd_csmprice}" maxlength="7"></td>
 					</tr>
 					<tr>
 						<td class="gdTd1 tdFont">판매가 필수(7)</td>
-						<td class="gdTd2 tdFont"><input name="gd_price" value="${gdsView.gd_price}"></td>
+						<td class="gdTd2 tdFont"><input name="gd_price" value="${gdsView.gd_price}" maxlength="7"></td>
 					</tr>
 					
 				</tbody>
@@ -392,14 +393,14 @@ h3 {
 						<c:forEach var="h" begin="0" end="${gdsOp.size()-1}" step="1">
 							<li class="opTb">
 								<span>
-									<input class="inpWidth" name="op_name${h}" value="${gdsOp[h].op_name}">
+									<input class="inpWidth" name="op_name${h}" value="${gdsOp[h].op_name}" maxlength="20">
 									<input type="hidden" name="op_no${h}" value="${gdsOp[h].op_no}">
 								</span><br>
 								<span>
-									<input class="inpWidth" name="op_price${h}" value="${gdsOp[h].op_price}">
+									<input class="inpWidth" name="op_price${h}" value="${gdsOp[h].op_price}" maxlength="7">
 								</span><br>
 								<span>
-									<input class="inpWidth" name="op_stock${h}" value="${gdsOp[h].op_stock}">
+									<input class="inpWidth" name="op_stock${h}" value="${gdsOp[h].op_stock}" maxlength="4">
 								</span>
 							</li>
 						</c:forEach>
@@ -502,35 +503,35 @@ h3 {
 				<tbody>
 					<tr>
 						<td class="gdTd1 tdFont">제조사(20)</td>
-						<td class="gdTd2 tdFont"><input name="gt_maker" value="${gdsView.gt_maker}"></td>
+						<td class="gdTd2 tdFont"><input name="gt_maker" value="${gdsView.gt_maker}" maxlength="20"></td>
 					</tr>
 					<tr>
 						<td class="gdTd1 tdFont">브랜드(20)</td>
-						<td class="gdTd2 tdFont"><input name="gt_brand" value="${gdsView.gt_brand}"></td>
+						<td class="gdTd2 tdFont"><input name="gt_brand" value="${gdsView.gt_brand}" maxlength="20"></td>
 					</tr>
 					<tr>
-						<td class="gdTd1 tdFont">제조일자(20)</td>
-						<td class="gdTd2 tdFont"><input name="gt_mfd" value="${gdsView.gt_mfd}"></td>
+						<td class="gdTd1 tdFont">제조일자(8)</td>
+						<td class="gdTd2 tdFont"><input name="gt_mfd" value="${gdsView.gt_mfd}" maxlength="8"></td>
 					</tr>
 					<tr>
-						<td class="gdTd1 tdFont">유효기간(20)</td>
-						<td class="gdTd2 tdFont"><input name="gt_exp" value="${gdsView.gt_exp}"></td>
+						<td class="gdTd1 tdFont">유효기간(8)</td>
+						<td class="gdTd2 tdFont"><input name="gt_exp" value="${gdsView.gt_exp}" maxlength="8"></td>
 					</tr>
 					<tr>
 						<td class="gdTd1 tdFont">소재(20)</td>
-						<td class="gdTd2 tdFont"><input name="gt_material" value="${gdsView.gt_material}"></td>
+						<td class="gdTd2 tdFont"><input name="gt_material" value="${gdsView.gt_material}" maxlength="20"></td>
 					</tr>
 					<tr>
 						<td class="gdTd1 tdFont">전체중량(kg)(20)</td>
-						<td class="gdTd2 tdFont"><input name="gt_weight" value="${gdsView.gt_weight}"></td>
+						<td class="gdTd2 tdFont"><input name="gt_weight" value="${gdsView.gt_weight}" maxlength="20"></td>
 					</tr>
 					<tr>
 						<td class="gdTd1 tdFont">부피(cm)(20)</td>
-						<td class="gdTd2 tdFont"><input name="gt_volume" value="${gdsView.gt_volume}"></td>
+						<td class="gdTd2 tdFont"><input name="gt_volume" value="${gdsView.gt_volume}" maxlength="20"></td>
 					</tr>
 					<tr>
 						<td class="gdTd1 tdFont">원산지(20)</td>
-						<td class="gdTd2 tdFont"><input name="gt_origin" value="${gdsView.gt_origin}"></td>
+						<td class="gdTd2 tdFont"><input name="gt_origin" value="${gdsView.gt_origin}" maxlength="20"></td>
 					</tr>
 				</tbody>
 			</table>
@@ -546,11 +547,11 @@ h3 {
 				<tbody>
 					<tr>
 						<td class="gdTd1 tdFont">배송비 필수(20)</td>
-						<td class="gdTd2 tdFont"><input name="gd_dlvchrg" value="${gdsView.gd_dlvchrg}"></td>
+						<td class="gdTd2 tdFont"><input name="gd_dlvchrg" value="${gdsView.gd_dlvchrg}" maxlength="20"></td>
 					</tr>
 					<tr>
-						<td class="gdTd1 tdFont">출고지 필수(20)</td>
-						<td class="gdTd2 tdFont"><input name="gd_outarea" value="${gdsView.gd_outarea}"></td>
+						<td class="gdTd1 tdFont">출고지 필수(12)</td>
+						<td class="gdTd2 tdFont"><input name="gd_outarea" value="${gdsView.gd_outarea}" maxlength="12"></td>
 					</tr>
 				</tbody>
 			</table>
