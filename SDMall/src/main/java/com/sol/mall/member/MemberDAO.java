@@ -108,7 +108,7 @@ public class MemberDAO {
 
 			// 로그인 성공시
 			req.getSession().setAttribute("loginCustomer", dbC);
-			req.getSession().setMaxInactiveInterval(600);
+			req.getSession().setMaxInactiveInterval(86400);
 
 			// 로그인 실패는 AJAX로 유효성 검사
 
@@ -139,7 +139,7 @@ public class MemberDAO {
 		Customer cc = (Customer) req.getSession().getAttribute("loginCustomer");
 
 		if (cc != null) {
-			req.setAttribute("loginInfo", "csmLoginOK.jsp");
+			req.setAttribute("contentPage", "goods/shop.jsp");
 			
 			return true;
 
@@ -203,7 +203,7 @@ public class MemberDAO {
 
 		try {
 			// 세션 불러와서
-			Customer nowSession = (Customer) req.getSession().getAttribute("loginCustomer");
+			//Customer nowSession = (Customer) req.getSession().getAttribute("loginCustomer");
 
 			SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
 			String csm_emailFront = req.getParameter("csm_emailFront");
@@ -234,7 +234,7 @@ public class MemberDAO {
 
 		try {
 			// 세션 불러오기
-			Seller nowSession = (Seller) req.getSession().getAttribute("loginSeller");
+			//Seller nowSession = (Seller) req.getSession().getAttribute("loginSeller");
 
 			String sl_emailFront = req.getParameter("sl_emailFront");
 			String sl_autoCompleteEmail = req.getParameter("sl_autoCompleteEmail");

@@ -35,6 +35,7 @@ public class GoodsController {
 		return "sale/saleIndex";
 	}
 
+
 	// 전체 상품 조회
 	@RequestMapping(value = "/shop", method = RequestMethod.GET)
 	public String getAllGoods(HttpServletRequest request, HttpServletResponse response) {
@@ -50,7 +51,6 @@ public class GoodsController {
 	public String getGoodsByCate(Category category, HttpServletRequest request, HttpServletResponse response) {
 		cDAO.getAllCategory(request, response);
 		
-		System.out.println("컨트롤러");
 		gdsDAO.getGoodsByCate(category, request, response);
 		request.setAttribute("contentPage", "goods/shop.jsp");
 		return "main";

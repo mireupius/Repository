@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.sol.mall.goods.CategoryDAO;
+import com.sol.mall.goods.GoodsDAO;
 import com.sol.mall.myPage.MyPageDAO;
 
 @Controller
@@ -23,6 +24,10 @@ public class MemberController {
 
 	@Autowired
 	private CategoryDAO cDAO;
+
+	@Autowired
+	private GoodsDAO gdsDAO;
+	
 
 	@RequestMapping(value = "/member.loginPage", method = RequestMethod.GET)
 	public String goLoginPage(HttpServletRequest req, HttpServletResponse res) {
@@ -91,7 +96,7 @@ public class MemberController {
 		if(MDAO.csmLoginCheck(req, res)) {
 			
 			cDAO.getAllCategory(req, res);// 메인 카테고리 호출 메소드
-			req.setAttribute("contentPage", "home.jsp");
+			gdsDAO.getAllGoods(req); // 상품 전체 목록 가져오기
 			return "main";
 			
 		}else {
@@ -108,7 +113,7 @@ public class MemberController {
 			
 			MPDAO.getMembership(m, req, res);
 			
-			return "customer/customerMyPage";
+			return "customer/customerMyPage2";
 			
 			
 		}else {

@@ -48,14 +48,21 @@ qa_sort varchar2(10 char) not null,
 );
 
 create table product_Review(
-pr_no number(4) primary key,
+pr_RegNo number(4) primary key,
 pr_orderNo varchar2(13 char) not null,
 pr_csm_id varchar2(12 char) not null,
 pr_comment varchar2(100 char) not null,
 pr_pCode number(13) not null,
 pr_pName varchar2(50 char) not null,
-pr_star number(1) not null,
+pr_star number(1) not null
 );
+
+
+select * from sale_delivery, customer_reg where 
+
+select * from PRODUCT_REVIEW;
+
+create sequence product_Review_seq;
 
 drop table customer_reg cascade constraint purge;
 drop table membership cascade constraint purge;
@@ -84,15 +91,16 @@ sb_searchMonth number(2) not null
 
 select * from shoppingBasket;
 
+
 select SYSDATE AS BASIC, TO_CHAR(SYSDATE, 'YYYY.MM.DD')
 from dual
-where BASIC between (SELECT BASIC + 1 FROM DUAL) AND (SELECT SYSDATE+ 6 FROM DUAL)
-;
+where BASIC between (SELECT BASIC + 1 FROM DUAL) AND (SELECT SYSDATE+ 6 FROM DUAL);
 
+-- 날짜 
 SELECT SYSDATE + 6 FROM DUAL
 SELECT TO_DATE(TO_CHAR(SYSDATE, 'YYYYMMDD')) - TO_DATE(TO_CHAR(SELECT SYSDATE + 6 FROM DUAL, 'YYYYMMDD')) FROM DUAL;
 
-SELECT * FROM shoppingBasket WHERE sb_orderDate BETWEEN (SELECT ADD_MONTHS(SYSDATE, -3) FROM dual) and (SELECT SYSDATE FROM dual);
+select * from '테이블명' where '날짜칼럼명' between (select add_months(sysdate, -3) from dual) and (select sysdate from dual);
 
 SELECT *
 FROM shoppingBasket

@@ -3,7 +3,7 @@
 	
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
 <title>Shopping Smart - SDmall</title>
 <meta charset="utf-8">
@@ -127,18 +127,19 @@
 									<c:forEach var="cate1" items="${allCategory}">
 										<c:if test="${cate1.ct_clf==1 }">
 										<li class="hassubs">
-											<a href="shop.Category?ct_no=${cate1.ct_no }">${cate1.ct_clfname }<i class="fas fa-chevron-right"></i></a>
+											<a href="shop?cate1=${cate1.ct_no }">${cate1.ct_clfname }<i class="fas fa-chevron-right"></i></a>
 											<ul>
 											<c:forEach var="cate2" items="${allCategory}">
 												<c:if test="${cate2.ct_parentno==cate1.ct_no }">
 													<li class="hassubs">
-														<a href="shop.Category?ct_no=${cate2.ct_no }">${cate2.ct_clfname }<i class="fas fa-chevron-right"></i></a>
+														<a href="shop?cate3=${cate3.ct_no }">${cate2.ct_clfname }<i class="fas fa-chevron-right"></i></a>
 														<ul>
 														<c:forEach var="cate3" items="${allCategory}">
 															<c:if test="${cate3.ct_parentno==cate2.ct_no }">
-															<li><a href="shop.Category?ct_no=${cate3.ct_no }">${cate3.ct_clfname }<i class="fas fa-chevron-right"></i></a></li>
+															<li><a href="shop?cate3=${cate3.ct_no }">${cate3.ct_clfname }<i class="fas fa-chevron-right"></i></a></li>
 															</c:if>
 														</c:forEach>
+															
 														</ul>
 													</li>
 												</c:if>

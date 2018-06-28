@@ -28,5 +28,11 @@ public class ShoppingBagController {
 		req.setAttribute("contentPage", "home.jsp");
 		return "main";
 	}
+	
+	@RequestMapping(value = "/customer.cart.go", method = RequestMethod.GET)
+	public String cartGo(ShoppingBag sb, HttpServletRequest req, HttpServletResponse res) {
+		sbDAO.showCartItems(sb, req, res);
+		return "shoppingBag/cart";
+	}
 
 }
