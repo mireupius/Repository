@@ -79,6 +79,11 @@
 			</div>
 		</div>
 	</div>
+	
+	<!-- 	상품 상세정보 영역 -->
+	<div class="gt_detail_area">
+	${goodsDtl2.gt_detail }
+	</div>
 
 	<!-- Recently Viewed -->
 
