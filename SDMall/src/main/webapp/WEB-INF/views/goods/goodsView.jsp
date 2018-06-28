@@ -35,8 +35,9 @@ function deleteGoods(){
 		var imgm=$("input[name=gd_imgm]").val();
 		var imgs=$("input[name=gd_imgs]").val();
 		var imgss=$("input[name=gd_imgss]").val();
+		var sellerid=$("input[name=gd_sellerid]").val();
 	    
-	    param= {'gd_no':gdno, 'gd_imgl':imgl, 'gd_imgm':imgm, 'gd_imgs':imgs, 'gd_imgss':imgss};
+	    param= {'gd_no':gdno, 'gd_imgl':imgl, 'gd_imgm':imgm, 'gd_imgs':imgs, 'gd_imgss':imgss, 'gd_sellerid':sellerid};
 	    
 		for(var key in param) {
 	        var hiddenField = document.createElement("input");
@@ -346,7 +347,7 @@ h3 {
 						</td>
 					</tr>
 					<tr>
-						<td class="gdTd1 tdFont">검색어설정</td>
+						<td class="gdTd1 tdFont">검색어설정(40)</td>
 						<td class="gdTd2 tdFont"><input name="gt_keyword" value="${gdsView.gt_keyword}"></td>
 					</tr>
 				</tbody>

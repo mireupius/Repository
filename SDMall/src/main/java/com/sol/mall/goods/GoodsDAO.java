@@ -90,7 +90,6 @@ public class GoodsDAO {
 
 	// 상품목록 전체조회(상품리스트화면)
 	public void getAllGoodsView(Goods gds, HttpServletRequest request) {
-		System.out.println("셀러"+gds.getGd_sellerid());
 		List<GoodsView> gdsViewList = ss.getMapper(GoodsMapper.class).getAllGoodsView(gds);
 
 		request.setAttribute("gdsViewList", gdsViewList);
@@ -163,17 +162,20 @@ public class GoodsDAO {
 		// ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓ 옵션 여러개 입력할 때 ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓
 		Option op = new Option();
 		for (int i = 0; i < opl.getOpl_name().size(); i++) {
-
-			op.setOp_name(opl.getOpl_name().get(i));
-			op.setOp_price(new BigDecimal(opl.getOpl_price().get(i)));
-			op.setOp_stock(new BigDecimal(opl.getOpl_stock().get(i)));
-
-			// 입력(상품상세 파라메터 작성goods, goodsDtl)
-			HashMap<String, Object> map2 = new HashMap<String, Object>();
-			map2.put("goods", gd);
-			map2.put("option", op);
-			// 입력(옵션테이블)
-			insertOpTwo(map2, request, response);
+			
+			if(!opl.getOpl_name().get(i).equals("") && !opl.getOpl_price().get(i).equals("") && !opl.getOpl_stock().get(i).equals("")) {
+				
+				op.setOp_name(opl.getOpl_name().get(i));
+				op.setOp_price(new BigDecimal(opl.getOpl_price().get(i)));
+				op.setOp_stock(new BigDecimal(opl.getOpl_stock().get(i)));
+			
+				// 입력(상품상세 파라메터 작성goods, goodsDtl)
+				HashMap<String, Object> map2 = new HashMap<String, Object>();
+				map2.put("goods", gd);
+				map2.put("option", op);
+				// 입력(옵션테이블)
+				insertOpTwo(map2, request, response);
+			}
 		}
 		// ↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑ 옵션 여러개 입력할 때 ↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑
 
@@ -200,28 +202,29 @@ public class GoodsDAO {
 		// ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓ 옵션 여러개 입력할 때 ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓
 		Option op = new Option();
 		for (int i = 0; i < opl.getOpl_name().size(); i++) {
-
-			op.setOp_no(opl.getOpl_no().get(i));
-			op.setOp_name(opl.getOpl_name().get(i));
-			op.setOp_price(new BigDecimal(opl.getOpl_price().get(i)));
-			op.setOp_stock(new BigDecimal(opl.getOpl_stock().get(i)));
-			// 입력(상품상세 파라메터 작성goods, goodsDtl)
-			HashMap<String, Object> map2 = new HashMap<String, Object>();
-
-			map2.put("goods", gd);
-			map2.put("option", op);
-
-			System.out.println(gd.getGd_clfl());
-			System.out.println(gd.getGd_clfm());
-			System.out.println(gd.getGd_clfs());
-
-			// 수정화면에서 옵션을 추가할시 수정이 아닌 입력이 필요
-			if (op.getOp_no().equals("")) {
-				System.out.println("수정화면 옵션 입력");
-				insertOpTwoForUp(map2, request, response);
-			} else {
-				// 수정(옵션테이블)
-				updateOpTwo(map2, request, response);
+			if(!opl.getOpl_name().get(i).equals("") && !opl.getOpl_price().get(i).equals("") && !opl.getOpl_stock().get(i).equals("")) {
+				op.setOp_no(opl.getOpl_no().get(i));
+				op.setOp_name(opl.getOpl_name().get(i));
+				op.setOp_price(new BigDecimal(opl.getOpl_price().get(i)));
+				op.setOp_stock(new BigDecimal(opl.getOpl_stock().get(i)));
+				// 입력(상품상세 파라메터 작성goods, goodsDtl)
+				HashMap<String, Object> map2 = new HashMap<String, Object>();
+	
+				map2.put("goods", gd);
+				map2.put("option", op);
+	
+				System.out.println(gd.getGd_clfl());
+				System.out.println(gd.getGd_clfm());
+				System.out.println(gd.getGd_clfs());
+	
+				// 수정화면에서 옵션을 추가할시 수정이 아닌 입력이 필요
+				if (op.getOp_no().equals("")) {
+					System.out.println("수정화면 옵션 입력");
+					insertOpTwoForUp(map2, request, response);
+				} else {
+					// 수정(옵션테이블)
+					updateOpTwo(map2, request, response);
+				}
 			}
 		}
 		// ↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑ 옵션 여러개 입력할 때 ↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑

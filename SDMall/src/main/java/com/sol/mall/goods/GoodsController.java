@@ -310,11 +310,9 @@ public class GoodsController {
 		
 		if(mDAO.slLoginCheck(request, response)) {
 			
-			
 			Seller dbS = (Seller) request.getSession().getAttribute("loginSeller");
 			gds.setGd_sellerid(dbS.getSl_id());
 
-			System.out.println("콘트롤러 셀러=="+gds.getGd_sellerid());
 			gdsDAO.getAllGoodsView(gds, request);
 	
 			request.setAttribute("contentPage", "../goods/goodsList.jsp");
@@ -360,6 +358,7 @@ public class GoodsController {
 		if(mDAO.slLoginCheck(request, response)) {
 			// 삭제 상품코드가져와서 삭제--> 삭제 할 때는 상품에 딸려있는 상품상세 옵션도 같이 전부 삭제 해야함 이미지도
 			try {
+				System.out.println("셀러 아이디1"+gds.getGd_sellerid());
 				gdsDAO.deleteGdsInfo(gds, request);
 			} catch (Exception e) {
 				e.printStackTrace();
