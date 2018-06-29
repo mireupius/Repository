@@ -42,6 +42,7 @@
 						<div class="rating_r rating_r_4 product_rating"><i></i><i></i><i></i><i></i><i></i></div>
 						<div class="product_text"><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas fermentum. laoreet turpis, nec sollicitudin dolor cursus at. Maecenas aliquet, dolor a faucibus efficitur, nisi tellus cursus urna, eget dictum lacus turpis.</p></div>
 						<div class="order_info d-flex flex-row">
+<!-- 							장바구니 form -->
 							<form action="cart.add" method="get">
 								<div class="clearfix" style="z-index: 1000;">
 									<!-- Product Quantity -->
@@ -60,10 +61,7 @@
 												</c:forEach>
 											</select>
 										</label>
-
-
 								</div>
-
 								<div class="product_price">${goodsDtl1.gd_price }</div>
 								<div class="button_container">
 									<input type="submit" class="button cart_button" value="Add to Cart">
@@ -72,6 +70,22 @@
 								</div>
 								<input value="${goodsDtl1.gd_no }" name="sb_gdno"> 
 							</form>
+							
+<!-- <!-- 							즉시구매 form --> -->
+<!-- 							<form> -->
+<%-- 							<input name="sd_delivery_cost" value="${goodsDtl1.gd_dlvchrg }"> --%>
+<%-- 							<input name="sd_product_name" value="${goodsDtl1.gd_name }"> --%>
+<!-- 							<input name="sd_option_info" value=""> -->
+<!-- 							<input name="sd_amount" value=""> -->
+<!-- 							<input name="sd_option_price" value=""> -->
+<%-- 							<input name="sd_product_price" value="${goodsDtl1.gd_price }"> --%>
+<%-- 							<input name="sd_product_sellprice" value="${goodsDtl1.gd_csmprice }"> --%>
+<%-- 							<input name="sd_total_price" value="${goodsDtl1.gd_dlvchrg+ }"> --%>
+<%-- 							<input name="sd_out_area" value="${goodsDtl1.gd_outarea }"> --%>
+<%-- 							<input name="sd_product_no" value="${goodsDtl1.gd_no }"> --%>
+<%-- 							<input name="sd_seller_id" value="${goodsDtl1.gd_sellerid }"> --%>
+<!-- 							</form> -->
+							
 						</div>
 					</div>
 				</div>
