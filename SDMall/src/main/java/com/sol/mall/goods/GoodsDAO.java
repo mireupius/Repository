@@ -2,6 +2,7 @@ package com.sol.mall.goods;
 
 import java.io.File;
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -29,14 +30,25 @@ public class GoodsDAO {
 		return new Categories(ss.getMapper(GoodsMapper.class).getCategory(cg));
 	}
 
+	// 상품코드로 상품 조회
 	public void getGoodsByNo(Goods goods, HttpServletRequest request, HttpServletResponse response) {
 		request.setAttribute("goodsDtl1", ss.getMapper(GoodsMapper.class).getGoodsByNo(goods));
 		request.setAttribute("goodsDtl2", ss.getMapper(GoodsMapper.class).getGoodsDtlByNo(goods));
 		request.setAttribute("option", ss.getMapper(OptionMapper.class).getOptionByGdno(goods));
-		System.out.println(goods.getGd_no());
 
 		// ss.getMapper(GoodsMapper.class).getGoodsByNo(goods).getGd_clfl();
 
+	}
+
+	// 카테고리로 상품 조회
+	public void getGoodsByCate(Category category, HttpServletRequest request, HttpServletResponse response) {
+		try {
+			List<Goods> goods = ss.getMapper(GoodsMapper.class).getGoodsByCate(category);
+
+			request.setAttribute("goods", goods);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 	// 상품 조회
@@ -77,16 +89,83 @@ public class GoodsDAO {
 	}
 
 	// 상품목록 전체조회(상품리스트화면)
-	public void getAllGoodsView(HttpServletRequest request) {
-		List<GoodsView> gdsViewList = ss.getMapper(GoodsMapper.class).getAllGoodsView();
+	public void getAllGoodsView(Goods gds, HttpServletRequest request) {
+		List<GoodsView> gdsViewList = ss.getMapper(GoodsMapper.class).getAllGoodsView(gds);
 
 		request.setAttribute("gdsViewList", gdsViewList);
 	}
 
 	// 상품목록 검색(상품리스트화면)
 	public GoodsViewList getGoodsViewByKey(Keywords k, HttpServletRequest request) {
+		System.out.println(k.getKey_name());
+		System.out.println(k.getKey_value());
+		System.out.println(k.getSort_name());
+		System.out.println(k.getGd_sellerid());
+		System.out.println(k.getDesc_name());
+		
 		return new GoodsViewList(ss.getMapper(GoodsMapper.class).getGoodsViewByKey(k));
 	}
+	
+	
+	//\\\\\\\\\\\\\\\\\\\\\   페이징 테스트   \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+	// 상품목록 검색(상품리스트화면)
+	public Paging getGoodsViewByKey2(Keywords k, int curPage, HttpServletRequest request) {
+		List<GoodsView> gdv = ss.getMapper(GoodsMapper.class).getGoodsViewByKey(k);
+		
+		double cnt = 4;// 페이지당 건수
+		int listSize = gdv.size();
+		
+		System.out.println("listSize=="+listSize);
+		int allPage = (int) Math.ceil(listSize / cnt);// 총페이지
+		request.setAttribute("pageCount", allPage);
+
+		System.out.println("allPage=="+allPage);
+		
+		int start = listSize - (int) cnt * (curPage - 1);// 페이지 첫번째 게시물
+		int end = (curPage == allPage) ? 1 : start - ((int) cnt - 1);// 페이지 마지막 게시물
+
+		List<GoodsView> gdsPage = new ArrayList<>();// 해당 페이지 게시물 리스트
+
+		for (int i = start; i >= end; i--) {
+			
+			System.out.println("gdv.get"+i+"=="+ gdv.get(i-1));
+			gdsPage.add(gdv.get(i-1));
+		}
+		
+		//request.setAttribute("gdsViewList", gdsPage);
+		
+		return new Paging(curPage,allPage, gdsPage);
+	}
+	
+	// 상품목록 전체조회(상품리스트화면)
+		public void getAllGoodsView2(Goods gds, HttpServletRequest request) {
+			int curPage =1;
+			List<GoodsView> gdv = ss.getMapper(GoodsMapper.class).getAllGoodsView(gds);
+
+			double cnt = 4;// 페이지당 건수
+			int listSize = gdv.size();
+			
+			System.out.println("listSize=="+listSize);
+			int allPage = (int) Math.ceil(listSize / cnt);// 총페이지
+			request.setAttribute("pageCount", allPage);
+
+			System.out.println("allPage=="+allPage);
+			
+			int start = listSize - (int) cnt * (curPage - 1);// 페이지 첫번째 게시물
+			int end = (curPage == allPage) ? 1 : start - ((int) cnt - 1);// 페이지 마지막 게시물
+
+			List<GoodsView> gdsPage = new ArrayList<>();// 해당 페이지 게시물 리스트
+
+			for (int i = start; i >= end; i--) {
+				
+				System.out.println("gdv.get"+i+"=="+ gdv.get(i-1));
+				gdsPage.add(gdv.get(i-1));
+			}
+			
+			request.setAttribute("gdsViewList", gdsPage);
+		}
+	
+	//\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 
 	// 입력 ==================================================
 	public void insertGd(Goods gd, HttpServletRequest request, HttpServletResponse response) {
@@ -150,17 +229,20 @@ public class GoodsDAO {
 		// ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓ 옵션 여러개 입력할 때 ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓
 		Option op = new Option();
 		for (int i = 0; i < opl.getOpl_name().size(); i++) {
-
-			op.setOp_name(opl.getOpl_name().get(i));
-			op.setOp_price(new BigDecimal(opl.getOpl_price().get(i)));
-			op.setOp_stock(new BigDecimal(opl.getOpl_stock().get(i)));
-
-			// 입력(상품상세 파라메터 작성goods, goodsDtl)
-			HashMap<String, Object> map2 = new HashMap<String, Object>();
-			map2.put("goods", gd);
-			map2.put("option", op);
-			// 입력(옵션테이블)
-			insertOpTwo(map2, request, response);
+			
+			if(!opl.getOpl_name().get(i).equals("") && !opl.getOpl_price().get(i).equals("") && !opl.getOpl_stock().get(i).equals("")) {
+				
+				op.setOp_name(opl.getOpl_name().get(i));
+				op.setOp_price(new BigDecimal(opl.getOpl_price().get(i)));
+				op.setOp_stock(new BigDecimal(opl.getOpl_stock().get(i)));
+			
+				// 입력(상품상세 파라메터 작성goods, goodsDtl)
+				HashMap<String, Object> map2 = new HashMap<String, Object>();
+				map2.put("goods", gd);
+				map2.put("option", op);
+				// 입력(옵션테이블)
+				insertOpTwo(map2, request, response);
+			}
 		}
 		// ↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑ 옵션 여러개 입력할 때 ↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑
 
@@ -187,28 +269,29 @@ public class GoodsDAO {
 		// ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓ 옵션 여러개 입력할 때 ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓
 		Option op = new Option();
 		for (int i = 0; i < opl.getOpl_name().size(); i++) {
-
-			op.setOp_no(opl.getOpl_no().get(i));
-			op.setOp_name(opl.getOpl_name().get(i));
-			op.setOp_price(new BigDecimal(opl.getOpl_price().get(i)));
-			op.setOp_stock(new BigDecimal(opl.getOpl_stock().get(i)));
-			// 입력(상품상세 파라메터 작성goods, goodsDtl)
-			HashMap<String, Object> map2 = new HashMap<String, Object>();
-
-			map2.put("goods", gd);
-			map2.put("option", op);
-
-			System.out.println(gd.getGd_clfl());
-			System.out.println(gd.getGd_clfm());
-			System.out.println(gd.getGd_clfs());
-
-			// 수정화면에서 옵션을 추가할시 수정이 아닌 입력이 필요
-			if (op.getOp_no().equals("")) {
-				System.out.println("수정화면 옵션 입력");
-				insertOpTwoForUp(map2, request, response);
-			} else {
-				// 수정(옵션테이블)
-				updateOpTwo(map2, request, response);
+			if(!opl.getOpl_name().get(i).equals("") && !opl.getOpl_price().get(i).equals("") && !opl.getOpl_stock().get(i).equals("")) {
+				op.setOp_no(opl.getOpl_no().get(i));
+				op.setOp_name(opl.getOpl_name().get(i));
+				op.setOp_price(new BigDecimal(opl.getOpl_price().get(i)));
+				op.setOp_stock(new BigDecimal(opl.getOpl_stock().get(i)));
+				// 입력(상품상세 파라메터 작성goods, goodsDtl)
+				HashMap<String, Object> map2 = new HashMap<String, Object>();
+	
+				map2.put("goods", gd);
+				map2.put("option", op);
+	
+				System.out.println(gd.getGd_clfl());
+				System.out.println(gd.getGd_clfm());
+				System.out.println(gd.getGd_clfs());
+	
+				// 수정화면에서 옵션을 추가할시 수정이 아닌 입력이 필요
+				if (op.getOp_no().equals("")) {
+					System.out.println("수정화면 옵션 입력");
+					insertOpTwoForUp(map2, request, response);
+				} else {
+					// 수정(옵션테이블)
+					updateOpTwo(map2, request, response);
+				}
 			}
 		}
 		// ↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑ 옵션 여러개 입력할 때 ↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑

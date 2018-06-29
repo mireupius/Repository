@@ -1,4 +1,4 @@
-package com.sol.mall.category;
+package com.sol.mall.goods;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;

@@ -25,14 +25,17 @@
 		select * from goods_tb
 	</select>
 	
-	<select id="getAllGoodsView" resultType="com.sol.mall.goods.GoodsView">
-		select gd_no, gd_name, gd_price, gd_csmprice, gd_imgl, gt_maker, gt_brand, gt_mdlname, gt_origin from goods_tb a, goodsdtl_tb b
-		where a.gd_no = b.gt_gdno 
+	<select id="getAllGoodsView" parameterType="com.sol.mall.goods.Goods" resultType="com.sol.mall.goods.GoodsView">
+		select gd_no, gd_name, gd_price, gd_csmprice, gd_imgl, gt_maker, gt_brand, gt_mdlname, gt_origin 
+		from goods_tb a, goodsdtl_tb b
+		where a.gd_no = b.gt_gdno
+		and gd_sellerid = #{gd_sellerid}
 	</select>
 	
 	<select id="getGoodsViewByKey" parameterType="com.sol.mall.goods.Keywords" resultType="com.sol.mall.goods.GoodsView">
 		select gd_no, gd_name, gd_price, gd_csmprice, gd_imgl, gt_maker, gt_brand, gt_mdlname, gt_origin from goods_tb a, goodsdtl_tb b
 		where a.gd_no = b.gt_gdno 
+		and gd_sellerid = #{gd_sellerid}
 		and ${key_name} like '%' || #{key_value} || '%'
 		order by ${sort_name}  ${desc_name}
 	</select>
@@ -45,6 +48,11 @@
 	<select id="getGoodsByNo" parameterType="com.sol.mall.goods.Goods" resultType="com.sol.mall.goods.Goods">
 		select * from goods_tb
 		where gd_no = #{gd_no}
+	</select>
+	
+	<select id="getGoodsByCate" parameterType="com.sol.mall.goods.Category" resultType="com.sol.mall.goods.Goods">
+		select * from goods_tb
+		where gd_clfl = #{ct_no} or gd_clfm = #{ct_no} or gd_clfs = #{ct_no}
 	</select>
 	
 	<select id="getGoodsDtlByNo" parameterType="com.sol.mall.goods.Goods" resultType="com.sol.mall.goods.GoodsDtl">

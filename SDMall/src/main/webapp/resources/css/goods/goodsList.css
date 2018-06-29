@@ -1,13 +1,22 @@
+
 @charset "UTF-8";
 
 .gdLstTitle {
-width: 145px;
-height: 25px;
-line-height: 25px;
-font-size: 11pt;
+	width: 145px;
+	height: 25px;
+	line-height: 25px;
+	font-size: 11pt;
 }
 
 .gdLstSel {
 	height: 25px;
 	border: 0;
 }
+
+.search1Fix{
+	position: fixed;
+}
+.gdLstTb3{
+	margin-top: 50px;
+}
+
