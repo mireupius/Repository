@@ -57,7 +57,7 @@ function pageGo(p){
 				var mdlnameTd = $("<td></td>").attr("class","gdLstTd1").text(s.gt_mdlname);
 				var originTd = $("<td></td>").attr("class","gdLstTd1").text(s.gt_origin);
 				
-				var noTd = $("<td></td>").attr("class","gdLstTd1").text(i+1);
+				var noTd = $("<td></td>").attr("class","gdLstTd1").text(4*(t1-1)+1+i);
 				var codeA = $("<a></a>").attr("href","goods.view?gd_no="+s.gd_no).text(s.gd_no);
 				var codeTd = $("<td></td>").attr("class","gdLstTd1").append(codeA);
 				var nameImg=$("<img>").attr("src","${pageContext.request.contextPath}/upload/"+s.gd_imgl);
