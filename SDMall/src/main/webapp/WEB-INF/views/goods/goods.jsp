@@ -20,17 +20,9 @@
 		<div class="container">
 			<div class="row">
 
-				<!-- Images -->
-				<div class="col-lg-2 order-lg-1 order-2">
-					<ul class="image_list">
-						<li data-image="images/single_4.jpg"><img src="images/single_4.jpg" alt=""></li>
-						<li data-image="images/single_2.jpg"><img src="images/single_2.jpg" alt=""></li>
-						<li data-image="images/single_3.jpg"><img src="images/single_3.jpg" alt=""></li>
-					</ul>
-				</div>
 
 				<!-- Selected Image -->
-				<div class="col-lg-5 order-lg-2 order-1">
+				<div class="col-lg-7 order-lg-3 order-1">
 					<div class="image_selected"><img src="${pageContext.request.contextPath}/upload/${goodsDtl1.gd_imgl}"></div>
 				</div>
 
@@ -70,7 +62,7 @@
 							</form>
 							
 <!-- 							즉시구매 form -->
-							<form>
+							<form action="">
 							<input name="sd_delivery_cost" value="${goodsDtl1.gd_dlvchrg }">
 							<input name="sd_product_name" value="${goodsDtl1.gd_name }">
 							<input id="send_option_name" name="sd_option_info">
@@ -94,8 +86,10 @@
 	</div>
 	
 	<!-- 	상품 상세정보 영역 -->
-	<div class="gt_detail_area">
-	${goodsDtl2.gt_detail }
+	<div class="container">
+		<div class="row">
+		${goodsDtl2.gt_detail }
+		</div>	
 	</div>
 
 	<!-- Recently Viewed -->

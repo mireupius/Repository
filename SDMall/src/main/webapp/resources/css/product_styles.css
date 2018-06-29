@@ -12,12 +12,14 @@
 8. Newsletter
 
 ******************************/
+/* 상품상세설명 영역 */
 
-/* 상품상세설명 영역 테이블 가운데 정렬 */
-.gt_detail_area table{
-	margin-left: auto;
-	margin-right: auto;
+/* 상품 이미지 */
+.container p img{
+	max-width: 100%;
 }
+
+
 
 /*********************************
 4. Home
