@@ -50,9 +50,16 @@ function goReturnOrder(sd_pno) {
 	
 }
 
+function goQuestionSeller(sd_pno) {
+	alert("sdf");
+	location.href = "question.writing.go?sd_delivery_pno=" + sd_pno;
+	
+}
+
 function goWritingReview(sd_pno) {
 	
 	location.href = "productReview.writing.go?sd_delivery_pno=" + sd_pno;
 
 }
+
 

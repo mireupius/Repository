@@ -1,5 +1,7 @@
 package com.sol.mall.myPage;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -166,7 +168,7 @@ public class MyPageDAO {
 		
 		try {
 			
-			Delivery product = ss.getMapper(MyPageMapper.class).orderToReviewBySd_pno(d);
+			Delivery product = ss.getMapper(MyPageMapper.class).getOrderInfoBySd_pno(d);
 			
 			req.setAttribute("review", product);
 			System.out.println("리뷰 대상 정보 불러오기 성공");
@@ -179,27 +181,108 @@ public class MyPageDAO {
 		
 	}
 
-	
-	public void writeProductReview(Membership m, HttpServletRequest req, HttpServletResponse res) {
-		
-		Customer cc = (Customer) req.getSession().getAttribute("loginCustomer");
-		m.setMs_csm_id(cc.getCsm_id());
-		
-		// ss.getMapper(MyPageMapper.class).membershipStatus(c);
+	public void writeProductReview(ProductReview pr, HttpServletRequest req, HttpServletResponse res) {
 		
 		try {
 			
-			Membership mms = ss.getMapper(MyPageMapper.class).membershipStatus(m);
+			Date today = new Date();
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+			pr.setPr_regDate(sdf.parse(sdf.format(today)));
 			
-			req.setAttribute("memberStatus", mms);
-			System.out.println("멤버쉽 가져오기 성공");
+			if(ss.getMapper(MyPageMapper.class).writeProductReview(pr) == 1 &&
+			   ss.getMapper(MyPageMapper.class).changeReviewState(pr) == 1) {
+				
+				System.out.println("상품평 등록 성공");
+			
+			}
 			
 		} catch (Exception e) {
+			System.out.println("상품평 등록 실패");
 			e.printStackTrace();
-			System.out.println("멤버쉽 가져오기 실패");
+			
 		}
 		
 	}
+	
+	public void getWritedReview(ProductReview pr, HttpServletRequest req, HttpServletResponse res) {
+		
+		try {
+			
+			Customer c = (Customer) req.getSession().getAttribute("loginCustomer");
+			pr.setPr_csm_id(c.getCsm_id());
+			
+			List<ProductReview> reviews = ss.getMapper(MyPageMapper.class).getWritedReview(pr);
+			
+			System.out.println("상품평 조회 성공");
+			req.setAttribute("reviewList", reviews);
+				
+			
+		} catch (Exception e) {
+			System.out.println("상품평 조회 실패");
+			
+			
+		}
+		
+	}
+	
+	public void goOrderToQuestion(Delivery d, HttpServletRequest req, HttpServletResponse res) {
+		
+		try {
+			
+			Delivery product = ss.getMapper(MyPageMapper.class).getOrderInfoBySd_pno(d);
+			
+			req.setAttribute("question", product);
+			System.out.println("질문 대상 정보 불러오기 성공");
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println("질문 대상 정보 불러오기 실패");
+		}
+		
+	}
+	
+	public void writeQuestion(QuestionAnswer qa, HttpServletRequest req, HttpServletResponse res) {
+		
+		try {
+			
+			Date today = new Date();
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+			qa.setQa_qRegDate(sdf.format(today));
+			
+			if(ss.getMapper(MyPageMapper.class).writeQuestionToSeller(qa) == 1){
+				
+				System.out.println("질문 요청 성공");
+			
+			}
+			
+		} catch (Exception e) {
+			System.out.println("질문 요청 실패");
+			e.printStackTrace();
+			
+		}
+		
+	}
+	
+	public void getMyQuestionAnswer(QuestionAnswer qa, HttpServletRequest req, HttpServletResponse res) {
+		
+		try {
+			
+			Customer c = (Customer) req.getSession().getAttribute("loginCustomer");
+			qa.setQa_csm_id(c.getCsm_id());
+			
+			List<QuestionAnswer> myQuestion = ss.getMapper(MyPageMapper.class).searchQAByCustomerId(qa);
+			System.out.println("내 질문 보여주기 성공");
+			
+			req.setAttribute("myQuestionList", myQuestion);
+			
+		} catch (Exception e) {
+			System.out.println("내 질문 보여주기 실패");
+			e.printStackTrace();
+		}
+		
+		
+	}
+
 	
 	
 	
