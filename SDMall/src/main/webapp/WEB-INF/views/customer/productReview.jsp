@@ -12,13 +12,15 @@
 <body>
 
 <form action="customer.productReview.write">
-<input value="${review.sd_delivery_pno }" name="pr_orderNo"><br>
+<h3>히든처리</h3>
 <input value="${review.sd_product_no }" name="pr_gdNo"><br>
-<input value="${review.sd_product_name }" name="pr_gdName"><br>
 <input value="${review.sd_customer_id }" name="pr_csm_id"><br>
+<h3>히든처리</h3>
+<input value="${review.sd_delivery_pno }" name="pr_orderNo"><br>
+<input value="${review.sd_product_name }" name="pr_gdName"><br>
 <input name="pr_comment"><br>
 <span class="star-input">
-	<span class="input focus">
+	<span class="input">
     	<input type="radio" name="pr_star" value="1" id="p1">
     	<label for="p1">1</label>
     	<input type="radio" name="pr_star" value="2" id="p2">
@@ -29,7 +31,8 @@
     	<label for="p4">4</label>
     	<input type="radio" name="pr_star" value="5" id="p5">
     	<label for="p5">5</label>
-  	</span>					
+  	</span>
+  	<output for="pr-input"><b>0</b>점</output><br>					
 </span>
 <input type="submit" value="작성">
 

@@ -10,9 +10,11 @@
 <body>
 
 <form action="order.question.write">
-<input type="hidden" value="${question.sd_customer_id }" name="qa_csm_id"><br>
-<input type="hidden" value="${question.sd_seller_id }" name="qa_sl_id"><br>
-<input type="hidden" value="${question.sd_product_no }" name="qa_gdNo"><br>
+<h3>히든처리</h3>
+<input value="${question.sd_customer_id }" name="qa_csm_id"><br>
+<input value="${question.sd_seller_id }" name="qa_sl_id"><br>
+<input value="${question.sd_product_no }" name="qa_gdNo"><br>
+<h3>히든처리</h3>
 주문번호 : <input value="${question.sd_delivery_pno }" name="qa_orderNo"><br>
 문의상품 : <input value="${question.sd_product_name }" name="qa_gdName"><br>
 문의종류 : <select name="qa_sort">
