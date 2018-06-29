@@ -6,60 +6,72 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
-<link href="resources/junyoung/bootstrap.min.css" rel="stylesheet">
 <link href="resources/junyoung/myPage.css" rel="stylesheet">
 
 </head>
 <body>
-
-	<!-- 헤더가 와야할 위치 -->
-	<div id="myPagelogo">
-		<a href="/mall"><img src="resources/etc/logo.png"></a>
-	</div>
-	<!-- Login -->
-	<div id="header-Icon">
-		<div class="wishlist_content">
-			<div class="wishlist_icon">
-				<img src="resources/etc/icon-login.png" alt="">
-			</div>
-			<div class="wishlist_text">
-				<c:if test="${sessionScope.loginCustomer == null }">
-					<a href="member.loginPage">로그인</a>
-				</c:if>
-				<c:if test="${sessionScope.loginCustomer != null }">
-					<a href="customer.logout.do">로그아웃</a>
-				</c:if>
-			</div>
-		</div>
-
-		<!-- Myhome -->
-		<div class="wishlist_content">
-			<div class="wishlist_icon">
-				<img src="resources/etc/icon-myhome.png" alt="">
-			</div>
-			<div class="wishlist_text">
-				<a href="customer.myHome.go">마이홈</a>
-			</div>
-		</div>
-
-
-		<!-- Cart -->
-		<div class="wishlist_content">
-			<div class="wishlist_icon">
-				<img src="resources/etc/icon-cart.png" alt="">
-				<div class="cart_count">
-					<span></span>
-				</div>
-			</div>
-			<div class="wishlist_text">
-				<a href="customer.cart.go">장바구니</a>
-			</div>
-		</div>
-	</div>
-
-	<!--  -->
-
-	<div class="container-fluid">
+	<div class="container">
+		<div class="row">
+		<div class="col-lg-3">
+							<div class="shop_sidebar">
+						<div class="sidebar_section">
+							<div class="sidebar_title">Categories</div>
+							<ul class="sidebar_categories">
+								<li><a href="#">Computers & Laptops</a></li>
+								<li><a href="#">Cameras & Photos</a></li>
+								<li><a href="#">Hardware</a></li>
+							</ul>
+							<div class="sidebar_title">Categories</div>
+							<ul class="sidebar_categories">
+								<li><a href="#">Computers & Laptops</a></li>
+								<li><a href="#">Cameras & Photos</a></li>
+								<li><a href="#">Hardware</a></li>
+							</ul>
+						</div>
+						<div class="sidebar_section filter_by_section">
+							<div class="sidebar_title">Filter By</div>
+							<div class="sidebar_subtitle">Price</div>
+							<div class="filter_price">
+								<div id="slider-range" class="slider_range"></div>
+								<p>Range: </p>
+								<p><input type="text" id="amount" class="amount" readonly style="border:0; font-weight:bold;"></p>
+							</div>
+						</div>
+						<div class="sidebar_section">
+							<div class="sidebar_subtitle color_subtitle">Color</div>
+							<ul class="colors_list">
+								<li class="color"><a href="#" style="background: #b19c83;"></a></li>
+								<li class="color"><a href="#" style="background: #000000;"></a></li>
+								<li class="color"><a href="#" style="background: #999999;"></a></li>
+								<li class="color"><a href="#" style="background: #0e8ce4;"></a></li>
+								<li class="color"><a href="#" style="background: #df3b3b;"></a></li>
+								<li class="color"><a href="#" style="background: #ffffff; border: solid 1px #e1e1e1;"></a></li>
+							</ul>
+						</div>
+						<div class="sidebar_section">
+							<div class="sidebar_subtitle brands_subtitle">Brands</div>
+							<ul class="brands_list">
+								<li class="brand"><a href="#">Apple</a></li>
+								<li class="brand"><a href="#">Beoplay</a></li>
+								<li class="brand"><a href="#">Google</a></li>
+								<li class="brand"><a href="#">Meizu</a></li>
+								<li class="brand"><a href="#">OnePlus</a></li>
+								<li class="brand"><a href="#">Samsung</a></li>
+								<li class="brand"><a href="#">Sony</a></li>
+								<li class="brand"><a href="#">Xiaomi</a></li>
+							</ul>
+						</div>
+					</div>
+			</div>		
+			
+		
+		
+		
+		
+		
+		
+		
+		
 
 		<div class="row row-offcanvas row-offcanvas-left">
 		
@@ -238,19 +250,9 @@
 					themes</a>
 
 			</div>
-			<!--/row-->
-		</div>
+
+		</div>	
 	</div>
-	<!--/.container-->
-
-	<footer>
-		<p class="pull-right">©2016 Company</p>
-	</footer>
-
-	<!-- script references -->
-	<script src="resources/js/jquery-3.3.1.min.js"></script>
-	<script src="resources/junyoung/bootstrap.min.js"></script>
-	<script src="resources/junyoung/scripts.js"></script>
-
+	
 </body>
 </html>

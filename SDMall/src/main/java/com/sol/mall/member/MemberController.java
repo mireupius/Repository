@@ -113,8 +113,9 @@ public class MemberController {
 			
 			mpDAO.getMembership(m, req, res);
 			
-			return "customer/customerMyPage2";
+			req.setAttribute("contentPage", "customer/customerMyPage2.jsp");
 			
+			return "main";
 			
 		}else {
 			return "member/loginPage";
