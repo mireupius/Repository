@@ -39,7 +39,7 @@ function pageGo(p){
 				key_value : k_value,
 				sort_name : sort_name,
 				desc_name : desc_name
-				,curPage:curPage
+				,curPage : curPage
 				},
 		success : function(json) {
 			var ar = json.goodsView;
@@ -48,32 +48,29 @@ function pageGo(p){
 			alert(t1);
 			alert(t2);
 			
-			$.each(ar, function(i, c){
-				$("#gdLstTr").empty();
+			$("#gdLstTr").empty();
+			
+			$.each(ar, function(i, s){
 				
-				$.each(ar, function(i, s){
-					var makerTd = $("<td></td>").attr("class","gdLstTd1").text(s.gt_maker);
-					var brandTd = $("<td></td>").attr("class","gdLstTd1").text(s.gt_brand);
-					var mdlnameTd = $("<td></td>").attr("class","gdLstTd1").text(s.gt_mdlname);
-					var originTd = $("<td></td>").attr("class","gdLstTd1").text(s.gt_origin);
-					
-					var noTd = $("<td></td>").attr("class","gdLstTd1").text(i+1);
-					var codeA = $("<a></a>").attr("href","goods.view?gd_no="+s.gd_no).text(s.gd_no);
-					var codeTd = $("<td></td>").attr("class","gdLstTd1").append(codeA);
-					var nameImg=$("<img>").attr("src","${pageContext.request.contextPath}/upload/"+s.gd_imgl);
-					nameImg.css("width","44").css("height","44");
-					var nameTd = $("<td></td>").attr("class","gdLstTd1").append(nameImg);
-					nameTd.append("&nbsp;&nbsp; " + s.gd_name);
-					var priceTd = $("<td></td>").attr("class","gdLstTd1").text(s.gd_price);
-					var cmpriceTd = $("<td></td>").attr("class","gdLstTd1").text(s.gd_csmprice);
-					var tr = $("<tr></tr>").append(noTd, codeTd, nameTd, priceTd,cmpriceTd,makerTd,brandTd,mdlnameTd,originTd);
-					$("#gdLstTr").append(tr);
-				});
+				var makerTd = $("<td></td>").attr("class","gdLstTd1").text(s.gt_maker);
+				var brandTd = $("<td></td>").attr("class","gdLstTd1").text(s.gt_brand);
+				var mdlnameTd = $("<td></td>").attr("class","gdLstTd1").text(s.gt_mdlname);
+				var originTd = $("<td></td>").attr("class","gdLstTd1").text(s.gt_origin);
 				
+				var noTd = $("<td></td>").attr("class","gdLstTd1").text(i+1);
+				var codeA = $("<a></a>").attr("href","goods.view?gd_no="+s.gd_no).text(s.gd_no);
+				var codeTd = $("<td></td>").attr("class","gdLstTd1").append(codeA);
+				var nameImg=$("<img>").attr("src","${pageContext.request.contextPath}/upload/"+s.gd_imgl);
+				nameImg.css("width","44").css("height","44");
+				var nameTd = $("<td></td>").attr("class","gdLstTd1").append(nameImg);
+				nameTd.append("&nbsp;&nbsp; " + s.gd_name);
+				var priceTd = $("<td></td>").attr("class","gdLstTd1").text(s.gd_price);
+				var cmpriceTd = $("<td></td>").attr("class","gdLstTd1").text(s.gd_csmprice);
+				var tr = $("<tr></tr>").append(noTd, codeTd, nameTd, priceTd,cmpriceTd,makerTd,brandTd,mdlnameTd,originTd);
+				$("#gdLstTr").append(tr);
 			});
 		}
 	});
-	
 }
 
 

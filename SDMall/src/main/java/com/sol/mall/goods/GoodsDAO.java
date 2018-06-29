@@ -132,9 +132,9 @@ public class GoodsDAO {
 			gdsPage.add(gdv.get(i-1));
 		}
 		
-		request.setAttribute("gdsViewList", gdsPage);
+		//request.setAttribute("gdsViewList", gdsPage);
 		
-		return new Paging(curPage,allPage,ss.getMapper(GoodsMapper.class).getGoodsViewByKey(k));
+		return new Paging(curPage,allPage, gdsPage);
 	}
 	
 	// 상품목록 전체조회(상품리스트화면)
