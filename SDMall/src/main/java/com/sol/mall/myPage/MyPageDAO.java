@@ -168,7 +168,7 @@ public class MyPageDAO {
 		
 		try {
 			
-			Delivery product = ss.getMapper(MyPageMapper.class).orderToReviewBySd_pno(d);
+			Delivery product = ss.getMapper(MyPageMapper.class).getOrderInfoBySd_pno(d);
 			
 			req.setAttribute("review", product);
 			System.out.println("리뷰 대상 정보 불러오기 성공");
@@ -225,9 +225,64 @@ public class MyPageDAO {
 		
 	}
 	
+	public void goOrderToQuestion(Delivery d, HttpServletRequest req, HttpServletResponse res) {
+		
+		try {
+			
+			Delivery product = ss.getMapper(MyPageMapper.class).getOrderInfoBySd_pno(d);
+			
+			req.setAttribute("question", product);
+			System.out.println("질문 대상 정보 불러오기 성공");
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println("질문 대상 정보 불러오기 실패");
+		}
+		
+	}
 	
+	public void writeQuestion(QuestionAnswer qa, HttpServletRequest req, HttpServletResponse res) {
+		
+		try {
+			
+			Date today = new Date();
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+			qa.setQa_qRegDate(sdf.format(today));
+			
+			if(ss.getMapper(MyPageMapper.class).writeQuestionToSeller(qa) == 1){
+				
+				System.out.println("질문 요청 성공");
+			
+			}
+			
+		} catch (Exception e) {
+			System.out.println("질문 요청 실패");
+			e.printStackTrace();
+			
+		}
+		
+	}
 	
-	
+	public void getMyQuestionAnswer(QuestionAnswer qa, HttpServletRequest req, HttpServletResponse res) {
+		
+		try {
+			
+			Customer c = (Customer) req.getSession().getAttribute("loginCustomer");
+			qa.setQa_csm_id(c.getCsm_id());
+			
+			List<QuestionAnswer> myQuestion = ss.getMapper(MyPageMapper.class).searchQAByCustomerId(qa);
+			System.out.println("내 질문 보여주기 성공");
+			
+			req.setAttribute("myQuestionList", myQuestion);
+			
+		} catch (Exception e) {
+			System.out.println("내 질문 보여주기 실패");
+			e.printStackTrace();
+		}
+		
+		
+	}
+
 	
 	
 	

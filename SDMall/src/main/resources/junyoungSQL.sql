@@ -78,13 +78,16 @@ qa_regNo varchar2(12 char) primary key,
 qa_orderNo varchar2(16 char) not null,
 qa_csm_id varchar2(12 char) not null,
 qa_sl_id varchar2(12 char) not null,
+qa_gdNo varchar2(13 char) not null,
 qa_gdName varchar2(20 char) not null,
 qa_questionTitle varchar2(20 char) not null,
 qa_questionContent varchar2(200 char) not null,
 qa_answer varchar2(200 char),
 qa_qRegDate varchar2(20 char) not null,
 qa_aRegDate varchar2(20 char),
-qa_sort varchar2(10 char) not null
+qa_sort varchar2(10 char) not null,
+qa_check varchar2(5 char) not null
+
 );
 
 drop table question_Answer cascade constraint purge;
@@ -95,10 +98,9 @@ select * from question_Answer
 insert into question_Answer values(
 	to_char(SYSDATE,'yyyyMMdd') || LPAD(question_Answer_seq.nextval, 4, 0),
 		'15313135', 'junyoung00',
-		'seller00', '연필', '배송문의요', '어제 상품주문했는데 배송언제되요',
-		'오늘이나 내일 출고됩니다','2018-08-09', '2018-08-09', '배송'
+		'seller00','7777888855553', '연필', '배송문의요', '어제 상품주문했는데 배송언제되요',
+		'오늘이나 내일 출고됩니다','2018-08-09', '2018-08-09', '배송', '미답변'
 	)
-
 
 
 -- 상품평 테이블

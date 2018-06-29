@@ -6,6 +6,7 @@ public class QuestionAnswer {
 	private String qa_orderNo;
 	private String qa_csm_id;
 	private String qa_sl_id;
+	private String qa_gdNo;
 	private String qa_gdName;
 	private String qa_questionTitle;
 	private String qa_questionContent;
@@ -13,19 +14,21 @@ public class QuestionAnswer {
 	private String qa_qRegDate;
 	private String qa_aRegDate;
 	private String qa_sort;
+	private String qa_check;
 	
 	public QuestionAnswer() {
 		// TODO Auto-generated constructor stub
 	}
 
-	public QuestionAnswer(String qa_regNo, String qa_orderNo, String qa_csm_id, String qa_sl_id, String qa_gdName,
-			String qa_questionTitle, String qa_questionContent, String qa_answer, String qa_qRegDate,
-			String qa_aRegDate, String qa_sort) {
+	public QuestionAnswer(String qa_regNo, String qa_orderNo, String qa_csm_id, String qa_sl_id, String qa_gdNo,
+			String qa_gdName, String qa_questionTitle, String qa_questionContent, String qa_answer, String qa_qRegDate,
+			String qa_aRegDate, String qa_sort, String qa_check) {
 		super();
 		this.qa_regNo = qa_regNo;
 		this.qa_orderNo = qa_orderNo;
 		this.qa_csm_id = qa_csm_id;
 		this.qa_sl_id = qa_sl_id;
+		this.qa_gdNo = qa_gdNo;
 		this.qa_gdName = qa_gdName;
 		this.qa_questionTitle = qa_questionTitle;
 		this.qa_questionContent = qa_questionContent;
@@ -33,6 +36,7 @@ public class QuestionAnswer {
 		this.qa_qRegDate = qa_qRegDate;
 		this.qa_aRegDate = qa_aRegDate;
 		this.qa_sort = qa_sort;
+		this.qa_check = qa_check;
 	}
 
 	public String getQa_regNo() {
@@ -65,6 +69,14 @@ public class QuestionAnswer {
 
 	public void setQa_sl_id(String qa_sl_id) {
 		this.qa_sl_id = qa_sl_id;
+	}
+
+	public String getQa_gdNo() {
+		return qa_gdNo;
+	}
+
+	public void setQa_gdNo(String qa_gdNo) {
+		this.qa_gdNo = qa_gdNo;
 	}
 
 	public String getQa_gdName() {
@@ -122,7 +134,14 @@ public class QuestionAnswer {
 	public void setQa_sort(String qa_sort) {
 		this.qa_sort = qa_sort;
 	}
-	
-	
+
+	public String getQa_check() {
+		return qa_check;
+	}
+
+	public void setQa_check(String qa_check) {
+		this.qa_check = qa_check;
+	}
+
 
 }

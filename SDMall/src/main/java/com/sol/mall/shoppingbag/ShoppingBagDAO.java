@@ -48,6 +48,8 @@ public class ShoppingBagDAO {
 			Customer nowSession = (Customer) req.getSession().getAttribute("loginCustomer");
 			//System.out.println(nowSession.getCsm_id());
 			
+			
+			
 			sb.setSb_csmid(nowSession.getCsm_id());
 			System.out.println(sb.getSb_csmid());
 			

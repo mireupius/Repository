@@ -80,7 +80,7 @@
 					<h4>활동관리</h4>
 					<li><a href="customer.myHome.productReview.go">상품평작성</a></li>
 					<li><a href="customer.productReview.show">상품평조회</a></li>
-					<li><a href="">상품Q&A</a></li>
+					<li><a href="customer.myQuestion.show">상품Q&A</a></li>
 					<li><a href="">적립금</a></li>
 				</ul>
 				<ul class="nav nav-sidebar">
