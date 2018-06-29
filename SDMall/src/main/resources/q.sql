@@ -1,6 +1,13 @@
 select gd_no, gd_name, gd_price, gd_csmprice, gd_imgl from goods_tb a, goodsdtl_tb b
 		where a.gd_no = b.gt_gdno 
 		and gd_name like '%%'
+		
+		
+		select gd_no, gd_name, gd_price, gd_csmprice, gd_imgl, gt_maker, gt_brand, gt_mdlname, gt_origin from goods_tb a, goodsdtl_tb b
+		where a.gd_no = b.gt_gdno 
+		and gd_sellerid = 'a'
+		and gd_no like '%%'
+		order by gd_no  ;
 
 select gd_no, gd_name, gd_price, gd_csmprice, gd_imgl from goods_tb a, goodsdtl_tb b
 		where a.gd_no = b.gt_gdno 

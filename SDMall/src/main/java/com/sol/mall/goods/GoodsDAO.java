@@ -2,6 +2,7 @@ package com.sol.mall.goods;
 
 import java.io.File;
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -96,8 +97,75 @@ public class GoodsDAO {
 
 	// 상품목록 검색(상품리스트화면)
 	public GoodsViewList getGoodsViewByKey(Keywords k, HttpServletRequest request) {
+		System.out.println(k.getKey_name());
+		System.out.println(k.getKey_value());
+		System.out.println(k.getSort_name());
+		System.out.println(k.getGd_sellerid());
+		System.out.println(k.getDesc_name());
+		
 		return new GoodsViewList(ss.getMapper(GoodsMapper.class).getGoodsViewByKey(k));
 	}
+	
+	
+	//\\\\\\\\\\\\\\\\\\\\\   페이징 테스트   \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+	// 상품목록 검색(상품리스트화면)
+	public Paging getGoodsViewByKey2(Keywords k, int curPage, HttpServletRequest request) {
+		List<GoodsView> gdv = ss.getMapper(GoodsMapper.class).getGoodsViewByKey(k);
+		
+		double cnt = 4;// 페이지당 건수
+		int listSize = gdv.size();
+		
+		System.out.println("listSize=="+listSize);
+		int allPage = (int) Math.ceil(listSize / cnt);// 총페이지
+		request.setAttribute("pageCount", allPage);
+
+		System.out.println("allPage=="+allPage);
+		
+		int start = listSize - (int) cnt * (curPage - 1);// 페이지 첫번째 게시물
+		int end = (curPage == allPage) ? 1 : start - ((int) cnt - 1);// 페이지 마지막 게시물
+
+		List<GoodsView> gdsPage = new ArrayList<>();// 해당 페이지 게시물 리스트
+
+		for (int i = start; i >= end; i--) {
+			
+			System.out.println("gdv.get"+i+"=="+ gdv.get(i-1));
+			gdsPage.add(gdv.get(i-1));
+		}
+		
+		request.setAttribute("gdsViewList", gdsPage);
+		
+		return new Paging(curPage,allPage,ss.getMapper(GoodsMapper.class).getGoodsViewByKey(k));
+	}
+	
+	// 상품목록 전체조회(상품리스트화면)
+		public void getAllGoodsView2(Goods gds, HttpServletRequest request) {
+			int curPage =1;
+			List<GoodsView> gdv = ss.getMapper(GoodsMapper.class).getAllGoodsView(gds);
+
+			double cnt = 4;// 페이지당 건수
+			int listSize = gdv.size();
+			
+			System.out.println("listSize=="+listSize);
+			int allPage = (int) Math.ceil(listSize / cnt);// 총페이지
+			request.setAttribute("pageCount", allPage);
+
+			System.out.println("allPage=="+allPage);
+			
+			int start = listSize - (int) cnt * (curPage - 1);// 페이지 첫번째 게시물
+			int end = (curPage == allPage) ? 1 : start - ((int) cnt - 1);// 페이지 마지막 게시물
+
+			List<GoodsView> gdsPage = new ArrayList<>();// 해당 페이지 게시물 리스트
+
+			for (int i = start; i >= end; i--) {
+				
+				System.out.println("gdv.get"+i+"=="+ gdv.get(i-1));
+				gdsPage.add(gdv.get(i-1));
+			}
+			
+			request.setAttribute("gdsViewList", gdsPage);
+		}
+	
+	//\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 
 	// 입력 ==================================================
 	public void insertGd(Goods gd, HttpServletRequest request, HttpServletResponse response) {

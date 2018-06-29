@@ -16,13 +16,68 @@ h3 {
 	color: #fff;
 	background-color: #848898;
 }
-
 .imgli {
 	float: left;
 	width: 200px;
 }
 </style>
 <script type="text/javascript">
+
+function pageGo(p){
+	
+	var k_name = $("#sKey").val();
+	var k_value = $("#sValue").val();
+	var sort_name = $("#sort").val();
+	var desc_name = $("#desc").val();
+	var curPage = p;
+	//var pageCount =5;
+	
+	$.ajax({
+		url : "goods.search.keyword2",
+		data : {
+				key_name : k_name,
+				key_value : k_value,
+				sort_name : sort_name,
+				desc_name : desc_name
+				,curPage:curPage
+				},
+		success : function(json) {
+			var ar = json.goodsView;
+			var t1 = json.curPage;
+			var t2 = json.pageCount;
+			alert(t1);
+			alert(t2);
+			
+			$.each(ar, function(i, c){
+				$("#gdLstTr").empty();
+				
+				$.each(ar, function(i, s){
+					var makerTd = $("<td></td>").attr("class","gdLstTd1").text(s.gt_maker);
+					var brandTd = $("<td></td>").attr("class","gdLstTd1").text(s.gt_brand);
+					var mdlnameTd = $("<td></td>").attr("class","gdLstTd1").text(s.gt_mdlname);
+					var originTd = $("<td></td>").attr("class","gdLstTd1").text(s.gt_origin);
+					
+					var noTd = $("<td></td>").attr("class","gdLstTd1").text(i+1);
+					var codeA = $("<a></a>").attr("href","goods.view?gd_no="+s.gd_no).text(s.gd_no);
+					var codeTd = $("<td></td>").attr("class","gdLstTd1").append(codeA);
+					var nameImg=$("<img>").attr("src","${pageContext.request.contextPath}/upload/"+s.gd_imgl);
+					nameImg.css("width","44").css("height","44");
+					var nameTd = $("<td></td>").attr("class","gdLstTd1").append(nameImg);
+					nameTd.append("&nbsp;&nbsp; " + s.gd_name);
+					var priceTd = $("<td></td>").attr("class","gdLstTd1").text(s.gd_price);
+					var cmpriceTd = $("<td></td>").attr("class","gdLstTd1").text(s.gd_csmprice);
+					var tr = $("<tr></tr>").append(noTd, codeTd, nameTd, priceTd,cmpriceTd,makerTd,brandTd,mdlnameTd,originTd);
+					$("#gdLstTr").append(tr);
+				});
+				
+			});
+		}
+	});
+	
+}
+
+
+
 $(function(){
 		
 		$("#sValue").keyup(function(e) {
@@ -38,15 +93,26 @@ $(function(){
 			var k_value = $("#sValue").val();
 			var sort_name = $("#sort").val();
 			var desc_name = $("#desc").val();
+			var curPage = 1;
+			var pageCount =5;
+			
 			$.ajax({
+				//url : "goods.search.keyword",
+				//goods.search.keyword2?key_name="gd_name"&key_value="00"&sort_name="gd_name"&gd_sellerid ="a"
 				url : "goods.search.keyword",
 				data : {
 						key_name : k_name,
 						key_value : k_value,
 						sort_name : sort_name,
-						desc_name : desc_name},
+						desc_name : desc_name
+						,curPage:curPage
+						},
 				success : function(json) {
 					var ar = json.goodsView;
+					var t1 = json.curPage;
+					var t2 = json.pageCount;
+					alert(t1);
+					alert(t2);
 					
 					$.each(ar, function(i, c){
 						$("#gdLstTr").empty();
@@ -75,7 +141,6 @@ $(function(){
 			});
 		});
 });
-
 </script>
 </head>
 <body>
@@ -173,6 +238,14 @@ $(function(){
 						</table>
 					</div>
 				</div>
+				
+				<div>
+					<input id="pageCount" type="hidden" value="${pageCount }">
+					<c:forEach var="p" begin="1" end="${pageCount }">
+						<a class="pageNo" onclick="pageGo(${p});">${p }</a>
+					</c:forEach>
+				</div>
+				
 				<br>
 				<br>
 				<br>
