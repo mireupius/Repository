@@ -39,8 +39,8 @@
 					<div class="product_description">
 						<div class="product_category">Laptops</div>
 						<div class="product_name">${goodsDtl1.gd_name }</div>
+						<div class="product_price">${goodsDtl1.gd_price }</div>
 						<div class="rating_r rating_r_4 product_rating"><i></i><i></i><i></i><i></i><i></i></div>
-						<div class="product_text"><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas fermentum. laoreet turpis, nec sollicitudin dolor cursus at. Maecenas aliquet, dolor a faucibus efficitur, nisi tellus cursus urna, eget dictum lacus turpis.</p></div>
 						<div class="order_info d-flex flex-row">
 <!-- 							장바구니 form -->
 							<form action="cart.add" method="get">
@@ -55,36 +55,35 @@
 										</div>
 									</div>
 										<label class="custom-select" for="styledSelect1">
-											<select id="styledSelect1" name="sb_opno" onchange="limitQuantity(); overQuantity();">
+											<select id="styledSelect1" name="sb_opno" onchange="opChange()">
 												<c:forEach var="o" items="${option}">
 												<option value="${o.op_no }">${o.op_name } (+${o.op_price }) / ${o.op_stock }</option>
 												</c:forEach>
 											</select>
 										</label>
 								</div>
-								<div class="product_price">${goodsDtl1.gd_price }</div>
+								<div id="view_total_price" class="product_price">${goodsDtl1.gd_price }원</div>
 								<div class="button_container">
-									<input type="submit" class="button cart_button" value="Add to Cart">
-									<!-- <button type="button" class="button cart_button">Add to Cart</button> -->
-									<div class="product_fav"><i class="fas fa-heart"></i></div>
+									<button type="button" class="button cart_button">Add to Cart</button>
+<!-- 									<div class="product_fav"><i class="fas fa-heart"></i></div> -->
 								</div>
-								<input value="${goodsDtl1.gd_no }" name="sb_gdno"> 
 							</form>
 							
-<!-- <!-- 							즉시구매 form --> -->
-<!-- 							<form> -->
-<%-- 							<input name="sd_delivery_cost" value="${goodsDtl1.gd_dlvchrg }"> --%>
-<%-- 							<input name="sd_product_name" value="${goodsDtl1.gd_name }"> --%>
-<!-- 							<input name="sd_option_info" value=""> -->
-<!-- 							<input name="sd_amount" value=""> -->
-<!-- 							<input name="sd_option_price" value=""> -->
-<%-- 							<input name="sd_product_price" value="${goodsDtl1.gd_price }"> --%>
-<%-- 							<input name="sd_product_sellprice" value="${goodsDtl1.gd_csmprice }"> --%>
-<%-- 							<input name="sd_total_price" value="${goodsDtl1.gd_dlvchrg+ }"> --%>
-<%-- 							<input name="sd_out_area" value="${goodsDtl1.gd_outarea }"> --%>
-<%-- 							<input name="sd_product_no" value="${goodsDtl1.gd_no }"> --%>
-<%-- 							<input name="sd_seller_id" value="${goodsDtl1.gd_sellerid }"> --%>
-<!-- 							</form> -->
+<!-- 							즉시구매 form -->
+							<form>
+							<input name="sd_delivery_cost" value="${goodsDtl1.gd_dlvchrg }">
+							<input name="sd_product_name" value="${goodsDtl1.gd_name }">
+							<input id="send_option_name" name="sd_option_info">
+							<input id="send_quantity" name="sd_amount">
+							<input id="send_option_price" name="sd_option_price">
+							<input id="send_price" name="sd_product_price" value="${goodsDtl1.gd_price }">
+							<input name="sd_product_sellprice" value="${goodsDtl1.gd_csmprice }">
+							<input id = "send_total_price" name="sd_total_price">
+							<input name="sd_out_area" value="${goodsDtl1.gd_outarea }">
+							<input name="sd_product_no" value="${goodsDtl1.gd_no }">
+							<input name="sd_seller_id" value="${goodsDtl1.gd_sellerid }">
+							<button type="button" class="button cart_button">구매</button>
+							</form>
 							
 						</div>
 					</div>
