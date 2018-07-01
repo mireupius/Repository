@@ -362,26 +362,26 @@ public class GoodsController {
 	}
 
 	// 상품표시화면 처음
-		@RequestMapping(value = "/goods.list2", method = RequestMethod.GET)
-		public String goodsList2(Goods gds, HttpServletRequest request, HttpServletResponse response) {
+	@RequestMapping(value = "/goods.list2", method = RequestMethod.GET)
+	public String goodsList2(Goods gds, HttpServletRequest request, HttpServletResponse response) {
+		
+		if(mDAO.slLoginCheck(request, response)) {
 			
-			if(mDAO.slLoginCheck(request, response)) {
-				
-				Seller dbS = (Seller) request.getSession().getAttribute("loginSeller");
-				gds.setGd_sellerid(dbS.getSl_id());
+			Seller dbS = (Seller) request.getSession().getAttribute("loginSeller");
+			gds.setGd_sellerid(dbS.getSl_id());
 
 //				gdsDAO.getAllGoodsView(gds, request);
-				gdsDAO.getAllGoodsView2(gds, request);
-		
+			gdsDAO.getAllGoodsView2(gds, request);
+	
 //				gdsDAO.getGoodsViewByKey2(k, 1, request);
-				
-				request.setAttribute("contentPage", "../goods/goodsList.jsp");
-				return "sale/saleIndex";
-			}else {
-				request.setAttribute("loginInfo", "loginArea.jsp");
-				return "member/loginPage";
-			}
+			
+			request.setAttribute("contentPage", "../goods/goodsList.jsp");
+			return "sale/saleIndex";
+		}else {
+			request.setAttribute("loginInfo", "loginArea.jsp");
+			return "member/loginPage";
 		}
+	}
 	
 	
 	
