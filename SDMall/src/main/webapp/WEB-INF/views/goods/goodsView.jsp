@@ -21,6 +21,7 @@
 	src="${pageContext.request.contextPath}/resources/daumeditor/js/editor_loader.js"></script>
 <script type="text/javascript">
 function saveContent() {
+	$("#opSave").trigger("click");
     Editor.save(); // 이 함수를 호출하여 글을 등록하면 된다.
 }
 function deleteGoods(){
@@ -407,12 +408,6 @@ h3 {
 						</c:if>
 						</ul>
 						</div>
-						<li class="opTbr">
-							<button id="opPlus">추가</button>
-						</li>
-						<li class="opTbr">
-							<button id="opSave">적용</button>
-						</li>
 						<input id="opSize" type="hidden" value="${gdsOp.size()}">
 						<input name="opl_no" type="hidden">
 						<input name="opl_name" type="hidden">
@@ -425,6 +420,17 @@ h3 {
 					</tr>
 					<tr>
 						<td class="gdTd1 tdFont">옵션재고 필수(4)</td>
+					</tr>
+					<tr>
+						<td class="gdTd1"></td>
+						<td class="gdTd2">
+							<span class="opTbr">
+								<button id="opPlus">추가</button>
+							</span>
+							<span class="opTbr">
+								<button id="opSave">적용</button>
+							</span>
+						</td>
 					</tr>
 				</tbody>
 			</table>

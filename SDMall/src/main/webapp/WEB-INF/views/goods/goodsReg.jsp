@@ -451,12 +451,6 @@ h3 {
 							</li>
 						</ul>
 						</div>
-						<li class="opTbr">
-							<button id="opPlus">추가</button>
-						</li>
-						<li class="opTbr">
-							<button id="opSave">적용</button>
-						</li>
 						<input class="inpWidth" name="opl_name" type="hidden">
 						<input class="inpWidth" name="opl_price" type="hidden">
 						<input class="inpWidth" name="opl_stock" type="hidden">
@@ -467,6 +461,17 @@ h3 {
 					</tr>
 					<tr>
 						<td class="gdTd1">옵션재고 필수(4)</td>
+					</tr>
+					<tr>
+						<td class="gdTd1"></td>
+						<td class="gdTd2">
+							<span class="opTbr">
+								<button id="opPlus">추가</button>
+							</span>
+							<span class="opTbr">
+								<button id="opSave">적용</button>
+							</span>
+						</td>
 					</tr>
 				</tbody>
 			</table>
