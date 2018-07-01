@@ -95,20 +95,15 @@ public class GoodsDAO {
 		double cnt = 4;// 페이지당 건수
 		int listSize = gdv.size();
 		
-		System.out.println("listSize=="+listSize);
 		int allPage = (int) Math.ceil(listSize / cnt);// 총페이지
 		request.setAttribute("pageCount", allPage);
 
-		System.out.println("allPage=="+allPage);
-		
 		int start = listSize - (int) cnt * (curPage - 1);// 페이지 첫번째 게시물
 		int end = (curPage == allPage) ? 1 : start - ((int) cnt - 1);// 페이지 마지막 게시물
 
 		List<GoodsView> gdsPage = new ArrayList<>();// 해당 페이지 게시물 리스트
 
 		for (int i = start; i >= end; i--) {
-			
-			System.out.println("gdv.get"+i+"=="+ gdv.get(i-1));
 			gdsPage.add(gdv.get(i-1));
 		}
 		
@@ -117,26 +112,21 @@ public class GoodsDAO {
 	
 	// 상품목록 전체조회(상품리스트화면)
 	public void getAllGoodsView(Goods gds, HttpServletRequest request) {
-		int curPage =1;
 		List<GoodsView> gdv = ss.getMapper(GoodsMapper.class).getAllGoodsView(gds);
 
+		int curPage =1;
 		double cnt = 4;// 페이지당 건수
 		int listSize = gdv.size();
 		
-		System.out.println("listSize=="+listSize);
 		int allPage = (int) Math.ceil(listSize / cnt);// 총페이지
 		request.setAttribute("pageCount", allPage);
 
-		System.out.println("allPage=="+allPage);
-		
 		int start = listSize - (int) cnt * (curPage - 1);// 페이지 첫번째 게시물
 		int end = (curPage == allPage) ? 1 : start - ((int) cnt - 1);// 페이지 마지막 게시물
 
 		List<GoodsView> gdsPage = new ArrayList<>();// 해당 페이지 게시물 리스트
 
 		for (int i = start; i >= end; i--) {
-			
-			System.out.println("gdv.get"+i+"=="+ gdv.get(i-1));
 			gdsPage.add(gdv.get(i-1));
 		}
 		
