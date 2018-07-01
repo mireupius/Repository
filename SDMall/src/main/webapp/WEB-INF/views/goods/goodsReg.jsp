@@ -44,6 +44,8 @@ function saveContent() {
  		var dlvchrgField = document.tx_editor_form.gd_dlvchrg;
  		var outareaField = document.tx_editor_form.gd_outarea;
  	
+ 		$("#opSave").trigger("click");
+ 		
  		if (clflField==null) {
  			alert("상품 대분류 를 선택해주세요.");
  			$("body").scrollTop(0);

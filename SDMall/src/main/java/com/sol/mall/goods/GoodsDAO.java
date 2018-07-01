@@ -37,7 +37,6 @@ public class GoodsDAO {
 		request.setAttribute("option", ss.getMapper(OptionMapper.class).getOptionByGdno(goods));
 
 		// ss.getMapper(GoodsMapper.class).getGoodsByNo(goods).getGd_clfl();
-
 	}
 
 	// 카테고리로 상품 조회
@@ -88,28 +87,9 @@ public class GoodsDAO {
 		request.setAttribute("allGoods", gdslist);
 	}
 
-	// 상품목록 전체조회(상품리스트화면)
-	public void getAllGoodsView(Goods gds, HttpServletRequest request) {
-		List<GoodsView> gdsViewList = ss.getMapper(GoodsMapper.class).getAllGoodsView(gds);
-
-		request.setAttribute("gdsViewList", gdsViewList);
-	}
-
+	// ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓ 페이징 ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓
 	// 상품목록 검색(상품리스트화면)
-	public GoodsViewList getGoodsViewByKey(Keywords k, HttpServletRequest request) {
-		System.out.println(k.getKey_name());
-		System.out.println(k.getKey_value());
-		System.out.println(k.getSort_name());
-		System.out.println(k.getGd_sellerid());
-		System.out.println(k.getDesc_name());
-		
-		return new GoodsViewList(ss.getMapper(GoodsMapper.class).getGoodsViewByKey(k));
-	}
-	
-	
-	//\\\\\\\\\\\\\\\\\\\\\   페이징 테스트   \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
-	// 상품목록 검색(상품리스트화면)
-	public Paging getGoodsViewByKey2(Keywords k, int curPage, HttpServletRequest request) {
+	public Paging getGoodsViewByKey(Keywords k, int curPage, HttpServletRequest request) {
 		List<GoodsView> gdv = ss.getMapper(GoodsMapper.class).getGoodsViewByKey(k);
 		
 		double cnt = 4;// 페이지당 건수
@@ -132,40 +112,37 @@ public class GoodsDAO {
 			gdsPage.add(gdv.get(i-1));
 		}
 		
-		//request.setAttribute("gdsViewList", gdsPage);
-		
 		return new Paging(curPage,allPage, gdsPage);
 	}
 	
 	// 상품목록 전체조회(상품리스트화면)
-		public void getAllGoodsView2(Goods gds, HttpServletRequest request) {
-			int curPage =1;
-			List<GoodsView> gdv = ss.getMapper(GoodsMapper.class).getAllGoodsView(gds);
+	public void getAllGoodsView(Goods gds, HttpServletRequest request) {
+		int curPage =1;
+		List<GoodsView> gdv = ss.getMapper(GoodsMapper.class).getAllGoodsView(gds);
 
-			double cnt = 4;// 페이지당 건수
-			int listSize = gdv.size();
+		double cnt = 4;// 페이지당 건수
+		int listSize = gdv.size();
+		
+		System.out.println("listSize=="+listSize);
+		int allPage = (int) Math.ceil(listSize / cnt);// 총페이지
+		request.setAttribute("pageCount", allPage);
+
+		System.out.println("allPage=="+allPage);
+		
+		int start = listSize - (int) cnt * (curPage - 1);// 페이지 첫번째 게시물
+		int end = (curPage == allPage) ? 1 : start - ((int) cnt - 1);// 페이지 마지막 게시물
+
+		List<GoodsView> gdsPage = new ArrayList<>();// 해당 페이지 게시물 리스트
+
+		for (int i = start; i >= end; i--) {
 			
-			System.out.println("listSize=="+listSize);
-			int allPage = (int) Math.ceil(listSize / cnt);// 총페이지
-			request.setAttribute("pageCount", allPage);
-
-			System.out.println("allPage=="+allPage);
-			
-			int start = listSize - (int) cnt * (curPage - 1);// 페이지 첫번째 게시물
-			int end = (curPage == allPage) ? 1 : start - ((int) cnt - 1);// 페이지 마지막 게시물
-
-			List<GoodsView> gdsPage = new ArrayList<>();// 해당 페이지 게시물 리스트
-
-			for (int i = start; i >= end; i--) {
-				
-				System.out.println("gdv.get"+i+"=="+ gdv.get(i-1));
-				gdsPage.add(gdv.get(i-1));
-			}
-			
-			request.setAttribute("gdsViewList", gdsPage);
+			System.out.println("gdv.get"+i+"=="+ gdv.get(i-1));
+			gdsPage.add(gdv.get(i-1));
 		}
-	
-	//\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+		
+		request.setAttribute("gdsViewList", gdsPage);
+	}
+	// ↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑ 페이징 ↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑
 
 	// 입력 ==================================================
 	public void insertGd(Goods gd, HttpServletRequest request, HttpServletResponse response) {
@@ -245,7 +222,6 @@ public class GoodsDAO {
 			}
 		}
 		// ↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑ 옵션 여러개 입력할 때 ↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑
-
 	}
 
 	// 업데이트================================================
@@ -385,7 +361,6 @@ public class GoodsDAO {
 		}else {
 			System.out.println("이미지 삭제 실패");
 		}
-		
 	}
 	
 	// 파일 삭제

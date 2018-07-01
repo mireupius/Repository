@@ -39,7 +39,7 @@ function pageGo(p){
 	var curPage = p;
 	
 	$.ajax({
-		url : "goods.search.keyword2",
+		url : "goods.search.keyword",
 		data : {
 				key_name : k_name,
 				key_value : k_value,
@@ -105,9 +105,8 @@ $(function(){
 			var curPage = 1;
 
 			$.ajax({
-				//url : "goods.search.keyword",
-				//goods.search.keyword2?key_name="gd_name"&key_value="00"&sort_name="gd_name"&gd_sellerid ="a"
-				url : "goods.search.keyword2",
+				//goods.search.keyword?key_name="gd_name"&key_value="00"&sort_name="gd_name"&gd_sellerid ="a"
+				url : "goods.search.keyword",
 				data : {
 						key_name : k_name,
 						key_value : k_value,
@@ -251,13 +250,13 @@ $(function(){
 				</div>
 				
 				<div id="pageDiv" align="center">
-					<c:forEach var="p" begin="1" end="${pageCount }">
+					<c:forEach var="p" begin="1" end="${pageCount}">
 						<c:choose>
-							<c:when test="${p == 1 }">
-								<a class="pageNo red" onclick="pageGo(${p});">${p }</a>&nbsp;&nbsp;
+							<c:when test="${p == 1}">
+								<a class="pageNo red" onclick="pageGo(${p});">${p}&nbsp;</a>
 							</c:when>
 							<c:otherwise>
-								<a class="pageNo" onclick="pageGo(${p});">${p }</a>
+								<a class="pageNo" onclick="pageGo(${p});">${p}&nbsp;</a>
 							</c:otherwise>
 						</c:choose>
 					</c:forEach>
