@@ -17,9 +17,6 @@ public interface GoodsMapper {
 	// 상품상세 입력
 	public abstract int insertGdsDtl(GoodsDtl g);
 
-	// 상품 조회
-	public abstract List<Goods> getGoods();
-
 	// 상품 전체 조회
 	public abstract List<Goods> getAllGoods();
 
