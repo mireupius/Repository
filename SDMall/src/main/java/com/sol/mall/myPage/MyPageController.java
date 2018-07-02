@@ -36,19 +36,35 @@ public class MyPageController {
 	}
 	
 	
+//	@RequestMapping(value = "/customer.myHome.orderList", method = RequestMethod.GET)
+//	public String getOrderList(SearchOrder bb, HttpServletRequest req, HttpServletResponse res) {
+//		
+//		if (mDAO.csmLoginCheck(req, res)) {
+//			
+//			mpDAO.getOrderList(bb, req, res);
+//			req.setAttribute("contentPage", "customer/customerMyPage2.jsp");
+//			req.setAttribute("myPageContentArea", "orderDelivery.jsp");
+//			return "main";
+//		}
+//		return "member/loginPage";
+//			
+//	}
+	
 	@RequestMapping(value = "/customer.myHome.orderList", method = RequestMethod.GET)
 	public String getOrderList(SearchOrder bb, HttpServletRequest req, HttpServletResponse res) {
 		
 		if (mDAO.csmLoginCheck(req, res)) {
 			
-			mpDAO.getOrderList(bb, req, res);
+			mpDAO.getOrderList2(bb, req, res);
 			req.setAttribute("contentPage", "customer/customerMyPage2.jsp");
 			req.setAttribute("myPageContentArea", "orderDelivery.jsp");
 			return "main";
 		}
 		return "member/loginPage";
-			
+		
 	}
+	
+	
 	
 	@RequestMapping(value = "/customer.myHome.claimedOrderList.go", method = RequestMethod.GET)
 	public String goClaimedOrderList(SearchOrder bb, HttpServletRequest req, HttpServletResponse res) {

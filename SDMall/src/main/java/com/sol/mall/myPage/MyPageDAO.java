@@ -2,6 +2,7 @@ package com.sol.mall.myPage;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -11,6 +12,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.sol.mall.goods.Goods;
 import com.sol.mall.member.Customer;
 import com.sol.mall.member.Membership;
 import com.sol.mall.sale.delivery.Delivery;
@@ -28,6 +30,7 @@ public class MyPageDAO {
 		bb.setSd_customer_id(cc.getCsm_id());
 
 		List<Delivery> orders = ss.getMapper(MyPageMapper.class).searchOrderList(bb);
+		
 
 		if (cc.getCsm_id().equals(bb.getSd_customer_id())) {
 			
@@ -35,6 +38,32 @@ public class MyPageDAO {
 		}
 
 	}
+	
+	public void getOrderList2(SearchOrder bb, HttpServletRequest req, HttpServletResponse res) {
+		
+		Customer cc = (Customer) req.getSession().getAttribute("loginCustomer");
+		
+		SearchOrder2 so2 = new SearchOrder2();
+		so2.setSd_customer_id(cc.getCsm_id());
+		
+		HashMap<String, Object> map = new HashMap<>();
+		map.put("searchOrder2", so2);
+		map.put("searchOrder1", bb.getSb_searchMonth());
+		
+		
+		
+		List<SearchOrder2> orders = ss.getMapper(MyPageMapper.class).searchoo(map);
+		
+	
+		if (cc.getCsm_id().equals(so2.getSd_customer_id())) {
+			
+			req.setAttribute("orderList", orders);
+		}
+		
+	}
+	
+	
+	
 	
 	public void cancelOrder(Delivery d, HttpServletRequest req, HttpServletResponse res) {
 		

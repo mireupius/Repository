@@ -50,7 +50,6 @@
 				</div>
 				<div>
 				<jsp:include page="${myPageContentArea }"></jsp:include>
-				
 				</div>
 			</div>
 		</div>
