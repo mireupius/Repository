@@ -4,7 +4,7 @@
 	<select id="searchOrderList"
 		parameterType="com.sol.mall.myPage.SearchOrder"
 		resultType="com.sol.mall.sale.delivery.Delivery">
-		select sd_delivery_pno, sd_delivery_no, sd_product_name, sd_claim, sd_amount, sd_option_info, sd_total_price
+		select *
 		from sale_delivery
 		where ((sd_customer_id = #{sd_customer_id} and sd_claim is null)
 		or ((sd_customer_id = #{sd_customer_id} and sd_claim not like '%'||'교환'||'%')
@@ -18,7 +18,7 @@
 	<select id="searchClaimedOrderList"
 		parameterType="com.sol.mall.myPage.SearchOrder"
 		resultType="com.sol.mall.sale.delivery.Delivery">
-		select sd_delivery_pno, sd_delivery_no, sd_product_name, sd_claim, sd_amount, sd_option_info, sd_total_price
+		select *
 		from sale_delivery
 		where ((sd_customer_id = #{sd_customer_id} and sd_claim like '%'||'취소'||'%')
 		or (sd_customer_id = #{sd_customer_id} and sd_claim like '%'||'교환'||'%')
@@ -72,7 +72,7 @@
 
 	</select>
 	
-	<select id="orderToReviewBySd_pno"
+	<select id="getOrderInfoBySd_pno"
 		parameterType="com.sol.mall.sale.delivery.Delivery"
 		resultType="com.sol.mall.sale.delivery.Delivery">
 		select *
@@ -81,10 +81,50 @@
 		
 	</select>
 	<insert id="writeProductReview" parameterType="com.sol.mall.myPage.ProductReview">
-	insert into product_Review values(
-		pr_RegNo
-	
-	)
+		insert into product_Review values(
+		to_char(SYSDATE,'yyyyMMdd') || LPAD(product_Review_seq.nextval, 4, 0),
+			#{pr_orderNo}, #{pr_csm_id}, #{pr_comment},
+			#{pr_gdNo}, #{pr_gdName}, #{pr_star}, #{pr_regDate}
+		)
 	</insert>
+	
+	<update id="changeReviewState" parameterType="com.sol.mall.myPage.ProductReview">
+		update sale_delivery
+		set sd_review = 'Y'
+		where sd_delivery_pno = #{pr_orderNo}
+	</update>
+	
+	<select id="getWritedReview"
+		parameterType="com.sol.mall.sale.delivery.Delivery"
+		resultType="com.sol.mall.myPage.ProductReview">
+		select *
+		from product_Review
+		where pr_csm_id = #{pr_csm_id}
+	</select>
+	
+	
+	<insert id="writeQuestionToSeller" parameterType="com.sol.mall.myPage.QuestionAnswer">
+		insert into question_Answer values(
+		to_char(SYSDATE,'yyyyMMdd') || LPAD(question_Answer_seq.nextval, 4, 0),
+			#{qa_orderNo}, #{qa_csm_id}, #{qa_sl_id}, #{qa_gdNo},
+			#{qa_gdName}, #{qa_questionTitle}, #{qa_questionContent}, #{qa_answer, jdbcType=VARCHAR},
+			#{qa_qRegDate}, #{qa_aRegDate, jdbcType=VARCHAR}, #{qa_sort}, '미답변'
+		)
+	</insert>
+	
+	<update id="writeAnswerToCustomer" parameterType="com.sol.mall.myPage.QuestionAnswer">
+		update question_Answer
+		set qa_answer = #{qa_answer}, qa_aRegDate = {qa_aRegDate}, qa_check = '답변'
+		where sd_delivery_pno = #{pr_orderNo}
+	</update>
+	
+	
+	<select id="searchQAByCustomerId"
+		parameterType="com.sol.mall.myPage.QuestionAnswer"
+		resultType="com.sol.mall.myPage.QuestionAnswer">
+		select *
+		from question_Answer
+		where qa_csm_id = #{qa_csm_id}
+	</select>
 	
 </mapper>
