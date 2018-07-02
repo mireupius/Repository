@@ -28,6 +28,7 @@ public class MyPageDAO {
 		bb.setSd_customer_id(cc.getCsm_id());
 
 		List<Delivery> orders = ss.getMapper(MyPageMapper.class).searchOrderList(bb);
+	
 
 		if (cc.getCsm_id().equals(bb.getSd_customer_id())) {
 			

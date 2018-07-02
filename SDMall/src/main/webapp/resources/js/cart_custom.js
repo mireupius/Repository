@@ -12,9 +12,14 @@
 
 ******************************/
 
+function deleteCartItem(sb_no) {
+	location.href="customer.cart.delete?sb_no="+sb_no;
+}
+
 $(document).ready(function()
 {
 	"use strict";
+	
 
 	/* 
 

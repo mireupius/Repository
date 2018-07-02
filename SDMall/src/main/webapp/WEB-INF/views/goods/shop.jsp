@@ -34,7 +34,11 @@
 						<div class="sidebar_section">
 							<div class="sidebar_title">Categories</div>
 							<ul class="sidebar_categories">
-								<li><a href="#">Computers & Laptops</a></li>
+								<c:forEach var="sideCate" items="${allCategory}">
+									<li><a href="#">gd ${ct_no} ${sideCate.ct_clfname }${sideCate.ct_parentno }</a></li>
+								</c:forEach>
+								
+								
 								<li><a href="#">Cameras & Photos</a></li>
 								<li><a href="#">Hardware</a></li>
 								<li><a href="#">Smartphones & Tablets</a></li>

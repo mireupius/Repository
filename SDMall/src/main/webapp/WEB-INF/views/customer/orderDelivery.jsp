@@ -20,6 +20,7 @@
 		</select> <input type="submit" value="조회">
 	</form>
 
+	
 	<c:forEach var="list" items="${orderList }">
 	<div>
 	상품주문번호 : ${list.sd_delivery_pno }

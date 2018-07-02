@@ -37,5 +37,15 @@ public class ShoppingBagController {
 		req.setAttribute("contentPage", "shoppingBag/cart.jsp");
 		return "main";
 	}
+	
+	@RequestMapping(value = "/customer.cart.delete", method = RequestMethod.GET)
+	public String deleteCartItem(ShoppingBag sb, ShoppingBagItem sbItem, HttpServletRequest req, HttpServletResponse res) {
+		cDAO.getAllCategory(req, res);// 메인 카테고리 호출 메소드
+		
+		sbDAO.deleteCartItem(sbItem, req, res);
+		sbDAO.showCartItems(sb, req, res);
+		req.setAttribute("contentPage", "shoppingBag/cart.jsp");
+		return "main";
+	}
 
 }
