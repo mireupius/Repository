@@ -224,8 +224,7 @@
 								</tbody>
 							</table>
 						</section>
-
-
+					</div>
 					</div>
 
 					<!-- /content-panel -->

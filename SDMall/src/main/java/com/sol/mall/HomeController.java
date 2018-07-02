@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.sol.mall.goods.CategoryDAO;
-import com.sol.mall.goods.GoodsDAO;
 
 /**
  * Handles requests for the application home page.
@@ -20,11 +19,7 @@ public class HomeController {
 	@Autowired
 	private CategoryDAO cDAO;
 
-	@Autowired
-	private GoodsDAO gDAO;
-
 	@RequestMapping(value = "/", method = RequestMethod.GET)
-
 	public String home(HttpServletRequest request, HttpServletResponse response) {
 		
 		

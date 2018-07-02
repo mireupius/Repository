@@ -111,6 +111,7 @@ public class MemberController {
 		
 		if(mDAO.csmLoginCheck2(req, res)) {
 			
+			cDAO.getAllCategory(req, res);
 			mpDAO.getMembership(m, req, res);
 			
 			req.setAttribute("contentPage", "customer/customerMyPage2.jsp");
@@ -161,14 +162,6 @@ public class MemberController {
 		
 		
 	}
-
-	//@RequestMapping(value = "/shopbag.get.do", method = RequestMethod.GET)
-	//public String shopbagGet(Shoppingbag sb, HttpServletRequest req, HttpServletResponse res) {
-
-		//MDAO.getCart(sb, req, res);
-		//return "member/as";
-
-	//}
 
 	@RequestMapping(value = "/customer.update.go", method = RequestMethod.GET)
 	public String goUpdateCustomer(HttpServletRequest req, HttpServletResponse res) {

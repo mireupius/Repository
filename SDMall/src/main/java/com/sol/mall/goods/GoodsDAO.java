@@ -2,6 +2,7 @@ package com.sol.mall.goods;
 
 import java.io.File;
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -34,10 +35,8 @@ public class GoodsDAO {
 		request.setAttribute("goodsDtl1", ss.getMapper(GoodsMapper.class).getGoodsByNo(goods));
 		request.setAttribute("goodsDtl2", ss.getMapper(GoodsMapper.class).getGoodsDtlByNo(goods));
 		request.setAttribute("option", ss.getMapper(OptionMapper.class).getOptionByGdno(goods));
-		System.out.println(goods.getGd_no());
 
 		// ss.getMapper(GoodsMapper.class).getGoodsByNo(goods).getGd_clfl();
-
 	}
 
 	// 카테고리로 상품 조회
@@ -49,14 +48,6 @@ public class GoodsDAO {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-	}
-
-	// 상품 조회
-	public void getGd(HttpServletRequest request, HttpServletResponse response) {
-
-		List<Goods> gds = ss.getMapper(GoodsMapper.class).getGoods();
-
-		request.setAttribute("gds", gds);
 	}
 
 	// 상품상세 조회
@@ -88,17 +79,57 @@ public class GoodsDAO {
 		request.setAttribute("allGoods", gdslist);
 	}
 
+	// ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓ 페이징 ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓
+	// 상품목록 검색(상품리스트화면)
+	public Paging getGoodsViewByKey(Keywords k, int curPage, HttpServletRequest request) {
+		List<GoodsView> gdv = ss.getMapper(GoodsMapper.class).getGoodsViewByKey(k);
+
+		double cnt = 4;// 페이지당 건수
+		int listSize = gdv.size();
+
+		int allPage = (int) Math.ceil(listSize / cnt);// 총페이지
+		request.setAttribute("pageCount", allPage);
+
+		int start = listSize - (int) cnt * (curPage - 1);// 페이지 첫번째 게시물
+		int end = (curPage == allPage) ? 1 : start - ((int) cnt - 1);// 페이지 마지막 게시물
+
+		List<GoodsView> gdsPage = new ArrayList<>();// 해당 페이지 게시물 리스트
+
+		// start가 0인 경우 -1이 나와서 익셉션걸림(검색결과가 0인 경우에 -1이 됨)
+		if (start > 0) {
+			for (int i = start; i >= end; i--) {
+				gdsPage.add(gdv.get(i - 1));
+			}
+		}
+
+		return new Paging(curPage, allPage, gdsPage);
+	}
+
 	// 상품목록 전체조회(상품리스트화면)
 	public void getAllGoodsView(Goods gds, HttpServletRequest request) {
-		List<GoodsView> gdsViewList = ss.getMapper(GoodsMapper.class).getAllGoodsView(gds);
+		List<GoodsView> gdv = ss.getMapper(GoodsMapper.class).getAllGoodsView(gds);
 
-		request.setAttribute("gdsViewList", gdsViewList);
-	}
+		int curPage = 1;
+		double cnt = 4;// 페이지당 건수
+		int listSize = gdv.size();
 
-	// 상품목록 검색(상품리스트화면)
-	public GoodsViewList getGoodsViewByKey(Keywords k, HttpServletRequest request) {
-		return new GoodsViewList(ss.getMapper(GoodsMapper.class).getGoodsViewByKey(k));
+		int allPage = (int) Math.ceil(listSize / cnt);// 총페이지
+		request.setAttribute("pageCount", allPage);
+
+		int start = listSize - (int) cnt * (curPage - 1);// 페이지 첫번째 게시물
+		int end = (curPage == allPage) ? 1 : start - ((int) cnt - 1);// 페이지 마지막 게시물
+
+		List<GoodsView> gdsPage = new ArrayList<>();// 해당 페이지 게시물 리스트
+		
+		// start가 0인 경우 -1이 나와서 익셉션걸림(검색결과가 0인 경우에 -1이 됨)
+		if (start > 0) {
+			for (int i = start; i >= end; i--) {
+				gdsPage.add(gdv.get(i - 1));
+			}
+		}
+		request.setAttribute("gdsViewList", gdsPage);
 	}
+	// ↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑ 페이징 ↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑
 
 	// 입력 ==================================================
 	public void insertGd(Goods gd, HttpServletRequest request, HttpServletResponse response) {
@@ -111,7 +142,6 @@ public class GoodsDAO {
 			System.out.println("insertGd해당항목 없음");
 		}
 	}
-
 
 	public void insertGdtlTwo(HashMap<String, Object> map, HttpServletRequest request, HttpServletResponse response) {
 
@@ -162,13 +192,14 @@ public class GoodsDAO {
 		// ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓ 옵션 여러개 입력할 때 ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓
 		Option op = new Option();
 		for (int i = 0; i < opl.getOpl_name().size(); i++) {
-			
-			if(!opl.getOpl_name().get(i).equals("") && !opl.getOpl_price().get(i).equals("") && !opl.getOpl_stock().get(i).equals("")) {
-				
+
+			if (!opl.getOpl_name().get(i).equals("") && !opl.getOpl_price().get(i).equals("")
+					&& !opl.getOpl_stock().get(i).equals("")) {
+
 				op.setOp_name(opl.getOpl_name().get(i));
 				op.setOp_price(new BigDecimal(opl.getOpl_price().get(i)));
 				op.setOp_stock(new BigDecimal(opl.getOpl_stock().get(i)));
-			
+
 				// 입력(상품상세 파라메터 작성goods, goodsDtl)
 				HashMap<String, Object> map2 = new HashMap<String, Object>();
 				map2.put("goods", gd);
@@ -178,11 +209,10 @@ public class GoodsDAO {
 			}
 		}
 		// ↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑ 옵션 여러개 입력할 때 ↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑
-
 	}
 
 	// 업데이트================================================
-	
+
 	// 트랜잭션 3가지 테이블 입력시 상품번호 시퀀스충돌 방지?
 	// @Transactional(rollbackFor = Exception.class)
 	public void updateGdsInfo(Goods gd, GoodsDtl gdtl, OptionList opl, HttpServletRequest request,
@@ -202,21 +232,18 @@ public class GoodsDAO {
 		// ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓ 옵션 여러개 입력할 때 ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓
 		Option op = new Option();
 		for (int i = 0; i < opl.getOpl_name().size(); i++) {
-			if(!opl.getOpl_name().get(i).equals("") && !opl.getOpl_price().get(i).equals("") && !opl.getOpl_stock().get(i).equals("")) {
+			if (!opl.getOpl_name().get(i).equals("") && !opl.getOpl_price().get(i).equals("")
+					&& !opl.getOpl_stock().get(i).equals("")) {
 				op.setOp_no(opl.getOpl_no().get(i));
 				op.setOp_name(opl.getOpl_name().get(i));
 				op.setOp_price(new BigDecimal(opl.getOpl_price().get(i)));
 				op.setOp_stock(new BigDecimal(opl.getOpl_stock().get(i)));
 				// 입력(상품상세 파라메터 작성goods, goodsDtl)
 				HashMap<String, Object> map2 = new HashMap<String, Object>();
-	
+
 				map2.put("goods", gd);
 				map2.put("option", op);
-	
-				System.out.println(gd.getGd_clfl());
-				System.out.println(gd.getGd_clfm());
-				System.out.println(gd.getGd_clfs());
-	
+
 				// 수정화면에서 옵션을 추가할시 수정이 아닌 입력이 필요
 				if (op.getOp_no().equals("")) {
 					System.out.println("수정화면 옵션 입력");
@@ -242,7 +269,6 @@ public class GoodsDAO {
 
 	public void updateGdtlTwo(HashMap<String, Object> map, HttpServletRequest request, HttpServletResponse response) {
 
-		System.out.println("updateGdtlTwo 시작");
 		if (ss.getMapper(GoodsMapper.class).updateGdtlTwo(map) == 1) {
 
 			System.out.println("updateGdtlTwo성공");
@@ -294,44 +320,43 @@ public class GoodsDAO {
 
 	// 트랜잭션 (옵션, 상세, 상품, 이미지) 삭제
 	public void deleteGdsInfo(Goods gd, HttpServletRequest request) throws Exception {
-		
+
 		// 이미지 파일명 가져오기
 		String imgl = gd.getGd_imgl();
 		String imgm = gd.getGd_imgm();
 		String imgs = gd.getGd_imgs();
 		String imgss = gd.getGd_imgss();
-		
+
 		// 서버기본경로 (프로젝트 폴더 아님)
 		String defaultPath = request.getSession().getServletContext().getRealPath("/");
 		String path = defaultPath + "upload" + File.separator + "";
-		
+
 		// 옵션 삭제
 		deleteGoodsOpByNo(gd);
 		// 상품상세 삭제
 		deleteGoodsDtlByNo(gd);
 		// 상품 삭제
 		deleteGoodsByNo(gd);
-		
+
 		// 이미지 삭제
-		if(fileDelete(path, imgl) && fileDelete(path, imgm) && fileDelete(path, imgs) && fileDelete(path, imgss)) {
+		if (fileDelete(path, imgl) && fileDelete(path, imgm) && fileDelete(path, imgs) && fileDelete(path, imgss)) {
 			System.out.println("이미지 삭제 완료");
-		}else {
+		} else {
 			System.out.println("이미지 삭제 실패");
 		}
-		
 	}
-	
+
 	// 파일 삭제
-	public boolean fileDelete(String path, String filename) throws Exception{
-		
-//		System.out.println("path==="+path);
-//		System.out.println("filename==="+filename);
+	public boolean fileDelete(String path, String filename) throws Exception {
+
+		// System.out.println("path==="+path);
+		// System.out.println("filename==="+filename);
 		// path 파일 경로, filename 파일 이름
 		File oldFile = new File(path + filename);
-		
-		if(oldFile.delete()) {
+
+		if (oldFile.delete()) {
 			return true;
-		}else {
+		} else {
 			throw new Exception();
 		}
 	}

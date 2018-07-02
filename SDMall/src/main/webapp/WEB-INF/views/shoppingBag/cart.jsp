@@ -25,37 +25,38 @@
 						<div class="cart_title">Shopping Cart</div>
 						<div class="cart_items">
 							<ul class="cart_list">
-								<c:forEach var="list" items="${cartItems }">
-								<li class="cart_item clearfix">
-									<input type="hidden" style="display: none;" value="${list.sb_no }">
-									<div class="cart_item_image">
-									<img style="max-width: 30px;" src="resources/etc/${list.gd_imgm }">
-									</div>
-									<div class="cart_item_info d-flex flex-md-row flex-column justify-content-between">
-										<div class="cart_item_name cart_info_col">
-											<div class="cart_item_title">Name</div>
-											<div class="cart_item_text">${list.gd_name }</div>
-										</div>
-										<div class="cart_item_color cart_info_col">
-											<div class="cart_item_title">Color</div>
-											<div class="cart_item_text">${list.op_name }</div>
-										</div>
-										<div class="cart_item_quantity cart_info_col">
-											<div class="cart_item_title">Quantity</div>
-											<div class="cart_item_text">${list.sb_quantity }</div>
-										</div>
-										<div class="cart_item_price cart_info_col">
-											<div class="cart_item_title">Price</div>
-											<div class="cart_item_text">${list.op_price }</div>
-										</div>
-										<div class="cart_item_total cart_info_col">
-											<div class="cart_item_title">Total</div>
-											<div class="cart_item_text">${list.gd_price }</div>
-										</div>
-									</div>
-								</li>
+									<c:forEach var="list" items="${cartItems }">
+										<li class="cart_item clearfix"><input type="hidden"
+											style="display: none;" value="${list.sb_no }">
+											<div class="cart_item_image">
+												<img style="max-width: 30px;"
+													src="resources/etc/${list.gd_imgm }">
+											</div>
+											<div
+												class="cart_item_info d-flex flex-md-row flex-column justify-content-between">
+												<div class="cart_item_name cart_info_col">
+													<div class="cart_item_title">Name</div>
+													<div class="cart_item_text">${list.gd_name }</div>
+												</div>
+												<div class="cart_item_color cart_info_col">
+													<div class="cart_item_title">Color</div>
+													<div class="cart_item_text">${list.op_name }</div>
+												</div>
+												<div class="cart_item_quantity cart_info_col">
+													<div class="cart_item_title">Quantity</div>
+													<div class="cart_item_text">${list.sb_quantity }</div>
+												</div>
+												<div class="cart_item_price cart_info_col">
+													<div class="cart_item_title">Price</div>
+													<div class="cart_item_text">${list.op_price }</div>
+												</div>
+												<div class="cart_item_total cart_info_col">
+													<div class="cart_item_title">Total</div>
+													<div class="cart_item_text">${list.gd_price }</div>
+												</div>
+											</div></li>
 									</c:forEach>
-							</ul>
+								</ul>
 						</div>
 						
 						<!-- Order Total -->

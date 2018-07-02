@@ -20,9 +20,12 @@
 <script type=text/javascript charset=utf-8
 	src="${pageContext.request.contextPath}/resources/daumeditor/js/editor_loader.js"></script>
 <script type="text/javascript">
+
 function saveContent() {
+	$("#opSave").trigger("click");
     Editor.save(); // 이 함수를 호출하여 글을 등록하면 된다.
 }
+
 function deleteGoods(){
 	var ok =confirm("정말 삭제 하시겠습니까?");
 	if(ok){
@@ -37,7 +40,7 @@ function deleteGoods(){
 		var imgss=$("input[name=gd_imgss]").val();
 		var sellerid=$("input[name=gd_sellerid]").val();
 	    
-	    param= {'gd_no':gdno, 'gd_imgl':imgl, 'gd_imgm':imgm, 'gd_imgs':imgs, 'gd_imgss':imgss, 'gd_sellerid':sellerid};
+	    var param= {'gd_no':gdno, 'gd_imgl':imgl, 'gd_imgm':imgm, 'gd_imgs':imgs, 'gd_imgss':imgss, 'gd_sellerid':sellerid};
 	    
 		for(var key in param) {
 	        var hiddenField = document.createElement("input");
@@ -51,19 +54,10 @@ function deleteGoods(){
 	    form.submit();
 	}
 }
+
 $(function(){
 	
-/* 	$("#delete_button").click(function(){
-		var gdno=$("input[name=gd_no]").val();
-		var imgl=$("input[name=gd_imgl]").val();
-		var imgm=$("input[name=gd_imgm]").val();
-		var imgs=$("input[name=gd_imgs]").val();
-		var imgss=$("input[name=gd_imgss]").val();
-		location.href = "goods.delete?gd_no="+gdno+"&gd_imgl="+imgl+"&gd_imgm="+imgm+"&gd_imgs="+imgs+"&gd_imgss="+imgss;
-		// 새창 window.open("goods.list");
-	}); */
-	
-//구버전	$(".ct1").click(function() {
+	//구버전	$(".ct1").click(function() {
 	$(document).on("click",".ct1",function(){
 		var cn = $(this).attr("category_num");
 		var clfname = $(this).text();
@@ -159,21 +153,26 @@ $(function(){
 	
 	
 	// ▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼ 옵션값 배열로 저장 input hidden으로 넘기기 ▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼
-	// db에 저장된 옵션 사이지 저장 추가 버튼 클릭시 옵션 번호증가
+	// db에 저장된 옵션 사이즈 저장 추가 버튼 클릭시 옵션 번호증가
 	var opN = $("#opSize").val();
 	
 	$(document).on("click","#opPlus",function(){
-		var opInputN = $("<input>").attr("class","inpWidth").attr("name", "op_name"+opN);
+		var opInputN = $("<input>").attr("class","inpWidth").attr("name", "op_name"+opN).attr("maxlength","20");
 		var opInputNo = $("<input>").attr("type","hidden").attr("name", "op_no"+opN);
 		var opSpanN = $("<span></span>").append(opInputN, opInputNo);
 		
-		var opInputP = $("<input>").attr("class","inpWidth").attr("name", "op_price"+opN);
+		var opInputP = $("<input>").attr("class","inpWidth").attr("name", "op_price"+opN).attr("maxlength","7");
 		var opSpanP = $("<span></span>").append(opInputP);
 		
-		var opInputS = $("<input>").attr("class","inpWidth").attr("name", "op_stock"+opN);
+		var opInputS = $("<input>").attr("class","inpWidth").attr("name", "op_stock"+opN).attr("maxlength","4");
 		var opSpanS = $("<span></span>").append(opInputS);
+		
 		var opLi = $("<li></li>").attr("class","opTb").append(opSpanN, opSpanP, opSpanS);
-		$(".opUl").append(opLi);
+		
+		var opInputChk = $("<input>").attr("type","checkbox").attr("name","opChk");
+		var opLiChk = $("<li></li>").attr("class","opChk").append(opInputChk);
+		
+		$(".opUl").append(opLi, opLiChk);
 		
 		opN++;
 	});
@@ -202,28 +201,34 @@ $(function(){
 	// ▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲ 옵션값 배열로 저장 input hidden으로 넘기기 ▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲
 	
 });
-	var sel_file;
-	$(document).ready(function(){  
-		$("#input_img").on("change", handleImgFileSelect);
+
+var sel_file;
+$(document).ready(function(){  
+	$("#input_img").on("change", handleImgFileSelect);
+});
+
+function handleImgFileSelect(e){
+	var files = e.target.files;
+	var filesArr = Array.prototype.slice.call(files);
+	filesArr.forEach(function(f){
+		if(!f.type.match("image.*")){alert("확장자는 이미지 확장자만 가능")
+			return;
+		}
+		sel_file = f;
+		var reader = new FileReader();
+		reader.onload = function(e){
+			$("#img1").attr("src", e.target.result); 
+			$("#img2").attr("src", e.target.result);
+			$("#img3").attr("src", e.target.result);
+			$("#img4").attr("src", e.target.result);
+		}
+		reader.readAsDataURL(f);
 	});
-	function handleImgFileSelect(e){
-		var files = e.target.files;
-		var filesArr = Array.prototype.slice.call(files);
-		filesArr.forEach(function(f){
-			if(!f.type.match("image.*")){alert("확장자는 이미지 확장자만 가능")
-				return;
-			}
-			sel_file = f;
-			var reader = new FileReader();
-			reader.onload = function(e){
-				$("#img1").attr("src", e.target.result); 
-				$("#img2").attr("src", e.target.result);
-				$("#img3").attr("src", e.target.result);
-				$("#img4").attr("src", e.target.result);
-			}
-			reader.readAsDataURL(f);
-		});
-	}
+}
+
+function opDelete(){
+
+}
 </script>
 
 <title>Goods</title>
@@ -326,11 +331,11 @@ h3 {
 					</tr>
 					<tr>
 						<td class="gdTd1 tdFont">상품명 필수(20)</td>
-						<td class="gdTd2 tdFont"><input name="gd_name" value="${gdsView.gd_name}"></td>
+						<td class="gdTd2 tdFont"><input name="gd_name" value="${gdsView.gd_name}" maxlength="20"></td>
 					</tr>
 					<tr>
 						<td class="gdTd1 tdFont">모델명(20)</td>
-						<td class="gdTd2 tdFont"><input name="gt_mdlname" value="${gdsView.gt_mdlname}"></td>
+						<td class="gdTd2 tdFont"><input name="gt_mdlname" value="${gdsView.gt_mdlname}" maxlength="20"></td>
 					</tr>
 					<tr>
 						<td class="gdTd1 tdFont">상품상세설명 필수</td>
@@ -348,7 +353,7 @@ h3 {
 					</tr>
 					<tr>
 						<td class="gdTd1 tdFont">검색어설정(40)</td>
-						<td class="gdTd2 tdFont"><input name="gt_keyword" value="${gdsView.gt_keyword}"></td>
+						<td class="gdTd2 tdFont"><input name="gt_keyword" value="${gdsView.gt_keyword}" maxlength="40"></td>
 					</tr>
 				</tbody>
 			</table>
@@ -364,11 +369,11 @@ h3 {
 				<tbody>
 					<tr>
 						<td class="gdTd1 tdFont">소비자가 필수(7)</td>
-						<td class="gdTd2 tdFont"><input name="gd_csmprice" value="${gdsView.gd_csmprice}"></td>
+						<td class="gdTd2 tdFont"><input name="gd_csmprice" value="${gdsView.gd_csmprice}" maxlength="7"></td>
 					</tr>
 					<tr>
 						<td class="gdTd1 tdFont">판매가 필수(7)</td>
-						<td class="gdTd2 tdFont"><input name="gd_price" value="${gdsView.gd_price}"></td>
+						<td class="gdTd2 tdFont"><input name="gd_price" value="${gdsView.gd_price}" maxlength="7"></td>
 					</tr>
 					
 				</tbody>
@@ -392,26 +397,21 @@ h3 {
 						<c:forEach var="h" begin="0" end="${gdsOp.size()-1}" step="1">
 							<li class="opTb">
 								<span>
-									<input class="inpWidth" name="op_name${h}" value="${gdsOp[h].op_name}">
+									<input class="inpWidth" name="op_name${h}" value="${gdsOp[h].op_name}" maxlength="20">
 									<input type="hidden" name="op_no${h}" value="${gdsOp[h].op_no}">
 								</span><br>
 								<span>
-									<input class="inpWidth" name="op_price${h}" value="${gdsOp[h].op_price}">
+									<input class="inpWidth" name="op_price${h}" value="${gdsOp[h].op_price}" maxlength="7">
 								</span><br>
 								<span>
-									<input class="inpWidth" name="op_stock${h}" value="${gdsOp[h].op_stock}">
+									<input class="inpWidth" name="op_stock${h}" value="${gdsOp[h].op_stock}" maxlength="4">
 								</span>
 							</li>
+							<li class="opChk"><input type="checkbox" name="opChk" value="${gdsOp[h].op_no}"></li>
 						</c:forEach>
 						</c:if>
 						</ul>
 						</div>
-						<li class="opTbr">
-							<button id="opPlus">추가</button>
-						</li>
-						<li class="opTbr">
-							<button id="opSave">적용</button>
-						</li>
 						<input id="opSize" type="hidden" value="${gdsOp.size()}">
 						<input name="opl_no" type="hidden">
 						<input name="opl_name" type="hidden">
@@ -424,6 +424,20 @@ h3 {
 					</tr>
 					<tr>
 						<td class="gdTd1 tdFont">옵션재고 필수(4)</td>
+					</tr>
+					<tr>
+						<td class="gdTd1"></td>
+						<td class="gdTd2">
+							<span class="opTbr">
+								<button id="opPlus">추가</button>
+							</span>
+							<span class="opTbr">
+								<button id="opSave">추가 적용</button>
+							</span>
+							<span class="opTbr">
+								<button id="opDelete">삭제</button>
+							</span>
+						</td>
 					</tr>
 				</tbody>
 			</table>
@@ -502,35 +516,35 @@ h3 {
 				<tbody>
 					<tr>
 						<td class="gdTd1 tdFont">제조사(20)</td>
-						<td class="gdTd2 tdFont"><input name="gt_maker" value="${gdsView.gt_maker}"></td>
+						<td class="gdTd2 tdFont"><input name="gt_maker" value="${gdsView.gt_maker}" maxlength="20"></td>
 					</tr>
 					<tr>
 						<td class="gdTd1 tdFont">브랜드(20)</td>
-						<td class="gdTd2 tdFont"><input name="gt_brand" value="${gdsView.gt_brand}"></td>
+						<td class="gdTd2 tdFont"><input name="gt_brand" value="${gdsView.gt_brand}" maxlength="20"></td>
 					</tr>
 					<tr>
-						<td class="gdTd1 tdFont">제조일자(20)</td>
-						<td class="gdTd2 tdFont"><input name="gt_mfd" value="${gdsView.gt_mfd}"></td>
+						<td class="gdTd1 tdFont">제조일자(8)</td>
+						<td class="gdTd2 tdFont"><input name="gt_mfd" value="${gdsView.gt_mfd}" maxlength="8"></td>
 					</tr>
 					<tr>
-						<td class="gdTd1 tdFont">유효기간(20)</td>
-						<td class="gdTd2 tdFont"><input name="gt_exp" value="${gdsView.gt_exp}"></td>
+						<td class="gdTd1 tdFont">유효기간(8)</td>
+						<td class="gdTd2 tdFont"><input name="gt_exp" value="${gdsView.gt_exp}" maxlength="8"></td>
 					</tr>
 					<tr>
 						<td class="gdTd1 tdFont">소재(20)</td>
-						<td class="gdTd2 tdFont"><input name="gt_material" value="${gdsView.gt_material}"></td>
+						<td class="gdTd2 tdFont"><input name="gt_material" value="${gdsView.gt_material}" maxlength="20"></td>
 					</tr>
 					<tr>
 						<td class="gdTd1 tdFont">전체중량(kg)(20)</td>
-						<td class="gdTd2 tdFont"><input name="gt_weight" value="${gdsView.gt_weight}"></td>
+						<td class="gdTd2 tdFont"><input name="gt_weight" value="${gdsView.gt_weight}" maxlength="20"></td>
 					</tr>
 					<tr>
 						<td class="gdTd1 tdFont">부피(cm)(20)</td>
-						<td class="gdTd2 tdFont"><input name="gt_volume" value="${gdsView.gt_volume}"></td>
+						<td class="gdTd2 tdFont"><input name="gt_volume" value="${gdsView.gt_volume}" maxlength="20"></td>
 					</tr>
 					<tr>
 						<td class="gdTd1 tdFont">원산지(20)</td>
-						<td class="gdTd2 tdFont"><input name="gt_origin" value="${gdsView.gt_origin}"></td>
+						<td class="gdTd2 tdFont"><input name="gt_origin" value="${gdsView.gt_origin}" maxlength="20"></td>
 					</tr>
 				</tbody>
 			</table>
@@ -546,11 +560,11 @@ h3 {
 				<tbody>
 					<tr>
 						<td class="gdTd1 tdFont">배송비 필수(20)</td>
-						<td class="gdTd2 tdFont"><input name="gd_dlvchrg" value="${gdsView.gd_dlvchrg}"></td>
+						<td class="gdTd2 tdFont"><input name="gd_dlvchrg" value="${gdsView.gd_dlvchrg}" maxlength="20"></td>
 					</tr>
 					<tr>
-						<td class="gdTd1 tdFont">출고지 필수(20)</td>
-						<td class="gdTd2 tdFont"><input name="gd_outarea" value="${gdsView.gd_outarea}"></td>
+						<td class="gdTd1 tdFont">출고지 필수(12)</td>
+						<td class="gdTd2 tdFont"><input name="gd_outarea" value="${gdsView.gd_outarea}" maxlength="12"></td>
 					</tr>
 				</tbody>
 			</table>

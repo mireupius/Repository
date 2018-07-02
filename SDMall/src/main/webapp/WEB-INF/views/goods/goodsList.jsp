@@ -16,13 +16,77 @@ h3 {
 	color: #fff;
 	background-color: #848898;
 }
-
 .imgli {
 	float: left;
 	width: 200px;
 }
 </style>
 <script type="text/javascript">
+function nullReplace(a){
+	if(a == null){
+		return "";
+	}
+	return a;
+}
+
+function pageGo(p){
+	// 주의사항: 오름차순과 내림차순이 페이징 과정에서 반전 되는 것을 유의 해야함
+	//         오름차순과 내림차순 선택시 asc와 desc를 반대로 설정해줘야함
+	var k_name = $("#sKey").val();
+	var k_value = $("#sValue").val();
+	var sort_name = $("#sort").val();
+	var desc_name = $("#desc").val();
+	var curPage = p;
+	
+	$.ajax({
+		url : "goods.search.keyword",
+		data : {
+				key_name : k_name,
+				key_value : k_value,
+				sort_name : sort_name,
+				desc_name : desc_name
+				,curPage : curPage
+				},
+		success : function(json) {
+			var ar = json.goodsView;
+			curPage = json.curPage;
+			var pc = json.pageCount;
+			
+			$("#gdLstTr").empty();
+			
+			$.each(ar, function(i, s){
+				var makerTd = $("<td></td>").attr("class","gdLstTd1").text(nullReplace(s.gt_maker));
+				var brandTd = $("<td></td>").attr("class","gdLstTd1").text(nullReplace(s.gt_brand));
+				var mdlnameTd = $("<td></td>").attr("class","gdLstTd1").text(nullReplace(s.gt_mdlname));
+				var originTd = $("<td></td>").attr("class","gdLstTd1").text(nullReplace(s.gt_origin));
+				var noTd = $("<td></td>").attr("class","gdLstTd1").text(4*(curPage-1)+1+i);
+				var codeA = $("<a></a>").attr("href","goods.view?gd_no="+s.gd_no).text(s.gd_no);
+				var codeTd = $("<td></td>").attr("class","gdLstTd1").append(codeA);
+				var nameImg=$("<img>").attr("src","${pageContext.request.contextPath}/upload/"+s.gd_imgl);
+				nameImg.css("width","44").css("height","44");
+				var nameTd = $("<td></td>").attr("class","gdLstTd1").append(nameImg);
+				nameTd.append("&nbsp;&nbsp; " + s.gd_name);
+				var priceTd = $("<td></td>").attr("class","gdLstTd1").text(s.gd_price);
+				var cmpriceTd = $("<td></td>").attr("class","gdLstTd1").text(s.gd_csmprice);
+				var tr = $("<tr></tr>").append(noTd, codeTd, nameTd, priceTd,cmpriceTd,makerTd,brandTd,mdlnameTd,originTd);
+				$("#gdLstTr").append(tr);
+			});
+			
+			$("#pageDiv").empty();
+			for (var i =1 ; i <= pc ; i++){
+				if(curPage == i){
+					var pageA = $("<a></a>").attr("class","pageNo red").text(i);
+				}else{
+					var pageA = $("<a></a>").attr("class","pageNo").text(i);
+				}
+				pageA.attr("onclick","pageGo("+ i +");")
+				
+				$("#pageDiv").append(pageA,"&nbsp;&nbsp;");
+			}
+		}
+	});
+}
+
 $(function(){
 		
 		$("#sValue").keyup(function(e) {
@@ -38,44 +102,58 @@ $(function(){
 			var k_value = $("#sValue").val();
 			var sort_name = $("#sort").val();
 			var desc_name = $("#desc").val();
+			var curPage = 1;
+
 			$.ajax({
+				//goods.search.keyword?key_name="gd_name"&key_value="00"&sort_name="gd_name"&gd_sellerid ="a"
 				url : "goods.search.keyword",
 				data : {
 						key_name : k_name,
 						key_value : k_value,
 						sort_name : sort_name,
-						desc_name : desc_name},
+						desc_name : desc_name
+						,curPage:curPage
+						},
 				success : function(json) {
 					var ar = json.goodsView;
+					curPage = json.curPage;
+					var pc = json.pageCount;
+
+					$("#gdLstTr").empty();
 					
-					$.each(ar, function(i, c){
-						$("#gdLstTr").empty();
-						
-						$.each(ar, function(i, s){
-							var makerTd = $("<td></td>").attr("class","gdLstTd1").text(s.gt_maker);
-							var brandTd = $("<td></td>").attr("class","gdLstTd1").text(s.gt_brand);
-							var mdlnameTd = $("<td></td>").attr("class","gdLstTd1").text(s.gt_mdlname);
-							var originTd = $("<td></td>").attr("class","gdLstTd1").text(s.gt_origin);
-							
-							var noTd = $("<td></td>").attr("class","gdLstTd1").text(i+1);
-							var codeA = $("<a></a>").attr("href","goods.view?gd_no="+s.gd_no).text(s.gd_no);
-							var codeTd = $("<td></td>").attr("class","gdLstTd1").append(codeA);
-							var nameImg=$("<img>").attr("src","${pageContext.request.contextPath}/upload/"+s.gd_imgl);
-							nameImg.css("width","44").css("height","44");
-							var nameTd = $("<td></td>").attr("class","gdLstTd1").append(nameImg);
-							nameTd.append("&nbsp;&nbsp; " + s.gd_name);
-							var priceTd = $("<td></td>").attr("class","gdLstTd1").text(s.gd_price);
-							var cmpriceTd = $("<td></td>").attr("class","gdLstTd1").text(s.gd_csmprice);
-							var tr = $("<tr></tr>").append(noTd, codeTd, nameTd, priceTd,cmpriceTd,makerTd,brandTd,mdlnameTd,originTd);
-							$("#gdLstTr").append(tr);
-						});
-						
+					$.each(ar, function(i, s){
+						var makerTd = $("<td></td>").attr("class","gdLstTd1").text(nullReplace(s.gt_maker));
+						var brandTd = $("<td></td>").attr("class","gdLstTd1").text(nullReplace(s.gt_brand));
+						var mdlnameTd = $("<td></td>").attr("class","gdLstTd1").text(nullReplace(s.gt_mdlname));
+						var originTd = $("<td></td>").attr("class","gdLstTd1").text(nullReplace(s.gt_origin));
+						var noTd = $("<td></td>").attr("class","gdLstTd1").text(4*(curPage-1)+1+i);
+						var codeA = $("<a></a>").attr("href","goods.view?gd_no="+s.gd_no).text(s.gd_no);
+						var codeTd = $("<td></td>").attr("class","gdLstTd1").append(codeA);
+						var nameImg=$("<img>").attr("src","${pageContext.request.contextPath}/upload/"+s.gd_imgl);
+						nameImg.css("width","44").css("height","44");
+						var nameTd = $("<td></td>").attr("class","gdLstTd1").append(nameImg);
+						nameTd.append("&nbsp;&nbsp; " + s.gd_name);
+						var priceTd = $("<td></td>").attr("class","gdLstTd1").text(s.gd_price);
+						var cmpriceTd = $("<td></td>").attr("class","gdLstTd1").text(s.gd_csmprice);
+						var tr = $("<tr></tr>").append(noTd, codeTd, nameTd, priceTd,cmpriceTd,makerTd,brandTd,mdlnameTd,originTd);
+						$("#gdLstTr").append(tr);
 					});
+						
+					$("#pageDiv").empty();
+					for (var i =1 ; i <= pc ; i++){
+						if(curPage == i){
+							var pageA = $("<a></a>").attr("class","pageNo red").text(i);
+						}else{
+							var pageA = $("<a></a>").attr("class","pageNo").text(i);
+						}
+						pageA.attr("onclick","pageGo("+ i +");")
+						
+						$("#pageDiv").append(pageA,"&nbsp;&nbsp;");
+					}
 				}
 			});
 		});
 });
-
 </script>
 </head>
 <body>
@@ -121,8 +199,8 @@ $(function(){
 											<option value="gt_keyword">상품 검색태그</option>
 									</select>
 									<select class="gdLstSel" id="desc" >
-											<option value="asc">오름차순</option>
-											<option value="desc">내림차순</option>
+											<option value="desc">오름차순</option>
+											<option value="asc">내림차순</option>
 									</select>
 									<input id="sValue" ><button id="s_bt">검색</button>
 									</td>
@@ -131,9 +209,6 @@ $(function(){
 						</table>
 					</div>
 				</div>
-				<br>
-				<br>
-				<br>
 				<div class="gdLstTb3">
 					<h3>상품목록</h3>
 				</div>
@@ -172,6 +247,19 @@ $(function(){
 							</tbody>
 						</table>
 					</div>
+				</div>
+				
+				<div id="pageDiv" align="center">
+					<c:forEach var="p" begin="1" end="${pageCount}">
+						<c:choose>
+							<c:when test="${p == 1}">
+								<a class="pageNo red" onclick="pageGo(${p});">${p}&nbsp;</a>
+							</c:when>
+							<c:otherwise>
+								<a class="pageNo" onclick="pageGo(${p});">${p}&nbsp;</a>
+							</c:otherwise>
+						</c:choose>
+					</c:forEach>
 				</div>
 				<br>
 				<br>

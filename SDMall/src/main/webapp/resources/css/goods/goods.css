@@ -92,8 +92,14 @@ li {
 	float: left;
 	width: 150px;
 }
+
+.opChk{
+	float: left;
+	width: 20px;
+}
+
 .opTbr{
-	float: right;
+	float: left;
 	width: 100px;
 }
 .opUl{

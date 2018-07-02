@@ -44,6 +44,8 @@ function saveContent() {
  		var dlvchrgField = document.tx_editor_form.gd_dlvchrg;
  		var outareaField = document.tx_editor_form.gd_outarea;
  	
+ 		$("#opSave").trigger("click");
+ 		
  		if (clflField==null) {
  			alert("상품 대분류 를 선택해주세요.");
  			$("body").scrollTop(0);
@@ -214,13 +216,13 @@ $(function(){
 
 	$(document).on("click","#opPlus",function(){
 
-		var opInputN = $("<input>").attr("class","inpWidth").attr("name", "op_name"+opN);
+		var opInputN = $("<input>").attr("class","inpWidth").attr("name", "op_name"+opN).attr("maxlength","20");
 		var opSpanN = $("<span></span>").append(opInputN);
 		
-		var opInputP = $("<input>").attr("class","inpWidth").attr("name", "op_price"+opN);
+		var opInputP = $("<input>").attr("class","inpWidth").attr("name", "op_price"+opN).attr("maxlength","7");
 		var opSpanP = $("<span></span>").append(opInputP);
 		
-		var opInputS = $("<input>").attr("class","inpWidth").attr("name", "op_stock"+opN);
+		var opInputS = $("<input>").attr("class","inpWidth").attr("name", "op_stock"+opN).attr("maxlength","4");
 		var opSpanS = $("<span></span>").append(opInputS);
 
 		var opLi = $("<li></li>").attr("class","opTb").append(opSpanN, opSpanP, opSpanS);
@@ -374,11 +376,11 @@ h3 {
 				<tbody>
 					<tr>
 						<td class="gdTd1">상품명 필수(20)</td>
-						<td class="gdTd2"><input class="inpWidth" name="gd_name"></td>
+						<td class="gdTd2"><input class="inpWidth" name="gd_name" maxlength="20"></td>
 					</tr>
 					<tr>
 						<td class="gdTd1">모델명(20)</td>
-						<td class="gdTd2"><input class="inpWidth" name="gt_mdlname"></td>
+						<td class="gdTd2"><input class="inpWidth" name="gt_mdlname" maxlength="20"></td>
 					</tr>
 					<tr>
 						<td class="gdTd1">상품상세설명 필수</td>
@@ -396,7 +398,7 @@ h3 {
 					</tr>
 					<tr>
 						<td class="gdTd1">검색어설정(40)</td>
-						<td class="gdTd2"><input class="inpWidth" name="gt_keyword"></td>
+						<td class="gdTd2"><input class="inpWidth" name="gt_keyword" maxlength="40"></td>
 					</tr>
 				</tbody>
 			</table>
@@ -412,11 +414,11 @@ h3 {
 				<tbody>
 					<tr>
 						<td class="gdTd1">소비자가 필수(7)</td>
-						<td class="gdTd2"><input class="inpWidth" name="gd_csmprice"></td>
+						<td class="gdTd2"><input class="inpWidth" name="gd_csmprice" maxlength="7"></td>
 					</tr>
 					<tr>
 						<td class="gdTd1">판매가 필수(7)</td>
-						<td class="gdTd2"><input class="inpWidth" name="gd_price"></td>
+						<td class="gdTd2"><input class="inpWidth" name="gd_price" maxlength="7"></td>
 					</tr>
 					
 				</tbody>
@@ -438,23 +440,17 @@ h3 {
 						<ul class="opUl">
 							<li class="opTb">
 								<span>
-									<input class="inpWidth" name="op_name0">
+									<input class="inpWidth" name="op_name0" maxlength="20">
 								</span><br>
 								<span>
-									<input class="inpWidth" name="op_price0">
+									<input class="inpWidth" name="op_price0" maxlength="7">
 								</span><br>
 								<span>
-									<input class="inpWidth" name="op_stock0">
+									<input class="inpWidth" name="op_stock0" maxlength="4">
 								</span>
 							</li>
 						</ul>
 						</div>
-						<li class="opTbr">
-							<button id="opPlus">추가</button>
-						</li>
-						<li class="opTbr">
-							<button id="opSave">적용</button>
-						</li>
 						<input class="inpWidth" name="opl_name" type="hidden">
 						<input class="inpWidth" name="opl_price" type="hidden">
 						<input class="inpWidth" name="opl_stock" type="hidden">
@@ -465,6 +461,17 @@ h3 {
 					</tr>
 					<tr>
 						<td class="gdTd1">옵션재고 필수(4)</td>
+					</tr>
+					<tr>
+						<td class="gdTd1"></td>
+						<td class="gdTd2">
+							<span class="opTbr">
+								<button id="opPlus">추가</button>
+							</span>
+							<span class="opTbr">
+								<button id="opSave">적용</button>
+							</span>
+						</td>
 					</tr>
 				</tbody>
 			</table>
@@ -539,35 +546,35 @@ h3 {
 				<tbody>
 					<tr>
 						<td class="gdTd1">제조사(20)</td>
-						<td class="gdTd2"><input class="inpWidth" name="gt_maker"></td>
+						<td class="gdTd2"><input class="inpWidth" name="gt_maker" maxlength="20"></td>
 					</tr>
 					<tr>
 						<td class="gdTd1">브랜드(20)</td>
-						<td class="gdTd2"><input class="inpWidth" name="gt_brand"></td>
+						<td class="gdTd2"><input class="inpWidth" name="gt_brand" maxlength="20"></td>
 					</tr>
 					<tr>
-						<td class="gdTd1">제조일자(20)</td>
-						<td class="gdTd2"><input class="inpWidth" name="gt_mfd"></td>
+						<td class="gdTd1">제조일자(8)</td>
+						<td class="gdTd2"><input class="inpWidth" name="gt_mfd" maxlength="8"></td>
 					</tr>
 					<tr>
-						<td class="gdTd1">유효기간(20)</td>
-						<td class="gdTd2"><input class="inpWidth" name="gt_exp"></td>
+						<td class="gdTd1">유효기간(8)</td>
+						<td class="gdTd2"><input class="inpWidth" name="gt_exp" maxlength="8"></td>
 					</tr>
 					<tr>
 						<td class="gdTd1">상품소재(20)</td>
-						<td class="gdTd2"><input class="inpWidth" name="gt_material"></td>
+						<td class="gdTd2"><input class="inpWidth" name="gt_material" maxlength="20"></td>
 					</tr>
 					<tr>
 						<td class="gdTd1">전체중량(kg)(20)</td>
-						<td class="gdTd2"><input class="inpWidth" name="gt_weight"></td>
+						<td class="gdTd2"><input class="inpWidth" name="gt_weight" maxlength="20"></td>
 					</tr>
 					<tr>
 						<td class="gdTd1">부피(cm)(20)</td>
-						<td class="gdTd2"><input class="inpWidth" name="gt_volume"></td>
+						<td class="gdTd2"><input class="inpWidth" name="gt_volume" maxlength="20"></td>
 					</tr>
 					<tr>
 						<td class="gdTd1">원산지(20)</td>
-						<td class="gdTd2"><input class="inpWidth" name="gt_origin"></td>
+						<td class="gdTd2"><input class="inpWidth" name="gt_origin" maxlength="20"></td>
 					</tr>
 				</tbody>
 			</table>
@@ -583,11 +590,11 @@ h3 {
 				<tbody>
 					<tr>
 						<td class="gdTd1">배송비 필수(20)</td>
-						<td class="gdTd2"><input class="inpWidth" name="gd_dlvchrg"></td>
+						<td class="gdTd2"><input class="inpWidth" name="gd_dlvchrg" maxlength="20"></td>
 					</tr>
 					<tr>
-						<td class="gdTd1">출고지 필수(20)</td>
-						<td class="gdTd2"><input class="inpWidth" name="gd_outarea"></td>
+						<td class="gdTd1">출고지 필수(12)</td>
+						<td class="gdTd2"><input class="inpWidth" name="gd_outarea" maxlength="12"></td>
 					</tr>
 				</tbody>
 			</table>
