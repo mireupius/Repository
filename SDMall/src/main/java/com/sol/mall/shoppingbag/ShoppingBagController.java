@@ -30,8 +30,12 @@ public class ShoppingBagController {
 
 	@RequestMapping(value = "/customer.cart.go", method = RequestMethod.GET)
 	public String cartGo(ShoppingBag sb, HttpServletRequest req, HttpServletResponse res) {
+		cDAO.getAllCategory(req, res);// 메인 카테고리 호출 메소드
+		
 		sbDAO.showCartItems(sb, req, res);
-		return "shoppingBag/cart";
+		
+		req.setAttribute("contentPage", "shoppingBag/cart.jsp");
+		return "main";
 	}
 
 }

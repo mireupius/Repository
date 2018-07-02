@@ -312,6 +312,12 @@
 		<jsp:include page="${contentPage }"></jsp:include>
 	</div>
 	
+<!-- 	<div class="container"> -->
+<!-- 		<div class="row"> -->
+			
+<!-- 		</div>	 -->
+<!-- 	</div> -->
+	
 	<!-- Footer -->
 	<footer class="footer">
 		<div class="container">

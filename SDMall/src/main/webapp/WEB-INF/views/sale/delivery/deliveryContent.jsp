@@ -10,9 +10,11 @@
 <script type="text/javascript">
 	$(function() {
 
-		if ($('#allVal').val() != 0) {
-			alert($('#allVal').val() + "건 등록시도," + $('#successVal').val()
-					+ "건 등록성공");
+		var all = "${all }";
+		var success = "${success }";
+
+		if (all != "" && success != "") {
+			alert(all + "건 등록시도," + success + "건 등록성공");
 		}
 
 		$("#checkAll").click(function() {
@@ -222,8 +224,7 @@
 								</tbody>
 							</table>
 						</section>
-
-
+					</div>
 					</div>
 
 					<!-- /content-panel -->
@@ -262,8 +263,7 @@
 								type="file" style="display: inline">
 						</form>
 
-						<input value="${all }" id="allVal" hidden> <input
-							value="${success }" id="successVal" hidden>
+
 					</div>
 
 

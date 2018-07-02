@@ -33,23 +33,23 @@ public class MemberDAO {
 			System.out.println(c.getCsm_birth());
 			c.setCsm_emailAddress(csm_emailAddress);
 			m.setMs_csm_id(req.getParameter("csm_id"));
-			
+
 			// 회원가입 시 멤버십 가입
-			
-			if (ss.getMapper(MemberMapper.class).registerCSM(c) == 1 && ss.getMapper(MemberMapper.class).registerMemberShip(m) == 1) {
+
+			if (ss.getMapper(MemberMapper.class).registerCSM(c) == 1
+					&& ss.getMapper(MemberMapper.class).registerMemberShip(m) == 1) {
 				req.setAttribute("r", "가입 성공");
 
 			} else {
 				req.setAttribute("r", "가입 실패");
 			}
-			
-			
-			//if (ss.getMapper(MemberMapper.class).registerMemberShip(m) == 1) {
-				//System.out.println("멤버쉽 가입 성공");
-				
-			//} else {
-				//System.out.println("멤버쉽 가입 실패");
-			//}
+
+			// if (ss.getMapper(MemberMapper.class).registerMemberShip(m) == 1) {
+			// System.out.println("멤버쉽 가입 성공");
+
+			// } else {
+			// System.out.println("멤버쉽 가입 실패");
+			// }
 
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -140,7 +140,7 @@ public class MemberDAO {
 
 		if (cc != null) {
 			req.setAttribute("contentPage", "goods/shop.jsp");
-			
+
 			return true;
 
 		} else {
@@ -149,22 +149,22 @@ public class MemberDAO {
 		}
 
 	}
-	
+
 	public boolean csmLoginCheck2(HttpServletRequest req, HttpServletResponse res) {
-		
+
 		Customer cc = (Customer) req.getSession().getAttribute("loginCustomer");
-		
+
 		if (cc != null) {
-			//req.setAttribute("loginInfo", "csmLoginOK.jsp");
+			// req.setAttribute("loginInfo", "csmLoginOK.jsp");
 			System.out.println("마이페이지이동성공");
 			return true;
-			
+
 		} else {
 			System.out.println("마이페이지이동실패");
 			req.setAttribute("loginInfo", "loginArea.jsp");
 			return false;
 		}
-		
+
 	}
 
 	public boolean slLoginCheck(HttpServletRequest req, HttpServletResponse res) {
@@ -203,7 +203,8 @@ public class MemberDAO {
 
 		try {
 			// 세션 불러와서
-			//Customer nowSession = (Customer) req.getSession().getAttribute("loginCustomer");
+			// Customer nowSession = (Customer)
+			// req.getSession().getAttribute("loginCustomer");
 
 			SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
 			String csm_emailFront = req.getParameter("csm_emailFront");
@@ -234,7 +235,7 @@ public class MemberDAO {
 
 		try {
 			// 세션 불러오기
-			//Seller nowSession = (Seller) req.getSession().getAttribute("loginSeller");
+			// Seller nowSession = (Seller) req.getSession().getAttribute("loginSeller");
 
 			String sl_emailFront = req.getParameter("sl_emailFront");
 			String sl_autoCompleteEmail = req.getParameter("sl_autoCompleteEmail");
@@ -262,7 +263,8 @@ public class MemberDAO {
 
 		try {
 
-			if (ss.getMapper(MemberMapper.class).withdrawCSM(c) == 1 && ss.getMapper(MemberMapper.class).withdrawMemberShip(m) == 1) {
+			if (ss.getMapper(MemberMapper.class).withdrawCSM(c) == 1
+					&& ss.getMapper(MemberMapper.class).withdrawMemberShip(m) == 1) {
 
 				req.setAttribute("r", "탈퇴 성공");
 				// req.getSession().setAttribute("loginCustomer", null);

@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sol.mall.buying.BuyingMapper">
+	<insert parameterType="com.sol.mall.buying.Order"
+		id="insertOrder">
+
+		insert into sale_order values(
+		concat( to_char(sysdate,'yyyyMMdd'),
+		to_char(sale_order_seq.nextVal,'FM000000')),
+		#{so_seller_id},
+		#{so_customer_name},
+		#{so_customer_id},
+		#{so_taker_name},
+		#{so_taker_phone},
+		#{so_take_area},
+		#{so_take_area_detail},
+		#{so_customer_ph},
+		#{so_postno},
+		sysdate,
+		#{so_pay_method},
+		#{so_message},
+		'N'
+		)
+	</insert>
+
+	<insert parameterType="com.sol.mall.sale.delivery.Delivery"
+		id="insertDelivery">
+
+		insert into sale_delivery
+		(
+		sd_delivery_pno,
+		sd_delivery_no,
+		sd_seller_id,
+		sd_customer_name,
+		sd_customer_id,
+		sd_taker_name,
+		sd_delivery_state,
+		sd_state_detail,
+		sd_delivery_cost,
+		sd_product_no,
+		sd_product_name,
+		sd_option_type,
+		sd_option_info,
+		sd_amount,
+		sd_option_price,
+		sd_product_price,
+		sd_product_sellprice,
+		sd_total_price,
+		sd_taker_phone,
+		sd_take_area,
+		sd_customer_ph,
+		sd_postno,
+		sd_message,
+		sd_out_area,
+		sd_order_date,
+		sd_pay_method,
+		sd_review
+		)
+		select
+		concat(
+		to_char(sysdate,'yyyyMMdd'),
+		to_char(sale_delivery_seq.nextVal,'FM000000')),
+		so_delivery_no,
+		so_seller_id,
+		so_customer_name,
+		so_customer_id,
+		so_taker_name,
+		'배송준비중',
+		'신규주문',
+		#{sd_delivery_cost},
+		#{sd_product_no},
+		#{sd_product_name},
+		'선택형
+		옵션',
+		#{sd_option_info},
+		#{sd_amount},
+		#{sd_option_price},
+		#{sd_product_price},
+		#{sd_product_sellprice},
+		#{sd_total_price},
+		so_taker_phone,
+		concat(so_take_area,
+		concat(' ',so_take_area_detail)
+		),
+		so_customer_ph,
+		so_postno,
+		so_message,
+		#{sd_out_area},
+		so_order_date,
+		so_pay_method,
+		'N'
+		from
+		sale_order where so_seller_id = #{sd_seller_id}
+		and so_customer_id = #{sd_customer_id} and so_is_order ='N'
+	</insert>
+
+	<update id="changeIsOrderToYes"
+		parameterType="com.sol.mall.buying.Order">
+		update sale_order set so_is_order = 'Y' where
+		so_customer_id = #{so_customer_id}
+	</update>
+
+</mapper>
