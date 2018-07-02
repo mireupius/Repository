@@ -225,8 +225,12 @@ $(function(){
 		var opInputS = $("<input>").attr("class","inpWidth").attr("name", "op_stock"+opN).attr("maxlength","4");
 		var opSpanS = $("<span></span>").append(opInputS);
 
-		var opLi = $("<li></li>").attr("class","opTb").append(opSpanN, opSpanP, opSpanS);
-		$(".opUl").append(opLi);
+		var opLi = $("<li></li>").attr("class","opTb").attr("id","opLi"+opN).append(opSpanN, opSpanP, opSpanS);
+		
+		var opInputChk = $("<input>").attr("type","checkbox").attr("name","opChk").val(opN);
+		var opLiChk = $("<li></li>").attr("class","opChkLi").attr("id","ch"+opN).append(opInputChk);
+		
+		$(".opUl").append(opLi, opLiChk);
 		
 		opN++;
 	});
@@ -255,34 +259,55 @@ $(function(){
 	
 });
 
-	var sel_file;
-	
-	$(document).ready(function(){  
-		$("#input_img").on("change", handleImgFileSelect);
-	});
+var sel_file;
 
-	function handleImgFileSelect(e){
-		var files = e.target.files;
-		var filesArr = Array.prototype.slice.call(files);
-		filesArr.forEach(function(f){
-			if(!f.type.match("image.*")){alert("확장자는 이미지 확장자만 가능")
-				return;
-			}
-			
-			sel_file = f;
-			
-			var reader = new FileReader();
-			reader.onload = function(e){
-				$("#img1").attr("src", e.target.result); 
-				$("#img2").attr("src", e.target.result);
-				$("#img3").attr("src", e.target.result);
-				$("#img4").attr("src", e.target.result);
-			}
-			
-			reader.readAsDataURL(f);
-		});
-	}
+$(document).ready(function(){  
+	$("#input_img").on("change", handleImgFileSelect);
+});
+
+function handleImgFileSelect(e){
+	var files = e.target.files;
+	var filesArr = Array.prototype.slice.call(files);
+	filesArr.forEach(function(f){
+		if(!f.type.match("image.*")){alert("확장자는 이미지 확장자만 가능")
+			return;
+		}
+		
+		sel_file = f;
+		
+		var reader = new FileReader();
+		reader.onload = function(e){
+			$("#img1").attr("src", e.target.result); 
+			$("#img2").attr("src", e.target.result);
+			$("#img3").attr("src", e.target.result);
+			$("#img4").attr("src", e.target.result);
+		}
+		
+		reader.readAsDataURL(f);
+	});
+}
+
+
+function opDelete(){
 	
+	var values = document.getElementsByName("opChk");
+	
+	$.each(values, function(i, s){
+		if(s.checked){
+			alert(i);
+/* 			$("input[name=op_name"+i+"]").remove();
+			$("input[name=op_price"+i+"]").remove();
+			$("input[name=op_stock"+i+"]").remove(); */
+			$("#opLi"+i).empty();
+			$("#opLi"+i).remove();
+	/* 		values[i].remove(); */
+			
+			$("#ch"+i).empty();
+			$("#ch"+i).remove();
+		}
+	});
+}
+
 </script>
 
 <title>Goods</title>
@@ -438,7 +463,7 @@ h3 {
 						<td class="gdTd2" rowspan="3">
 						<div>
 						<ul class="opUl">
-							<li class="opTb">
+							<li class="opTb" id="opLi0">
 								<span>
 									<input class="inpWidth" name="op_name0" maxlength="20">
 								</span><br>
@@ -449,6 +474,7 @@ h3 {
 									<input class="inpWidth" name="op_stock0" maxlength="4">
 								</span>
 							</li>
+							<li class="opChkLi" id="ch0"><input type="checkbox" name="opChk" value="0"></li>
 						</ul>
 						</div>
 						<input class="inpWidth" name="opl_name" type="hidden">
@@ -470,6 +496,9 @@ h3 {
 							</span>
 							<span class="opTbr">
 								<button id="opSave">적용</button>
+							</span>
+							<span class="opTbr" onclick="opDelete();">
+								<button id="opDelete" >삭제</button>
 							</span>
 						</td>
 					</tr>

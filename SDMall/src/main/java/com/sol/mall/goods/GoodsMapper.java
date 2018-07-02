@@ -62,8 +62,11 @@ public interface GoodsMapper {
 	// 상품상세삭제
 	public abstract int deleteGoodsDtlByNo(Goods g);
 	
-	// 옵션삭제
+	// 옵션삭제 (상품번호)
 	public abstract int deleteGoodsOpByNo(Goods g);
+	
+	// 옵션삭제 (옵션번호)
+	public abstract int deleteOpByNo(Option op);
 
 	public abstract Goods getGoodsByNo(Goods goods);// 상품코드로 상품 조회
 

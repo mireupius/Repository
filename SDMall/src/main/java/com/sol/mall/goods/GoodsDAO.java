@@ -308,7 +308,7 @@ public class GoodsDAO {
 		}
 	}
 
-	// 옵션 삭제
+	// 옵션 삭제(상품번호에 해당하는 모든 옵션삭제)
 	public void deleteGoodsOpByNo(Goods gd) {
 		if (ss.getMapper(GoodsMapper.class).deleteGoodsOpByNo(gd) == 1) {
 
@@ -359,6 +359,23 @@ public class GoodsDAO {
 		} else {
 			throw new Exception();
 		}
+	}
+	
+	
+	// 옵션 삭제(옵션번호로 삭제)
+	public void deleteOpByNo(Option op) {
+		
+		if (ss.getMapper(GoodsMapper.class).deleteOpByNo(op) == 1) {
+
+			System.out.println("deleteOpByNo 성공");
+		} else {
+			System.out.println("deleteOpByNo 해당자료 없음");
+		}
+	}
+	
+	// 상품번호로 옵션 가져오기
+	public List<Option> getOptionByGdNo(Option op) {
+		return ss.getMapper(GoodsMapper.class).getOptionByNo(op);
 	}
 
 }

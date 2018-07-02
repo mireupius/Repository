@@ -44,8 +44,8 @@ function pageGo(p){
 				key_name : k_name,
 				key_value : k_value,
 				sort_name : sort_name,
-				desc_name : desc_name
-				,curPage : curPage
+				desc_name : desc_name,
+				curPage : curPage
 				},
 		success : function(json) {
 			var ar = json.goodsView;

@@ -87,9 +87,7 @@ $(function(){
 						var input = $("#ctgry1").val(cn);
 		                input.attr("name", "gd_clfl");
 					});
-				
 				}else{
-				
 					// 카테고리 선택 표시 영역
 					$("#category_select1").text(clfname + " > ");
 					var input = $("#ctgry1").val(cn);
@@ -170,7 +168,7 @@ $(function(){
 		var opLi = $("<li></li>").attr("class","opTb").append(opSpanN, opSpanP, opSpanS);
 		
 		var opInputChk = $("<input>").attr("type","checkbox").attr("name","opChk");
-		var opLiChk = $("<li></li>").attr("class","opChk").append(opInputChk);
+		var opLiChk = $("<li></li>").attr("class","opChkLi").append(opInputChk);
 		
 		$(".opUl").append(opLi, opLiChk);
 		
@@ -227,7 +225,53 @@ function handleImgFileSelect(e){
 }
 
 function opDelete(){
-
+	var ok =confirm("정말 삭제 하시겠습니까?");
+	if(ok){
+		// ▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼선택한 옵션들을 배열에 저장 ▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼
+		// 체크한 옵션 번호를 가져옴
+		var values = document.getElementsByName("opChk");
+		
+		var opl_no = [];
+		var gd_no = $("input[name=gd_no]").val();
+		
+		
+		// i값이 체크된 것만 들어 가서 배열0번등 중간에 번호가 빌 수 있음
+		$.each(values, function(i, s){
+			if(s.checked){
+				opl_no[i] = s.value;
+			}
+		});
+		// ▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲선택한 옵션들을 배열에 저장 ▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲
+		$.ajaxSettings.traditional = true;
+		$.ajax({ 
+			url : "option.delete",
+			data : {opl_no : opl_no, op_gdno : gd_no},
+			success : function(json){
+				var ar = json.option;
+				
+				$(".opUl").empty();
+				$.each(ar, function(i, s){
+					
+					var opInputN = $("<input>").attr("class","inpWidth").attr("name", "op_name"+i).attr("maxlength","20").val(s.op_name);
+					var opInputNo = $("<input>").attr("type","hidden").attr("name", "op_no"+i).val(s.op_no);
+					var opSpanN = $("<span></span>").append(opInputN, opInputNo);
+					
+					var opInputP = $("<input>").attr("class","inpWidth").attr("name", "op_price"+i).attr("maxlength","7").val(s.op_price);
+					var opSpanP = $("<span></span>").append(opInputP);
+					
+					var opInputS = $("<input>").attr("class","inpWidth").attr("name", "op_stock"+i).attr("maxlength","4").val(s.op_stock);
+					var opSpanS = $("<span></span>").append(opInputS);
+					
+					var opLi = $("<li></li>").attr("class","opTb").append(opSpanN, opSpanP, opSpanS);
+					
+					var opInputChk = $("<input>").attr("type","checkbox").attr("name","opChk");
+					var opLiChk = $("<li></li>").attr("class","opChkLi").append(opInputChk);
+					
+					$(".opUl").append(opLi, opLiChk);
+				});
+			}
+		});
+	}
 }
 </script>
 
@@ -407,7 +451,7 @@ h3 {
 									<input class="inpWidth" name="op_stock${h}" value="${gdsOp[h].op_stock}" maxlength="4">
 								</span>
 							</li>
-							<li class="opChk"><input type="checkbox" name="opChk" value="${gdsOp[h].op_no}"></li>
+							<li class="opChkLi"><input type="checkbox" name="opChk" value="${gdsOp[h].op_no}"></li>
 						</c:forEach>
 						</c:if>
 						</ul>
@@ -434,8 +478,8 @@ h3 {
 							<span class="opTbr">
 								<button id="opSave">추가 적용</button>
 							</span>
-							<span class="opTbr">
-								<button id="opDelete">삭제</button>
+							<span class="opTbr" onclick="opDelete();">
+								<button id="opDelete" >삭제</button>
 							</span>
 						</td>
 					</tr>
