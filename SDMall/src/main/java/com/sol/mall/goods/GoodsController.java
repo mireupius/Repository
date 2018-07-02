@@ -157,10 +157,10 @@ public class GoodsController {
 					e.printStackTrace();
 				}
 			}
-	
+
 			gdsDAO.getAllGoodsView(gds, request);
+			
 			request.setAttribute("contentPage", "../goods/goodsList.jsp");
-	
 			return "sale/saleIndex";
 		}else {
 			request.setAttribute("loginInfo", "loginArea.jsp");
@@ -197,6 +197,7 @@ public class GoodsController {
 				long limitFileSize = 5 * 1024 * 1024; // 5MB
 				if (limitFileSize < filesize) {
 					// 제한보다 파일크기가 클 경우
+					//??????????????????????? 구현 하기 귀찮으 ....
 				}
 	
 				// 저장경로
@@ -278,8 +279,8 @@ public class GoodsController {
 			}
 	
 			gdsDAO.getAllGoodsView(gds, request);
+			
 			request.setAttribute("contentPage", "../goods/goodsList.jsp");
-	
 			return "sale/saleIndex";
 		}else {
 			request.setAttribute("loginInfo", "loginArea.jsp");
@@ -323,12 +324,22 @@ public class GoodsController {
 		}
 	}
 
+	// 상품키워드 검색(ajax - json)
+	@RequestMapping(value = "/goods.search.keyword", method = RequestMethod.GET, produces = "application/json; charset=utf-8")
+	public @ResponseBody Paging gdsSearchKey2(Keywords k, int curPage, HttpServletRequest request, HttpServletResponse response) {
+		
+		Seller dbS = (Seller) request.getSession().getAttribute("loginSeller");
+		k.setGd_sellerid(dbS.getSl_id());
+		
+		return gdsDAO.getGoodsViewByKey(k, curPage, request);
+	}
+	
 	// 상품상세화면 표시
 	@RequestMapping(value = "/goods.view", method = RequestMethod.GET)
 	public String goodsDtlView(GoodsView gv, GoodsCategory gc, HttpServletRequest request, HttpServletResponse response) {
 		
 		if(mDAO.slLoginCheck(request, response)) {
-			// goodsView.jsp 수정시 daumeditor의 editor.jsp안의 	Editor.modify({'content': '${gdsView.gt_detail}'}); 수정필요
+			// goodsView.jsp 수정시 daumeditor의 editor.jsp안의 Editor.modify({'content': '${gdsView.gt_detail}'}); 수정필요
 			// gdsView.gt_detail 다음에디터로 작성한 상세내용 
 			gdsDAO.getGoodsView(gv, gc, request, response);
 			
@@ -340,53 +351,6 @@ public class GoodsController {
 			return "member/loginPage";
 		}
 	}
-	
-	// 상품키워드 검색(ajax - json)
-	@RequestMapping(value = "/goods.search.keyword", method = RequestMethod.GET, produces = "application/json; charset=utf-8")
-	public @ResponseBody GoodsViewList gdsSearchKey(Keywords k, HttpServletRequest request, HttpServletResponse response) {
-		
-		Seller dbS = (Seller) request.getSession().getAttribute("loginSeller");
-		k.setGd_sellerid(dbS.getSl_id());
-		
-		return gdsDAO.getGoodsViewByKey(k, request);
-	}
-	////////////////////////////////////////////////////////////////////////////////////
-	// 테스트용 지워야함
-	@RequestMapping(value = "/goods.search.keyword2", method = RequestMethod.GET, produces = "application/json; charset=utf-8")
-	public @ResponseBody Paging gdsSearchKey2(Keywords k, int curPage, HttpServletRequest request, HttpServletResponse response) {
-		
-		Seller dbS = (Seller) request.getSession().getAttribute("loginSeller");
-		k.setGd_sellerid(dbS.getSl_id());
-		
-		return gdsDAO.getGoodsViewByKey2(k,curPage, request);
-	}
-
-	// 상품표시화면 처음
-		@RequestMapping(value = "/goods.list2", method = RequestMethod.GET)
-		public String goodsList2(Goods gds, HttpServletRequest request, HttpServletResponse response) {
-			
-			if(mDAO.slLoginCheck(request, response)) {
-				
-				Seller dbS = (Seller) request.getSession().getAttribute("loginSeller");
-				gds.setGd_sellerid(dbS.getSl_id());
-
-//				gdsDAO.getAllGoodsView(gds, request);
-				gdsDAO.getAllGoodsView2(gds, request);
-		
-//				gdsDAO.getGoodsViewByKey2(k, 1, request);
-				
-				request.setAttribute("contentPage", "../goods/goodsList.jsp");
-				return "sale/saleIndex";
-			}else {
-				request.setAttribute("loginInfo", "loginArea.jsp");
-				return "member/loginPage";
-			}
-		}
-	
-	
-	
-	////////////////////////////////////////////////////////////////////////////////////
-	
 	
 	// 상품삭제
 	@RequestMapping(value = "/goods.delete", method = RequestMethod.POST)

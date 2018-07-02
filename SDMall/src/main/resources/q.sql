@@ -15,6 +15,7 @@ select gd_no, gd_name, gd_price, gd_csmprice, gd_imgl from goods_tb a, goodsdtl_
 		select * from seller_reg
 		
 select gd_sellerid from goods_tb;
+select gd_no from goods_tb;
 
 
 select * from option_tb

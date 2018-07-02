@@ -82,7 +82,7 @@
 			value="com.sol.mall" />
 		<beans:property name="mapperLocations">
 			<beans:list>
-				<beans:value>classpath:goods/goodsMapper.xml</beans:value>
+				<beans:value>classpath:goodsMapper.xml</beans:value>
 				<beans:value>classpath:deliveryMapper.xml</beans:value>
 				<beans:value>classpath:memberMapper.xml</beans:value>
 				<beans:value>classpath:categoryMapper.xml</beans:value>
