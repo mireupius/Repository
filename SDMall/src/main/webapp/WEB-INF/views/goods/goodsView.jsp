@@ -38,7 +38,7 @@ function deleteGoods(){
 		var imgss=$("input[name=gd_imgss]").val();
 		var sellerid=$("input[name=gd_sellerid]").val();
 	    
-	    param= {'gd_no':gdno, 'gd_imgl':imgl, 'gd_imgm':imgm, 'gd_imgs':imgs, 'gd_imgss':imgss, 'gd_sellerid':sellerid};
+	    var param= {'gd_no':gdno, 'gd_imgl':imgl, 'gd_imgm':imgm, 'gd_imgs':imgs, 'gd_imgss':imgss, 'gd_sellerid':sellerid};
 	    
 		for(var key in param) {
 	        var hiddenField = document.createElement("input");
