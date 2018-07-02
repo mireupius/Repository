@@ -25,8 +25,8 @@
 						<div class="cart_title">Shopping Cart</div>
 						<div class="cart_items">
 							<ul class="cart_list">
-								<li class="cart_item clearfix">
 								<c:forEach var="list" items="${cartItems }">
+								<li class="cart_item clearfix">
 									<input type="hidden" style="display: none;" value="${list.sb_no }">
 									<div class="cart_item_image">
 									<img style="max-width: 30px;" src="resources/etc/${list.gd_imgm }">
@@ -53,8 +53,8 @@
 											<div class="cart_item_text">${list.gd_price }</div>
 										</div>
 									</div>
-									</c:forEach>
 								</li>
+									</c:forEach>
 							</ul>
 						</div>
 						
