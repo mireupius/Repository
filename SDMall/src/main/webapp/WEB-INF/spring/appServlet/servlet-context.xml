@@ -82,12 +82,8 @@
 			value="com.sol.mall" />
 		<beans:property name="mapperLocations">
 			<beans:list>
-<<<<<<< HEAD
 				<beans:value>classpath:goodsMapper.xml</beans:value>
-=======
 				<beans:value>classpath:buyingMapper.xml</beans:value>
-				<beans:value>classpath:goods/goodsMapper.xml</beans:value>
->>>>>>> refs/remotes/origin/Oh16
 				<beans:value>classpath:deliveryMapper.xml</beans:value>
 				<beans:value>classpath:memberMapper.xml</beans:value>
 				<beans:value>classpath:categoryMapper.xml</beans:value>
