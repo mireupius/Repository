@@ -1,9 +1,7 @@
 @charset "UTF-8";
 
 
-/*********************************
-6. Shop Sidebar
-*********************************/
+/* Shop SideBar */
 
 .shop_sidebar
 {
@@ -17,19 +15,19 @@
 .sidebar_title
 {
 	font-size: 18px;
-	font-weight: 500;
+	font-weight: 900;
 }
 .sidebar_categories
 {
-	margin-top: 37px;
+	margin-top: 25px;
 }
 .sidebar_categories li
 {
-	margin-bottom: 7px;
+	margin-bottom: 15px;
 }
 .sidebar_categories li a
 {
-	color: rgba(0,0,0,0.5);
+	color: #666666;
 	-webkit-transition: all 200ms ease;
 	-moz-transition: all 200ms ease;
 	-ms-transition: all 200ms ease;
@@ -120,4 +118,19 @@
 .brand a:hover
 {
 	color: #0e8ce4;
+}
+
+.myPage_sidebar{
+	padding-left: 40px;
+	
+}
+
+/* MyPage ContentsArea */
+
+#memberShipTable{
+	
+	margin-top: 20px;
+	margin-left: 90px;
+	
+	
 }

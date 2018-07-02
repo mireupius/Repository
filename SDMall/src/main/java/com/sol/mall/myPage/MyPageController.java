@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.sol.mall.goods.CategoryDAO;
 import com.sol.mall.member.MemberDAO;
 import com.sol.mall.sale.delivery.Delivery;
 
@@ -20,14 +21,20 @@ public class MyPageController {
 	@Autowired
 	private MemberDAO mDAO;
 	
+	@Autowired
+	private CategoryDAO cDAO;
 	
 	@RequestMapping(value = "/customer.myHome.orderList.go", method = RequestMethod.GET)
 	public String goOrderList(SearchOrder bb, HttpServletRequest req, HttpServletResponse res) {
-
-		return "customer/orderDelivery";
 		
 
+		req.setAttribute("contentPage", "customer/customerMyPage2.jsp");
+		req.setAttribute("myPageContentArea", "orderDelivery.jsp");
+		
+		return "main";
+		
 	}
+	
 	
 	@RequestMapping(value = "/customer.myHome.orderList", method = RequestMethod.GET)
 	public String getOrderList(SearchOrder bb, HttpServletRequest req, HttpServletResponse res) {
@@ -35,7 +42,9 @@ public class MyPageController {
 		if (mDAO.csmLoginCheck(req, res)) {
 			
 			mpDAO.getOrderList(bb, req, res);
-			return "customer/orderDelivery";
+			req.setAttribute("contentPage", "customer/customerMyPage2.jsp");
+			req.setAttribute("myPageContentArea", "orderDelivery.jsp");
+			return "main";
 		}
 		return "member/loginPage";
 			
