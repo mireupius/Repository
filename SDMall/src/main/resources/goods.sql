@@ -23,6 +23,10 @@ insert into goods_tb values('1184523498778','호랑이',70000,33000,'0,2500','�
 
 select * from goods_tb;
 
+select * from goods_tb where gd_name like '%고%';
+
+select * from goods_tb,goodsdtl_tb where gd_no=gt_gdno and gd_name like '%고%' or gt_keyword like '%고%';
+
 
 create table goodsdtl_tb		
 (		
@@ -78,3 +82,4 @@ insert into OPTION_TB values(to_char(option_sq.nextval),'9998887774445','블랙'
 insert into OPTION_TB values(to_char(option_sq.nextval),'9998887774445','화이트',5000,50);
 insert into OPTION_TB values(to_char(option_sq.nextval),'9998887774445','레드',0,200);
 select * from option_tb;
+
