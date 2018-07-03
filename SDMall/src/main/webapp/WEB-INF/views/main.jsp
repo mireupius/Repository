@@ -61,6 +61,11 @@
 										<input type="search" required="required" class="header_search_input" placeholder="Search for products...">
 										<button type="submit" class="header_search_button trans_300" value="Submit"><img src="images/search.png" alt=""></button>
 									</form>
+										<ul class="header_search_dropdown">
+											<li><a href="#">검색</a></li>
+											<li><a href="#">검색</a></li>
+											<li><a href="#">검색</a></li>
+										</ul>
 								</div>
 							</div>
 						</div>
