@@ -127,10 +127,50 @@
 
 /* MyPage ContentsArea */
 
-#memberShipTable{
+.myPageContent{
 	
-	margin-top: 20px;
-	margin-left: 90px;
-	
+	position: absolute;
+	top : 50px;
+	left: 120px;
 	
 }
+
+
+.memberShipTable{
+
+	margin-left: auto;
+	margin-right: auto;
+	border: #D5D5D5 solid 2px;
+	border-radius : 0 10px 0 10px;
+	font-weight: 500;
+}
+
+.msTd{
+	
+	width: 200px;
+	height: 50px;
+	border-radius: 10px;
+	font-size: 12pt;
+}
+
+.upRow{
+	width: 700px;
+	color: white;
+	font: 14pt;
+	
+}
+
+.searchOrderTb{
+	border : 2px solid black;
+	margin-left: auto;
+	margin-right: auto;
+	
+}
+
+.searchOrderTd{
+	
+	width: 700px;
+	height: 100px;
+	
+}
+

@@ -12,7 +12,6 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.sol.mall.goods.Goods;
 import com.sol.mall.member.Customer;
 import com.sol.mall.member.Membership;
 import com.sol.mall.sale.delivery.Delivery;
@@ -23,18 +22,19 @@ public class MyPageDAO {
 	@Autowired
 	private SqlSession ss;
 
-	public void getOrderList2(SearchMonth sm, HttpServletRequest req, HttpServletResponse res) {
+	public void searchOrderList(SearchMonth sm, HttpServletRequest req, HttpServletResponse res) {
 		
 		Customer cc = (Customer) req.getSession().getAttribute("loginCustomer");
 		
 		SearchOrder so = new SearchOrder();
 		so.setSd_customer_id(cc.getCsm_id());
+		System.out.println(sm.getSearchMonth());
 		
 		HashMap<String, Object> map = new HashMap<>();
 		map.put("searchOrder", so);
 		map.put("searchMonth", sm.getSearchMonth());
-		
-		
+		System.out.println(map.get(so.getGd_imgss()));
+		System.out.println(sm.getSearchMonth());
 		
 		List<SearchOrder> orders = ss.getMapper(MyPageMapper.class).searchOrderList(map);
 		
@@ -123,15 +123,20 @@ public class MyPageDAO {
 		
 	}
 
-	public void getClaimedOrderList(SearchOrder bb, HttpServletRequest req, HttpServletResponse res) {
+	public void searchClaimedOrderList(SearchMonth sm, HttpServletRequest req, HttpServletResponse res) {
 
 		Customer cc = (Customer) req.getSession().getAttribute("loginCustomer");
 
-		bb.setSd_customer_id(cc.getCsm_id());
+		SearchOrder so = new SearchOrder();
+		so.setSd_customer_id(cc.getCsm_id());
+		
+		HashMap<String, Object> map = new HashMap<>();
+		map.put("searchOrder", so);
+		map.put("searchMonth", sm.getSearchMonth());
 
-		List<Delivery> orders = ss.getMapper(MyPageMapper.class).searchClaimedOrderList(bb);
+		List<SearchOrder> orders = ss.getMapper(MyPageMapper.class).searchClaimedOrderList(map);
 
-		if (cc.getCsm_id().equals(bb.getSd_customer_id())) {
+		if (cc.getCsm_id().equals(so.getSd_customer_id())) {
 			
 			req.setAttribute("orderList", orders);
 		}

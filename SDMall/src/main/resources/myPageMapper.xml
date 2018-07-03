@@ -1,47 +1,34 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.sol.mall.myPage.MyPageMapper">
-	<!-- <select id="searchOrderList"
-		parameterType="com.sol.mall.myPage.SearchOrder"
-		resultType="com.sol.mall.sale.delivery.Delivery">
-		select *
-		from sale_delivery
-		where ((sd_customer_id = #{sd_customer_id} and sd_claim is null)
-		or ((sd_customer_id = #{sd_customer_id} and sd_claim not like '%'||'교환'||'%')
-			 and (sd_customer_id = #{sd_customer_id} and sd_claim not like '%'||'취소'||'%')
-			 and (sd_customer_id = #{sd_customer_id} and sd_claim not like '%'||'반품'||'%'))
-		) 
-		and sd_order_date between (select add_months(SYSDATE, -#{sb_searchMonth}) from dual) and (select SYSDATE from dual)
-	#{sb_searchMonth}앞 '-'는 GET방식으로 넘어갈 때 양수로 보여지게 하기 위해서 쿼리를 수정함
-	</select> -->
-	
-	
+
 	<!-- 주문/배송 조회 -->
 	<!-- #{sb_searchMonth}앞 '-'는 GET방식으로 넘어갈 때 양수로 보여지게 하기 위해서 쿼리를 수정함 -->
 	<select id="searchOrderList"
 		parameterType="hashmap"
-		resultType="com.sol.mall.myPage.SearchOrder2">
+		resultType="com.sol.mall.myPage.SearchOrder">
 		select * 
 		from sale_delivery, goods_tb
-		where ((sd_customer_id = #{searchOrder2.sd_customer_id} and sd_claim is null)
-		or ((sd_customer_id = #{searchOrder2.sd_customer_id} and sd_claim not like '%'||'교환'||'%')
-			 and (sd_customer_id = #{searchOrder2.sd_customer_id} and sd_claim not like '%'||'취소'||'%')
-			 and (sd_customer_id = #{searchOrder2.sd_customer_id} and sd_claim not like '%'||'반품'||'%'))
+		where ((sd_customer_id = #{searchOrder.sd_customer_id} and sd_claim is null)
+		or ((sd_customer_id = #{searchOrder.sd_customer_id} and sd_claim not like '%'||'교환'||'%')
+			 and (sd_customer_id = #{searchOrder.sd_customer_id} and sd_claim not like '%'||'취소'||'%')
+			 and (sd_customer_id = #{searchOrder.sd_customer_id} and sd_claim not like '%'||'반품'||'%'))
 		)
-		and gd_no = sd_product_no and sd_customer_id = #{searchOrder2.sd_customer_id}
-		and (sd_order_date between (select add_months(SYSDATE, -#{searchOrder1}) from dual) and (select SYSDATE from dual))
+		and gd_no = sd_product_no and sd_customer_id = #{searchOrder.sd_customer_id}
+		and (sd_order_date between (select add_months(SYSDATE, -#{searchMonth}) from dual) and (select SYSDATE from dual))
 	</select>
 	
+	<!-- 교환/반품/취소 조회 -->
 	<select id="searchClaimedOrderList"
-		parameterType="com.sol.mall.myPage.SearchOrder"
-		resultType="com.sol.mall.sale.delivery.Delivery">
+		parameterType="hashmap"
+		resultType="com.sol.mall.myPage.SearchOrder">
 		select *
-		from sale_delivery
-		where ((sd_customer_id = #{sd_customer_id} and sd_claim like '%'||'취소'||'%')
-		or (sd_customer_id = #{sd_customer_id} and sd_claim like '%'||'교환'||'%')
-		or (sd_customer_id = #{sd_customer_id} and sd_claim like '%'||'반품'||'%')) 
-		and sd_order_date between (select add_months(SYSDATE, -#{sb_searchMonth}) from dual) and (select SYSDATE from dual)
-	<!-- #{sb_searchMonth}앞 '-'는 GET방식으로 넘어갈 때 양수로 보여지게 하기 위해서 쿼리를 수정함 -->
+		from sale_delivery, goods_tb
+		where ((sd_customer_id = #{searchOrder.sd_customer_id} and sd_claim like '%'||'취소'||'%')
+		or (sd_customer_id = #{searchOrder.sd_customer_id} and sd_claim like '%'||'교환'||'%')
+		or (sd_customer_id = #{searchOrder.sd_customer_id} and sd_claim like '%'||'반품'||'%'))
+		and gd_no = sd_product_no and sd_customer_id = #{searchOrder.sd_customer_id}
+		and sd_order_date between (select add_months(SYSDATE, -#{searchMonth}) from dual) and (select SYSDATE from dual)
 	</select>
 	
 	<update id="cancelOrder" parameterType="com.sol.mall.sale.delivery.Delivery">
@@ -61,17 +48,7 @@
 		set sd_claim = '반품접수'
 		where sd_delivery_pno = #{sd_delivery_pno}
 	</update>
-	
-	<select id="searchClaimList"
-			parameterType="com.sol.mall.myPage.SearchOrder"
-			resultType="com.sol.mall.sale.delivery.Delivery">
-		select sd_delivery_pno, sd_delivery_no, sd_product_name, sd_delivery_state, sd_amount, sd_option_info, sd_total_price
-		from sale_delivery
-		where ((sd_customer_id = #{sd_customer_id} and sd_claim like '%'||'교환'||'%') or (sd_customer_id = #{sd_customer_id} and sd_claim like '%'||'취소'||'%')
-		or (sd_customer_id = #{sd_customer_id} and sd_claim like '%'||'반품'||'%'))
-		and sd_order_date between (select add_months(SYSDATE, -#{sb_searchMonth}) from dual) and (select SYSDATE from dual)
-	</select>
-	
+
 	<select id="membershipStatus"
 		parameterType="com.sol.mall.member.Membership"
 		resultType="com.sol.mall.member.Membership">

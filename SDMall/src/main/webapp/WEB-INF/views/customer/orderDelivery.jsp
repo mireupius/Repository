@@ -11,13 +11,26 @@
 <body>
 
 	<form action="customer.myHome.orderList">
-
-		<select name="sb_searchMonth">
-			<option value="1">최근 1개월 전</option>
-			<option value="3">최근 3개월 전</option>
-			<option value="6">최근 6개월 전</option>
-			<option value="12">최근 12개월 전</option>
-		</select> <input type="submit" value="조회">
+		<table class="searchOrderTb">
+			<tr>
+			<td class="searchOrderTd">주문/배송 조회</td>
+			</tr>
+			<tr>
+				<td class="searchOrderTd">
+					<div>
+						<select name="searchMonth">
+							<option value="1">최근 1개월 전</option>
+							<option value="3">최근 3개월 전</option>
+							<option value="6">최근 6개월 전</option>
+							<option value="12">최근 12개월 전</option>
+						</select>
+					</div>
+				</td>
+			</tr>
+			<tr>
+				<td><input type="submit" value="조회"></td>
+			</tr>
+		</table>
 	</form>
 
 	<c:forEach var="list" items="${orderList }">
@@ -30,7 +43,8 @@
 					<td>
 						<table>
 							<tr>
-								<td rowspan="4"><img style="max-width: 10px;" src="upload/${list.gd_imgs }"></td>
+								<td rowspan="4"><img style="max-width: 100px;"
+									src="upload/${list.gd_imgss }"></td>
 								<td>${list.sd_delivery_state }</td>
 							</tr>
 							<tr>
@@ -59,8 +73,6 @@
 				</tr>
 			</table>
 		</div>
-
 	</c:forEach>
-
 </body>
 </html>

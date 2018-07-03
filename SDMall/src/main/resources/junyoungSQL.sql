@@ -9,6 +9,19 @@ csm_emailAddress varchar2(30 char) not null
 );
 
 
+select * 
+		from sale_delivery, goods_tb
+		where ((sd_customer_id = 'junyoung12' and sd_claim is null)
+		or ((sd_customer_id = 'junyoung12' and sd_claim not like '%'||'교환'||'%')
+			 and (sd_customer_id = 'junyoung12' and sd_claim not like '%'||'취소'||'%')
+			 and (sd_customer_id = 'junyoung12' and sd_claim not like '%'||'반품'||'%'))
+		)
+		and gd_no = sd_product_no and sd_customer_id = 'junyoung12'
+		and (sd_order_date between (select add_months(SYSDATE, -6) from dual) and (select SYSDATE from dual))
+
+
+
+
 -- 구매자 insert
 -- 비번은 준영 1212
 insert into customer_reg values('junyoung12', 'wnsdud1212', '준영', '1980-02-16', '01033369944', 'junyoung@naver.com');
