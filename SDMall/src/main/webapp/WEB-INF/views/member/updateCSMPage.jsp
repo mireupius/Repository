@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>	
 <!DOCTYPE html">
 <html>
 <head>
@@ -50,7 +51,7 @@
 		</div>
 		<div>
 		<span>
-		<input class="birthdayInput" name="csm_birthday" placeholder="생년월일(예: 19910101)" maxlength="8"><br>
+		<fmt:formatDate value="${sessionScope.loginCustomer.csm_birth }" dateStyle="long"/>
 		</span>
 		<span class="promptTxt_birthday"></span>
 		</div>

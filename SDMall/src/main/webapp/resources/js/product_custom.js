@@ -17,12 +17,64 @@
 
 ******************************/
 
+function opChange(){
+	overQuantity();//재조정
+	limitQuantity();//수량제한
+	
+	getOp_name();//옵션명 추출
+	getOp_price();//옵션가 추출
+	getQuantity();//수량 추출
+	setTotal_price();//총가격 계산
+}
+
+//총액 계산
+function setTotal_price() {
+	
+	var price = $('#send_price').val()*1;
+	
+	price += getOp_price();
+	price *= getQuantity();	
+	
+	$('#view_total_price').text(price);
+	$('#send_total_price').val(price);
+}
+
+//선택된 옵션명을 반환하는 함수
+function getOp_name(){
+	var optionSelected = $('option:selected').text();
+	var opName = optionSelected.split(" (");
+	
+	$('#send_option_name').val(opName[0]);
+	
+	return opName[0];	
+}
+
+//선택된 옵션가를 반환하는 함수
+function getOp_price(){
+	var optionSelected = $('option:selected').text();
+	var price = optionSelected.split("+");
+	price = price[1].split(")");
+	
+	$('#send_option_price').val(price[0]);
+	
+	
+	return price[0] *= 1;
+}
+
 //선택된 옵션의 재고를 반환하는 함수
 function limitQuantity(){
 	var optionSelected = $('option:selected').text();
 	var stock = optionSelected.split("/");
 	
 	return stock[1]*=1;	
+}
+
+//수량 반환
+function getQuantity(){
+	var quantity =  $('#quantity_input').val();
+	$('#send_quantity').val(quantity);
+	
+	return quantity;
 }
 
 //quantity_input에 재고 이상 입력된 경우 수량을 재고로 맞춤
@@ -34,16 +86,20 @@ function overQuantity(){
 	}
 }
 
+
+
 $(document).ready(function()
 {
 	"use strict";
 
+	opChange();
+	
 	/* 
 
 	1. Vars and Inits
 
 	*/
-
+	
 	var menuActive = false;
 	var header = $('.header');
 	var opQuantity = 0;
@@ -291,6 +347,8 @@ $(document).ready(function()
 				if(originalVal < limitQuantity()){
 					endVal = parseFloat(originalVal) + 1;
 					input.val(endVal);
+					
+					opChange()
 				}
 			});
 
@@ -301,6 +359,8 @@ $(document).ready(function()
 				{
 					endVal = parseFloat(originalVal) - 1;
 					input.val(endVal);
+					
+					opChange()
 				}
 			});
 		}

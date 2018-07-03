@@ -20,10 +20,12 @@
 <script type=text/javascript charset=utf-8
 	src="${pageContext.request.contextPath}/resources/daumeditor/js/editor_loader.js"></script>
 <script type="text/javascript">
+
 function saveContent() {
 	$("#opSave").trigger("click");
     Editor.save(); // 이 함수를 호출하여 글을 등록하면 된다.
 }
+
 function deleteGoods(){
 	var ok =confirm("정말 삭제 하시겠습니까?");
 	if(ok){
@@ -38,7 +40,7 @@ function deleteGoods(){
 		var imgss=$("input[name=gd_imgss]").val();
 		var sellerid=$("input[name=gd_sellerid]").val();
 	    
-	    param= {'gd_no':gdno, 'gd_imgl':imgl, 'gd_imgm':imgm, 'gd_imgs':imgs, 'gd_imgss':imgss, 'gd_sellerid':sellerid};
+	    var param= {'gd_no':gdno, 'gd_imgl':imgl, 'gd_imgm':imgm, 'gd_imgs':imgs, 'gd_imgss':imgss, 'gd_sellerid':sellerid};
 	    
 		for(var key in param) {
 	        var hiddenField = document.createElement("input");
@@ -52,19 +54,10 @@ function deleteGoods(){
 	    form.submit();
 	}
 }
+
 $(function(){
 	
-/* 	$("#delete_button").click(function(){
-		var gdno=$("input[name=gd_no]").val();
-		var imgl=$("input[name=gd_imgl]").val();
-		var imgm=$("input[name=gd_imgm]").val();
-		var imgs=$("input[name=gd_imgs]").val();
-		var imgss=$("input[name=gd_imgss]").val();
-		location.href = "goods.delete?gd_no="+gdno+"&gd_imgl="+imgl+"&gd_imgm="+imgm+"&gd_imgs="+imgs+"&gd_imgss="+imgss;
-		// 새창 window.open("goods.list");
-	}); */
-	
-//구버전	$(".ct1").click(function() {
+	//구버전	$(".ct1").click(function() {
 	$(document).on("click",".ct1",function(){
 		var cn = $(this).attr("category_num");
 		var clfname = $(this).text();
@@ -94,9 +87,7 @@ $(function(){
 						var input = $("#ctgry1").val(cn);
 		                input.attr("name", "gd_clfl");
 					});
-				
 				}else{
-				
 					// 카테고리 선택 표시 영역
 					$("#category_select1").text(clfname + " > ");
 					var input = $("#ctgry1").val(cn);
@@ -160,7 +151,7 @@ $(function(){
 	
 	
 	// ▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼ 옵션값 배열로 저장 input hidden으로 넘기기 ▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼
-	// db에 저장된 옵션 사이지 저장 추가 버튼 클릭시 옵션 번호증가
+	// db에 저장된 옵션 사이즈 저장 추가 버튼 클릭시 옵션 번호증가
 	var opN = $("#opSize").val();
 	
 	$(document).on("click","#opPlus",function(){
@@ -175,7 +166,11 @@ $(function(){
 		var opSpanS = $("<span></span>").append(opInputS);
 		
 		var opLi = $("<li></li>").attr("class","opTb").append(opSpanN, opSpanP, opSpanS);
-		$(".opUl").append(opLi);
+		
+		var opInputChk = $("<input>").attr("type","checkbox").attr("name","opChk");
+		var opLiChk = $("<li></li>").attr("class","opChkLi").append(opInputChk);
+		
+		$(".opUl").append(opLi, opLiChk);
 		
 		opN++;
 	});
@@ -204,28 +199,80 @@ $(function(){
 	// ▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲ 옵션값 배열로 저장 input hidden으로 넘기기 ▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲
 	
 });
-	var sel_file;
-	$(document).ready(function(){  
-		$("#input_img").on("change", handleImgFileSelect);
+
+var sel_file;
+$(document).ready(function(){  
+	$("#input_img").on("change", handleImgFileSelect);
+});
+
+function handleImgFileSelect(e){
+	var files = e.target.files;
+	var filesArr = Array.prototype.slice.call(files);
+	filesArr.forEach(function(f){
+		if(!f.type.match("image.*")){alert("확장자는 이미지 확장자만 가능")
+			return;
+		}
+		sel_file = f;
+		var reader = new FileReader();
+		reader.onload = function(e){
+			$("#img1").attr("src", e.target.result); 
+			$("#img2").attr("src", e.target.result);
+			$("#img3").attr("src", e.target.result);
+			$("#img4").attr("src", e.target.result);
+		}
+		reader.readAsDataURL(f);
 	});
-	function handleImgFileSelect(e){
-		var files = e.target.files;
-		var filesArr = Array.prototype.slice.call(files);
-		filesArr.forEach(function(f){
-			if(!f.type.match("image.*")){alert("확장자는 이미지 확장자만 가능")
-				return;
+}
+
+function opDelete(){
+	var ok =confirm("정말 삭제 하시겠습니까?");
+	if(ok){
+		// ▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼선택한 옵션들을 배열에 저장 ▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼
+		// 체크한 옵션 번호를 가져옴
+		var values = document.getElementsByName("opChk");
+		
+		var opl_no = [];
+		var gd_no = $("input[name=gd_no]").val();
+		
+		
+		// i값이 체크된 것만 들어 가서 배열0번등 중간에 번호가 빌 수 있음
+		$.each(values, function(i, s){
+			if(s.checked){
+				opl_no[i] = s.value;
 			}
-			sel_file = f;
-			var reader = new FileReader();
-			reader.onload = function(e){
-				$("#img1").attr("src", e.target.result); 
-				$("#img2").attr("src", e.target.result);
-				$("#img3").attr("src", e.target.result);
-				$("#img4").attr("src", e.target.result);
+		});
+		// ▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲선택한 옵션들을 배열에 저장 ▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲
+		$.ajaxSettings.traditional = true;
+		$.ajax({ 
+			url : "option.delete",
+			data : {opl_no : opl_no, op_gdno : gd_no},
+			success : function(json){
+				var ar = json.option;
+				
+				$(".opUl").empty();
+				$.each(ar, function(i, s){
+					
+					var opInputN = $("<input>").attr("class","inpWidth").attr("name", "op_name"+i).attr("maxlength","20").val(s.op_name);
+					var opInputNo = $("<input>").attr("type","hidden").attr("name", "op_no"+i).val(s.op_no);
+					var opSpanN = $("<span></span>").append(opInputN, opInputNo);
+					
+					var opInputP = $("<input>").attr("class","inpWidth").attr("name", "op_price"+i).attr("maxlength","7").val(s.op_price);
+					var opSpanP = $("<span></span>").append(opInputP);
+					
+					var opInputS = $("<input>").attr("class","inpWidth").attr("name", "op_stock"+i).attr("maxlength","4").val(s.op_stock);
+					var opSpanS = $("<span></span>").append(opInputS);
+					
+					var opLi = $("<li></li>").attr("class","opTb").append(opSpanN, opSpanP, opSpanS);
+					
+					var opInputChk = $("<input>").attr("type","checkbox").attr("name","opChk");
+					var opLiChk = $("<li></li>").attr("class","opChkLi").append(opInputChk);
+					
+					$(".opUl").append(opLi, opLiChk);
+				});
 			}
-			reader.readAsDataURL(f);
 		});
 	}
+}
 </script>
 
 <title>Goods</title>
@@ -404,6 +451,7 @@ h3 {
 									<input class="inpWidth" name="op_stock${h}" value="${gdsOp[h].op_stock}" maxlength="4">
 								</span>
 							</li>
+							<li class="opChkLi"><input type="checkbox" name="opChk" value="${gdsOp[h].op_no}"></li>
 						</c:forEach>
 						</c:if>
 						</ul>
@@ -428,7 +476,10 @@ h3 {
 								<button id="opPlus">추가</button>
 							</span>
 							<span class="opTbr">
-								<button id="opSave">적용</button>
+								<button id="opSave">추가 적용</button>
+							</span>
+							<span class="opTbr" onclick="opDelete();">
+								<button id="opDelete" >삭제</button>
 							</span>
 						</td>
 					</tr>

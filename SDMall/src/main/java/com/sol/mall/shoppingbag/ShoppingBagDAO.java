@@ -31,10 +31,7 @@ public class ShoppingBagDAO {
 
 	public void showCartItems(ShoppingBag sb, HttpServletRequest req, HttpServletResponse res) {
 
-		// System.out.println("dsfsdf");
-
 		Customer nowSession = (Customer) req.getSession().getAttribute("loginCustomer");
-		// System.out.println(nowSession.getCsm_id());
 
 		sb.setSb_csmid(nowSession.getCsm_id());
 		System.out.println(sb.getSb_csmid());

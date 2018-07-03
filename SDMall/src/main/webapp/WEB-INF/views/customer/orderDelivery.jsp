@@ -24,6 +24,7 @@
 	<div>
 	상품주문번호 : ${list.sd_delivery_pno }
 	상품번호 : ${list.sd_delivery_no }
+	판매자 : ${list.sd_seller_id }
 	상품명 : ${list.sd_product_name }
 	가격 : ${list.sd_total_price }
 	클레임상태 : ${list.sd_claim }
@@ -32,6 +33,7 @@
 	<button type="button" onclick="goCancelOrder(${list.sd_delivery_pno });">주문취소</button>
 	<button type="button" onclick="goExchangeOrder(${list.sd_delivery_pno });">교환신청</button>
 	<button type="button" onclick="goReturnOrder(${list.sd_delivery_pno });">반품신청</button>
+	<button type="button" onclick="goQuestionSeller(${list.sd_delivery_pno });">판매자문의</button>
 	</div>
 
 </c:forEach>

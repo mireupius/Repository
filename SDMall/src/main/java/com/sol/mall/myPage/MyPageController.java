@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.sol.mall.goods.CategoryDAO;
 import com.sol.mall.member.MemberDAO;
 import com.sol.mall.sale.delivery.Delivery;
 
@@ -15,27 +16,35 @@ import com.sol.mall.sale.delivery.Delivery;
 public class MyPageController {
 	
 	@Autowired
-	private MyPageDAO MPDAO;
+	private MyPageDAO mpDAO;
 	
 	@Autowired
-	private MemberDAO MDAO;
+	private MemberDAO mDAO;
 	
+	@Autowired
+	private CategoryDAO cDAO;
 	
 	@RequestMapping(value = "/customer.myHome.orderList.go", method = RequestMethod.GET)
 	public String goOrderList(SearchOrder bb, HttpServletRequest req, HttpServletResponse res) {
-
-		return "customer/orderDelivery";
 		
 
+		req.setAttribute("contentPage", "customer/customerMyPage2.jsp");
+		req.setAttribute("myPageContentArea", "orderDelivery.jsp");
+		
+		return "main";
+		
 	}
+	
 	
 	@RequestMapping(value = "/customer.myHome.orderList", method = RequestMethod.GET)
 	public String getOrderList(SearchOrder bb, HttpServletRequest req, HttpServletResponse res) {
 		
-		if (MDAO.csmLoginCheck(req, res)) {
+		if (mDAO.csmLoginCheck(req, res)) {
 			
-			MPDAO.getOrderList(bb, req, res);
-			return "customer/orderDelivery";
+			mpDAO.getOrderList(bb, req, res);
+			req.setAttribute("contentPage", "customer/customerMyPage2.jsp");
+			req.setAttribute("myPageContentArea", "orderDelivery.jsp");
+			return "main";
 		}
 		return "member/loginPage";
 			
@@ -53,9 +62,9 @@ public class MyPageController {
 	public String getClaimedOrderList(SearchOrder bb, HttpServletRequest req, HttpServletResponse res) {
 		
 		//System.out.println("==="+bb.getSb_searchMonth());
-		if (MDAO.csmLoginCheck(req, res)) {
+		if (mDAO.csmLoginCheck(req, res)) {
 			
-			MPDAO.getClaimedOrderList(bb, req, res);
+			mpDAO.getClaimedOrderList(bb, req, res);
 			return "customer/orderClaim";
 		}
 		return "member/loginPage";
@@ -65,25 +74,28 @@ public class MyPageController {
 	@RequestMapping(value = "/orderList.cancel.do", method = RequestMethod.GET)
 	public String correctOrder(Delivery d, HttpServletRequest req, HttpServletResponse res) {
 		
-		MPDAO.cancelOrder(d, req, res);
+		mpDAO.cancelOrder(d, req, res);
 		
 		return "customer/orderDelivery";
 		
 		
 	}
+	
 	@RequestMapping(value = "/orderList.exchange.do", method = RequestMethod.GET)
 	public String exchangeOrder(Delivery d, HttpServletRequest req, HttpServletResponse res) {
 		
-		MPDAO.exchangeOrder(d, req, res);
+		mpDAO.exchangeOrder(d, req, res);
 		
 		return "customer/orderDelivery";
 		
 		
 	}
+	
+	
 	@RequestMapping(value = "/orderList.return.do", method = RequestMethod.GET)
 	public String returnOrder(Delivery d, HttpServletRequest req, HttpServletResponse res) {
 		
-		MPDAO.returnOrder(d, req, res);
+		mpDAO.returnOrder(d, req, res);
 		
 		return "customer/orderDelivery";
 		
@@ -93,9 +105,9 @@ public class MyPageController {
 	@RequestMapping(value = "/customer.myHome.productReview.go", method = RequestMethod.GET)
 	public String getOrderListToReview(Delivery d, HttpServletRequest req, HttpServletResponse res) {
 		
-		if (MDAO.csmLoginCheck(req, res)) {
+		if (mDAO.csmLoginCheck(req, res)) {
 			
-			MPDAO.getOrderListToReview(d, req, res);
+			mpDAO.getOrderListToReview(d, req, res);
 			return "customer/productReview2";
 		}
 		return "member/loginPage";
@@ -106,11 +118,76 @@ public class MyPageController {
 	@RequestMapping(value = "/productReview.writing.go", method = RequestMethod.GET)
 	public String goWritingReview(Delivery d, HttpServletRequest req, HttpServletResponse res) {
 		
-		if (MDAO.csmLoginCheck(req, res)) {
+		if (mDAO.csmLoginCheck(req, res)) {
 			
-			MPDAO.goOrderToReview(d, req, res);
+			mpDAO.goOrderToReview(d, req, res);
 			return "customer/productReview";
 		
+		}
+		return "member/loginPage";
+		
+	}
+	
+	@RequestMapping(value = "/customer.productReview.write", method = RequestMethod.GET)
+	public String doWritingReview(ProductReview pr, HttpServletRequest req, HttpServletResponse res) {
+		
+		if (mDAO.csmLoginCheck(req, res)) {
+			
+			mpDAO.writeProductReview(pr, req, res);
+			return "customer/productReview";
+			
+		}
+		return "member/loginPage";
+		
+	}
+	
+	@RequestMapping(value = "/customer.productReview.show", method = RequestMethod.GET)
+	public String getWritedReview(ProductReview pr, HttpServletRequest req, HttpServletResponse res) {
+		
+		if (mDAO.csmLoginCheck(req, res)) {
+			
+			mpDAO.getWritedReview(pr, req, res);
+			return "customer/writedReviews";
+			
+		}
+		return "member/loginPage";
+		
+	}
+	
+	@RequestMapping(value = "/question.writing.go", method = RequestMethod.GET)
+	public String goWritingQuestion(Delivery d, HttpServletRequest req, HttpServletResponse res) {
+		
+		if (mDAO.csmLoginCheck(req, res)) {
+			
+			mpDAO.goOrderToQuestion(d, req, res);
+			return "customer/question";
+		
+		}
+		return "member/loginPage";
+		
+	}
+	
+	@RequestMapping(value = "/order.question.write", method = RequestMethod.GET)
+	public String doWritingQuestion(QuestionAnswer qa, HttpServletRequest req, HttpServletResponse res) {
+		
+		if (mDAO.csmLoginCheck(req, res)) {
+			
+			mpDAO.writeQuestion(qa, req, res);
+			return "customer/customerMyPage2";
+			
+		}
+		return "member/loginPage";
+		
+	}
+	
+	@RequestMapping(value = "/customer.myQuestion.show", method = RequestMethod.GET)
+	public String getWritedReview(QuestionAnswer qa, HttpServletRequest req, HttpServletResponse res) {
+		
+		if (mDAO.csmLoginCheck(req, res)) {
+			
+			mpDAO.getMyQuestionAnswer(qa, req, res);
+			return "customer/myQuestion";
+			
 		}
 		return "member/loginPage";
 		

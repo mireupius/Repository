@@ -2,6 +2,7 @@ package com.sol.mall.goods;
 
 import java.util.List;
 
+//ajax용
 public class Paging {
 
 	private int curPage;

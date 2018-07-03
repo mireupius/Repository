@@ -21,6 +21,8 @@ public class HomeController {
 
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String home(HttpServletRequest request, HttpServletResponse response) {
+		
+		
 		cDAO.getAllCategory(request, response);// 메인 카테고리 호출 메소드
 
 		request.setAttribute("contentPage", "home.jsp");

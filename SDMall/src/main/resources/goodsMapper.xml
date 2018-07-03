@@ -42,11 +42,6 @@
 		order by ${sort_name}  ${desc_name}
 	</select>
 	
-	<select id="getGoods" parameterType="com.sol.mall.goods.Goods" resultType="com.sol.mall.goods.Goods">
-		select * from goods_tb
-		where gd_no = #{gd_no}
-	</select>
-	
 	<select id="getGoodsByNo" parameterType="com.sol.mall.goods.Goods" resultType="com.sol.mall.goods.Goods">
 		select * from goods_tb
 		where gd_no = #{gd_no}
@@ -180,6 +175,11 @@
 	<delete id="deleteGoodsOpByNo" parameterType="com.sol.mall.goods.Goods">
 		delete from option_tb
 		where op_gdno = #{gd_no}
+	</delete>
+	
+	<delete id="deleteOpByNo" parameterType="com.sol.mall.goods.Option">
+		delete from option_tb
+		where op_no = #{op_no}
 	</delete>
 	
 </mapper>
