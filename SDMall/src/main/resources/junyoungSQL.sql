@@ -8,20 +8,6 @@ csm_phoneNo varchar2(11 char) not null,
 csm_emailAddress varchar2(30 char) not null
 );
 
-select * 
-		from sale_delivery, goods_tb
-		where ((sd_customer_id = 'junyoung12' and sd_claim is null)
-		or ((sd_customer_id = 'junyoung12' and sd_claim not like '%교환%')
-			 and (sd_customer_id = 'junyoung12' and sd_claim not like '%취소%')
-			 and (sd_customer_id = 'junyoung12' and sd_claim not like '%반품%'))
-		)
-		and gd_no = sd_product_no and sd_customer_id = 'junyoung12'
-		and (sd_order_date between (select add_months(SYSDATE, -12) from dual) and (select SYSDATE from dual));
-
-select * 
-		from sale_delivery, goods_tb where gd_no = sd_product_no;
-
-select * from GOODS_TB;
 
 -- 구매자 insert
 -- 비번은 준영 1212
@@ -165,9 +151,7 @@ select *
 		where sd_customer_id = 'junyoung12' and not sd_customer_name like '%장희원%';
 
 -- test용도
-
-create or replace
-		
+	
 insert into sale_delivery values('2018052291233613','2018052252351030','seller123',NULL,NULL,NULL,'장희원','junyoung12','장희원','구매확정','신규주문',2500,'2917445931','헤어핀1번','조합형옵션상품','컬러:레드',2,0,5700,5700,5700,NULL,'010-0000-0002','서울특별시 송파구 오금로32길 5 (송파동, 가락삼익맨숀) 000동000호','010-4717-0039','05675',NULL,'(04306) 서울특별시 용산구 청파로71길  77-77','2018-06-25',NULL,'신용카드',NULL,NULL, 'Y')
 insert into sale_delivery values('2018052291233614','2018052252351031','aaa',NULL,NULL,NULL,'장희원','xx','장희원','구매확정','신규주문',2500,'2917445931','헤어핀notjunyoung','조합형옵션상품','컬러:블랙',2,0,5700,5700,5700,NULL,'010-0000-0002','서울특별시 송파구 오금로32길 5 (송파동, 가락삼익맨숀) 000동000호','010-4717-0039','05675',NULL,'(04306) 서울특별시 용산구 청파로71길  77-77',sysdate,NULL,'신용카드',NULL,NULL, null)
 insert into sale_delivery values('2018052291233615','2018052252351032','seller123',NULL,NULL,NULL,'김덕순','junyoung12','장희원','결제완료','신규주문',2500,'2917445931','헤어핀3번','조합형옵션상품','컬러:블루',2,0,5700,5700,5700,NULL,'010-0000-0002','부산광역시 아파트','010-4717-0039','05675',NULL,'(04306) 서울특별시 용산구 청파로71길  77-77','2017-01-08',NULL,'신용카드',NULL,NULL, null)

@@ -15,7 +15,10 @@
 	#{sb_searchMonth}앞 '-'는 GET방식으로 넘어갈 때 양수로 보여지게 하기 위해서 쿼리를 수정함
 	</select> -->
 	
-	<select id="searchoo"
+	
+	<!-- 주문/배송 조회 -->
+	<!-- #{sb_searchMonth}앞 '-'는 GET방식으로 넘어갈 때 양수로 보여지게 하기 위해서 쿼리를 수정함 -->
+	<select id="searchOrderList"
 		parameterType="hashmap"
 		resultType="com.sol.mall.myPage.SearchOrder2">
 		select * 

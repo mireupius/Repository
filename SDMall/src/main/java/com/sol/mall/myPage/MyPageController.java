@@ -25,7 +25,7 @@ public class MyPageController {
 	private CategoryDAO cDAO;
 	
 	@RequestMapping(value = "/customer.myHome.orderList.go", method = RequestMethod.GET)
-	public String goOrderList(SearchOrder bb, HttpServletRequest req, HttpServletResponse res) {
+	public String goOrderList(SearchMonth bb, HttpServletRequest req, HttpServletResponse res) {
 		
 
 		req.setAttribute("contentPage", "customer/customerMyPage2.jsp");
@@ -51,7 +51,7 @@ public class MyPageController {
 //	}
 	
 	@RequestMapping(value = "/customer.myHome.orderList", method = RequestMethod.GET)
-	public String getOrderList(SearchOrder bb, HttpServletRequest req, HttpServletResponse res) {
+	public String getOrderList(SearchMonth bb, HttpServletRequest req, HttpServletResponse res) {
 		
 		if (mDAO.csmLoginCheck(req, res)) {
 			
@@ -67,7 +67,7 @@ public class MyPageController {
 	
 	
 	@RequestMapping(value = "/customer.myHome.claimedOrderList.go", method = RequestMethod.GET)
-	public String goClaimedOrderList(SearchOrder bb, HttpServletRequest req, HttpServletResponse res) {
+	public String goClaimedOrderList(SearchMonth bb, HttpServletRequest req, HttpServletResponse res) {
 
 		return "customer/orderClaim";
 		
@@ -75,7 +75,7 @@ public class MyPageController {
 	}
 	
 	@RequestMapping(value = "/customer.myHome.claimList", method = RequestMethod.GET)
-	public String getClaimedOrderList(SearchOrder bb, HttpServletRequest req, HttpServletResponse res) {
+	public String getClaimedOrderList(SearchMonth bb, HttpServletRequest req, HttpServletResponse res) {
 		
 		//System.out.println("==="+bb.getSb_searchMonth());
 		if (mDAO.csmLoginCheck(req, res)) {
