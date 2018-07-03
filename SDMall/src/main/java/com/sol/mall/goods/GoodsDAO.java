@@ -226,6 +226,7 @@ public class GoodsDAO {
 		for (int i = 0; i < opl.getOpl_name().size(); i++) {
 			if (!opl.getOpl_name().get(i).equals("") && !opl.getOpl_price().get(i).equals("")
 					&& !opl.getOpl_stock().get(i).equals("")) {
+				
 				op.setOp_no(opl.getOpl_no().get(i));
 				op.setOp_name(opl.getOpl_name().get(i));
 				op.setOp_price(new BigDecimal(opl.getOpl_price().get(i)));
@@ -236,8 +237,9 @@ public class GoodsDAO {
 				map2.put("goods", gd);
 				map2.put("option", op);
 
-				// 수정화면에서 옵션을 추가할시 수정이 아닌 입력이 필요
-				if (op.getOp_no().equals("")) {
+				// 옵션번호가 없으면 수정이 아닌 입력이 필요(옵션 번호 이외는 필수체크로 null이나""이면 안됨)
+				// ""일때 size가 0 이되서 화면에서 "insert" 강제 입력
+				if (op.getOp_no().equals("insert")) {
 					System.out.println("수정화면 옵션 입력");
 					insertOpTwoForUp(map2, request, response);
 				} else {

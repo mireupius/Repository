@@ -152,9 +152,11 @@ $(function(){
 	
 	// ▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼ 옵션값 배열로 저장 input hidden으로 넘기기 ▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼
 	// db에 저장된 옵션 사이즈저장 --> 추가 버튼 클릭시 옵션 번호증가
-	var opN = $("#opSize").val();
 	
 	$(document).on("click","#opPlus",function(){
+		var values = document.getElementsByName("opChk");
+		var opN = values.length;
+
 		var opInputN = $("<input>").attr("class","inpWidth").attr("name", "op_name"+opN).attr("maxlength","20");
 		var opInputNo = $("<input>").attr("type","hidden").attr("name", "op_no"+opN);
 		var opSpanN = $("<span></span>").append(opInputN, opInputNo);
@@ -171,8 +173,6 @@ $(function(){
 		var opLiChk = $("<li></li>").attr("class","opChkLi").attr("id","ch"+opN).append(opInputChk);
 
 		$(".opUl").append(opLi, opLiChk);
-		
-		opN++;
 	});
 
 	// ▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲ 옵션값 배열로 저장 input hidden으로 넘기기 ▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲
@@ -205,7 +205,7 @@ function handleImgFileSelect(e){
 
 // 삭제 버튼 클릭시 체크박스 선택여부 확인
 // 옵션번호가 단순번호로 되어있으면 체크박스 임의 숫자로도 삭제가 가능한 황당한 경우가 생김
-// 대책필요
+// 대책필요 -- > 상품번호 조건에 넣어서 해결
 function opSelCheck(){
 	var vals = document.getElementsByName("opChk");
 	var cnt =0;
@@ -260,13 +260,12 @@ function opDelete(){
 					
 					var opLi = $("<li></li>").attr("class","opTb").attr("id","opLi"+i).append(opSpanN, opSpanP, opSpanS);
 					
-					var opInputChk = $("<input>").attr("type","checkbox").attr("name","opChk").val(i);
+					var opInputChk = $("<input>").attr("type","checkbox").attr("name","opChk").val(s.op_no);
 					var opLiChk = $("<li></li>").attr("class","opChkLi").attr("id","ch"+i).append(opInputChk);
 					
 					$(".opUl").append(opLi, opLiChk);
 				});
 				
-				alert("도착");
 				if(warnMessage=="no"){
 					alert("선택된 옵션중 바르지 못한 옵션번호가 있었습니다.");
 				}
@@ -275,7 +274,7 @@ function opDelete(){
 	}
 }
 
-//옵션 박스값 적용( 그냥 for문은 안됨 추가 삭제시 문제 발생)
+//옵션 박스값 적용
 function opApplyView(){
 	var values = document.getElementsByName("opChk");
 	var r = values.length;
@@ -283,13 +282,22 @@ function opApplyView(){
 	var opl_name = [];
 	var opl_price = [];
 	var opl_stock = [];
-	
-	$.each(values, function(i,s){
-		opl_no[i] = $("input[name=op_no"+s.value+"]").val();
-		opl_name[i] = $("input[name=op_name"+s.value+"]").val();
-		opl_price[i] = $("input[name=op_price"+s.value+"]").val();
-		opl_stock[i] = $("input[name=op_stock"+s.value+"]").val();
-	});
+	var end = values[r-1].value;
+
+	// 데이터 검증을 해서 필수 항목에 값이 꼭들어가 있는 상태에서 들어와야함
+	for(var i = 0 ; i <= end; i++){
+		if($("input[name=op_name"+i+"]").val() !="" || $("input[name=op_name"+i+"]").val()!=null){
+			
+			if($("input[name=op_no"+i+"]").val()==""){
+				opl_no[i] = "insert";
+			}else{
+				opl_no[i] = $("input[name=op_no"+i+"]").val();
+			}
+			opl_name[i] = $("input[name=op_name"+i+"]").val();
+			opl_price[i] = $("input[name=op_price"+i+"]").val();
+			opl_stock[i] = $("input[name=op_stock"+i+"]").val();
+		}
+	}
 	
 	$("input[name=opl_no]").val(opl_no);
 	$("input[name=opl_name]").val(opl_name);
@@ -501,7 +509,6 @@ h3 {
 						</c:if>
 						</ul>
 						</div>
-						<input id="opSize" type="hidden" value="${gdsOp.size()}">
 						<input name="opl_no" type="hidden">
 						<input name="opl_name" type="hidden">
 						<input name="opl_price" type="hidden">
