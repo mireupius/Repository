@@ -81,13 +81,13 @@ public class GoodsDAO {
 
 	// ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓ 페이징 ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓
 	// 상품목록 검색(상품리스트화면)
-	public Paging getGoodsViewByKey(Keywords k, int curPage, HttpServletRequest request) {
+	public Paging getGoodsViewByKey(Keywords k, int curPage, double cnt, HttpServletRequest request) {
 		List<GoodsView> gdv = ss.getMapper(GoodsMapper.class).getGoodsViewByKey(k);
 
-		double cnt = 4;// 페이지당 건수
+//		double cnt = 10;// 페이지당 건수
 		int listSize = gdv.size();
 
-		int allPage = (int) Math.ceil(listSize / cnt);// 총페이지
+		int allPage = (int) Math.ceil(listSize / cnt);// 총페이지 올림
 		request.setAttribute("pageCount", allPage);
 
 		int start = listSize - (int) cnt * (curPage - 1);// 페이지 첫번째 게시물
@@ -110,10 +110,10 @@ public class GoodsDAO {
 		List<GoodsView> gdv = ss.getMapper(GoodsMapper.class).getAllGoodsView(gds);
 
 		int curPage = 1;
-		double cnt = 4;// 페이지당 건수
+		double cnt = 10;// 페이지당 건수
 		int listSize = gdv.size();
 
-		int allPage = (int) Math.ceil(listSize / cnt);// 총페이지
+		int allPage = (int) Math.ceil(listSize / cnt);// 총페이지 올림
 		request.setAttribute("pageCount", allPage);
 
 		int start = listSize - (int) cnt * (curPage - 1);// 페이지 첫번째 게시물

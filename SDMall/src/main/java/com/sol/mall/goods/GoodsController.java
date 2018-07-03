@@ -326,12 +326,12 @@ public class GoodsController {
 
 	// 상품키워드 검색(ajax - json)
 	@RequestMapping(value = "/goods.search.keyword", method = RequestMethod.GET, produces = "application/json; charset=utf-8")
-	public @ResponseBody Paging gdsSearchKey(Keywords k, int curPage, HttpServletRequest request, HttpServletResponse response) {
+	public @ResponseBody Paging gdsSearchKey(Keywords k, int curPage, double cnt, HttpServletRequest request, HttpServletResponse response) {
 		
 		Seller dbS = (Seller) request.getSession().getAttribute("loginSeller");
 		k.setGd_sellerid(dbS.getSl_id());
 		
-		return gdsDAO.getGoodsViewByKey(k, curPage, request);
+		return gdsDAO.getGoodsViewByKey(k, curPage, cnt, request);
 	}
 	
 	// 옵션 선택삭제(ajax - json)
