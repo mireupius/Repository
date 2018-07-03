@@ -338,17 +338,21 @@ public class GoodsController {
 	@RequestMapping(value = "/option.delete", method = RequestMethod.GET, produces = "application/json; charset=utf-8")
 	public @ResponseBody Options optionDel(OptionList op, HttpServletRequest request, HttpServletResponse response) {
 		
-		System.out.println("옵션 삭제 시작");
 		Option op2 = new Option();
-		for (String a : op.getOpl_no()) {
-			op2.setOp_no(a);
-			gdsDAO.deleteOpByNo(op2);
-		}
-		
-		System.out.println("옵션상품번호==="+op.getOp_gdno());
 		op2.setOp_gdno(op.getOp_gdno());
-		// 삭제하고 나머지 옵션 json에 넘기기
-		return new Options(gdsDAO.getOptionByGdNo(op2));
+		try {
+			for (String a : op.getOpl_no()) {
+				op2.setOp_no(a);
+				gdsDAO.deleteOpByNo(op2);
+			}
+			
+			// 삭제하고 나머지 옵션 json에 넘기기
+			return new Options(gdsDAO.getOptionByGdNo(op2));
+			
+		}catch (Exception e) {
+			e.printStackTrace();
+			return new Options(gdsDAO.getOptionByGdNo(op2));
+		}
 	}
 	
 	// 상품상세화면 표시

@@ -22,5 +22,5 @@ public class Options {
 	public void setOption(List<Option> option) {
 		this.option = option;
 	}
-	
+
 }

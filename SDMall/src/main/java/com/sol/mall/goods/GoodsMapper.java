@@ -63,9 +63,11 @@ public interface GoodsMapper {
 	public abstract int deleteGoodsDtlByNo(Goods g);
 	
 	// 옵션삭제 (상품번호)
-	public abstract int deleteGoodsOpByNo(Goods g);
+	public abstract int deleteOpByGoodsNo(Goods g);
 	
-	// 옵션삭제 (옵션번호)
+	// 옵션삭제 (옵션번호, 옵션 상품번호)
+	// 옵션번호로만 삭제 하면 옵션셀렉트 값으로 삭제가 되는 문제가 발생
+	// 옵션상품번호와 옵션번호 두가지가 일치 해야지 삭제 되도록 변경
 	public abstract int deleteOpByNo(Option op);
 
 	public abstract Goods getGoodsByNo(Goods goods);// 상품코드로 상품 조회

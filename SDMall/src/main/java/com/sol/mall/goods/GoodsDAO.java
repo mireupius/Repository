@@ -133,10 +133,8 @@ public class GoodsDAO {
 
 	// 입력 ==================================================
 	public void insertGd(Goods gd, HttpServletRequest request, HttpServletResponse response) {
-
 		// 이미지 문제
 		if (ss.getMapper(GoodsMapper.class).insertGds(gd) == 1) {
-
 			System.out.println("insertGd성공");
 		} else {
 			System.out.println("insertGd해당항목 없음");
@@ -144,9 +142,7 @@ public class GoodsDAO {
 	}
 
 	public void insertGdtlTwo(HashMap<String, Object> map, HttpServletRequest request, HttpServletResponse response) {
-
 		if (ss.getMapper(GoodsMapper.class).insertGdtlTwo(map) == 1) {
-
 			System.out.println("insertGdtlTwo성공");
 		} else {
 			System.out.println("insertGdtlTwo해당 항목없음");
@@ -154,9 +150,7 @@ public class GoodsDAO {
 	}
 
 	public void insertOpTwo(HashMap<String, Object> map, HttpServletRequest request, HttpServletResponse response) {
-
 		if (ss.getMapper(GoodsMapper.class).insertOpTwo(map) == 1) {
-
 			System.out.println("insertOpTwo성공");
 		} else {
 			System.out.println("insertOpTwo해당항목없음");
@@ -165,9 +159,7 @@ public class GoodsDAO {
 
 	public void insertOpTwoForUp(HashMap<String, Object> map, HttpServletRequest request,
 			HttpServletResponse response) {
-
 		if (ss.getMapper(GoodsMapper.class).insertOpTwoForUp(map) == 1) {
-
 			System.out.println("insertOpTwoForUp성공");
 		} else {
 			System.out.println("insertOpTwoForUp해당항목 없음");
@@ -268,9 +260,7 @@ public class GoodsDAO {
 	}
 
 	public void updateGdtlTwo(HashMap<String, Object> map, HttpServletRequest request, HttpServletResponse response) {
-
 		if (ss.getMapper(GoodsMapper.class).updateGdtlTwo(map) == 1) {
-
 			System.out.println("updateGdtlTwo성공");
 		} else {
 			System.out.println("updateGdtlTwo 해당자료 없음");
@@ -278,9 +268,7 @@ public class GoodsDAO {
 	}
 
 	public void updateOpTwo(HashMap<String, Object> map, HttpServletRequest request, HttpServletResponse response) {
-
 		if (ss.getMapper(GoodsMapper.class).updateOpTwo(map) == 1) {
-
 			System.out.println("updateOpTwo성공");
 		} else {
 			System.out.println("updateOpTwo 해당자료 없음");
@@ -291,7 +279,6 @@ public class GoodsDAO {
 	// 상품 삭제
 	public void deleteGoodsByNo(Goods gd) {
 		if (ss.getMapper(GoodsMapper.class).deleteGoodsByNo(gd) == 1) {
-
 			System.out.println("deleteGoodsByNo 성공");
 		} else {
 			System.out.println("deleteGoodsByNo 해당자료 없음");
@@ -301,7 +288,6 @@ public class GoodsDAO {
 	// 상품상세 삭제
 	public void deleteGoodsDtlByNo(Goods gd) {
 		if (ss.getMapper(GoodsMapper.class).deleteGoodsDtlByNo(gd) == 1) {
-
 			System.out.println("deleteGoodsDtlByNo 성공");
 		} else {
 			System.out.println("deleteGoodsDtlByNo 해당자료 없음");
@@ -310,8 +296,7 @@ public class GoodsDAO {
 
 	// 옵션 삭제(상품번호에 해당하는 모든 옵션삭제)
 	public void deleteGoodsOpByNo(Goods gd) {
-		if (ss.getMapper(GoodsMapper.class).deleteGoodsOpByNo(gd) == 1) {
-
+		if (ss.getMapper(GoodsMapper.class).deleteOpByGoodsNo(gd) == 1) {
 			System.out.println("deleteGoodsOpByNo 성공");
 		} else {
 			System.out.println("deleteGoodsOpByNo 해당자료 없음");
@@ -363,10 +348,8 @@ public class GoodsDAO {
 	
 	
 	// 옵션 삭제(옵션번호로 삭제)
-	public void deleteOpByNo(Option op) {
-		
+	public void deleteOpByNo(Option op) throws Exception{
 		if (ss.getMapper(GoodsMapper.class).deleteOpByNo(op) == 1) {
-
 			System.out.println("deleteOpByNo 성공");
 		} else {
 			System.out.println("deleteOpByNo 해당자료 없음");

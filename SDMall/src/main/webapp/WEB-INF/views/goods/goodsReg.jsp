@@ -23,6 +23,8 @@
 <script src="resources/js/validCheck.js"></script>
 <script type="text/javascript">
 function saveContent() {
+ 		opApplyReg();
+
  		var clflField = document.tx_editor_form.gd_clfl;
  		var clfmField = document.tx_editor_form.gd_clfm;
  		var gdNameField = document.tx_editor_form.gd_name;
@@ -44,7 +46,6 @@ function saveContent() {
  		var dlvchrgField = document.tx_editor_form.gd_dlvchrg;
  		var outareaField = document.tx_editor_form.gd_outarea;
  	
- 		$("#opSave").trigger("click");
  		
  		if (clflField==null) {
  			alert("상품 대분류 를 선택해주세요.");
@@ -112,7 +113,6 @@ function saveContent() {
  		}else{
  			  Editor.save(); // 이 함수를 호출하여 글을 등록하면 된다.
  		}
- 		
 }
 
 $(function(){
@@ -234,27 +234,12 @@ $(function(){
 		
 		opN++;
 	});
-	
-	// 적용 버튼 클릭으로 옵션값 히든에 저장
-//	$(document).on("keyup","[name=op_stock"+(opN-1)+"]",function(){
-	$(document).on("click","#opSave",function(){
-		var r = opN;
-		var opl_name = [];
-		var opl_price = [];
-		var opl_stock = [];
-		
-		for (var i = 0; i < r; i++) {
-			opl_name[i] = $("input[name=op_name"+i+"]").val();
-			opl_price[i] = $("input[name=op_price"+i+"]").val();
-			opl_stock[i] = $("input[name=op_stock"+i+"]").val();
-		}
-		
-		$("input[name=opl_name]").val(opl_name);
-		$("input[name=opl_price]").val(opl_price);
-		$("input[name=opl_stock]").val(opl_stock);
-		alert("옵션 적용");
 
-	});
+	// 적용 버튼 클릭으로 옵션값 히든에 저장
+	
+//	$(document).on("keyup","[name=op_stock"+(opN-1)+"]",function(){
+//	$(document).on("click","#opSave",function(){
+//	});
 	// ▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲ 옵션값 배열로 저장 input hidden으로 넘기기 ▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲
 	
 });
@@ -287,27 +272,47 @@ function handleImgFileSelect(e){
 	});
 }
 
-
-function opDelete(){
-	
+// 옵션 박스값 적용
+function opApplyReg(){
 	var values = document.getElementsByName("opChk");
+	
+	var r = values.length;
+	var opl_name = [];
+	var opl_price = [];
+	var opl_stock = [];
+	
+	for (var i = 0; i < r; i++) {
+		opl_name[i] = $("input[name=op_name"+i+"]").val();
+		opl_price[i] = $("input[name=op_price"+i+"]").val();
+		opl_stock[i] = $("input[name=op_stock"+i+"]").val();
+	}
+	
+	$("input[name=opl_name]").val(opl_name);
+	$("input[name=opl_price]").val(opl_price);
+	$("input[name=opl_stock]").val(opl_stock);
+	alert("옵션 적용");
+}
+
+// 옵션 박스 제거
+function opBoxDelete(){
+	var values = document.getElementsByName("opChk");
+	var a=[];
+	//var a = new Array();
 	
 	$.each(values, function(i, s){
 		if(s.checked){
-			alert(i);
-/* 			$("input[name=op_name"+i+"]").remove();
-			$("input[name=op_price"+i+"]").remove();
-			$("input[name=op_stock"+i+"]").remove(); */
-			$("#opLi"+i).empty();
-			$("#opLi"+i).remove();
-	/* 		values[i].remove(); */
-			
-			$("#ch"+i).empty();
-			$("#ch"+i).remove();
+			a.push(values[i].value);
 		}
 	});
+	
+	$.each(a, function(i, s){
+			$("#opLi"+s).empty();
+			$("#opLi"+s).remove();
+			
+			$("#ch"+s).empty();
+			$("#ch"+s).remove();
+	});
 }
-
 </script>
 
 <title>Goods</title>
@@ -492,13 +497,10 @@ h3 {
 						<td class="gdTd1"></td>
 						<td class="gdTd2">
 							<span class="opTbr">
-								<button id="opPlus">추가</button>
+								<button id="opPlus">입력칸 추가</button>
 							</span>
-							<span class="opTbr">
-								<button id="opSave">적용</button>
-							</span>
-							<span class="opTbr" onclick="opDelete();">
-								<button id="opDelete" >삭제</button>
+							<span class="opTbr" onclick="opBoxDelete();">
+								<button id="opDelete" >입력칸 삭제</button>
 							</span>
 						</td>
 					</tr>
