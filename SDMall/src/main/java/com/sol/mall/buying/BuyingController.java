@@ -16,8 +16,15 @@ public class BuyingController {
 	@Autowired
 	private BuyingDAO BDAO;
 
-	@RequestMapping(value = "/buying.go", method = RequestMethod.GET)
-	public String home(HttpServletRequest req, HttpServletResponse res) {
+	@RequestMapping(value = "/buying.go", method = RequestMethod.POST)
+	public String buyingGo(HttpServletRequest req, HttpServletResponse res, Delivery delivery) {
+		BDAO.containProduct(req, res, delivery);
+		req.setAttribute("contentPage", "buying/buying.jsp");
+		return "main";
+	}
+
+	@RequestMapping(value = "/buyingFormBarsket.go", method = RequestMethod.POST)
+	public String buyingFormBarsket(HttpServletRequest req, HttpServletResponse res, Delivery delivery) {
 
 		req.setAttribute("contentPage", "buying/buying.jsp");
 		return "main";

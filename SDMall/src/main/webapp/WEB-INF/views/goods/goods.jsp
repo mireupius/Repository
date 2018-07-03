@@ -63,7 +63,8 @@
 							</form>
 							
 <!-- 							즉시구매 form -->
-							<form action="">
+							<form action="buying.go" method="post">
+							<input name="imageFileName" value="${goodsDtl1.gd_imgs }">
 							<input name="sd_delivery_cost" value="${goodsDtl1.gd_dlvchrg }">
 							<input name="sd_product_name" value="${goodsDtl1.gd_name }">
 							<input id="send_option_name" name="sd_option_info">
@@ -75,7 +76,7 @@
 							<input name="sd_out_area" value="${goodsDtl1.gd_outarea }">
 							<input name="sd_product_no" value="${goodsDtl1.gd_no }">
 							<input name="sd_seller_id" value="${goodsDtl1.gd_sellerid }">
-							<button type="button" class="button cart_button">구매</button>
+							<button type="submit" class="button cart_button">구매</button>
 							</form>
 							
 						</div>
