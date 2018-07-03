@@ -243,6 +243,7 @@ function opDelete(){
 			data : {opl_no : opl_no, op_gdno : gd_no},
 			success : function(json){
 				var ar = json.option;
+				var warnMessage = json.warnMessage;
 
 				$(".opUl").empty();
 				$.each(ar, function(i, s){
@@ -264,27 +265,31 @@ function opDelete(){
 					
 					$(".opUl").append(opLi, opLiChk);
 				});
+				
+				alert("도착");
+				if(warnMessage=="no"){
+					alert("선택된 옵션중 바르지 못한 옵션번호가 있었습니다.");
+				}
 			}
 		});
 	}
 }
 
-//옵션 박스값 적용
+//옵션 박스값 적용( 그냥 for문은 안됨 추가 삭제시 문제 발생)
 function opApplyView(){
 	var values = document.getElementsByName("opChk");
-	
 	var r = values.length;
 	var opl_no = [];
 	var opl_name = [];
 	var opl_price = [];
 	var opl_stock = [];
 	
-	for (var i = 0; i < r; i++) {
-		opl_no[i] = $("input[name=op_no"+i+"]").val();
-		opl_name[i] = $("input[name=op_name"+i+"]").val();
-		opl_price[i] = $("input[name=op_price"+i+"]").val();
-		opl_stock[i] = $("input[name=op_stock"+i+"]").val();
-	}
+	$.each(values, function(i,s){
+		opl_no[i] = $("input[name=op_no"+s.value+"]").val();
+		opl_name[i] = $("input[name=op_name"+s.value+"]").val();
+		opl_price[i] = $("input[name=op_price"+s.value+"]").val();
+		opl_stock[i] = $("input[name=op_stock"+s.value+"]").val();
+	});
 	
 	$("input[name=opl_no]").val(opl_no);
 	$("input[name=opl_name]").val(opl_name);

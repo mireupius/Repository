@@ -346,13 +346,16 @@ public class GoodsDAO {
 		}
 	}
 	
-	
-	// 옵션 삭제(옵션번호로 삭제)
-	public void deleteOpByNo(Option op) throws Exception{
+	// 옵션삭제 (옵션번호, 옵션 상품번호)
+	// 옵션번호로만 삭제 하면 옵션셀렉트 값으로 삭제가 되는 문제가 발생
+	// 옵션상품번호와 옵션번호 두가지가 일치 해야지 삭제 되도록 변경
+	public boolean deleteOpByNo(Option op) throws Exception{
 		if (ss.getMapper(GoodsMapper.class).deleteOpByNo(op) == 1) {
 			System.out.println("deleteOpByNo 성공");
+			return false;
 		} else {
 			System.out.println("deleteOpByNo 해당자료 없음");
+			return true;
 		}
 	}
 	

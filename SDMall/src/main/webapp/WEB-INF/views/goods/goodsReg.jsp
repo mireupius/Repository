@@ -272,20 +272,19 @@ function handleImgFileSelect(e){
 	});
 }
 
-// 옵션 박스값 적용
+// 옵션 박스값 적용( 그냥 for문은 안됨 추가 삭제시 문제 발생)
 function opApplyReg(){
 	var values = document.getElementsByName("opChk");
-	
 	var r = values.length;
 	var opl_name = [];
 	var opl_price = [];
 	var opl_stock = [];
 	
-	for (var i = 0; i < r; i++) {
-		opl_name[i] = $("input[name=op_name"+i+"]").val();
-		opl_price[i] = $("input[name=op_price"+i+"]").val();
-		opl_stock[i] = $("input[name=op_stock"+i+"]").val();
-	}
+	$.each(values, function(i,s){
+		opl_name[i] = $("input[name=op_name"+s.value+"]").val();
+		opl_price[i] = $("input[name=op_price"+s.value+"]").val();
+		opl_stock[i] = $("input[name=op_stock"+s.value+"]").val();
+	});
 	
 	$("input[name=opl_name]").val(opl_name);
 	$("input[name=opl_price]").val(opl_price);
