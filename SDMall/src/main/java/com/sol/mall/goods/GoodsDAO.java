@@ -59,6 +59,10 @@ public class GoodsDAO {
 			e.printStackTrace();
 		}
 	}
+	
+	public GoodsList getGoodsByName(Goods goods, HttpServletRequest request, HttpServletResponse response) {
+		return new GoodsList(ss.getMapper(GoodsMapper.class).getGoodsByName(goods));
+	}
 
 	// 상품상세 조회
 	public void getGoodsView(GoodsView gv, GoodsCategory gc, HttpServletRequest request, HttpServletResponse response) {

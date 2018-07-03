@@ -29,6 +29,7 @@
 <script src="resources/plugins/OwlCarousel2-2.2.1/owl.carousel.js"></script>
 <script src="resources/plugins/easing/easing.js"></script>
 <script src="resources/js/custom.js"></script>
+<script src="resources/js/search.js"></script>
 </head>
 
 <body>
@@ -58,13 +59,10 @@
 							<div class="header_search_content">
 								<div class="header_search_form_container">
 									<form action="shop.search" class="header_search_form clearfix">
-										<input type="search" required="required" class="header_search_input" placeholder="Search for products..." name="gd_name">
+										<input type="search" required="required" class="header_search_input" placeholder="Search for products..." autocomplete="off" name="gd_name">
 										<button type="submit" class="header_search_button trans_300" value="Submit"><img src="resources/etc/search.png" alt=""></button>
 									</form>
 										<ul class="header_search_dropdown">
-											<li><a href="#">검색</a></li>
-											<li><a href="#">검색</a></li>
-											<li><a href="#">검색</a></li>
 										</ul>
 								</div>
 							</div>

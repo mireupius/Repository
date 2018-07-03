@@ -79,6 +79,12 @@ public class GoodsController {
 		request.setAttribute("contentPage", "goods/shop.jsp");
 		return "main";
 	}
+	
+	@RequestMapping(value = "/search.name", method = RequestMethod.GET, produces = "application/json; charset=utf-8")
+	public @ResponseBody GoodsList getGoodsByName(Goods goods, HttpServletRequest request, HttpServletResponse response) {
+
+		return gdsDAO.getGoodsByName(goods, request, response);
+	}
 
 	// 상품등록작업
 	@RequestMapping(value = "/registration.do", method = RequestMethod.POST)

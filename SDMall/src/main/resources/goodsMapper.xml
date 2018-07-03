@@ -33,9 +33,9 @@
 	</select>
 	
 	<select id="getGoodsByName" parameterType="com.sol.mall.goods.Goods" resultType="com.sol.mall.goods.Goods"> 
-		select * 
-		from goods_tb 
-		where gd_name like '%'||#{gd_name}||'%'
+		SELECT * 
+		FROM GOODS_TB
+		WHERE GD_NAME LIKE '%'||#{gd_name}||'%'
 	</select>
 	
 	<select id="getAllGoodsView" parameterType="com.sol.mall.goods.Goods" resultType="com.sol.mall.goods.GoodsView">

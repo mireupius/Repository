@@ -25,7 +25,9 @@ select * from goods_tb;
 
 select * from goods_tb where gd_name like '%고%';
 
-select * from goods_tb,goodsdtl_tb where gd_no=gt_gdno and gd_name like '%고%' or gt_keyword like '%고%';
+SELECT * 
+FROM GOODS_TB
+WHERE  GD_NAME LIKE '%티셔츠%';
 
 
 create table goodsdtl_tb		
