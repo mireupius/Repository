@@ -2,6 +2,7 @@ package com.sol.mall.myPage;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -21,20 +22,29 @@ public class MyPageDAO {
 	@Autowired
 	private SqlSession ss;
 
-	public void getOrderList(SearchOrder bb, HttpServletRequest req, HttpServletResponse res) {
-
+	public void searchOrderList(SearchMonth sm, HttpServletRequest req, HttpServletResponse res) {
+		
 		Customer cc = (Customer) req.getSession().getAttribute("loginCustomer");
 
-		bb.setSd_customer_id(cc.getCsm_id());
-
-		List<Delivery> orders = ss.getMapper(MyPageMapper.class).searchOrderList(bb);
+		
+		SearchOrder so = new SearchOrder();
+		so.setSd_customer_id(cc.getCsm_id());
+		System.out.println(sm.getSearchMonth());
+		
+		HashMap<String, Object> map = new HashMap<>();
+		map.put("searchOrder", so);
+		map.put("searchMonth", sm.getSearchMonth());
+		System.out.println(map.get(so.getGd_imgss()));
+		System.out.println(sm.getSearchMonth());
+		
+		List<SearchOrder> orders = ss.getMapper(MyPageMapper.class).searchOrderList(map);
+		
 	
-
-		if (cc.getCsm_id().equals(bb.getSd_customer_id())) {
+		if (cc.getCsm_id().equals(so.getSd_customer_id())) {
 			
 			req.setAttribute("orderList", orders);
 		}
-
+		
 	}
 	
 	public void cancelOrder(Delivery d, HttpServletRequest req, HttpServletResponse res) {
@@ -114,15 +124,20 @@ public class MyPageDAO {
 		
 	}
 
-	public void getClaimedOrderList(SearchOrder bb, HttpServletRequest req, HttpServletResponse res) {
+	public void searchClaimedOrderList(SearchMonth sm, HttpServletRequest req, HttpServletResponse res) {
 
 		Customer cc = (Customer) req.getSession().getAttribute("loginCustomer");
 
-		bb.setSd_customer_id(cc.getCsm_id());
+		SearchOrder so = new SearchOrder();
+		so.setSd_customer_id(cc.getCsm_id());
+		
+		HashMap<String, Object> map = new HashMap<>();
+		map.put("searchOrder", so);
+		map.put("searchMonth", sm.getSearchMonth());
 
-		List<Delivery> orders = ss.getMapper(MyPageMapper.class).searchClaimedOrderList(bb);
+		List<SearchOrder> orders = ss.getMapper(MyPageMapper.class).searchClaimedOrderList(map);
 
-		if (cc.getCsm_id().equals(bb.getSd_customer_id())) {
+		if (cc.getCsm_id().equals(so.getSd_customer_id())) {
 			
 			req.setAttribute("orderList", orders);
 		}

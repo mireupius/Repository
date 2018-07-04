@@ -73,7 +73,8 @@
 						<div class="wishlist_cart d-flex flex-row align-items-center justify-content-end">
 							<div class="wishlist d-flex flex-row align-items-center justify-content-end">
 								<div class="wishlist_content">
-									<div class="wishlist_icon"><img src="resources/etc/icon-login.png" alt=""></div>
+									<div class="wishlist_icon">
+									<a href="member.loginPage"><img src="resources/etc/icon-login.png" alt=""></a></div>
 									<div class="wishlist_text">
 										<c:if test="${sessionScope.loginCustomer == null }">
 										<a href="member.loginPage">로그인</a>
@@ -87,7 +88,7 @@
 							<!-- Myhome -->
 							<div class="wishlist d-flex flex-row align-items-center justify-content-end">
 								<div class="wishlist_content">
-									<div class="wishlist_icon"><img src="resources/etc/icon-myhome.png" alt=""></div>
+									<div class="wishlist_icon"><a href="customer.myHome.go"><img src="resources/etc/icon-myhome.png" alt=""></a></div>
 									<div class="wishlist_text"><a href="customer.myHome.go">마이홈</a></div>
 								</div>
 							</div>
@@ -97,12 +98,17 @@
 								<div class="cart_container d-flex flex-row align-items-center justify-content-end">
 									<div class="cart_content">
 										<div class="cart_icon">
+<<<<<<< HEAD
 											<img src="resources/etc/icon-cart.png" alt="">
 											<c:if test="${sessionScope.loginCustomer != null}">
 												<div class="cart_count">
 												<span>${sbsize }  </span>
 												</div>
 											</c:if>
+=======
+											<a href="customer.cart.go"><img src="resources/etc/icon-cart.png" alt=""></a>
+											<div class="cart_count"><span>10</span></div>
+>>>>>>> refs/remotes/origin/Oh19
 										</div>
 										<div class="cart_text"><a href="customer.cart.go">장바구니</a></div>
 									</div>

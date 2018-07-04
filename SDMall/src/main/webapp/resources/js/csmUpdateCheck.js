@@ -1,3 +1,4 @@
+// 구매자 회원정보 event
 function connectCSMUpdateCheckEvent() {
 
 		var pwField = document.updateCSMForm.csm_pw;	
@@ -103,7 +104,7 @@ function connectCSMUpdateCheckEvent() {
 		
 		$('.emailFrontInput').keyup(function(e) {
 
-			if (isEmpty(emailFrontField) != false) {
+			if (isEmpty(emailFrontField) || containsHangul(emailFrontField) != false) {
 				$(".promptTxt_email").text("이메일을 입력해주세요")
 				.css("color", "red").css("display", "block");
 			}else {

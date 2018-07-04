@@ -12,7 +12,7 @@
 
 <form action="customer.myHome.claimList">
 
-		<select name="sb_searchMonth">
+		<select name="searchMonth">
 			<option value="1">최근 1개월 전</option>
 			<option value="3">최근 3개월 전</option>
 			<option value="6">최근 6개월 전</option>

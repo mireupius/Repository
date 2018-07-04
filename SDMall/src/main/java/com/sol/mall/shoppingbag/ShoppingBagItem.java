@@ -2,6 +2,7 @@ package com.sol.mall.shoppingbag;
 
 import java.math.BigDecimal;
 
+// 장바구니에 담긴 상품들 보여줄 때 사용하는 자바빈(테이블x)
 public class ShoppingBagItem {
 
 	private String sb_no;
@@ -100,6 +101,7 @@ public class ShoppingBagItem {
 	public void setGd_price(BigDecimal gd_price) {
 		this.gd_price = gd_price;
 	}
+<<<<<<< HEAD
 
 	public String getGd_dlvchrg() {
 		return gd_dlvchrg;
@@ -125,4 +127,7 @@ public class ShoppingBagItem {
 		this.gd_sellerid = gd_sellerid;
 	}
 
+=======
+	
+>>>>>>> refs/remotes/origin/Oh19
 }

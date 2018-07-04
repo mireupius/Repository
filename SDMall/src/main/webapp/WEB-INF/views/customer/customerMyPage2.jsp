@@ -36,21 +36,9 @@
 				</div>
 			</div>
 			<div class="col-lg-9">
-
-				<div id="memberShip">
-					<table id="memberShipTable">
-						<tr>
-							<td colspan="2">${sessionScope.loginCustomer.csm_name }님</td>
-						</tr>
-						<tr>
-							<td>${memberStatus.ms_grade }</td>
-							<td>${memberStatus.ms_point }</td>
-						</tr>
-					</table>
-				</div>
-				<div>
-				<jsp:include page="${myPageContentArea }"></jsp:include>
-				
+			
+				<div class="myPageContent">
+					<jsp:include page="${myPageContentArea }"></jsp:include>
 				</div>
 			</div>
 		</div>

@@ -128,8 +128,8 @@
 							class=" fa fa-bar-chart-o"></i> <span>판매자정보</span>
 					</a>
 						<ul class="sub">
-							<li><a href="morris.html">판매자 정보변경</a></li>
-							<li><a href="chartjs.html">판매자 등급</a></li>
+							<li><a href="seller.update.go">판매자 정보변경</a></li>
+							<li><a href="seller.withdraw.go">판매자 회원탈퇴</a></li>
 						</ul></li>
 
 				</ul>
