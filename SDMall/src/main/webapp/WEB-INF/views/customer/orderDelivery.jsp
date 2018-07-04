@@ -33,6 +33,7 @@
 		</table>
 	</form>
 
+	
 	<c:forEach var="list" items="${orderList }">
 		<div>
 			<table>

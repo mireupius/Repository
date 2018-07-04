@@ -56,7 +56,8 @@
 								</div>
 								<div id="view_total_price" class="product_price">${goodsDtl1.gd_price }원</div>
 								<div class="button_container">
-									<button type="button" class="button cart_button">Add to Cart</button>
+								<input name="sb_gdno" value="${goodsDtl1.gd_no }">
+									<button class="button cart_button">Add to Cart</button>
 <!-- 									<div class="product_fav"><i class="fas fa-heart"></i></div> -->
 								</div>
 							</form>

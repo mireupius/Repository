@@ -16,7 +16,6 @@
 <link rel="stylesheet" type="text/css" href="resources/plugins/OwlCarousel2-2.2.1/owl.theme.default.css">
 <link rel="stylesheet" type="text/css" href="resources/plugins/OwlCarousel2-2.2.1/animate.css">
 <link rel="stylesheet" type="text/css" href="resources/css/main.css">
-<link rel="stylesheet" type="text/css" href="resources/css/responsive.css">
 
 <script src="resources/js/jquery-3.3.1.min.js"></script>
 <script src="resources/css/bootstrap4/popper.js"></script>
@@ -29,6 +28,7 @@
 <script src="resources/plugins/OwlCarousel2-2.2.1/owl.carousel.js"></script>
 <script src="resources/plugins/easing/easing.js"></script>
 <script src="resources/js/custom.js"></script>
+<script src="resources/js/search.js"></script>
 </head>
 
 <body>
@@ -57,9 +57,11 @@
 						<div class="header_search">
 							<div class="header_search_content">
 								<div class="header_search_form_container">
-									<form action="#" class="header_search_form clearfix">
-										<input type="search" required="required" class="header_search_input" placeholder="Search for products...">
-										<button type="submit" class="header_search_button trans_300" value="Submit"><img src="images/search.png" alt=""></button>
+									<form action="shop.search" class="header_search_form clearfix">
+										<input type="search" required="required" class="header_search_input" placeholder="Search for products..." autocomplete="off" name="gd_name">
+										<button type="submit" class="header_search_button trans_300" value="Submit"><img src="resources/etc/search.png" alt=""></button>
+										<ul class="header_search_dropdown">
+										</ul>
 									</form>
 								</div>
 							</div>

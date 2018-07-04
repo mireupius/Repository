@@ -59,7 +59,7 @@ public class GoodsController {
 		request.setAttribute("contentPage", "goods/shop.jsp");
 		return "main";
 	}
-
+	
 	// 카테고리 상품 조회
 	@RequestMapping(value = "/shop.Category", method = RequestMethod.GET)
 	public String getGoodsByCate(Category category, HttpServletRequest request, HttpServletResponse response) {
@@ -68,6 +68,22 @@ public class GoodsController {
 		gdsDAO.getGoodsByCate(category, request, response);
 		request.setAttribute("contentPage", "goods/shop.jsp");
 		return "main";
+	}
+	
+	// 검색창에 입력받은 값으로 상품 이름과 키워드를 검색
+	@RequestMapping(value = "/shop.search", method = RequestMethod.GET)
+	public String searchGoods(Goods goods, HttpServletRequest request, HttpServletResponse response) {
+		cDAO.getAllCategory(request, response);
+		
+		gdsDAO.searchGoods(goods, request, response);
+		request.setAttribute("contentPage", "goods/shop.jsp");
+		return "main";
+	}
+	
+	@RequestMapping(value = "/search.name", method = RequestMethod.GET, produces = "application/json; charset=utf-8")
+	public @ResponseBody GoodsList getGoodsByName(Goods goods, HttpServletRequest request, HttpServletResponse response) {
+
+		return gdsDAO.getGoodsByName(goods, request, response);
 	}
 
 	// 상품등록작업

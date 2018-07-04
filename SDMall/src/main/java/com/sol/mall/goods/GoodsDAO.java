@@ -36,7 +36,6 @@ public class GoodsDAO {
 		request.setAttribute("goodsDtl2", ss.getMapper(GoodsMapper.class).getGoodsDtlByNo(goods));
 		request.setAttribute("option", ss.getMapper(OptionMapper.class).getOptionByGdno(goods));
 
-		// ss.getMapper(GoodsMapper.class).getGoodsByNo(goods).getGd_clfl();
 	}
 
 	// 카테고리로 상품 조회
@@ -44,10 +43,25 @@ public class GoodsDAO {
 		try {
 			List<Goods> goods = ss.getMapper(GoodsMapper.class).getGoodsByCate(category);
 
-			request.setAttribute("goods", goods);
+			request.setAttribute("goodsList", goods);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+	}
+	
+	// 검색창에 입력받은 값으로 상품 이름과 키워드를 검색
+	public void searchGoods(Goods goods, HttpServletRequest request, HttpServletResponse response) {
+		try {
+			List<Goods> goodsResult = ss.getMapper(GoodsMapper.class).searchGoods(goods);
+
+			request.setAttribute("goodsList", goodsResult);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public GoodsList getGoodsByName(Goods goods, HttpServletRequest request, HttpServletResponse response) {
+		return new GoodsList(ss.getMapper(GoodsMapper.class).getGoodsByName(goods));
 	}
 
 	// 상품상세 조회
@@ -120,7 +134,7 @@ public class GoodsDAO {
 		int end = (curPage == allPage) ? 1 : start - ((int) cnt - 1);// 페이지 마지막 게시물
 
 		List<GoodsView> gdsPage = new ArrayList<>();// 해당 페이지 게시물 리스트
-		
+
 		// start가 0인 경우 -1이 나와서 익셉션걸림(검색결과가 0인 경우에 -1이 됨)
 		if (start > 0) {
 			for (int i = start; i >= end; i--) {

@@ -25,6 +25,7 @@ public class MyPageDAO {
 	public void searchOrderList(SearchMonth sm, HttpServletRequest req, HttpServletResponse res) {
 		
 		Customer cc = (Customer) req.getSession().getAttribute("loginCustomer");
+<<<<<<< HEAD
 		
 		SearchOrder so = new SearchOrder();
 		so.setSd_customer_id(cc.getCsm_id());
@@ -40,6 +41,15 @@ public class MyPageDAO {
 		
 	
 		if (cc.getCsm_id().equals(so.getSd_customer_id())) {
+=======
+
+		bb.setSd_customer_id(cc.getCsm_id());
+
+		List<Delivery> orders = ss.getMapper(MyPageMapper.class).searchOrderList(bb);
+	
+
+		if (cc.getCsm_id().equals(bb.getSd_customer_id())) {
+>>>>>>> refs/remotes/origin/hs6
 			
 			req.setAttribute("orderList", orders);
 		}
