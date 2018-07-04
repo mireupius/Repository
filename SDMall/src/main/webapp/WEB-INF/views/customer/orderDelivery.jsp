@@ -11,7 +11,7 @@
 <body>
 
 	<form action="customer.myHome.orderList">
-		<table class="searchOrderTb">
+		<table class="searchOrderTb" border="1">
 			<tr>
 			<td class="searchOrderTd">주문/배송 조회</td>
 			</tr>
