@@ -3,21 +3,26 @@ package com.sol.mall.shoppingbag;
 import java.math.BigDecimal;
 
 public class ShoppingBagItem {
-	
+
 	private String sb_no;
 	private String gd_name;
 	private String gd_imgm;
 	private String op_name;
 	private BigDecimal sb_quantity;
 	private BigDecimal op_price;
+	private BigDecimal gd_csmprice;
 	private BigDecimal gd_price;
-	
+	private String gd_dlvchrg;
+	private String gd_outarea;
+	private String gd_sellerid;
+
 	public ShoppingBagItem() {
 		// TODO Auto-generated constructor stub
 	}
 
 	public ShoppingBagItem(String sb_no, String gd_name, String gd_imgm, String op_name, BigDecimal sb_quantity,
-			BigDecimal op_price, BigDecimal gd_price) {
+			BigDecimal op_price, BigDecimal gd_csmprice, BigDecimal gd_price, String gd_dlvchrg, String gd_outarea,
+			String gd_sellerid) {
 		super();
 		this.sb_no = sb_no;
 		this.gd_name = gd_name;
@@ -25,7 +30,11 @@ public class ShoppingBagItem {
 		this.op_name = op_name;
 		this.sb_quantity = sb_quantity;
 		this.op_price = op_price;
+		this.gd_csmprice = gd_csmprice;
 		this.gd_price = gd_price;
+		this.gd_dlvchrg = gd_dlvchrg;
+		this.gd_outarea = gd_outarea;
+		this.gd_sellerid = gd_sellerid;
 	}
 
 	public String getSb_no() {
@@ -76,6 +85,14 @@ public class ShoppingBagItem {
 		this.op_price = op_price;
 	}
 
+	public BigDecimal getGd_csmprice() {
+		return gd_csmprice;
+	}
+
+	public void setGd_csmprice(BigDecimal gd_csmprice) {
+		this.gd_csmprice = gd_csmprice;
+	}
+
 	public BigDecimal getGd_price() {
 		return gd_price;
 	}
@@ -83,8 +100,29 @@ public class ShoppingBagItem {
 	public void setGd_price(BigDecimal gd_price) {
 		this.gd_price = gd_price;
 	}
-	
 
-	
+	public String getGd_dlvchrg() {
+		return gd_dlvchrg;
+	}
+
+	public void setGd_dlvchrg(String gd_dlvchrg) {
+		this.gd_dlvchrg = gd_dlvchrg;
+	}
+
+	public String getGd_outarea() {
+		return gd_outarea;
+	}
+
+	public void setGd_outarea(String gd_outarea) {
+		this.gd_outarea = gd_outarea;
+	}
+
+	public String getGd_sellerid() {
+		return gd_sellerid;
+	}
+
+	public void setGd_sellerid(String gd_sellerid) {
+		this.gd_sellerid = gd_sellerid;
+	}
 
 }

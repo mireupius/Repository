@@ -87,22 +87,23 @@ qa_qRegDate varchar2(20 char) not null,
 qa_aRegDate varchar2(20 char),
 qa_sort varchar2(10 char) not null,
 qa_check varchar2(5 char) not null
-
 );
 
 drop table question_Answer cascade constraint purge;
 drop sequence question_Answer_seq;
 select * from question_Answer
 
+delete from question_Answer;
+
 -- 샘플 데이터
 insert into question_Answer values(
 	to_char(SYSDATE,'yyyyMMdd') || LPAD(question_Answer_seq.nextval, 4, 0),
 		'15313135', 'junyoung00',
 		'seller00','7777888855553', '연필', '배송문의요', '어제 상품주문했는데 배송언제되요',
-		'오늘이나 내일 출고됩니다','2018-08-09', '2018-08-09', '배송', '미답변'
-	)
+		'오늘이나 내일 출고됩니다','2018-08-09', '2018-08-09', '배송', '답변'
+	);
 
-
+select * from question_Answer;
 -- 상품평 테이블
 -- 따로 직접 insert 할 필요없음(마이페이지에서 직접 입력하고 테스트 해봐야함)
 CREATE SEQUENCE product_Review_seq
