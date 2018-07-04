@@ -15,6 +15,7 @@
 			<div class="col-lg-3">
 				<div class="shop_sidebar">
 					<div class="sidebar_section myPage_sidebar">
+						<div class="sidebar_title"><span style="color: blue;">${r }<span></div>
 						<div class="sidebar_title">주문관리</div>
 						<ul class="sidebar_categories">
 							<li><a href="customer.myHome.orderList.go">주문/배송조회</a></li>
@@ -36,7 +37,7 @@
 				</div>
 			</div>
 			<div class="col-lg-9">
-			
+				
 				<div class="myPageContent">
 					<jsp:include page="${myPageContentArea }"></jsp:include>
 				</div>

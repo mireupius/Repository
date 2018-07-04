@@ -2,7 +2,7 @@ create sequence goods_sq
 MAXVALUE 9999
 CYCLE
 NOCACHE;
-select * from GOODS_TB;
+
 create table goods_tb
 (
  gd_no 						varchar2 (13 char)		primary key,

@@ -296,15 +296,15 @@ public class MemberDAO {
 
 			if (ss.getMapper(MemberMapper.class).withdrawSL(s) == 1) {
 
-				req.setAttribute("r", "탈퇴 성공");
+				System.out.println("탈퇴 성공");
 
 			} else {
-				req.setAttribute("r", "탈퇴 실패");
+				System.out.println("탈퇴 실패");
 			}
 
 		} catch (Exception e) {
 			e.printStackTrace();
-			req.setAttribute("r", "탈퇴 실패");
+			System.out.println("탈퇴 실패");
 		}
 
 	}

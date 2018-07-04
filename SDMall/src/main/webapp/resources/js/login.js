@@ -1,3 +1,5 @@
+
+// 로그인 AJAX Event처리 
 function loginCheck() {
 	
 	$("#csm_LoginBtn").click(function() {
