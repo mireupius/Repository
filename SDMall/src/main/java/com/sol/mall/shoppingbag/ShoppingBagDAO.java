@@ -40,7 +40,6 @@ public class ShoppingBagDAO {
 		req.setAttribute("sbsize", items.size());
 		System.out.println("카트 보여주기 성공");
 		req.setAttribute("cartItems", items);
-
 	}
 
 	public void deleteCartItem(ShoppingBagItem sbItem, HttpServletRequest req, HttpServletResponse res) {
