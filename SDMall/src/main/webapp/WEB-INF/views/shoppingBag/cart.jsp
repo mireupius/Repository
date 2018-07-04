@@ -39,7 +39,7 @@
 													<div class="cart_item_text">${list.gd_name }</div>
 												</div>
 												<div class="cart_item_color cart_info_col">
-													<div class="cart_item_title">Color</div>
+													<div class="cart_item_title">Option</div>
 													<div class="cart_item_text">${list.op_name }</div>
 												</div>
 												<div class="cart_item_price cart_info_col">

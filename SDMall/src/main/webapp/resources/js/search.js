@@ -43,7 +43,7 @@ $(function() {
 				if (!$(e.target).hasClass("header_search_input")
 						&& !$(e.target).hasClass("header_search_dropdown")) {
 					// 클릭한 곳이 input,dropdown이 아니면
-					$(".header_search_dropdown").empty();
+					$(".header_search_dropdown").empty();//dropdown제거 
 				}
 			});
 	
