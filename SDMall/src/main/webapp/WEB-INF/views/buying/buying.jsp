@@ -69,7 +69,7 @@ li input {
 
 										<li class="cart_item clearfix">
 											<div class="cart_item_image">
-												<img src="resources/files/goods/img/${imageName }" alt="">
+												<img src="${pageContext.request.contextPath}/upload/${p.sd_imageFileName }" alt="">
 											</div>
 											<div
 												class="cart_item_info d-flex flex-md-row flex-column justify-content-between">

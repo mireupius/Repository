@@ -6,46 +6,46 @@ public interface DeliveryMapper {
 	
 	
 	// --- 신규/발주
-	public abstract List<Delivery> getAllDelivery();
-	public abstract List<Delivery> getNewDeliverys();
-	public abstract List<Delivery> getCheckDeliverys();
+	public abstract List<Delivery> getAllDelivery(Delivery d);
+	public abstract List<Delivery> getNewDeliverys(Delivery d);
+	public abstract List<Delivery> getCheckDeliverys(Delivery d);
 	
-	public abstract int getNewDeliveryNum();
-	public abstract int getCheckDeliveryNum();
-	public abstract int getAllDeliveryNum();
+	public abstract int getNewDeliveryNum(Delivery d);
+	public abstract int getCheckDeliveryNum(Delivery d);
+	public abstract int getAllDeliveryNum(Delivery d);
 	
 	public abstract int sendDeliverys(Delivery d);
 	public abstract int deliveryCheck(Delivery d);
 	
 	// --- 배송관리
-	public abstract int getSendingDeliverysNum();
-	public abstract int getSendDoneDeliveryNum();
+	public abstract int getSendingDeliverysNum(Delivery d);
+	public abstract int getSendDoneDeliveryNum(Delivery d);
 	
-	public abstract List<Delivery> getSendingDeliverys();
-	public abstract List<Delivery> getSendDoneDeliverys();
+	public abstract List<Delivery> getSendingDeliverys(Delivery d);
+	public abstract List<Delivery> getSendDoneDeliverys(Delivery d);
 	
 	
 	// --- 구매확정
 	
-	public abstract List<Delivery> getConfirmDelivery();
-	public abstract int getConfirmDeliveryNum();
+	public abstract List<Delivery> getConfirmDelivery(Delivery d);
+	public abstract int getConfirmDeliveryNum(Delivery d);
 
 	
 	// --- 취소
 	
-	public abstract List<Delivery> getCancelDelivery();
-	public abstract int getCancelDeliveryNum();
+	public abstract List<Delivery> getCancelDelivery(Delivery d);
+	public abstract int getCancelDeliveryNum(Delivery d);
 
 	
 	// --- 반품
 	
-	public abstract List<Delivery> getReturnDelivery();
-	public abstract int getReturnDeliveryNum();
+	public abstract List<Delivery> getReturnDelivery(Delivery d);
+	public abstract int getReturnDeliveryNum(Delivery d);
 
 	
 	// --- 교환
-	public abstract List<Delivery> getExchangeDelivery();
-	public abstract int getExchangeDeliveryNum();
+	public abstract List<Delivery> getExchangeDelivery(Delivery d);
+	public abstract int getExchangeDeliveryNum(Delivery d);
 
 
 }

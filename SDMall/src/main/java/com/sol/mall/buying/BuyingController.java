@@ -17,15 +17,15 @@ public class BuyingController {
 	private BuyingDAO BDAO;
 
 	@RequestMapping(value = "/buying.go", method = RequestMethod.POST)
-	public String buyingGo(HttpServletRequest req, HttpServletResponse res, Delivery delivery) {
-		BDAO.containProduct(req, res, delivery);
+	public String buyingGo(HttpServletRequest req, HttpServletResponse res, Cart cart) {
+		BDAO.containProduct(req, res, cart);
 		req.setAttribute("contentPage", "buying/buying.jsp");
 		return "main";
 	}
 
 	@RequestMapping(value = "/buyingFormBarsket.go", method = RequestMethod.POST)
-	public String buyingFormBarsket(HttpServletRequest req, HttpServletResponse res, Delivery delivery) {
-
+	public String buyingFormBarsket(HttpServletRequest req, HttpServletResponse res, Cart cart) {
+		BDAO.containProducts(req, res, cart);
 		req.setAttribute("contentPage", "buying/buying.jsp");
 		return "main";
 	}

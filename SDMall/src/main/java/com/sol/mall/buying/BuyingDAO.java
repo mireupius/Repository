@@ -20,12 +20,43 @@ public class BuyingDAO {
 	@Autowired
 	private SqlSession ss;
 
-	public void containProduct(HttpServletRequest req, HttpServletResponse res, Delivery delivery) {
-		ArrayList<Delivery> products = new ArrayList<>();
-		products.add(delivery);
-		
-		
-		req.setAttribute("imageName", req.getParameter("imageFileName"));
+	public void containProduct(HttpServletRequest req, HttpServletResponse res, Cart cart) {
+		ArrayList<Cart> products = new ArrayList<>();
+		products.add(cart);
+
+		req.setAttribute("products", products);
+	}
+
+	public void containProducts(HttpServletRequest req, HttpServletResponse res, Cart cart) {
+		ArrayList<Cart> products = new ArrayList<>();
+
+		String[] Im = req.getParameterValues("sd_imageFileName");
+		String[] spn = req.getParameterValues("sd_product_name");
+		String[] am = req.getParameterValues("sd_amount");
+		String[] op = req.getParameterValues("sd_option_info");
+		String[] opp = req.getParameterValues("sd_option_price");
+		String[] pp = req.getParameterValues("sd_product_price");
+		String[] ps = req.getParameterValues("sd_product_sellprice");
+		String[] tp = req.getParameterValues("sd_total_price");
+		String[] oa = req.getParameterValues("sd_out_area");
+		String[] pn = req.getParameterValues("sd_product_no");
+		String[] si = req.getParameterValues("sd_seller_id");
+
+		for (int i = 0; i < si.length; i++) {
+			cart.setSd_product_name(spn[i]);
+			cart.setSd_imageFileName(Im[i]);
+			System.out.println(Im[i]);
+			cart.setSd_amount(new BigDecimal(am[i]));
+			cart.setSd_option_info(op[i]);
+			cart.setSd_option_price(new BigDecimal(opp[i]));
+			cart.setSd_product_price(new BigDecimal(pp[i]));
+			cart.setSd_product_sellprice(new BigDecimal(ps[i]));
+			cart.setSd_total_price(new BigDecimal(tp[i]));
+			cart.setSd_out_area(oa[i]);
+			cart.setSd_product_no(pn[i]);
+			cart.setSd_seller_id(si[i]);
+			products.add(cart);
+		}
 		req.setAttribute("products", products);
 	}
 

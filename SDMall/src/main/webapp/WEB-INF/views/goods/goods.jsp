@@ -64,7 +64,7 @@
 							
 <!-- 							즉시구매 form -->
 							<form action="buying.go" method="post">
-							<input name="imageFileName" value="${goodsDtl1.gd_imgs }">
+							<input name="sd_imageFileName" value="${goodsDtl1.gd_imgs }">
 							<input name="sd_delivery_cost" value="${goodsDtl1.gd_dlvchrg }">
 							<input name="sd_product_name" value="${goodsDtl1.gd_name }">
 							<input id="send_option_name" name="sd_option_info">
