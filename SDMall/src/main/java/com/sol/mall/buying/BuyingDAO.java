@@ -12,6 +12,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.sol.mall.member.Customer;
 import com.sol.mall.sale.delivery.Delivery;
 
 @Service
@@ -27,7 +28,7 @@ public class BuyingDAO {
 		req.setAttribute("products", products);
 	}
 
-	public void containProducts(HttpServletRequest req, HttpServletResponse res, Cart cart) {
+	public void containProducts(HttpServletRequest req, HttpServletResponse res) {
 		ArrayList<Cart> products = new ArrayList<>();
 
 		String[] Im = req.getParameterValues("sd_imageFileName");
@@ -41,11 +42,15 @@ public class BuyingDAO {
 		String[] oa = req.getParameterValues("sd_out_area");
 		String[] pn = req.getParameterValues("sd_product_no");
 		String[] si = req.getParameterValues("sd_seller_id");
+		String[] sdc = req.getParameterValues("sd_delivery_cost");
 
+		Cart cart = null;
 		for (int i = 0; i < si.length; i++) {
+
+			cart = new Cart();
+
 			cart.setSd_product_name(spn[i]);
 			cart.setSd_imageFileName(Im[i]);
-			System.out.println(Im[i]);
 			cart.setSd_amount(new BigDecimal(am[i]));
 			cart.setSd_option_info(op[i]);
 			cart.setSd_option_price(new BigDecimal(opp[i]));
@@ -55,6 +60,8 @@ public class BuyingDAO {
 			cart.setSd_out_area(oa[i]);
 			cart.setSd_product_no(pn[i]);
 			cart.setSd_seller_id(si[i]);
+			cart.setSd_delivery_cost(new BigDecimal(sdc[i]));
+
 			products.add(cart);
 		}
 		req.setAttribute("products", products);
@@ -64,7 +71,8 @@ public class BuyingDAO {
 
 		String[] sd_seller_id = req.getParameterValues("sd_seller_id");
 
-		String loginID = "aaa";
+		Customer cc = (Customer) req.getSession().getAttribute("loginCustomer");
+		String loginID = cc.getCsm_id();
 
 		// HashMap으로 판매자 아이디 중복제거 후 Iterator객체로 만들어 하나씩 Order 객체에 입력 String[] sellers
 		HashSet<String> sellerSet = new HashSet<>();
@@ -112,15 +120,7 @@ public class BuyingDAO {
 			delivery.setSd_out_area(sd_out_area[i]);
 			delivery.setSd_product_no(sd_product_no[i]);
 
-			System.out.println(delivery.getSd_seller_id() + "1");
-			System.out.println(delivery.getSd_delivery_cost() + "2");
-			System.out.println(delivery.getSd_product_name() + "3");
-			System.out.println(delivery.getSd_option_info() + "4");
-			System.out.println(delivery.getSd_amount() + "5");
-			System.out.println(delivery.getSd_product_price() + "6");
-			System.out.println(delivery.getSd_product_sellprice() + "7");
-			System.out.println(delivery.getSd_out_area() + "8");
-			System.out.println(delivery.getSd_product_no() + "9");
+			System.out.println(delivery.getSd_seller_id() + " 셀러 아이디 " + i);
 
 			ss.getMapper(BuyingMapper.class).insertDelivery(delivery);
 

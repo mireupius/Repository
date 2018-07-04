@@ -213,9 +213,8 @@
 		sd_invoice_no = #{sd_invoice_no},
 		sd_courier = #{sd_courier},
 		sd_delivery_state = '배송중',
-		sd_state_detail =
-		'배송중',
-		sd_delivery_type = '택배/등기/소포',
+		sd_state_detail = '배송중',
+		sd_delivery_type = '택배',
 		sd_go_delivery_date = sysdate
 		where sd_delivery_pno = #{sd_delivery_pno}
 	</update>
