@@ -4,6 +4,7 @@
 <html lang="en">
 <head>
 <link rel="stylesheet" type="text/css" href="resources/css/home_styles.css">
+<link rel="stylesheet" type="text/css" href="resources/css/responsive.css">
 </head>
 
 <body>
@@ -12,7 +13,7 @@
 	<!-- Banner -->
 
 	<div class="banner">
-		<div class="banner_background" style="background-image:url(images/banner_background.jpg)"></div>
+		<div class="banner_background" style="background-image:url(https://www.lg.com/us/images/MC/features/d_v30_cnet_003.jpg)"></div>
 		<div class="container fill_height">
 			<div class="row fill_height">
 				<div class="banner_product_image"><img src="images/banner_product.png" alt=""></div>
