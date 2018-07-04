@@ -22,6 +22,7 @@ h3 {
 }
 </style>
 <script type="text/javascript">
+// 널일 경우 "" 변경
 function nullReplace(a){
 	if(a == null){
 		return "";
@@ -31,12 +32,13 @@ function nullReplace(a){
 
 function pageGo(p){
 	// 주의사항: 오름차순과 내림차순이 페이징 과정에서 반전 되는 것을 유의 해야함
-	//         오름차순과 내림차순 선택시 asc와 desc를 반대로 설정해줘야함
+	//         오름차순과 내림차순 선택시 asc와 desc를 반대로 설정해줘야함 !!!
 	var k_name = $("#sKey").val();
 	var k_value = $("#sValue").val();
 	var sort_name = $("#sort").val();
 	var desc_name = $("#desc").val();
 	var curPage = p;
+	var cnt = $("#showCount").val();
 	
 	$.ajax({
 		url : "goods.search.keyword",
@@ -45,7 +47,8 @@ function pageGo(p){
 				key_value : k_value,
 				sort_name : sort_name,
 				desc_name : desc_name,
-				curPage : curPage
+				curPage : curPage,
+				cnt : cnt
 				},
 		success : function(json) {
 			var ar = json.goodsView;
@@ -59,7 +62,7 @@ function pageGo(p){
 				var brandTd = $("<td></td>").attr("class","gdLstTd1").text(nullReplace(s.gt_brand));
 				var mdlnameTd = $("<td></td>").attr("class","gdLstTd1").text(nullReplace(s.gt_mdlname));
 				var originTd = $("<td></td>").attr("class","gdLstTd1").text(nullReplace(s.gt_origin));
-				var noTd = $("<td></td>").attr("class","gdLstTd1").text(4*(curPage-1)+1+i);
+				var noTd = $("<td></td>").attr("class","gdLstTd1").text(cnt*(curPage-1)+1+i);
 				var codeA = $("<a></a>").attr("href","goods.view?gd_no="+s.gd_no).text(s.gd_no);
 				var codeTd = $("<td></td>").attr("class","gdLstTd1").append(codeA);
 				var nameImg=$("<img>").attr("src","${pageContext.request.contextPath}/upload/"+s.gd_imgl);
@@ -88,13 +91,17 @@ function pageGo(p){
 }
 
 $(function(){
-		
 		$("#sValue").keyup(function(e) {
 			// 입력시 엔터치면 클릭이벤트 발생
 			if(e.keyCode == 13){
 				// 강제 이벤트 발생
 				$("#s_bt").trigger("click");
 			}
+		});
+		
+		$("#showCount").click(function(e) {
+			// 강제 이벤트 발생
+			$("#s_bt").trigger("click");
 		});
 	
 		$("#s_bt").click(function(){
@@ -103,6 +110,7 @@ $(function(){
 			var sort_name = $("#sort").val();
 			var desc_name = $("#desc").val();
 			var curPage = 1;
+			var cnt = $("#showCount").val();
 
 			$.ajax({
 				//goods.search.keyword?key_name="gd_name"&key_value="00"&sort_name="gd_name"&gd_sellerid ="a"
@@ -111,8 +119,9 @@ $(function(){
 						key_name : k_name,
 						key_value : k_value,
 						sort_name : sort_name,
-						desc_name : desc_name
-						,curPage:curPage
+						desc_name : desc_name,
+						curPage : curPage,
+						cnt : cnt
 						},
 				success : function(json) {
 					var ar = json.goodsView;
@@ -126,7 +135,7 @@ $(function(){
 						var brandTd = $("<td></td>").attr("class","gdLstTd1").text(nullReplace(s.gt_brand));
 						var mdlnameTd = $("<td></td>").attr("class","gdLstTd1").text(nullReplace(s.gt_mdlname));
 						var originTd = $("<td></td>").attr("class","gdLstTd1").text(nullReplace(s.gt_origin));
-						var noTd = $("<td></td>").attr("class","gdLstTd1").text(4*(curPage-1)+1+i);
+						var noTd = $("<td></td>").attr("class","gdLstTd1").text(cnt*(curPage-1)+1+i);
 						var codeA = $("<a></a>").attr("href","goods.view?gd_no="+s.gd_no).text(s.gd_no);
 						var codeTd = $("<td></td>").attr("class","gdLstTd1").append(codeA);
 						var nameImg=$("<img>").attr("src","${pageContext.request.contextPath}/upload/"+s.gd_imgl);
@@ -208,6 +217,14 @@ $(function(){
 							</tbody>
 						</table>
 					</div>
+				</div>
+				<div>
+					<select class="gdLstSel" id="showCount" >
+						<option value="5">5건</option>
+						<option value="10" selected="selected">10건</option>
+						<option value="20">20건</option>
+						<option value="50">50건</option>
+					</select>
 				</div>
 				<div class="gdLstTb3">
 					<h3>상품목록</h3>

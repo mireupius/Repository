@@ -22,12 +22,12 @@
 <script type="text/javascript">
 
 function saveContent() {
-	$("#opSave").trigger("click");
+	opApplyView();
     Editor.save(); // 이 함수를 호출하여 글을 등록하면 된다.
 }
 
 function deleteGoods(){
-	var ok =confirm("정말 삭제 하시겠습니까?");
+	var ok =confirm("이 상품을 정말 삭제 하시겠습니까?");
 	if(ok){
 		var form = document.createElement("form");
 	    form.setAttribute("method", "POST");
@@ -151,10 +151,12 @@ $(function(){
 	
 	
 	// ▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼ 옵션값 배열로 저장 input hidden으로 넘기기 ▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼
-	// db에 저장된 옵션 사이즈 저장 추가 버튼 클릭시 옵션 번호증가
-	var opN = $("#opSize").val();
+	// db에 저장된 옵션 사이즈저장 --> 추가 버튼 클릭시 옵션 번호증가
 	
 	$(document).on("click","#opPlus",function(){
+		var values = document.getElementsByName("opChk");
+		var opN = values.length;
+
 		var opInputN = $("<input>").attr("class","inpWidth").attr("name", "op_name"+opN).attr("maxlength","20");
 		var opInputNo = $("<input>").attr("type","hidden").attr("name", "op_no"+opN);
 		var opSpanN = $("<span></span>").append(opInputN, opInputNo);
@@ -165,41 +167,18 @@ $(function(){
 		var opInputS = $("<input>").attr("class","inpWidth").attr("name", "op_stock"+opN).attr("maxlength","4");
 		var opSpanS = $("<span></span>").append(opInputS);
 		
-		var opLi = $("<li></li>").attr("class","opTb").append(opSpanN, opSpanP, opSpanS);
+		var opLi = $("<li></li>").attr("class","opTb").attr("id","opLi"+opN).append(opSpanN, opSpanP, opSpanS);
 		
-		var opInputChk = $("<input>").attr("type","checkbox").attr("name","opChk");
-		var opLiChk = $("<li></li>").attr("class","opChkLi").append(opInputChk);
-		
+		var opInputChk = $("<input>").attr("type","checkbox").attr("name","opChk").val(opN);
+		var opLiChk = $("<li></li>").attr("class","opChkLi").attr("id","ch"+opN).append(opInputChk);
+
 		$(".opUl").append(opLi, opLiChk);
-		
-		opN++;
 	});
-	
-	// 적용 버튼 클릭으로 옵션값 히든에 저장
-	$(document).on("click","#opSave",function(){
-		var r = opN;
-		var opl_no = [];
-		var opl_name = [];
-		var opl_price = [];
-		var opl_stock = [];
-		
-		for (var i = 0; i < r; i++) {
-			opl_no[i] = $("input[name=op_no"+i+"]").val();
-			opl_name[i] = $("input[name=op_name"+i+"]").val();
-			opl_price[i] = $("input[name=op_price"+i+"]").val();
-			opl_stock[i] = $("input[name=op_stock"+i+"]").val();
-		}
-		
-		$("input[name=opl_no]").val(opl_no);
-		$("input[name=opl_name]").val(opl_name);
-		$("input[name=opl_price]").val(opl_price);
-		$("input[name=opl_stock]").val(opl_stock);
-		alert("옵션 적용");
-	});
+
 	// ▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲ 옵션값 배열로 저장 input hidden으로 넘기기 ▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲
 	
 });
-
+	
 var sel_file;
 $(document).ready(function(){  
 	$("#input_img").on("change", handleImgFileSelect);
@@ -224,9 +203,27 @@ function handleImgFileSelect(e){
 	});
 }
 
+// 삭제 버튼 클릭시 체크박스 선택여부 확인
+// 옵션번호가 단순번호로 되어있으면 체크박스 임의 숫자로도 삭제가 가능한 황당한 경우가 생김
+// 대책필요 -- > 상품번호 조건에 넣어서 해결
+function opSelCheck(){
+	var vals = document.getElementsByName("opChk");
+	var cnt =0;
+	$.each(vals, function(i, s){
+		if(s.checked){
+			cnt++;
+		}
+	});
+	if(cnt >0 ){
+		return true;
+	}
+	alert("삭제할 옵션을 선택해 주세요.");
+	return false;
+}
+
 function opDelete(){
 	var ok =confirm("정말 삭제 하시겠습니까?");
-	if(ok){
+	if(ok && opSelCheck()){
 		// ▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼선택한 옵션들을 배열에 저장 ▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼
 		// 체크한 옵션 번호를 가져옴
 		var values = document.getElementsByName("opChk");
@@ -234,11 +231,9 @@ function opDelete(){
 		var opl_no = [];
 		var gd_no = $("input[name=gd_no]").val();
 		
-		
-		// i값이 체크된 것만 들어 가서 배열0번등 중간에 번호가 빌 수 있음
 		$.each(values, function(i, s){
 			if(s.checked){
-				opl_no[i] = s.value;
+				opl_no.push(s.value);
 			}
 		});
 		// ▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲선택한 옵션들을 배열에 저장 ▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲
@@ -248,7 +243,8 @@ function opDelete(){
 			data : {opl_no : opl_no, op_gdno : gd_no},
 			success : function(json){
 				var ar = json.option;
-				
+				var warnMessage = json.warnMessage;
+
 				$(".opUl").empty();
 				$.each(ar, function(i, s){
 					
@@ -262,16 +258,73 @@ function opDelete(){
 					var opInputS = $("<input>").attr("class","inpWidth").attr("name", "op_stock"+i).attr("maxlength","4").val(s.op_stock);
 					var opSpanS = $("<span></span>").append(opInputS);
 					
-					var opLi = $("<li></li>").attr("class","opTb").append(opSpanN, opSpanP, opSpanS);
+					var opLi = $("<li></li>").attr("class","opTb").attr("id","opLi"+i).append(opSpanN, opSpanP, opSpanS);
 					
-					var opInputChk = $("<input>").attr("type","checkbox").attr("name","opChk");
-					var opLiChk = $("<li></li>").attr("class","opChkLi").append(opInputChk);
+					var opInputChk = $("<input>").attr("type","checkbox").attr("name","opChk").val(s.op_no);
+					var opLiChk = $("<li></li>").attr("class","opChkLi").attr("id","ch"+i).append(opInputChk);
 					
 					$(".opUl").append(opLi, opLiChk);
 				});
+				
+				if(warnMessage=="no"){
+					alert("선택된 옵션중 바르지 못한 옵션번호가 있었습니다.");
+				}
 			}
 		});
 	}
+}
+
+//옵션 박스값 적용
+function opApplyView(){
+	var values = document.getElementsByName("opChk");
+	var r = values.length;
+	var opl_no = [];
+	var opl_name = [];
+	var opl_price = [];
+	var opl_stock = [];
+	var end = values[r-1].value;
+
+	// 데이터 검증을 해서 필수 항목에 값이 꼭들어가 있는 상태에서 들어와야함
+	for(var i = 0 ; i <= end; i++){
+		if($("input[name=op_name"+i+"]").val() !="" || $("input[name=op_name"+i+"]").val()!=null){
+			
+			if($("input[name=op_no"+i+"]").val()==""){
+				opl_no[i] = "insert";
+			}else{
+				opl_no[i] = $("input[name=op_no"+i+"]").val();
+			}
+			opl_name[i] = $("input[name=op_name"+i+"]").val();
+			opl_price[i] = $("input[name=op_price"+i+"]").val();
+			opl_stock[i] = $("input[name=op_stock"+i+"]").val();
+		}
+	}
+	
+	$("input[name=opl_no]").val(opl_no);
+	$("input[name=opl_name]").val(opl_name);
+	$("input[name=opl_price]").val(opl_price);
+	$("input[name=opl_stock]").val(opl_stock);
+	alert("옵션 적용");
+}
+
+//옵션 박스 제거
+function opBoxDelete(){
+	var values = document.getElementsByName("opChk");
+	var a=[];
+	//var a = new Array();
+
+	$.each(values, function(i, s){
+		if(s.checked){
+			a.push(values[i].value);
+		}
+	});
+	
+	$.each(a, function(i, s){
+			$("#opLi"+s).empty();
+			$("#opLi"+s).remove();
+			
+			$("#ch"+s).empty();
+			$("#ch"+s).remove();
+	});
 }
 </script>
 
@@ -439,7 +492,7 @@ h3 {
 						<ul class="opUl">
 						<c:if test="${gdsOp.size() > 0}">
 						<c:forEach var="h" begin="0" end="${gdsOp.size()-1}" step="1">
-							<li class="opTb">
+							<li class="opTb" id="opLi${h}">
 								<span>
 									<input class="inpWidth" name="op_name${h}" value="${gdsOp[h].op_name}" maxlength="20">
 									<input type="hidden" name="op_no${h}" value="${gdsOp[h].op_no}">
@@ -451,12 +504,11 @@ h3 {
 									<input class="inpWidth" name="op_stock${h}" value="${gdsOp[h].op_stock}" maxlength="4">
 								</span>
 							</li>
-							<li class="opChkLi"><input type="checkbox" name="opChk" value="${gdsOp[h].op_no}"></li>
+							<li class="opChkLi"  id="ch${h}"><input type="checkbox" name="opChk" value="${gdsOp[h].op_no}"></li>
 						</c:forEach>
 						</c:if>
 						</ul>
 						</div>
-						<input id="opSize" type="hidden" value="${gdsOp.size()}">
 						<input name="opl_no" type="hidden">
 						<input name="opl_name" type="hidden">
 						<input name="opl_price" type="hidden">
@@ -473,13 +525,13 @@ h3 {
 						<td class="gdTd1"></td>
 						<td class="gdTd2">
 							<span class="opTbr">
-								<button id="opPlus">추가</button>
+								<button id="opPlus">입력칸 추가</button>
 							</span>
-							<span class="opTbr">
-								<button id="opSave">추가 적용</button>
+							<span class="opTbr" onclick="opBoxDelete();">
+								<button id="opDelete" >입력칸 삭제</button>
 							</span>
 							<span class="opTbr" onclick="opDelete();">
-								<button id="opDelete" >삭제</button>
+								<button id="opDelete" >옵션 삭제</button>
 							</span>
 						</td>
 					</tr>

@@ -172,7 +172,7 @@
 		delete from goodsdtl_tb
 		where gt_gdno = #{gd_no}
 	</delete>
-	<delete id="deleteGoodsOpByNo" parameterType="com.sol.mall.goods.Goods">
+	<delete id="deleteOpByGoodsNo" parameterType="com.sol.mall.goods.Goods">
 		delete from option_tb
 		where op_gdno = #{gd_no}
 	</delete>
@@ -180,6 +180,7 @@
 	<delete id="deleteOpByNo" parameterType="com.sol.mall.goods.Option">
 		delete from option_tb
 		where op_no = #{op_no}
+		and op_gdno = #{op_gdno}
 	</delete>
 	
 </mapper>

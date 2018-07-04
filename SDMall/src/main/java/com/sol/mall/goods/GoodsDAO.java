@@ -81,13 +81,13 @@ public class GoodsDAO {
 
 	// ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓ 페이징 ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓
 	// 상품목록 검색(상품리스트화면)
-	public Paging getGoodsViewByKey(Keywords k, int curPage, HttpServletRequest request) {
+	public Paging getGoodsViewByKey(Keywords k, int curPage, double cnt, HttpServletRequest request) {
 		List<GoodsView> gdv = ss.getMapper(GoodsMapper.class).getGoodsViewByKey(k);
 
-		double cnt = 4;// 페이지당 건수
+//		double cnt = 10;// 페이지당 건수
 		int listSize = gdv.size();
 
-		int allPage = (int) Math.ceil(listSize / cnt);// 총페이지
+		int allPage = (int) Math.ceil(listSize / cnt);// 총페이지 올림
 		request.setAttribute("pageCount", allPage);
 
 		int start = listSize - (int) cnt * (curPage - 1);// 페이지 첫번째 게시물
@@ -110,10 +110,10 @@ public class GoodsDAO {
 		List<GoodsView> gdv = ss.getMapper(GoodsMapper.class).getAllGoodsView(gds);
 
 		int curPage = 1;
-		double cnt = 4;// 페이지당 건수
+		double cnt = 10;// 페이지당 건수
 		int listSize = gdv.size();
 
-		int allPage = (int) Math.ceil(listSize / cnt);// 총페이지
+		int allPage = (int) Math.ceil(listSize / cnt);// 총페이지 올림
 		request.setAttribute("pageCount", allPage);
 
 		int start = listSize - (int) cnt * (curPage - 1);// 페이지 첫번째 게시물
@@ -133,10 +133,8 @@ public class GoodsDAO {
 
 	// 입력 ==================================================
 	public void insertGd(Goods gd, HttpServletRequest request, HttpServletResponse response) {
-
 		// 이미지 문제
 		if (ss.getMapper(GoodsMapper.class).insertGds(gd) == 1) {
-
 			System.out.println("insertGd성공");
 		} else {
 			System.out.println("insertGd해당항목 없음");
@@ -144,9 +142,7 @@ public class GoodsDAO {
 	}
 
 	public void insertGdtlTwo(HashMap<String, Object> map, HttpServletRequest request, HttpServletResponse response) {
-
 		if (ss.getMapper(GoodsMapper.class).insertGdtlTwo(map) == 1) {
-
 			System.out.println("insertGdtlTwo성공");
 		} else {
 			System.out.println("insertGdtlTwo해당 항목없음");
@@ -154,9 +150,7 @@ public class GoodsDAO {
 	}
 
 	public void insertOpTwo(HashMap<String, Object> map, HttpServletRequest request, HttpServletResponse response) {
-
 		if (ss.getMapper(GoodsMapper.class).insertOpTwo(map) == 1) {
-
 			System.out.println("insertOpTwo성공");
 		} else {
 			System.out.println("insertOpTwo해당항목없음");
@@ -165,9 +159,7 @@ public class GoodsDAO {
 
 	public void insertOpTwoForUp(HashMap<String, Object> map, HttpServletRequest request,
 			HttpServletResponse response) {
-
 		if (ss.getMapper(GoodsMapper.class).insertOpTwoForUp(map) == 1) {
-
 			System.out.println("insertOpTwoForUp성공");
 		} else {
 			System.out.println("insertOpTwoForUp해당항목 없음");
@@ -234,6 +226,7 @@ public class GoodsDAO {
 		for (int i = 0; i < opl.getOpl_name().size(); i++) {
 			if (!opl.getOpl_name().get(i).equals("") && !opl.getOpl_price().get(i).equals("")
 					&& !opl.getOpl_stock().get(i).equals("")) {
+				
 				op.setOp_no(opl.getOpl_no().get(i));
 				op.setOp_name(opl.getOpl_name().get(i));
 				op.setOp_price(new BigDecimal(opl.getOpl_price().get(i)));
@@ -244,8 +237,9 @@ public class GoodsDAO {
 				map2.put("goods", gd);
 				map2.put("option", op);
 
-				// 수정화면에서 옵션을 추가할시 수정이 아닌 입력이 필요
-				if (op.getOp_no().equals("")) {
+				// 옵션번호가 없으면 수정이 아닌 입력이 필요(옵션 번호 이외는 필수체크로 null이나""이면 안됨)
+				// ""일때 size가 0 이되서 화면에서 "insert" 강제 입력
+				if (op.getOp_no().equals("insert")) {
 					System.out.println("수정화면 옵션 입력");
 					insertOpTwoForUp(map2, request, response);
 				} else {
@@ -268,9 +262,7 @@ public class GoodsDAO {
 	}
 
 	public void updateGdtlTwo(HashMap<String, Object> map, HttpServletRequest request, HttpServletResponse response) {
-
 		if (ss.getMapper(GoodsMapper.class).updateGdtlTwo(map) == 1) {
-
 			System.out.println("updateGdtlTwo성공");
 		} else {
 			System.out.println("updateGdtlTwo 해당자료 없음");
@@ -278,9 +270,7 @@ public class GoodsDAO {
 	}
 
 	public void updateOpTwo(HashMap<String, Object> map, HttpServletRequest request, HttpServletResponse response) {
-
 		if (ss.getMapper(GoodsMapper.class).updateOpTwo(map) == 1) {
-
 			System.out.println("updateOpTwo성공");
 		} else {
 			System.out.println("updateOpTwo 해당자료 없음");
@@ -291,7 +281,6 @@ public class GoodsDAO {
 	// 상품 삭제
 	public void deleteGoodsByNo(Goods gd) {
 		if (ss.getMapper(GoodsMapper.class).deleteGoodsByNo(gd) == 1) {
-
 			System.out.println("deleteGoodsByNo 성공");
 		} else {
 			System.out.println("deleteGoodsByNo 해당자료 없음");
@@ -301,7 +290,6 @@ public class GoodsDAO {
 	// 상품상세 삭제
 	public void deleteGoodsDtlByNo(Goods gd) {
 		if (ss.getMapper(GoodsMapper.class).deleteGoodsDtlByNo(gd) == 1) {
-
 			System.out.println("deleteGoodsDtlByNo 성공");
 		} else {
 			System.out.println("deleteGoodsDtlByNo 해당자료 없음");
@@ -310,8 +298,7 @@ public class GoodsDAO {
 
 	// 옵션 삭제(상품번호에 해당하는 모든 옵션삭제)
 	public void deleteGoodsOpByNo(Goods gd) {
-		if (ss.getMapper(GoodsMapper.class).deleteGoodsOpByNo(gd) == 1) {
-
+		if (ss.getMapper(GoodsMapper.class).deleteOpByGoodsNo(gd) == 1) {
 			System.out.println("deleteGoodsOpByNo 성공");
 		} else {
 			System.out.println("deleteGoodsOpByNo 해당자료 없음");
@@ -361,15 +348,16 @@ public class GoodsDAO {
 		}
 	}
 	
-	
-	// 옵션 삭제(옵션번호로 삭제)
-	public void deleteOpByNo(Option op) {
-		
+	// 옵션삭제 (옵션번호, 옵션 상품번호)
+	// 옵션번호로만 삭제 하면 옵션셀렉트 값으로 삭제가 되는 문제가 발생
+	// 옵션상품번호와 옵션번호 두가지가 일치 해야지 삭제 되도록 변경
+	public boolean deleteOpByNo(Option op) throws Exception{
 		if (ss.getMapper(GoodsMapper.class).deleteOpByNo(op) == 1) {
-
 			System.out.println("deleteOpByNo 성공");
+			return false;
 		} else {
 			System.out.println("deleteOpByNo 해당자료 없음");
+			return true;
 		}
 	}
 	

@@ -326,29 +326,36 @@ public class GoodsController {
 
 	// 상품키워드 검색(ajax - json)
 	@RequestMapping(value = "/goods.search.keyword", method = RequestMethod.GET, produces = "application/json; charset=utf-8")
-	public @ResponseBody Paging gdsSearchKey(Keywords k, int curPage, HttpServletRequest request, HttpServletResponse response) {
+	public @ResponseBody Paging gdsSearchKey(Keywords k, int curPage, double cnt, HttpServletRequest request, HttpServletResponse response) {
 		
 		Seller dbS = (Seller) request.getSession().getAttribute("loginSeller");
 		k.setGd_sellerid(dbS.getSl_id());
 		
-		return gdsDAO.getGoodsViewByKey(k, curPage, request);
+		return gdsDAO.getGoodsViewByKey(k, curPage, cnt, request);
 	}
 	
 	// 옵션 선택삭제(ajax - json)
 	@RequestMapping(value = "/option.delete", method = RequestMethod.GET, produces = "application/json; charset=utf-8")
 	public @ResponseBody Options optionDel(OptionList op, HttpServletRequest request, HttpServletResponse response) {
-		
-		System.out.println("옵션 삭제 시작");
+		String warnMessage= "ok";
 		Option op2 = new Option();
-		for (String a : op.getOpl_no()) {
-			op2.setOp_no(a);
-			gdsDAO.deleteOpByNo(op2);
+		op2.setOp_gdno(op.getOp_gdno());
+		try {
+			for (String a : op.getOpl_no()) {
+				op2.setOp_no(a);
+				
+				if(gdsDAO.deleteOpByNo(op2)) {
+					warnMessage = "no";
+				}
+			}
+			
+		}catch (Exception e) {
+			e.printStackTrace();
 		}
 		
-		System.out.println("옵션상품번호==="+op.getOp_gdno());
-		op2.setOp_gdno(op.getOp_gdno());
 		// 삭제하고 나머지 옵션 json에 넘기기
-		return new Options(gdsDAO.getOptionByGdNo(op2));
+		return new Options(gdsDAO.getOptionByGdNo(op2), warnMessage);
+			
 	}
 	
 	// 상품상세화면 표시
