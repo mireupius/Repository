@@ -14,7 +14,8 @@ public class MemberDAO {
 
 	@Autowired
 	private SqlSession ss;
-
+	
+	// 구매자 회원가입 DAO
 	public void registerCSM(Customer c, Membership m, HttpServletRequest req, HttpServletResponse res) {
 
 		try {
@@ -38,18 +39,15 @@ public class MemberDAO {
 
 			if (ss.getMapper(MemberMapper.class).registerCSM(c) == 1
 					&& ss.getMapper(MemberMapper.class).registerMemberShip(m) == 1) {
-				req.setAttribute("r", "가입 성공");
+				
+				System.out.println(c.getCsm_name());
+				req.setAttribute("name", c.getCsm_name());
+				System.out.println("구매자 회원가입 성공");
 
 			} else {
 				req.setAttribute("r", "가입 실패");
 			}
 
-			// if (ss.getMapper(MemberMapper.class).registerMemberShip(m) == 1) {
-			// System.out.println("멤버쉽 가입 성공");
-
-			// } else {
-			// System.out.println("멤버쉽 가입 실패");
-			// }
 
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -59,12 +57,14 @@ public class MemberDAO {
 		}
 
 	}
-
+	
+	// 구매자 유효성검사
 	public Customers customerCheck(Customer c, HttpServletRequest req, HttpServletResponse res) {
 
 		return new Customers(ss.getMapper(MemberMapper.class).getCustomerById2(c));
 	}
-
+	
+	// 판매자 회원가입 DAO
 	public void registerSL(Seller s, HttpServletRequest req, HttpServletResponse res) {
 
 		try {
@@ -75,13 +75,9 @@ public class MemberDAO {
 
 			s.setSl_emailAddress(sl_emailAddress);
 
-			// System.out.println(s.getSl_id());System.out.println(s.getSl_pw());
-			// System.out.println(s.getSl_coName());System.out.println(s.getSl_coRegNo());
-			// System.out.println(s.getSl_phoneNo());
-			// System.out.println(s.getSl_emailAddress());
-
 			if (ss.getMapper(MemberMapper.class).registerSL(s) == 1) {
-				req.setAttribute("r", "가입 성공");
+				req.setAttribute("name", s.getSl_coName());
+				System.out.println("판매자 회원가입 성공");
 
 			} else {
 				req.setAttribute("r", "가입 실패");
@@ -95,11 +91,13 @@ public class MemberDAO {
 
 	}
 
+	// 판매자 유효성검사
 	public Sellers sellerCheck(Seller s, HttpServletRequest req, HttpServletResponse res) {
 
 		return new Sellers(ss.getMapper(MemberMapper.class).getSellerById2(s));
 	}
-
+	
+	// 구매자 로그인
 	public void loginCustomer(Customer c, HttpServletRequest req, HttpServletResponse res) {
 
 		try {
@@ -119,6 +117,7 @@ public class MemberDAO {
 
 	}
 
+	// 판매자 로그인
 	public void loginSeller(Seller s, HttpServletRequest req, HttpServletResponse res) {
 
 		try {
@@ -134,6 +133,7 @@ public class MemberDAO {
 
 	}
 
+	// 보통의 구매자 로그인 체크
 	public boolean csmLoginCheck(HttpServletRequest req, HttpServletResponse res) {
 
 		Customer cc = (Customer) req.getSession().getAttribute("loginCustomer");
@@ -150,6 +150,7 @@ public class MemberDAO {
 
 	}
 
+	// 마이페이지 이동시 구매자 로그인 체크 
 	public boolean csmLoginCheck2(HttpServletRequest req, HttpServletResponse res) {
 
 		Customer cc = (Customer) req.getSession().getAttribute("loginCustomer");
@@ -167,6 +168,7 @@ public class MemberDAO {
 
 	}
 
+	// 판매자 로그인 체크
 	public boolean slLoginCheck(HttpServletRequest req, HttpServletResponse res) {
 
 		Seller s = (Seller) req.getSession().getAttribute("loginSeller");
@@ -180,24 +182,28 @@ public class MemberDAO {
 
 	}
 
+	// 구매자 로그아웃
 	public void logoutCustomer(HttpServletRequest req, HttpServletResponse res) {
 
 		req.getSession().setAttribute("loginCustomer", null);
 
 	}
 
+	// 판매자 로그아웃
 	public void logoutSeller(HttpServletRequest req, HttpServletResponse res) {
 
 		req.getSession().setAttribute("loginSeller", null);
 
 	}
 
+	// 모든 구매자 보여주기
 	public Customers getAllCustomer(HttpServletRequest req, HttpServletResponse res) {
 
 		return new Customers(ss.getMapper(MemberMapper.class).getAllCustomer());
 
 	}
 
+	// 구매자 회원정보 수정
 	public void updateCustomer(Customer c, HttpServletRequest req, HttpServletResponse res) {
 
 		try {
@@ -230,6 +236,7 @@ public class MemberDAO {
 
 	}
 
+	// 판매자 회원정보 수정
 	public void updateSeller(Seller s, HttpServletRequest req, HttpServletResponse res) {
 
 		try {
@@ -258,27 +265,31 @@ public class MemberDAO {
 
 	}
 
+	// 구매자 회원탈퇴
 	public void withdrawCustomer(Customer c, Membership m, HttpServletRequest req, HttpServletResponse res) {
 
 		try {
+			System.out.println(c.getCsm_id());
+			System.out.println(m.getMs_csm_id());
 
 			if (ss.getMapper(MemberMapper.class).withdrawCSM(c) == 1
 					&& ss.getMapper(MemberMapper.class).withdrawMemberShip(m) == 1) {
 
-				req.setAttribute("r", "탈퇴 성공");
+				System.out.println("탈퇴 성공");
 				// req.getSession().setAttribute("loginCustomer", null);
 
 			} else {
-				req.setAttribute("r", "탈퇴 실패");
+				System.out.println("탈퇴 실패");
 			}
 
 		} catch (Exception e) {
 			e.printStackTrace();
-			req.setAttribute("r", "탈퇴 실패");
+			System.out.println("탈퇴 실패");
 		}
 
 	}
 
+	// 판매자 회원탈퇴
 	public void withdrawSeller(Seller s, HttpServletRequest req, HttpServletResponse res) {
 
 		try {

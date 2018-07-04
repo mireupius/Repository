@@ -6,6 +6,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 <link rel="stylesheet" href="resources/junyoung/member.css">
+<script type="text/javascript" src="resources/js/go.js"></script>
 <script type="text/javascript" src="resources/js/validCheck.js"></script>
 <script type="text/javascript" src="resources/js/jquery.js"></script>
 <script type="text/javascript" src="resources/js/csmRegisterCheck.js"></script>
@@ -147,6 +148,7 @@
 			<table class="memberTb2">
 				<tr>
 					<td>
+					<div><button onclick="goHome();" type="button" class="regBtn">이전 페이지로 돌아가기</button></div>
 					<div><input class="regBtn" type="submit" value="회원가입"></div>
 					</td>
 				</tr>

@@ -1,3 +1,4 @@
+// 구매자 회원정보 event
 function connectCSMUpdateCheckEvent() {
 
 		var pwField = document.updateCSMForm.csm_pw;	
