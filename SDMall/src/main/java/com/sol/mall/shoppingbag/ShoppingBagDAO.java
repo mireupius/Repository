@@ -29,24 +29,33 @@ public class ShoppingBagDAO {
 		}
 	}
 
-	public void showCartItems(ShoppingBag sb, HttpServletRequest req, HttpServletResponse res) {
+	public void showCartItems(HttpServletRequest req, HttpServletResponse res) {
 
 		Customer nowSession = (Customer) req.getSession().getAttribute("loginCustomer");
+		ShoppingBag sb = new ShoppingBag();
 
 		sb.setSb_csmid(nowSession.getCsm_id());
-		System.out.println(sb.getSb_csmid());
 
 		List<ShoppingBag> items = ss.getMapper(ShoppingBagMapper.class).showCartItems(sb);
 		req.setAttribute("sbsize", items.size());
 		System.out.println("카트 보여주기 성공");
 		req.setAttribute("cartItems", items);
-
 	}
 
 	public void deleteCartItem(ShoppingBagItem sbItem, HttpServletRequest req, HttpServletResponse res) {
-		if (ss.getMapper(ShoppingBagMapper.class).deleteCartItem(sbItem)==1) {
+		if (ss.getMapper(ShoppingBagMapper.class).deleteCartItem(sbItem) == 1) {
 			System.out.println("카트삭제");
 		}
-		
+
 	}
+
+	public void deleteAllCartItem(HttpServletRequest req, HttpServletResponse res) {
+		Customer cc = (Customer) req.getSession().getAttribute("loginCustomer");
+
+		if (ss.getMapper(ShoppingBagMapper.class).deleteAllCartItem(cc) == 1) {
+			System.out.println("카트전체삭제");
+		}
+
+	}
+
 }

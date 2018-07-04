@@ -225,55 +225,57 @@
 							</table>
 						</section>
 					</div>
-					</div>
+				</div>
 
-					<!-- /content-panel -->
-					<c:if test="${pageCount != 0}">
-						<div class="showback" align="center">
+				<!-- /content-panel -->
+				<c:if test="${pageCount != 0}">
+					<div class="showback" align="center">
 
-							<c:forEach var="i" begin="0" varStatus="num" end="${pageCount }">
-								<a href="${now}?pno=${num.count }">
-									<button type="button" class="btn btn-default">${num.count }</button>
-								</a>
-							</c:forEach>
-
-						</div>
-					</c:if>
-					<div class="showback">
-						<form action="sale.deliverySend.do" method="post"
-							style="display: inline">
-							<input name="send_Array" id="send_ArrayVal" hidden> <input
-								name="cs_sendArray" id="cs_ArrayVal" hidden> <input
-								name="no_sendArray" id="no_ArrayVal" hidden> <input
-								id="selectDealSend" type="submit" value="선택건 발송처리" type="submit"
-								class="btn btn-default">
-						</form>
-
-						<form action="sale.deliveryCheck.do" method="post"
-							style="display: inline">
-							<input name="array" id="arrayVal" hidden> <input
-								id="deliveryCheckButton" type="submit" value="선택건 발주확인"
-								type="button" class="btn btn-default">
-						</form>
-
-						<form action="insertExcel.go" enctype="multipart/form-data"
-							method="post" style="display: inline">
-							<input type="submit" value="엑셀 일괄발송" type="button"
-								class="btn btn-default"> <input name="excelFile"
-								type="file" style="display: inline">
-						</form>
-
+						<c:forEach var="i" begin="0" varStatus="num" end="${pageCount }">
+							<a href="${now}?pno=${num.count }">
+								<button type="button" class="btn btn-default">${num.count }</button>
+							</a>
+						</c:forEach>
 
 					</div>
+				</c:if>
+				<div class="showback">
+					<form action="sale.deliverySend.do" method="post"
+						style="display: inline">
+						<input name="send_Array" id="send_ArrayVal" hidden> <input
+							name="cs_sendArray" id="cs_ArrayVal" hidden> <input
+							name="no_sendArray" id="no_ArrayVal" hidden> <input
+							id="selectDealSend" type="submit" value="선택건 발송처리" type="submit"
+							class="btn btn-default">
+					</form>
 
+					<form action="sale.deliveryCheck.do" method="post"
+						style="display: inline">
+						<input name="array" id="arrayVal" hidden> <input
+							id="deliveryCheckButton" type="submit" value="선택건 발주확인"
+							type="button" class="btn btn-default">
+					</form>
+
+					<form action="insertExcel.go" enctype="multipart/form-data"
+						method="post" style="display: inline">
+						<input type="submit" value="엑셀 일괄발송" type="button"
+							class="btn btn-default"> <input name="excelFile"
+							type="file" style="display: inline">
+					</form>
+					<a href="resources\files\sale\sample.xlsx"><button
+							type="submit" type="button" class="btn btn-default">엑셀양식
+							다운로드</button></a>
 
 				</div>
 
 
+			</div>
 
-				<!-- /col-lg-4 -->
 
-				<!-- /row -->
+
+			<!-- /col-lg-4 -->
+
+			<!-- /row -->
 		</section>
 		<!--/wrapper -->
 	</section>

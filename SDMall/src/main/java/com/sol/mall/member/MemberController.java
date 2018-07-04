@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.sol.mall.goods.CategoryDAO;
 import com.sol.mall.goods.GoodsDAO;
 import com.sol.mall.myPage.MyPageDAO;
+import com.sol.mall.shoppingbag.ShoppingBagDAO;
 
 @Controller
 public class MemberController {
@@ -28,11 +29,24 @@ public class MemberController {
 	@Autowired
 	private GoodsDAO gdsDAO;
 	
+<<<<<<< HEAD
+	@Autowired
+	private ShoppingBagDAO sbDAO;
+
+=======
 	//로그인 페이지 가기
+>>>>>>> refs/remotes/origin/Oh19
 	@RequestMapping(value = "/member.loginPage", method = RequestMethod.GET)
 	public String goLoginPage(HttpServletRequest req, HttpServletResponse res) {
+		cDAO.getAllCategory(req, res);// 메인 카테고리 호출 메소드
+		if (mDAO.csmLoginCheck(req, res)) {//로그인체크
+			sbDAO.showCartItems(req, res);//장바구니 상품수량 반환
+		}
 
+<<<<<<< HEAD
+=======
 		cDAO.getAllCategory(req, res);
+>>>>>>> refs/remotes/origin/Oh19
 		req.setAttribute("contentPage", "member/loginArea.jsp");
 		return "main";
 
@@ -103,11 +117,10 @@ public class MemberController {
 	// 구매자 로그인
 	@RequestMapping(value = "/customer.login.do", method = RequestMethod.GET)
 	public String loginCustomer(Customer c, HttpServletRequest req, HttpServletResponse res) {
-
+		cDAO.getAllCategory(req, res);// 메인 카테고리 호출 메소드
 		mDAO.loginCustomer(c, req, res);
 		if(mDAO.csmLoginCheck(req, res)) {
-			
-			cDAO.getAllCategory(req, res);// 메인 카테고리 호출 메소드
+			sbDAO.showCartItems(req, res);//장바구니 상품수량 반환
 			gdsDAO.getAllGoods(req); // 상품 전체 목록 가져오기
 			return "main";
 			

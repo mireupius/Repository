@@ -87,7 +87,7 @@ public class ExcelDAO {
 
 	}
 
-	public File MakeExcel(HttpServletRequest req, HttpServletResponse res) {
+	public File MakeExcel(HttpServletRequest req, HttpServletResponse res, Delivery ds) {
 
 		String filePath = req.getSession().getServletContext().getRealPath("resources/files/sale/temp");
 		File selectedDir = new File(filePath);
@@ -104,7 +104,7 @@ public class ExcelDAO {
 		String excelName = "excel.xlsx";
 		Map<String, String> headerList = new HashMap<String, String>();
 		Map<String, String> list = new HashMap<String, String>();
-		List<Delivery> d = ss.getMapper(DeliveryMapper.class).getCheckDeliverys();
+		List<Delivery> d = ss.getMapper(DeliveryMapper.class).getCheckDeliverys(ds);
 		String[] titles = { "상품주문번호", "주문번호", "택배사", "구매자명", "구매자ID", "수취인명", "주문상태", "주문세부상태", "배송비", "상품번호", "상품명",
 				"옵션종류", "옵션정보", "수량(구입수량)", "옵션가격", "상품가격", "판매가격", "상품별 총 주문금액", "발주확인일", "수취인연락처1", "배송지", "구매자연락처",
 				"우편번호", "배송메세지", "출고지", "주문일시", "클레임상태", "결제수단", "배송방법" };
