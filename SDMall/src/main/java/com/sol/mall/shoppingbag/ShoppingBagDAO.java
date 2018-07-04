@@ -29,12 +29,12 @@ public class ShoppingBagDAO {
 		}
 	}
 
-	public void showCartItems(ShoppingBag sb, HttpServletRequest req, HttpServletResponse res) {
+	public void showCartItems(HttpServletRequest req, HttpServletResponse res) {
 
 		Customer nowSession = (Customer) req.getSession().getAttribute("loginCustomer");
-
+		ShoppingBag sb = new ShoppingBag();
+		
 		sb.setSb_csmid(nowSession.getCsm_id());
-		System.out.println(sb.getSb_csmid());
 
 		List<ShoppingBag> items = ss.getMapper(ShoppingBagMapper.class).showCartItems(sb);
 		req.setAttribute("sbsize", items.size());

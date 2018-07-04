@@ -32,7 +32,7 @@ public class ShoppingBagController {
 	public String cartGo(ShoppingBag sb, HttpServletRequest req, HttpServletResponse res) {
 		cDAO.getAllCategory(req, res);// 메인 카테고리 호출 메소드
 		
-		sbDAO.showCartItems(sb, req, res);
+		sbDAO.showCartItems(req, res);
 		
 		req.setAttribute("contentPage", "shoppingBag/cart.jsp");
 		return "main";
@@ -43,7 +43,7 @@ public class ShoppingBagController {
 		cDAO.getAllCategory(req, res);// 메인 카테고리 호출 메소드
 		
 		sbDAO.deleteCartItem(sbItem, req, res);
-		sbDAO.showCartItems(sb, req, res);
+		sbDAO.showCartItems(req, res);
 		req.setAttribute("contentPage", "shoppingBag/cart.jsp");
 		return "main";
 	}

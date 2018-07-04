@@ -98,7 +98,11 @@
 									<div class="cart_content">
 										<div class="cart_icon">
 											<img src="resources/etc/icon-cart.png" alt="">
-											<div class="cart_count"><span>10</span></div>
+											<c:if test="${sessionScope.loginCustomer != null}">
+												<div class="cart_count">
+												<span>${sbsize }  </span>
+												</div>
+											</c:if>
 										</div>
 										<div class="cart_text"><a href="customer.cart.go">장바구니</a></div>
 									</div>
