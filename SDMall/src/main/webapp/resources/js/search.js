@@ -1,3 +1,10 @@
+function setSearch(name) {//input에 li의 text를 입력
+	$('.header_search_input').val(name);
+//	setTimeout(function  () {
+	$('.header_search_input').focus();
+//	}, 101);
+};
+
 $(function() {
 	$('.header_search_input').focus(function() {
 		var name = $('.header_search_input').val();
@@ -14,11 +21,9 @@ $(function() {
 					// 데이터 있는 배열까지 찾아 들어가서
 					var ar = json.goods;
 					$.each(ar, function(i, goods) {
-						var a = $("<a></a>").text(goods.gd_name);
-						a.attr('href','shop.search?gd_name='+goods.gd_name);
-						var li = $("<li></li>").append(a);
+						var li = $("<li></li>").text(goods.gd_name);
+						li.attr('onclick','setSearch("'+goods.gd_name+'")');//onclick setSearch를 가진 li 생성
 						ul.append(li);
-						
 					});
 				}
 			});
@@ -29,8 +34,17 @@ $(function() {
 		$('.header_search_input').trigger("focus");
 	});
 	
-//	$('.header_search_input').focusout(function(e) {
+//	$('.header_search_form').focusout(function(e) {
+//		setTimeout(function  () {
 //		$('.header_search_dropdown').empty();
-//	});
+//		}, 100);
+		$('html').click(
+			function(e) {
+				if (!$(e.target).hasClass("header_search_input")
+						&& !$(e.target).hasClass("header_search_dropdown")) {
+					// 클릭한 곳이 input,dropdown이 아니면
+					$(".header_search_dropdown").empty();
+				}
+			});
 	
 });
