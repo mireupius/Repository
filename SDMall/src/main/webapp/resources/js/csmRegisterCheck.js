@@ -11,6 +11,7 @@ function connectCSMRegisterCheckEvent() {
 		// keyup이니까 키보드가 눌러있을 때는 그냥 다 반복시켜버림
 		// 클릭도 keyup적용되니 별도의 메소드로..
 			
+		
 		// 아이디 Event	
 		$(".idInput").keyup(function(e) {
 			
@@ -22,7 +23,9 @@ function connectCSMRegisterCheckEvent() {
 				}
 				
 				if (isEmpty(idField) || containsHangul(idField) != false) {
-					$(".promptTxt_id").text("아이디 필수, 한글 금지");
+					$(".promptTxt_id").text("아이디 필수, 한글 금지")
+					.css("color", "red").css("display", "block");
+					$(".idInput").focus();
 					
 				}
 				
@@ -76,6 +79,7 @@ function connectCSMRegisterCheckEvent() {
 			
 		});
 		
+		
 		$('.pwOKInput').keyup(function(e) {
 		
 				if (notEquals(pwField, pwOKField) != false) {
@@ -87,6 +91,7 @@ function connectCSMRegisterCheckEvent() {
 				}	
 				
 		});
+		
 		
 		// 이름 Event
 		
@@ -100,21 +105,6 @@ function connectCSMRegisterCheckEvent() {
 			}
 	
 		});
-		
-		// 생년월일 Event
-		
-		//$('.birthdayInput').keyup(function(e) {
-
-			//if (isEmpty(birthdayField)|| lessThan(birthdayField, 11) != false) {
-				//$(".promptTxt_birthday").text("생년월일을 입력해주세요")
-				//.css("color", "red").css("display", "block");
-			//}else {
-				//$(".promptTxt_birthday").empty();
-			//}
-	
-		//});
-		
-		//$('.birthdayInput').datepicker({}); 
 		
 		
 		// 휴대전화 Event
@@ -134,7 +124,7 @@ function connectCSMRegisterCheckEvent() {
 		
 		$('.emailFrontInput').keyup(function(e) {
 
-			if (isEmpty(emailFrontField) != false) {
+			if (isEmpty(emailFrontField) || containsHangul(emailFrontField) != false) {
 				$(".promptTxt_email").text("이메일을 입력해주세요")
 				.css("color", "red").css("display", "block");
 			}else {

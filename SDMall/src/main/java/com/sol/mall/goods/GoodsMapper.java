@@ -73,6 +73,10 @@ public interface GoodsMapper {
 	public abstract Goods getGoodsByNo(Goods goods);// 상품코드로 상품 조회
 
 	public abstract GoodsDtl getGoodsDtlByNo(Goods goods);// 상품코드로 상품 상세 조회
+	
+	public abstract List<Goods> searchGoods(Goods goods);//이름과 키워드로 상품 검색
+	
+	public abstract List<Goods> getGoodsByName(Goods goods);//상품이름검색
 
 	public abstract List<Goods> getGoodsByCate(Category category);// 카테고리 상품 조회
 }

@@ -1,28 +1,45 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
+<link rel="stylesheet" href="resources/junyoung/member.css">
 <script type="text/javascript" src="resources/js/jquery.js"></script>
 <script type="text/javascript" src="resources/js/csmWithdrawCheck.js"></script>
 <script type="text/javascript">
-$(function() {
-	
-	connectCSMWithdrawCheckEvent();
-	
-	
-});
+	$(function() {
+
+		connectCSMWithdrawCheckEvent();
+
+	});
 </script>
 </head>
 <body>
 	<div>
-		<span>
-			아이디 : <input readonly="readonly" class="idCheck" value="${sessionScope.loginCustomer.csm_id }"><br>
-			비밀번호 : <input class="passwordCheck" type="password"><br>
-			<a class="withdrawBtn">탈퇴하기</a>
-		</span>
+		<table class="memberTb3">
+			<tr>
+				<td class="memberTd1">아이디</td>
+				<td class="memberTd2"><input readonly="readonly"
+					class="idCheck" value="${sessionScope.loginCustomer.csm_id }">
+				</td>
+			</tr>
+			<tr>
+				<td class="memberTd1">비밀번호 확인</td>
+				<td class="memberTd2"><input class="passwordCheck"
+					type="password"></td>
+			</tr>
+		</table>
+		<table class="memberTb2">
+			<tr>
+				<td>
+					<div>
+						<a class="withdrawBtn">탈퇴하기</a>
+					</div>
+				</td>
+			</tr>
+		</table>
 	</div>
 </body>
 </html>

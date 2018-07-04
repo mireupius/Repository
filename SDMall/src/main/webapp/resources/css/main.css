@@ -16,7 +16,29 @@
 17. Footer
 
 
+
 ******************************/
+
+.header_search_dropdown{
+	color: #7f7f7f;
+	position: absolute;
+	top:50px;
+	width:100%;
+	display: block;
+	box-shadow: 0 0 25px rgba(63, 78, 100, 0.15);
+}
+
+.header_search_dropdown li{
+	height: 25px;
+    padding-left: 15px;
+    background: #FFFFFF;
+    cursor:pointer;
+}
+
+
+.logo a img{
+	max-width: 100%;
+}
 
 /***********
 1. Fonts

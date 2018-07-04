@@ -115,12 +115,11 @@ public class MemberController {
 			mpDAO.getMembership(m, req, res);
 			
 			req.setAttribute("contentPage", "customer/customerMyPage2.jsp");
+			req.setAttribute("myPageContentArea", "memberShip.jsp");
 			
 			return "main";
-			
-		}else {
-			return "member/loginPage";
 		}
+			return "member/loginPage";
 		
 	}
 	
@@ -209,7 +208,7 @@ public class MemberController {
 		if(mDAO.slLoginCheck(req, res)) {
 			
 			mDAO.updateSeller(s, req, res);
-			return "seller/slLoginOK";
+			return "sale/saleIndex";
 			
 		}else {
 			return "member/loginPage";
@@ -259,7 +258,7 @@ public class MemberController {
 		if(mDAO.slLoginCheck(req, res)) {
 			
 			mDAO.withdrawSeller(s, req, res);
-			mDAO.logoutCustomer(req, res);
+			mDAO.logoutSeller(req, res);
 			mDAO.slLoginCheck(req, res);
 		}
 		return "member/loginPage";
