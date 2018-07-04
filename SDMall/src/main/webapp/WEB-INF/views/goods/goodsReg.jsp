@@ -427,7 +427,7 @@ h3 {
 		<div>
 			<table class="gdTb3">
 				<tbody>
-					<tr>
+					<tr>                            <!-- sessionScope 사용 안 했는데 값 가져옴  -->
 						<td class="gdTd1">상품명 필수(20)${submitStop }<input name="submitStop" type="hidden" value="${submitStop }"></td>
 						<td class="gdTd2"><input class="inpWidth" name="gd_name" maxlength="20"></td>
 					</tr>
