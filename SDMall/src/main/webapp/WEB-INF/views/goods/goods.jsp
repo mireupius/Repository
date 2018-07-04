@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -29,10 +30,29 @@
 				<!-- Description -->
 				<div class="col-lg-5 order-3">
 					<div class="product_description">
-						<div class="product_category">Laptops</div>
+						<div class="product_category">
+						<c:forEach var="goodsCategory" items="${allCategory}">
+							<c:if test="${goodsDtl1.gd_clfl==goodsCategory.ct_no }">
+								${goodsCategory.ct_clfname }
+							</c:if>
+							<c:if test="${goodsDtl1.gd_clfm==goodsCategory.ct_no }">
+								> ${goodsCategory.ct_clfname }
+							</c:if>
+							<c:if test="${goodsDtl1.gd_clfs==goodsCategory.ct_no }">
+								> ${goodsCategory.ct_clfname }
+							</c:if>
+						</c:forEach>
+						</div>
 						<div class="product_name">${goodsDtl1.gd_name }</div>
 						<div class="product_price">${goodsDtl1.gd_price }</div>
 						<div class="rating_r rating_r_4 product_rating"><i></i><i></i><i></i><i></i><i></i></div>
+						<div class="product_text">
+						<c:set var="dlvchrg" value="${fn:split(goodsDtl1.gd_dlvchrg, ',') }"/>
+							<p>배송비 <c:out value=" ${dlvchrg[0]}"/>원</p>
+							<c:if test="${dlvchrg[1]>0}">
+							<p><c:out value=" ${dlvchrg[1]}"/>원 이상 구매시 배송비 무료</p>
+							</c:if>
+						</p></div>
 						<div class="order_info d-flex flex-row">
 <!-- 							장바구니 form -->
 							<form action="cart.add" method="get">
