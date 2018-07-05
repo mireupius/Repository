@@ -19,7 +19,7 @@ public class MemberController {
 
 	@Autowired
 	private MemberDAO mDAO;
-	
+
 	@Autowired
 	private MyPageDAO mpDAO;
 
@@ -28,65 +28,60 @@ public class MemberController {
 
 	@Autowired
 	private GoodsDAO gdsDAO;
-	
-<<<<<<< HEAD
+
 	@Autowired
 	private ShoppingBagDAO sbDAO;
 
-=======
-	//로그인 페이지 가기
->>>>>>> refs/remotes/origin/Oh19
+	// 로그인 페이지 가기
+
 	@RequestMapping(value = "/member.loginPage", method = RequestMethod.GET)
 	public String goLoginPage(HttpServletRequest req, HttpServletResponse res) {
 		cDAO.getAllCategory(req, res);// 메인 카테고리 호출 메소드
-		if (mDAO.csmLoginCheck(req, res)) {//로그인체크
-			sbDAO.showCartItems(req, res);//장바구니 상품수량 반환
+		if (mDAO.csmLoginCheck(req, res)) {// 로그인체크
+			sbDAO.showCartItems(req, res);// 장바구니 상품수량 반환
 		}
 
-<<<<<<< HEAD
-=======
 		cDAO.getAllCategory(req, res);
->>>>>>> refs/remotes/origin/Oh19
+
 		req.setAttribute("contentPage", "member/loginArea.jsp");
 		return "main";
 
 	}
-	
+
 	// 구매자 회원가입하러 가기
 	@RequestMapping(value = "/customer.register.go", method = RequestMethod.GET)
 	public String goRegCustomer(HttpServletRequest req, HttpServletResponse res) {
-		
+
 		return "member/regCSMPage";
-		
+
 	}
-	
+
 	// 구매자 회원가입 하기
 	@RequestMapping(value = "/customer.register.do", method = RequestMethod.POST)
 	public String doRegCustomer(Customer c, Membership m, HttpServletRequest req, HttpServletResponse res) {
-			mDAO.registerCSM(c, m, req, res);
-			cDAO.getAllCategory(req, res);
-			req.setAttribute("contentPage", "member/joinSuccess.jsp");
-			return "main";
+		mDAO.registerCSM(c, m, req, res);
+		cDAO.getAllCategory(req, res);
+		req.setAttribute("contentPage", "member/joinSuccess.jsp");
+		return "main";
 
-		}
-	
+	}
+
 	// 모든 구매자 보여주기
 	@RequestMapping(value = "/customer.getAll.do", method = RequestMethod.GET, produces = "application/json; charset=utf-8")
 	public @ResponseBody Customers getAllCustomer(HttpServletRequest req, HttpServletResponse res) {
-		
-		
+
 		return mDAO.getAllCustomer(req, res);
-		
+
 	}
-	
+
 	// 구매자 유효성 검사
 	@RequestMapping(value = "/customer.validCheck", method = RequestMethod.GET, produces = "application/json; charset=utf-8")
 	public @ResponseBody Customers csmValidCheck(Customer c, HttpServletRequest req, HttpServletResponse res) {
-		
+
 		return mDAO.customerCheck(c, req, res);
-		
+
 	}
-	
+
 	// 판매자 회원가입하러 가기
 	@RequestMapping(value = "/seller.register.go", method = RequestMethod.GET)
 	public String goRegSeller(HttpServletRequest req, HttpServletResponse res) {
@@ -105,13 +100,13 @@ public class MemberController {
 		return "main";
 
 	}
-	
+
 	// 판매자 유효성검사
 	@RequestMapping(value = "/seller.validCheck", method = RequestMethod.GET, produces = "application/json; charset=utf-8")
 	public @ResponseBody Sellers slValidCheck(Seller s, HttpServletRequest req, HttpServletResponse res) {
-		
+
 		return mDAO.sellerCheck(s, req, res);
-		
+
 	}
 
 	// 구매자 로그인
@@ -119,202 +114,200 @@ public class MemberController {
 	public String loginCustomer(Customer c, HttpServletRequest req, HttpServletResponse res) {
 		cDAO.getAllCategory(req, res);// 메인 카테고리 호출 메소드
 		mDAO.loginCustomer(c, req, res);
-		if(mDAO.csmLoginCheck(req, res)) {
-			sbDAO.showCartItems(req, res);//장바구니 상품수량 반환
+		if (mDAO.csmLoginCheck(req, res)) {
+			sbDAO.showCartItems(req, res);// 장바구니 상품수량 반환
 			gdsDAO.getAllGoods(req); // 상품 전체 목록 가져오기
 			return "main";
-			
-		}else {
+
+		} else {
 			return "member/loginPage";
 		}
-	
+
 	}
-	
+
 	// 구매자 마이페이지로 가기
 	@RequestMapping(value = "/customer.myHome.go", method = RequestMethod.GET)
 	public String goMyhome(Membership m, HttpServletRequest req, HttpServletResponse res) {
-		
-		
-		if(mDAO.csmLoginCheck2(req, res)) {
-			
+
+		if (mDAO.csmLoginCheck2(req, res)) {
+
 			cDAO.getAllCategory(req, res);
 			mpDAO.getMembership(m, req, res);
-			
+
 			req.setAttribute("contentPage", "customer/customerMyPage2.jsp");
 			req.setAttribute("myPageContentArea", "memberShip.jsp");
-			
+
 			return "main";
 		}
 		cDAO.getAllCategory(req, res);
 		req.setAttribute("contentPage", "member/loginArea.jsp");
 		return "main";
-		
+
 	}
-	
+
 	// 판매자 로그인
 	@RequestMapping(value = "/seller.login.do", method = RequestMethod.GET)
 	public String loginSeller(Seller s, HttpServletRequest req, HttpServletResponse res) {
-		
+
 		mDAO.loginSeller(s, req, res);
-		
-		if(mDAO.slLoginCheck(req, res)) {
-			
+
+		if (mDAO.slLoginCheck(req, res)) {
+
 			req.setAttribute("contentPage", "saleHome.jsp");
 			return "sale/saleIndex";
-	
-		}else {
+
+		} else {
 			cDAO.getAllCategory(req, res);
 			req.setAttribute("contentPage", "member/loginArea.jsp");
 			return "main";
-			
+
 		}
-		
+
 	}
-	
+
 	// 구매자 로그아웃
 	@RequestMapping(value = "/customer.logout.do", method = RequestMethod.GET)
 	public String logoutCustomer(HttpServletRequest req, HttpServletResponse res) {
-		
+
 		mDAO.logoutCustomer(req, res);
 		mDAO.csmLoginCheck(req, res);
 		cDAO.getAllCategory(req, res);// 메인 카테고리 호출 메소드
 		req.setAttribute("contentPage", "home.jsp");
 		return "main";
-			
+
 	}
-	
+
 	// 판매자 로그아웃
 	@RequestMapping(value = "/seller.logout.do", method = RequestMethod.GET)
 	public String logoutSeller(HttpServletRequest req, HttpServletResponse res) {
-		
+
 		mDAO.logoutSeller(req, res);
 		mDAO.slLoginCheck(req, res);
 		cDAO.getAllCategory(req, res);// 메인 카테고리 호출 메소드
 		req.setAttribute("contentPage", "home.jsp");
 		return "main";
-		
-		
+
 	}
 
 	// 구매자 회원정보 수정하러가기
 	@RequestMapping(value = "/customer.update.go", method = RequestMethod.GET)
 	public String goUpdateCustomer(HttpServletRequest req, HttpServletResponse res) {
-		
-		if(mDAO.csmLoginCheck(req, res)) {
-			
+
+		if (mDAO.csmLoginCheck(req, res)) {
+
 			return "member/updateCSMPage";
-		
-		}else {
+
+		} else {
 			cDAO.getAllCategory(req, res);
 			req.setAttribute("contentPage", "member/loginArea.jsp");
 			return "main";
 		}
-		
+
 	}
-	
+
 	// 구매자 회원정보 수정하기
 	@RequestMapping(value = "/customer.update.do", method = RequestMethod.POST)
 	public String doUpdateCustomer(Customer c, HttpServletRequest req, HttpServletResponse res) {
-		
-		if(mDAO.csmLoginCheck(req, res)) {
-			
+
+		if (mDAO.csmLoginCheck(req, res)) {
+
 			mDAO.updateCustomer(c, req, res);
 			return "customer/csmLoginOK";
-			
-		}else {
+
+		} else {
 			cDAO.getAllCategory(req, res);
 			req.setAttribute("contentPage", "member/loginArea.jsp");
 			return "main";
 		}
-		
+
 	}
-	
+
 	// 판매자 회원정보 수정하러가기
 	@RequestMapping(value = "/seller.update.go", method = RequestMethod.GET)
 	public String goUpdateSeller(HttpServletRequest req, HttpServletResponse res) {
-		
-		if(mDAO.slLoginCheck(req, res)) {
-			
+
+		if (mDAO.slLoginCheck(req, res)) {
+
 			return "member/updateSLPage";
-			
-		}else {
+
+		} else {
 			cDAO.getAllCategory(req, res);
 			req.setAttribute("contentPage", "member/loginArea.jsp");
 			return "main";
 		}
-		
+
 	}
-	
+
 	// 판매자 회원정보 수정하기
 	@RequestMapping(value = "/seller.update.do", method = RequestMethod.POST)
 	public String doUpdateSeller(Seller s, HttpServletRequest req, HttpServletResponse res) {
-		
-		if(mDAO.slLoginCheck(req, res)) {
-			
+
+		if (mDAO.slLoginCheck(req, res)) {
+
 			mDAO.updateSeller(s, req, res);
 			return "sale/saleIndex";
-			
-		}else {
+
+		} else {
 			cDAO.getAllCategory(req, res);
 			req.setAttribute("contentPage", "member/loginArea.jsp");
 			return "main";
 		}
-		
+
 	}
-	
+
 	// 구매자 회원탈퇴하러가기
 	@RequestMapping(value = "/customer.withdraw.go", method = RequestMethod.GET)
 	public String goWithdrawCustomer(HttpServletRequest req, HttpServletResponse res) {
-		
-		if(mDAO.csmLoginCheck(req, res)) {
-			
+
+		if (mDAO.csmLoginCheck(req, res)) {
+
 			return "member/withdrawCSMPage";
-		
-		}else {
+
+		} else {
 			cDAO.getAllCategory(req, res);
 			req.setAttribute("contentPage", "member/loginArea.jsp");
 			return "main";
 		}
-		
+
 	}
-	
+
 	// 구매자 회원탈퇴 하기
 	@RequestMapping(value = "/customer.withdraw.do", method = RequestMethod.GET)
 	public String doWithdrawCustomer(Customer c, Membership m, HttpServletRequest req, HttpServletResponse res) {
-	
-		if(mDAO.csmLoginCheck(req, res)) {
-			
+
+		if (mDAO.csmLoginCheck(req, res)) {
+
 			mDAO.withdrawCustomer(c, m, req, res);
 			mDAO.logoutCustomer(req, res);
 			mDAO.csmLoginCheck(req, res);
-			
+
 		}
-			cDAO.getAllCategory(req, res);
-			req.setAttribute("contentPage", "home.jsp");
-			return "main";
-		
+		cDAO.getAllCategory(req, res);
+		req.setAttribute("contentPage", "home.jsp");
+		return "main";
+
 	}
-	
+
 	// 판매자 회원탈퇴하러가기
 	@RequestMapping(value = "/seller.withdraw.go", method = RequestMethod.GET)
 	public String goWithdrawSeller(HttpServletRequest req, HttpServletResponse res) {
-		
-		if(mDAO.slLoginCheck(req, res)) {
-			
+
+		if (mDAO.slLoginCheck(req, res)) {
+
 			return "member/withdrawSLPage";
-			
-		}else {
+
+		} else {
 			return "member/loginPage";
 		}
-		
+
 	}
-	
+
 	// 판매자 회원탈퇴하기
 	@RequestMapping(value = "/seller.withdraw.do", method = RequestMethod.GET)
 	public String doWithdrawSeller(Seller s, HttpServletRequest req, HttpServletResponse res) {
-		
-		if(mDAO.slLoginCheck(req, res)) {
-			
+
+		if (mDAO.slLoginCheck(req, res)) {
+
 			mDAO.withdrawSeller(s, req, res);
 			mDAO.logoutSeller(req, res);
 			mDAO.slLoginCheck(req, res);
@@ -322,9 +315,7 @@ public class MemberController {
 		cDAO.getAllCategory(req, res);
 		req.setAttribute("contentPage", "home.jsp");
 		return "main";
-		
-	}
-	
 
-	
+	}
+
 }

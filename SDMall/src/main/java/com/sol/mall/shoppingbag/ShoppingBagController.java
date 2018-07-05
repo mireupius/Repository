@@ -19,81 +19,53 @@ public class ShoppingBagController {
 
 	@Autowired
 	private ShoppingBagDAO sbDAO;
-	
-	@Autowired
-	private MemberDAO mDAO;
 
 	@Autowired
 	private CategoryDAO cDAO;
 
 	@RequestMapping(value = "/cart.add", method = RequestMethod.GET)
 	public String home(ShoppingBag sb, HttpServletRequest req, HttpServletResponse res) {
-<<<<<<< HEAD
+
 		cDAO.getAllCategory(req, res);// 메인 카테고리 호출 메소드
-		if (mDAO.csmLoginCheck(req, res)) {//로그인체크
+		if (mDAO.csmLoginCheck(req, res)) {// 로그인체크
 			sbDAO.addToCart(sb, req, res);
-			
-			sbDAO.showCartItems(req, res);//장바구니 상품수량 반환
+
+			sbDAO.showCartItems(req, res);// 장바구니 상품수량 반환
 			req.setAttribute("contentPage", "home.jsp");
-		}else {
+		} else {
 			req.setAttribute("contentPage", "member/loginArea.jsp");
 		}
 		cDAO.getAllCategory(req, res);// 메인 카테고리 호출 메소드
-=======
->>>>>>> refs/remotes/origin/Oh19
 
-<<<<<<< HEAD
 		return "main";
-=======
-		if (mDAO.csmLoginCheck(req, res)) {
 
-			cDAO.getAllCategory(req, res);// 메인 카테고리 호출 메소드
-
-			sbDAO.addToCart(sb, req, res);
-			req.setAttribute("contentPage", "home.jsp");
-			return "main";
-
-		}
-		return "member/loginPage";
-
->>>>>>> refs/remotes/origin/Oh19
 	}
 
 	@RequestMapping(value = "/customer.cart.go", method = RequestMethod.GET)
 	public String cartGo(ShoppingBag sb, HttpServletRequest req, HttpServletResponse res) {
-<<<<<<< HEAD
+
 		cDAO.getAllCategory(req, res);// 메인 카테고리 호출 메소드
-		if (mDAO.csmLoginCheck(req, res)) {//로그인체크
-			sbDAO.showCartItems(req, res);//장바구니 상품수량 반환
-		
+		if (mDAO.csmLoginCheck(req, res)) {// 로그인체크
+			sbDAO.showCartItems(req, res);// 장바구니 상품수량 반환
+
 			req.setAttribute("contentPage", "shoppingBag/cart.jsp");
-		}else {
+		} else {
 			req.setAttribute("contentPage", "member/loginArea.jsp");
 		}
 		return "main";
-=======
 
-		if (mDAO.csmLoginCheck(req, res)) {
-			cDAO.getAllCategory(req, res);// 메인 카테고리 호출 메소드
-			sbDAO.showCartItems(sb, req, res);
-			req.setAttribute("contentPage", "shoppingBag/cart.jsp");
-
-			return "main";
-		}
-
-		return "member/loginPage";
->>>>>>> refs/remotes/origin/Oh19
 	}
-	
+
 	@RequestMapping(value = "/customer.cart.delete", method = RequestMethod.GET)
-	public String deleteCartItem(ShoppingBag sb, ShoppingBagItem sbItem, HttpServletRequest req, HttpServletResponse res) {
+	public String deleteCartItem(ShoppingBag sb, ShoppingBagItem sbItem, HttpServletRequest req,
+			HttpServletResponse res) {
 		cDAO.getAllCategory(req, res);// 메인 카테고리 호출 메소드
-		if (mDAO.csmLoginCheck(req, res)) {//로그인체크
+		if (mDAO.csmLoginCheck(req, res)) {// 로그인체크
 			sbDAO.deleteCartItem(sbItem, req, res);
 			sbDAO.showCartItems(req, res);
-			
+
 			req.setAttribute("contentPage", "shoppingBag/cart.jsp");
-		}else {
+		} else {
 			req.setAttribute("contentPage", "member/loginArea.jsp");
 		}
 		return "main";
