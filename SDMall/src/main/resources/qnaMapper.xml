@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sol.mall.sale.delivery.qna.QnaMapper">
+	<select id="getAllQnAById"
+		parameterType="com.sol.mall.myPage.QuestionAnswer"
+		resultType="com.sol.mall.myPage.QuestionAnswer">
+		select *
+		from question_Answer
+		where qa_sl_id = #{qa_sl_id}
+		order by qa_qRegDate
+	</select>
+
+
+	<select id="geUnAById"
+		parameterType="com.sol.mall.myPage.QuestionAnswer"
+		resultType="com.sol.mall.myPage.QuestionAnswer">
+		select *
+		from question_Answer
+		where qa_sl_id = #{qa_sl_id}
+		and qa_check = '미답변' order by qa_qRegDate
+	</select>
+
+	<select id="getAedById"
+		parameterType="com.sol.mall.myPage.QuestionAnswer"
+		resultType="com.sol.mall.myPage.QuestionAnswer">
+		select *
+		from question_Answer
+		where qa_sl_id = #{qa_sl_id}
+		and qa_check = '답변' order by qa_qRegDate
+	</select>
+
+	<select id="getQnaByNum"
+		parameterType="com.sol.mall.myPage.QuestionAnswer"
+		resultType="com.sol.mall.myPage.QuestionAnswer">
+		select *
+		from question_Answer
+		where qa_regNo = #{qa_regNo}
+	</select>
+
+
+	<update id="answerQna"
+		parameterType="com.sol.mall.myPage.QuestionAnswer">
+		update question_Answer set qa_answer = #{qa_answer},
+		qa_check = '답변'
+		where qa_regNo = #{qa_regNo}
+	</update>
+
+
+
+
+
+
+	<select id="getAllQnANumById"
+		parameterType="com.sol.mall.myPage.QuestionAnswer"
+		resultType="java.lang.Integer">
+		select count(*)
+		from question_Answer
+		where qa_sl_id =
+		#{qa_sl_id} order by qa_qRegDate
+	</select>
+
+	<select id="getUnAnswerQnANumById"
+		parameterType="com.sol.mall.myPage.QuestionAnswer"
+		resultType="java.lang.Integer">
+		select count(*)
+		from question_Answer
+		where qa_sl_id =
+		#{qa_sl_id} and qa_check = '미답변'
+		order by qa_qRegDate
+	</select>
+
+	<select id="getAnsweredQnANumById"
+		parameterType="com.sol.mall.myPage.QuestionAnswer"
+		resultType="java.lang.Integer">
+		select count(*)
+		from question_Answer
+		where qa_sl_id =
+		#{qa_sl_id} and qa_check like '답변' order
+		by qa_qRegDate
+	</select>
+</mapper>

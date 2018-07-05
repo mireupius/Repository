@@ -35,7 +35,7 @@ CREATE TABLE sale_delivery (
 	sd_claim varchar2(20 char), /* 클레임상태 */
 	sd_pay_method varchar2(10 char) NOT NULL, /* 결제수단 */
 	sd_go_delivery_date date, /* 발송처리일 */
-	sd_delivery_method varchar2(10 char) /* 배송방법 */
+	sd_delivery_type varchar2(10 char), /* 배송방법 */
 	sd_review varchar2(1 char) /*구매평 여부 */
 );
 

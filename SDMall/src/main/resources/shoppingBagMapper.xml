@@ -1,21 +1,41 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.sol.mall.shoppingbag.ShoppingBagMapper">
-	<insert id="addToCart" parameterType="com.sol.mall.shoppingbag.ShoppingBag">
+
+
+	<!-- 장바구니추가 -->
+	<insert id="addToCart"
+		parameterType="com.sol.mall.shoppingbag.ShoppingBag">
+
 		insert into SHOPPINGBAG_TB values(
 		to_char(SHOPPINGBAG_Seq.nextval),#{sb_csmid},#{sb_gdno},#{sb_opno},#{sb_quantity}
 		)
 	</insert>
-	<select id="showCartItems" parameterType="com.sol.mall.shoppingbag.ShoppingBag" resultType="com.sol.mall.shoppingbag.ShoppingBagItem">
-		select sb_no, gd_name, gd_imgm, op_name, sb_quantity, op_price, gd_price
+
+	<select id="showCartItems"
+		parameterType="com.sol.mall.shoppingbag.ShoppingBag"
+		resultType="com.sol.mall.shoppingbag.ShoppingBagItem">
+		select sb_no, gd_name, gd_imgm, op_name, sb_quantity,
+		op_price, gd_price, gd_dlvchrg, gd_outarea, gd_csmprice, gd_sellerid
+
 		from shoppingbag_tb, goods_tb, option_tb
-		where gd_no = sb_gdno and op_no = sb_opno
+		where gd_no = sb_gdno and
+		op_no = sb_opno
 		and sb_csmid = #{sb_csmid}
 	</select>
-	<delete id="deleteCartItem" parameterType="com.sol.mall.shoppingbag.ShoppingBagItem">
-		delete 
-		from shoppingbag_tb 
+	<delete id="deleteCartItem"
+		parameterType="com.sol.mall.shoppingbag.ShoppingBagItem">
+		delete
+		from shoppingbag_tb
 		where sb_no=#{sb_no}
 	</delete>
-	
+
+	<delete id="deleteAllCartItem"
+		parameterType="com.sol.mall.member.Customer">
+		delete
+		from shoppingbag_tb
+		where sb_csmid = #{csm_id}
+	</delete>
+
+
 </mapper>

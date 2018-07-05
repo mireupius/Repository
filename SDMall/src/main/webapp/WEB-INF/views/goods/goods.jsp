@@ -52,7 +52,7 @@
 							<c:if test="${dlvchrg[1]>0}">
 							<p><c:out value=" ${dlvchrg[1]}"/>원 이상 구매시 배송비 무료</p>
 							</c:if>
-						</p></div>
+						</div>
 						<div class="order_info d-flex flex-row">
 <!-- 							장바구니 form -->
 							<form action="cart.add" method="get">
@@ -75,31 +75,33 @@
 										</label>
 								</div>
 								<div id="view_total_price" class="product_price">${goodsDtl1.gd_price }원</div>
-								<div class="button_container">
+							<div class="button_container">
 								<input type="hidden" name="sb_gdno" value="${goodsDtl1.gd_no }">
-									<button class="button cart_button">Add to Cart</button>
+								<button class="button cart_button">Add to Cart</button>
 <!-- 									<div class="product_fav"><i class="fas fa-heart"></i></div> -->
 							</form>
+							
 <!-- 							즉시구매 form -->
-							<form action="">
-							<input type="hidden" name="sd_delivery_cost" value="${goodsDtl1.gd_dlvchrg }">
-							<input type="hidden" name="sd_product_name" value="${goodsDtl1.gd_name }">
-							<input type="hidden" id="send_option_name" name="sd_option_info">
-							<input type="hidden" id="send_quantity" name="sd_amount">
-							<input type="hidden" id="send_option_price" name="sd_option_price">
-							<input type="hidden" id="send_price" name="sd_product_price" value="${goodsDtl1.gd_price }">
-							<input type="hidden" name="sd_product_sellprice" value="${goodsDtl1.gd_csmprice }">
-							<input type="hidden" id = "send_total_price" name="sd_total_price">
-							<input type="hidden" name="sd_out_area" value="${goodsDtl1.gd_outarea }">
-							<input type="hidden" name="sd_product_no" value="${goodsDtl1.gd_no }">
-							<input type="hidden" name="sd_seller_id" value="${goodsDtl1.gd_sellerid }">
-							<button type="button" class="button cart_button">구매</button>
+							<form action="buying.go" method="post">
+								<input type="hidden" name="sd_imageFileName" value="${goodsDtl1.gd_imgs }">
+								<input type="hidden" name="sd_delivery_cost" value="${goodsDtl1.gd_dlvchrg }">
+								<input type="hidden" name="sd_product_name" value="${goodsDtl1.gd_name }">
+								<input type="hidden" id="send_option_name" name="sd_option_info">
+								<input type="hidden" id="send_quantity" name="sd_amount">
+								<input type="hidden" id="send_option_price" name="sd_option_price">
+								<input type="hidden" id="send_price" name="sd_product_price" value="${goodsDtl1.gd_price }">
+								<input type="hidden" name="sd_product_sellprice" value="${goodsDtl1.gd_csmprice }">
+								<input type="hidden" id = "send_total_price" name="sd_total_price">
+								<input type="hidden" name="sd_out_area" value="${goodsDtl1.gd_outarea }">
+								<input type="hidden" name="sd_product_no" value="${goodsDtl1.gd_no }">
+								<input type="hidden" name="sd_seller_id" value="${goodsDtl1.gd_sellerid }">
+								<button class="button cart_button">구매</button>
 							</form>
-						</div>
+							
+							</div>
 						</div>
 					</div>
 				</div>
-
 			</div>
 		</div>
 	</div>

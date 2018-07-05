@@ -73,7 +73,8 @@
 						<div class="wishlist_cart d-flex flex-row align-items-center justify-content-end">
 							<div class="wishlist d-flex flex-row align-items-center justify-content-end">
 								<div class="wishlist_content">
-									<div class="wishlist_icon"><img src="resources/etc/icon-login.png" alt=""></div>
+									<div class="wishlist_icon">
+									<a href="member.loginPage"><img src="resources/etc/icon-login.png" alt=""></a></div>
 									<div class="wishlist_text">
 										<c:if test="${sessionScope.loginCustomer == null }">
 										<a href="member.loginPage">로그인</a>
@@ -87,7 +88,7 @@
 							<!-- Myhome -->
 							<div class="wishlist d-flex flex-row align-items-center justify-content-end">
 								<div class="wishlist_content">
-									<div class="wishlist_icon"><img src="resources/etc/icon-myhome.png" alt=""></div>
+									<div class="wishlist_icon"><a href="customer.myHome.go"><img src="resources/etc/icon-myhome.png" alt=""></a></div>
 									<div class="wishlist_text"><a href="customer.myHome.go">마이홈</a></div>
 								</div>
 							</div>
