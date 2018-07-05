@@ -85,6 +85,8 @@
 								onclick="goReturnOrder(${list.sd_delivery_pno });">반품신청</button>
 							<button class="orderBtn" type="button"
 								onclick="goQuestionSeller(${list.sd_delivery_pno });">판매자문의</button>
+							<button class="orderBtn" type="button"
+								onclick="goCompleteBuy(${list.sd_delivery_pno });">구매확정</button>
 						</td>
 					</tr>
 				</table>

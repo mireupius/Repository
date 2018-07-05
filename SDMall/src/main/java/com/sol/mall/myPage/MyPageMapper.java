@@ -1,5 +1,6 @@
 package com.sol.mall.myPage;
 
+import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.List;
 
@@ -16,8 +17,13 @@ public interface MyPageMapper {
 	public abstract int cancelOrder(Delivery d);
 	public abstract int exchangeOrder(Delivery d);
 	public abstract int returnOrder(Delivery d);
+	public abstract int completeBuyOrder(Delivery d);
+	public abstract int updateCumulativePrice(Membership m);
+	public abstract int updateMemberShipGrade(Membership m);
 	public abstract int writeQuestionToSeller(QuestionAnswer qa);
 	public abstract Membership membershipStatus(Membership m);
+	public abstract BigDecimal getTotalBuyPriceById(Delivery d);
+	
 	
 	// 활동관리
 	public abstract int writeProductReview(ProductReview pr);

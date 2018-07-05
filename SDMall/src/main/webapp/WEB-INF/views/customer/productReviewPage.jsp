@@ -6,13 +6,20 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
-<link href="resources/junyoung/star.css" rel="stylesheet">
 <link href="resources/junyoung/review.css" rel="stylesheet">
-<script src="resources/js/jquery-3.3.1.min.js"></script>
-<script src="resources/js/star.js"></script>
 <script src="resources/js/go.js"></script>
 </head>
 <body>
+
+	<div>
+		<table class="reviewTb0">
+			<tr>
+				<td>
+					<h2>상품 리뷰</h2>
+				</td>
+			</tr>
+		</table>
+	</div>
 
 	<c:forEach var="list" items="${orderList }">
 		<div>

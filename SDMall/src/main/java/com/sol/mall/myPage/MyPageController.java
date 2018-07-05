@@ -35,7 +35,9 @@ public class MyPageController {
 
 			return "main";
 		}
-		return "member/loginPage";
+		cDAO.getAllCategory(req, res);
+		req.setAttribute("contentPage", "member/loginArea.jsp");
+		return "main";
 	}
 
 	@RequestMapping(value = "/customer.myHome.orderList", method = RequestMethod.GET)
@@ -48,7 +50,9 @@ public class MyPageController {
 			req.setAttribute("myPageContentArea", "orderDelivery.jsp");
 			return "main";
 		}
-		return "member/loginPage";
+		cDAO.getAllCategory(req, res);
+		req.setAttribute("contentPage", "member/loginArea.jsp");
+		return "main";
 
 	}
 
@@ -63,7 +67,9 @@ public class MyPageController {
 
 			return "main";
 		}
-		return "member/loginPage";
+		cDAO.getAllCategory(req, res);
+		req.setAttribute("contentPage", "member/loginArea.jsp");
+		return "main";
 
 	}
 
@@ -78,7 +84,9 @@ public class MyPageController {
 			req.setAttribute("myPageContentArea", "orderClaim.jsp");
 			return "main";
 		}
-		return "member/loginPage";
+		cDAO.getAllCategory(req, res);
+		req.setAttribute("contentPage", "member/loginArea.jsp");
+		return "main";
 
 	}
 
@@ -93,7 +101,9 @@ public class MyPageController {
 			req.setAttribute("myPageContentArea", "orderDelivery.jsp");
 			return "main";
 		}
-		return "member/loginPage";
+		cDAO.getAllCategory(req, res);
+		req.setAttribute("contentPage", "member/loginArea.jsp");
+		return "main";
 
 	}
 
@@ -109,7 +119,9 @@ public class MyPageController {
 			req.setAttribute("myPageContentArea", "orderDelivery.jsp");
 			return "main";
 		}
-		return "member/loginPage";
+		cDAO.getAllCategory(req, res);
+		req.setAttribute("contentPage", "member/loginArea.jsp");
+		return "main";
 
 	}
 
@@ -124,9 +136,30 @@ public class MyPageController {
 			req.setAttribute("myPageContentArea", "orderDelivery.jsp");
 			return "main";
 		}
-		return "member/loginPage";
+		cDAO.getAllCategory(req, res);
+		req.setAttribute("contentPage", "member/loginArea.jsp");
+		return "main";
 
 
+	}
+	@RequestMapping(value = "/orderList.completeBuy.do", method = RequestMethod.GET)
+	public String completeBuyOrder(Delivery d, HttpServletRequest req, HttpServletResponse res) {
+		
+		if (mDAO.csmLoginCheck(req, res)) {
+			
+			cDAO.getAllCategory(req, res);
+			mpDAO.completeBuyOrder(d, req, res);
+			mpDAO.updateCumulativePrice(req, res);
+			mpDAO.updateMemberShipGrade(req, res);
+			req.setAttribute("contentPage", "customer/customerMyPage2.jsp");
+			req.setAttribute("myPageContentArea", "orderDelivery.jsp");
+			return "main";
+		}
+		cDAO.getAllCategory(req, res);
+		req.setAttribute("contentPage", "member/loginArea.jsp");
+		return "main";
+		
+		
 	}
 
 	@RequestMapping(value = "/customer.myHome.productReview.go", method = RequestMethod.GET)
@@ -137,7 +170,9 @@ public class MyPageController {
 			mpDAO.getOrderListToReview(d, req, res);
 			return "customer/productReviewPage";
 		}
-		return "member/loginPage";
+		cDAO.getAllCategory(req, res);
+		req.setAttribute("contentPage", "member/loginArea.jsp");
+		return "main";
 
 	}
 
@@ -151,7 +186,9 @@ public class MyPageController {
 			return "customer/productReview";
 
 		}
-		return "member/loginPage";
+		cDAO.getAllCategory(req, res);
+		req.setAttribute("contentPage", "member/loginArea.jsp");
+		return "main";
 
 	}
 
@@ -164,7 +201,9 @@ public class MyPageController {
 			return "customer/productReview";
 
 		}
-		return "member/loginPage";
+		cDAO.getAllCategory(req, res);
+		req.setAttribute("contentPage", "member/loginArea.jsp");
+		return "main";
 
 	}
 
@@ -177,7 +216,9 @@ public class MyPageController {
 			return "customer/writedReviews";
 
 		}
-		return "member/loginPage";
+		cDAO.getAllCategory(req, res);
+		req.setAttribute("contentPage", "member/loginArea.jsp");
+		return "main";
 
 	}
 
@@ -190,7 +231,9 @@ public class MyPageController {
 			return "customer/question";
 
 		}
-		return "member/loginPage";
+		cDAO.getAllCategory(req, res);
+		req.setAttribute("contentPage", "member/loginArea.jsp");
+		return "main";
 
 	}
 
@@ -203,7 +246,9 @@ public class MyPageController {
 			return "customer/customerMyPage2";
 
 		}
-		return "member/loginPage";
+		cDAO.getAllCategory(req, res);
+		req.setAttribute("contentPage", "member/loginArea.jsp");
+		return "main";
 
 	}
 
@@ -216,7 +261,9 @@ public class MyPageController {
 			return "customer/myQuestion";
 
 		}
-		return "member/loginPage";
+		cDAO.getAllCategory(req, res);
+		req.setAttribute("contentPage", "member/loginArea.jsp");
+		return "main";
 
 	}
 

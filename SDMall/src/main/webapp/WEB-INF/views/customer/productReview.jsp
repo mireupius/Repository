@@ -13,6 +13,16 @@
 </head>
 <body>
 
+	<div>
+		<table class="writeTb0">
+			<tr>
+				<td>
+					<h2>상품 리뷰 작성</h2>
+				</td>
+			</tr>
+		</table>
+	</div>
+
 	<form action="customer.productReview.write">
 		<div>
 			<input type="hidden" value="${review.sd_product_no }" name="pr_gdNo">

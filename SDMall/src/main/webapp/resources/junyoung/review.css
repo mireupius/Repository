@@ -3,10 +3,41 @@
 
 
 .reviewOrder{
-
+	margin-left : auto;
+	margin-right : auto;
 	border: #D5D5D5 solid 2px;
 	margin-bottom: 20px;
 }
+
+.reviewTb0 {
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.reviewTb1 {
+	margin-left: auto;
+	margin-right: auto;
+}
+
+
+.reviewTb2 {
+	margin-left: auto;
+	margin-right: auto;
+	padding-top : 20px;
+	padding-bottom : 20px;
+	border: #D5D5D5 solid 2px;
+	border-radius : 10px 10px 0 10px;
+	margin-bottom: 30px;
+	background-color: white;
+
+}
+
+.reviewTb3 {
+	margin-left: auto;
+	margin-right: auto;
+}
+
+
 
 .reviewTd1{
 	width : 200px;
@@ -64,35 +95,6 @@
 	
 }
 
-.reviewTb0 {
-	margin-left: auto;
-	margin-right: auto;
-}
-.reviewTb1 {
-	margin-left: auto;
-	margin-right: auto;
-}
-
-
-
-
-.reviewTb2 {
-	margin-left: auto;
-	margin-right: auto;
-	padding-top : 20px;
-	padding-bottom : 20px;
-	border: #D5D5D5 solid 2px;
-	border-radius : 10px 10px 0 10px;
-	margin-bottom: 30px;
-	background-color: white;
-
-}
-
-.reviewTb3 {
-	margin-left: auto;
-	margin-right: auto;
-}
-
 .reviewdTd1{
 	padding-left: 20px;
 	width: 100px;
@@ -102,11 +104,12 @@
 	
 }
 
-
 .reviewdTd2 {
 	padding-left: 30px;
 	
 }
+
+
 
 
 

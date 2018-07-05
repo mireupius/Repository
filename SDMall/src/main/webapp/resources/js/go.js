@@ -41,6 +41,17 @@ function goReturnOrder(sd_pno) {
 	
 }
 
+// 구매확정
+function goCompleteBuy(sd_pno) {
+	var ok = confirm("이 상품을 구매확정하시겠습니까?");
+	
+	if (ok) {
+		
+		location.href = "orderList.completeBuy.do?sd_delivery_pno=" + sd_pno;
+	}
+	
+}
+
 // 판매자에게 질문하기
 function goQuestionSeller(sd_pno) {
 	alert("sdf");

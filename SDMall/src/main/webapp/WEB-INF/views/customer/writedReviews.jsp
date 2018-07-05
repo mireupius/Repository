@@ -11,7 +11,15 @@
 <script src="resources/js/go.js"></script>
 </head>
 <body>
-
+	<div>
+		<table class="reviewTb0">
+			<tr>
+				<td>
+					<h2>상품 리뷰</h2>
+				</td>
+			</tr>
+		</table>
+	</div>
 	<c:forEach var="list" items="${reviewList }">
 
 		<div>
@@ -46,9 +54,7 @@
 							</tr>
 							<tr>
 								<td class="reviewdTd1">별점</td>
-								<td class="reviewdTd2">
-									${list.pr_star }점
-								</td>
+								<td class="reviewdTd2">${list.pr_star }점</td>
 							</tr>
 							<tr>
 								<td class="reviewdTd1">작성일</td>

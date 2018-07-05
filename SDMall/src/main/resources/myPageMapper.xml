@@ -51,6 +51,13 @@
 		set sd_claim = '반품접수'
 		where sd_delivery_pno = #{sd_delivery_pno}
 	</update>
+	
+	<!-- 구매확정 -->
+	<update id="completeBuyOrder" parameterType="com.sol.mall.sale.delivery.Delivery">
+		update sale_delivery
+		set sd_delivery_state = '구매확정'
+		where sd_delivery_state = '배송완료' and sd_delivery_pno = #{sd_delivery_pno}
+	</update>
 
 	<!-- 멤버십 보여주기 -->
 	<select id="membershipStatus"
@@ -132,4 +139,33 @@
 		where qa_csm_id = #{qa_csm_id}
 	</select>
 	
+	<!-- 총 구매 금액 가져오기 -->
+	<select id="getTotalBuyPriceById" parameterType="com.sol.mall.sale.delivery.Delivery"
+		resultType="java.math.BigDecimal">
+		select sum(sd_total_price)
+		from sale_delivery
+		where sd_delivery_state = '구매확정' and sd_customer_id = #{sd_customer_id}
+	</select>
+	
+	<!-- 누적구매금액 업데이트 -->
+	<update id="updateCumulativePrice" parameterType="com.sol.mall.member.Membership">
+		update membership
+		set ms_totalBuy = #{ms_totalBuy}
+		where ms_csm_id = #{ms_csm_id}
+	</update>
+	
+	<!-- 멤버십 정보 가져오기 -->
+	<select id="getMemberShipInfoById" parameterType="com.sol.mall.member.Membership"
+		resultType="com.sol.mall.member.Membership">
+		select *
+		from membership
+		where ms_csm_id = #{ms_csm_id}
+	</select>
+	
+	<!-- 멤버쉽 업데이트 -->
+	<update id="updateMemberShipGrade" parameterType="com.sol.mall.member.Membership">
+		update membership
+		set ms_grade = #{ms_grade}
+		where ms_csm_id = #{ms_csm_id}
+	</update>
 </mapper>

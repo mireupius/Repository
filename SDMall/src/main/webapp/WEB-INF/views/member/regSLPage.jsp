@@ -9,7 +9,7 @@
 <script type="text/javascript" src="resources/js/go.js"></script>
 <script type="text/javascript" src="resources/js/validCheck.js"></script>
 <script type="text/javascript" src="resources/js/jquery.js"></script>
-<script type="text/javascript" src="resources/js/csmRegisterCheck.js"></script>
+<script type="text/javascript" src="resources/js/slRegisterCheck.js"></script>
 <script type="text/javascript">
 	$(function() {
 
