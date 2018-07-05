@@ -90,8 +90,9 @@ function overQuantity(){
 
 //배송비 계산
 function calcDlvchrg() {
-	var chrg = $('#chrg').val();
 	var terms= $('#terms').val();
+	var chrg = $('#chrg').val();
+	
 	if(terms>0){
 		chrg = setTotal_price()>terms?0:chrg;
 	}
