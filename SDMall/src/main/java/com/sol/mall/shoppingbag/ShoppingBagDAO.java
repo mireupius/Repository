@@ -37,8 +37,16 @@ public class ShoppingBagDAO {
 		System.out.println(sb.getSb_csmid());
 
 		List<ShoppingBag> items = ss.getMapper(ShoppingBagMapper.class).showCartItems(sb);
+		req.setAttribute("sbsize", items.size());
 		System.out.println("카트 보여주기 성공");
 		req.setAttribute("cartItems", items);
 
+	}
+
+	public void deleteCartItem(ShoppingBagItem sbItem, HttpServletRequest req, HttpServletResponse res) {
+		if (ss.getMapper(ShoppingBagMapper.class).deleteCartItem(sbItem)==1) {
+			System.out.println("카트삭제");
+		}
+		
 	}
 }

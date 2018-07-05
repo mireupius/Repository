@@ -25,6 +25,19 @@
 		select * from goods_tb
 	</select>
 	
+	<select id="searchGoods" parameterType="com.sol.mall.goods.Goods" resultType="com.sol.mall.goods.Goods"> 
+		SELECT DISTINCT * 
+		FROM GOODS_TB,GOODSDTL_TB 
+		WHERE GD_NO=GT_GDNO AND GD_NAME LIKE '%'||#{gd_name}||'%' 
+		OR GD_NO=GT_GDNO AND GT_KEYWORD LIKE '%'||#{gd_name}||'%'
+	</select>
+	
+	<select id="getGoodsByName" parameterType="com.sol.mall.goods.Goods" resultType="com.sol.mall.goods.Goods"> 
+		SELECT * 
+		FROM GOODS_TB
+		WHERE GD_NAME LIKE '%'||#{gd_name}||'%'
+	</select>
+	
 	<select id="getAllGoodsView" parameterType="com.sol.mall.goods.Goods" resultType="com.sol.mall.goods.GoodsView">
 		select gd_no, gd_name, gd_price, gd_csmprice, gd_imgl, gt_maker, gt_brand, gt_mdlname, gt_origin 
 		from goods_tb a, goodsdtl_tb b

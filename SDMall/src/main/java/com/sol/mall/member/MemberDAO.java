@@ -172,7 +172,6 @@ public class MemberDAO {
 		Seller s = (Seller) req.getSession().getAttribute("loginSeller");
 
 		if (s != null) {
-			req.setAttribute("loginInfo", "slLoginOK.jsp");
 			return true;
 
 		}

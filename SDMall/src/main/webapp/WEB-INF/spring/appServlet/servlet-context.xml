@@ -21,6 +21,10 @@
 	<!-- <tx:annotation-driven /> -->
 	<resources mapping="/resources/**" location="/resources/" />
 
+<beans:bean id="annotationHandlerAdaptor" class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter">
+    <beans:property name="synchronizeOnSession" value="true" />
+</beans:bean>
+
 	<!--↓↓↓↓↓↓↓↓↓↓ 다음오픈에디터 저장소 ↓↓↓↓↓↓↓↓↓↓ -->
 	<resources mapping="/upload/**" location="/upload/" />
 	<!--↑↑↑↑↑↑↑↑↑↑ 다음오픈에디터 저장소 ↑↑↑↑↑↑↑↑↑↑ -->
