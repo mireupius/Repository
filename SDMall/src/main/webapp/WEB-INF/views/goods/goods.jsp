@@ -33,13 +33,13 @@
 						<div class="product_category">
 						<c:forEach var="goodsCategory" items="${allCategory}">
 							<c:if test="${goodsDtl1.gd_clfl==goodsCategory.ct_no }">
-								${goodsCategory.ct_clfname }
+								<a href="shop.Category?ct_no=${goodsDtl1.gd_clfl }">${goodsCategory.ct_clfname }</a>
 							</c:if>
 							<c:if test="${goodsDtl1.gd_clfm==goodsCategory.ct_no }">
-								> ${goodsCategory.ct_clfname }
+								 > <a href="shop.Category?ct_no=${goodsDtl1.gd_clfm }">${goodsCategory.ct_clfname }</a>
 							</c:if>
 							<c:if test="${goodsDtl1.gd_clfs==goodsCategory.ct_no }">
-								> ${goodsCategory.ct_clfname }
+								 > <a href="shop.Category?ct_no=${goodsDtl1.gd_clfs }">${goodsCategory.ct_clfname }</a>
 							</c:if>
 						</c:forEach>
 						</div>
@@ -76,28 +76,26 @@
 								</div>
 								<div id="view_total_price" class="product_price">${goodsDtl1.gd_price }원</div>
 								<div class="button_container">
-								<input name="sb_gdno" value="${goodsDtl1.gd_no }">
+								<input type="hidden" name="sb_gdno" value="${goodsDtl1.gd_no }">
 									<button class="button cart_button">Add to Cart</button>
 <!-- 									<div class="product_fav"><i class="fas fa-heart"></i></div> -->
-								</div>
 							</form>
-							
 <!-- 							즉시구매 form -->
 							<form action="">
-							<input name="sd_delivery_cost" value="${goodsDtl1.gd_dlvchrg }">
-							<input name="sd_product_name" value="${goodsDtl1.gd_name }">
-							<input id="send_option_name" name="sd_option_info">
-							<input id="send_quantity" name="sd_amount">
-							<input id="send_option_price" name="sd_option_price">
-							<input id="send_price" name="sd_product_price" value="${goodsDtl1.gd_price }">
-							<input name="sd_product_sellprice" value="${goodsDtl1.gd_csmprice }">
-							<input id = "send_total_price" name="sd_total_price">
-							<input name="sd_out_area" value="${goodsDtl1.gd_outarea }">
-							<input name="sd_product_no" value="${goodsDtl1.gd_no }">
-							<input name="sd_seller_id" value="${goodsDtl1.gd_sellerid }">
+							<input type="hidden" name="sd_delivery_cost" value="${goodsDtl1.gd_dlvchrg }">
+							<input type="hidden" name="sd_product_name" value="${goodsDtl1.gd_name }">
+							<input type="hidden" id="send_option_name" name="sd_option_info">
+							<input type="hidden" id="send_quantity" name="sd_amount">
+							<input type="hidden" id="send_option_price" name="sd_option_price">
+							<input type="hidden" id="send_price" name="sd_product_price" value="${goodsDtl1.gd_price }">
+							<input type="hidden" name="sd_product_sellprice" value="${goodsDtl1.gd_csmprice }">
+							<input type="hidden" id = "send_total_price" name="sd_total_price">
+							<input type="hidden" name="sd_out_area" value="${goodsDtl1.gd_outarea }">
+							<input type="hidden" name="sd_product_no" value="${goodsDtl1.gd_no }">
+							<input type="hidden" name="sd_seller_id" value="${goodsDtl1.gd_sellerid }">
 							<button type="button" class="button cart_button">구매</button>
 							</form>
-							
+						</div>
 						</div>
 					</div>
 				</div>
