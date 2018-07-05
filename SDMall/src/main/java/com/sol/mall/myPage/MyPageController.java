@@ -135,7 +135,7 @@ public class MyPageController {
 		if (mDAO.csmLoginCheck(req, res)) {
 
 			mpDAO.getOrderListToReview(d, req, res);
-			return "customer/productReview2";
+			return "customer/productReviewPage";
 		}
 		return "member/loginPage";
 

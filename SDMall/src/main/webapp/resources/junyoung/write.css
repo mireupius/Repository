@@ -91,6 +91,22 @@
     font-weight: 800;
     cursor: pointer;
 }
+.writeBtn2{
+	
+	width:475px;
+    background-color: #3399ff;
+    color: white;
+    border: none;
+    padding: 15px 0;
+    text-align: center;
+    text-decoration: none;
+    border-radius : 10px;
+    display: inline-block;
+    font-size: 15px;
+    margin-left: 4px;
+    font-weight: 800;
+    cursor: pointer;
+}
 
 
 

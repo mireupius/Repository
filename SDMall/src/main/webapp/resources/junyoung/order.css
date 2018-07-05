@@ -5,11 +5,22 @@
 	margin-right: auto;
 }
 .orderTb1 {
+	margin-left: auto;
+	margin-right: auto;
 	margin-top : 30px;
+	
 
 }
 
 .orderTb2 {
+	margin-left: auto;
+	margin-right: auto;
+	margin-bottom: 20px;
+	border: #D5D5D5 solid 3px;
+}
+
+
+.orderTb3 {
 	margin-left: auto;
 	margin-right: auto;
 	margin-bottom: 20px;
@@ -73,6 +84,6 @@
 
 .showOrderlist{
 	
-	margin-top: 100px;
+	margin-top: 50px;
 	
 }

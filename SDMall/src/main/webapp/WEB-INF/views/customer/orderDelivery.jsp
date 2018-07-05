@@ -16,7 +16,7 @@
 		<div>
 			<table class="orderTb0">
 				<tr>
-					<td align="justify">
+					<td>
 						<h2>주문/배송 조회</h2>
 					</td>
 				</tr>
@@ -44,14 +44,14 @@
 
 	<div class="showOrderlist">
 		<c:forEach var="list" items="${orderList }">
-			<div>
-				<table>
+
+				<table class="orderTb2">
 					<tr>
 						<td class="orderTd1">주문번호 : ${list.sd_delivery_pno }</td>
 					</tr>
 					<tr>
 						<td>
-							<table border="1" class="orderTb2">
+							<table class="orderTb3">
 								<tr>
 									<td class="orderTd2" colspan="2" rowspan="5"><img style="max-width: 100px;"
 										src="upload/${list.gd_imgss }"></td>
@@ -88,7 +88,7 @@
 						</td>
 					</tr>
 				</table>
-			</div>
+
 		</c:forEach>
 	</div>
 </body>
