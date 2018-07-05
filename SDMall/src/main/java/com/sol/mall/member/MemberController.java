@@ -28,20 +28,17 @@ public class MemberController {
 
 	@Autowired
 	private GoodsDAO gdsDAO;
-
+	
 	@Autowired
 	private ShoppingBagDAO sbDAO;
 
-	// 로그인 페이지 가기
-
+	//로그인 페이지 가기
 	@RequestMapping(value = "/member.loginPage", method = RequestMethod.GET)
 	public String goLoginPage(HttpServletRequest req, HttpServletResponse res) {
 		cDAO.getAllCategory(req, res);// 메인 카테고리 호출 메소드
 		if (mDAO.csmLoginCheck(req, res)) {// 로그인체크
 			sbDAO.showCartItems(req, res);// 장바구니 상품수량 반환
 		}
-
-		cDAO.getAllCategory(req, res);
 
 		req.setAttribute("contentPage", "member/loginArea.jsp");
 		return "main";

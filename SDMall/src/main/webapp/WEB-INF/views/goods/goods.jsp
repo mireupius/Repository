@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -29,10 +30,29 @@
 				<!-- Description -->
 				<div class="col-lg-5 order-3">
 					<div class="product_description">
-						<div class="product_category">Laptops</div>
+						<div class="product_category">
+						<c:forEach var="goodsCategory" items="${allCategory}">
+							<c:if test="${goodsDtl1.gd_clfl==goodsCategory.ct_no }">
+								<a href="shop.Category?ct_no=${goodsDtl1.gd_clfl }">${goodsCategory.ct_clfname }</a>
+							</c:if>
+							<c:if test="${goodsDtl1.gd_clfm==goodsCategory.ct_no }">
+								 > <a href="shop.Category?ct_no=${goodsDtl1.gd_clfm }">${goodsCategory.ct_clfname }</a>
+							</c:if>
+							<c:if test="${goodsDtl1.gd_clfs==goodsCategory.ct_no }">
+								 > <a href="shop.Category?ct_no=${goodsDtl1.gd_clfs }">${goodsCategory.ct_clfname }</a>
+							</c:if>
+						</c:forEach>
+						</div>
 						<div class="product_name">${goodsDtl1.gd_name }</div>
 						<div class="product_price">${goodsDtl1.gd_price }</div>
 						<div class="rating_r rating_r_4 product_rating"><i></i><i></i><i></i><i></i><i></i></div>
+						<div class="product_text">
+						<c:set var="dlvchrg" value="${fn:split(goodsDtl1.gd_dlvchrg, ',') }"/>
+							<p>배송비 <c:out value=" ${dlvchrg[0]}"/>원</p>
+							<c:if test="${dlvchrg[1]>0}">
+							<p><c:out value=" ${dlvchrg[1]}"/>원 이상 구매시 배송비 무료</p>
+							</c:if>
+						</div>
 						<div class="order_info d-flex flex-row">
 <!-- 							장바구니 form -->
 							<form action="cart.add" method="get">
@@ -55,34 +75,33 @@
 										</label>
 								</div>
 								<div id="view_total_price" class="product_price">${goodsDtl1.gd_price }원</div>
-								<div class="button_container">
-								<input name="sb_gdno" value="${goodsDtl1.gd_no }">
-									<button class="button cart_button">Add to Cart</button>
+							<div class="button_container">
+								<input type="hidden" name="sb_gdno" value="${goodsDtl1.gd_no }">
+								<button class="button cart_button">Add to Cart</button>
 <!-- 									<div class="product_fav"><i class="fas fa-heart"></i></div> -->
-								</div>
 							</form>
 							
 <!-- 							즉시구매 form -->
 							<form action="buying.go" method="post">
-							<input name="sd_imageFileName" value="${goodsDtl1.gd_imgs }">
-							<input name="sd_delivery_cost" value="${goodsDtl1.gd_dlvchrg }">
-							<input name="sd_product_name" value="${goodsDtl1.gd_name }">
-							<input id="send_option_name" name="sd_option_info">
-							<input id="send_quantity" name="sd_amount">
-							<input id="send_option_price" name="sd_option_price">
-							<input id="send_price" name="sd_product_price" value="${goodsDtl1.gd_price }">
-							<input name="sd_product_sellprice" value="${goodsDtl1.gd_csmprice }">
-							<input id = "send_total_price" name="sd_total_price">
-							<input name="sd_out_area" value="${goodsDtl1.gd_outarea }">
-							<input name="sd_product_no" value="${goodsDtl1.gd_no }">
-							<input name="sd_seller_id" value="${goodsDtl1.gd_sellerid }">
-							<button type="submit" class="button cart_button">구매</button>
+								<input type="hidden" name="sd_imageFileName" value="${goodsDtl1.gd_imgs }">
+								<input type="hidden" name="sd_delivery_cost" value="${goodsDtl1.gd_dlvchrg }">
+								<input type="hidden" name="sd_product_name" value="${goodsDtl1.gd_name }">
+								<input type="hidden" id="send_option_name" name="sd_option_info">
+								<input type="hidden" id="send_quantity" name="sd_amount">
+								<input type="hidden" id="send_option_price" name="sd_option_price">
+								<input type="hidden" id="send_price" name="sd_product_price" value="${goodsDtl1.gd_price }">
+								<input type="hidden" name="sd_product_sellprice" value="${goodsDtl1.gd_csmprice }">
+								<input type="hidden" id = "send_total_price" name="sd_total_price">
+								<input type="hidden" name="sd_out_area" value="${goodsDtl1.gd_outarea }">
+								<input type="hidden" name="sd_product_no" value="${goodsDtl1.gd_no }">
+								<input type="hidden" name="sd_seller_id" value="${goodsDtl1.gd_sellerid }">
+								<button class="button cart_button">구매</button>
 							</form>
 							
+							</div>
 						</div>
 					</div>
 				</div>
-
 			</div>
 		</div>
 	</div>
