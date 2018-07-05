@@ -164,11 +164,12 @@ public class MyPageDAO {
 		Customer cc = (Customer) req.getSession().getAttribute("loginCustomer");
 
 		d.setSd_customer_id(cc.getCsm_id());
+		System.out.println("id"+d.getSd_customer_id());
 
 		List<Delivery> orders = ss.getMapper(MyPageMapper.class).orderListToReview(d);
-
+System.out.println(orders.size());
 		if (cc.getCsm_id().equals(d.getSd_customer_id())) {
-
+			
 			req.setAttribute("orderList", orders);
 		}
 
@@ -194,7 +195,8 @@ public class MyPageDAO {
 		}
 
 	}
-
+	
+	// 리뷰할 상품의 정보 자동입력 될 때 가져오기
 	public void goOrderToReview(Delivery d, HttpServletRequest req, HttpServletResponse res) {
 
 		try {
@@ -364,7 +366,7 @@ public class MyPageDAO {
 				System.out.println("멤버십 등급 변경");
 				System.out.println(totalBuyPrice);
 			} else {
-				System.out.println("멤버십 등급 변경 실패");
+				System.out.println("변경사항 없음");
 
 			}
 

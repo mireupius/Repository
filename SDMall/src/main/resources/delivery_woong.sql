@@ -41,6 +41,8 @@ CREATE TABLE sale_delivery (
 select * from sale_delivery;
 drop table sale_delivery cascade constraint  purge;
 
+update sale_delivery set sd_delivery_state = '배송완료' where sd_delivery_pno = '20180705000002';
+update sale_delivery set sd_claim = 'null' where sd_delivery_pno = '20180705000002';
 /* 샘플데이터 - 에러나면 한줄씩 실행해보세요*/
 
 insert into sale_delivery values('2018052291233613','2018052252351030','aaa',NULL,NULL,NULL,'장희원','junyoung12','장희원','구매확정','신규주문',2500,'2917445931','헤어핀1번','조합형옵션상품','컬러:블랙',2,0,5700,5700,5700,NULL,'010-0000-0002','서울특별시 송파구 오금로32길 5 (송파동, 가락삼익맨숀) 000동000호','010-4717-0039','05675',NULL,'(04306) 서울특별시 용산구 청파로71길  77-77',sysdate,NULL,'신용카드',NULL,NULL, null)

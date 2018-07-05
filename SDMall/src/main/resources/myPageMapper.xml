@@ -72,10 +72,10 @@
 	<select id="orderListToReview"
 		parameterType="com.sol.mall.sale.delivery.Delivery"
 		resultType="com.sol.mall.sale.delivery.Delivery">
-		select sd_delivery_pno, sd_product_name, sd_delivery_state
+		select *
 		from sale_delivery
 		where sd_customer_id = #{sd_customer_id} and sd_delivery_state = '구매확정'
-		and sd_review is null
+		and sd_review = 'N'
 
 	</select>
 	

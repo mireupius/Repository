@@ -142,6 +142,7 @@ public class MyPageController {
 
 
 	}
+	
 	@RequestMapping(value = "/orderList.completeBuy.do", method = RequestMethod.GET)
 	public String completeBuyOrder(Delivery d, HttpServletRequest req, HttpServletResponse res) {
 		
@@ -161,7 +162,8 @@ public class MyPageController {
 		
 		
 	}
-
+	
+	// 리뷰할 주문내역 가져오기
 	@RequestMapping(value = "/customer.myHome.productReview.go", method = RequestMethod.GET)
 	public String getOrderListToReview(Delivery d, HttpServletRequest req, HttpServletResponse res) {
 

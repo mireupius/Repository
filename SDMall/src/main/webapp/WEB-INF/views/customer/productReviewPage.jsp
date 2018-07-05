@@ -21,22 +21,22 @@
 		</table>
 	</div>
 
-	<c:forEach var="list" items="${orderList }">
+	<c:forEach var="aa" items="${orderList }">
 		<div>
 			<table class="reviewOrder">
 				<tr>
 					<td class="reviewTd1">상품주문번호</td>
-					<td class="reviewTd2">${list.sd_delivery_pno }</td>
+					<td class="reviewTd2">${aa.sd_delivery_pno }</td>
 				</tr>
 				<tr>
 					<td class="reviewTd1">상품명</td>
-					<td class="reviewTd2">${list.sd_product_name }</td>
+					<td class="reviewTd2">${aa.sd_product_name }</td>
 				</tr>
 				<tr>
 					<td colspan="2">
 						<div>
 							<button class="reviewBtn" type="button"
-								onclick="goWritingReview(${list.sd_delivery_pno })">상품평작성</button>
+								onclick="goWritingReview(${aa.sd_delivery_pno })">상품평작성</button>
 						</div>
 					</td>
 				</tr>

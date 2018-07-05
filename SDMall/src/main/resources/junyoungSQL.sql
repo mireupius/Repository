@@ -17,9 +17,14 @@ select *
 			 and (sd_customer_id = 'junyoung12' and sd_claim not like '%'||'반품'||'%'))
 		)
 		and gd_no = sd_product_no and sd_customer_id = 'junyoung12'
-		and (sd_order_date between (select add_months(SYSDATE, -6) from dual) and (select SYSDATE from dual))
+		and (sd_order_date between (select add_months(SYSDATE, -6) from dual) and (select SYSDATE from dual));
 
+select * from goods_tb;
 
+select *
+		from sale_delivery
+		where sd_customer_id = 'junyoung12' and sd_delivery_state = '구매확정'
+		and sd_review = 'N';
 
 
 -- 구매자 insert
