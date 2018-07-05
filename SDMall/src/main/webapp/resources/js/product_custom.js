@@ -25,6 +25,7 @@ function opChange(){
 	getOp_price();//옵션가 추출
 	getQuantity();//수량 추출
 	setTotal_price();//총가격 계산
+	calcDlvchrg();//배송비 계산
 }
 
 //총액 계산
@@ -37,6 +38,7 @@ function setTotal_price() {
 	
 	$('#view_total_price').text(price);
 	$('#send_total_price').val(price);
+	return price;
 }
 
 //선택된 옵션명을 반환하는 함수
@@ -86,7 +88,16 @@ function overQuantity(){
 	}
 }
 
-
+//배송비 계산
+function calcDlvchrg() {
+	var chrg = $('#chrg').val();
+	var terms= $('#terms').val();
+	if(terms>0){
+		chrg = setTotal_price()>terms?0:chrg;
+	}
+	$('#send_dlvchrg').val(chrg);
+	return chrg;
+}
 
 $(document).ready(function()
 {

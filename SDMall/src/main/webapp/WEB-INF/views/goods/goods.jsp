@@ -50,7 +50,9 @@
 						<c:set var="dlvchrg" value="${fn:split(goodsDtl1.gd_dlvchrg, ',') }"/>
 							<p>배송비 <c:out value=" ${dlvchrg[0]}"/>원</p>
 							<c:if test="${dlvchrg[1]>0}">
-							<p><c:out value=" ${dlvchrg[1]}"/>원 이상 구매시 배송비 무료</p>
+							<p><c:out value=" ${dlvchrg[1]}"/>원 이상 구매시 무료 배송</p>
+							<input type="hidden" id="terms" value="${dlvchrg[1]}"> 
+							<input type="hidden" id="chrg" value="${dlvchrg[0]}"> 
 							</c:if>
 						</div>
 						<div class="order_info d-flex flex-row">
@@ -84,7 +86,7 @@
 <!-- 							즉시구매 form -->
 							<form action="buying.go" method="post">
 								<input type="hidden" name="sd_imageFileName" value="${goodsDtl1.gd_imgs }">
-								<input type="hidden" name="sd_delivery_cost" value="${goodsDtl1.gd_dlvchrg }">
+								<input type="hidden" id="send_dlvchrg" name="sd_delivery_cost" value="${goodsDtl1.gd_dlvchrg }">
 								<input type="hidden" name="sd_product_name" value="${goodsDtl1.gd_name }">
 								<input type="hidden" id="send_option_name" name="sd_option_info">
 								<input type="hidden" id="send_quantity" name="sd_amount">
