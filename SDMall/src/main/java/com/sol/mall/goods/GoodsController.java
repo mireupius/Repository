@@ -41,7 +41,7 @@ public class GoodsController {
 		if(mDAO.slLoginCheck(request, response)) {
 			
 			Date now = new Date();
-			
+			 
 			System.out.println("=now==>"+ now);
 			
 			// 이중 작동 방지
