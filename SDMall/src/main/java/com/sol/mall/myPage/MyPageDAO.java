@@ -124,7 +124,7 @@ public class MyPageDAO {
 
 			d.setSd_customer_id(cc.getCsm_id());
 
-			if (ss.getMapper(MyPageMapper.class).returnOrder(d) == 1) {
+			if (ss.getMapper(MyPageMapper.class).completeBuyOrder(d) == 1) {
 
 				System.out.println("구매확정 성공");
 

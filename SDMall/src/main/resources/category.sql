@@ -12,7 +12,13 @@ START WITH 100
 CYCLE 
 NOCACHE;/*카테고리 sequence*/
 
+update sale_delivery
+		set sd_claim = NULL
+		where sd_customer_id = 'junyoung12'
 
+select sum(sd_total_price)
+		from sale_delivery;
+		where sd_delivery_state = '구매확정' and sd_customer_id = 'junyoung12';
 
 insert into category_tb values(to_char(category_sq.nextval),'패션의류',1,null);
 insert into category_tb values(to_char(category_sq.nextval),'잡화/보석',1,null);

@@ -68,7 +68,7 @@
 							<td>${list.sd_total_price }</td>
 						</tr>
 						<tr>
-							<td class="orderTd4" align="right" colspan="2">${list.sd_delivery_state }</td>
+							<td class="orderTd4" align="right" colspan="2">${list.sd_claim }</td>
 						</tr>
 					</table>
 				</td>
