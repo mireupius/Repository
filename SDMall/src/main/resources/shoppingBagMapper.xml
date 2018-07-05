@@ -4,15 +4,22 @@
 
 
 	<!-- 장바구니추가 -->
-	<insert id="addToCart" parameterType="com.sol.mall.shoppingbag.ShoppingBag">
+
+	<insert id="addToCart"
+		parameterType="com.sol.mall.shoppingbag.ShoppingBag">
+
 
 		insert into SHOPPINGBAG_TB values(
 		to_char(SHOPPINGBAG_Seq.nextval),#{sb_csmid},#{sb_gdno},#{sb_opno},#{sb_quantity}
 		)
 	</insert>
 
+
 	<!-- 장바구니보여주기 -->
-	<select id="showCartItems" parameterType="com.sol.mall.shoppingbag.ShoppingBag" resultType="com.sol.mall.shoppingbag.ShoppingBagItem">
+	<select id="showCartItems"
+		parameterType="com.sol.mall.shoppingbag.ShoppingBag"
+		resultType="com.sol.mall.shoppingbag.ShoppingBagItem">
+
 		select sb_no, gd_name, gd_imgm, op_name, sb_quantity,
 		op_price, gd_price, gd_dlvchrg, gd_outarea, gd_csmprice, gd_sellerid
 

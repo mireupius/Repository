@@ -21,6 +21,7 @@ import org.springframework.stereotype.Service;
 
 import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
+import com.sol.mall.member.Seller;
 import com.sol.mall.sale.delivery.Delivery;
 import com.sol.mall.sale.delivery.DeliveryMapper;
 
@@ -104,6 +105,9 @@ public class ExcelDAO {
 		String excelName = "excel.xlsx";
 		Map<String, String> headerList = new HashMap<String, String>();
 		Map<String, String> list = new HashMap<String, String>();
+		
+		Seller s = (Seller) req.getSession().getAttribute("loginSeller");
+		ds.setSd_seller_id(s.getSl_id());
 		List<Delivery> d = ss.getMapper(DeliveryMapper.class).getCheckDeliverys(ds);
 		String[] titles = { "상품주문번호", "주문번호", "택배사", "구매자명", "구매자ID", "수취인명", "주문상태", "주문세부상태", "배송비", "상품번호", "상품명",
 				"옵션종류", "옵션정보", "수량(구입수량)", "옵션가격", "상품가격", "판매가격", "상품별 총 주문금액", "발주확인일", "수취인연락처1", "배송지", "구매자연락처",

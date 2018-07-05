@@ -102,8 +102,16 @@ public class ShoppingBagItem {
 		this.gd_price = gd_price;
 	}
 
-	public String getGd_dlvchrg() {
-		return gd_dlvchrg;
+	public BigDecimal getGd_dlvchrg() {
+		BigDecimal dlvchrg =new BigDecimal(gd_dlvchrg.split(",")[0]);//배송비
+		BigDecimal terms =new BigDecimal(gd_dlvchrg.split(",")[1]);//조건
+		BigDecimal zero =new BigDecimal("0");//0
+		
+		if (terms.compareTo(zero)==0) {//조건이 0이면 
+			return dlvchrg;//배송비 적용
+		}else {
+			return terms.compareTo(sb_quantity.multiply(gd_price.add(op_price)))>0?dlvchrg:zero;//조건부 배송비 적용
+		}
 	}
 
 	public void setGd_dlvchrg(String gd_dlvchrg) {

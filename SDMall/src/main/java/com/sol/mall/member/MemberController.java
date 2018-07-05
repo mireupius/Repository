@@ -28,12 +28,11 @@ public class MemberController {
 
 	@Autowired
 	private GoodsDAO gdsDAO;
-
+	
 	@Autowired
 	private ShoppingBagDAO sbDAO;
 
-	// 로그인 페이지 가기
-
+	//로그인 페이지 가기
 	@RequestMapping(value = "/member.loginPage", method = RequestMethod.GET)
 	public String goLoginPage(HttpServletRequest req, HttpServletResponse res) {
 		cDAO.getAllCategory(req, res);// 메인 카테고리 호출 메소드
@@ -128,9 +127,10 @@ public class MemberController {
 	@RequestMapping(value = "/customer.myHome.go", method = RequestMethod.GET)
 	public String goMyhome(Membership m, HttpServletRequest req, HttpServletResponse res) {
 
+		cDAO.getAllCategory(req, res);
 		if (mDAO.csmLoginCheck2(req, res)) {
 
-			cDAO.getAllCategory(req, res);
+			sbDAO.showCartItems(req, res);// 장바구니 상품수량 반환
 			mpDAO.getMembership(m, req, res);
 
 			req.setAttribute("contentPage", "customer/customerMyPage2.jsp");
@@ -138,7 +138,7 @@ public class MemberController {
 
 			return "main";
 		}
-		cDAO.getAllCategory(req, res);
+		
 		req.setAttribute("contentPage", "member/loginArea.jsp");
 		return "main";
 
@@ -191,13 +191,14 @@ public class MemberController {
 	// 구매자 회원정보 수정하러가기
 	@RequestMapping(value = "/customer.update.go", method = RequestMethod.GET)
 	public String goUpdateCustomer(HttpServletRequest req, HttpServletResponse res) {
+		cDAO.getAllCategory(req, res);
 
 		if (mDAO.csmLoginCheck(req, res)) {
 
 			return "member/updateCSMPage";
 
 		} else {
-			cDAO.getAllCategory(req, res);
+			
 			req.setAttribute("contentPage", "member/loginArea.jsp");
 			return "main";
 		}
@@ -206,20 +207,24 @@ public class MemberController {
 
 	// 구매자 회원정보 수정하기
 	@RequestMapping(value = "/customer.update.do", method = RequestMethod.POST)
+
 	public String doUpdateCustomer(Customer c, Membership m, HttpServletRequest req, HttpServletResponse res) {
 
-		if (mDAO.csmLoginCheck(req, res)) {
+		cDAO.getAllCategory(req, res);
 
+		if (mDAO.csmLoginCheck(req, res)) {
+			
+			sbDAO.showCartItems(req, res);// 장바구니 상품수량 반환
 			mDAO.updateCustomer(c, req, res);
-			cDAO.getAllCategory(req, res);
 			mpDAO.getMembership(m, req, res);
 
 			req.setAttribute("contentPage", "customer/customerMyPage2.jsp");
 			req.setAttribute("myPageContentArea", "memberShip.jsp");
 			return "main";
 
+
 		} else {
-			cDAO.getAllCategory(req, res);
+			
 			req.setAttribute("contentPage", "member/loginArea.jsp");
 			return "main";
 		}
@@ -287,7 +292,9 @@ public class MemberController {
 
 		}
 		cDAO.getAllCategory(req, res);
+
 		req.setAttribute("contentPage", "member/withdrawSuccess.jsp");
+
 		return "main";
 
 	}
@@ -301,6 +308,7 @@ public class MemberController {
 			return "member/withdrawSLPage";
 
 		} else {
+
 			cDAO.getAllCategory(req, res);
 			req.setAttribute("contentPage", "member/loginArea.jsp");
 			return "main";
