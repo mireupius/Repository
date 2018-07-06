@@ -42,13 +42,6 @@ public class GoodsController {
 			
 			// ↓↓↓↓↓↓ 이중 submit 작동 방지용 세션 ↓↓↓↓↓↓
 			Date now = new Date();
-<<<<<<< HEAD
-=======
-			 
-			System.out.println("=now==>"+ now);
-			
-			// 이중 작동 방지
->>>>>>> refs/remotes/origin/yunh001
 			request.getSession().setAttribute("submitStop", now);
 			// ↑↑↑↑↑↑ 이중 submit 작동 방지용 세션 ↑↑↑↑↑↑
 			
