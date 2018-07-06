@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -23,46 +23,23 @@
 	<c:forEach var="list" items="${reviewList }">
 
 		<div>
-			<table class="reviewTb0">
-				<tr>
-					<td align="justify">
-						<h2>SD Mall Q&A</h2>
-					</td>
-				</tr>
-			</table>
-		</div>
-		<div>
 			<table class="reviewTb1">
 				<tr>
 					<td align="center">
 						<table class="reviewTb2">
 							<tr>
 								<td class="reviewdTd1">상품명</td>
-								<td class="reviewdTd2">
-									<div>
-										<input class="writeInput" value="${list.pr_gdName }">
-									</div>
-								</td>
-							</tr>
-							<tr>
 								<td class="reviewdTd1">내용</td>
-								<td class="reviewdTd2">
-									<div>
-										<textarea class="reviewTextArea"> ${list.pr_comment }</textarea>
-									</div>
-								</td>
-							</tr>
-							<tr>
 								<td class="reviewdTd1">별점</td>
-								<td class="reviewdTd2">${list.pr_star }점</td>
+								<td class="reviewdTd1">작성일</td>
 							</tr>
 							<tr>
-								<td class="reviewdTd1">작성일</td>
+								<td class="reviewdTd2">${list.pr_gdName }</td>
 								<td class="reviewdTd2">
-									<div>
-										<fmt:formatDate value="${list.pr_regDate }" dateStyle="long" />
-									</div>
+									 ${list.pr_comment }
 								</td>
+								<td class="reviewdTd2">${list.pr_star }점</td>
+								<td class="reviewdTd2">${list.pr_regDate }</td>
 							</tr>
 						</table>
 					</td>

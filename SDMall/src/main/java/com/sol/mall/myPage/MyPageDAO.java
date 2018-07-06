@@ -35,11 +35,8 @@ public class MyPageDAO {
 		HashMap<String, Object> map = new HashMap<>();
 		map.put("searchOrder", so);
 		map.put("searchMonth", sm.getSearchMonth());
-		System.out.println(sm.getSearchMonth());
 		
 		List<SearchOrder> orders = ss.getMapper(MyPageMapper.class).searchOrderList(map);
-
-		System.out.println(orders.size()+"오더리스트");
 
 		if (cc.getCsm_id().equals(so.getSd_customer_id())) {
 
@@ -251,9 +248,9 @@ System.out.println(orders.size());
 		try {
 
 			Date today = new Date();
-			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-			pr.setPr_regDate(sdf.parse(sdf.format(today)));
-
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+			pr.setPr_regDate(sdf.format(today));
+			
 			if (ss.getMapper(MyPageMapper.class).writeProductReview(pr) == 1
 					&& ss.getMapper(MyPageMapper.class).changeReviewState(pr) == 1) {
 
@@ -283,6 +280,7 @@ System.out.println(orders.size());
 			req.setAttribute("reviewList", reviews);
 
 		} catch (Exception e) {
+			e.printStackTrace();
 			System.out.println("상품평 조회 실패");
 
 		}

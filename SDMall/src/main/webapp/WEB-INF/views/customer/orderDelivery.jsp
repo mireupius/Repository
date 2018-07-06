@@ -44,55 +44,41 @@
 
 	<div class="showOrderlist">
 		<c:forEach var="list" items="${orderList }">
-
-				<table class="orderTb2">
-					<tr>
-						<td class="orderTd1">주문번호 : ${list.sd_delivery_pno }</td>
-					</tr>
-					<tr>
-						<td>
-							<table class="orderTb3">
-								<tr>
-									<td class="orderTd2" colspan="2" rowspan="5"><img style="max-width: 100px;"
-										src="upload/${list.gd_imgss }"></td>
-									
-								</tr>
-								<tr>
-									<td class="orderTd3">상품명</td>
-									<td>${list.sd_product_name }</td>
-								</tr>
-								<tr>
-									<td class="orderTd3">옵션</td>
-									<td>수량 ${list.sd_amount } | ${list.sd_option_info }</td>
-								</tr>
-								<tr>
-									<td class="orderTd3">가격</td>
-									<td>${list.sd_total_price }</td>
-								</tr>
-								<tr>
-									<td class="orderTd4" align="right" colspan="2">${list.sd_delivery_state }</td>
-								</tr>
-							</table>
-						</td>
-					</tr>
-					<tr>
-						<td>
-							<button class="orderBtn" type="button"
-								onclick="goCancelOrder(${list.sd_delivery_pno });">주문취소</button>
-							<button class="orderBtn" type="button"
-								onclick="goExchangeOrder(${list.sd_delivery_pno });">교환신청</button>
-							<button class="orderBtn" type="button"
-								onclick="goReturnOrder(${list.sd_delivery_pno });">반품신청</button>
-							<button class="orderBtn" type="button"
-								onclick="goQuestionSeller(${list.sd_delivery_pno });">판매자문의</button>
-							<button class="orderBtn" type="button"
-								onclick="goCompleteDelivery(${list.sd_delivery_pno });">수취확인</button>
-							<button class="orderBtn" type="button"
-								onclick="goCompleteBuy(${list.sd_delivery_pno });">구매확정</button>
-						</td>
-					</tr>
-				</table>
-
+			<table class="orderTb2">
+				<tr>
+					<td class="orderTd2" rowspan="5"><img
+					 src="upload/${list.gd_imgss }"></td>
+					<td class="orderTd1">주문번호 : ${list.sd_delivery_pno }</td>
+				</tr>
+				<tr>
+					<td colspan="2" class="orderTd1">상품명 : ${list.sd_product_name }</td>
+				</tr>
+				<tr>
+					<td colspan="2" class="orderTd1">옵션 : 수량 ${list.sd_amount } | ${list.sd_option_info }</td>
+				</tr>
+				<tr>
+					<td colspan="2" class="orderTd1">가격 : ${list.sd_total_price }</td>
+				</tr>
+				<tr>
+					<td colspan="2" class="orderTd1">${list.sd_delivery_state }</td>
+				</tr>
+				<tr>
+				<td colspan="2" class="orderTd2" colspan="5">
+					<button class="orderBtn" type="button"
+						onclick="goCancelOrder(${list.sd_delivery_pno });">주문취소</button>
+					<button class="orderBtn" type="button"
+						onclick="goExchangeOrder(${list.sd_delivery_pno });">교환신청</button>
+					<button class="orderBtn" type="button"
+						onclick="goReturnOrder(${list.sd_delivery_pno });">반품신청</button>
+					<button class="orderBtn" type="button"
+						onclick="goQuestionSeller(${list.sd_delivery_pno });">판매자문의</button>
+					<button class="orderBtn" type="button"
+						onclick="goCompleteDelivery(${list.sd_delivery_pno });">수취확인</button>
+					<button class="orderBtn" type="button"
+						onclick="goCompleteBuy(${list.sd_delivery_pno });">구매확정</button>
+				</td>
+			</tr>
+			</table>
 		</c:forEach>
 	</div>
 </body>
