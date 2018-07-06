@@ -1,3 +1,4 @@
+// 판매자 회원가입 Event처리
 function connectSLRegisterCheckEvent() {
 
 		var idField = document.regSLForm.sl_id;

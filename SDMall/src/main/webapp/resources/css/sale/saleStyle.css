@@ -44,3 +44,14 @@
 #deliveryTable {
 	margin: 0px;
 }
+
+#qnaTable th {
+	text-align: center;
+}
+
+#anwser {
+	resize: none;
+	overflow: auto;
+	height: 90px;
+	width: 100%;
+}

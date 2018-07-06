@@ -5,6 +5,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
+<script type="text/javascript" src="resources/js/go.js"></script>
 <script type="text/javascript" src="resources/js/validCheck.js"></script>
 <link rel="stylesheet" href="resources/junyoung/member.css">
 <script type="text/javascript" src="resources/js/jquery.js"></script>
@@ -163,6 +164,9 @@
 			<table class="memberTb2">
 				<tr>
 					<td>
+						<div>
+							<button onclick="goSellerPage();" class="regBtn" type="button">이전 페이지로 돌아가기</button>
+						</div>
 						<div>
 							<input class="regBtn" type="submit" value="회원정보변경">
 						</div>

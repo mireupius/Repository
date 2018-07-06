@@ -1,3 +1,4 @@
+// 구매자 회원등록 event
 function connectCSMRegisterCheckEvent() {
 
 		var idField = document.regCSMForm.csm_id;

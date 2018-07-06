@@ -10,6 +10,8 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.sol.mall.member.Seller;
+
 @Service
 public class DeliveryDAO {
 
@@ -51,40 +53,49 @@ public class DeliveryDAO {
 
 	// ------------------- 발주주문 -----------------------------
 
-	public List<Delivery> getAllOrder(HttpServletRequest req, HttpServletResponse res) {
-
+	public List<Delivery> getAllOrder(HttpServletRequest req, HttpServletResponse res, Delivery d) {
+		Seller s = (Seller) req.getSession().getAttribute("loginSeller");
+		d.setSd_seller_id(s.getSl_id());
 		req.setAttribute("now", "sale.delivery.go");
-		return ss.getMapper(DeliveryMapper.class).getAllDelivery();
+		return ss.getMapper(DeliveryMapper.class).getAllDelivery(d);
 	}
 
-	public List<Delivery> getNewDeals(HttpServletRequest req, HttpServletResponse res) {
+	public List<Delivery> getNewDeals(HttpServletRequest req, HttpServletResponse res, Delivery d) {
+		Seller s = (Seller) req.getSession().getAttribute("loginSeller");
+		d.setSd_seller_id(s.getSl_id());
 		req.setAttribute("now", "sale.selNewDeals.go");
-		return ss.getMapper(DeliveryMapper.class).getNewDeliverys();
+		return ss.getMapper(DeliveryMapper.class).getNewDeliverys(d);
 	}
 
-	public List<Delivery> getCheckDeals(HttpServletRequest req, HttpServletResponse res) {
+	public List<Delivery> getCheckDeals(HttpServletRequest req, HttpServletResponse res, Delivery d) {
+		Seller s = (Seller) req.getSession().getAttribute("loginSeller");
+		d.setSd_seller_id(s.getSl_id());
 		req.setAttribute("now", "sale.selCheckDeals.go");
-		return ss.getMapper(DeliveryMapper.class).getCheckDeliverys();
+		return ss.getMapper(DeliveryMapper.class).getCheckDeliverys(d);
 	}
 
-	public void getAllDeliveryNum(HttpServletRequest req, HttpServletResponse res) {
-		int adn = ss.getMapper(DeliveryMapper.class).getAllDeliveryNum();
+	public void getAllDeliveryNum(HttpServletRequest req, HttpServletResponse res, Delivery d) {
+		Seller s = (Seller) req.getSession().getAttribute("loginSeller");
+		d.setSd_seller_id(s.getSl_id());
+		int adn = ss.getMapper(DeliveryMapper.class).getAllDeliveryNum(d);
 		req.setAttribute("AllDeliveryNum", adn);
 	}
 
-	public void getNewDeliveryNum(HttpServletRequest req, HttpServletResponse res) {
-
-		int ndn = ss.getMapper(DeliveryMapper.class).getNewDeliveryNum();
+	public void getNewDeliveryNum(HttpServletRequest req, HttpServletResponse res, Delivery d) {
+		Seller s = (Seller) req.getSession().getAttribute("loginSeller");
+		d.setSd_seller_id(s.getSl_id());
+		int ndn = ss.getMapper(DeliveryMapper.class).getNewDeliveryNum(d);
 		req.setAttribute("NewDeliveryNum", ndn);
 	}
 
-	public void getCheckDeliveryNum(HttpServletRequest req, HttpServletResponse res) {
-
-		int cdn = ss.getMapper(DeliveryMapper.class).getCheckDeliveryNum();
+	public void getCheckDeliveryNum(HttpServletRequest req, HttpServletResponse res, Delivery d) {
+		Seller s = (Seller) req.getSession().getAttribute("loginSeller");
+		d.setSd_seller_id(s.getSl_id());
+		int cdn = ss.getMapper(DeliveryMapper.class).getCheckDeliveryNum(d);
 		req.setAttribute("CheckDeliveryNum", cdn);
 	}
 
-	public void deliveryCheck(HttpServletRequest req, HttpServletResponse res) {
+	public void deliveryCheck(HttpServletRequest req, HttpServletResponse res, Delivery d) {
 		String str = req.getParameter("array");
 		String[] array = str.split(",");
 		d = new Delivery();
@@ -99,14 +110,13 @@ public class DeliveryDAO {
 		}
 	}
 
-	public void deliverySend(HttpServletRequest req, HttpServletResponse res) {
+	public void deliverySend(HttpServletRequest req, HttpServletResponse res, Delivery d) {
 		String send_Array = req.getParameter("send_Array");
 		String cs_sendArray = req.getParameter("cs_sendArray");
 		String no_sendArray = req.getParameter("no_sendArray");
 		String[] sendArray = send_Array.split(",");
 		String[] csSendArray = cs_sendArray.split(",");
 		String[] noSendArray = no_sendArray.split(",");
-		d = new Delivery();
 
 		int success = 0;
 		for (int i = 0; i < sendArray.length; i++) {
@@ -123,77 +133,113 @@ public class DeliveryDAO {
 
 	// ------------------- 배송 -----------------------------
 
-	public List<Delivery> getSendingDeliverys(HttpServletRequest req, HttpServletResponse res) {
+	public List<Delivery> getSendingDeliverys(HttpServletRequest req, HttpServletResponse res, Delivery d) {
+		
+		Seller s = (Seller) req.getSession().getAttribute("loginSeller");
+		d.setSd_seller_id(s.getSl_id());
 		req.setAttribute("now", "sale.sendingDelivery.go");
-		return ss.getMapper(DeliveryMapper.class).getSendingDeliverys();
+		return ss.getMapper(DeliveryMapper.class).getSendingDeliverys(d);
 
 	}
 
-	public List<Delivery> getSendDoneDeliverys(HttpServletRequest req, HttpServletResponse res) {
+	public List<Delivery> getSendDoneDeliverys(HttpServletRequest req, HttpServletResponse res, Delivery d) {
+		
+		Seller s = (Seller) req.getSession().getAttribute("loginSeller");
+		d.setSd_seller_id(s.getSl_id());
 		req.setAttribute("now", "sale.sendDoneDelivery.go");
-		return ss.getMapper(DeliveryMapper.class).getSendDoneDeliverys();
+		return ss.getMapper(DeliveryMapper.class).getSendDoneDeliverys(d);
 	}
 
-	public void getSendingDeliverysNum(HttpServletRequest req, HttpServletResponse res) {
-		int num = ss.getMapper(DeliveryMapper.class).getSendingDeliverysNum();
+	public void getSendingDeliverysNum(HttpServletRequest req, HttpServletResponse res, Delivery d) {
+		
+		Seller s = (Seller) req.getSession().getAttribute("loginSeller");
+		d.setSd_seller_id(s.getSl_id());
+		int num = ss.getMapper(DeliveryMapper.class).getSendingDeliverysNum(d);
 		req.setAttribute("sendingDeliveryNum", num);
 
 	}
 
-	public void getSendDoneDeliveryNum(HttpServletRequest req, HttpServletResponse res) {
-		int num = ss.getMapper(DeliveryMapper.class).getSendDoneDeliveryNum();
+	public void getSendDoneDeliveryNum(HttpServletRequest req, HttpServletResponse res, Delivery d) {
+		
+		Seller s = (Seller) req.getSession().getAttribute("loginSeller");
+		d.setSd_seller_id(s.getSl_id());
+		int num = ss.getMapper(DeliveryMapper.class).getSendDoneDeliveryNum(d);
 		req.setAttribute("sendDoneDeliveryNum", num);
 
 	}
 
 	// ------------------- 구매확정 -----------------------------
 
-	public List<Delivery> getConfirmDelivery(HttpServletRequest req, HttpServletResponse res) {
+	public List<Delivery> getConfirmDelivery(HttpServletRequest req, HttpServletResponse res, Delivery d) {
+		
+		Seller s = (Seller) req.getSession().getAttribute("loginSeller");
+		d.setSd_seller_id(s.getSl_id());
 		req.setAttribute("now", "sale.confirmDelivery.go");
-		return ss.getMapper(DeliveryMapper.class).getConfirmDelivery();
+		return ss.getMapper(DeliveryMapper.class).getConfirmDelivery(d);
 	}
 
-	public void getConfirmDeliveryNum(HttpServletRequest req, HttpServletResponse res) {
-		int num = ss.getMapper(DeliveryMapper.class).getConfirmDeliveryNum();
+	public void getConfirmDeliveryNum(HttpServletRequest req, HttpServletResponse res, Delivery d) {
+		
+		Seller s = (Seller) req.getSession().getAttribute("loginSeller");
+		d.setSd_seller_id(s.getSl_id());
+		int num = ss.getMapper(DeliveryMapper.class).getConfirmDeliveryNum(d);
 		req.setAttribute("confirmDeliveryNum", num);
 
 	}
 
 	// ------------------- 취소관리 -----------------------------
 
-	public List<Delivery> getCancelDelivery(HttpServletRequest req, HttpServletResponse res) {
+	public List<Delivery> getCancelDelivery(HttpServletRequest req, HttpServletResponse res, Delivery d) {
+		
+		Seller s = (Seller) req.getSession().getAttribute("loginSeller");
+		d.setSd_seller_id(s.getSl_id());
 		req.setAttribute("now", "sale.cancelDelivery.go");
-		return ss.getMapper(DeliveryMapper.class).getCancelDelivery();
+		return ss.getMapper(DeliveryMapper.class).getCancelDelivery(d);
 	}
 
-	public void getCancelDeliveryNum(HttpServletRequest req, HttpServletResponse res) {
-		int num = ss.getMapper(DeliveryMapper.class).getCancelDeliveryNum();
+	public void getCancelDeliveryNum(HttpServletRequest req, HttpServletResponse res, Delivery d) {
+		
+		Seller s = (Seller) req.getSession().getAttribute("loginSeller");
+		d.setSd_seller_id(s.getSl_id());
+		int num = ss.getMapper(DeliveryMapper.class).getCancelDeliveryNum(d);
 		req.setAttribute("cancelDeliveryNum", num);
 
 	}
 
 	// ------------------- 반품관리 -----------------------------
 
-	public List<Delivery> getReturnDelivery(HttpServletRequest req, HttpServletResponse res) {
+	public List<Delivery> getReturnDelivery(HttpServletRequest req, HttpServletResponse res, Delivery d) {
+		
+		Seller s = (Seller) req.getSession().getAttribute("loginSeller");
+		d.setSd_seller_id(s.getSl_id());
 		req.setAttribute("now", "sale.returnDelivery.go");
-		return ss.getMapper(DeliveryMapper.class).getReturnDelivery();
+		return ss.getMapper(DeliveryMapper.class).getReturnDelivery(d);
 	}
 
-	public void getReturnDeliveryNum(HttpServletRequest req, HttpServletResponse res) {
-		int num = ss.getMapper(DeliveryMapper.class).getReturnDeliveryNum();
+	public void getReturnDeliveryNum(HttpServletRequest req, HttpServletResponse res, Delivery d) {
+		
+		Seller s = (Seller) req.getSession().getAttribute("loginSeller");
+		d.setSd_seller_id(s.getSl_id());
+		int num = ss.getMapper(DeliveryMapper.class).getReturnDeliveryNum(d);
 		req.setAttribute("returnDeliveryNum", num);
 
 	}
 
 	// ------------------- 교환관리 -----------------------------
 
-	public List<Delivery> getExchangeDelivery(HttpServletRequest req, HttpServletResponse res) {
+	public List<Delivery> getExchangeDelivery(HttpServletRequest req, HttpServletResponse res, Delivery d) {
+		
+		Seller s = (Seller) req.getSession().getAttribute("loginSeller");
+		d.setSd_seller_id(s.getSl_id());
 		req.setAttribute("now", "sale.exchangeDelivery.go");
-		return ss.getMapper(DeliveryMapper.class).getExchangeDelivery();
+		return ss.getMapper(DeliveryMapper.class).getExchangeDelivery(d);
 	}
 
-	public void getExchangeDeliveryNum(HttpServletRequest req, HttpServletResponse res) {
-		int num = ss.getMapper(DeliveryMapper.class).getExchangeDeliveryNum();
+	public void getExchangeDeliveryNum(HttpServletRequest req, HttpServletResponse res, Delivery d) {
+		
+		Seller s = (Seller) req.getSession().getAttribute("loginSeller");
+		d.setSd_seller_id(s.getSl_id());
+		int num = ss.getMapper(DeliveryMapper.class).getExchangeDeliveryNum(d);
 		req.setAttribute("exchangeDeliveryNum", num);
 
 	}

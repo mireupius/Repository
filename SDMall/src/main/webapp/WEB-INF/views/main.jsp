@@ -98,8 +98,12 @@
 								<div class="cart_container d-flex flex-row align-items-center justify-content-end">
 									<div class="cart_content">
 										<div class="cart_icon">
-											<a href="customer.cart.go"><img src="resources/etc/icon-cart.png" alt=""></a>
-											<div class="cart_count"><span>10</span></div>
+											<img src="resources/etc/icon-cart.png" alt="">
+											<c:if test="${sessionScope.loginCustomer != null}">
+												<div class="cart_count">
+												<span>${sbsize }  </span>
+												</div>
+											</c:if>
 										</div>
 										<div class="cart_text"><a href="customer.cart.go">장바구니</a></div>
 									</div>
@@ -316,9 +320,7 @@
 	</div>
 	
 <!-- 	<div class="container"> -->
-<!-- 		<div class="row"> -->
-			
-<!-- 		</div>	 -->
+
 <!-- 	</div> -->
 	
 	<!-- Footer -->

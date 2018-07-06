@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.sol.mall.member.MemberMapper">
+	
+	<!-- 구매자 회원가입 -->
 	<insert id="registerCSM" parameterType="com.sol.mall.member.Customer">
 		insert into customer_reg values(
 			#{csm_id}, #{csm_pw},
@@ -9,6 +11,7 @@
 		)
 	</insert>
 	
+	<!-- 판매자 회원가입 -->
 	<insert id="registerSL" parameterType="com.sol.mall.member.Seller">
 		insert into seller_reg values(
 			#{sl_id}, #{sl_pw},
@@ -17,32 +20,35 @@
 		)
 	</insert>
 	
+	<!-- 모든 구매자 보여주기 -->
 	<select id="getAllCustomer"
 		resultType="com.sol.mall.member.Customer">
 		select * from customer_reg
 	</select>
 	
+	<!-- 구매자 id로 구매자 정보추출 -->
 	<select id="getCustomerById"
 		parameterType="com.sol.mall.member.Customer"
 		resultType="com.sol.mall.member.Customer">
 		select * from customer_reg
 		where csm_id = #{csm_id}
 	</select>
-	
+	<!-- 구매자 id로 구매자 정보추출2 -->
 	<select id="getCustomerById2"
 		parameterType="com.sol.mall.member.Customer"
 		resultType="com.sol.mall.member.Customer">
 		select * from customer_reg
 		where csm_id = #{csm_id}
 	</select>
-
+	
+	<!-- 판매자 id로 판매자 정보추출 -->
 	<select id="getSellerById"
 		parameterType="com.sol.mall.member.Seller"
 		resultType="com.sol.mall.member.Seller">
 		select * from seller_reg
 		where sl_id = #{sl_id}
 	</select>
-	
+	<!-- 판매자 id로 판매자 정보추출2 -->
 	<select id="getSellerById2"
 		parameterType="com.sol.mall.member.Seller"
 		resultType="com.sol.mall.member.Seller">
@@ -50,6 +56,7 @@
 		where sl_id = #{sl_id}
 	</select>
 	
+	<!-- 구매자 회원정보 수정 -->
 	<update id="updateCSMInfo" parameterType="com.sol.mall.member.Customer">
 		update customer_reg
 		set csm_pw = #{csm_pw}, csm_name = #{csm_name},
@@ -57,6 +64,8 @@
 			csm_emailAddress = #{csm_emailAddress}
 		where csm_id = #{csm_id}
 	</update>
+	
+	<!-- 판매자 회원정보 수정 -->
 	<update id="updateSLInfo" parameterType="com.sol.mall.member.Seller">
 		update seller_reg
 		set sl_pw = #{sl_pw}, sl_coName = #{sl_coName},
@@ -65,26 +74,33 @@
 		where sl_id = #{sl_id}
 	</update>
 	
+	<!-- 구매자 회원탈퇴 -->
 	<delete id="withdrawCSM" parameterType="com.sol.mall.member.Customer">
 		delete
 		from customer_reg
 		where csm_id = #{csm_id}
 	</delete>
+	
+	<!-- 판매자 회원정보 수정 -->
 	<delete id="withdrawSL" parameterType="com.sol.mall.member.Seller">
 		delete
 		from seller_reg
 		where sl_id = #{sl_id}
 	</delete>
+	
+	<!-- 구매자 멤버십 가입하기 -->
 	<insert id="registerMemberShip" parameterType="com.sol.mall.member.Membership">
 		insert into membership values(
 		#{ms_csm_id}, '실버', 0, 0
 		)
 	</insert>
+	<!-- 구매자 멤버십 탈퇴  -->
 	<delete id="withdrawMemberShip" parameterType="com.sol.mall.member.Membership">
 		delete
 		from membership
 		where ms_csm_id = #{ms_csm_id}
 	</delete>
+
 </mapper>
 
 

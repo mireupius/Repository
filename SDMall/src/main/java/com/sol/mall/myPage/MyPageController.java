@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import com.sol.mall.goods.CategoryDAO;
 import com.sol.mall.member.MemberDAO;
 import com.sol.mall.sale.delivery.Delivery;
+import com.sol.mall.shoppingbag.ShoppingBagDAO;
 
 @Controller
 public class MyPageController {
@@ -23,121 +24,188 @@ public class MyPageController {
 
 	@Autowired
 	private CategoryDAO cDAO;
+	
+	@Autowired
+	private ShoppingBagDAO sbDAO;
 
 	@RequestMapping(value = "/customer.myHome.orderList.go", method = RequestMethod.GET)
 	public String goOrderList(SearchMonth bb, HttpServletRequest req, HttpServletResponse res) {
 
+		cDAO.getAllCategory(req, res);
 		if (mDAO.csmLoginCheck(req, res)) {
 
-			cDAO.getAllCategory(req, res);
+			sbDAO.showCartItems(req, res);// 장바구니 상품수량 반환
 			req.setAttribute("contentPage", "customer/customerMyPage2.jsp");
 			req.setAttribute("myPageContentArea", "orderDelivery.jsp");
 
 			return "main";
 		}
-		return "member/loginPage";
+		
+		req.setAttribute("contentPage", "member/loginArea.jsp");
+		return "main";
 	}
 
 	@RequestMapping(value = "/customer.myHome.orderList", method = RequestMethod.GET)
 	public String getOrderList(SearchMonth sm, HttpServletRequest req, HttpServletResponse res) {
 
+		cDAO.getAllCategory(req, res);
 		if (mDAO.csmLoginCheck(req, res)) {
-			cDAO.getAllCategory(req, res);
+			sbDAO.showCartItems(req, res);// 장바구니 상품수량 반환
 			mpDAO.searchOrderList(sm, req, res);
 			req.setAttribute("contentPage", "customer/customerMyPage2.jsp");
 			req.setAttribute("myPageContentArea", "orderDelivery.jsp");
 			return "main";
 		}
-		return "member/loginPage";
+		
+		req.setAttribute("contentPage", "member/loginArea.jsp");
+		return "main";
 
 	}
 
 	@RequestMapping(value = "/customer.myHome.claimedOrderList.go", method = RequestMethod.GET)
 	public String goClaimedOrderList(SearchMonth bb, HttpServletRequest req, HttpServletResponse res) {
 
+		cDAO.getAllCategory(req, res);
 		if (mDAO.csmLoginCheck(req, res)) {
 
-			cDAO.getAllCategory(req, res);
+			sbDAO.showCartItems(req, res);// 장바구니 상품수량 반환
 			req.setAttribute("contentPage", "customer/customerMyPage2.jsp");
 			req.setAttribute("myPageContentArea", "orderClaim.jsp");
 
 			return "main";
 		}
-		return "member/loginPage";
+		
+		req.setAttribute("contentPage", "member/loginArea.jsp");
+		return "main";
 
 	}
 
 	@RequestMapping(value = "/customer.myHome.claimList", method = RequestMethod.GET)
 	public String getClaimedOrderList(SearchMonth sm, HttpServletRequest req, HttpServletResponse res) {
 
+		cDAO.getAllCategory(req, res);
 		if (mDAO.csmLoginCheck(req, res)) {
 
-			cDAO.getAllCategory(req, res);
+			sbDAO.showCartItems(req, res);// 장바구니 상품수량 반환
 			mpDAO.searchClaimedOrderList(sm, req, res);
 			req.setAttribute("contentPage", "customer/customerMyPage2.jsp");
 			req.setAttribute("myPageContentArea", "orderClaim.jsp");
 			return "main";
 		}
-		return "member/loginPage";
+		
+		req.setAttribute("contentPage", "member/loginArea.jsp");
+		return "main";
 
 	}
 
 	@RequestMapping(value = "/orderList.cancel.do", method = RequestMethod.GET)
 	public String correctOrder(Delivery d, HttpServletRequest req, HttpServletResponse res) {
 
+		cDAO.getAllCategory(req, res);
 		if (mDAO.csmLoginCheck(req, res)) {
 
-			cDAO.getAllCategory(req, res);
+			sbDAO.showCartItems(req, res);// 장바구니 상품수량 반환
 			mpDAO.cancelOrder(d, req, res);
 			req.setAttribute("contentPage", "customer/customerMyPage2.jsp");
 			req.setAttribute("myPageContentArea", "orderDelivery.jsp");
 			return "main";
 		}
-		return "member/loginPage";
+		
+		req.setAttribute("contentPage", "member/loginArea.jsp");
+		return "main";
 
 	}
 
 	@RequestMapping(value = "/orderList.exchange.do", method = RequestMethod.GET)
 	public String exchangeOrder(Delivery d, HttpServletRequest req, HttpServletResponse res) {
 
-
+		cDAO.getAllCategory(req, res);
 		if (mDAO.csmLoginCheck(req, res)) {
 
-			cDAO.getAllCategory(req, res);
+			sbDAO.showCartItems(req, res);// 장바구니 상품수량 반환
 			mpDAO.exchangeOrder(d, req, res);
 			req.setAttribute("contentPage", "customer/customerMyPage2.jsp");
 			req.setAttribute("myPageContentArea", "orderDelivery.jsp");
 			return "main";
 		}
-		return "member/loginPage";
+		
+		req.setAttribute("contentPage", "member/loginArea.jsp");
+		return "main";
 
 	}
 
 	@RequestMapping(value = "/orderList.return.do", method = RequestMethod.GET)
 	public String returnOrder(Delivery d, HttpServletRequest req, HttpServletResponse res) {
 		
+		cDAO.getAllCategory(req, res);
 		if (mDAO.csmLoginCheck(req, res)) {
-
-			cDAO.getAllCategory(req, res);
+			
+			sbDAO.showCartItems(req, res);// 장바구니 상품수량 반환
 			mpDAO.returnOrder(d, req, res);
 			req.setAttribute("contentPage", "customer/customerMyPage2.jsp");
 			req.setAttribute("myPageContentArea", "orderDelivery.jsp");
 			return "main";
 		}
-		return "member/loginPage";
+		
+		req.setAttribute("contentPage", "member/loginArea.jsp");
+		return "main";
 
 
 	}
-
+	
+	@RequestMapping(value = "/orderList.completeDelivery.do", method = RequestMethod.GET)
+	public String completeDelivery(Delivery d, HttpServletRequest req, HttpServletResponse res) {
+		
+		cDAO.getAllCategory(req, res);
+		if (mDAO.csmLoginCheck(req, res)) {
+			
+			sbDAO.showCartItems(req, res);// 장바구니 상품수량 반환
+			mpDAO.completeDelivery(d, req, res);
+			req.setAttribute("contentPage", "customer/customerMyPage2.jsp");
+			req.setAttribute("myPageContentArea", "orderDelivery.jsp");
+			return "main";
+		}
+		
+		req.setAttribute("contentPage", "member/loginArea.jsp");
+		return "main";
+		
+		
+	}
+	
+	@RequestMapping(value = "/orderList.completeBuy.do", method = RequestMethod.GET)
+	public String completeBuyOrder(Delivery d, HttpServletRequest req, HttpServletResponse res) {
+		
+		cDAO.getAllCategory(req, res);
+		if (mDAO.csmLoginCheck(req, res)) {
+			
+			sbDAO.showCartItems(req, res);// 장바구니 상품수량 반환
+			mpDAO.completeBuyOrder(d, req, res);
+			mpDAO.updateCumulativePrice(req, res);
+			mpDAO.updateMemberShipGrade(req, res);
+			req.setAttribute("contentPage", "customer/customerMyPage2.jsp");
+			req.setAttribute("myPageContentArea", "orderDelivery.jsp");
+			return "main";
+		}
+		
+		req.setAttribute("contentPage", "member/loginArea.jsp");
+		return "main";
+		
+		
+	}
+	
+	// 리뷰할 주문내역 가져오기
 	@RequestMapping(value = "/customer.myHome.productReview.go", method = RequestMethod.GET)
 	public String getOrderListToReview(Delivery d, HttpServletRequest req, HttpServletResponse res) {
 
+		
 		if (mDAO.csmLoginCheck(req, res)) {
 
 			mpDAO.getOrderListToReview(d, req, res);
-			return "customer/productReview2";
+			return "customer/productReviewPage";
 		}
-		return "member/loginPage";
+		cDAO.getAllCategory(req, res);
+		req.setAttribute("contentPage", "member/loginArea.jsp");
+		return "main";
 
 	}
 
@@ -151,7 +219,9 @@ public class MyPageController {
 			return "customer/productReview";
 
 		}
-		return "member/loginPage";
+		cDAO.getAllCategory(req, res);
+		req.setAttribute("contentPage", "member/loginArea.jsp");
+		return "main";
 
 	}
 
@@ -164,7 +234,9 @@ public class MyPageController {
 			return "customer/productReview";
 
 		}
-		return "member/loginPage";
+		cDAO.getAllCategory(req, res);
+		req.setAttribute("contentPage", "member/loginArea.jsp");
+		return "main";
 
 	}
 
@@ -177,7 +249,9 @@ public class MyPageController {
 			return "customer/writedReviews";
 
 		}
-		return "member/loginPage";
+		cDAO.getAllCategory(req, res);
+		req.setAttribute("contentPage", "member/loginArea.jsp");
+		return "main";
 
 	}
 
@@ -190,7 +264,9 @@ public class MyPageController {
 			return "customer/question";
 
 		}
-		return "member/loginPage";
+		cDAO.getAllCategory(req, res);
+		req.setAttribute("contentPage", "member/loginArea.jsp");
+		return "main";
 
 	}
 
@@ -203,7 +279,9 @@ public class MyPageController {
 			return "customer/customerMyPage2";
 
 		}
-		return "member/loginPage";
+		cDAO.getAllCategory(req, res);
+		req.setAttribute("contentPage", "member/loginArea.jsp");
+		return "main";
 
 	}
 
@@ -216,7 +294,9 @@ public class MyPageController {
 			return "customer/myQuestion";
 
 		}
-		return "member/loginPage";
+		cDAO.getAllCategory(req, res);
+		req.setAttribute("contentPage", "member/loginArea.jsp");
+		return "main";
 
 	}
 

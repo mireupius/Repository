@@ -94,6 +94,7 @@
 				<beans:value>classpath:optionMapper.xml</beans:value>
 				<beans:value>classpath:myPageMapper.xml</beans:value>
 				<beans:value>classpath:shoppingBagMapper.xml</beans:value>
+				<beans:value>classpath:qnaMapper.xml</beans:value>
 			</beans:list>
 		</beans:property>
 	</beans:bean>

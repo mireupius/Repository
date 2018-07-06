@@ -20,6 +20,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.sol.mall.common.ImageResize;
 import com.sol.mall.member.MemberDAO;
 import com.sol.mall.member.Seller;
+import com.sol.mall.shoppingbag.ShoppingBagDAO;
 
 @Controller
 public class GoodsController {
@@ -32,6 +33,10 @@ public class GoodsController {
 	
 	@Autowired
 	private CategoryDAO cDAO;
+	
+	@Autowired
+	private ShoppingBagDAO sbDAO;
+	
 	
 	// 상품등록화면 처음
 	@RequestMapping(value = "/goodsReg.go", method = RequestMethod.GET)
@@ -58,7 +63,10 @@ public class GoodsController {
 	// 전체 상품 조회
 	@RequestMapping(value = "/shop", method = RequestMethod.GET)
 	public String getAllGoods(HttpServletRequest request, HttpServletResponse response) {
-		cDAO.getAllCategory(request, response);
+		cDAO.getAllCategory(request, response);// 메인 카테고리 호출 메소드
+		if (mDAO.csmLoginCheck(request, response)) {//로그인체크
+			sbDAO.showCartItems(request, response);//장바구니 상품수량 반환
+		}
 
 		gdsDAO.getAllGoods(request);
 		request.setAttribute("contentPage", "goods/shop.jsp");
@@ -68,7 +76,10 @@ public class GoodsController {
 	// 카테고리 상품 조회
 	@RequestMapping(value = "/shop.Category", method = RequestMethod.GET)
 	public String getGoodsByCate(Category category, HttpServletRequest request, HttpServletResponse response) {
-		cDAO.getAllCategory(request, response);
+		cDAO.getAllCategory(request, response);// 메인 카테고리 호출 메소드
+		if (mDAO.csmLoginCheck(request, response)) {//로그인체크
+			sbDAO.showCartItems(request, response);//장바구니 상품수량 반환
+		}
 		
 		gdsDAO.getGoodsByCate(category, request, response);
 		request.setAttribute("contentPage", "goods/shop.jsp");
@@ -78,17 +89,33 @@ public class GoodsController {
 	// 검색창에 입력받은 값으로 상품 이름과 키워드를 검색
 	@RequestMapping(value = "/shop.search", method = RequestMethod.GET)
 	public String searchGoods(Goods goods, HttpServletRequest request, HttpServletResponse response) {
-		cDAO.getAllCategory(request, response);
+		cDAO.getAllCategory(request, response);// 메인 카테고리 호출 메소드
+		if (mDAO.csmLoginCheck(request, response)) {//로그인체크
+			sbDAO.showCartItems(request, response);//장바구니 상품수량 반환
+		}
 		
 		gdsDAO.searchGoods(goods, request, response);
 		request.setAttribute("contentPage", "goods/shop.jsp");
 		return "main";
 	}
 	
+	//상품이름으로 상품검색 json
 	@RequestMapping(value = "/search.name", method = RequestMethod.GET, produces = "application/json; charset=utf-8")
 	public @ResponseBody GoodsList getGoodsByName(Goods goods, HttpServletRequest request, HttpServletResponse response) {
-
 		return gdsDAO.getGoodsByName(goods, request, response);
+	}
+	
+	// 상품상세 조회
+	@RequestMapping(value = "/goods", method = RequestMethod.GET)
+	public String getGoodsDtlByNo(Goods goods, HttpServletRequest request, HttpServletResponse response) {
+		cDAO.getAllCategory(request, response);// 메인 카테고리 호출 메소드
+		if (mDAO.csmLoginCheck(request, response)) {//로그인체크
+			sbDAO.showCartItems(request, response);//장바구니 상품수량 반환
+		}
+
+		gdsDAO.getGoodsByNo(goods, request, response);
+		request.setAttribute("contentPage", "goods/goods.jsp");
+		return "main";
 	}
 
 	// 상품등록작업
@@ -318,16 +345,6 @@ public class GoodsController {
 			request.setAttribute("loginInfo", "loginArea.jsp");
 			return "member/loginPage";
 		}
-	}
-
-	// 상품상세 조회
-	@RequestMapping(value = "/goods", method = RequestMethod.GET)
-	public String getGoodsDtlByNo(Goods goods, HttpServletRequest request, HttpServletResponse response) {
-		cDAO.getAllCategory(request, response);
-
-		gdsDAO.getGoodsByNo(goods, request, response);
-		request.setAttribute("contentPage", "goods/goods.jsp");
-		return "main";
 	}
 
 	// 카테고리 가져오기(ajax - json)
