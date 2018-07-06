@@ -63,14 +63,6 @@ public class MemberController {
 
 	}
 
-	// 모든 구매자 보여주기
-	@RequestMapping(value = "/customer.getAll.do", method = RequestMethod.GET, produces = "application/json; charset=utf-8")
-	public @ResponseBody Customers getAllCustomer(HttpServletRequest req, HttpServletResponse res) {
-
-		return mDAO.getAllCustomer(req, res);
-
-	}
-
 	// 구매자 유효성 검사
 	@RequestMapping(value = "/customer.validCheck", method = RequestMethod.GET, produces = "application/json; charset=utf-8")
 	public @ResponseBody Customers csmValidCheck(Customer c, HttpServletRequest req, HttpServletResponse res) {

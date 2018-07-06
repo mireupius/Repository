@@ -23,6 +23,7 @@ public class MyPageDAO {
 	@Autowired
 	private SqlSession ss;
 
+	// 주문&배송 조회
 	public void searchOrderList(SearchMonth sm, HttpServletRequest req, HttpServletResponse res) {
 
 		Customer cc = (Customer) req.getSession().getAttribute("loginCustomer");
@@ -30,6 +31,7 @@ public class MyPageDAO {
 		SearchOrder so = new SearchOrder();
 		so.setSd_customer_id(cc.getCsm_id());
 
+		// string에 적힌 이름의 자바빈에서 파라미터 추출or주입
 		HashMap<String, Object> map = new HashMap<>();
 		map.put("searchOrder", so);
 		map.put("searchMonth", sm.getSearchMonth());
@@ -45,6 +47,7 @@ public class MyPageDAO {
 
 	}
 
+	// 주문취소신청
 	public void cancelOrder(Delivery d, HttpServletRequest req, HttpServletResponse res) {
 
 		try {
@@ -70,6 +73,7 @@ public class MyPageDAO {
 
 	}
 
+	// 교환신청
 	public void exchangeOrder(Delivery d, HttpServletRequest req, HttpServletResponse res) {
 
 		try {
@@ -93,6 +97,7 @@ public class MyPageDAO {
 
 	}
 
+	// 반품신청
 	public void returnOrder(Delivery d, HttpServletRequest req, HttpServletResponse res) {
 
 		try {
@@ -116,6 +121,7 @@ public class MyPageDAO {
 
 	}
 
+	// 수취확인
 	public void completeDelivery(Delivery d, HttpServletRequest req, HttpServletResponse res) {
 
 		try {
@@ -139,6 +145,7 @@ public class MyPageDAO {
 
 	}
 	
+	// 구매확정
 	public void completeBuyOrder(Delivery d, HttpServletRequest req, HttpServletResponse res) {
 		
 		try {
@@ -162,6 +169,7 @@ public class MyPageDAO {
 		
 	}
 
+	// 교환, 반품, 취소된 주문내역 조회
 	public void searchClaimedOrderList(SearchMonth sm, HttpServletRequest req, HttpServletResponse res) {
 
 		Customer cc = (Customer) req.getSession().getAttribute("loginCustomer");
@@ -182,6 +190,7 @@ public class MyPageDAO {
 
 	}
 
+	// 상품평 남길 주문내역 조회
 	public void getOrderListToReview(Delivery d, HttpServletRequest req, HttpServletResponse res) {
 
 		Customer cc = (Customer) req.getSession().getAttribute("loginCustomer");
@@ -198,12 +207,11 @@ System.out.println(orders.size());
 
 	}
 
+	// 마이페이지 메인에 멤버쉽 정보 보여주기
 	public void getMembership(Membership m, HttpServletRequest req, HttpServletResponse res) {
 
 		Customer cc = (Customer) req.getSession().getAttribute("loginCustomer");
 		m.setMs_csm_id(cc.getCsm_id());
-
-		// ss.getMapper(MyPageMapper.class).membershipStatus(c);
 
 		try {
 
@@ -236,6 +244,7 @@ System.out.println(orders.size());
 
 	}
 
+	// 상품 리뷰 작성하기
 	public void writeProductReview(ProductReview pr, HttpServletRequest req, HttpServletResponse res) {
 
 		try {
@@ -259,6 +268,7 @@ System.out.println(orders.size());
 
 	}
 
+	// 작성된 상품 리뷰 조회
 	public void getWritedReview(ProductReview pr, HttpServletRequest req, HttpServletResponse res) {
 
 		try {
@@ -278,6 +288,7 @@ System.out.println(orders.size());
 
 	}
 
+	// 판매자에게 Q&A 남기러 가기
 	public void goOrderToQuestion(Delivery d, HttpServletRequest req, HttpServletResponse res) {
 
 		try {
@@ -294,6 +305,7 @@ System.out.println(orders.size());
 
 	}
 
+	// 판매자에게 질문 하기
 	public void writeQuestion(QuestionAnswer qa, HttpServletRequest req, HttpServletResponse res) {
 
 		try {
@@ -316,6 +328,7 @@ System.out.println(orders.size());
 
 	}
 
+	// 작성된 Q&A 가져오기
 	public void getMyQuestionAnswer(QuestionAnswer qa, HttpServletRequest req, HttpServletResponse res) {
 
 		try {
@@ -335,6 +348,7 @@ System.out.println(orders.size());
 
 	}
 
+	// 멤버십 누적금액 수정
 	public void updateCumulativePrice(HttpServletRequest req, HttpServletResponse res) {
 
 		try {
@@ -363,6 +377,7 @@ System.out.println(orders.size());
 
 	}
 
+	// 멤버십 등급 수정
 	public void updateMemberShipGrade(HttpServletRequest req, HttpServletResponse res) {
 
 		try {
@@ -375,14 +390,15 @@ System.out.println(orders.size());
 
 			BigDecimal totalBuyPrice = ss.getMapper(MyPageMapper.class).getTotalBuyPriceById(d);
 			m.setMs_totalBuy(totalBuyPrice);
+			System.out.println(m.getMs_totalBuy());
 			BigDecimal gold = new BigDecimal("100000");
 			BigDecimal platinum = new BigDecimal("500000");
 
-			if (totalBuyPrice.compareTo(gold) > 0) {
-				m.setMs_grade("골드");
-
-			} else if (totalBuyPrice.compareTo(platinum) > 0) {
+			if (totalBuyPrice.compareTo(platinum) > 0) {
 				m.setMs_grade("플래티넘");
+
+			} else if (totalBuyPrice.compareTo(gold) > 0) {
+				m.setMs_grade("골드");
 			}
 
 			if (ss.getMapper(MyPageMapper.class).updateMemberShipGrade(m) == 1) {
@@ -400,4 +416,33 @@ System.out.println(orders.size());
 		}
 
 	}
+	
+	// 적립금 적립
+		public void accumulatePoint(Delivery d, HttpServletRequest req, HttpServletResponse res) {
+
+			try {
+
+				Customer cc = (Customer) req.getSession().getAttribute("loginCustomer");
+					
+				Membership m = new Membership();
+				m.setMs_csm_id((cc.getCsm_id()));
+				BigDecimal pointRate = new BigDecimal(0.01);
+				BigDecimal priceByPno = ss.getMapper(MyPageMapper.class).getTotalBuyPriceByPno(d);
+				
+				m.setMs_point(priceByPno.multiply(pointRate));
+
+				if (ss.getMapper(MyPageMapper.class).updateAccumulatePoint(m) == 1) {
+
+					System.out.println("포인트 적립 완료");
+
+				} else {
+					System.out.println("포인트 적립 실패");
+				}
+
+			} catch (Exception e) {
+				e.printStackTrace();
+				System.out.println("포인트 적립 실패");
+			}
+
+		}
 }

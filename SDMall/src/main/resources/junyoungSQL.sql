@@ -8,6 +8,9 @@ csm_phoneNo varchar2(11 char) not null,
 csm_emailAddress varchar2(30 char) not null
 );
 
+	update sale_delivery
+		set sd_delivery_state = '배송완료'
+		where sd_delivery_pno = 20180706000008;
 
 select * 
 		from sale_delivery, goods_tb
@@ -141,7 +144,7 @@ pr_comment varchar2(100 char) not null,
 pr_gdNo varchar2(13 char) not null,
 pr_gdName varchar2(20 char) not null,
 pr_star varchar2(1 char) not null,
-pr_regDate varchar2(8 char) not null
+pr_regDate varchar2(30 char) not null
 );
 
 drop table product_Review cascade constraint purge;
