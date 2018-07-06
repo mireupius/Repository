@@ -40,12 +40,10 @@ public class GoodsController {
 		//판매자 세션 확인
 		if(mDAO.slLoginCheck(request, response)) {
 			
+			// ↓↓↓↓↓↓ 이중 submit 작동 방지용 세션 ↓↓↓↓↓↓
 			Date now = new Date();
-			
-			System.out.println("=now==>"+ now);
-			
-			// 이중 작동 방지
 			request.getSession().setAttribute("submitStop", now);
+			// ↑↑↑↑↑↑ 이중 submit 작동 방지용 세션 ↑↑↑↑↑↑
 			
 			gdsDAO.getAllcategory(request, response);
 			
@@ -98,13 +96,12 @@ public class GoodsController {
 	public String registrationDo(@RequestParam("gd_file1") MultipartFile multipartFile, Goods gds, GoodsDtl gdtl,
 			OptionList opl, HttpServletRequest request, HttpServletResponse response){
 		
-		// 이중 서브밋 세션확인
-		
+		// 이중 submit 세션확인
 		String stop = request.getSession().getAttribute("submitStop").toString();
 
 		if(mDAO.slLoginCheck(request, response)) {
 
-			// 이중 서브밋 세션확인
+			// 이중 submit 세션확인
 			if(stop.equals(request.getParameter("submitStop"))) {
 				// 업로드 파일이 존재하면
 				if (multipartFile != null && !(multipartFile.getOriginalFilename().equals(""))) {
