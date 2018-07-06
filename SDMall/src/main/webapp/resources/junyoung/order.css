@@ -9,7 +9,6 @@
 	margin-right: auto;
 	margin-top : 10px;
 	
-
 }
 
 .orderTb2 {
@@ -19,6 +18,9 @@
 	border: #D5D5D5 solid 2px;
 }
 
+.orderTd0{
+	width : 70px;
+}
 
 
 .orderTd1 {
@@ -42,18 +44,17 @@
 }
 
 .orderSelect {
-	width: 150px;
+	width: 120px;
 	height: 40px;
 	border: #D5D5D5 solid 2px;
 	border-radius: 10px;
-	font-size: 12pt;
+	font-size: 10pt;
 	outline: none;
 	color: black;
 	-webkit-appearance: menulist;
 }
 
 .orderBtn{
-	
 	width:70px;
     background-color: #3399ff;
     color: white;
@@ -67,6 +68,12 @@
     margin-left: 4px;
     font-weight: 800;
     cursor: pointer;
+}
+
+.state{
+	color: blue;
+	font-weight: 800;
+	
 }
 
 .showOrderlist{

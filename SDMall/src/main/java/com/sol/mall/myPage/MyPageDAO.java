@@ -24,7 +24,7 @@ public class MyPageDAO {
 	@Autowired
 	private SqlSession ss;
 	
-	
+	// 주문&배송 조회(페이징 적용)
 	public void pagingOrderList (int curPage, String showCnt, SearchMonth sm, HttpServletRequest request, HttpServletResponse response) {
 		
 		System.out.println("서치먼쓰==="+sm.getSearchMonth());
@@ -73,6 +73,59 @@ public class MyPageDAO {
 
 		request.getSession().setAttribute("ordersPage", ordersPage);
 
+	}
+	
+	//교환, 반품, 취소된 주문내역 조회(페이징 적용)
+	public void pagingClaimedOrderList (int curPage, String showCnt, SearchMonth sm, HttpServletRequest request, HttpServletResponse response) {
+		
+		System.out.println("서치먼쓰==="+sm.getSearchMonth());
+		
+		// 검색을 위해 준비
+		Customer cc = (Customer) request.getSession().getAttribute("loginCustomer");
+		
+		SearchOrder so = new SearchOrder();
+		so.setSd_customer_id(cc.getCsm_id());
+		
+		// string에 적힌 이름의 자바빈에서 파라미터 추출or주입
+		HashMap<String, Object> map = new HashMap<>();
+		map.put("searchOrder", so);
+		map.put("searchMonth", sm.getSearchMonth());
+		
+		List<SearchOrder> orders2 = ss.getMapper(MyPageMapper.class).searchClaimedOrderList(map);
+		
+		// 처음 화면 표시할 때 전체검색 멤버에 집어넣고 페이징시에는 세션으로만
+		// 페이징은 세션이용 멤버리스트에서 해당 페이지 만큼 세션에 넣어서
+		// 수정 화면에 이동은 페이징 세션으로 해결
+		double cnt = Double.parseDouble(showCnt);// 페이지당 건수
+		int listSize = orders2.size();
+		int allPage = (int) Math.ceil(listSize / cnt);// 총페이지
+		request.setAttribute("pageCount", allPage);
+		
+		// 현재 페이지 색변경
+		if (curPage <= allPage && curPage > 1) {
+			request.setAttribute("curPage", curPage);
+		} else if (curPage > allPage && curPage > 1) {
+			curPage = curPage - 1;
+			request.setAttribute("curPage", curPage);
+		} else {
+			request.setAttribute("curPage", 1);
+		}
+		
+		int start = listSize - (int) cnt * (curPage - 1);// 페이지 첫번째 게시물
+		int end = (curPage == allPage) ? 1 : start - ((int) cnt - 1);// 페이지 마지막 게시물
+		
+		List<SearchOrder> ordersPage = new ArrayList<>();// 해당 페이지 게시물 리스트
+		
+		// start가 0인 경우 -1이 나와서 익셉션걸림(검색결과가 0인 경우에 -1이 됨 주의)
+		for (int i = start; i >= end; i--) {
+			// 페이지용 List에 해당 페이지 만큼넣기
+			ordersPage.add(orders2.get(i - 1));
+			System.out.println(orders2.get(i - 1).getSd_claim());
+		}
+		
+		request.getSession().setAttribute("claimedOrder", ordersPage);
+		
+		
 	}
 
 	// 주문&배송 조회
