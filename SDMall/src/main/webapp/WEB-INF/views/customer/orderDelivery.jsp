@@ -27,7 +27,7 @@ $(function(){
 	});
 	
    	$(".pageNoSel").click(function(){  	
-    	var curPage = $(".pageNoSel");
+    	var curPage = $(this).attr("clickPage");
     	$("#curPage").val(curPage);
         document.getElementById('deliveryFrm').submit();
    	});

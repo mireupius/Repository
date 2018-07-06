@@ -71,4 +71,21 @@ public class BankController {
 		}
 	}
 
+	@RequestMapping(value = "/saleBank.modify.do", method = RequestMethod.POST)
+	public String modifyAccount(HttpServletRequest req, HttpServletResponse res, Account a) {
+
+		if (MDAO.slLoginCheck(req, res)) {
+
+			BDAO.modifyAccount(req, res, a);
+			BDAO.getAccount(req, res, a);
+			BDAO.getNotCalMoney(req, res, a);
+			req.setAttribute("contentPage", "bank/bank.jsp");
+			return "sale/saleIndex";
+		} else {
+			cDAO.getAllCategory(req, res);// 메인 카테고리 호출 메소드
+			req.setAttribute("contentPage", "member/loginArea.jsp");
+			return "main";
+		}
+	}
+
 }

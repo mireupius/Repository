@@ -71,8 +71,7 @@
 		#{sd_delivery_cost},
 		#{sd_product_no},
 		#{sd_product_name},
-		'선택형
-		옵션',
+		'선택형 옵션',
 		#{sd_option_info},
 		#{sd_amount},
 		#{sd_option_price},

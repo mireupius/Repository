@@ -125,6 +125,7 @@ insert into option_tb values('18','1001091170008','블랙/66','88000','2');
 
 --=====================================================================
 
+
 drop table goods_tb cascade constraint purge;
 drop sequence goods_sq;
 drop table goodsdtl_tb cascade constraint purge;
