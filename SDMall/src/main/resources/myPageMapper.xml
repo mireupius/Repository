@@ -51,6 +51,11 @@
 		set sd_claim = '반품접수'
 		where sd_delivery_pno = #{sd_delivery_pno}
 	</update>
+	<update id="completeDelivery" parameterType="com.sol.mall.sale.delivery.Delivery">
+		update sale_delivery
+		set sd_delivery_state = '배송완료'
+		where sd_delivery_pno = #{sd_delivery_pno}
+	</update>
 	
 	<!-- 구매확정 -->
 	<update id="completeBuyOrder" parameterType="com.sol.mall.sale.delivery.Delivery">

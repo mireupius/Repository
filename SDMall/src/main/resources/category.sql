@@ -268,7 +268,8 @@ insert into category_tb values(to_char(category_sq.nextval),'건어물/해조류
 /*소분류*/
 
 select * from category_tb;
-
+drop table category_tb cascade constraint purge;
+drop sequence category_sq;
 
 
 /*************************************************

@@ -116,7 +116,7 @@ public class MyPageDAO {
 
 	}
 
-	public void completeBuyOrder(Delivery d, HttpServletRequest req, HttpServletResponse res) {
+	public void completeDelivery(Delivery d, HttpServletRequest req, HttpServletResponse res) {
 
 		try {
 
@@ -124,19 +124,42 @@ public class MyPageDAO {
 
 			d.setSd_customer_id(cc.getCsm_id());
 
-			if (ss.getMapper(MyPageMapper.class).completeBuyOrder(d) == 1) {
+			if (ss.getMapper(MyPageMapper.class).completeDelivery(d) == 1) {
 
-				System.out.println("구매확정 성공");
+				System.out.println("배송완료 변경");
 
 			} else {
-				System.out.println("구매확정 실패");
+				System.out.println("배송완료 실패");
 			}
 
 		} catch (Exception e) {
 			e.printStackTrace();
-			System.out.println("구매확정 실패");
+			System.out.println("배송완료 실패");
 		}
 
+	}
+	
+	public void completeBuyOrder(Delivery d, HttpServletRequest req, HttpServletResponse res) {
+		
+		try {
+			
+			Customer cc = (Customer) req.getSession().getAttribute("loginCustomer");
+			
+			d.setSd_customer_id(cc.getCsm_id());
+			
+			if (ss.getMapper(MyPageMapper.class).completeBuyOrder(d) == 1) {
+				
+				System.out.println("구매확정 성공");
+				
+			} else {
+				System.out.println("구매확정 실패");
+			}
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println("구매확정 실패");
+		}
+		
 	}
 
 	public void searchClaimedOrderList(SearchMonth sm, HttpServletRequest req, HttpServletResponse res) {

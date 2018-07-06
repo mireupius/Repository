@@ -17,6 +17,7 @@ public interface MyPageMapper {
 	public abstract int cancelOrder(Delivery d);
 	public abstract int exchangeOrder(Delivery d);
 	public abstract int returnOrder(Delivery d);
+	public abstract int completeDelivery(Delivery d);
 	public abstract int completeBuyOrder(Delivery d);
 	public abstract int updateCumulativePrice(Membership m);
 	public abstract int updateMemberShipGrade(Membership m);

@@ -86,6 +86,8 @@
 							<button class="orderBtn" type="button"
 								onclick="goQuestionSeller(${list.sd_delivery_pno });">판매자문의</button>
 							<button class="orderBtn" type="button"
+								onclick="goCompleteDelivery(${list.sd_delivery_pno });">수취확인</button>
+							<button class="orderBtn" type="button"
 								onclick="goCompleteBuy(${list.sd_delivery_pno });">구매확정</button>
 						</td>
 					</tr>
