@@ -90,7 +90,7 @@
 	}
 	.image_selected
 	{
-		height: 420px;
+		
 	}
 	.product_quantity,
 	.custom-select
@@ -586,7 +586,8 @@
 		float: none;
 		margin-top: 15px;
 	}
-	.cart_button
+	.cart_button,
+	.buy_button
 	{
 		font-size: 13px;
 		line-height: 32px;

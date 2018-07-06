@@ -8,6 +8,8 @@
 <title>Insert title here</title>
 <link href="resources/junyoung/review.css" rel="stylesheet">
 <script src="resources/js/go.js"></script>
+<script type="text/javascript">
+</script>
 </head>
 <body>
 	<div>
@@ -20,56 +22,37 @@
 		</table>
 	</div>
 	<!-- 내 질문 보여주기 -->
-	<c:forEach var="list" items="${myQuestionList }">
-		<table class="reviewTb1">
-			<tr>
-				<td align="center">
-					<table class="reviewTb2">
-						<tr>
-							<td class="reviewdTd1">여부</td>
-							<td class="reviewdTd2">${list.qa_check}</td>
-						</tr>
-						<tr>
-							<td class="reviewdTd1">상품명</td>
-							<td class="reviewdTd2">${list.qa_gdName }</td>
-						</tr>
-						<tr>
-							<td class="reviewdTd1">제목</td>
-							<td class="reviewdTd2">${list.qa_questionTitle }</td>
-						</tr>
-						<tr>
-							<td class="reviewdTd1">질문내용</td>
-							<td class="reviewdTd2">${list.qa_questionContent }</td>
-						</tr>
-						<tr>
-							<td class="reviewdTd1">작성일</td>
-							<td class="reviewdTd2">${list.qa_qRegDate }</td>
-						</tr>
-					</table>
-				</td>
-			</tr>
-		</table>
-		<!-- 판매자 답변 보여주기 -->
-		<c:if test="${list.qa_answer != null }">
-			<c:forEach var="list" items="${myQuestionList }">
-				<table class="reviewTb1">
-					<tr>
-						<td align="center">
-							<table class="reviewTb2">
-								<tr>
-									<td class="reviewdTd1">답변</td>
-									<td class="reviewdTd2">${list.qa_answer }</td>
-								</tr>
-								<tr>
-									<td class="reviewdTd1">작성일</td>
-									<td class="reviewdTd2">${list.qa_aRegDate }</td>
-								</tr>
-							</table>
-						</td>
+	<table class="reviewTb1">
+		<tr>
+			<td align="center">
+				<table class="reviewTb2" border="2">
+					<tr class="reviewTr1">
+						<td class="reviewdTd1">여부</td>
+						<td class="reviewdTd1">상품명</td>
+						<td class="reviewdTd1">제목</td>
+						<td class="reviewdTd1">질문내용</td>
+						<td class="reviewdTd1">작성일</td>
+						<td class="reviewdTd1">답변</td>
 					</tr>
+					<c:forEach var="list" items="${myQuestionList }">
+						<tr>
+							<td class="reviewdTd2">${list.qa_check}</td>
+							<td class="reviewdTd2">${list.qa_gdName }</td>
+							<td class="reviewdTd2">${list.qa_questionTitle }</td>
+							<td class="reviewdTd2">${list.qa_questionContent }</td>
+							<td class="reviewdTd2">${list.qa_qRegDate }</td>
+							<!-- 판매자 답변 보여주기 -->
+							<c:choose>
+								<c:when test="${list.qa_answer != null }">
+									<td class="reviewdTd2">${list.qa_answer }</td>
+								</c:when>
+								<c:otherwise>
+									<td class="reviewdTd2">조회된 내용이 없습니다</td>
+								</c:otherwise>
+							</c:choose>
+						</tr>
+					</c:forEach>
 				</table>
-			</c:forEach>
-		</c:if>
-	</c:forEach>
+	</table>
 </body>
 </html>

@@ -28,7 +28,7 @@
 					<div class="row">
 						<div class="col-lg-10 offset-lg-1">
 							<div class="cart_container">
-								<div class="cart_title">Shopping Cart</div>
+								<div class="cart_title">장바구니</div>
 
 								<div class="cart_items">
 									<ul class="cart_list">
@@ -69,7 +69,7 @@
 														</div>
 													</div>
 													<div class="cart_item_total cart_info_col">
-														<button onclick="deleteCartItem(${list.sb_no})">삭제</button>
+														<button class="button delete_button" onclick="deleteCartItem(${list.sb_no})">삭제</button>
 														<input name="sd_imageFileName" value="${list.gd_imgm}"
 															type="hidden"> <input name="sd_product_name"
 															value=${list.gd_name } type="hidden"> <input

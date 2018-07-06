@@ -41,6 +41,7 @@ public interface MyPageMapper {
 	
 	// Q&A
 	public abstract List<QuestionAnswer> searchQAByCustomerId(QuestionAnswer qa);
+	
 	public abstract int writeQuestionToSeller(QuestionAnswer qa);
 	
 }

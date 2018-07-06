@@ -21,29 +21,25 @@
 		</table>
 	</div>
 
-	<c:forEach var="aa" items="${orderList }">
 		<div>
-			<table class="reviewOrder">
+			<table class="reviewOrder" border="1">
 				<tr>
 					<td class="reviewTd1">상품주문번호</td>
-					<td class="reviewTd2">${aa.sd_delivery_pno }</td>
-				</tr>
-				<tr>
 					<td class="reviewTd1">상품명</td>
-					<td class="reviewTd2">${aa.sd_product_name }</td>
+					<td class="reviewTd3"></td>
+
 				</tr>
-				<tr>
-					<td colspan="2">
-						<div>
-							<button class="reviewBtn" type="button"
-								onclick="goWritingReview(${aa.sd_delivery_pno })">상품평작성</button>
-						</div>
+	<c:forEach var="aa" items="${orderList }">
+				<tr class="reviewTr1">
+					<td class="reviewTd2">${aa.sd_delivery_pno }</td>
+					<td class="reviewTd2">${aa.sd_product_name }</td>
+					<td class="reviewTd2">
+						<button class="reviewBtn" type="button"
+							onclick="goWritingReview(${aa.sd_delivery_pno })">상품평작성</button>
 					</td>
 				</tr>
+	</c:forEach>
 			</table>
 		</div>
-
-	</c:forEach>
-
 </body>
 </html>

@@ -1,5 +1,7 @@
 package com.sol.mall.myPage;
 
+import java.math.BigDecimal;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -36,6 +38,11 @@ public class MyPageController {
 		if (mDAO.csmLoginCheck(req, res)) {
 
 			sbDAO.showCartItems(req, res);// 장바구니 상품수량 반환
+			//추가 페이징
+			SearchMonth sm = new SearchMonth();
+			sm.setSearchMonth(new BigDecimal(1));
+			mpDAO.pagingOrderList(1, "3", sm, req, res);
+			
 			req.setAttribute("contentPage", "customer/customerMyPage2.jsp");
 			req.setAttribute("myPageContentArea", "orderDelivery.jsp");
 
@@ -63,17 +70,72 @@ public class MyPageController {
 		return "main";
 
 	}
+	// ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓ paging  ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓
+	// 주문&배송 목록 기간별로 가져오기
+	@RequestMapping(value = "/customer.myHome.pagingOrderList", method = RequestMethod.GET)
+	public String pagingOrderList(int curPage, String showCnt, SearchMonth sm, HttpServletRequest req, HttpServletResponse res) {
 
+		System.out.println("입장====");
+		System.out.println("curPage=="+curPage);
+		if(curPage == 0) {
+			curPage =1;
+		}
+		cDAO.getAllCategory(req, res);
+		if (mDAO.csmLoginCheck(req, res)) {
+			sbDAO.showCartItems(req, res);// 장바구니 상품수량 반환
+			
+			mpDAO.pagingOrderList(curPage, showCnt, sm, req, res);
+			
+			req.setAttribute("contentPage", "customer/customerMyPage2.jsp");
+			req.setAttribute("myPageContentArea", "orderDelivery.jsp");
+			return "main";
+		}
+		
+		req.setAttribute("contentPage", "member/loginArea.jsp");
+		return "main";
+
+	}
+	
+	@RequestMapping(value = "/customer.myHome.pagingClaimList", method = RequestMethod.GET)
+	public String pagingClaimedOrderList(int curPage, String showCnt, SearchMonth sm, HttpServletRequest req, HttpServletResponse res) {
+		
+		System.out.println("입장====");
+		System.out.println("curPage=="+curPage);
+		if(curPage == 0) {
+			curPage =1;
+		}
+		cDAO.getAllCategory(req, res);
+		if (mDAO.csmLoginCheck(req, res)) {
+			sbDAO.showCartItems(req, res);// 장바구니 상품수량 반환
+			
+			mpDAO.pagingClaimedOrderList(curPage, showCnt, sm, req, res);
+			
+			req.setAttribute("contentPage", "customer/customerMyPage2.jsp");
+			req.setAttribute("myPageContentArea", "orderClaim.jsp");
+			return "main";
+		}
+		
+		req.setAttribute("contentPage", "member/loginArea.jsp");
+		return "main";
+		
+	}
+	// ↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑  paging  ↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑
+	
 	// 교환&반품&취소 목록 조회하러가기
 	@RequestMapping(value = "/customer.myHome.claimedOrderList.go", method = RequestMethod.GET)
 	public String goClaimedOrderList(SearchMonth bb, HttpServletRequest req, HttpServletResponse res) {
 
 		cDAO.getAllCategory(req, res);
 		if (mDAO.csmLoginCheck(req, res)) {
-
 			sbDAO.showCartItems(req, res);// 장바구니 상품수량 반환
+
+			SearchMonth sm = new SearchMonth();
+			sm.setSearchMonth(new BigDecimal(1));
+			mpDAO.pagingOrderList(1, "3", sm, req, res);
+			
 			req.setAttribute("contentPage", "customer/customerMyPage2.jsp");
 			req.setAttribute("myPageContentArea", "orderClaim.jsp");
+			//추가 페이징
 
 			return "main";
 		}
@@ -111,6 +173,9 @@ public class MyPageController {
 
 			sbDAO.showCartItems(req, res);// 장바구니 상품수량 반환
 			mpDAO.cancelOrder(d, req, res);
+			SearchMonth sm = new SearchMonth();
+			sm.setSearchMonth(new BigDecimal("1"));
+			mpDAO.pagingOrderList(1, "3", sm, req, res);
 			req.setAttribute("contentPage", "customer/customerMyPage2.jsp");
 			req.setAttribute("myPageContentArea", "orderDelivery.jsp");
 			return "main";
@@ -130,6 +195,9 @@ public class MyPageController {
 
 			sbDAO.showCartItems(req, res);// 장바구니 상품수량 반환
 			mpDAO.exchangeOrder(d, req, res);
+			SearchMonth sm = new SearchMonth();
+			sm.setSearchMonth(new BigDecimal("1"));
+			mpDAO.pagingOrderList(1, "3", sm, req, res);
 			req.setAttribute("contentPage", "customer/customerMyPage2.jsp");
 			req.setAttribute("myPageContentArea", "orderDelivery.jsp");
 			return "main";
@@ -149,6 +217,9 @@ public class MyPageController {
 			
 			sbDAO.showCartItems(req, res);// 장바구니 상품수량 반환
 			mpDAO.returnOrder(d, req, res);
+			SearchMonth sm = new SearchMonth();
+			sm.setSearchMonth(new BigDecimal("1"));
+			mpDAO.pagingOrderList(1, "3", sm, req, res);
 			req.setAttribute("contentPage", "customer/customerMyPage2.jsp");
 			req.setAttribute("myPageContentArea", "orderDelivery.jsp");
 			return "main";

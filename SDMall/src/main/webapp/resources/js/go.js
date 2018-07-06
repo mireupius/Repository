@@ -64,7 +64,6 @@ function goCompleteBuy(sd_pno) {
 
 // 판매자에게 질문하기
 function goQuestionSeller(sd_pno) {
-	alert("sdf");
 	location.href = "question.writing.go?sd_delivery_pno=" + sd_pno;
 	
 }

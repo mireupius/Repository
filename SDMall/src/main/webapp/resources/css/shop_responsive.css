@@ -199,6 +199,7 @@
 	}
 	.shop_sidebar
 	{
+		display:none;
 		-webkit-transform: none;
 		-moz-transform: none;
 		-ms-transform: none;
