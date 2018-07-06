@@ -8,11 +8,36 @@
 <title>Insert title here</title>
 <link rel="stylesheet" href="resources/junyoung/order.css">
 <script type="text/javascript" src="resources/js/go.js"></script>
+<script type="text/javascript" src="resources/js/jquery.js"></script>
+<script type="text/javascript">
 
+$(function(){
+	
+	$(".orderBtn").click(function(){
+    	var curPage = 1;
+    	$("#curPage").val(curPage);
+    	
+	});
+	
+	$(".pageNo").click(function(){
+    	var curPage = $(this).attr("clickPage");
+    	$("#curPage").val(curPage);
+        document.getElementById('deliveryFrm').submit();
+		
+	});
+	
+   	$(".pageNoSel").click(function(){  	
+    	var curPage = $(".pageNoSel");
+    	$("#curPage").val(curPage);
+        document.getElementById('deliveryFrm').submit();
+   	});
+
+});
+
+</script>
 </head>
 <body>
-
-	<form action="customer.myHome.orderList">
+	<form action="customer.myHome.pagingOrderList" id="deliveryFrm" method="get">
 		<div>
 			<table class="orderTb0">
 				<tr>
@@ -27,6 +52,16 @@
 				<tr>
 					<td align="left">
 						<div class="orderDiv">
+							<select class="cntSelect" name="showCnt">
+								<option value="3">3</option>
+								<option value="5">5</option>
+								<option value="10">10</option>
+								<option value="15">15</option>
+							</select>
+						</div>
+					</td>
+					<td align="left">
+						<div class="orderDiv">
 							<select class="orderSelect" name="searchMonth">
 								<option value="1">최근 1개월 전</option>
 								<option value="3">최근 3개월 전</option>
@@ -35,15 +70,18 @@
 							</select>
 						</div>
 					</td>
-					<td align="right"><input class="orderBtn" type="submit"
-						value="조회"></td>
+					<td align="right">
+						<button class="orderBtn" >조회</button>
+					</td>
 				</tr>
 			</table>
 		</div>
+		<input type="hidden" name ="curPage" id="curPage">
+		
 	</form>
 
 	<div class="showOrderlist">
-		<c:forEach var="list" items="${orderList }">
+		<c:forEach var="list" items="${ordersPage }">
 
 				<table class="orderTb2">
 					<tr>
@@ -92,7 +130,19 @@
 						</td>
 					</tr>
 				</table>
-
+		</c:forEach>
+	</div>
+	
+	<div>
+		<c:forEach var="p" begin="1" end="${pageCount }">
+			<c:choose>
+				<c:when test="${curPage==p }">
+					<a class="pageNoSel" clickPage="${p }">${p }</a>
+				</c:when>
+				<c:otherwise>
+					<a class="pageNo" clickPage="${p }">${p }</a>
+				</c:otherwise>
+			</c:choose>
 		</c:forEach>
 	</div>
 </body>
