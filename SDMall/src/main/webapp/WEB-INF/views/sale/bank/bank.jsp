@@ -9,6 +9,7 @@
 <title>Insert title here</title>
 <script type="text/javascript">
 	$(function() {
+
 		$("#takeMoneyBtn").click(function() {
 			var take = confirm("정산하시겠습니까?");
 			if (take) {
@@ -16,13 +17,22 @@
 			}
 
 		});
+
 		$("#modifyBtn").click(function() {
-			var reg = confirm("수정하시겠습니까?");
-			if (reg) {
-				$("#modifyBtn").attr("type", "submit");
-				$("#modifyBtn").text("수정하기");
+
+			if (confirm("수정하시겠습니까?") == true) {
+
+				$("#modifyBtn").remove();
+				$("#an_input").val("");
+				$("#ab_input").val("");
 				$("#an_input").removeAttr("readonly");
 				$("#ab_input").removeAttr("readonly");
+
+				$("<input>", {
+					value : "수정하기",
+					type : "submit"
+				}).appendTo($("#modifyForm"));
+
 			}
 
 		});
@@ -31,135 +41,281 @@
 </head>
 <body>
 
+	<section id="main-content">
+		<section class="wrapper">
+			<h3>
+				<i class="fa fa-angle-right"></i> 정산내역
+			</h3>
+
+
+			<div class="row mt">
+				<div class="col-lg-12">
+
+					<!-- 답변패널 시작 -->
+					<div class="col-md-6">
+						<div class="content-panel">
+							<table class="table">
+								<tr>
+									<th>정산금액</th>
+									<td>"${money }￦"</td>
+									<th>정산하기</th>
+									<td><button class="btn btn-default">정산하기</button></td>
+								</tr>
+
+								<tr>
+									<th>상품주문번호</th>
+									<td id="qa_orderNo"></td>
+									<th>상품명</th>
+									<td id="gdName"></td>
+								</tr>
+								<tr>
+									<th>문의유형/제목</th>
+									<td colspan="3" id="questionTitle"></td>
+								</tr>
+								<tr>
+									<th>문의내용</th>
+									<td colspan="3" id="questionContent"></td>
+								</tr>
+							</table>
+						</div>
+					</div>
+					<!-- /col-md-12 -->
+
+
+					<div class="col-md-6">
+						<div class="content-panel">
+							<table class="table">
+								<thead>
+									<tr>
+										<th colspan="4">판매자 답변처리</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr>
+										<td>답변내용</td>
+										<td>
+											<form method="post" action="sale.delivery.answer.do">
+												<textarea name="qa_answer" id="anwser" value=""></textarea>
+												<input name="qa_regNo" id="anwserNum" value="" hidden="">
+												<input type="submit" value="답변하기"><span id="result"
+													hidden>${r }</span>
+											</form>
+										</td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+					</div>
+					<!-- 답변패널 끝-->
+
+
+				</div>
+
+			</div>
+
+
+			<!-- /col-lg-4 -->
+
+			<!-- /row -->
+		</section>
+		<!--/wrapper -->
+	</section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 	<section id="container">
 		<section id="main-content">
 			<section class="wrapper">
-				<div class="row">
-					<div class="col-lg-9 main-chart">
-						<div class="row mt">
-							<!-- SERVER STATUS PANELS -->
 
 
-							<div class="col-md-4 mb">
-								<!-- WHITE PANEL - TOP USER -->
-								<div class="white-panel pn">
-									<div class="white-header">
-										<h5>${account.sa_id }</h5>
+				<div class="row mt">
+					<div class="col-lg-12">
+						<div class="form-panel">
+							<h4 class="mb">
+								<i class="fa fa-angle-right"></i> Form Elements
+							</h4>
+
+							<div class="form-group">
+								<label class="col-sm-2 col-sm-2 control-label">정산예정금액</label>
+								<div class="col-sm-5">
+									<input type="text" class="form-control" value="${money }￦"
+										readonly="readonly">
+									<button class="btn btn-default">정산하기</button>
+								</div>
+							</div>
+
+							<form method="get">
+								<div class="form-group">
+									<label class="col-sm-2 col-sm-2 control-label">결제계좌</label>
+									<div class="col-sm-5">
+										<input type="text" class="form-control" value="${bankNum }"
+											readonly="readonly">
 									</div>
+								</div>
 
-									<p>
-										결산 예정금액 <b> : &#92; ${money }</b>
-										<button id="takeMoneyBtn">정산하기</button>
-									</p>
-									<div class="row">
+								<div class="form-group">
+									<label class="col-sm-2 col-sm-2 control-label">은행명</label>
+									<div class="col-sm-5">
+										<input type="text" class="form-control" value="${bankName }"
+											readonly="readonly">
+									</div>
+								</div>
+							</form>
+						</div>
+					</div>
+				</div>
+				</div>
+
+				</div>
+				<!-- col-lg-12-->
+				</div>
+				<!-- /row -->
 
 
-										<c:choose>
-											<c:when test="${account.sa_account_num }"== "">
-												<b>등록된 계좌가 없습니다</b>
-												<form action="">
-													<input name="sa_account_num"> <select
+
+
+
+
+
+				<div class="row">
+
+
+
+
+
+
+
+					<div class="row mt">
+						<div class="col-lg-12">
+							<div class="form-panel">
+								<h4 class="mb">
+									<i class="fa fa-angle-right"></i> 정산내역
+								</h4>
+
+								<div class="form-group">
+									<label class="col-sm-2 col-sm-2 control-label">정산예정금액</label>
+									<div class="col-sm-10">
+										결산 예정금액 <b> : ${money } ￦</b>
+									</div>
+								</div>
+
+
+
+
+
+								<c:choose>
+									<c:when test="${ empty bankNum }">
+										<b>등록된 계좌가 없습니다</b>
+										<form action="saleBank.reg.do" method="post">
+
+
+
+
+
+											<div class="form-group">
+												<label class="col-sm-2 col-sm-2 control-label">정산계좌</label>
+												<div class="col-sm-10">
+													<input id="an_input" name="sa_account_num"
+														class="form-control">
+												</div>
+											</div>
+
+											<div class="form-group">
+												<label class="col-sm-2 col-sm-2 control-label">은행</label>
+												<div class="col-sm-10">
+													<input id="ab_input" name="sa_account_bank"
+														class="form-control">
+												</div>
+											</div>
+
+											<button type="submit">계좌 등록하기</button>
+										</form>
+									</c:when>
+									<c:otherwise>
+										<form action="saleBank.modify.do" method="post"
+											id="modifyForm">
+
+
+
+											<div class="form-group">
+												<label class="col-sm-2 col-sm-2 control-label">Password</label>
+												<div class="col-sm-10">
+													<input type="password" class="form-control" placeholder="">
+												</div>
+											</div>
+
+											<div class="form-group">
+												<label class="col-sm-2 col-sm-2 control-label">Password</label>
+												<div class="col-sm-10">
+													<input type="password" class="form-control" placeholder="">
+												</div>
+											</div>
+
+
+											<div class="form-group">
+												<label class="col-sm-2 col-sm-2 control-label">정산계좌</label>
+												<div class="col-sm-10">
+													<input id="an_input" readonly="readonly"
+														name="sa_account_num" value="${bankNum }"
+														class="form-control">
+												</div>
+											</div>
+
+											<div class="form-group">
+												<label class="col-sm-2 col-sm-2 control-label">은행</label>
+												<div class="col-sm-10">
+													<input id="ab_input" readonly="readonly"
+														name="sa_account_bank" value="${bankName }"
+														class="form-control"> <select
 														name="sa_account_bank">
 														<option>국민</option>
 														<option>하나</option>
 														<option>기업</option>
 														<option>신한</option>
 														<option>우체국</option>
-													</select> <input type="submit" value="등록하러가기">
-												</form>
+													</select>
+
+												</div>
+											</div>
+
+											<button type="button" id="modifyBtn" name="modify">계좌정보
+												수정하기</button>
+										</form>
 
 
-											</c:when>
-											<c:otherwise>
-												<form action="saleBank.reg.do" method="post">
-													<div class="col-md-6">
-														<p class="small mt">정산계좌</p>
-														<p>
-															<input id="an_input" readonly="readonly"
-																name="sa_account_num" value="${account.sa_account_num }">
+									</c:otherwise>
+								</c:choose>
 
-														</p>
-													</div>
-													<div class="col-md-6">
-														<p class="small mt">정산은행</p>
-														<p>
-															<input id="ab_input" readonly="readonly"
-																name="sa_account_bank"
-																value="${account.sa_account_bank }">
-														</p>
-													</div>
-													<button type="button" id="modifyBtn">계좌정보 수정하기</button>
-												</form>
-											</c:otherwise>
-
-										</c:choose>
-
-									</div>
-								</div>
-							</div>
-							<!-- /col-md-4 -->
-
-
-						</div>
-						<!-- /row -->
-
-
-
-						<div class="row mt">
-
-
-							<div class="border-head">
-								<h3>VISITS</h3>
-							</div>
-							<div class="custom-bar-chart">
-								<ul class="y-axis">
-									<li><span>10.000</span></li>
-									<li><span>8.000</span></li>
-									<li><span>6.000</span></li>
-									<li><span>4.000</span></li>
-									<li><span>2.000</span></li>
-									<li><span>0</span></li>
-								</ul>
-								<div class="bar">
-									<div class="title">JAN</div>
-									<div class="value tooltips" data-original-title="8.500"
-										data-toggle="tooltip" data-placement="top">85%</div>
-								</div>
-								<div class="bar ">
-									<div class="title">FEB</div>
-									<div class="value tooltips" data-original-title="5.000"
-										data-toggle="tooltip" data-placement="top">50%</div>
-								</div>
-								<div class="bar ">
-									<div class="title">MAR</div>
-									<div class="value tooltips" data-original-title="6.000"
-										data-toggle="tooltip" data-placement="top">60%</div>
-								</div>
-								<div class="bar ">
-									<div class="title">APR</div>
-									<div class="value tooltips" data-original-title="4.500"
-										data-toggle="tooltip" data-placement="top">45%</div>
-								</div>
-								<div class="bar">
-									<div class="title">MAY</div>
-									<div class="value tooltips" data-original-title="3.200"
-										data-toggle="tooltip" data-placement="top">32%</div>
-								</div>
-								<div class="bar ">
-									<div class="title">JUN</div>
-									<div class="value tooltips" data-original-title="6.200"
-										data-toggle="tooltip" data-placement="top">62%</div>
-								</div>
-								<div class="bar">
-									<div class="title">JUL</div>
-									<div class="value tooltips" data-original-title="7.500"
-										data-toggle="tooltip" data-placement="top">75%</div>
-								</div>
 							</div>
 						</div>
 					</div>
+					<!-- /col-md-4 -->
+
+
 				</div>
+				<!-- /row -->
+
+
+
 			</section>
 		</section>
 	</section>

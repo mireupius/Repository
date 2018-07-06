@@ -7,6 +7,8 @@ create table seller_account(
 
 		select sum(sd_total_price)
 		from sale_delivery
-		where sd_seller_id = 'aaa'
+		where sd_seller_id = 'ioso1212'
 		and sd_delivery_state = '구매확정'
 		and sd_is_calculate = 'N';
+select * from seller_account
+select * from seller_account

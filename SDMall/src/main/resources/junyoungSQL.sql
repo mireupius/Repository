@@ -14,12 +14,12 @@ csm_emailAddress varchar2(30 char) not null
 
 select * 
 		from sale_delivery, goods_tb
-		where ((sd_customer_id = 'junyoung12' and sd_claim is null)
-		or ((sd_customer_id = 'junyoung12' and sd_claim not like '%'||'교환'||'%')
-			 and (sd_customer_id = 'junyoung12' and sd_claim not like '%'||'취소'||'%')
-			 and (sd_customer_id = 'junyoung12' and sd_claim not like '%'||'반품'||'%'))
+		where ((sd_customer_id = 'ioso1212' and sd_claim is null)
+		or ((sd_customer_id = 'ioso1212' and sd_claim not like '%'||'교환'||'%')
+			 and (sd_customer_id = 'ioso1212' and sd_claim not like '%'||'취소'||'%')
+			 and (sd_customer_id = 'ioso1212' and sd_claim not like '%'||'반품'||'%'))
 		)
-		and gd_no = sd_product_no and sd_customer_id = 'junyoung12'
+		and gd_no = sd_product_no and sd_customer_id = 'ioso1212'
 		and (sd_order_date between (select add_months(SYSDATE, -6) from dual) and (select SYSDATE from dual));
 
 select * from goods_tb;

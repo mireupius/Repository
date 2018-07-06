@@ -83,7 +83,7 @@
 															type="hidden"> <input name="sd_total_price"
 															value="${(list.gd_price+list.op_price) * list.sb_quantity + list.gd_dlvchrg}"
 															type="hidden"> <input name="sd_product_no"
-															value="${list.sb_no }" type="hidden"> <input
+															value="${list.sb_gdno }" type="hidden"> <input
 															name="sd_seller_id" value="${list.gd_sellerid }"
 															type="hidden"> <input name="sd_out_area"
 															value="${list.gd_outarea}" type="hidden"> <input

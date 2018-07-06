@@ -18,9 +18,8 @@ import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
-import com.oreilly.servlet.MultipartRequest;
-import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 import com.sol.mall.member.Seller;
 import com.sol.mall.sale.delivery.Delivery;
 import com.sol.mall.sale.delivery.DeliveryMapper;
@@ -31,27 +30,32 @@ public class ExcelDAO {
 	@Autowired
 	private SqlSession ss;
 
-	public void sendDeliverys(HttpServletRequest req, HttpServletResponse res) {
+	public void sendDeliverys(HttpServletRequest req, HttpServletResponse res, MultipartFile multipartFile) {
 		String path = req.getSession().getServletContext().getRealPath("resources/files/sale/temp");
 
+		String filename = multipartFile.getOriginalFilename();
+
 		System.out.println(path);
+		System.out.println(filename);
 
 		File selectedDir = new File(path);
-
 		File[] innerFiles = selectedDir.listFiles();
 
 		// 하위 디렉토리 삭제
-		for (int i = 0; i < innerFiles.length; i++) {
-			innerFiles[i].delete();
-		}
 
-		try {
-			MultipartRequest mr = new MultipartRequest(req, path, 1024 * 1024 * 12, "utf-8",
-					new DefaultFileRenamePolicy());
+		if (multipartFile != null && !(multipartFile.getOriginalFilename().equals(""))) {
 
-			String fileName = mr.getFilesystemName("excelFile");
+			File excel = new File(path + "/" + filename);
 
-			File excel = new File(path + "/" + fileName);
+			try {
+				multipartFile.transferTo(excel);
+			} catch (IllegalStateException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 
 			ReadOption readOption = new ReadOption();
 			readOption.setFilePath(excel.getAbsolutePath());
@@ -78,14 +82,14 @@ public class ExcelDAO {
 					success++;
 				}
 			}
+
+			for (int i = 0; i < innerFiles.length; i++) {
+				innerFiles[i].delete();
+			}
+
 			req.setAttribute("all", all - 1);
 			req.setAttribute("success", success);
-
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
 		}
-
 	}
 
 	public File MakeExcel(HttpServletRequest req, HttpServletResponse res, Delivery ds) {
@@ -105,7 +109,7 @@ public class ExcelDAO {
 		String excelName = "excel.xlsx";
 		Map<String, String> headerList = new HashMap<String, String>();
 		Map<String, String> list = new HashMap<String, String>();
-		
+
 		Seller s = (Seller) req.getSession().getAttribute("loginSeller");
 		ds.setSd_seller_id(s.getSl_id());
 		List<Delivery> d = ss.getMapper(DeliveryMapper.class).getCheckDeliverys(ds);
