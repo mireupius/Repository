@@ -18,9 +18,14 @@ public class BankDAO {
 	public void getAccount(HttpServletRequest req, HttpServletResponse res, Account a) {
 		Seller s = (Seller) req.getSession().getAttribute("loginSeller");
 		a.setSa_id(s.getSl_id());
-		Account aa = ss.getMapper(BankMapper.class).getAccount(a);
-		req.setAttribute("bankName", aa.getSa_account_bank());
-		req.setAttribute("bankNum", aa.getSa_account_num());
+		try {
+			Account aa = ss.getMapper(BankMapper.class).getAccount(a);
+			req.setAttribute("bankName", aa.getSa_account_bank());
+			req.setAttribute("bankNum", aa.getSa_account_num());
+		} catch (Exception e) {
+			req.setAttribute("bankName", "");
+			req.setAttribute("bankNum", "");
+		}
 	}
 
 	public void getNotCalMoney(HttpServletRequest req, HttpServletResponse res, Account a) {

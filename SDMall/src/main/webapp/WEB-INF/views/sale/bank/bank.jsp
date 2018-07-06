@@ -7,15 +7,52 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
 <title>Insert title here</title>
+
+<style type="text/css">
+#bankTabel {
+	border: none;
+	height: 300px;
+}
+
+#btCell {
+	font-size: 10pt;
+	text-align: center;
+	border-top: none;
+}
+
+#an_input {
+	width: 100%;
+	border: none;
+}
+
+#ab_input {
+	width: 100%;
+	border: none;
+}
+
+#infoCell {
+	text-align: center;
+}
+
+#infoCell2 {
+	text-align: center;
+}
+</style>
 <script type="text/javascript">
 	$(function() {
 
+		
+		if (${empty bankNum }){
+			alert("등록된 은행 정보가 없습니다");
+		}								
+		
 		$("#takeMoneyBtn").click(function() {
 			var take = confirm("정산하시겠습니까?");
-			if (take) {
+			if (take && ${!empty bankNum}) {
 				location.href = "saleBank.takemoney.do";
+			}else{
+			  alert("은행정보를 등록해주세요");
 			}
-
 		});
 
 		$("#modifyBtn").click(function() {
@@ -25,13 +62,16 @@
 				$("#modifyBtn").remove();
 				$("#an_input").val("");
 				$("#ab_input").val("");
+				$("#an_input").css("border","black solid 1px");
+				$("#ab_input").css("border","black solid 1px");
 				$("#an_input").removeAttr("readonly");
 				$("#ab_input").removeAttr("readonly");
 
 				$("<input>", {
 					value : "수정하기",
-					type : "submit"
-				}).appendTo($("#modifyForm"));
+					type : "submit",
+				    class : "btn btn-default"
+				}).appendTo($("#btCell"));
 
 			}
 
@@ -51,66 +91,72 @@
 			<div class="row mt">
 				<div class="col-lg-12">
 
-					<!-- 답변패널 시작 -->
 					<div class="col-md-6">
 						<div class="content-panel">
-							<table class="table">
+							<c:choose>
+								<c:when test="${empty bankNum }">
+									<form action="saleBank.reg.do" method="post" id="backForm">
+								</c:when>
+								<c:otherwise>
+									<form action="saleBank.modify.do" method="post" id="backForm">
+								</c:otherwise>
+							</c:choose>
+
+							<table class="table" id="bankTabel">
 								<tr>
 									<th>정산금액</th>
-									<td>"${money }￦"</td>
-									<th>정산하기</th>
-									<td><button class="btn btn-default">정산하기</button></td>
+									<td colspan="3">${money }￦
+										<button class="btn btn-default" type="button"
+											id="takeMoneyBtn">정산하기</button>
+									</td>
 								</tr>
 
-								<tr>
-									<th>상품주문번호</th>
-									<td id="qa_orderNo"></td>
-									<th>상품명</th>
-									<td id="gdName"></td>
-								</tr>
-								<tr>
-									<th>문의유형/제목</th>
-									<td colspan="3" id="questionTitle"></td>
-								</tr>
-								<tr>
-									<th>문의내용</th>
-									<td colspan="3" id="questionContent"></td>
-								</tr>
+								<c:choose>
+									<c:when test="${empty bankNum }">
+										<tr>
+
+											<th>정산금 입금계좌번호</th>
+											<td><input name="sa_account_num"></td>
+											<th>은행명</th>
+											<td><input name="sa_account_bank"></td>
+										</tr>
+
+										<tr>
+											<td colspan="4" id="infoCell2">
+												<button class="btn btn-default" id="btCell">은행정보 입력</button>
+											</td>
+										</tr>
+
+									</c:when>
+
+									<c:otherwise>
+
+										<tr>
+
+											<th>정산금 입금계좌번호</th>
+											<td><input id="an_input" value="${bankNum }"
+												name="sa_account_num" readonly="readonly"></td>
+											<th>은행명</th>
+											<td><input id="ab_input" value="${bankName }"
+												name="sa_account_bank" readonly="readonly"><br></td>
+										</tr>
+
+										<tr>
+											<td colspan="4" id="btCell">
+												<button class="btn btn-default" id="modifyBtn">계좌정보
+													수정하기</button>
+											</td>
+										</tr>
+									</c:otherwise>
+								</c:choose>
 							</table>
+							</form>
 						</div>
 					</div>
 					<!-- /col-md-12 -->
 
 
-					<div class="col-md-6">
-						<div class="content-panel">
-							<table class="table">
-								<thead>
-									<tr>
-										<th colspan="4">판매자 답변처리</th>
-									</tr>
-								</thead>
-								<tbody>
-									<tr>
-										<td>답변내용</td>
-										<td>
-											<form method="post" action="sale.delivery.answer.do">
-												<textarea name="qa_answer" id="anwser" value=""></textarea>
-												<input name="qa_regNo" id="anwserNum" value="" hidden="">
-												<input type="submit" value="답변하기"><span id="result"
-													hidden>${r }</span>
-											</form>
-										</td>
-									</tr>
-								</tbody>
-							</table>
-						</div>
-					</div>
-					<!-- 답변패널 끝-->
-
-
 				</div>
-
 			</div>
 
 
@@ -121,203 +167,5 @@
 		<!--/wrapper -->
 	</section>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-	<section id="container">
-		<section id="main-content">
-			<section class="wrapper">
-
-
-				<div class="row mt">
-					<div class="col-lg-12">
-						<div class="form-panel">
-							<h4 class="mb">
-								<i class="fa fa-angle-right"></i> Form Elements
-							</h4>
-
-							<div class="form-group">
-								<label class="col-sm-2 col-sm-2 control-label">정산예정금액</label>
-								<div class="col-sm-5">
-									<input type="text" class="form-control" value="${money }￦"
-										readonly="readonly">
-									<button class="btn btn-default">정산하기</button>
-								</div>
-							</div>
-
-							<form method="get">
-								<div class="form-group">
-									<label class="col-sm-2 col-sm-2 control-label">결제계좌</label>
-									<div class="col-sm-5">
-										<input type="text" class="form-control" value="${bankNum }"
-											readonly="readonly">
-									</div>
-								</div>
-
-								<div class="form-group">
-									<label class="col-sm-2 col-sm-2 control-label">은행명</label>
-									<div class="col-sm-5">
-										<input type="text" class="form-control" value="${bankName }"
-											readonly="readonly">
-									</div>
-								</div>
-							</form>
-						</div>
-					</div>
-				</div>
-				</div>
-
-				</div>
-				<!-- col-lg-12-->
-				</div>
-				<!-- /row -->
-
-
-
-
-
-
-
-				<div class="row">
-
-
-
-
-
-
-
-					<div class="row mt">
-						<div class="col-lg-12">
-							<div class="form-panel">
-								<h4 class="mb">
-									<i class="fa fa-angle-right"></i> 정산내역
-								</h4>
-
-								<div class="form-group">
-									<label class="col-sm-2 col-sm-2 control-label">정산예정금액</label>
-									<div class="col-sm-10">
-										결산 예정금액 <b> : ${money } ￦</b>
-									</div>
-								</div>
-
-
-
-
-
-								<c:choose>
-									<c:when test="${ empty bankNum }">
-										<b>등록된 계좌가 없습니다</b>
-										<form action="saleBank.reg.do" method="post">
-
-
-
-
-
-											<div class="form-group">
-												<label class="col-sm-2 col-sm-2 control-label">정산계좌</label>
-												<div class="col-sm-10">
-													<input id="an_input" name="sa_account_num"
-														class="form-control">
-												</div>
-											</div>
-
-											<div class="form-group">
-												<label class="col-sm-2 col-sm-2 control-label">은행</label>
-												<div class="col-sm-10">
-													<input id="ab_input" name="sa_account_bank"
-														class="form-control">
-												</div>
-											</div>
-
-											<button type="submit">계좌 등록하기</button>
-										</form>
-									</c:when>
-									<c:otherwise>
-										<form action="saleBank.modify.do" method="post"
-											id="modifyForm">
-
-
-
-											<div class="form-group">
-												<label class="col-sm-2 col-sm-2 control-label">Password</label>
-												<div class="col-sm-10">
-													<input type="password" class="form-control" placeholder="">
-												</div>
-											</div>
-
-											<div class="form-group">
-												<label class="col-sm-2 col-sm-2 control-label">Password</label>
-												<div class="col-sm-10">
-													<input type="password" class="form-control" placeholder="">
-												</div>
-											</div>
-
-
-											<div class="form-group">
-												<label class="col-sm-2 col-sm-2 control-label">정산계좌</label>
-												<div class="col-sm-10">
-													<input id="an_input" readonly="readonly"
-														name="sa_account_num" value="${bankNum }"
-														class="form-control">
-												</div>
-											</div>
-
-											<div class="form-group">
-												<label class="col-sm-2 col-sm-2 control-label">은행</label>
-												<div class="col-sm-10">
-													<input id="ab_input" readonly="readonly"
-														name="sa_account_bank" value="${bankName }"
-														class="form-control"> <select
-														name="sa_account_bank">
-														<option>국민</option>
-														<option>하나</option>
-														<option>기업</option>
-														<option>신한</option>
-														<option>우체국</option>
-													</select>
-
-												</div>
-											</div>
-
-											<button type="button" id="modifyBtn" name="modify">계좌정보
-												수정하기</button>
-										</form>
-
-
-									</c:otherwise>
-								</c:choose>
-
-							</div>
-						</div>
-					</div>
-					<!-- /col-md-4 -->
-
-
-				</div>
-				<!-- /row -->
-
-
-
-			</section>
-		</section>
-	</section>
 </body>
 </html>
