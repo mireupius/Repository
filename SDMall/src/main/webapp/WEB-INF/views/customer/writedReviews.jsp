@@ -20,45 +20,43 @@
 			</tr>
 		</table>
 	</div>
-	<c:forEach var="list" items="${reviewList }">
 
-		<div>
-			<table class="reviewTb1">
-				<tr>
-					<td align="center">
-						<table class="reviewTb2">
-							<tr>
-								<td class="reviewdTd1">상품명</td>
-								<td class="reviewdTd1">내용</td>
-								<td class="reviewdTd1">별점</td>
-								<td class="reviewdTd1">작성일</td>
-							</tr>
+	<div>
+		<table class="reviewTb1">
+			<tr>
+				<td align="center">
+					<table class="reviewTb2">
+						<tr>
+							<td class="reviewdTd1">상품명</td>
+							<td class="reviewdTd1">내용</td>
+							<td class="reviewdTd1">별점</td>
+							<td class="reviewdTd1">작성일</td>
+						</tr>
+						<c:forEach var="list" items="${reviewList }">
 							<tr>
 								<td class="reviewdTd2">${list.pr_gdName }</td>
-								<td class="reviewdTd2">
-									 ${list.pr_comment }
-								</td>
+								<td class="reviewdTd2">${list.pr_comment }</td>
 								<td class="reviewdTd2">${list.pr_star }점</td>
 								<td class="reviewdTd2">${list.pr_regDate }</td>
 							</tr>
-						</table>
-					</td>
-				</tr>
-			</table>
-		</div>
-		<div>
-			<table class="reviewTb3">
-				<tr>
-					<td>
-						<div>
-							<button class="reviewBtn2" onclick="goCustomerPage();"
-								type="button">이전으로</button>
-						</div>
-					</td>
-				</tr>
-			</table>
-		</div>
-	</c:forEach>
+						</c:forEach>
+					</table>
+				</td>
+			</tr>
+		</table>
+	</div>
+	<div>
+		<table class="reviewTb3">
+			<tr>
+				<td>
+					<div>
+						<button class="reviewBtn2" onclick="goCustomerPage();"
+							type="button">이전으로</button>
+					</div>
+				</td>
+			</tr>
+		</table>
+	</div>
 
 </body>
 </html>
