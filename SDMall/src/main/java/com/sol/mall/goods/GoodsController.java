@@ -17,7 +17,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
-
 import com.sol.mall.common.ImageResize;
 import com.sol.mall.member.MemberDAO;
 import com.sol.mall.member.Seller;
@@ -42,8 +41,14 @@ public class GoodsController {
 	// 상품등록화면 처음
 	@RequestMapping(value = "/goodsReg.go", method = RequestMethod.GET)
 	public String goodsReg(HttpServletRequest request, HttpServletResponse response) {
+
 		//판매자 세션 확인
 		if(mDAO.slLoginCheck(request, response)) {
+			
+			// ↓↓↓↓↓↓ 이중 submit 작동 방지용 세션 ↓↓↓↓↓↓
+			Date now = new Date();
+			request.getSession().setAttribute("submitStop", now);
+			// ↑↑↑↑↑↑ 이중 submit 작동 방지용 세션 ↑↑↑↑↑↑
 			
 			gdsDAO.getAllcategory(request, response);
 			
@@ -117,98 +122,109 @@ public class GoodsController {
 	@RequestMapping(value = "/registration.do", method = RequestMethod.POST)
 	public String registrationDo(@RequestParam("gd_file1") MultipartFile multipartFile, Goods gds, GoodsDtl gdtl,
 			OptionList opl, HttpServletRequest request, HttpServletResponse response){
-		if(mDAO.slLoginCheck(request, response)) {
-			// 업로드 파일이 존재하면
-			if (multipartFile != null && !(multipartFile.getOriginalFilename().equals(""))) {
-				
-				// 확장자 제한
-				String originalName = multipartFile.getOriginalFilename(); // 실제 파일명
-				String originalNameExtension = originalName.substring(originalName.lastIndexOf(".") + 1).toLowerCase(); // 실제파일
-																														// 확장자
-				// (소문자변경)
-				if (!((originalNameExtension.equals("jpg")) || (originalNameExtension.equals("gif"))
-						|| (originalNameExtension.equals("png")) || (originalNameExtension.equals("bmp")))) {
-					// 허용 확장자가 아닐 경우
-				}
-				// 파일크기제한 (5MB)
-				long filesize = multipartFile.getSize(); // 파일크기
-				long limitFileSize = 5 * 1024 * 1024; // 5MB
-				if (limitFileSize < filesize) {
-					// 제한보다 파일크기가 클 경우
-					//??????????????????????? 구현 하기 귀찮으 ....
-				}
-	
-				// 저장경로
-				String defaultPath = request.getSession().getServletContext().getRealPath("/"); // 서버기본경로 (프로젝트 폴더 아님)
-				String path = defaultPath + "upload" + File.separator + "";
-				
-				// 저장경로 처리 폴더생성
-				File file = new File(path);
-				if (!file.exists()) { // 디렉토리 존재하지 않을경우 디렉토리 생성
-					file.mkdirs();
-				}
-	
-				// 파일 저장명 처리 (20150702091941-fd8-db619e6040d5.확장자)
-				SimpleDateFormat formatter = new SimpleDateFormat("yyyyMMddHHmmss");
-				String today = formatter.format(new Date());
-				String modifyName = today + "-" + UUID.randomUUID().toString().substring(20) + "." + originalNameExtension;
-	
-				String pathNameGd_imgl = today + "-" + UUID.randomUUID().toString().substring(20) + "." + originalNameExtension;
-				String pathNameGd_imgm = today + "-" + UUID.randomUUID().toString().substring(20) + "." + originalNameExtension;
-				String pathNameGd_imgs = today + "-" + UUID.randomUUID().toString().substring(20) + "." + originalNameExtension;
-				String pathNameGd_imgss = today + "-" + UUID.randomUUID().toString().substring(20) + "." + originalNameExtension;
-				
-				// Multipart 처리
-				// 서버에 파일 저장 (쓰기)
-				try {
-					multipartFile.transferTo(new File(path + modifyName));
-				} catch (IllegalStateException e) {
-					e.printStackTrace();
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
-	
-				// 이미지 사이즈 변경
-				ImageResize.resize(470, 470, path + modifyName, path+pathNameGd_imgl, originalNameExtension);
-				ImageResize.resize(236, 236, path + modifyName, path+pathNameGd_imgm, originalNameExtension);
-				ImageResize.resize(220, 220, path + modifyName, path+pathNameGd_imgs, originalNameExtension);
-				ImageResize.resize(70, 70, path + modifyName, path+pathNameGd_imgss, originalNameExtension);
-				
-				// 상품이미지 로그
-				System.out.println("** 상품이미지 upload 정보 **");
-				System.out.println("** 상품이미지 path : " + path + " **");
-				System.out.println("** 상품이미지 originalName : " + originalName + " **");
-				System.out.println("** 상품이미지 modifyName : " + modifyName + " **");
-				System.out.println("** 상품이미지 pathNameGd_imgl : " + pathNameGd_imgl + " **");
-				System.out.println("** 상품이미지 pathNameGd_imgm : " + pathNameGd_imgm + " **");
-				System.out.println("** 상품이미지 pathNameGd_imgs : " + pathNameGd_imgs + " **");
-				System.out.println("** 상품이미지 pathNameGd_imgss : " + pathNameGd_imgss + " **");
-	
-				// 리사이즈된 이미지 적용
-				gds.setGd_imgl(pathNameGd_imgl);
-				gds.setGd_imgm(pathNameGd_imgm);
-				gds.setGd_imgs(pathNameGd_imgs);
-				gds.setGd_imgss(pathNameGd_imgss);
-				
-				// 리사이즈 원본파일 삭제
-				File oldFile = new File(path + modifyName);
-				oldFile.delete();
-	
-				try {
-					gdsDAO.insertGdsInfo(gds, gdtl, opl, request, response);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
+		
+		// 이중 submit 세션확인
+		String stop = request.getSession().getAttribute("submitStop").toString();
 
+		if(mDAO.slLoginCheck(request, response)) {
+
+			// 이중 submit 세션확인
+			if(stop.equals(request.getParameter("submitStop"))) {
+				// 업로드 파일이 존재하면
+				if (multipartFile != null && !(multipartFile.getOriginalFilename().equals(""))) {
+					
+					// 확장자 제한
+					String originalName = multipartFile.getOriginalFilename(); // 실제 파일명
+					String originalNameExtension = originalName.substring(originalName.lastIndexOf(".") + 1).toLowerCase(); // 실제파일
+																															// 확장자
+					// (소문자변경)
+					if (!((originalNameExtension.equals("jpg")) || (originalNameExtension.equals("gif"))
+							|| (originalNameExtension.equals("png")) || (originalNameExtension.equals("bmp")))) {
+						// 허용 확장자가 아닐 경우
+					}
+					// 파일크기제한 (5MB)
+					long filesize = multipartFile.getSize(); // 파일크기
+					long limitFileSize = 5 * 1024 * 1024; // 5MB
+					if (limitFileSize < filesize) {
+						// 제한보다 파일크기가 클 경우
+						//??????????????????????? 구현 하기 귀찮으 ....
+					}
+		
+					// 저장경로
+					String defaultPath = request.getSession().getServletContext().getRealPath("/"); // 서버기본경로 (프로젝트 폴더 아님)
+					String path = defaultPath + "upload" + File.separator + "";
+					
+					// 저장경로 처리 폴더생성
+					File file = new File(path);
+					if (!file.exists()) { // 디렉토리 존재하지 않을경우 디렉토리 생성
+						file.mkdirs();
+					}
+		
+					// 파일 저장명 처리 (20150702091941-fd8-db619e6040d5.확장자)
+					SimpleDateFormat formatter = new SimpleDateFormat("yyyyMMddHHmmss");
+					String today = formatter.format(new Date());
+					String modifyName = today + "-" + UUID.randomUUID().toString().substring(20) + "." + originalNameExtension;
+		
+					String pathNameGd_imgl = today + "-" + UUID.randomUUID().toString().substring(20) + "." + originalNameExtension;
+					String pathNameGd_imgm = today + "-" + UUID.randomUUID().toString().substring(20) + "." + originalNameExtension;
+					String pathNameGd_imgs = today + "-" + UUID.randomUUID().toString().substring(20) + "." + originalNameExtension;
+					String pathNameGd_imgss = today + "-" + UUID.randomUUID().toString().substring(20) + "." + originalNameExtension;
+					
+					// Multipart 처리
+					// 서버에 파일 저장 (쓰기)
+					try {
+						multipartFile.transferTo(new File(path + modifyName));
+					} catch (IllegalStateException e) {
+						e.printStackTrace();
+					} catch (IOException e) {
+						e.printStackTrace();
+					}
+		
+					// 이미지 사이즈 변경
+					ImageResize.resize(470, 470, path + modifyName, path+pathNameGd_imgl, originalNameExtension);
+					ImageResize.resize(236, 236, path + modifyName, path+pathNameGd_imgm, originalNameExtension);
+					ImageResize.resize(115, 115, path + modifyName, path+pathNameGd_imgs, originalNameExtension);
+					ImageResize.resize(70, 70, path + modifyName, path+pathNameGd_imgss, originalNameExtension);
+					
+					// 상품이미지 로그
+					System.out.println("** 상품이미지 upload 정보 **");
+					System.out.println("** 상품이미지 path : " + path + " **");
+					System.out.println("** 상품이미지 originalName : " + originalName + " **");
+					System.out.println("** 상품이미지 modifyName : " + modifyName + " **");
+					System.out.println("** 상품이미지 pathNameGd_imgl : " + pathNameGd_imgl + " **");
+					System.out.println("** 상품이미지 pathNameGd_imgm : " + pathNameGd_imgm + " **");
+					System.out.println("** 상품이미지 pathNameGd_imgs : " + pathNameGd_imgs + " **");
+					System.out.println("** 상품이미지 pathNameGd_imgss : " + pathNameGd_imgss + " **");
+		
+					// 리사이즈된 이미지 적용
+					gds.setGd_imgl(pathNameGd_imgl);
+					gds.setGd_imgm(pathNameGd_imgm);
+					gds.setGd_imgs(pathNameGd_imgs);
+					gds.setGd_imgss(pathNameGd_imgss);
+					
+					// 리사이즈 원본파일 삭제
+					File oldFile = new File(path + modifyName);
+					oldFile.delete();
+		
+					try {
+						gdsDAO.insertGdsInfo(gds, gdtl, opl, request, response);
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
+				}
+
+				Date now = new Date();
+				// 이중 서브밋 방지 세션 값 변경
+				request.getSession().setAttribute("submitStop","s"+now);
+			}
 			gdsDAO.getAllGoodsView(gds, request);
-			
 			request.setAttribute("contentPage", "../goods/goodsList.jsp");
 			return "sale/saleIndex";
 		}else {
 			request.setAttribute("loginInfo", "loginArea.jsp");
 			return "member/loginPage";
 		}
+		
 	}
 	
 	// 상품 수정 작업
@@ -276,7 +292,7 @@ public class GoodsController {
 				// 이미지 사이즈 변경
 				ImageResize.resize(470, 470, path + modifyName, path+pathNameGd_imgl, originalNameExtension);
 				ImageResize.resize(236, 236, path + modifyName, path+pathNameGd_imgm, originalNameExtension);
-				ImageResize.resize(220, 220, path + modifyName, path+pathNameGd_imgs, originalNameExtension);
+				ImageResize.resize(115, 115, path + modifyName, path+pathNameGd_imgs, originalNameExtension);
 				ImageResize.resize(70, 70, path + modifyName, path+pathNameGd_imgss, originalNameExtension);
 							
 				// 상품이미지 로그
@@ -359,12 +375,36 @@ public class GoodsController {
 
 	// 상품키워드 검색(ajax - json)
 	@RequestMapping(value = "/goods.search.keyword", method = RequestMethod.GET, produces = "application/json; charset=utf-8")
-	public @ResponseBody Paging gdsSearchKey2(Keywords k, int curPage, HttpServletRequest request, HttpServletResponse response) {
+	public @ResponseBody Paging gdsSearchKey(Keywords k, int curPage, double cnt, HttpServletRequest request, HttpServletResponse response) {
 		
 		Seller dbS = (Seller) request.getSession().getAttribute("loginSeller");
 		k.setGd_sellerid(dbS.getSl_id());
 		
-		return gdsDAO.getGoodsViewByKey(k, curPage, request);
+		return gdsDAO.getGoodsViewByKey(k, curPage, cnt, request);
+	}
+	
+	// 옵션 선택삭제(ajax - json)
+	@RequestMapping(value = "/option.delete", method = RequestMethod.GET, produces = "application/json; charset=utf-8")
+	public @ResponseBody Options optionDel(OptionList op, HttpServletRequest request, HttpServletResponse response) {
+		String warnMessage= "ok";
+		Option op2 = new Option();
+		op2.setOp_gdno(op.getOp_gdno());
+		try {
+			for (String a : op.getOpl_no()) {
+				op2.setOp_no(a);
+				
+				if(gdsDAO.deleteOpByNo(op2)) {
+					warnMessage = "no";
+				}
+			}
+			
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		// 삭제하고 나머지 옵션 json에 넘기기
+		return new Options(gdsDAO.getOptionByGdNo(op2), warnMessage);
+			
 	}
 	
 	// 상품상세화면 표시
