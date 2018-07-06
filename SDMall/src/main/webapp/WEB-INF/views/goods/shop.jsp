@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html lang="en">
@@ -34,14 +35,27 @@
 						<div class="sidebar_section">
 							<div class="sidebar_title">Categories</div>
 							<ul class="sidebar_categories">
-								
+								<c:choose>
+								<c:when test="${param.ct_clf==3 }">
 								<c:forEach var="sideCate" items="${allCategory}">
-									<c:if test="${sideCate.ct_parentno==param.ct_no }">
-										<li><a href="shop.Category?ct_no=${sideCate.ct_no }">${sideCate.ct_clfname }</a></li>
+									<c:if test="${sideCate.ct_parentno==param.ct_parentno }">
+										<li><a href="shop.Category?ct_no=${sideCate.ct_no }&ct_clf=${sideCate.ct_clf}&ct_parentno=${sideCate.ct_parentno }">${sideCate.ct_clfname }</a></li>
 										<c:if test="${sideCate.ct_no==null}">
 										</c:if>
 									</c:if>
 								</c:forEach>
+								</c:when>
+								
+								<c:otherwise>
+								<c:forEach var="sideCate" items="${allCategory}">
+									<c:if test="${sideCate.ct_parentno==param.ct_no }">
+										<li><a href="shop.Category?ct_no=${sideCate.ct_no }&ct_clf=${sideCate.ct_clf}&ct_parentno=${sideCate.ct_parentno }">${sideCate.ct_clfname }</a></li>
+										<c:if test="${sideCate.ct_no==null}">
+										</c:if>
+									</c:if>
+								</c:forEach>
+								</c:otherwise>
+								</c:choose>
 								
 							</ul>
 						</div>
@@ -51,31 +65,16 @@
 				<div class="col-lg-9">
 					
 					<!-- Shop Content -->
-
 					<div class="shop_content">
 						<div class="shop_bar clearfix">
-							<div class="shop_product_count"><span>186</span> products found</div>
-							<div class="shop_sorting">
-								<span>Sort by:</span>
-								<ul>
-									<li>
-										<span class="sorting_text">highest rated<i class="fas fa-chevron-down"></span></i>
-										<ul>
-											<li class="shop_sorting_button" data-isotope-option='{ "sortBy": "original-order" }'>highest rated</li>
-											<li class="shop_sorting_button" data-isotope-option='{ "sortBy": "name" }'>name</li>
-											<li class="shop_sorting_button"data-isotope-option='{ "sortBy": "price" }'>price</li>
-										</ul>
-									</li>
-								</ul>
-							</div>
+							<div class="shop_product_count"><span>${fn:length(goodsList) }</span> products found</div>
 						</div>
-
 						<div class="product_grid">
 							<div class="product_grid_border"></div>
-
-
-
 							
+							<c:if test="${fn:length(goodsList)==0 }">
+							<h5 class="goods_nothing">해당 상품이 없습니다.</h3>
+							</c:if>
 							<c:forEach var="goods" items="${goodsList}">
 							<a href="goods?gd_no=${goods.gd_no }">
 							<c:choose>
@@ -84,10 +83,9 @@
 									<div class="product_border"></div>
 									<div class="product_image d-flex flex-column align-items-center justify-content-center"><img src="${pageContext.request.contextPath}/upload/${goods.gd_imgs}" alt=""></div>
 									<div class="product_content">
-										<div class="product_price">${goods.gd_price }</div>
+										<div class="product_price"><fmt:formatNumber value="${goods.gd_price }" pattern="#,###" />원</div>
 										<div class="product_name"><div><a href="goods?gd_no=${goods.gd_no }" tabindex="0">${goods.gd_name }</a></div></div>
 									</div>
-									<div class="product_fav"><i class="fas fa-heart"></i></div>
 								</div>
 								</c:when>
 								<c:otherwise>
@@ -95,10 +93,9 @@
 									<div class="product_border"></div>
 									<div class="product_image d-flex flex-column align-items-center justify-content-center"><img src="${pageContext.request.contextPath}/upload/${goods.gd_imgs}"></div>
 									<div class="product_content">
-										<div class="product_price">${goods.gd_price }<span>${goods.gd_csmprice }</span></div>
+										<div class="product_price"><fmt:formatNumber value="${goods.gd_price }" pattern="#,###" />원<span><fmt:formatNumber value="${goods.gd_csmprice }" pattern="#,###" /></span></div>
 										<div class="product_name"><div><a href="goods?gd_no=${goods.gd_no }" tabindex="0">${goods.gd_name }</a></div></div>
 									</div>
-									<div class="product_fav"><i class="fas fa-heart"></i></div>
 									<ul class="product_marks">
 										<li class="product_mark product_discount">${(goods.gd_price-goods.gd_csmprice)*100/goods.gd_csmprice}%</li>
 									</ul>
@@ -108,318 +105,6 @@
 							</a>
 							</c:forEach>
 														
-							
-							
-							
-							
-							
-							
-							<!-- Product Item -->
-							<div class="product_item is_new">
-								<div class="product_border"></div>
-								<div class="product_image d-flex flex-column align-items-center justify-content-center"><img src="images/new_5.jpg" alt=""></div>
-								<div class="product_content">
-									<div class="product_price">$225</div>
-									<div class="product_name"><div><a href="#" tabindex="0">Philips BT6900A</a></div></div>
-								</div>
-								<div class="product_fav"><i class="fas fa-heart"></i></div>
-								<ul class="product_marks">
-									<li class="product_mark product_discount">-25%</li>
-									<li class="product_mark product_new">new</li>
-								</ul>
-							</div>
-
-
-
-
-
-
-
-
-							<!-- Product Item -->
-							<div class="product_item discount">
-								<div class="product_border"></div>
-								<div class="product_image d-flex flex-column align-items-center justify-content-center"><img src="images/featured_1.png" alt=""></div>
-								<div class="product_content">
-									<div class="product_price">$225<span>$300</span></div>
-									<div class="product_name"><div><a href="#" tabindex="0">Huawei MediaPad...</a></div></div>
-								</div>
-								<div class="product_fav"><i class="fas fa-heart"></i></div>
-								<ul class="product_marks">
-									<li class="product_mark product_discount">-25%</li>
-									<li class="product_mark product_new">new</li>
-								</ul>
-							</div>
-
-							<!-- Product Item -->
-							<div class="product_item">
-								<div class="product_border"></div>
-								<div class="product_image d-flex flex-column align-items-center justify-content-center"><img src="images/featured_2.png" alt=""></div>
-								<div class="product_content">
-									<div class="product_price">$379</div>
-									<div class="product_name"><div><a href="#" tabindex="0">Apple iPod shuffle</a></div></div>
-								</div>
-								<div class="product_fav"><i class="fas fa-heart"></i></div>
-								<ul class="product_marks">
-									<li class="product_mark product_discount">-25%</li>
-									<li class="product_mark product_new">new</li>
-								</ul>
-							</div>
-
-							<!-- Product Item -->
-							<div class="product_item">
-								<div class="product_border"></div>
-								<div class="product_image d-flex flex-column align-items-center justify-content-center"><img src="images/featured_3.png" alt=""></div>
-								<div class="product_content">
-									<div class="product_price">$225</div>
-									<div class="product_name"><div><a href="#" tabindex="0">Sony MDRZX310W</a></div></div>
-								</div>
-								<div class="product_fav"><i class="fas fa-heart"></i></div>
-								<ul class="product_marks">
-									<li class="product_mark product_discount">-25%</li>
-									<li class="product_mark product_new">new</li>
-								</ul>
-							</div>
-
-							<!-- Product Item -->
-							<div class="product_item is_new">
-								<div class="product_border"></div>
-								<div class="product_image d-flex flex-column align-items-center justify-content-center"><img src="images/featured_4.png" alt=""></div>
-								<div class="product_content">
-									<div class="product_price">$379</div>
-									<div class="product_name"><div><a href="#" tabindex="0">LUNA Smartphone</a></div></div>
-								</div>
-								<div class="product_fav"><i class="fas fa-heart"></i></div>
-								<ul class="product_marks">
-									<li class="product_mark product_discount">-25%</li>
-									<li class="product_mark product_new">new</li>
-								</ul>
-							</div>
-
-							<!-- Product Item -->
-							<div class="product_item is_new">
-								<div class="product_border"></div>
-								<div class="product_image d-flex flex-column align-items-center justify-content-center"><img src="images/shop_1.jpg" alt=""></div>
-								<div class="product_content">
-									<div class="product_price">$379</div>
-									<div class="product_name"><div><a href="#" tabindex="0">Canon IXUS 175...</a></div></div>
-								</div>
-								<div class="product_fav"><i class="fas fa-heart"></i></div>
-								<ul class="product_marks">
-									<li class="product_mark product_discount">-25%</li>
-									<li class="product_mark product_new">new</li>
-								</ul>
-							</div>
-
-							<!-- Product Item -->
-							<div class="product_item">
-								<div class="product_border"></div>
-								<div class="product_image d-flex flex-column align-items-center justify-content-center"><img src="images/featured_5.png" alt=""></div>
-								<div class="product_content">
-									<div class="product_price">$379<span>$300</span></div>
-									<div class="product_name"><div><a href="#" tabindex="0">Canon STM Kit...</a></div></div>
-								</div>
-								<div class="product_fav"><i class="fas fa-heart"></i></div>
-								<ul class="product_marks">
-									<li class="product_mark product_discount">-25%</li>
-									<li class="product_mark product_new">new</li>
-								</ul>
-							</div>
-
-							<!-- Product Item -->
-							<div class="product_item">
-								<div class="product_border"></div>
-								<div class="product_image d-flex flex-column align-items-center justify-content-center"><img src="images/featured_6.png" alt=""></div>
-								<div class="product_content">
-									<div class="product_price">$225<span>$300</span></div>
-									<div class="product_name"><div><a href="#" tabindex="0">Samsung J330F</a></div></div>
-								</div>
-								<div class="product_fav"><i class="fas fa-heart"></i></div>
-								<ul class="product_marks">
-									<li class="product_mark product_discount">-25%</li>
-									<li class="product_mark product_new">new</li>
-								</ul>
-							</div>
-
-							<!-- Product Item -->
-							<div class="product_item">
-								<div class="product_border"></div>
-								<div class="product_image d-flex flex-column align-items-center justify-content-center"><img src="images/featured_7.png" alt=""></div>
-								<div class="product_content">
-									<div class="product_price">$225</div>
-									<div class="product_name"><div><a href="#" tabindex="0">Lenovo IdeaPad</a></div></div>
-								</div>
-								<div class="product_fav"><i class="fas fa-heart"></i></div>
-								<ul class="product_marks">
-									<li class="product_mark product_discount">-25%</li>
-									<li class="product_mark product_new">new</li>
-								</ul>
-							</div>
-
-							<!-- Product Item -->
-							<div class="product_item">
-								<div class="product_border"></div>
-								<div class="product_image d-flex flex-column align-items-center justify-content-center"><img src="images/featured_8.png" alt=""></div>
-								<div class="product_content">
-									<div class="product_price">$379</div>
-									<div class="product_name"><div><a href="#" tabindex="0">Digitus EDNET...</a></div></div>
-								</div>
-								<div class="product_fav"><i class="fas fa-heart"></i></div>
-								<ul class="product_marks">
-									<li class="product_mark product_discount">-25%</li>
-									<li class="product_mark product_new">new</li>
-								</ul>
-							</div>
-
-							<!-- Product Item -->
-							<div class="product_item is_new">
-								<div class="product_border"></div>
-								<div class="product_image d-flex flex-column align-items-center justify-content-center"><img src="images/new_1.jpg" alt=""></div>
-								<div class="product_content">
-									<div class="product_price">$225</div>
-									<div class="product_name"><div><a href="#" tabindex="0">Astro M2 Black</a></div></div>
-								</div>
-								<div class="product_fav"><i class="fas fa-heart"></i></div>
-								<ul class="product_marks">
-									<li class="product_mark product_discount">-25%</li>
-									<li class="product_mark product_new">new</li>
-								</ul>
-							</div>
-
-							<!-- Product Item -->
-							<div class="product_item is_new">
-								<div class="product_border"></div>
-								<div class="product_image d-flex flex-column align-items-center justify-content-center"><img src="images/new_2.jpg" alt=""></div>
-								<div class="product_content">
-									<div class="product_price">$225</div>
-									<div class="product_name"><div><a href="#" tabindex="0">Transcend T.Sonic</a></div></div>
-								</div>
-								<div class="product_fav"><i class="fas fa-heart"></i></div>
-								<ul class="product_marks">
-									<li class="product_mark product_discount">-25%</li>
-									<li class="product_mark product_new">new</li>
-								</ul>
-							</div>
-
-							<!-- Product Item -->
-							<div class="product_item is_new">
-								<div class="product_border"></div>
-								<div class="product_image d-flex flex-column align-items-center justify-content-center"><img src="images/new_3.jpg" alt=""></div>
-								<div class="product_content">
-									<div class="product_price">$225</div>
-									<div class="product_name"><div><a href="#" tabindex="0">Xiaomi Band 2...</a></div></div>
-								</div>
-								<div class="product_fav"><i class="fas fa-heart"></i></div>
-								<ul class="product_marks">
-									<li class="product_mark product_discount">-25%</li>
-									<li class="product_mark product_new">new</li>
-								</ul>
-							</div>
-
-							<!-- Product Item -->
-							<div class="product_item is_new">
-								<div class="product_border"></div>
-								<div class="product_image d-flex flex-column align-items-center justify-content-center"><img src="images/new_4.jpg" alt=""></div>
-								<div class="product_content">
-									<div class="product_price">$379</div>
-									<div class="product_name"><div><a href="#" tabindex="0">Rapoo T8 White</a></div></div>
-								</div>
-								<div class="product_fav"><i class="fas fa-heart"></i></div>
-								<ul class="product_marks">
-									<li class="product_mark product_discount">-25%</li>
-									<li class="product_mark product_new">new</li>
-								</ul>
-							</div>
-
-							<!-- Product Item -->
-							<div class="product_item discount">
-								<div class="product_border"></div>
-								<div class="product_image d-flex flex-column align-items-center justify-content-center"><img src="images/featured_1.png" alt=""></div>
-								<div class="product_content">
-									<div class="product_price">$225<span>$300</span></div>
-									<div class="product_name"><div><a href="#" tabindex="0">Huawei MediaPad...</a></div></div>
-								</div>
-								<div class="product_fav"><i class="fas fa-heart"></i></div>
-								<ul class="product_marks">
-									<li class="product_mark product_discount">-25%</li>
-									<li class="product_mark product_new">new</li>
-								</ul>
-							</div>
-
-							<!-- Product Item -->
-							<div class="product_item is_new">
-								<div class="product_border"></div>
-								<div class="product_image d-flex flex-column align-items-center justify-content-center"><img src="images/new_6.jpg" alt=""></div>
-								<div class="product_content">
-									<div class="product_price">$379</div>
-									<div class="product_name"><div><a href="#" tabindex="0">Nokia 3310 (2017)</a></div></div>
-								</div>
-								<div class="product_fav"><i class="fas fa-heart"></i></div>
-								<ul class="product_marks">
-									<li class="product_mark product_discount">-25%</li>
-									<li class="product_mark product_new">new</li>
-								</ul>
-							</div>
-
-							<!-- Product Item -->
-							<div class="product_item is_new">
-								<div class="product_border"></div>
-								<div class="product_image d-flex flex-column align-items-center justify-content-center"><img src="images/new_7.jpg" alt=""></div>
-								<div class="product_content">
-									<div class="product_price">$225</div>
-									<div class="product_name"><div><a href="#" tabindex="0">Rapoo 7100p Gray</a></div></div>
-								</div>
-								<div class="product_fav"><i class="fas fa-heart"></i></div>
-								<ul class="product_marks">
-									<li class="product_mark product_discount">-25%</li>
-									<li class="product_mark product_new">new</li>
-								</ul>
-							</div>
-
-							<!-- Product Item -->
-							<div class="product_item is_new">
-								<div class="product_border"></div>
-								<div class="product_image d-flex flex-column align-items-center justify-content-center"><img src="images/new_8.jpg" alt=""></div>
-								<div class="product_content">
-									<div class="product_price">$379</div>
-									<div class="product_name"><div><a href="#" tabindex="0">Canon EF</a></div></div>
-								</div>
-								<div class="product_fav"><i class="fas fa-heart"></i></div>
-								<ul class="product_marks">
-									<li class="product_mark product_discount">-25%</li>
-									<li class="product_mark product_new">new</li>
-								</ul>
-							</div>
-
-							<!-- Product Item -->
-							<div class="product_item is_new">
-								<div class="product_border"></div>
-								<div class="product_image d-flex flex-column align-items-center justify-content-center"><img src="images/shop_2.jpg" alt=""></div>
-								<div class="product_content">
-									<div class="product_price">$225</div>
-									<div class="product_name"><div><a href="#" tabindex="0">Gembird SPK-103</a></div></div>
-								</div>
-								<div class="product_fav"><i class="fas fa-heart"></i></div>
-								<ul class="product_marks">
-									<li class="product_mark product_discount">-25%</li>
-									<li class="product_mark product_new">new</li>
-								</ul>
-							</div>
-
-							<!-- Product Item -->
-							<div class="product_item is_new">
-								<div class="product_border"></div>
-								<div class="product_image d-flex flex-column align-items-center justify-content-center"><img src="images/featured_5.png" alt=""></div>
-								<div class="product_content">
-									<div class="product_price">$379</div>
-									<div class="product_name"><div><a href="#" tabindex="0">Canon STM Kit...</a></div></div>
-								</div>
-								<div class="product_fav"><i class="fas fa-heart"></i></div>
-								<ul class="product_marks">
-									<li class="product_mark product_discount">-25%</li>
-									<li class="product_mark product_new">new</li>
-								</ul>
-							</div>
 
 						</div>
 

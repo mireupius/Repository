@@ -35,8 +35,7 @@ function setTotal_price() {
 	
 	price += getOp_price();
 	price *= getQuantity();	
-	
-	$('#view_total_price').text(price);
+	$('#view_total_price').text(Number(price).toLocaleString('en')+"원");
 	$('#send_total_price').val(price);
 	return price;
 }

@@ -16,7 +16,19 @@
 5. Newsletter
 6. Footer
 
-
+*/
+.delete_button{
+	display: inline-block;
+    border: none;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 48px;
+    color: #FFFFFF;
+    padding-left: 10px;
+    padding-right: 10px;
+    outline: none;
+    cursor: pointer;
+}
 /*********************************
 4. Cart
 *********************************/
