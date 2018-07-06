@@ -49,10 +49,10 @@
 						<div class="product_text">
 						<c:set var="dlvchrg" value="${fn:split(goodsDtl1.gd_dlvchrg, ',') }"/>
 							<p>배송비 <c:out value=" ${dlvchrg[0]}"/>원</p>
+							<input id="chrg" value="${dlvchrg[0]}"> 
+							<input id="terms" value="${dlvchrg[1]}"> 
 							<c:if test="${dlvchrg[1]>0}">
 							<p><c:out value=" ${dlvchrg[1]}"/>원 이상 구매시 무료 배송</p>
-							<input type="hidden" id="terms" value="${dlvchrg[1]}"> 
-							<input type="hidden" id="chrg" value="${dlvchrg[0]}"> 
 							</c:if>
 						</div>
 						<div class="order_info d-flex flex-row">
