@@ -118,7 +118,7 @@ var r = $("#result").text();
 
 
 					<!-- 답변패널 시작 -->
-					<c:if test="${pageCount != 0}">
+					<c:if test="${qna != '0'}">
 						<div class="col-md-6">
 							<div class="content-panel">
 								<table class="table">
