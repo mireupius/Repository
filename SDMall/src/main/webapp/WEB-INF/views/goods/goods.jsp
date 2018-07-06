@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -44,15 +45,15 @@
 						</c:forEach>
 						</div>
 						<div class="product_name">${goodsDtl1.gd_name }</div>
-						<div class="product_price">${goodsDtl1.gd_price }</div>
+						<div class="product_price"><fmt:formatNumber value="${goodsDtl1.gd_price }" pattern="#,###" />원</div>
 						<div class="rating_r rating_r_4 product_rating"><i></i><i></i><i></i><i></i><i></i></div>
 						<div class="product_text">
 						<c:set var="dlvchrg" value="${fn:split(goodsDtl1.gd_dlvchrg, ',') }"/>
-							<p>배송비 <c:out value=" ${dlvchrg[0]}"/>원</p>
-							<input id="chrg" value="${dlvchrg[0]}"> 
-							<input id="terms" value="${dlvchrg[1]}"> 
+							<p>배송비 <fmt:formatNumber value="${dlvchrg[0]}" pattern="#,###" />원</p>
+							<input type="hidden" id="chrg" value="${dlvchrg[0]}"> 
+							<input type="hidden" id="terms" value="${dlvchrg[1]}"> 
 							<c:if test="${dlvchrg[1]>0}">
-							<p><c:out value=" ${dlvchrg[1]}"/>원 이상 구매시 무료 배송</p>
+							<p><fmt:formatNumber value="${dlvchrg[1]}" pattern="#,###" />원 이상 구매시 무료 배송</p>
 							</c:if>
 						</div>
 						<div class="order_info d-flex flex-row">
@@ -76,10 +77,10 @@
 											</select>
 										</label>
 								</div>
-								<div id="view_total_price" class="product_price">${goodsDtl1.gd_price }원</div>
+								<div id="view_total_price" class="product_price">${goodsDtl1.gd_price }</div>
 							<div class="button_container">
 								<input type="hidden" name="sb_gdno" value="${goodsDtl1.gd_no }">
-								<button class="button cart_button">Add to Cart</button>
+								<button class="button cart_button">장바구니 추가</button>
 <!-- 									<div class="product_fav"><i class="fas fa-heart"></i></div> -->
 							</form>
 							
@@ -97,7 +98,7 @@
 								<input type="hidden" name="sd_out_area" value="${goodsDtl1.gd_outarea }">
 								<input type="hidden" name="sd_product_no" value="${goodsDtl1.gd_no }">
 								<input type="hidden" name="sd_seller_id" value="${goodsDtl1.gd_sellerid }">
-								<button class="button cart_button">구매</button>
+								<button class="button buy_button"> 구 매 </button>
 							</form>
 							
 							</div>
