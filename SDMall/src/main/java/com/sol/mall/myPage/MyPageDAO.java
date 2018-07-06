@@ -38,6 +38,7 @@ public class MyPageDAO {
 		List<SearchOrder> orders = ss.getMapper(MyPageMapper.class).searchOrderList(map);
 
 		System.out.println(orders.size()+"오더리스트");
+
 		if (cc.getCsm_id().equals(so.getSd_customer_id())) {
 
 			req.setAttribute("orderList", orders);

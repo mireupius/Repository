@@ -19,217 +19,7 @@
 	charset=utf-8 />
 <script type=text/javascript charset=utf-8
 	src="${pageContext.request.contextPath}/resources/daumeditor/js/editor_loader.js"></script>
-<script type="text/javascript">
-
-function saveContent() {
-	$("#opSave").trigger("click");
-    Editor.save(); // 이 함수를 호출하여 글을 등록하면 된다.
-}
-
-function deleteGoods(){
-	var ok =confirm("정말 삭제 하시겠습니까?");
-	if(ok){
-		var form = document.createElement("form");
-	    form.setAttribute("method", "POST");
-	    form.setAttribute("action", "goods.delete");
-	    
-	    var gdno=$("input[name=gd_no]").val();
-		var imgl=$("input[name=gd_imgl]").val();
-		var imgm=$("input[name=gd_imgm]").val();
-		var imgs=$("input[name=gd_imgs]").val();
-		var imgss=$("input[name=gd_imgss]").val();
-		var sellerid=$("input[name=gd_sellerid]").val();
-	    
-	    var param= {'gd_no':gdno, 'gd_imgl':imgl, 'gd_imgm':imgm, 'gd_imgs':imgs, 'gd_imgss':imgss, 'gd_sellerid':sellerid};
-	    
-		for(var key in param) {
-	        var hiddenField = document.createElement("input");
-	        hiddenField.setAttribute("type", "hidden");
-	        hiddenField.setAttribute("name", key);
-	        hiddenField.setAttribute("value", param[key]);
-	        form.appendChild(hiddenField);
-		}
-		
-	    document.body.appendChild(form);
-	    form.submit();
-	}
-}
-
-$(function(){
-	
-	//구버전	$(".ct1").click(function() {
-	$(document).on("click",".ct1",function(){
-		var cn = $(this).attr("category_num");
-		var clfname = $(this).text();
-		var clf = "2";
-		
-		$.ajax({
-			url : "category.get",
-			data : {ct_no : cn, ct_clf : clf},
-			success : function(json) {
-				var ar = json.category;
-				
-				$("#ct12").empty();
-				$("#ct13").empty();
-				$("#category_select1").empty();
-				$("#category_select2").empty();
-				$("#category_select3").empty();
-				
-				if(ar.length > 0){
-					$.each(ar, function(i, c){
-						
-						var fname = $("<li></li>").text(c.ct_clfname);
-						fname.attr("class","ct2");
-						fname.attr("category_num", c.ct_no);
-						$("#ct12").append(fname);
-						// 카테고리 선택 표시 영역
-						$("#category_select1").text(clfname + " > ");
-						var input = $("#ctgry1").val(cn);
-		                input.attr("name", "gd_clfl");
-					});
-				
-				}else{
-				
-					// 카테고리 선택 표시 영역
-					$("#category_select1").text(clfname + " > ");
-					var input = $("#ctgry1").val(cn);
-	                input.attr("name", "gd_clfl");
-				}
-			}
-		});
-	});
-	
-	// 동적으로 생성된 태그에 이벤트 주기 $(document).on("click",".ct2",function(){
-	$(document).on("click",".ct2",function(){
-		var cn = $(this).attr("category_num");
-		var clfname = $(this).text();
-		var clf = "3";
-		
-		$.ajax({
-			url : "category.get",
-			data : {ct_no : cn, ct_clf : clf},
-			success : function(json) {
-				var ar = json.category;
-				
-				$("#ct13").empty();
-				$("#category_select2").empty();
-				$("#category_select3").empty();
-				
-				if(ar.length > 0){
-					$.each(ar, function(i, c){
-						
-						var fname = $("<li></li>").text(c.ct_clfname);
-						fname.attr("class","ct3");
-						fname.attr("category_num", c.ct_no);
-						$("#ct13").append(fname);
-						
-						// 카테고리 선택 표시 영역
-						$("#category_select2").text(clfname);
-						var input = $("#ctgry2").val(cn);
-		                input.attr("name", "gd_clfm");
-		                
-					});
-				}else{
-					// 카테고리 선택 표시 영역
-					$("#category_select2").text(clfname);
-					var input = $("#ctgry2").val(cn);
-	                input.attr("name", "gd_clfm");
-				}
-			}
-		});
-	});
-	
-	// 동적으로 생성된 태그에 이벤트 주기 $(document).on("click",".ct2",function(){
-	$(document).on("click",".ct3",function(){
-		var cn = $(this).attr("category_num");
-		var clfname = $(this).text();
-		
-		$("#category_select3").empty();
-		// 카테고리 선택 표시 영역
-		$("#category_select3").text(" > "+clfname);
-		var input = $("#ctgry3").val(cn);
-        input.attr("name", "gd_clfs");
-	});
-	
-	
-	// ▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼ 옵션값 배열로 저장 input hidden으로 넘기기 ▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼
-	// db에 저장된 옵션 사이즈 저장 추가 버튼 클릭시 옵션 번호증가
-	var opN = $("#opSize").val();
-	
-	$(document).on("click","#opPlus",function(){
-		var opInputN = $("<input>").attr("class","inpWidth").attr("name", "op_name"+opN).attr("maxlength","20");
-		var opInputNo = $("<input>").attr("type","hidden").attr("name", "op_no"+opN);
-		var opSpanN = $("<span></span>").append(opInputN, opInputNo);
-		
-		var opInputP = $("<input>").attr("class","inpWidth").attr("name", "op_price"+opN).attr("maxlength","7");
-		var opSpanP = $("<span></span>").append(opInputP);
-		
-		var opInputS = $("<input>").attr("class","inpWidth").attr("name", "op_stock"+opN).attr("maxlength","4");
-		var opSpanS = $("<span></span>").append(opInputS);
-		
-		var opLi = $("<li></li>").attr("class","opTb").append(opSpanN, opSpanP, opSpanS);
-		
-		var opInputChk = $("<input>").attr("type","checkbox").attr("name","opChk");
-		var opLiChk = $("<li></li>").attr("class","opChk").append(opInputChk);
-		
-		$(".opUl").append(opLi, opLiChk);
-		
-		opN++;
-	});
-	
-	// 적용 버튼 클릭으로 옵션값 히든에 저장
-	$(document).on("click","#opSave",function(){
-		var r = opN;
-		var opl_no = [];
-		var opl_name = [];
-		var opl_price = [];
-		var opl_stock = [];
-		
-		for (var i = 0; i < r; i++) {
-			opl_no[i] = $("input[name=op_no"+i+"]").val();
-			opl_name[i] = $("input[name=op_name"+i+"]").val();
-			opl_price[i] = $("input[name=op_price"+i+"]").val();
-			opl_stock[i] = $("input[name=op_stock"+i+"]").val();
-		}
-		
-		$("input[name=opl_no]").val(opl_no);
-		$("input[name=opl_name]").val(opl_name);
-		$("input[name=opl_price]").val(opl_price);
-		$("input[name=opl_stock]").val(opl_stock);
-		alert("옵션 적용");
-	});
-	// ▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲ 옵션값 배열로 저장 input hidden으로 넘기기 ▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲
-	
-});
-
-var sel_file;
-$(document).ready(function(){  
-	$("#input_img").on("change", handleImgFileSelect);
-});
-
-function handleImgFileSelect(e){
-	var files = e.target.files;
-	var filesArr = Array.prototype.slice.call(files);
-	filesArr.forEach(function(f){
-		if(!f.type.match("image.*")){alert("확장자는 이미지 확장자만 가능")
-			return;
-		}
-		sel_file = f;
-		var reader = new FileReader();
-		reader.onload = function(e){
-			$("#img1").attr("src", e.target.result); 
-			$("#img2").attr("src", e.target.result);
-			$("#img3").attr("src", e.target.result);
-			$("#img4").attr("src", e.target.result);
-		}
-		reader.readAsDataURL(f);
-	});
-}
-
-function opDelete(){
-
-}
-</script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/goods/goodsView.js" ></script>
 
 <title>Goods</title>
 <link rel="stylesheet" href="resources/css/goods/goods.css">
@@ -395,7 +185,7 @@ h3 {
 						<ul class="opUl">
 						<c:if test="${gdsOp.size() > 0}">
 						<c:forEach var="h" begin="0" end="${gdsOp.size()-1}" step="1">
-							<li class="opTb">
+							<li class="opTb" id="opLi${h}">
 								<span>
 									<input class="inpWidth" name="op_name${h}" value="${gdsOp[h].op_name}" maxlength="20">
 									<input type="hidden" name="op_no${h}" value="${gdsOp[h].op_no}">
@@ -407,12 +197,11 @@ h3 {
 									<input class="inpWidth" name="op_stock${h}" value="${gdsOp[h].op_stock}" maxlength="4">
 								</span>
 							</li>
-							<li class="opChk"><input type="checkbox" name="opChk" value="${gdsOp[h].op_no}"></li>
+							<li class="opChkLi"  id="ch${h}"><input type="checkbox" name="opChk" value="${gdsOp[h].op_no}"></li>
 						</c:forEach>
 						</c:if>
 						</ul>
 						</div>
-						<input id="opSize" type="hidden" value="${gdsOp.size()}">
 						<input name="opl_no" type="hidden">
 						<input name="opl_name" type="hidden">
 						<input name="opl_price" type="hidden">
@@ -429,13 +218,13 @@ h3 {
 						<td class="gdTd1"></td>
 						<td class="gdTd2">
 							<span class="opTbr">
-								<button id="opPlus">추가</button>
+								<button id="opPlus">입력칸 추가</button>
 							</span>
-							<span class="opTbr">
-								<button id="opSave">추가 적용</button>
+							<span class="opTbr" onclick="opBoxDelete();">
+								<button id="opDelete" >입력칸 삭제</button>
 							</span>
-							<span class="opTbr">
-								<button id="opDelete">삭제</button>
+							<span class="opTbr" onclick="opDelete();">
+								<button id="opDelete" >옵션 삭제</button>
 							</span>
 						</td>
 					</tr>
@@ -472,7 +261,7 @@ h3 {
 									</li>
 									<li  class="liImg">
 										<span>작은목록 이미지</span><br>
-										<span>권장 220px * 220px</span><br>
+										<span>권장 115px * 115px</span><br>
 										<span>
 											<img id="img3"  src="${pageContext.request.contextPath}/upload/${gdsView.gd_imgs}" width="108" height="108"  >
 										</span>
