@@ -59,7 +59,7 @@ public class GoodsController {
 			return "member/loginPage";
 		}
 	}
-
+	
 	// 전체 상품 조회
 	@RequestMapping(value = "/shop", method = RequestMethod.GET)
 	public String getAllGoods(HttpServletRequest request, HttpServletResponse response) {
@@ -67,8 +67,10 @@ public class GoodsController {
 		if (mDAO.csmLoginCheck(request, response)) {//로그인체크
 			sbDAO.showCartItems(request, response);//장바구니 상품수량 반환
 		}
-
+		
 		gdsDAO.getAllGoods(request);
+		int page=Integer.parseInt(request.getParameter("p"));
+		gdsDAO.paging(page, request, response);
 		request.setAttribute("contentPage", "goods/shop.jsp");
 		return "main";
 	}
@@ -82,6 +84,9 @@ public class GoodsController {
 		}
 		
 		gdsDAO.getGoodsByCate(category, request, response);
+		int page=1;
+		page = request.getParameter("p")!=null?page=Integer.parseInt(request.getParameter("p")):page;
+		gdsDAO.paging(page, request, response);
 		request.setAttribute("contentPage", "goods/shop.jsp");
 		return "main";
 	}
@@ -95,6 +100,9 @@ public class GoodsController {
 		}
 		
 		gdsDAO.searchGoods(goods, request, response);
+		int page=1;
+		page = request.getParameter("p")!=null?page=Integer.parseInt(request.getParameter("p")):page;
+		gdsDAO.paging(page, request, response);
 		request.setAttribute("contentPage", "goods/shop.jsp");
 		return "main";
 	}
