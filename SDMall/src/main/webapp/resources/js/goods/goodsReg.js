@@ -77,10 +77,6 @@ function saveContent() {
  			weightField.value = "";
  			weightField.focus();
  			
- 		}else if(isNotNumber(volumeField)){
- 			alert("숫자만 입력 해주세요.");
- 			volumeField.value = "";
- 			volumeField.focus();
  		}else if(isEmpty(dlvchrgField)){
  			alert("배송비를 입력 해주세요.");
  			
