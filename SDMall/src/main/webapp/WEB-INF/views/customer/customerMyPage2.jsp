@@ -26,7 +26,6 @@
 							<li><a href="customer.myHome.productReview.go">상품평작성</a></li>
 							<li><a href="customer.productReview.show">상품평조회</a></li>
 							<li><a href="customer.myQuestion.show">상품Q&A</a></li>
-							<li><a href="">적립금</a></li>
 						</ul>
 						<div class="sidebar_title">정보관리</div>
 						<ul class="sidebar_categories">

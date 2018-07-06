@@ -12,6 +12,7 @@ public class ProductReview {
 	private String pr_gdName;
 	private String pr_star;
 	private Date pr_regDate;
+	private String pr_check;
 	
 	public ProductReview() {
 		// TODO Auto-generated constructor stub

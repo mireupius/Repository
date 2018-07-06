@@ -28,6 +28,7 @@ public class MyPageController {
 	@Autowired
 	private ShoppingBagDAO sbDAO;
 
+	// 주문&배송 목록 조회하러가기
 	@RequestMapping(value = "/customer.myHome.orderList.go", method = RequestMethod.GET)
 	public String goOrderList(SearchMonth bb, HttpServletRequest req, HttpServletResponse res) {
 
@@ -45,6 +46,7 @@ public class MyPageController {
 		return "main";
 	}
 
+	// 주문&배송 목록 기간별로 가져오기
 	@RequestMapping(value = "/customer.myHome.orderList", method = RequestMethod.GET)
 	public String getOrderList(SearchMonth sm, HttpServletRequest req, HttpServletResponse res) {
 
@@ -62,6 +64,7 @@ public class MyPageController {
 
 	}
 
+	// 교환&반품&취소 목록 조회하러가기
 	@RequestMapping(value = "/customer.myHome.claimedOrderList.go", method = RequestMethod.GET)
 	public String goClaimedOrderList(SearchMonth bb, HttpServletRequest req, HttpServletResponse res) {
 
@@ -80,6 +83,7 @@ public class MyPageController {
 
 	}
 
+	// 교환&반품&취소 목록 기간별로 조회하기
 	@RequestMapping(value = "/customer.myHome.claimList", method = RequestMethod.GET)
 	public String getClaimedOrderList(SearchMonth sm, HttpServletRequest req, HttpServletResponse res) {
 
@@ -98,6 +102,7 @@ public class MyPageController {
 
 	}
 
+	// 주문 상품취소하기
 	@RequestMapping(value = "/orderList.cancel.do", method = RequestMethod.GET)
 	public String correctOrder(Delivery d, HttpServletRequest req, HttpServletResponse res) {
 
@@ -115,7 +120,8 @@ public class MyPageController {
 		return "main";
 
 	}
-
+	
+	// 주문 상품 교환하기
 	@RequestMapping(value = "/orderList.exchange.do", method = RequestMethod.GET)
 	public String exchangeOrder(Delivery d, HttpServletRequest req, HttpServletResponse res) {
 
@@ -134,6 +140,7 @@ public class MyPageController {
 
 	}
 
+	// 주문 상품 반품하기
 	@RequestMapping(value = "/orderList.return.do", method = RequestMethod.GET)
 	public String returnOrder(Delivery d, HttpServletRequest req, HttpServletResponse res) {
 		
@@ -153,6 +160,7 @@ public class MyPageController {
 
 	}
 	
+	// 수취확인하기
 	@RequestMapping(value = "/orderList.completeDelivery.do", method = RequestMethod.GET)
 	public String completeDelivery(Delivery d, HttpServletRequest req, HttpServletResponse res) {
 		
@@ -172,6 +180,7 @@ public class MyPageController {
 		
 	}
 	
+	// 구매확정하기
 	@RequestMapping(value = "/orderList.completeBuy.do", method = RequestMethod.GET)
 	public String completeBuyOrder(Delivery d, HttpServletRequest req, HttpServletResponse res) {
 		
@@ -182,6 +191,7 @@ public class MyPageController {
 			mpDAO.completeBuyOrder(d, req, res);
 			mpDAO.updateCumulativePrice(req, res);
 			mpDAO.updateMemberShipGrade(req, res);
+			mpDAO.accumulatePoint(d, req, res);
 			req.setAttribute("contentPage", "customer/customerMyPage2.jsp");
 			req.setAttribute("myPageContentArea", "orderDelivery.jsp");
 			return "main";
@@ -197,104 +207,133 @@ public class MyPageController {
 	@RequestMapping(value = "/customer.myHome.productReview.go", method = RequestMethod.GET)
 	public String getOrderListToReview(Delivery d, HttpServletRequest req, HttpServletResponse res) {
 
+		cDAO.getAllCategory(req, res);
 		
 		if (mDAO.csmLoginCheck(req, res)) {
-
+			sbDAO.showCartItems(req, res);// 장바구니 상품수량 반환
 			mpDAO.getOrderListToReview(d, req, res);
-			return "customer/productReviewPage";
+			req.setAttribute("contentPage", "customer/customerMyPage2.jsp");
+			req.setAttribute("myPageContentArea", "productReviewPage.jsp");
+			return "main";
 		}
-		cDAO.getAllCategory(req, res);
 		req.setAttribute("contentPage", "member/loginArea.jsp");
 		return "main";
 
 	}
 
-	// 파라미터 앞 주소가 같으면 스프링이 찾아서 파라메터 이름이 같은 걸 가져옴
+	// 각 주문 상품 실제로 리뷰작성하러 가기
 	@RequestMapping(value = "/productReview.writing.go", method = RequestMethod.GET)
 	public String goWritingReview(Delivery d, HttpServletRequest req, HttpServletResponse res) {
+		cDAO.getAllCategory(req, res);
 
 		if (mDAO.csmLoginCheck(req, res)) {
-
+			sbDAO.showCartItems(req, res);// 장바구니 상품수량 반환
 			mpDAO.goOrderToReview(d, req, res);
-			return "customer/productReview";
+			
+			req.setAttribute("contentPage", "customer/customerMyPage2.jsp");
+			req.setAttribute("myPageContentArea", "productReview.jsp");
+			return "main";
+			
 
 		}
-		cDAO.getAllCategory(req, res);
 		req.setAttribute("contentPage", "member/loginArea.jsp");
 		return "main";
 
 	}
 
+	// 리뷰작성하기
 	@RequestMapping(value = "/customer.productReview.write", method = RequestMethod.GET)
-	public String doWritingReview(ProductReview pr, HttpServletRequest req, HttpServletResponse res) {
+	public String doWritingReview(ProductReview pr, Delivery d, HttpServletRequest req, HttpServletResponse res) {
 
+		cDAO.getAllCategory(req, res);
 		if (mDAO.csmLoginCheck(req, res)) {
 
 			mpDAO.writeProductReview(pr, req, res);
-			return "customer/productReview";
+			sbDAO.showCartItems(req, res);// 장바구니 상품수량 반환
+			mpDAO.getOrderListToReview(d, req, res);
+			
+			req.setAttribute("contentPage", "customer/customerMyPage2.jsp");
+			req.setAttribute("myPageContentArea", "productReviewPage.jsp");
+			return "main";
 
 		}
-		cDAO.getAllCategory(req, res);
 		req.setAttribute("contentPage", "member/loginArea.jsp");
 		return "main";
 
 	}
 
+	// 작성한 리뷰 가져오기
 	@RequestMapping(value = "/customer.productReview.show", method = RequestMethod.GET)
 	public String getWritedReview(ProductReview pr, HttpServletRequest req, HttpServletResponse res) {
-
+		
+		cDAO.getAllCategory(req, res);
 		if (mDAO.csmLoginCheck(req, res)) {
 
+			sbDAO.showCartItems(req, res);// 장바구니 상품수량 반환
 			mpDAO.getWritedReview(pr, req, res);
-			return "customer/writedReviews";
+			req.setAttribute("contentPage", "customer/customerMyPage2.jsp");
+			req.setAttribute("myPageContentArea", "writedReviews.jsp");
+			return "main";
 
 		}
-		cDAO.getAllCategory(req, res);
 		req.setAttribute("contentPage", "member/loginArea.jsp");
 		return "main";
 
 	}
 
+	// 판매자에게 질문하러가기
 	@RequestMapping(value = "/question.writing.go", method = RequestMethod.GET)
 	public String goWritingQuestion(Delivery d, HttpServletRequest req, HttpServletResponse res) {
-
+		cDAO.getAllCategory(req, res);
 		if (mDAO.csmLoginCheck(req, res)) {
-
+			sbDAO.showCartItems(req, res);// 장바구니 상품수량 반환
+			
 			mpDAO.goOrderToQuestion(d, req, res);
-			return "customer/question";
+			req.setAttribute("contentPage", "customer/customerMyPage2.jsp");
+			req.setAttribute("myPageContentArea", "question.jsp");
+
+			return "main";
 
 		}
-		cDAO.getAllCategory(req, res);
+		
 		req.setAttribute("contentPage", "member/loginArea.jsp");
 		return "main";
 
 	}
 
+	// 판매자에게 질문하기
 	@RequestMapping(value = "/order.question.write", method = RequestMethod.GET)
 	public String doWritingQuestion(QuestionAnswer qa, HttpServletRequest req, HttpServletResponse res) {
-
+		cDAO.getAllCategory(req, res);
 		if (mDAO.csmLoginCheck(req, res)) {
-
+			sbDAO.showCartItems(req, res);// 장바구니 상품수량 반환
 			mpDAO.writeQuestion(qa, req, res);
-			return "customer/customerMyPage2";
+			
+			req.setAttribute("contentPage", "customer/customerMyPage2.jsp");
+			req.setAttribute("myPageContentArea", "myQuestion.jsp");
+			return "main";
 
 		}
-		cDAO.getAllCategory(req, res);
+		
 		req.setAttribute("contentPage", "member/loginArea.jsp");
 		return "main";
 
 	}
 
+	// 질문한 내역 보여주기
 	@RequestMapping(value = "/customer.myQuestion.show", method = RequestMethod.GET)
-	public String getWritedReview(QuestionAnswer qa, HttpServletRequest req, HttpServletResponse res) {
+	public String getWritedQuestionAnswer(QuestionAnswer qa, HttpServletRequest req, HttpServletResponse res) {
 
+		cDAO.getAllCategory(req, res);
 		if (mDAO.csmLoginCheck(req, res)) {
-
+			
+			sbDAO.showCartItems(req, res);// 장바구니 상품수량 반환
 			mpDAO.getMyQuestionAnswer(qa, req, res);
-			return "customer/myQuestion";
+			req.setAttribute("contentPage", "customer/customerMyPage2.jsp");
+			req.setAttribute("myPageContentArea", "myQuestion.jsp");
+			return "main";
 
 		}
-		cDAO.getAllCategory(req, res);
 		req.setAttribute("contentPage", "member/loginArea.jsp");
 		return "main";
 

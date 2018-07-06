@@ -20,12 +20,6 @@
 		)
 	</insert>
 	
-	<!-- 모든 구매자 보여주기 -->
-	<select id="getAllCustomer"
-		resultType="com.sol.mall.member.Customer">
-		select * from customer_reg
-	</select>
-	
 	<!-- 구매자 id로 구매자 정보추출 -->
 	<select id="getCustomerById"
 		parameterType="com.sol.mall.member.Customer"

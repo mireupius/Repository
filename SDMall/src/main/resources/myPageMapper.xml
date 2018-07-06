@@ -51,6 +51,8 @@
 		set sd_claim = '반품접수'
 		where sd_delivery_pno = #{sd_delivery_pno}
 	</update>
+	
+	<!-- 수취확인 -->
 	<update id="completeDelivery" parameterType="com.sol.mall.sale.delivery.Delivery">
 		update sale_delivery
 		set sd_delivery_state = '배송완료'
@@ -152,10 +154,25 @@
 		where sd_delivery_state = '구매확정' and sd_customer_id = #{sd_customer_id}
 	</select>
 	
+	<!-- 총 구매 금액 가져오기 -->
+	<select id="getTotalBuyPriceByPno" parameterType="com.sol.mall.sale.delivery.Delivery"
+		resultType="java.math.BigDecimal">
+		select sd_total_price
+		from sale_delivery
+		where sd_delivery_pno = #{sd_delivery_pno}
+	</select>
+	
 	<!-- 누적구매금액 업데이트 -->
 	<update id="updateCumulativePrice" parameterType="com.sol.mall.member.Membership">
 		update membership
 		set ms_totalBuy = #{ms_totalBuy}
+		where ms_csm_id = #{ms_csm_id}
+	</update>
+	
+	<!-- 적립금 업데이트 -->
+	<update id="updateAccumulatePoint" parameterType="com.sol.mall.member.Membership">
+		update membership
+		set ms_point = ms_point + #{ms_point}
 		where ms_csm_id = #{ms_csm_id}
 	</update>
 	

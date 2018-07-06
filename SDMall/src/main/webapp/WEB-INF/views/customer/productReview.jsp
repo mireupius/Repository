@@ -32,7 +32,7 @@
 				type="hidden" value="${review.sd_product_name }" name="pr_gdName">
 		</div>
 
-		<table>
+		<table class="writeTb0">
 			<tr>
 				<td class="writeTd1">상품평</td>
 				<td class="writeTd2"><textarea class="writeTextArea" name="pr_comment"></textarea></td>
