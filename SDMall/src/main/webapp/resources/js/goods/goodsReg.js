@@ -74,13 +74,13 @@ function saveContent() {
  			expField.focus();
  		}else if(isNotNumber(weightField)){
  			alert("숫자만 입력 해주세요.");
- 			expField.value = "";
- 			expField.focus();
+ 			weightField.value = "";
+ 			weightField.focus();
  			
  		}else if(isNotNumber(volumeField)){
  			alert("숫자만 입력 해주세요.");
- 			expField.value = "";
- 			expField.focus();
+ 			volumeField.value = "";
+ 			volumeField.focus();
  		}else if(isEmpty(dlvchrgField)){
  			alert("배송비를 입력 해주세요.");
  			
