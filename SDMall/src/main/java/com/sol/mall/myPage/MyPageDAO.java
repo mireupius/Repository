@@ -26,11 +26,7 @@ public class MyPageDAO {
 	public void searchOrderList(SearchMonth sm, HttpServletRequest req, HttpServletResponse res) {
 
 		Customer cc = (Customer) req.getSession().getAttribute("loginCustomer");
-<<<<<<< HEAD
-		
-=======
 
->>>>>>> refs/remotes/origin/FinalTest
 		SearchOrder so = new SearchOrder();
 		so.setSd_customer_id(cc.getCsm_id());
 
@@ -40,23 +36,14 @@ public class MyPageDAO {
 		System.out.println(sm.getSearchMonth());
 		
 		List<SearchOrder> orders = ss.getMapper(MyPageMapper.class).searchOrderList(map);
-<<<<<<< HEAD
-		
-=======
 
 		System.out.println(orders.size()+"오더리스트");
->>>>>>> refs/remotes/origin/FinalTest
-		if (cc.getCsm_id().equals(so.getSd_customer_id())) {
-<<<<<<< HEAD
-=======
 
->>>>>>> refs/remotes/origin/FinalTest
+		if (cc.getCsm_id().equals(so.getSd_customer_id())) {
+
 			req.setAttribute("orderList", orders);
 		}
-<<<<<<< HEAD
-=======
 
->>>>>>> refs/remotes/origin/FinalTest
 	}
 
 	public void cancelOrder(Delivery d, HttpServletRequest req, HttpServletResponse res) {
