@@ -82,7 +82,7 @@
 								<c:when test="${goods.gd_price==goods.gd_csmprice }">
 								<div class="product_item">
 									<div class="product_border"></div>
-									<div class="product_image d-flex flex-column align-items-center justify-content-center"><img src="${pageContext.request.contextPath}/upload/${goods.gd_imgm}" alt=""></div>
+									<div class="product_image d-flex flex-column align-items-center justify-content-center"><img src="${pageContext.request.contextPath}/upload/${goods.gd_imgs}" alt=""></div>
 									<div class="product_content">
 										<div class="product_price">${goods.gd_price }</div>
 										<div class="product_name"><div><a href="goods?gd_no=${goods.gd_no }" tabindex="0">${goods.gd_name }</a></div></div>
@@ -93,7 +93,7 @@
 								<c:otherwise>
 								<div class="product_item discount">
 									<div class="product_border"></div>
-									<div class="product_image d-flex flex-column align-items-center justify-content-center"><img src="${pageContext.request.contextPath}/upload/${goods.gd_imgm}"></div>
+									<div class="product_image d-flex flex-column align-items-center justify-content-center"><img src="${pageContext.request.contextPath}/upload/${goods.gd_imgs}"></div>
 									<div class="product_content">
 										<div class="product_price">${goods.gd_price }<span>${goods.gd_csmprice }</span></div>
 										<div class="product_name"><div><a href="goods?gd_no=${goods.gd_no }" tabindex="0">${goods.gd_name }</a></div></div>

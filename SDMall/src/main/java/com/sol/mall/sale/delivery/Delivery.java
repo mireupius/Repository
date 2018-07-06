@@ -37,6 +37,7 @@ public class Delivery {
 	private String sd_pay_method;
 	private Date sd_go_delivery_date;
 	private String sd_delivery_type;
+	private String sd_is_calculate;
 
 	public Delivery() {
 		// TODO Auto-generated constructor stub
@@ -50,6 +51,15 @@ public class Delivery {
 		this.sd_seller_id = sd_seller_id;
 	}
 
+	
+	public String getSd_is_calculate() {
+		return sd_is_calculate;
+	}
+
+	public void setSd_is_calculate(String sd_is_calculate) {
+		this.sd_is_calculate = sd_is_calculate;
+	}
+
 	public Delivery(String sd_seller_id, String sd_delivery_pno, String sd_delivery_no, String sd_courier,
 			String sd_invoice_no, Date sd_delivery_done_date, String sd_customer_name, String sd_customer_id,
 			String sd_taker_name, String sd_delivery_state, String sd_state_detail, BigDecimal sd_delivery_cost,
@@ -58,7 +68,7 @@ public class Delivery {
 			BigDecimal sd_product_sellprice, BigDecimal sd_total_price, Date sd_check_date, String sd_taker_phone,
 			String sd_take_area, String sd_customer_ph, String sd_postno, String sd_message, String sd_out_area,
 			Date sd_order_date, String sd_claim, String sd_pay_method, Date sd_go_delivery_date,
-			String sd_delivery_type) {
+			String sd_delivery_type, String sd_is_calculate) {
 		super();
 		this.sd_seller_id = sd_seller_id;
 		this.sd_delivery_pno = sd_delivery_pno;
@@ -93,6 +103,7 @@ public class Delivery {
 		this.sd_pay_method = sd_pay_method;
 		this.sd_go_delivery_date = sd_go_delivery_date;
 		this.sd_delivery_type = sd_delivery_type;
+		this.sd_is_calculate = sd_is_calculate;
 	}
 
 	public String getSd_delivery_pno() {

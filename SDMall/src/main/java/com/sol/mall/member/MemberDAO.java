@@ -139,9 +139,6 @@ public class MemberDAO {
 		Customer cc = (Customer) req.getSession().getAttribute("loginCustomer");
 
 		if (cc != null) {
-			
-			
-			
 			req.setAttribute("contentPage", "home.jsp");
 
 			return true;
@@ -196,13 +193,6 @@ public class MemberDAO {
 	public void logoutSeller(HttpServletRequest req, HttpServletResponse res) {
 
 		req.getSession().setAttribute("loginSeller", null);
-
-	}
-
-	// 모든 구매자 보여주기
-	public Customers getAllCustomer(HttpServletRequest req, HttpServletResponse res) {
-
-		return new Customers(ss.getMapper(MemberMapper.class).getAllCustomer());
 
 	}
 
