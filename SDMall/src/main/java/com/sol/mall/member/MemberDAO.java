@@ -139,7 +139,10 @@ public class MemberDAO {
 		Customer cc = (Customer) req.getSession().getAttribute("loginCustomer");
 
 		if (cc != null) {
-			req.setAttribute("contentPage", "goods/shop.jsp");
+			
+			
+			
+			req.setAttribute("contentPage", "home.jsp");
 
 			return true;
 
