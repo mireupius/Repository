@@ -16,14 +16,23 @@ public class ShoppingBagItem {
 	private String gd_dlvchrg;
 	private String gd_outarea;
 	private String gd_sellerid;
+	private String sb_gdno;
 
 	public ShoppingBagItem() {
 		// TODO Auto-generated constructor stub
 	}
 
+	public String getSb_gdno() {
+		return sb_gdno;
+	}
+
+	public void setSb_gdno(String sb_gdno) {
+		this.sb_gdno = sb_gdno;
+	}
+
 	public ShoppingBagItem(String sb_no, String gd_name, String gd_imgm, String op_name, BigDecimal sb_quantity,
 			BigDecimal op_price, BigDecimal gd_csmprice, BigDecimal gd_price, String gd_dlvchrg, String gd_outarea,
-			String gd_sellerid) {
+			String gd_sellerid, String sb_gdno) {
 		super();
 		this.sb_no = sb_no;
 		this.gd_name = gd_name;
@@ -36,6 +45,7 @@ public class ShoppingBagItem {
 		this.gd_dlvchrg = gd_dlvchrg;
 		this.gd_outarea = gd_outarea;
 		this.gd_sellerid = gd_sellerid;
+		this.sb_gdno = sb_gdno;
 	}
 
 	public String getSb_no() {
@@ -103,14 +113,14 @@ public class ShoppingBagItem {
 	}
 
 	public BigDecimal getGd_dlvchrg() {
-		BigDecimal dlvchrg =new BigDecimal(gd_dlvchrg.split(",")[0]);//배송비
-		BigDecimal terms =new BigDecimal(gd_dlvchrg.split(",")[1]);//조건
-		BigDecimal zero =new BigDecimal("0");//0
-		
-		if (terms.compareTo(zero)==0) {//조건이 0이면 
-			return dlvchrg;//배송비 적용
-		}else {
-			return terms.compareTo(sb_quantity.multiply(gd_price.add(op_price)))>0?dlvchrg:zero;//조건부 배송비 적용
+		BigDecimal dlvchrg = new BigDecimal(gd_dlvchrg.split(",")[0]);// 배송비
+		BigDecimal terms = new BigDecimal(gd_dlvchrg.split(",")[1]);// 조건
+		BigDecimal zero = new BigDecimal("0");// 0
+
+		if (terms.compareTo(zero) == 0) {// 조건이 0이면
+			return dlvchrg;// 배송비 적용
+		} else {
+			return terms.compareTo(sb_quantity.multiply(gd_price.add(op_price))) > 0 ? dlvchrg : zero;// 조건부 배송비 적용
 		}
 	}
 

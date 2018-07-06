@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -54,7 +55,8 @@
 													<div class="cart_item_price cart_info_col">
 														<div class="cart_item_title">Price</div>
 														<div id="price" class="cart_item_text">
-															${list.gd_price+list.op_price  }</div>
+														<fmt:formatNumber value="${list.gd_price+list.op_price}" pattern="#,###" />원
+															</div>
 													</div>
 													<div class="cart_item_quantity cart_info_col">
 														<div class="cart_item_title">Quantity</div>
@@ -62,8 +64,13 @@
 													</div>
 													<div class="cart_item_total cart_info_col">
 														<div class="cart_item_title">Total</div>
-														<div class="cart_item_text">${(list.gd_price+list.op_price) * list.sb_quantity }
-															<!-- 													orderTotal변수에 상품 총액 합 -->
+														<div class="cart_item_text">
+<%-- 														<fmt:formatNumber value="${(list.gd_price+list.op_price) * list.sb_quantity }" pattern="#,###"/>원 --%>
+															<!-- 
+																												orderTotal변수에 상품 총액 합 -->
+															<c:set var="totalTest" value="${(list.gd_price+list.op_price) * list.sb_quantity }"/>
+															<fmt:formatNumber value="${totalTest }" pattern="#,###"/>원
+																												
 															<c:set var="orderTotal"
 																value="${orderTotal + (list.gd_price+list.op_price) * list.sb_quantity}" />
 														</div>
@@ -83,7 +90,7 @@
 															type="hidden"> <input name="sd_total_price"
 															value="${(list.gd_price+list.op_price) * list.sb_quantity + list.gd_dlvchrg}"
 															type="hidden"> <input name="sd_product_no"
-															value="${list.sb_no }" type="hidden"> <input
+															value="${list.sb_gdno }" type="hidden"> <input
 															name="sd_seller_id" value="${list.gd_sellerid }"
 															type="hidden"> <input name="sd_out_area"
 															value="${list.gd_outarea}" type="hidden"> <input
@@ -101,7 +108,7 @@
 										<div class="order_total_title">Order Total:</div>
 										<!-- 								orderTotal출력 -->
 										<div class="order_total_amount">
-											<c:out value="${orderTotal}" />
+											<fmt:formatNumber value="${orderTotal }" pattern="#,###"/>원
 										</div>
 									</div>
 								</div>

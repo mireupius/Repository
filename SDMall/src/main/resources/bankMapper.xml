@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.sol.mall.myPage.MyPageMapper">
+<mapper namespace="com.sol.mall.sale.bank.BankMapper">
 
 	<!-- 주문/배송 조회 -->
 	<!-- #{sb_searchMonth}앞 '-'는 GET방식으로 넘어갈 때 양수로 보여지게 하기 위해서 쿼리를 수정함 -->
@@ -12,8 +12,7 @@
 		where
 		sd_seller_id = #{sa_id}
 		and sd_delivery_state = '구매확정'
-		and
-		sd_is_calculate = 'N'
+		and	sd_is_calculate = 'N'
 	</select>
 
 	<update id="doCaculate"
@@ -24,7 +23,7 @@
 		sd_seller_id = #{sa_id}
 		and sd_delivery_state = '구매확정'
 		and
-		sd_is_calculate = 'Y'
+		sd_is_calculate = 'N'
 	</update>
 
 	<insert id="regAccount"
@@ -38,19 +37,16 @@
 		parameterType="com.sol.mall.sale.bank.Account"
 		resultType="com.sol.mall.sale.bank.Account">
 		select * from seller_account
-		where
-		sa_id = #{sa_id}
+		where sa_id = #{sa_id}
 	</select>
 
 	<update id="modifyAccount"
 		parameterType="com.sol.mall.sale.bank.Account">
 		update seller_account set
-		sa_account_num =
-		#{sa_account_num}
+		sa_account_num = #{sa_account_num},
 		sa_account_bank = #{sa_account_bank}
 		where
-		sa_id =
-		#{sa_id}
+		sa_id =	#{sa_id}
 	</update>
 
 

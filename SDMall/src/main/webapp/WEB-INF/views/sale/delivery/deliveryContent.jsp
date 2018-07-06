@@ -115,7 +115,7 @@
 				</span> <span>신규주문 :<a href="sale.selNewDeals.go">${NewDeliveryNum }</a>건
 				</span> <span>발주확인 :<a href="sale.selCheckDeals.go">${CheckDeliveryNum }</a>건
 				</span> <span>선택건 일괄입력</span> <select id="inputSel">
-					<option value="" selected disabled hidden>선택</option>
+					<option value="" selected disabled type="hidden">선택</option>
 					<option>대한통운</option>
 					<option>로젠택배</option>
 					<option>우체국택배</option>
@@ -179,7 +179,7 @@
 													<td>${d.sd_delivery_pno}</td>
 													<td>${d.sd_delivery_no}</td>
 													<td><select class="cs_${d.sd_delivery_pno}">
-															<option value="" selected disabled hidden>선택</option>
+															<option value="" selected disabled type="hidden">선택</option>
 															<option>대한통운</option>
 															<option>로젠택배</option>
 															<option>우체국택배</option>
@@ -242,16 +242,16 @@
 				<div class="showback">
 					<form action="sale.deliverySend.do" method="post"
 						style="display: inline">
-						<input name="send_Array" id="send_ArrayVal" hidden> <input
-							name="cs_sendArray" id="cs_ArrayVal" hidden> <input
-							name="no_sendArray" id="no_ArrayVal" hidden> <input
+						<input name="send_Array" id="send_ArrayVal" type="hidden"> <input
+							name="cs_sendArray" id="cs_ArrayVal" type="hidden"> <input
+							name="no_sendArray" id="no_ArrayVal" type="hidden"> <input
 							id="selectDealSend" type="submit" value="선택건 발송처리" type="submit"
 							class="btn btn-default">
 					</form>
 
 					<form action="sale.deliveryCheck.do" method="post"
 						style="display: inline">
-						<input name="array" id="arrayVal" hidden> <input
+						<input name="array" id="arrayVal" type="hidden"> <input
 							id="deliveryCheckButton" type="submit" value="선택건 발주확인"
 							type="button" class="btn btn-default">
 					</form>
@@ -259,7 +259,11 @@
 					<form action="insertExcel.go" enctype="multipart/form-data"
 						method="post" style="display: inline">
 						<input type="submit" value="엑셀 일괄발송" type="button"
-							class="btn btn-default"> <input name="excelFile"
+							class="btn btn-default"> 
+							
+							
+							
+							<input name="excelFile"
 							type="file" style="display: inline">
 					</form>
 					<a href="resources\files\sale\sample.xlsx"><button

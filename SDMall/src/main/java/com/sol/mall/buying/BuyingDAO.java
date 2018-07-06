@@ -58,7 +58,9 @@ public class BuyingDAO {
 			cart.setSd_product_sellprice(new BigDecimal(ps[i]));
 			cart.setSd_total_price(new BigDecimal(tp[i]));
 			cart.setSd_out_area(oa[i]);
+
 			cart.setSd_product_no(pn[i]);
+
 			cart.setSd_seller_id(si[i]);
 			cart.setSd_delivery_cost(new BigDecimal(sdc[i]));
 

@@ -49,7 +49,7 @@ insert into sale_delivery values('2018052291233615','2018052252351032','bbb',NUL
 insert into sale_delivery values('2018052291233616','2018052252351032','bbb',NULL,NULL,NULL,'이영희','zz','장희원','구매확정','신규주문',2500,'2917445931','헤어핀3','조합형옵션상품','컬러:블랙',2,0,5700,5700,5700,NULL,'010-0000-0002','서울 가좌동 32길 5 (가좌동, 주공아파트) 000동000호','010-4717-0039','05675',NULL,'(04306) 서울특별시 용산구 청파로71길  77-77',sysdate,NULL,'신용카드',NULL,NULL);
 
 select * from SALE_DELIVERY;
-
+delete from SALE_DELIVERY;
 
 drop table sale_delivery cascade constraint purge;
 CREATE TABLE sale_delivery 
