@@ -32,7 +32,7 @@ public class GoodsDAO {
 				item2 = item;
 			}
 
-			double cnt = 3;// 한 페이지당 나올 수
+			double cnt = 15;// 한 페이지당 나올 수
 			int itemSize = item2.size();// 총 글 수
 			int pageCount = (int) Math.ceil(itemSize / cnt);
 			request.setAttribute("pageCount", pageCount);
