@@ -23,109 +23,126 @@ public class MyPageDAO {
 
 	@Autowired
 	private SqlSession ss;
-	
+
 	// 주문&배송 조회(페이징 적용)
-	public void pagingOrderList (int curPage, String showCnt, SearchMonth sm, HttpServletRequest request, HttpServletResponse response) {
-		
-		System.out.println("서치먼쓰==="+sm.getSearchMonth());
-		
-		// 검색을 위해 준비
-		Customer cc = (Customer) request.getSession().getAttribute("loginCustomer");
+	public void pagingOrderList(int curPage, String showCnt, SearchMonth sm, HttpServletRequest request,
+			HttpServletResponse response) {
 
-		SearchOrder so = new SearchOrder();
-		so.setSd_customer_id(cc.getCsm_id());
+		try {
 
-		// string에 적힌 이름의 자바빈에서 파라미터 추출or주입
-		HashMap<String, Object> map = new HashMap<>();
-		map.put("searchOrder", so);
-		map.put("searchMonth", sm.getSearchMonth());
-		
-		List<SearchOrder> orders2 = ss.getMapper(MyPageMapper.class).searchOrderList(map);
+			// 검색을 위해 준비
+			Customer cc = (Customer) request.getSession().getAttribute("loginCustomer");
 
-		// 처음 화면 표시할 때 전체검색 멤버에 집어넣고 페이징시에는 세션으로만
-		// 페이징은 세션이용 멤버리스트에서 해당 페이지 만큼 세션에 넣어서
-		// 수정 화면에 이동은 페이징 세션으로 해결
-		double cnt = Double.parseDouble(showCnt);// 페이지당 건수
-		int listSize = orders2.size();
-		int allPage = (int) Math.ceil(listSize / cnt);// 총페이지
-		request.setAttribute("pageCount", allPage);
+			SearchOrder so = new SearchOrder();
+			so.setSd_customer_id(cc.getCsm_id());
 
-		// 현재 페이지 색변경
-		if (curPage <= allPage && curPage > 1) {
-			request.setAttribute("curPage", curPage);
-		} else if (curPage > allPage && curPage > 1) {
-			curPage = curPage - 1;
-			request.setAttribute("curPage", curPage);
-		} else {
-			request.setAttribute("curPage", 1);
+			// string에 적힌 이름의 자바빈에서 파라미터 추출or주입
+			HashMap<String, Object> map = new HashMap<>();
+			map.put("searchOrder", so);
+			map.put("searchMonth", sm.getSearchMonth());
+
+			List<SearchOrder> orders2 = ss.getMapper(MyPageMapper.class).searchOrderList(map);
+
+			// 처음 화면 표시할 때 전체검색 멤버에 집어넣고 페이징시에는 세션으로만
+			// 페이징은 세션이용 멤버리스트에서 해당 페이지 만큼 세션에 넣어서
+			// 수정 화면에 이동은 페이징 세션으로 해결
+			double cnt = Double.parseDouble(showCnt);// 페이지당 건수
+			int listSize = orders2.size();
+			int allPage = (int) Math.ceil(listSize / cnt);// 총페이지
+			request.setAttribute("pageCount", allPage);
+
+			// 현재 페이지 색변경
+			if (curPage <= allPage && curPage > 1) {
+				request.setAttribute("curPage", curPage);
+			} else if (curPage > allPage && curPage > 1) {
+				curPage = curPage - 1;
+				request.setAttribute("curPage", curPage);
+			} else {
+				request.setAttribute("curPage", 1);
+			}
+
+			int start = listSize - (int) cnt * (curPage - 1);// 페이지 첫번째 게시물
+			int end = (curPage == allPage) ? 1 : start - ((int) cnt - 1);// 페이지 마지막 게시물
+			System.out.println(start);
+			List<SearchOrder> ordersPage = new ArrayList<>();// 해당 페이지 게시물 리스트
+			System.out.println(ordersPage.size());
+
+			// start가 0인 경우 -1이 나와서 익셉션걸림(검색결과가 0인 경우에 -1이 됨 주의)
+			if (start > 0) {
+
+				for (int i = start; i >= end; i--) {
+					// 페이지용 List에 해당 페이지 만큼넣기
+					ordersPage.add(orders2.get(i - 1));
+				}
+			}
+			request.getSession().setAttribute("ordersPage", ordersPage);
+
+		} catch (Exception e) {
+			request.getSession().setAttribute("ordersPage", null);
 		}
-		
-		int start = listSize - (int) cnt * (curPage - 1);// 페이지 첫번째 게시물
-		int end = (curPage == allPage) ? 1 : start - ((int) cnt - 1);// 페이지 마지막 게시물
-
-		List<SearchOrder> ordersPage = new ArrayList<>();// 해당 페이지 게시물 리스트
-
-		// start가 0인 경우 -1이 나와서 익셉션걸림(검색결과가 0인 경우에 -1이 됨 주의)
-		for (int i = start; i >= end; i--) {
-			// 페이지용 List에 해당 페이지 만큼넣기
-			ordersPage.add(orders2.get(i - 1));
-		}
-
-		request.getSession().setAttribute("ordersPage", ordersPage);
 
 	}
-	
-	//교환, 반품, 취소된 주문내역 조회(페이징 적용)
-	public void pagingClaimedOrderList (int curPage, String showCnt, SearchMonth sm, HttpServletRequest request, HttpServletResponse response) {
-		
-		System.out.println("서치먼쓰==="+sm.getSearchMonth());
-		
-		// 검색을 위해 준비
-		Customer cc = (Customer) request.getSession().getAttribute("loginCustomer");
-		
-		SearchOrder so = new SearchOrder();
-		so.setSd_customer_id(cc.getCsm_id());
-		
-		// string에 적힌 이름의 자바빈에서 파라미터 추출or주입
-		HashMap<String, Object> map = new HashMap<>();
-		map.put("searchOrder", so);
-		map.put("searchMonth", sm.getSearchMonth());
-		
-		List<SearchOrder> orders2 = ss.getMapper(MyPageMapper.class).searchClaimedOrderList(map);
-		
-		// 처음 화면 표시할 때 전체검색 멤버에 집어넣고 페이징시에는 세션으로만
-		// 페이징은 세션이용 멤버리스트에서 해당 페이지 만큼 세션에 넣어서
-		// 수정 화면에 이동은 페이징 세션으로 해결
-		double cnt = Double.parseDouble(showCnt);// 페이지당 건수
-		int listSize = orders2.size();
-		int allPage = (int) Math.ceil(listSize / cnt);// 총페이지
-		request.setAttribute("pageCount", allPage);
-		
-		// 현재 페이지 색변경
-		if (curPage <= allPage && curPage > 1) {
-			request.setAttribute("curPage", curPage);
-		} else if (curPage > allPage && curPage > 1) {
-			curPage = curPage - 1;
-			request.setAttribute("curPage", curPage);
-		} else {
-			request.setAttribute("curPage", 1);
+
+	// 교환, 반품, 취소된 주문내역 조회(페이징 적용)
+	public void pagingClaimedOrderList(int curPage, String showCnt, SearchMonth sm, HttpServletRequest request,
+			HttpServletResponse response) {
+
+		try {
+			
+			// 검색을 위해 준비
+			Customer cc = (Customer) request.getSession().getAttribute("loginCustomer");
+
+			SearchOrder so = new SearchOrder();
+			so.setSd_customer_id(cc.getCsm_id());
+
+			// string에 적힌 이름의 자바빈에서 파라미터 추출or주입
+			HashMap<String, Object> map = new HashMap<>();
+			map.put("searchOrder", so);
+			map.put("searchMonth", sm.getSearchMonth());
+
+			List<SearchOrder> orders2 = ss.getMapper(MyPageMapper.class).searchClaimedOrderList(map);
+
+			// 처음 화면 표시할 때 전체검색 멤버에 집어넣고 페이징시에는 세션으로만
+			// 페이징은 세션이용 멤버리스트에서 해당 페이지 만큼 세션에 넣어서
+			// 수정 화면에 이동은 페이징 세션으로 해결
+			double cnt = Double.parseDouble(showCnt);// 페이지당 건수
+			int listSize = orders2.size();
+			int allPage = (int) Math.ceil(listSize / cnt);// 총페이지
+			request.setAttribute("pageCount", allPage);
+
+			// 현재 페이지 색변경
+			if (curPage <= allPage && curPage > 1) {
+				request.setAttribute("curPage", curPage);
+			} else if (curPage > allPage && curPage > 1) {
+				curPage = curPage - 1;
+				request.setAttribute("curPage", curPage);
+			} else {
+				request.setAttribute("curPage", 1);
+			}
+
+			int start = listSize - (int) cnt * (curPage - 1);// 페이지 첫번째 게시물
+			System.out.println(start);
+			int end = (curPage == allPage) ? 1 : start - ((int) cnt - 1);// 페이지 마지막 게시물
+
+			List<SearchOrder> ordersPage = new ArrayList<>();// 해당 페이지 게시물 리스트
+			if (start > 0) {
+				// start가 0인 경우 -1이 나와서 익셉션걸림(검색결과가 0인 경우에 -1이 됨 주의)
+				for (int i = start; i >= end; i--) {
+					// 페이지용 List에 해당 페이지 만큼넣기
+					ordersPage.add(orders2.get(i - 1));
+					System.out.println(orders2.get(i - 1).getSd_claim());
+				}
+			}
+
+			request.getSession().setAttribute("claimedOrder", ordersPage);
+			
+		} catch (Exception e) {
+			request.getSession().setAttribute("claimedOrder", null);
 		}
 		
-		int start = listSize - (int) cnt * (curPage - 1);// 페이지 첫번째 게시물
-		int end = (curPage == allPage) ? 1 : start - ((int) cnt - 1);// 페이지 마지막 게시물
+
 		
-		List<SearchOrder> ordersPage = new ArrayList<>();// 해당 페이지 게시물 리스트
-		
-		// start가 0인 경우 -1이 나와서 익셉션걸림(검색결과가 0인 경우에 -1이 됨 주의)
-		for (int i = start; i >= end; i--) {
-			// 페이지용 List에 해당 페이지 만큼넣기
-			ordersPage.add(orders2.get(i - 1));
-			System.out.println(orders2.get(i - 1).getSd_claim());
-		}
-		
-		request.getSession().setAttribute("claimedOrder", ordersPage);
-		
-		
+
 	}
 
 	// 주문&배송 조회
@@ -140,7 +157,7 @@ public class MyPageDAO {
 		HashMap<String, Object> map = new HashMap<>();
 		map.put("searchOrder", so);
 		map.put("searchMonth", sm.getSearchMonth());
-		
+
 		List<SearchOrder> orders = ss.getMapper(MyPageMapper.class).searchOrderList(map);
 
 		if (cc.getCsm_id().equals(so.getSd_customer_id())) {
@@ -247,29 +264,29 @@ public class MyPageDAO {
 		}
 
 	}
-	
+
 	// 구매확정
 	public void completeBuyOrder(Delivery d, HttpServletRequest req, HttpServletResponse res) {
-		
+
 		try {
-			
+
 			Customer cc = (Customer) req.getSession().getAttribute("loginCustomer");
-			
+
 			d.setSd_customer_id(cc.getCsm_id());
-			
+
 			if (ss.getMapper(MyPageMapper.class).completeBuyOrder(d) == 1) {
-				
+
 				System.out.println("구매확정 성공");
-				
+
 			} else {
 				System.out.println("구매확정 실패");
 			}
-			
+
 		} catch (Exception e) {
 			e.printStackTrace();
 			System.out.println("구매확정 실패");
 		}
-		
+
 	}
 
 	// 교환, 반품, 취소된 주문내역 조회
@@ -299,12 +316,12 @@ public class MyPageDAO {
 		Customer cc = (Customer) req.getSession().getAttribute("loginCustomer");
 
 		d.setSd_customer_id(cc.getCsm_id());
-		System.out.println("id"+d.getSd_customer_id());
+		System.out.println("id" + d.getSd_customer_id());
 
 		List<Delivery> orders = ss.getMapper(MyPageMapper.class).orderListToReview(d);
-System.out.println(orders.size());
+		System.out.println(orders.size());
 		if (cc.getCsm_id().equals(d.getSd_customer_id())) {
-			
+
 			req.setAttribute("orderList", orders);
 		}
 
@@ -329,7 +346,7 @@ System.out.println(orders.size());
 		}
 
 	}
-	
+
 	// 리뷰할 상품의 정보 자동입력 될 때 가져오기
 	public void goOrderToReview(Delivery d, HttpServletRequest req, HttpServletResponse res) {
 
@@ -355,7 +372,7 @@ System.out.println(orders.size());
 			Date today = new Date();
 			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
 			pr.setPr_regDate(sdf.format(today));
-			
+
 			if (ss.getMapper(MyPageMapper.class).writeProductReview(pr) == 1
 					&& ss.getMapper(MyPageMapper.class).changeReviewState(pr) == 1) {
 
@@ -520,33 +537,33 @@ System.out.println(orders.size());
 		}
 
 	}
-	
+
 	// 적립금 적립
-		public void accumulatePoint(Delivery d, HttpServletRequest req, HttpServletResponse res) {
+	public void accumulatePoint(Delivery d, HttpServletRequest req, HttpServletResponse res) {
 
-			try {
+		try {
 
-				Customer cc = (Customer) req.getSession().getAttribute("loginCustomer");
-					
-				Membership m = new Membership();
-				m.setMs_csm_id((cc.getCsm_id()));
-				BigDecimal pointRate = new BigDecimal(0.01);
-				BigDecimal priceByPno = ss.getMapper(MyPageMapper.class).getTotalBuyPriceByPno(d);
-				
-				m.setMs_point(priceByPno.multiply(pointRate));
+			Customer cc = (Customer) req.getSession().getAttribute("loginCustomer");
 
-				if (ss.getMapper(MyPageMapper.class).updateAccumulatePoint(m) == 1) {
+			Membership m = new Membership();
+			m.setMs_csm_id((cc.getCsm_id()));
+			BigDecimal pointRate = new BigDecimal(0.01);
+			BigDecimal priceByPno = ss.getMapper(MyPageMapper.class).getTotalBuyPriceByPno(d);
 
-					System.out.println("포인트 적립 완료");
+			m.setMs_point(priceByPno.multiply(pointRate));
 
-				} else {
-					System.out.println("포인트 적립 실패");
-				}
+			if (ss.getMapper(MyPageMapper.class).updateAccumulatePoint(m) == 1) {
 
-			} catch (Exception e) {
-				e.printStackTrace();
+				System.out.println("포인트 적립 완료");
+
+			} else {
 				System.out.println("포인트 적립 실패");
 			}
 
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println("포인트 적립 실패");
 		}
+
+	}
 }

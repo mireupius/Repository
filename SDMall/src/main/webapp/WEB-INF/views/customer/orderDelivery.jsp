@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -18,7 +19,7 @@ $(function(){
     	$("#curPage").val(curPage);
     	
 	});
-	
+	//  form안의 파라미터(개월), 히든값 페이지번호 넘기기
 	$(".pageNo").click(function(){
     	var curPage = $(this).attr("clickPage");
     	$("#curPage").val(curPage);
@@ -26,6 +27,7 @@ $(function(){
 		
 	});
 	
+	// css 색 변경
    	$(".pageNoSel").click(function(){  	
     	var curPage = $(this).attr("clickPage");
     	$("#curPage").val(curPage);
@@ -81,8 +83,15 @@ $(function(){
 	</form>
 
 	<div class="showOrderlist">
+	
+	
+		<c:if test="${fn:length(ordersPage)==0 }">
+		<h5 align="center" class="orderTb1">해당 상품이 없습니다.</h5>
+		</c:if>
 
 		<c:forEach var="list" items="${ordersPage }">
+		
+		
 			<table class="orderTb2" border="1">
 				<tr>
 					<td class = "orderTd0" rowspan="5"><img
