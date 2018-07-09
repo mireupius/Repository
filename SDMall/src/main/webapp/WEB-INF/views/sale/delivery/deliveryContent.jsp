@@ -8,6 +8,18 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 <script type="text/javascript">
+	function excelCheck() {
+
+		var excelField = $("#excelFileName").val();
+		excelField = excelField.slice(excelField.indexOf(".") + 1)
+				.toLowerCase(); //파일 확장자를 잘라내고, 비교를 위해 소문자로 만듭니다.
+		if (excelField != "xlsx") { //확장자를 확인합니다.
+			alert('xlsx파일만 등록가능합니다.');
+			return false;
+		}
+		return true
+	}
+
 	$(function() {
 
 		var all = "${all }";
@@ -242,11 +254,11 @@
 				<div class="showback">
 					<form action="sale.deliverySend.do" method="post"
 						style="display: inline">
-						<input name="send_Array" id="send_ArrayVal" type="hidden"> <input
-							name="cs_sendArray" id="cs_ArrayVal" type="hidden"> <input
-							name="no_sendArray" id="no_ArrayVal" type="hidden"> <input
-							id="selectDealSend" type="submit" value="선택건 발송처리" type="submit"
-							class="btn btn-default">
+						<input name="send_Array" id="send_ArrayVal" type="hidden">
+						<input name="cs_sendArray" id="cs_ArrayVal" type="hidden">
+						<input name="no_sendArray" id="no_ArrayVal" type="hidden">
+						<input id="selectDealSend" type="submit" value="선택건 발송처리"
+							type="submit" class="btn btn-default">
 					</form>
 
 					<form action="sale.deliveryCheck.do" method="post"
@@ -256,15 +268,13 @@
 							type="button" class="btn btn-default">
 					</form>
 
-					<form action="insertExcel.go" enctype="multipart/form-data"
-						method="post" style="display: inline">
+					<form action="insertExcel.go" onsubmit="return excelCheck();"
+						enctype="multipart/form-data" method="post"
+						style="display: inline">
 						<input type="submit" value="엑셀 일괄발송" type="button"
-							class="btn btn-default"> 
-							
-							
-							
-							<input name="excelFile"
-							type="file" style="display: inline">
+							class="btn btn-default"> <input id="excelFileName"
+							name="excelFile" required="required" type="file"
+							style="display: inline">
 					</form>
 					<a href="resources\files\sale\sample.xlsx"><button
 							type="submit" type="button" class="btn btn-default">엑셀양식

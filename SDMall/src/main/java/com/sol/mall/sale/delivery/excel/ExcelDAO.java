@@ -34,10 +34,6 @@ public class ExcelDAO {
 		String path = req.getSession().getServletContext().getRealPath("resources/files/sale/temp");
 
 		String filename = multipartFile.getOriginalFilename();
-
-		System.out.println(path);
-		System.out.println(filename);
-
 		File selectedDir = new File(path);
 		File[] innerFiles = selectedDir.listFiles();
 
@@ -69,27 +65,30 @@ public class ExcelDAO {
 			List<Map<String, String>> excelContent = ExcelRead.read(readOption);
 
 			int all = excelContent.size();
+
 			int success = 0;
 
 			for (int i = 1; i < excelContent.size(); i++) {
 				d = new Delivery();
 
-				d.setSd_delivery_pno(excelContent.get(i).get("A"));
-				d.setSd_courier(excelContent.get(i).get("B"));
-				d.setSd_invoice_no(excelContent.get(i).get("C") + "");
-
-				if (ss.getMapper(DeliveryMapper.class).sendDeliverys(d) == 1) {
-					success++;
+				if (excelContent.get(i).get("A") != null && excelContent.get(i).get("B") != null
+						&& excelContent.get(i).get("C") != null) {
+					d.setSd_delivery_pno(excelContent.get(i).get("A"));
+					d.setSd_courier(excelContent.get(i).get("B"));
+					d.setSd_invoice_no(excelContent.get(i).get("C") + "");
+					if (ss.getMapper(DeliveryMapper.class).sendDeliverys(d) == 1) {
+						success++;
+					}
 				}
-			}
 
+			}
 			for (int i = 0; i < innerFiles.length; i++) {
 				innerFiles[i].delete();
 			}
-
 			req.setAttribute("all", all - 1);
 			req.setAttribute("success", success);
 		}
+
 	}
 
 	public File MakeExcel(HttpServletRequest req, HttpServletResponse res, Delivery ds) {

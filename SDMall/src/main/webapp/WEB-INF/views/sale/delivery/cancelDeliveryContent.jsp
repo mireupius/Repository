@@ -92,7 +92,7 @@
 			<div class="showback" id="inputSets">
 
 				<span>취소 :<a href="sale.cancelDelivery.go">${cancelDeliveryNum }</a>건
-				</span>                                     
+				</span>
 
 			</div>
 
@@ -192,7 +192,8 @@
 						</div>
 					</c:if>
 					<div class="showback">
-						<button>엑셀 일괄등록</button>
+						<button class="btn btn-default">취소처리</button>
+						<button class="btn btn-default">취소거부처리</button>
 					</div>
 				</div>
 

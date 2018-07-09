@@ -193,7 +193,9 @@
 						</div>
 					</c:if>
 					<div class="showback">
-						<button>엑셀 일괄등록</button>
+						<button class="btn btn-default">판매자 직접 취소처리</button>
+						<button class="btn btn-default">판매자 직접 반품처리</button>
+						<button class="btn btn-default">판매자 직접 교환처리</button>
 					</div>
 				</div>
 

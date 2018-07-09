@@ -20,7 +20,6 @@ public class CellRef {
 
 	public static String getValue(Cell cell) {
 		String value = "";
-		System.out.println("ㅋㅋㅋㅋㅋㅋㅋ");
 		if (cell != null) {
 			switch (cell.getCellType()) {
 			case XSSFCell.CELL_TYPE_FORMULA:

@@ -192,7 +192,7 @@
 						</div>
 					</c:if>
 					<div class="showback">
-						<button>엑셀 일괄등록</button>
+						<button class="btn btn-default">구매확정 후 환불처리</button>
 					</div>
 				</div>
 
