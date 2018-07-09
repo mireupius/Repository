@@ -58,7 +58,7 @@
 							<c:otherwise>
 							<p>배송비 <fmt:formatNumber value="${dlvchrg[0]}" pattern="#,###" />원</p>
 							<c:if test="${dlvchrg[1]>0}">
-							<p><fmt:formatNumber value="${dlvchrg[1]}" pattern="#,###" />원 이상 구매시 무료 배송</p>
+							<p><fmt:formatNumber value="${dlvchrg[1]}" pattern="#,###" />원 이상 구매시 무료배송</p>
 							</c:if>
 							</c:otherwise>
 						</c:choose>

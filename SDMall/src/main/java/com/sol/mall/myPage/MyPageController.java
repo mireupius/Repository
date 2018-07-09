@@ -314,6 +314,7 @@ public class MyPageController {
 			mpDAO.writeProductReview(pr, req, res);
 			sbDAO.showCartItems(req, res);// 장바구니 상품수량 반환
 			mpDAO.getOrderListToReview(d, req, res);
+			mpDAO.getWritedReview(pr, req, res);
 			
 			req.setAttribute("contentPage", "customer/customerMyPage2.jsp");
 			req.setAttribute("myPageContentArea", "productReviewPage.jsp");

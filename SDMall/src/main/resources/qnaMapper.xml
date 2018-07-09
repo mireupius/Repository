@@ -41,6 +41,7 @@
 	<update id="answerQna"
 		parameterType="com.sol.mall.myPage.QuestionAnswer">
 		update question_Answer set qa_answer = #{qa_answer},
+		qa_aRegDate = sysdate,
 		qa_check = '답변'
 		where qa_regNo = #{qa_regNo}
 	</update>

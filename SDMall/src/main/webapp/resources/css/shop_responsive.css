@@ -489,7 +489,12 @@
 	{
 		width: 30px;
 	}
-	.page_nav li
+	.page_nav a
+	{
+		width: 30px;
+		height: 40px;
+	}
+	.page_nav a li
 	{
 		width: 30px;
 		height: 40px;
