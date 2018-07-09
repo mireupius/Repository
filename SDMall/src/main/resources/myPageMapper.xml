@@ -16,6 +16,7 @@
 		)
 		and gd_no = sd_product_no and sd_customer_id = #{searchOrder.sd_customer_id}
 		and (sd_order_date between (select add_months(SYSDATE, -#{searchMonth}) from dual) and (select SYSDATE from dual))
+		order by sd_delivery_pno
 	</select>
 	
 	<!-- 교환/반품/취소 조회 -->
@@ -31,24 +32,42 @@
 		and sd_order_date between (select add_months(SYSDATE, -#{searchMonth}) from dual) and (select SYSDATE from dual)
 	</select>
 	
+	<!-- 취소신청 -->
 	<update id="cancelOrder" parameterType="com.sol.mall.sale.delivery.Delivery">
 		update sale_delivery
 		set sd_claim = '취소접수'
 		where sd_delivery_pno = #{sd_delivery_pno}
 	</update>
 	
+	<!-- 교환신청 -->
 	<update id="exchangeOrder" parameterType="com.sol.mall.sale.delivery.Delivery">
 		update sale_delivery
 		set sd_claim = '교환접수'
 		where sd_delivery_pno = #{sd_delivery_pno}
 	</update>
 	
+	<!-- 반품신청 -->
 	<update id="returnOrder" parameterType="com.sol.mall.sale.delivery.Delivery">
 		update sale_delivery
 		set sd_claim = '반품접수'
 		where sd_delivery_pno = #{sd_delivery_pno}
 	</update>
+	
+	<!-- 수취확인 -->
+	<update id="completeDelivery" parameterType="com.sol.mall.sale.delivery.Delivery">
+		update sale_delivery
+		set sd_delivery_state = '배송완료', sd_state_detail = '배송완료'
+		where sd_delivery_pno = #{sd_delivery_pno}
+	</update>
+	
+	<!-- 구매확정 -->
+	<update id="completeBuyOrder" parameterType="com.sol.mall.sale.delivery.Delivery">
+		update sale_delivery
+		set sd_delivery_state = '구매확정'
+		where sd_delivery_state = '배송완료' and sd_delivery_pno = #{sd_delivery_pno}
+	</update>
 
+	<!-- 멤버십 보여주기 -->
 	<select id="membershipStatus"
 		parameterType="com.sol.mall.member.Membership"
 		resultType="com.sol.mall.member.Membership">
@@ -56,24 +75,28 @@
 		from membership
 		where ms_csm_id = #{ms_csm_id}
 	</select>
+	
+	<!-- 상품평 적을 구매목록 보여주기 -->
 	<select id="orderListToReview"
 		parameterType="com.sol.mall.sale.delivery.Delivery"
 		resultType="com.sol.mall.sale.delivery.Delivery">
-		select sd_delivery_pno, sd_product_name, sd_delivery_state
+		select *
 		from sale_delivery
 		where sd_customer_id = #{sd_customer_id} and sd_delivery_state = '구매확정'
-		and sd_review is null
+		and sd_review = 'N'
 
 	</select>
 	
+	<!-- 주문번호로 주문정보 얻기 -->
 	<select id="getOrderInfoBySd_pno"
 		parameterType="com.sol.mall.sale.delivery.Delivery"
 		resultType="com.sol.mall.sale.delivery.Delivery">
 		select *
 		from sale_delivery
 		where sd_delivery_pno = #{sd_delivery_pno}
-		
 	</select>
+	
+	<!-- 상품평 작성 -->
 	<insert id="writeProductReview" parameterType="com.sol.mall.myPage.ProductReview">
 		insert into product_Review values(
 		to_char(SYSDATE,'yyyyMMdd') || LPAD(product_Review_seq.nextval, 4, 0),
@@ -82,12 +105,14 @@
 		)
 	</insert>
 	
+	<!-- 상품평 작성 상태 변경 -->
 	<update id="changeReviewState" parameterType="com.sol.mall.myPage.ProductReview">
 		update sale_delivery
 		set sd_review = 'Y'
 		where sd_delivery_pno = #{pr_orderNo}
 	</update>
 	
+	<!-- 내가 적은 상품평 보여주기 -->
 	<select id="getWritedReview"
 		parameterType="com.sol.mall.sale.delivery.Delivery"
 		resultType="com.sol.mall.myPage.ProductReview">
@@ -96,7 +121,7 @@
 		where pr_csm_id = #{pr_csm_id}
 	</select>
 	
-	
+	<!-- 판매자에게 질문요청하기 -->
 	<insert id="writeQuestionToSeller" parameterType="com.sol.mall.myPage.QuestionAnswer">
 		insert into question_Answer values(
 		to_char(SYSDATE,'yyyyMMdd') || LPAD(question_Answer_seq.nextval, 4, 0),
@@ -106,13 +131,14 @@
 		)
 	</insert>
 	
+	<!-- 판매자 답변 작성 -->
 	<update id="writeAnswerToCustomer" parameterType="com.sol.mall.myPage.QuestionAnswer">
 		update question_Answer
 		set qa_answer = #{qa_answer}, qa_aRegDate = {qa_aRegDate}, qa_check = '답변'
 		where sd_delivery_pno = #{pr_orderNo}
 	</update>
 	
-	
+	<!-- 자기가 적은 질문 보여주기 -->
 	<select id="searchQAByCustomerId"
 		parameterType="com.sol.mall.myPage.QuestionAnswer"
 		resultType="com.sol.mall.myPage.QuestionAnswer">
@@ -121,4 +147,48 @@
 		where qa_csm_id = #{qa_csm_id}
 	</select>
 	
+	<!-- 총 구매 금액 가져오기 -->
+	<select id="getTotalBuyPriceById" parameterType="com.sol.mall.sale.delivery.Delivery"
+		resultType="java.math.BigDecimal">
+		select sum(sd_total_price)
+		from sale_delivery
+		where sd_delivery_state = '구매확정' and sd_customer_id = #{sd_customer_id}
+	</select>
+	
+	<!-- 총 구매 금액 가져오기 -->
+	<select id="getTotalBuyPriceByPno" parameterType="com.sol.mall.sale.delivery.Delivery"
+		resultType="java.math.BigDecimal">
+		select sd_total_price
+		from sale_delivery
+		where sd_delivery_pno = #{sd_delivery_pno}
+	</select>
+	
+	<!-- 누적구매금액 업데이트 -->
+	<update id="updateCumulativePrice" parameterType="com.sol.mall.member.Membership">
+		update membership
+		set ms_totalBuy = #{ms_totalBuy}
+		where ms_csm_id = #{ms_csm_id}
+	</update>
+	
+	<!-- 적립금 업데이트 -->
+	<update id="updateAccumulatePoint" parameterType="com.sol.mall.member.Membership">
+		update membership
+		set ms_point = ms_point + #{ms_point}
+		where ms_csm_id = #{ms_csm_id}
+	</update>
+	
+	<!-- 멤버십 정보 가져오기 -->
+	<select id="getMemberShipInfoById" parameterType="com.sol.mall.member.Membership"
+		resultType="com.sol.mall.member.Membership">
+		select *
+		from membership
+		where ms_csm_id = #{ms_csm_id}
+	</select>
+	
+	<!-- 멤버쉽 업데이트 -->
+	<update id="updateMemberShipGrade" parameterType="com.sol.mall.member.Membership">
+		update membership
+		set ms_grade = #{ms_grade}
+		where ms_csm_id = #{ms_csm_id}
+	</update>
 </mapper>

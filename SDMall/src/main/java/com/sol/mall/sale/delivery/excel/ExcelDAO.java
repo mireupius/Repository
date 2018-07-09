@@ -18,9 +18,9 @@ import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
-import com.oreilly.servlet.MultipartRequest;
-import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
+import com.sol.mall.member.Seller;
 import com.sol.mall.sale.delivery.Delivery;
 import com.sol.mall.sale.delivery.DeliveryMapper;
 
@@ -30,27 +30,28 @@ public class ExcelDAO {
 	@Autowired
 	private SqlSession ss;
 
-	public void sendDeliverys(HttpServletRequest req, HttpServletResponse res) {
+	public void sendDeliverys(HttpServletRequest req, HttpServletResponse res, MultipartFile multipartFile) {
 		String path = req.getSession().getServletContext().getRealPath("resources/files/sale/temp");
 
-		System.out.println(path);
-
+		String filename = multipartFile.getOriginalFilename();
 		File selectedDir = new File(path);
-
 		File[] innerFiles = selectedDir.listFiles();
 
 		// 하위 디렉토리 삭제
-		for (int i = 0; i < innerFiles.length; i++) {
-			innerFiles[i].delete();
-		}
 
-		try {
-			MultipartRequest mr = new MultipartRequest(req, path, 1024 * 1024 * 12, "utf-8",
-					new DefaultFileRenamePolicy());
+		if (multipartFile != null && !(multipartFile.getOriginalFilename().equals(""))) {
 
-			String fileName = mr.getFilesystemName("excelFile");
+			File excel = new File(path + "/" + filename);
 
-			File excel = new File(path + "/" + fileName);
+			try {
+				multipartFile.transferTo(excel);
+			} catch (IllegalStateException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 
 			ReadOption readOption = new ReadOption();
 			readOption.setFilePath(excel.getAbsolutePath());
@@ -64,36 +65,41 @@ public class ExcelDAO {
 			List<Map<String, String>> excelContent = ExcelRead.read(readOption);
 
 			int all = excelContent.size();
+
 			int success = 0;
 
 			for (int i = 1; i < excelContent.size(); i++) {
 				d = new Delivery();
 
-				d.setSd_delivery_pno(excelContent.get(i).get("A"));
-				d.setSd_courier(excelContent.get(i).get("B"));
-				d.setSd_invoice_no(excelContent.get(i).get("C") + "");
-
-				if (ss.getMapper(DeliveryMapper.class).sendDeliverys(d) == 1) {
-					success++;
+				if (excelContent.get(i).get("A") != null && excelContent.get(i).get("B") != null
+						&& excelContent.get(i).get("C") != null) {
+					d.setSd_delivery_pno(excelContent.get(i).get("A"));
+					d.setSd_courier(excelContent.get(i).get("B"));
+					d.setSd_invoice_no(excelContent.get(i).get("C") + "");
+					if (ss.getMapper(DeliveryMapper.class).sendDeliverys(d) == 1) {
+						success++;
+					}
 				}
+
+			}
+			for (int i = 0; i < innerFiles.length; i++) {
+				innerFiles[i].delete();
 			}
 			req.setAttribute("all", all - 1);
 			req.setAttribute("success", success);
-
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
 		}
 
 	}
 
-	public File MakeExcel(HttpServletRequest req, HttpServletResponse res) {
+	public File MakeExcel(HttpServletRequest req, HttpServletResponse res, Delivery ds) {
 
 		String filePath = req.getSession().getServletContext().getRealPath("resources/files/sale/temp");
 		File selectedDir = new File(filePath);
 
 		File[] innerFiles = selectedDir.listFiles();
 
+		
+		System.out.println(filePath);
 		// 하위 디렉토리 삭제
 		if (innerFiles.length != 0) {
 			for (int i = 0; i < innerFiles.length; i++) {
@@ -104,7 +110,10 @@ public class ExcelDAO {
 		String excelName = "excel.xlsx";
 		Map<String, String> headerList = new HashMap<String, String>();
 		Map<String, String> list = new HashMap<String, String>();
-		List<Delivery> d = ss.getMapper(DeliveryMapper.class).getCheckDeliverys();
+
+		Seller s = (Seller) req.getSession().getAttribute("loginSeller");
+		ds.setSd_seller_id(s.getSl_id());
+		List<Delivery> d = ss.getMapper(DeliveryMapper.class).getCheckDeliverys(ds);
 		String[] titles = { "상품주문번호", "주문번호", "택배사", "구매자명", "구매자ID", "수취인명", "주문상태", "주문세부상태", "배송비", "상품번호", "상품명",
 				"옵션종류", "옵션정보", "수량(구입수량)", "옵션가격", "상품가격", "판매가격", "상품별 총 주문금액", "발주확인일", "수취인연락처1", "배송지", "구매자연락처",
 				"우편번호", "배송메세지", "출고지", "주문일시", "클레임상태", "결제수단", "배송방법" };

@@ -19,6 +19,45 @@ public class GoodsDAO {
 	@Autowired
 	private SqlSession ss;
 
+	private ArrayList<Goods> item;
+
+	public void paging(int page, HttpServletRequest request, HttpServletResponse response) {
+		try {
+
+			@SuppressWarnings("unchecked")
+			ArrayList<Goods> item2 = (ArrayList<Goods>) request.getAttribute("goodsList");
+			request.setAttribute("itemCount", item2.size());
+
+			if (item2 == null) {
+				item2 = item;
+			}
+
+			double cnt = 15;// 한 페이지당 나올 수
+			int itemSize = item2.size();// 총 글 수
+			int pageCount = (int) Math.ceil(itemSize / cnt);
+			request.setAttribute("pageCount", pageCount);
+
+			int start = itemSize - ((int) cnt * (page - 1));
+			int end = (page == pageCount) ? -1 : start - ((int) cnt + 1);
+
+			ArrayList<Goods> items = new ArrayList<>();
+
+			for (int i = start - 1; i > end; i--) {
+				items.add(item2.get(i));
+			}
+
+			request.setAttribute("pageCount", pageCount);
+			request.setAttribute("page", page);
+			request.setAttribute("goodsList", items);
+		} catch (Exception e) {
+			request.setAttribute("itemCount", 0);
+			request.setAttribute("pageCount", 1);
+			request.setAttribute("page", 1);
+			request.setAttribute("goodsList", null);
+		}
+
+	}
+
 	// 카테고리 조회
 	public void getAllcategory(HttpServletRequest request, HttpServletResponse response) {
 		request.setAttribute("category", ss.getMapper(GoodsMapper.class).getAllcategory());
@@ -40,26 +79,19 @@ public class GoodsDAO {
 
 	// 카테고리로 상품 조회
 	public void getGoodsByCate(Category category, HttpServletRequest request, HttpServletResponse response) {
-		try {
 			List<Goods> goods = ss.getMapper(GoodsMapper.class).getGoodsByCate(category);
+			item=(ArrayList<Goods>) goods;
 
 			request.setAttribute("goodsList", goods);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
 	}
-	
+
 	// 검색창에 입력받은 값으로 상품 이름과 키워드를 검색
 	public void searchGoods(Goods goods, HttpServletRequest request, HttpServletResponse response) {
-		try {
 			List<Goods> goodsResult = ss.getMapper(GoodsMapper.class).searchGoods(goods);
 
 			request.setAttribute("goodsList", goodsResult);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
 	}
-	
+
 	public GoodsList getGoodsByName(Goods goods, HttpServletRequest request, HttpServletResponse response) {
 		return new GoodsList(ss.getMapper(GoodsMapper.class).getGoodsByName(goods));
 	}
@@ -89,8 +121,10 @@ public class GoodsDAO {
 	public void getAllGoods(HttpServletRequest request) {
 		List<Goods> gdslist = ss.getMapper(GoodsMapper.class).getAllGoods();
 
+		item = (ArrayList<Goods>) gdslist;
+
 		request.setAttribute("gdslist", gdslist);
-		request.setAttribute("allGoods", gdslist);
+		request.setAttribute("goodsList", gdslist);
 	}
 
 	// ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓ 페이징 ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓
@@ -98,7 +132,7 @@ public class GoodsDAO {
 	public Paging getGoodsViewByKey(Keywords k, int curPage, double cnt, HttpServletRequest request) {
 		List<GoodsView> gdv = ss.getMapper(GoodsMapper.class).getGoodsViewByKey(k);
 
-//		double cnt = 10;// 페이지당 건수
+		// double cnt = 10;// 페이지당 건수
 		int listSize = gdv.size();
 
 		int allPage = (int) Math.ceil(listSize / cnt);// 총페이지 올림
@@ -240,7 +274,7 @@ public class GoodsDAO {
 		for (int i = 0; i < opl.getOpl_name().size(); i++) {
 			if (!opl.getOpl_name().get(i).equals("") && !opl.getOpl_price().get(i).equals("")
 					&& !opl.getOpl_stock().get(i).equals("")) {
-				
+
 				op.setOp_no(opl.getOpl_no().get(i));
 				op.setOp_name(opl.getOpl_name().get(i));
 				op.setOp_price(new BigDecimal(opl.getOpl_price().get(i)));
@@ -361,11 +395,11 @@ public class GoodsDAO {
 			throw new Exception();
 		}
 	}
-	
+
 	// 옵션삭제 (옵션번호, 옵션 상품번호)
 	// 옵션번호로만 삭제 하면 옵션셀렉트 값으로 삭제가 되는 문제가 발생
 	// 옵션상품번호와 옵션번호 두가지가 일치 해야지 삭제 되도록 변경
-	public boolean deleteOpByNo(Option op) throws Exception{
+	public boolean deleteOpByNo(Option op) throws Exception {
 		if (ss.getMapper(GoodsMapper.class).deleteOpByNo(op) == 1) {
 			System.out.println("deleteOpByNo 성공");
 			return false;
@@ -374,7 +408,7 @@ public class GoodsDAO {
 			return true;
 		}
 	}
-	
+
 	// 상품번호로 옵션 가져오기
 	public List<Option> getOptionByGdNo(Option op) {
 		return ss.getMapper(GoodsMapper.class).getOptionByNo(op);

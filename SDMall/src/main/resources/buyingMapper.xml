@@ -54,7 +54,8 @@
 		sd_out_area,
 		sd_order_date,
 		sd_pay_method,
-		sd_review
+		sd_review,
+		sd_is_calculate
 		)
 		select
 		concat(
@@ -70,8 +71,7 @@
 		#{sd_delivery_cost},
 		#{sd_product_no},
 		#{sd_product_name},
-		'선택형
-		옵션',
+		'선택형 옵션',
 		#{sd_option_info},
 		#{sd_amount},
 		#{sd_option_price},
@@ -88,6 +88,7 @@
 		#{sd_out_area},
 		so_order_date,
 		so_pay_method,
+		'N',
 		'N'
 		from
 		sale_order where so_seller_id = #{sd_seller_id}

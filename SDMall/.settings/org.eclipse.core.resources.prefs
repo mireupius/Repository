@@ -1,14 +1,10 @@
+=\=\=\=\=\=\=
+<<<<<<<=HEAD
+>>>>>>>=refs/remotes/origin/woong3
 eclipse.preferences.version=1
-<<<<<<< HEAD
-<<<<<<< HEAD
-encoding//src/main/resources/goodsTable(yun).sql=UTF-8
-=======
-encoding//src/main/resources/db.sql=UTF-8
-encoding//src/main/resources/goodsTable.sql=UTF-8
->>>>>>> refs/remotes/origin/hs6
-=======
 encoding//src/main/java/com/sol/mall/buying/BuyingController.java=UTF-8
+encoding//src/main/resources/db.sql=UTF-8
+encoding//src/main/resources/goodsTable(yun).sql=UTF-8
 encoding//src/main/resources/sqls/delivery_woong.sql=UTF-8
->>>>>>> refs/remotes/origin/woong3
 encoding//src/main/webapp/WEB-INF/views/goods/goods.jsp=UTF-8
 encoding//src/main/webapp/WEB-INF/views/home.jsp=UTF-8

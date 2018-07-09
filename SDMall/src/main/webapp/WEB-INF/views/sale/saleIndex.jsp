@@ -57,12 +57,12 @@
 			<!--logo start-->
 			<a href="index.html" class="logo"><b>SD MALL</b></a>
 			<!--logo end-->
-			 <div class="top-menu">
-            	<ul class="nav pull-right top-menu">
-                    <li>${sessionScope.loginSeller.sl_id }님</li>
-                    <li><a class="logout" href="seller.logout.do">로그아웃</a></li>
-            	</ul>
-            </div>
+			<div class="top-menu">
+				<ul class="nav pull-right top-menu">
+					<li>${sessionScope.loginSeller.sl_id }님</li>
+					<li><a class="logout" href="seller.logout.do">로그아웃</a></li>
+				</ul>
+			</div>
 		</header>
 		<!--header end-->
 
@@ -106,25 +106,16 @@
 							class="fa fa-book"></i> <span>정산관리</span>
 					</a>
 						<ul class="sub">
-							<li><a href="#.html">정산내역</a></li>
+							<li><a href="saleBank.go">정산내역</a></li>
 						</ul></li>
 					<li class="sub-menu"><a href="javascript:;"> <i
 							class="fa fa-tasks"></i> <span>고객관리</span>
 					</a>
 						<ul class="sub">
-							<li><a href="#.html">상품문의관리</a></li>
-							<li><a href="#.html">고객문의관리</a></li>
-							<li><a href="#.html">구매평 관리</a></li>
+							<li><a href="sale.delivery.qna.go">상품문의관리</a></li>
+							<li><a href="#.html">구매평 조회</a></li>
 						</ul></li>
-					<li class="sub-menu"><a href="javascript:;"> <i
-							class="fa fa-th"></i> <span>통계</span>
-					</a>
-						<ul class="sub">
-							<li><a href="basic_table.html">주문분석</a></li>
-							<li><a href="responsive_table.html">유입분석</a></li>
-							<li><a href="responsive_table.html">고객현황</a></li>
-							<li><a href="responsive_table.html">재구매통계</a></li>
-						</ul></li>
+
 					<li class="sub-menu"><a href="javascript:;"> <i
 							class=" fa fa-bar-chart-o"></i> <span>판매자정보</span>
 					</a>
@@ -191,6 +182,8 @@
 		
 		
 		
+		
+		
         $(document).ready(function () {
             $("#date-popover").popover({html: true, trigger: "manual"});
             $("#date-popover").hide();
@@ -224,6 +217,8 @@
             console.log('nav ' + nav + ' to: ' + to.month + '/' + to.year);
         }
     
+	
+	
 	
 	
 	

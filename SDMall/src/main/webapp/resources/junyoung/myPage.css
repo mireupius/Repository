@@ -3,6 +3,10 @@
 
 /* Shop SideBar */
 
+.myPageContent{
+	margin-top: 50px;
+}
+
 .shop_sidebar
 {
 	width: 100%;
@@ -128,18 +132,13 @@
 /* MyPage ContentsArea */
 
 .myPageContent{
-	
-	position: absolute;
 	top : 50px;
-	left: 120px;
 	
 }
 
 
 .memberShipTable{
-
-	margin-left: auto;
-	margin-right: auto;
+	width:100%;
 	border: #D5D5D5 solid 2px;
 	border-radius : 0 10px 0 10px;
 	font-weight: 500;
@@ -154,7 +153,7 @@
 }
 
 .upRow{
-	width: 700px;
+	width: 100%;
 	color: white;
 	font: 14pt;
 	

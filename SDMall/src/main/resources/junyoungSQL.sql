@@ -8,18 +8,25 @@ csm_phoneNo varchar2(11 char) not null,
 csm_emailAddress varchar2(30 char) not null
 );
 
+	update sale_delivery
+		set sd_delivery_state = '배송완료'
+		where sd_delivery_pno = 20180706000008;
 
 select * 
 		from sale_delivery, goods_tb
-		where ((sd_customer_id = 'junyoung12' and sd_claim is null)
-		or ((sd_customer_id = 'junyoung12' and sd_claim not like '%'||'교환'||'%')
-			 and (sd_customer_id = 'junyoung12' and sd_claim not like '%'||'취소'||'%')
-			 and (sd_customer_id = 'junyoung12' and sd_claim not like '%'||'반품'||'%'))
+		where ((sd_customer_id = 'ioso1212' and sd_claim is null)
+		or ((sd_customer_id = 'ioso1212' and sd_claim not like '%'||'교환'||'%')
+			 and (sd_customer_id = 'ioso1212' and sd_claim not like '%'||'취소'||'%')
+			 and (sd_customer_id = 'ioso1212' and sd_claim not like '%'||'반품'||'%'))
 		)
-		and gd_no = sd_product_no and sd_customer_id = 'junyoung12'
-		and (sd_order_date between (select add_months(SYSDATE, -6) from dual) and (select SYSDATE from dual))
+		and gd_no = sd_product_no and sd_customer_id = 'ioso1212'
+		and (sd_order_date between (select add_months(SYSDATE, -6) from dual) and (select SYSDATE from dual));
 
 
+select *
+		from sale_delivery
+		where sd_customer_id = 'junyoung12' and sd_delivery_state = '구매확정'
+		and sd_review = 'N';
 
 
 -- 구매자 insert
@@ -101,22 +108,23 @@ qa_qRegDate varchar2(20 char) not null,
 qa_aRegDate varchar2(20 char),
 qa_sort varchar2(10 char) not null,
 qa_check varchar2(5 char) not null
-
 );
 
 drop table question_Answer cascade constraint purge;
 drop sequence question_Answer_seq;
 select * from question_Answer
 
+delete from question_Answer;
+
 -- 샘플 데이터
 insert into question_Answer values(
 	to_char(SYSDATE,'yyyyMMdd') || LPAD(question_Answer_seq.nextval, 4, 0),
 		'15313135', 'junyoung00',
 		'seller00','7777888855553', '연필', '배송문의요', '어제 상품주문했는데 배송언제되요',
-		'오늘이나 내일 출고됩니다','2018-08-09', '2018-08-09', '배송', '미답변'
-	)
+		'오늘이나 내일 출고됩니다','2018-08-09', '2018-08-09', '배송', '답변'
+	);
 
-
+select * from question_Answer;
 -- 상품평 테이블
 -- 따로 직접 insert 할 필요없음(마이페이지에서 직접 입력하고 테스트 해봐야함)
 CREATE SEQUENCE product_Review_seq
@@ -135,7 +143,7 @@ pr_comment varchar2(100 char) not null,
 pr_gdNo varchar2(13 char) not null,
 pr_gdName varchar2(20 char) not null,
 pr_star varchar2(1 char) not null,
-pr_regDate varchar2(8 char) not null
+pr_regDate varchar2(30 char) not null
 );
 
 drop table product_Review cascade constraint purge;
@@ -183,8 +191,6 @@ insert into sale_delivery values('2018052291233641','2018052252351040','seller12
 insert into sale_delivery values('2018052291233642','2018052252351040','seller123',NULL,NULL,NULL,'강운지','junyoung12','장희원','구매확정','신규주문',2500,'1001111710001','헤어핀10번','조합형옵션상품','컬러:마젠다',2,0,5700,5700,5700,NULL,'010-0000-0002','서울 연남동 192길 12 (연남동, 삼성아파트) 000동000호','010-3369-2239','05675',NULL,'(04306) 서울특별시 용산구 청파로71길  77-77','2018-03-21',NULL,'신용카드',NULL,NULL, null);
 
 
-
-insert into sale_delivery values('2018071711153333','2018052252351040','seller123',NULL,NULL,NULL,'강운지','junyoung12','장희원','구매확정','신규주문',2500,'2917445931','헤어핀8번','조합형옵션상품','컬러:마젠다',2,0,5700,5700,5700,NULL,'010-0000-0002','서울 연남동 192길 12 (연남동, 삼성아파트) 000동000호','010-3369-2239','05675',NULL,'(04306) 서울특별시 용산구 청파로71길  77-77','2017-01-30',NULL,'신용카드',NULL,NULL, null)
 insert into product_Review values(
 	to_char(SYSDATE,'yyyyMMdd') || LPAD(product_Review_seq.nextval, 4, 0),
 		'2018071711153333', 'xcvxcv',

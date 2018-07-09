@@ -1,3 +1,4 @@
+// 구매자 회원등록 event
 function connectCSMRegisterCheckEvent() {
 
 		var idField = document.regCSMForm.csm_id;
@@ -10,7 +11,9 @@ function connectCSMRegisterCheckEvent() {
 
 		// keyup이니까 키보드가 눌러있을 때는 그냥 다 반복시켜버림
 		// 클릭도 keyup적용되니 별도의 메소드로..
-			
+		
+		// 아이디 중복검사 여부 판단
+		var idvalidateCheck = 0;
 		
 		// 아이디 Event	
 		$(".idInput").keyup(function(e) {
@@ -48,6 +51,8 @@ function connectCSMRegisterCheckEvent() {
 						}else if (ok == 0) {
 							$('.promptTxt_id').text("사용가능한 아이디 입니다")
 							.css("color", "blue").css("display", "block");
+							
+							idvalidateCheck = 1;
 						}
 	
 					}
@@ -131,6 +136,21 @@ function connectCSMRegisterCheckEvent() {
 				$(".promptTxt_email").empty();
 			}
 
+		});
+		
+		// 회원가입 버튼 중복검사여부  Event
+		$('.regBtn').click(function() {
+			
+			if (idvalidateCheck == 0) {
+				
+				alert('아이디 중복체크버튼 눌러주세요');
+				return false;
+			
+			} else {
+				return true;
+			}
+			
+			
 		});
 		
 }

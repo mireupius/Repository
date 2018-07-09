@@ -20,6 +20,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.sol.mall.common.ImageResize;
 import com.sol.mall.member.MemberDAO;
 import com.sol.mall.member.Seller;
+import com.sol.mall.shoppingbag.ShoppingBagDAO;
 
 @Controller
 public class GoodsController {
@@ -33,6 +34,10 @@ public class GoodsController {
 	@Autowired
 	private CategoryDAO cDAO;
 	
+	@Autowired
+	private ShoppingBagDAO sbDAO;
+	
+	
 	// 상품등록화면 처음
 	@RequestMapping(value = "/goodsReg.go", method = RequestMethod.GET)
 	public String goodsReg(HttpServletRequest request, HttpServletResponse response) {
@@ -40,29 +45,33 @@ public class GoodsController {
 		//판매자 세션 확인
 		if(mDAO.slLoginCheck(request, response)) {
 			
+			// ↓↓↓↓↓↓ 이중 submit 작동 방지용 세션 ↓↓↓↓↓↓
 			Date now = new Date();
-			 
-			System.out.println("=now==>"+ now);
-			
-			// 이중 작동 방지
 			request.getSession().setAttribute("submitStop", now);
+			// ↑↑↑↑↑↑ 이중 submit 작동 방지용 세션 ↑↑↑↑↑↑
 			
 			gdsDAO.getAllcategory(request, response);
 			
 			request.setAttribute("contentPage", "../goods/goodsReg.jsp");
 			return "sale/saleIndex";
 		}else {
-			request.setAttribute("loginInfo", "loginArea.jsp");
-			return "member/loginPage";
+			cDAO.getAllCategory(request, response);
+			request.setAttribute("contentPage", "member/loginArea.jsp");
+			return "main";
 		}
 	}
-
+	
 	// 전체 상품 조회
 	@RequestMapping(value = "/shop", method = RequestMethod.GET)
 	public String getAllGoods(HttpServletRequest request, HttpServletResponse response) {
-		cDAO.getAllCategory(request, response);
-
+		cDAO.getAllCategory(request, response);// 메인 카테고리 호출 메소드
+		if (mDAO.csmLoginCheck(request, response)) {//로그인체크
+			sbDAO.showCartItems(request, response);//장바구니 상품수량 반환
+		}
+		
 		gdsDAO.getAllGoods(request);
+		int page=Integer.parseInt(request.getParameter("p"));
+		gdsDAO.paging(page, request, response);
 		request.setAttribute("contentPage", "goods/shop.jsp");
 		return "main";
 	}
@@ -70,9 +79,15 @@ public class GoodsController {
 	// 카테고리 상품 조회
 	@RequestMapping(value = "/shop.Category", method = RequestMethod.GET)
 	public String getGoodsByCate(Category category, HttpServletRequest request, HttpServletResponse response) {
-		cDAO.getAllCategory(request, response);
+		cDAO.getAllCategory(request, response);// 메인 카테고리 호출 메소드
+		if (mDAO.csmLoginCheck(request, response)) {//로그인체크
+			sbDAO.showCartItems(request, response);//장바구니 상품수량 반환
+		}
 		
 		gdsDAO.getGoodsByCate(category, request, response);
+		int page=1;
+		page = request.getParameter("p")!=null?page=Integer.parseInt(request.getParameter("p")):page;
+		gdsDAO.paging(page, request, response);
 		request.setAttribute("contentPage", "goods/shop.jsp");
 		return "main";
 	}
@@ -80,17 +95,36 @@ public class GoodsController {
 	// 검색창에 입력받은 값으로 상품 이름과 키워드를 검색
 	@RequestMapping(value = "/shop.search", method = RequestMethod.GET)
 	public String searchGoods(Goods goods, HttpServletRequest request, HttpServletResponse response) {
-		cDAO.getAllCategory(request, response);
+		cDAO.getAllCategory(request, response);// 메인 카테고리 호출 메소드
+		if (mDAO.csmLoginCheck(request, response)) {//로그인체크
+			sbDAO.showCartItems(request, response);//장바구니 상품수량 반환
+		}
 		
 		gdsDAO.searchGoods(goods, request, response);
+		int page=1;
+		page = request.getParameter("p")!=null?page=Integer.parseInt(request.getParameter("p")):page;
+		gdsDAO.paging(page, request, response);
 		request.setAttribute("contentPage", "goods/shop.jsp");
 		return "main";
 	}
 	
+	//상품이름으로 상품검색 json
 	@RequestMapping(value = "/search.name", method = RequestMethod.GET, produces = "application/json; charset=utf-8")
 	public @ResponseBody GoodsList getGoodsByName(Goods goods, HttpServletRequest request, HttpServletResponse response) {
-
 		return gdsDAO.getGoodsByName(goods, request, response);
+	}
+	
+	// 상품상세 조회
+	@RequestMapping(value = "/goods", method = RequestMethod.GET)
+	public String getGoodsDtlByNo(Goods goods, HttpServletRequest request, HttpServletResponse response) {
+		cDAO.getAllCategory(request, response);// 메인 카테고리 호출 메소드
+		if (mDAO.csmLoginCheck(request, response)) {//로그인체크
+			sbDAO.showCartItems(request, response);//장바구니 상품수량 반환
+		}
+
+		gdsDAO.getGoodsByNo(goods, request, response);
+		request.setAttribute("contentPage", "goods/goods.jsp");
+		return "main";
 	}
 
 	// 상품등록작업
@@ -98,13 +132,12 @@ public class GoodsController {
 	public String registrationDo(@RequestParam("gd_file1") MultipartFile multipartFile, Goods gds, GoodsDtl gdtl,
 			OptionList opl, HttpServletRequest request, HttpServletResponse response){
 		
-		// 이중 서브밋 세션확인
-		
+		// 이중 submit 세션확인
 		String stop = request.getSession().getAttribute("submitStop").toString();
 
 		if(mDAO.slLoginCheck(request, response)) {
 
-			// 이중 서브밋 세션확인
+			// 이중 submit 세션확인
 			if(stop.equals(request.getParameter("submitStop"))) {
 				// 업로드 파일이 존재하면
 				if (multipartFile != null && !(multipartFile.getOriginalFilename().equals(""))) {
@@ -197,8 +230,9 @@ public class GoodsController {
 			request.setAttribute("contentPage", "../goods/goodsList.jsp");
 			return "sale/saleIndex";
 		}else {
-			request.setAttribute("loginInfo", "loginArea.jsp");
-			return "member/loginPage";
+			cDAO.getAllCategory(request, response);
+			request.setAttribute("contentPage", "member/loginArea.jsp");
+			return "main";
 		}
 		
 	}
@@ -318,19 +352,10 @@ public class GoodsController {
 			request.setAttribute("contentPage", "../goods/goodsList.jsp");
 			return "sale/saleIndex";
 		}else {
-			request.setAttribute("loginInfo", "loginArea.jsp");
-			return "member/loginPage";
+			cDAO.getAllCategory(request, response);
+			request.setAttribute("contentPage", "member/loginArea.jsp");
+			return "main";
 		}
-	}
-
-	// 상품상세 조회
-	@RequestMapping(value = "/goods", method = RequestMethod.GET)
-	public String getGoodsDtlByNo(Goods goods, HttpServletRequest request, HttpServletResponse response) {
-		cDAO.getAllCategory(request, response);
-
-		gdsDAO.getGoodsByNo(goods, request, response);
-		request.setAttribute("contentPage", "goods/goods.jsp");
-		return "main";
 	}
 
 	// 카테고리 가져오기(ajax - json)
@@ -354,8 +379,9 @@ public class GoodsController {
 			request.setAttribute("contentPage", "../goods/goodsList.jsp");
 			return "sale/saleIndex";
 		}else {
-			request.setAttribute("loginInfo", "loginArea.jsp");
-			return "member/loginPage";
+			cDAO.getAllCategory(request, response);
+			request.setAttribute("contentPage", "member/loginArea.jsp");
+			return "main";
 		}
 	}
 
@@ -406,8 +432,9 @@ public class GoodsController {
 			request.setAttribute("contentPage", "../goods/goodsView.jsp");
 			return "sale/saleIndex";
 		}else {
-			request.setAttribute("loginInfo", "loginArea.jsp");
-			return "member/loginPage";
+			cDAO.getAllCategory(request, response);
+			request.setAttribute("contentPage", "member/loginArea.jsp");
+			return "main";
 		}
 	}
 	
@@ -429,8 +456,9 @@ public class GoodsController {
 			request.setAttribute("contentPage", "../goods/goodsList.jsp");
 			return "sale/saleIndex";
 		}else {
-			request.setAttribute("loginInfo", "loginArea.jsp");
-			return "member/loginPage";
+			cDAO.getAllCategory(request, response);
+			request.setAttribute("contentPage", "member/loginArea.jsp");
+			return "main";
 		}
 	}
 

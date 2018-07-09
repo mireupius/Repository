@@ -6,131 +6,189 @@
 	<!-- =========================================== select ==================================================== -->
 
 	<select id="getAllDelivery"
+		parameterType="com.sol.mall.sale.delivery.Delivery"
 		resultType="com.sol.mall.sale.delivery.Delivery">
 		select * from sale_delivery where sd_delivery_state !=
-		'배송중' order by sd_order_date
+		'배송중' and sd_delivery_state != '구매확정'
+		and sd_delivery_state != '배송완료'
+		and	sd_seller_id = #{sd_seller_id} order by sd_order_date
 	</select>
 
 	<select id="getNewDeliverys"
+		parameterType="com.sol.mall.sale.delivery.Delivery"
 		resultType="com.sol.mall.sale.delivery.Delivery">
 		select * from sale_delivery where sd_state_detail = '신규주문'
+		and sd_seller_id = #{sd_seller_id}
 		order by sd_order_date
 	</select>
 
 	<select id="getCheckDeliverys"
+		parameterType="com.sol.mall.sale.delivery.Delivery"
 		resultType="com.sol.mall.sale.delivery.Delivery">
 		select * from sale_delivery where sd_state_detail = '발주확인'
+		and sd_seller_id = #{sd_seller_id}
 		order by sd_order_date
 	</select>
 
-	<select id="getAllDeliveryNum" resultType="java.lang.Integer">
+	<select id="getAllDeliveryNum"
+		parameterType="com.sol.mall.sale.delivery.Delivery"
+		resultType="java.lang.Integer">
 		select count(*) from
 		sale_delivery where sd_delivery_state !=
-		'배송중'
+		'배송중' and sd_delivery_state != '구매확정'
+		and sd_delivery_state != '배송완료'
+		and	sd_seller_id = #{sd_seller_id} 
 	</select>
 
 
-	<select id="getNewDeliveryNum" resultType="java.lang.Integer">
+	<select id="getNewDeliveryNum"
+		parameterType="com.sol.mall.sale.delivery.Delivery"
+		resultType="java.lang.Integer">
 		select count(*) from
-		sale_delivery where sd_state_detail = '신규주문'
+		sale_delivery where sd_state_detail =
+		'신규주문'
+		and sd_seller_id = #{sd_seller_id}
 	</select>
 
-	<select id="getCheckDeliveryNum" resultType="java.lang.Integer">
+	<select id="getCheckDeliveryNum"
+		parameterType="com.sol.mall.sale.delivery.Delivery"
+		resultType="java.lang.Integer">
 		select count(*) from
-		sale_delivery where sd_state_detail = '발주확인'
+		sale_delivery where sd_state_detail =
+		'발주확인'
+		and sd_seller_id = #{sd_seller_id}
 	</select>
 
 	<!-- ============== 배송완료 ===================== -->
 
 
 	<select id="getSendingDeliverys"
+		parameterType="com.sol.mall.sale.delivery.Delivery"
+
 		resultType="com.sol.mall.sale.delivery.Delivery">
 		select * from sale_delivery where sd_delivery_state = '배송중'
+		and sd_seller_id = #{sd_seller_id}
 		order by sd_order_date
 	</select>
 
 	<select id="getSendDoneDeliverys"
+
+		parameterType="com.sol.mall.sale.delivery.Delivery"
 		resultType="com.sol.mall.sale.delivery.Delivery">
 		select * from sale_delivery where sd_delivery_state =
 		'배송완료'
+		and sd_seller_id = #{sd_seller_id}
 		order by sd_order_date
 	</select>
 
 	<select id="getSendingDeliverysNum"
+		parameterType="com.sol.mall.sale.delivery.Delivery"
 		resultType="java.lang.Integer">
 		select count(*) from sale_delivery where sd_delivery_state
 		= '배송중'
+		and sd_seller_id = #{sd_seller_id}
 	</select>
 
 	<select id="getSendDoneDeliveryNum"
+
+		parameterType="com.sol.mall.sale.delivery.Delivery"
 		resultType="java.lang.Integer">
 		select count(*) from sale_delivery where sd_delivery_state
 		= '배송완료'
+		and sd_seller_id = #{sd_seller_id}
 	</select>
 
 	<!-- ============== 구매확정 ===================== -->
 
 	<select id="getConfirmDeliveryNum"
+
+		parameterType="com.sol.mall.sale.delivery.Delivery"
 		resultType="java.lang.Integer">
 		select count(*) from
-		sale_delivery where sd_delivery_state
-		= '구매확정'
+		sale_delivery where sd_delivery_state =
+		'구매확정'
+		and sd_seller_id = #{sd_seller_id}
 	</select>
 
 	<select id="getConfirmDelivery"
+
+		parameterType="com.sol.mall.sale.delivery.Delivery"
 		resultType="com.sol.mall.sale.delivery.Delivery">
 		select * from
-		sale_delivery where sd_delivery_state
-		= '구매확정'
+		sale_delivery where sd_delivery_state = '구매확정'
+		and sd_seller_id = #{sd_seller_id}
 	</select>
 
 	<!-- ============== 취소관리 ===================== -->
 	<select id="getCancelDelivery"
+
+		parameterType="com.sol.mall.sale.delivery.Delivery"
 		resultType="com.sol.mall.sale.delivery.Delivery">
 		select * from
-		sale_delivery where sd_claim
-		= '취소' order by
-		sd_order_date
+		sale_delivery where sd_claim = '취소'
+		and
+		sd_seller_id = #{sd_seller_id}
+		order by sd_order_date
 	</select>
 
-	<select id="getCancelDeliveryNum" resultType="java.lang.Integer">
-		select count(*) from
+	<select id="getCancelDeliveryNum"
+		parameterType="com.sol.mall.sale.delivery.Delivery"
+		resultType="java.lang.Integer">
+		select count(*)
+		from
 		sale_delivery where sd_claim
-		= '취소'
+		= '취소' and
+		sd_seller_id = #{sd_seller_id}
 	</select>
 
 	<!-- ============== 반품관리 ===================== -->
 
 	<select id="getReturnDelivery"
+
+		parameterType="com.sol.mall.sale.delivery.Delivery"
 		resultType="com.sol.mall.sale.delivery.Delivery">
 		select * from
 		sale_delivery where sd_claim
-		= '반품' order by
+		= '반품'
+		and
+		sd_seller_id = #{sd_seller_id}
+		order by
 		sd_order_date
 	</select>
 
-	<select id="getReturnDeliveryNum" resultType="java.lang.Integer">
+	<select id="getReturnDeliveryNum"
+		parameterType="com.sol.mall.sale.delivery.Delivery"
+		resultType="java.lang.Integer">
 		select count(*)
 		from
 		sale_delivery where sd_claim
-		= '반품' order by sd_order_date
+		= '반품'
+		and
+		sd_seller_id = #{sd_seller_id}
+		order
+		by sd_order_date
 	</select>
 
 	<!-- ============== 교환관리 ===================== -->
 
 	<select id="getExchangeDelivery"
+		parameterType="com.sol.mall.sale.delivery.Delivery"
 		resultType="com.sol.mall.sale.delivery.Delivery">
 		select * from
 		sale_delivery where sd_claim
-		= '교환' order by
+		= '교환' and
+		sd_seller_id = #{sd_seller_id}
+		order by
 		sd_order_date
 	</select>
 
 	<select id="getExchangeDeliveryNum"
+		parameterType="com.sol.mall.sale.delivery.Delivery"
 		resultType="java.lang.Integer">
 		select count(*) from
 		sale_delivery where sd_claim
-		= '교환'
+		= '교환' and
+		sd_seller_id = #{sd_seller_id}
 		order by sd_order_date
 	</select>
 
@@ -161,9 +219,10 @@
 		sd_delivery_state = '배송중',
 		sd_state_detail =
 		'배송중',
-		sd_delivery_type = '택배/등기/소포',
+		sd_delivery_type = '택배',
 		sd_go_delivery_date = sysdate
-		where sd_delivery_pno = #{sd_delivery_pno}
+		where
+		sd_delivery_pno = #{sd_delivery_pno}
 	</update>
 
 

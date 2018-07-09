@@ -1,11 +1,15 @@
 function connectCSMWithdrawCheckEvent() {
 	
 
+//	구매자 회원탈퇴시 유효성 검사 및 회원탈퇴 컨트롤러로 보내기
 	
 	$(".withdrawBtn").click(function() {
 		
 		var id = $(".idCheck").val();
 		var pw = $(".passwordCheck").val();
+		var ms_csm_id = $('input[name = ms_csm_id]').val();
+		var csm_name = $('input[name = csm_name]').val();
+		
 		
 		$.ajax({
 			
@@ -22,7 +26,8 @@ function connectCSMWithdrawCheckEvent() {
 						
 						var ok = confirm("정말 탈퇴하시겠습니까?");
 						if (ok) {
-							location.href = "customer.withdraw.do?csm_id=" + id;
+							location.href = "customer.withdraw.do?csm_id=" + id + "&ms_csm_id=" + ms_csm_id
+												+ "&csm_name=" + csm_name;
 						}
 						
 					}else if (pw != csm_pw) {

@@ -12,9 +12,10 @@
 <body>
 	<div class="container">
 		<div class="row">
-			<div class="col-lg-3">
+			<div class="col-lg-3 col-3">
 				<div class="shop_sidebar">
 					<div class="sidebar_section myPage_sidebar">
+						<div class="sidebar_title"><span style="color: blue;">${r }<span></div>
 						<div class="sidebar_title">주문관리</div>
 						<ul class="sidebar_categories">
 							<li><a href="customer.myHome.orderList.go">주문/배송조회</a></li>
@@ -25,7 +26,6 @@
 							<li><a href="customer.myHome.productReview.go">상품평작성</a></li>
 							<li><a href="customer.productReview.show">상품평조회</a></li>
 							<li><a href="customer.myQuestion.show">상품Q&A</a></li>
-							<li><a href="">적립금</a></li>
 						</ul>
 						<div class="sidebar_title">정보관리</div>
 						<ul class="sidebar_categories">
@@ -35,11 +35,8 @@
 					</div>
 				</div>
 			</div>
-			<div class="col-lg-9">
-			
-				<div class="myPageContent">
-					<jsp:include page="${myPageContentArea }"></jsp:include>
-				</div>
+			<div class="col-lg-9 col-9 myPageContent">
+				<jsp:include page="${myPageContentArea }"></jsp:include>
 			</div>
 		</div>
 	</div>

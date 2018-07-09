@@ -1,3 +1,4 @@
+// 판매자 회원탈퇴 Event처리
 function connectSLWithdrawCheckEvent() {
 
 	

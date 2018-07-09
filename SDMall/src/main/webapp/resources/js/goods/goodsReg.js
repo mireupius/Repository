@@ -74,13 +74,9 @@ function saveContent() {
  			expField.focus();
  		}else if(isNotNumber(weightField)){
  			alert("숫자만 입력 해주세요.");
- 			expField.value = "";
- 			expField.focus();
+ 			weightField.value = "";
+ 			weightField.focus();
  			
- 		}else if(isNotNumber(volumeField)){
- 			alert("숫자만 입력 해주세요.");
- 			expField.value = "";
- 			expField.focus();
  		}else if(isEmpty(dlvchrgField)){
  			alert("배송비를 입력 해주세요.");
  			
@@ -264,7 +260,6 @@ function opApplyReg(){
 	$("input[name=opl_name]").val(opl_name);
 	$("input[name=opl_price]").val(opl_price);
 	$("input[name=opl_stock]").val(opl_stock);
-	alert("옵션 적용");
 }
 
 // 옵션 박스 제거

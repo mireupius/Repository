@@ -1,3 +1,4 @@
+// 판매자 회원정보수정 Event처리
 function connectSLUpdateCheckEvent() {
 
 		var pwField = document.updateSLForm.sl_pw;	

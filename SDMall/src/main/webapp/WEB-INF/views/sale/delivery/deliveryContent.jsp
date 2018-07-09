@@ -8,6 +8,18 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 <script type="text/javascript">
+	function excelCheck() {
+
+		var excelField = $("#excelFileName").val();
+		excelField = excelField.slice(excelField.indexOf(".") + 1)
+				.toLowerCase(); //파일 확장자를 잘라내고, 비교를 위해 소문자로 만듭니다.
+		if (excelField != "xlsx") { //확장자를 확인합니다.
+			alert('xlsx파일만 등록가능합니다.');
+			return false;
+		}
+		return true
+	}
+
 	$(function() {
 
 		var all = "${all }";
@@ -41,6 +53,8 @@
 
 		});
 
+
+
 		$("#deliveryCheckButton").click(function() {
 
 			var array;
@@ -51,22 +65,7 @@
 					array += "," + $(box).val();
 				}
 			});
-
 			$("#arrayVal").val(array);
-			alert($("#arrayVal").val());
-		});
-
-		$("#deliveryCheckButton").click(function() {
-
-			var array;
-			$("input[name=orderCheck]:checked").each(function(i, box) {
-				if (i == 0) {
-					array = $(box).val();
-				} else {
-					array += "," + $(box).val();
-				}
-			});
-
 			alert('선택건 발주 확인완료 ');
 		});
 
@@ -115,7 +114,7 @@
 				</span> <span>신규주문 :<a href="sale.selNewDeals.go">${NewDeliveryNum }</a>건
 				</span> <span>발주확인 :<a href="sale.selCheckDeals.go">${CheckDeliveryNum }</a>건
 				</span> <span>선택건 일괄입력</span> <select id="inputSel">
-					<option value="" selected disabled hidden>선택</option>
+					<option value="" selected disabled type="hidden">선택</option>
 					<option>대한통운</option>
 					<option>로젠택배</option>
 					<option>우체국택배</option>
@@ -179,7 +178,7 @@
 													<td>${d.sd_delivery_pno}</td>
 													<td>${d.sd_delivery_no}</td>
 													<td><select class="cs_${d.sd_delivery_pno}">
-															<option value="" selected disabled hidden>선택</option>
+															<option value="" selected disabled type="hidden">선택</option>
 															<option>대한통운</option>
 															<option>로젠택배</option>
 															<option>우체국택배</option>
@@ -225,55 +224,59 @@
 							</table>
 						</section>
 					</div>
-					</div>
+				</div>
 
-					<!-- /content-panel -->
-					<c:if test="${pageCount != 0}">
-						<div class="showback" align="center">
+				<!-- /content-panel -->
+				<c:if test="${pageCount != 0}">
+					<div class="showback" align="center">
 
-							<c:forEach var="i" begin="0" varStatus="num" end="${pageCount }">
-								<a href="${now}?pno=${num.count }">
-									<button type="button" class="btn btn-default">${num.count }</button>
-								</a>
-							</c:forEach>
-
-						</div>
-					</c:if>
-					<div class="showback">
-						<form action="sale.deliverySend.do" method="post"
-							style="display: inline">
-							<input name="send_Array" id="send_ArrayVal" hidden> <input
-								name="cs_sendArray" id="cs_ArrayVal" hidden> <input
-								name="no_sendArray" id="no_ArrayVal" hidden> <input
-								id="selectDealSend" type="submit" value="선택건 발송처리" type="submit"
-								class="btn btn-default">
-						</form>
-
-						<form action="sale.deliveryCheck.do" method="post"
-							style="display: inline">
-							<input name="array" id="arrayVal" hidden> <input
-								id="deliveryCheckButton" type="submit" value="선택건 발주확인"
-								type="button" class="btn btn-default">
-						</form>
-
-						<form action="insertExcel.go" enctype="multipart/form-data"
-							method="post" style="display: inline">
-							<input type="submit" value="엑셀 일괄발송" type="button"
-								class="btn btn-default"> <input name="excelFile"
-								type="file" style="display: inline">
-						</form>
-
+						<c:forEach var="i" begin="0" varStatus="num" end="${pageCount }">
+							<a href="${now}?pno=${num.count }">
+								<button type="button" class="btn btn-default">${num.count }</button>
+							</a>
+						</c:forEach>
 
 					</div>
+				</c:if>
+				<div class="showback">
+					<form action="sale.deliverySend.do" method="post"
+						style="display: inline">
+						<input name="send_Array" id="send_ArrayVal" type="hidden">
+						<input name="cs_sendArray" id="cs_ArrayVal" type="hidden">
+						<input name="no_sendArray" id="no_ArrayVal" type="hidden">
+						<input id="selectDealSend" type="submit" value="선택건 발송처리"
+							type="submit" class="btn btn-default">
+					</form>
 
+					<form action="sale.deliveryCheck.do" method="post"
+						style="display: inline">
+						<input name="array" id="arrayVal" type="hidden"> <input
+							id="deliveryCheckButton" type="submit" value="선택건 발주확인"
+							type="button" class="btn btn-default">
+					</form>
+
+					<form action="insertExcel.go" onsubmit="return excelCheck();"
+						enctype="multipart/form-data" method="post"
+						style="display: inline">
+						<input type="submit" value="엑셀 일괄발송" type="button"
+							class="btn btn-default"> <input id="excelFileName"
+							name="excelFile" required="required" type="file"
+							style="display: inline">
+					</form>
+					<a href="resources\files\sale\sample.xlsx"><button
+							type="submit" type="button" class="btn btn-default">엑셀양식
+							다운로드</button></a>
 
 				</div>
 
 
+			</div>
 
-				<!-- /col-lg-4 -->
 
-				<!-- /row -->
+
+			<!-- /col-lg-4 -->
+
+			<!-- /row -->
 		</section>
 		<!--/wrapper -->
 	</section>

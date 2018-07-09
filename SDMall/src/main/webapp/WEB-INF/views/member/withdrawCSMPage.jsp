@@ -21,8 +21,12 @@
 		<table class="memberTb3">
 			<tr>
 				<td class="memberTd1">아이디</td>
-				<td class="memberTd2"><input readonly="readonly"
+				<td class="memberTd2"><input name="csm_id" readonly="readonly"
 					class="idCheck" value="${sessionScope.loginCustomer.csm_id }">
+				<input type="hidden" name="ms_csm_id"
+					 value="${sessionScope.loginCustomer.csm_id }">
+				<input type="hidden" name="csm_name"
+					 value="${sessionScope.loginCustomer.csm_name }">
 				</td>
 			</tr>
 			<tr>

@@ -1,15 +1,16 @@
 @charset "EUC-KR";
 
+/* 회원가입&정보수정 */
 @font-face {
 	font-family: "나눔고딕";
 	src: url(../font/NanumGothicBold.ttf); /* 경로는 무조건 영어.. */
-	
 }
 
 .memberTb0 {
 	margin-left: auto;
 	margin-right: auto;
 }
+
 .memberTb1 {
 	margin-left: auto;
 	margin-right: auto;
@@ -23,14 +24,13 @@
 .memberTb3 {
 	margin-left: auto;
 	margin-right: auto;
-	padding-top : 20px;
-	padding-bottom : 20px;
+	padding-top: 20px;
+	padding-bottom: 20px;
 	width: 700px;
 	border: #D5D5D5 solid 2px;
-	border-radius : 10px 10px 0 10px;
+	border-radius: 10px 10px 0 10px;
 	margin-bottom: 30px;
 	background-color: white;
-
 }
 
 .memberTd1 {
@@ -43,11 +43,9 @@
 
 .memberTd2 {
 	padding-left: 50px;
-	
 }
 
-
-.input1{
+.input1 {
 	width: 300px;
 	height: 50px;
 	border: #D5D5D5 solid 2px;
@@ -55,50 +53,82 @@
 	font-size: 14pt;
 }
 
-.selectEmail{
+.selectEmail {
 	width: 100px;
 	height: 50px;
 	border: #D5D5D5 solid 2px;
 	border-radius: 10px;
-	font-size: 12pt;
-	
+	font-size: 10pt;
 }
 
-.validateBtn{
-	
-	width:100px;
-    background-color: #0099CC;
-    color: white;
-    border: none;
-    padding: 15px 0;
-    text-align: center;
-    text-decoration: none;
-    border-radius : 10px;
-    display: inline-block;
-    font-size: 15px;
-    margin-left: 4px;
-    font-weight: 800;
-    cursor: pointer;
+.validateBtn {
+	width: 100px;
+	background-color: #0099CC;
+	color: white;
+	border: none;
+	padding: 15px 0;
+	text-align: center;
+	text-decoration: none;
+	border-radius: 10px;
+	display: inline-block;
+	font-size: 15px;
+	margin-left: 4px;
+	font-weight: 800;
+	cursor: pointer;
 }
 
-.regBtn{
+.regBtn {
+	margin-bottom : 10px;
 	background-color: #0099CC;
 	color: white;
 	text-decoration: none;
 	border: none;
-	border-radius : 10px;
+	border-radius: 10px;
 	width: 700px;
 	height: 50px;
 	font-size: 20px;
 	font-weight: 800;
 	cursor: pointer;
-	
+}
+
+.joinSuccess {
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: 100px;
+	margin-bottom: 100px;
+	text-align: center;
+}
+
+.joinSuccessName {
+	font-weight: 800;
+}
+
+.joinSuccessAtag {
+	width: 501px;
+	background-color: #3399ff;
+	border: none;
+	color: #fff;
+	padding: 15px 0;
+	text-decoration: none;
+	display: inline-block;
+	font-size: 15px;
+	margin: 4px;
+	cursor: pointer;
 }
 
 
-
-
-/*-------------myInfo--------------*/
-
-
-
+.withdrawBtn {
+	width: 100px;
+	background-color: #0099CC;
+	color: white;
+	border: none;
+	padding: 15px 0;
+	text-align: center;
+	text-decoration: none;
+	border-radius: 10px;
+	display: inline-block;
+	font-size: 15px;
+	margin-left: 4px;
+	font-weight: 800;
+	cursor: pointer;
+}
