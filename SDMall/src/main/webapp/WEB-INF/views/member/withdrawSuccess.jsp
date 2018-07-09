@@ -11,7 +11,7 @@
 	<div class="container">
 		<div class="row">
 			<div class="joinSuccess">
-			<h3>정상적으로 탈퇴하셨습니다</h3>
+			<h3>${param.csm_name }님 정상적으로 탈퇴하셨습니다</h3>
 			<a class="joinSuccessAtag" href="/mall">홈으로 이동</a>
 			</div>
 		</div>	

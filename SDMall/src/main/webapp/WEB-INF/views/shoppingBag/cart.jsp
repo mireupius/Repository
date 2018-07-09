@@ -106,7 +106,7 @@
 								<div class="order_total">
 									<div class="order_total_content text-md-right">
 										<div class="order_total_title">Order Total:</div>
-										<!-- 								orderTotal출력 -->
+										<!-- orderTotal출력 -->
 										<div class="order_total_amount">
 											<fmt:formatNumber value="${orderTotal }" pattern="#,###"/>원
 										</div>

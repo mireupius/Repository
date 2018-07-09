@@ -8,6 +8,7 @@ function connectCSMWithdrawCheckEvent() {
 		var id = $(".idCheck").val();
 		var pw = $(".passwordCheck").val();
 		var ms_csm_id = $('input[name = ms_csm_id]').val();
+		var csm_name = $('input[name = csm_name]').val();
 		
 		
 		$.ajax({
@@ -25,7 +26,8 @@ function connectCSMWithdrawCheckEvent() {
 						
 						var ok = confirm("정말 탈퇴하시겠습니까?");
 						if (ok) {
-							location.href = "customer.withdraw.do?csm_id=" + id + "&ms_csm_id=" + ms_csm_id;
+							location.href = "customer.withdraw.do?csm_id=" + id + "&ms_csm_id=" + ms_csm_id
+												+ "&csm_name=" + csm_name;
 						}
 						
 					}else if (pw != csm_pw) {
