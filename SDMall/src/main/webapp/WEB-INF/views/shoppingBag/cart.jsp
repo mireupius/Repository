@@ -76,7 +76,7 @@
 														</div>
 													</div>
 													<div class="cart_item_total cart_info_col">
-														<button class="button delete_button" onclick="deleteCartItem(${list.sb_no})">삭제</button>
+														<button class="button delete_button" onclick="deleteCartItem(${list.sb_no})" type="button">삭제</button>
 														<input name="sd_imageFileName" value="${list.gd_imgm}"
 															type="hidden"> <input name="sd_product_name"
 															value=${list.gd_name } type="hidden"> <input

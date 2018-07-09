@@ -158,11 +158,11 @@ li input {
 								class="contact_form_inputs d-flex flex-md-row flex-column justify-content-between align-items-between">
 								<input type="text" id="contact_form_name"
 									class="contact_form_name input_field" placeholder="구매자 이름"
-									required="required" data-error="Name is required."
+									required="required" 
 									name="so_customer_name"> <input type="text"
 									id="contact_form_name" class="contact_form_name input_field"
 									placeholder="구매자 연락처" required="required"
-									data-error="Name is required." name="so_customer_ph">
+									 name="so_customer_ph">
 							</div>
 
 							<div class="footer_phone">수취인 정보</div>
@@ -170,11 +170,11 @@ li input {
 								class="contact_form_inputs d-flex flex-md-row flex-column justify-content-between align-items-between">
 								<input type="text" id="contact_form_name"
 									class="contact_form_name input_field" placeholder="수취인명"
-									required="required" data-error="Name is required."
+									required="required" 
 									name="so_taker_name"> <input type="text"
 									id="contact_form_email" class="contact_form_email input_field"
 									placeholder="수취인 연락처" required="required"
-									data-error="Email is required." name="so_taker_phone">
+									 name="so_taker_phone">
 							</div>
 
 							<div class="footer_phone">배송지 정보</div>
@@ -183,10 +183,10 @@ li input {
 								<input type="text" id="postno"
 									class="contact_form_name input_field adressNo"
 									placeholder="우편번호" required="required"
-									data-error="Name is required." readonly="readonly"
+									readonly="readonly"
 									name="so_postno">
 								<button type="button" class="button cart_button_checkout"
-									id="adress">우편번호 찾기</button>
+									id="adress" required="required" >우편번호 찾기</button>
 
 
 							</div>
@@ -225,7 +225,7 @@ li input {
 							<div
 								class="contact_form_inputs d-flex flex-md-row flex-column justify-content-between align-items-between">
 								<label class="custom-select"> <select id="select"
-									name="so_pay_method">
+									name="so_pay_method" required="required" >
 										<option selected hidden>선택해주세요</option>
 										<option>신용카드</option>
 										<option>계좌이체</option>
