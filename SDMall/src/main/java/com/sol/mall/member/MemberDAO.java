@@ -262,14 +262,16 @@ public class MemberDAO {
 	public void withdrawCustomer(Customer c, Membership m, HttpServletRequest req, HttpServletResponse res) {
 
 		try {
-			System.out.println(c.getCsm_id());
-			System.out.println(m.getMs_csm_id());
-
+			// form 안에서 작동할 때
+			//String name = req.getParameter("csm_name");
+			//System.out.println(name);
+	
 			if (ss.getMapper(MemberMapper.class).withdrawCSM(c) == 1
 					&& ss.getMapper(MemberMapper.class).withdrawMemberShip(m) == 1) {
 
 				System.out.println("탈퇴 성공");
 				// req.getSession().setAttribute("loginCustomer", null);
+				
 
 			} else {
 				System.out.println("탈퇴 실패");

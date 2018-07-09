@@ -53,10 +53,10 @@ $(function(){
 					<td align="left">
 						<div class="orderDiv">
 							<select class="orderSelect" name="showCnt">
-								<option value="3">3</option>
-								<option value="5">5</option>
-								<option value="10">10</option>
-								<option value="15">15</option>
+								<option value="3">3개씩 조회</option>
+								<option value="5">5개씩 조회</option>
+								<option value="10">10개씩 조회</option>
+								<option value="15">15개씩 조회</option>
 							</select>
 						</div>
 					</td>

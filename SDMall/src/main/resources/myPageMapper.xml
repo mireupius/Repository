@@ -56,8 +56,7 @@
 	<!-- 수취확인 -->
 	<update id="completeDelivery" parameterType="com.sol.mall.sale.delivery.Delivery">
 		update sale_delivery
-		set sd_delivery_state = '배송완료'
-		set sd_state_detail = '배송완료'
+		set sd_delivery_state = '배송완료', sd_state_detail = '배송완료'
 		where sd_delivery_pno = #{sd_delivery_pno}
 	</update>
 	
