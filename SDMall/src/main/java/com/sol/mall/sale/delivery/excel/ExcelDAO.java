@@ -99,6 +99,8 @@ public class ExcelDAO {
 
 		File[] innerFiles = selectedDir.listFiles();
 
+		
+		System.out.println(filePath);
 		// 하위 디렉토리 삭제
 		if (innerFiles.length != 0) {
 			for (int i = 0; i < innerFiles.length; i++) {

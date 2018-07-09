@@ -16,6 +16,7 @@
 		)
 		and gd_no = sd_product_no and sd_customer_id = #{searchOrder.sd_customer_id}
 		and (sd_order_date between (select add_months(SYSDATE, -#{searchMonth}) from dual) and (select SYSDATE from dual))
+		order by sd_order_date desc
 	</select>
 	
 	<!-- 교환/반품/취소 조회 -->
@@ -55,8 +56,7 @@
 	<!-- 수취확인 -->
 	<update id="completeDelivery" parameterType="com.sol.mall.sale.delivery.Delivery">
 		update sale_delivery
-		set sd_delivery_state = '배송완료'
-		set sd_state_detail = '배송완료'
+		set sd_delivery_state = '배송완료', sd_state_detail = '배송완료'
 		where sd_delivery_pno = #{sd_delivery_pno}
 	</update>
 	

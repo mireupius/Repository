@@ -56,9 +56,11 @@ public class BuyingController {
 		if (mDAO.csmLoginCheck2(req, res)) {
 
 			cDAO.getAllCategory(req, res);
+			
 			mpDAO.getMembership(m, req, res);
 
 			req.setAttribute("contentPage", "customer/customerMyPage2.jsp");
+			req.setAttribute("myPageContentArea", "memberShip.jsp");
 
 			return "main";
 

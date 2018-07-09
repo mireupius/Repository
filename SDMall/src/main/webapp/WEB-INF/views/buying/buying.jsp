@@ -91,7 +91,8 @@ li input {
 												<div class="cart_item_color cart_info_col">
 													<div class="cart_item_title">Delivery Cost</div>
 													<div class="cart_item_text">
-														$${p.sd_delivery_cost } <input name="sd_delivery_cost"
+													<fmt:formatNumber value="${p.sd_delivery_cost }" pattern="#,###" />원
+														 <input name="sd_delivery_cost"
 															value=${p.sd_delivery_cost }>
 													</div>
 												</div>
@@ -105,15 +106,17 @@ li input {
 												<div class="cart_item_price cart_info_col">
 													<div class="cart_item_title">Sale Price</div>
 													<div class="cart_item_text">
-														$${p.sd_product_price } <input name="sd_product_price"
+														<fmt:formatNumber value="${p.sd_product_price }" pattern="#,###" />원
+														<input name="sd_product_price"
 															value=${p.sd_product_price }> <input
-															name="sd_product_sellprice" value=1500>
+															name="sd_product_sellprice" value=${p.sd_product_sellprice }>
 													</div>
 												</div>
 												<div class="cart_item_total cart_info_col">
 													<div class="cart_item_title">Total</div>
 													<div class="cart_item_text">
-														${p.sd_total_price } <input name="sd_total_price"
+													<fmt:formatNumber value="${p.sd_total_price }" pattern="#,###" />원
+														 <input name="sd_total_price"
 															value=${p.sd_total_price }>
 													</div>
 												</div>
@@ -132,8 +135,8 @@ li input {
 										<c:forEach items="${products}" var="p">
 											<c:set var="sum" value="${sum + p.sd_total_price}" />
 										</c:forEach>
-										$
-										<c:out value="${sum }" />
+										<fmt:formatNumber value="${sum }" pattern="#,###" />원
+										
 									</div>
 								</div>
 							</div>

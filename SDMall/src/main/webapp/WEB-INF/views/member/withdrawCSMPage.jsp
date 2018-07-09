@@ -25,6 +25,8 @@
 					class="idCheck" value="${sessionScope.loginCustomer.csm_id }">
 				<input type="hidden" name="ms_csm_id"
 					 value="${sessionScope.loginCustomer.csm_id }">
+				<input type="hidden" name="csm_name"
+					 value="${sessionScope.loginCustomer.csm_name }">
 				</td>
 			</tr>
 			<tr>

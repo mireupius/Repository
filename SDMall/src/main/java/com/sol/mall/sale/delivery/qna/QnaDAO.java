@@ -10,6 +10,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.sol.mall.member.Seller;
 import com.sol.mall.myPage.QuestionAnswer;
 
 @Service
@@ -21,7 +22,9 @@ public class QnaDAO {
 	public List<QuestionAnswer> getAllQnAById(HttpServletRequest req, HttpServletResponse res, QuestionAnswer q) {
 		// 로그인 된 판매자 아이디 세션에서 가져와 자바빈에 넣어 sql문에 파라메터로 넘김
 		// req.getSession().getAttribute("loginID");
-		q.setQa_sl_id("seller00");
+		Seller s = (Seller) req.getSession().getAttribute("loginSeller");
+
+		q.setQa_sl_id(s.getSl_id());
 
 		req.setAttribute("now", "sale.delivery.qna.go");
 		return ss.getMapper(QnaMapper.class).getAllQnAById(q);
@@ -30,7 +33,9 @@ public class QnaDAO {
 	public List<QuestionAnswer> getUnAById(HttpServletRequest req, HttpServletResponse res, QuestionAnswer q) {
 		// 로그인 된 판매자 아이디 세션에서 가져와 자바빈에 넣어 sql문에 파라메터로 넘김
 		// req.getSession().getAttribute("loginID");
-		q.setQa_sl_id("seller00");
+		Seller s = (Seller) req.getSession().getAttribute("loginSeller");
+
+		q.setQa_sl_id(s.getSl_id());
 		req.setAttribute("now", "sale.delivery.una.go");
 		return ss.getMapper(QnaMapper.class).geUnAById(q);
 	}
@@ -38,7 +43,9 @@ public class QnaDAO {
 	public List<QuestionAnswer> getAedById(HttpServletRequest req, HttpServletResponse res, QuestionAnswer q) {
 		// 로그인 된 판매자 아이디 세션에서 가져와 자바빈에 넣어 sql문에 파라메터로 넘김
 		// req.getSession().getAttribute("loginID");
-		q.setQa_sl_id("seller00");
+		Seller s = (Seller) req.getSession().getAttribute("loginSeller");
+
+		q.setQa_sl_id(s.getSl_id());
 		req.setAttribute("now", "sale.delivery.aed.go");
 		return ss.getMapper(QnaMapper.class).getAedById(q);
 	}
@@ -47,7 +54,9 @@ public class QnaDAO {
 
 		// 로그인 된 판매자 아이디 세션에서 가져와 자바빈에 넣어 sql문에 파라메터로 넘김
 		// req.getSession().getAttribute("loginID");
-		q.setQa_sl_id("seller00");
+		Seller s = (Seller) req.getSession().getAttribute("loginSeller");
+
+		q.setQa_sl_id(s.getSl_id());
 		req.setAttribute("AllNum", ss.getMapper(QnaMapper.class).getAllQnANumById(q));
 	}
 
@@ -55,7 +64,9 @@ public class QnaDAO {
 
 		// 로그인 된 판매자 아이디 세션에서 가져와 자바빈에 넣어 sql문에 파라메터로 넘김
 		// req.getSession().getAttribute("loginID");
-		q.setQa_sl_id("seller00");
+		Seller s = (Seller) req.getSession().getAttribute("loginSeller");
+
+		q.setQa_sl_id(s.getSl_id());
 		req.setAttribute("unANum", ss.getMapper(QnaMapper.class).getUnAnswerQnANumById(q));
 	}
 
@@ -63,7 +74,9 @@ public class QnaDAO {
 
 		// 로그인 된 판매자 아이디 세션에서 가져와 자바빈에 넣어 sql문에 파라메터로 넘김
 		// req.getSession().getAttribute("loginID");
-		q.setQa_sl_id("seller00");
+		Seller s = (Seller) req.getSession().getAttribute("loginSeller");
+
+		q.setQa_sl_id(s.getSl_id());
 		req.setAttribute("AedNum", ss.getMapper(QnaMapper.class).getAnsweredQnANumById(q));
 	}
 
@@ -71,6 +84,9 @@ public class QnaDAO {
 
 		// 로그인 된 판매자 아이디 세션에서 가져와 자바빈에 넣어 sql문에 파라메터로 넘김
 		// req.getSession().getAttribute("loginID");
+		Seller s = (Seller) req.getSession().getAttribute("loginSeller");
+
+		q.setQa_sl_id(s.getSl_id());
 		return ss.getMapper(QnaMapper.class).getQnaByNum(q);
 	}
 
