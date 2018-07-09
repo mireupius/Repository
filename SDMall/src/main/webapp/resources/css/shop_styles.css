@@ -23,6 +23,7 @@
 }
 
 
+
 /*********************************
 4. Home
 *********************************/
@@ -418,7 +419,10 @@
 	margin-right: 15px;
 }
 
-.page_nav li {
+.page_nav a li {
+}
+
+.page_nav a {
 	display: -webkit-box;
 	display: -moz-box;
 	display: -ms-flexbox;
@@ -431,9 +435,6 @@
 	height: 50px;
 	border-right: solid 1px #e5e5e5;
 	cursor: pointer;
-}
-
-.page_nav li a {
 	font-weight: 500;
 	color: rgba(0, 0, 0, 0.7);
 	-webkit-transition: all 200ms ease;
@@ -447,10 +448,14 @@
 	color: #0e8ce4;
 }
 
-.page_nav li:last-child {
+.page_nav a:last-child {
 	border-right: none;
 }
 
+.selected_page{
+	color: #007bff;
+	font-weight: 800;
+}
 /*********************************
 6. Shop Sidebar
 *********************************/

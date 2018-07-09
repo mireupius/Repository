@@ -12,7 +12,7 @@
 <body>
 	<div class="container">
 		<div class="row">
-			<div class="col-lg-3">
+			<div class="col-lg-3 col-3">
 				<div class="shop_sidebar">
 					<div class="sidebar_section myPage_sidebar">
 						<div class="sidebar_title"><span style="color: blue;">${r }<span></div>
@@ -35,11 +35,8 @@
 					</div>
 				</div>
 			</div>
-			<div class="col-lg-9">
-				
-				<div class="myPageContent">
-					<jsp:include page="${myPageContentArea }"></jsp:include>
-				</div>
+			<div class="col-lg-9 col-9 myPageContent">
+				<jsp:include page="${myPageContentArea }"></jsp:include>
 			</div>
 		</div>
 	</div>

@@ -111,12 +111,10 @@ public class MemberController {
 		if (mDAO.csmLoginCheck(req, res)) {
 			sbDAO.showCartItems(req, res);// 장바구니 상품수량 반환
 			gdsDAO.getAllGoods(req); // 상품 전체 목록 가져오기
-			return "main";
-
-		} else {
+		}else {
 			req.setAttribute("contentPage", "member/loginArea.jsp");
-			return "main";
 		}
+		return "main";
 
 	}
 
@@ -133,10 +131,9 @@ public class MemberController {
 			req.setAttribute("contentPage", "customer/customerMyPage2.jsp");
 			req.setAttribute("myPageContentArea", "memberShip.jsp");
 
-			return "main";
+		}else {
+			req.setAttribute("contentPage", "member/loginArea.jsp");
 		}
-
-		req.setAttribute("contentPage", "member/loginArea.jsp");
 		return "main";
 
 	}
@@ -221,13 +218,10 @@ public class MemberController {
 
 			req.setAttribute("contentPage", "customer/customerMyPage2.jsp");
 			req.setAttribute("myPageContentArea", "memberShip.jsp");
-			return "main";
-
-		} else {
-
+		}else {
 			req.setAttribute("contentPage", "member/loginArea.jsp");
-			return "main";
 		}
+		return "main";
 
 	}
 

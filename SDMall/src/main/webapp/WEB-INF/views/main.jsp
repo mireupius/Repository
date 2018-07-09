@@ -16,6 +16,7 @@
 <link rel="stylesheet" type="text/css" href="resources/plugins/OwlCarousel2-2.2.1/owl.theme.default.css">
 <link rel="stylesheet" type="text/css" href="resources/plugins/OwlCarousel2-2.2.1/animate.css">
 <link rel="stylesheet" type="text/css" href="resources/css/main.css">
+<link rel="stylesheet" type="text/css" href="resources/css/responsive.css">
 
 <script src="resources/js/jquery-3.3.1.min.js"></script>
 <script src="resources/css/bootstrap4/popper.js"></script>
@@ -74,15 +75,17 @@
 						
 							<div class="wishlist d-flex flex-row align-items-center justify-content-end">
 								<div class="wishlist_content">
-									<div class="wishlist_icon">
-									<a href="member.loginPage"><img src="resources/etc/icon-login.png" alt=""></a></div>
 									<div class="wishlist_text">
-										<c:if test="${sessionScope.loginCustomer == null }">
-										<a href="member.loginPage">로그인</a>
-										</c:if>
-										<c:if test="${sessionScope.loginCustomer != null }">
-										<a href="customer.logout.do">로그아웃</a>
-										</c:if>
+										<c:choose>
+											<c:when test="${sessionScope.loginCustomer == null }">
+											<div class="wishlist_icon"><a href="member.loginPage"><img src="resources/etc/icon-login.png" alt=""></a></div>
+											<a href="member.loginPage">로그인</a>
+											</c:when>
+											<c:otherwise>
+											<div class="wishlist_icon"><a href="member.loginPage"><img src="resources/etc/icon-login.png" alt=""></a></div>
+											<a href="customer.logout.do">로그아웃</a>
+											</c:otherwise>
+										</c:choose>
 									</div>
 								</div>
 							</div>
@@ -99,7 +102,7 @@
 							<div class="wishlist d-flex flex-row align-items-center justify-content-end">
 								<div class="wishlist_content">
 									<div class="cart_icon">
-										<img src="resources/etc/icon-cart.png" alt="">
+										<a href="customer.cart.go"><img src="resources/etc/icon-cart.png" alt=""></a>
 										<c:if test="${sessionScope.loginCustomer != null}">
 											<div class="cart_count">
 											<span>${sbsize }  </span>
@@ -135,16 +138,16 @@
 									<c:forEach var="cate1" items="${allCategory}">
 										<c:if test="${cate1.ct_clf==1 }">
 										<li class="hassubs">
-											<a href="shop.Category?ct_no=${cate1.ct_no }&ct_clf=1">${cate1.ct_clfname }<i class="fas fa-chevron-right"></i></a>
+											<a href="shop.Category?ct_no=${cate1.ct_no }&ct_clf=1&p=1">${cate1.ct_clfname }<i class="fas fa-chevron-right"></i></a>
 											<ul>
 											<c:forEach var="cate2" items="${allCategory}">
 												<c:if test="${cate2.ct_parentno==cate1.ct_no }">
 													<li class="hassubs">
-														<a href="shop.Category?ct_no=${cate2.ct_no }&ct_clf=2">${cate2.ct_clfname }<i class="fas fa-chevron-right"></i></a>
+														<a href="shop.Category?ct_no=${cate2.ct_no }&ct_clf=2&p=1">${cate2.ct_clfname }<i class="fas fa-chevron-right"></i></a>
 														<ul>
 														<c:forEach var="cate3" items="${allCategory}">
 															<c:if test="${cate3.ct_parentno==cate2.ct_no }">
-															<li><a href="shop.Category?ct_no=${cate3.ct_no }&ct_clf=3&ct_parentno=${cate3.ct_parentno }">${cate3.ct_clfname }<i class="fas fa-chevron-right"></i></a></li>
+															<li><a href="shop.Category?ct_no=${cate3.ct_no }&ct_clf=3&ct_parentno=${cate3.ct_parentno }&p=1">${cate3.ct_clfname }<i class="fas fa-chevron-right"></i></a></li>
 															</c:if>
 														</c:forEach>
 														</ul>

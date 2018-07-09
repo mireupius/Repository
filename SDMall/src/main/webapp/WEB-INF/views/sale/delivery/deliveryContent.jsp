@@ -53,6 +53,8 @@
 
 		});
 
+
+
 		$("#deliveryCheckButton").click(function() {
 
 			var array;
@@ -63,22 +65,7 @@
 					array += "," + $(box).val();
 				}
 			});
-
 			$("#arrayVal").val(array);
-			alert($("#arrayVal").val());
-		});
-
-		$("#deliveryCheckButton").click(function() {
-
-			var array;
-			$("input[name=orderCheck]:checked").each(function(i, box) {
-				if (i == 0) {
-					array = $(box).val();
-				} else {
-					array += "," + $(box).val();
-				}
-			});
-
 			alert('선택건 발주 확인완료 ');
 		});
 

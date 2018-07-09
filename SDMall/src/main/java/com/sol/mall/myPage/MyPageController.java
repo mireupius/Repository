@@ -33,8 +33,8 @@ public class MyPageController {
 	// 주문&배송 목록 조회하러가기
 	@RequestMapping(value = "/customer.myHome.orderList.go", method = RequestMethod.GET)
 	public String goOrderList(SearchMonth bb, HttpServletRequest req, HttpServletResponse res) {
-
 		cDAO.getAllCategory(req, res);
+		
 		if (mDAO.csmLoginCheck(req, res)) {
 
 			sbDAO.showCartItems(req, res);// 장바구니 상품수량 반환
@@ -46,11 +46,12 @@ public class MyPageController {
 			req.setAttribute("contentPage", "customer/customerMyPage2.jsp");
 			req.setAttribute("myPageContentArea", "orderDelivery.jsp");
 
-			return "main";
+		}else {
+			
+			req.setAttribute("contentPage", "member/loginArea.jsp");
 		}
-		
-		req.setAttribute("contentPage", "member/loginArea.jsp");
 		return "main";
+		
 	}
 
 	// 주문&배송 목록 기간별로 가져오기
@@ -63,10 +64,12 @@ public class MyPageController {
 			mpDAO.searchOrderList(sm, req, res);
 			req.setAttribute("contentPage", "customer/customerMyPage2.jsp");
 			req.setAttribute("myPageContentArea", "orderDelivery.jsp");
-			return "main";
+			
+		}else {
+			
+			req.setAttribute("contentPage", "member/loginArea.jsp");
 		}
 		
-		req.setAttribute("contentPage", "member/loginArea.jsp");
 		return "main";
 
 	}
@@ -88,10 +91,9 @@ public class MyPageController {
 			
 			req.setAttribute("contentPage", "customer/customerMyPage2.jsp");
 			req.setAttribute("myPageContentArea", "orderDelivery.jsp");
-			return "main";
+		}else {
+			req.setAttribute("contentPage", "member/loginArea.jsp");
 		}
-		
-		req.setAttribute("contentPage", "member/loginArea.jsp");
 		return "main";
 
 	}
@@ -112,10 +114,9 @@ public class MyPageController {
 			
 			req.setAttribute("contentPage", "customer/customerMyPage2.jsp");
 			req.setAttribute("myPageContentArea", "orderClaim.jsp");
-			return "main";
+		}else {
+			req.setAttribute("contentPage", "member/loginArea.jsp");
 		}
-		
-		req.setAttribute("contentPage", "member/loginArea.jsp");
 		return "main";
 		
 	}
@@ -137,10 +138,9 @@ public class MyPageController {
 			req.setAttribute("myPageContentArea", "orderClaim.jsp");
 			//추가 페이징
 
-			return "main";
+		}else {
+			req.setAttribute("contentPage", "member/loginArea.jsp");
 		}
-		
-		req.setAttribute("contentPage", "member/loginArea.jsp");
 		return "main";
 
 	}
@@ -156,10 +156,9 @@ public class MyPageController {
 			mpDAO.searchClaimedOrderList(sm, req, res);
 			req.setAttribute("contentPage", "customer/customerMyPage2.jsp");
 			req.setAttribute("myPageContentArea", "orderClaim.jsp");
-			return "main";
+		}else {
+			req.setAttribute("contentPage", "member/loginArea.jsp");
 		}
-		
-		req.setAttribute("contentPage", "member/loginArea.jsp");
 		return "main";
 
 	}
@@ -178,10 +177,9 @@ public class MyPageController {
 			mpDAO.pagingOrderList(1, "3", sm, req, res);
 			req.setAttribute("contentPage", "customer/customerMyPage2.jsp");
 			req.setAttribute("myPageContentArea", "orderDelivery.jsp");
-			return "main";
+		}else {
+			req.setAttribute("contentPage", "member/loginArea.jsp");
 		}
-		
-		req.setAttribute("contentPage", "member/loginArea.jsp");
 		return "main";
 
 	}
@@ -200,10 +198,9 @@ public class MyPageController {
 			mpDAO.pagingOrderList(1, "3", sm, req, res);
 			req.setAttribute("contentPage", "customer/customerMyPage2.jsp");
 			req.setAttribute("myPageContentArea", "orderDelivery.jsp");
-			return "main";
+		}else {
+			req.setAttribute("contentPage", "member/loginArea.jsp");
 		}
-		
-		req.setAttribute("contentPage", "member/loginArea.jsp");
 		return "main";
 
 	}
@@ -222,10 +219,9 @@ public class MyPageController {
 			mpDAO.pagingOrderList(1, "3", sm, req, res);
 			req.setAttribute("contentPage", "customer/customerMyPage2.jsp");
 			req.setAttribute("myPageContentArea", "orderDelivery.jsp");
-			return "main";
+		}else {
+			req.setAttribute("contentPage", "member/loginArea.jsp");
 		}
-		
-		req.setAttribute("contentPage", "member/loginArea.jsp");
 		return "main";
 
 
@@ -242,10 +238,9 @@ public class MyPageController {
 			mpDAO.completeDelivery(d, req, res);
 			req.setAttribute("contentPage", "customer/customerMyPage2.jsp");
 			req.setAttribute("myPageContentArea", "orderDelivery.jsp");
-			return "main";
+		}else {
+			req.setAttribute("contentPage", "member/loginArea.jsp");
 		}
-		
-		req.setAttribute("contentPage", "member/loginArea.jsp");
 		return "main";
 		
 		
@@ -265,10 +260,9 @@ public class MyPageController {
 			mpDAO.accumulatePoint(d, req, res);
 			req.setAttribute("contentPage", "customer/customerMyPage2.jsp");
 			req.setAttribute("myPageContentArea", "orderDelivery.jsp");
-			return "main";
+		}else {
+			req.setAttribute("contentPage", "member/loginArea.jsp");
 		}
-		
-		req.setAttribute("contentPage", "member/loginArea.jsp");
 		return "main";
 		
 		
@@ -285,9 +279,9 @@ public class MyPageController {
 			mpDAO.getOrderListToReview(d, req, res);
 			req.setAttribute("contentPage", "customer/customerMyPage2.jsp");
 			req.setAttribute("myPageContentArea", "productReviewPage.jsp");
-			return "main";
+		}else {
+			req.setAttribute("contentPage", "member/loginArea.jsp");
 		}
-		req.setAttribute("contentPage", "member/loginArea.jsp");
 		return "main";
 
 	}
@@ -303,11 +297,9 @@ public class MyPageController {
 			
 			req.setAttribute("contentPage", "customer/customerMyPage2.jsp");
 			req.setAttribute("myPageContentArea", "productReview.jsp");
-			return "main";
-			
-
+		}else {
+			req.setAttribute("contentPage", "member/loginArea.jsp");
 		}
-		req.setAttribute("contentPage", "member/loginArea.jsp");
 		return "main";
 
 	}
@@ -325,10 +317,9 @@ public class MyPageController {
 			
 			req.setAttribute("contentPage", "customer/customerMyPage2.jsp");
 			req.setAttribute("myPageContentArea", "productReviewPage.jsp");
-			return "main";
-
+		}else {
+			req.setAttribute("contentPage", "member/loginArea.jsp");
 		}
-		req.setAttribute("contentPage", "member/loginArea.jsp");
 		return "main";
 
 	}
@@ -344,10 +335,9 @@ public class MyPageController {
 			mpDAO.getWritedReview(pr, req, res);
 			req.setAttribute("contentPage", "customer/customerMyPage2.jsp");
 			req.setAttribute("myPageContentArea", "writedReviews.jsp");
-			return "main";
-
+		}else {
+			req.setAttribute("contentPage", "member/loginArea.jsp");
 		}
-		req.setAttribute("contentPage", "member/loginArea.jsp");
 		return "main";
 
 	}
@@ -363,11 +353,9 @@ public class MyPageController {
 			req.setAttribute("contentPage", "customer/customerMyPage2.jsp");
 			req.setAttribute("myPageContentArea", "question.jsp");
 
-			return "main";
-
+		}else {
+			req.setAttribute("contentPage", "member/loginArea.jsp");
 		}
-		
-		req.setAttribute("contentPage", "member/loginArea.jsp");
 		return "main";
 
 	}
@@ -382,11 +370,9 @@ public class MyPageController {
 			
 			req.setAttribute("contentPage", "customer/customerMyPage2.jsp");
 			req.setAttribute("myPageContentArea", "myQuestion.jsp");
-			return "main";
-
+		}else {
+			req.setAttribute("contentPage", "member/loginArea.jsp");
 		}
-		
-		req.setAttribute("contentPage", "member/loginArea.jsp");
 		return "main";
 
 	}
@@ -402,10 +388,9 @@ public class MyPageController {
 			mpDAO.getMyQuestionAnswer(qa, req, res);
 			req.setAttribute("contentPage", "customer/customerMyPage2.jsp");
 			req.setAttribute("myPageContentArea", "myQuestion.jsp");
-			return "main";
-
+		}else {
+			req.setAttribute("contentPage", "member/loginArea.jsp");
 		}
-		req.setAttribute("contentPage", "member/loginArea.jsp");
 		return "main";
 
 	}

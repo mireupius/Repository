@@ -55,8 +55,9 @@ public class GoodsController {
 			request.setAttribute("contentPage", "../goods/goodsReg.jsp");
 			return "sale/saleIndex";
 		}else {
-			request.setAttribute("loginInfo", "loginArea.jsp");
-			return "member/loginPage";
+			cDAO.getAllCategory(request, response);
+			request.setAttribute("contentPage", "member/loginArea.jsp");
+			return "main";
 		}
 	}
 	
@@ -229,8 +230,9 @@ public class GoodsController {
 			request.setAttribute("contentPage", "../goods/goodsList.jsp");
 			return "sale/saleIndex";
 		}else {
-			request.setAttribute("loginInfo", "loginArea.jsp");
-			return "member/loginPage";
+			cDAO.getAllCategory(request, response);
+			request.setAttribute("contentPage", "member/loginArea.jsp");
+			return "main";
 		}
 		
 	}
@@ -350,8 +352,9 @@ public class GoodsController {
 			request.setAttribute("contentPage", "../goods/goodsList.jsp");
 			return "sale/saleIndex";
 		}else {
-			request.setAttribute("loginInfo", "loginArea.jsp");
-			return "member/loginPage";
+			cDAO.getAllCategory(request, response);
+			request.setAttribute("contentPage", "member/loginArea.jsp");
+			return "main";
 		}
 	}
 
@@ -376,8 +379,9 @@ public class GoodsController {
 			request.setAttribute("contentPage", "../goods/goodsList.jsp");
 			return "sale/saleIndex";
 		}else {
-			request.setAttribute("loginInfo", "loginArea.jsp");
-			return "member/loginPage";
+			cDAO.getAllCategory(request, response);
+			request.setAttribute("contentPage", "member/loginArea.jsp");
+			return "main";
 		}
 	}
 
@@ -428,8 +432,9 @@ public class GoodsController {
 			request.setAttribute("contentPage", "../goods/goodsView.jsp");
 			return "sale/saleIndex";
 		}else {
-			request.setAttribute("loginInfo", "loginArea.jsp");
-			return "member/loginPage";
+			cDAO.getAllCategory(request, response);
+			request.setAttribute("contentPage", "member/loginArea.jsp");
+			return "main";
 		}
 	}
 	
@@ -451,8 +456,9 @@ public class GoodsController {
 			request.setAttribute("contentPage", "../goods/goodsList.jsp");
 			return "sale/saleIndex";
 		}else {
-			request.setAttribute("loginInfo", "loginArea.jsp");
-			return "member/loginPage";
+			cDAO.getAllCategory(request, response);
+			request.setAttribute("contentPage", "member/loginArea.jsp");
+			return "main";
 		}
 	}
 

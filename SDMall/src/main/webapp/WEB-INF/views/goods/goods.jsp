@@ -49,14 +49,14 @@
 						<div class="rating_r rating_r_4 product_rating"><i></i><i></i><i></i><i></i><i></i></div>
 						<div class="product_text">
 						<c:set var="dlvchrg" value="${fn:split(goodsDtl1.gd_dlvchrg, ',') }"/>
+						<input type="hidden" id="chrg" value="${dlvchrg[0]}"> 
+						<input type="hidden" id="terms" value="${dlvchrg[1]}"> 
 						<c:choose>
 							<c:when test="${dlvchrg[0]==0}">
 							무료배송
 							</c:when>
 							<c:otherwise>
 							<p>배송비 <fmt:formatNumber value="${dlvchrg[0]}" pattern="#,###" />원</p>
-							<input type="hidden" id="chrg" value="${dlvchrg[0]}"> 
-							<input type="hidden" id="terms" value="${dlvchrg[1]}"> 
 							<c:if test="${dlvchrg[1]>0}">
 							<p><fmt:formatNumber value="${dlvchrg[1]}" pattern="#,###" />원 이상 구매시 무료 배송</p>
 							</c:if>

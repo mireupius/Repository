@@ -186,7 +186,7 @@ public class MemberDAO {
 	public void logoutCustomer(HttpServletRequest req, HttpServletResponse res) {
 
 		req.getSession().setAttribute("loginCustomer", null);
-
+		csmLoginCheck(req, res);
 	}
 
 	// 판매자 로그아웃

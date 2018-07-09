@@ -16,7 +16,7 @@
 		)
 		and gd_no = sd_product_no and sd_customer_id = #{searchOrder.sd_customer_id}
 		and (sd_order_date between (select add_months(SYSDATE, -#{searchMonth}) from dual) and (select SYSDATE from dual))
-		order by sd_order_date desc
+		order by sd_delivery_pno
 	</select>
 	
 	<!-- 교환/반품/취소 조회 -->

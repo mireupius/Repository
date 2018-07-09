@@ -39,7 +39,7 @@
 								<c:when test="${param.ct_clf==3 }">
 								<c:forEach var="sideCate" items="${allCategory}">
 									<c:if test="${sideCate.ct_parentno==param.ct_parentno }">
-										<li><a href="shop.Category?ct_no=${sideCate.ct_no }&ct_clf=${sideCate.ct_clf}&ct_parentno=${sideCate.ct_parentno }">${sideCate.ct_clfname }</a></li>
+										<li><a href="shop.Category?ct_no=${sideCate.ct_no }&ct_clf=${sideCate.ct_clf}&ct_parentno=${sideCate.ct_parentno }&p=1">${sideCate.ct_clfname }</a></li>
 										<c:if test="${sideCate.ct_no==null}">
 										</c:if>
 									</c:if>
@@ -49,7 +49,7 @@
 								<c:otherwise>
 								<c:forEach var="sideCate" items="${allCategory}">
 									<c:if test="${sideCate.ct_parentno==param.ct_no }">
-										<li><a href="shop.Category?ct_no=${sideCate.ct_no }&ct_clf=${sideCate.ct_clf}&ct_parentno=${sideCate.ct_parentno }">${sideCate.ct_clfname }</a></li>
+										<li><a href="shop.Category?ct_no=${sideCate.ct_no }&ct_clf=${sideCate.ct_clf}&ct_parentno=${sideCate.ct_parentno }&p=1">${sideCate.ct_clfname }</a></li>
 										<c:if test="${sideCate.ct_no==null}">
 										</c:if>
 									</c:if>
@@ -122,7 +122,20 @@
 							</c:if>
 							<ul class="page_nav d-flex flex-row">
 							<c:forEach var="p" begin="1" end="${pageCount }">
-								<li><a href="${prm }${p}">${p }</a></li>
+								<a href="${prm }${p}">
+								<c:choose>
+								<c:when test="${p!=param.p}">
+								<li>
+								${p }
+								</li>
+								</c:when>
+								<c:otherwise>
+								<li class="selected_page">
+								${p }
+								</li>
+								</c:otherwise>
+								</c:choose>
+								</a>
 							</c:forEach>
 							</ul>
 							<c:if test="${page != pageCount }">

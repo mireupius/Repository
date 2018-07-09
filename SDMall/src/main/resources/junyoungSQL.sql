@@ -22,7 +22,6 @@ select *
 		and gd_no = sd_product_no and sd_customer_id = 'ioso1212'
 		and (sd_order_date between (select add_months(SYSDATE, -6) from dual) and (select SYSDATE from dual));
 
-select * from goods_tb;
 
 select *
 		from sale_delivery
