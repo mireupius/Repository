@@ -262,6 +262,8 @@ public class MemberDAO {
 	public void withdrawCustomer(Customer c, Membership m, HttpServletRequest req, HttpServletResponse res) {
 
 		try {
+			String name = req.getParameter("csm_name1");
+			System.out.println(name);
 			System.out.println(c.getCsm_id());
 			System.out.println(m.getMs_csm_id());
 
@@ -270,6 +272,8 @@ public class MemberDAO {
 
 				System.out.println("탈퇴 성공");
 				// req.getSession().setAttribute("loginCustomer", null);
+				System.out.println(name);
+				req.setAttribute("name", name);
 
 			} else {
 				System.out.println("탈퇴 실패");
